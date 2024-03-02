@@ -1,0 +1,1588 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+%\usepackage[none]{hyphenat}
+\usepackage[utf8]{inputenc}
+\usepackage[english, main=ukrainian]{babel}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage[unicode]{hyperref}
+\usepackage{scalerel,stackengine}
+\usepackage{multicol}
+\usepackage{tikz-cd}
+\usetikzlibrary{fit,matrix}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+
+\usepackage{pdfpages}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{physics}
+\usetikzlibrary{spy}
+
+\def\rightproof{$\boxed{\Rightarrow}$ }
+
+\def\leftproof{$\boxed{\Leftarrow}$ }
+
+\newtheoremstyle{theoremdd}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\normalfont}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\textnormal{\thmnote{ \textbf{#3}\\}}}
+
+\theoremstyle{theoremdd}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand\thref[1]{\textbf{Th.~\ref{#1}}}
+\newcommand\defref[1]{\textbf{Def.~\ref{#1}}}
+\newcommand\exref[1]{\textbf{Ex.~\ref{#1}}}
+\newcommand\prpref[1]{\textbf{Prp.~\ref{#1}}}
+\newcommand\rmref[1]{\textbf{Rm.~\ref{#1}}}
+\newcommand\lmref[1]{\textbf{Lm.~\ref{#1}}}
+\newcommand\crlref[1]{\textbf{Crl.~\ref{#1}}}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\DeclareMathOperator{\linspan}{span}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\pr}{pr}
+
+
+\makeatletter
+\renewenvironment{proof}[1][Proof.\\]{\par
+\pushQED{\hfill \qed}%
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\bfseries
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{%
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+    	
+\begin{document}
+\tableofcontents
+\newpage
+
+\section{Топологічні простори}
+\subsection{Топологія}
+\begin{definition}
+Задано $X$ -- деяка множина.\\
+Клас $\tau$, що містить підмножини $X$, називається \textbf{топологією}, якщо:
+\begin{align*}
+X, \emptyset \in \tau \\
+\forall \{U_\alpha \in \tau\}: \bigcup_\alpha U_\alpha \in \tau \\
+\forall U,V \in \tau: U \cap V \in \tau
+\end{align*}
+Пару $(X,\tau)$ називатимемо \textbf{топологічним простором}.
+\end{definition}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Множина $U$ називається \textbf{відкритою}, якщо
+\begin{align*}
+U \in \tau
+\end{align*}
+Множина $V$ називається \textbf{замкненою}, якщо
+\begin{align*}
+X \setminus V \in \tau
+\end{align*}
+\end{definition}
+
+\begin{example}
+Зокрема будь-який метричний простір $(X,\rho)$ задає топологію \\$\tau_\rho = \{ \text{всі відкриті множини в } (X,\rho)\}$. Тому що там виконуються твердження: $X, \emptyset$ -- відркиті, будь-яке об'єднання сім'ї відкритих -- відкрита, будь-який перетин двох відкритих -- відкрита.
+\end{example}
+
+\begin{example}
+Розглянемо множину $X$ та $\tau = 2^X$. Тоді вона також задає топологію.\\
+$(X,\tau)$, де $\tau = 2^X$, ще називають \textbf{дискретною топологією}.
+\end{example}
+
+\begin{example}
+Розглянемо множину $X$ та $\tau = \{\emptyset, X\}$. Тоді вона також задає топологію.\\
+$(X,\tau)$, де $\tau = \{\emptyset, X\}$, ще називають \textbf{недискретною топологією}.
+\end{example}
+
+\begin{example}
+Маємо $X = \mathbb{R}$ та розглянемо $\tau = \{U \subset \mathbb{R} \mid U = \emptyset \text{ або } U = \mathbb{R} \setminus S, S \subset \mathbb{R} \text{ -- деяка скінченна}\}$. Вона утворює топологію, а називається вона \textbf{топологія Заріского.}\\
+Дійсно, $\emptyset \in \tau$, а також $X \in \tau$, тому що $X = \mathbb{R} \setminus \emptyset$.\\
+Нехай $\{U_\alpha \in \tau\}$ -- сім'я, поки нехай всі такі, що $U_\alpha = \mathbb{R} \setminus S_\alpha$ для декяої $\{S_\alpha\}$ сім'ї скінченних підмножин. Тоді звідси $\displaystyle\bigcup_\alpha U_\alpha = \mathbb{R} \setminus \bigcap_\alpha S_\alpha$. Зрозуміло цілком, що $\displaystyle\bigcap_\alpha S_\alpha$ буде скінченною, тож $\displaystyle\bigcup_\alpha U_\alpha \in \tau$. Якщо існує принаймні одна множина $U_\alpha$, де $U_\alpha = \emptyset$, то тоді прибираємо їх -- повертаємось до першого випадку.\\
+Нехай $U_1,U_2 \in \tau$, тобто $U_1 = \mathbb{R} \setminus S_1$ та $U_2 = \mathbb{R} \setminus S_2$, де множини $S_1,S_2$ -- скінченні. Тоді $U_1 \cap U_2 = \mathbb{R} \setminus (S_1 \cup S_2)$, де $S_1 \cup S_2$, зрозуміло, скінченна. Тож $U_1 \cap U_2 \in \tau$. Якщо серед них $U_i = \emptyset$, то тоді все зрозуміло.
+\end{example}
+
+\begin{definition}
+Задано $(X,\tau)$ та $(X,\tau')$ -- два топологічних простори.\\
+$\tau'$ називається \textbf{сильнішою за} $\tau$, якщо
+\begin{align*}
+\tau' \supset \tau
+\end{align*}
+$\tau'$ називається \textbf{слабшою за} $\tau$, якщо
+\begin{align*}
+\tau' \subset \tau
+\end{align*}
+\end{definition}
+
+\begin{example}
+Якщо є множина $X$, то дискретна топологія є найсильнішою серед всіх інших топології; а недискретна топологія є найслабшою серед всіх інших топології.
+\end{example}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $x \in X$.\\
+\textbf{Відкритим околом точки $x$} назвемо таку відкриту множину $U$, де
+\begin{align*}
+U \ni x
+\end{align*}
+\textbf{Околом точки $x$} назвемо таку множину $V$, що містить відкритий окіл т. $x$, тобто
+\begin{align*}
+\exists U \text{ -- відкритий окіл точки } x: V \supset U
+\end{align*}
+\end{definition}
+
+\begin{example}
+Розглянемо $\mathbb{R}$ зі стандартною метрикою. Тоді $(-\varepsilon,\varepsilon)$ буде відкритим околом точки $0$, тому що даний інтервал відкритий та містить $0$.\\
+Водночас $[-\varepsilon,\varepsilon], (-\varepsilon,\varepsilon], [-\varepsilon,\varepsilon)$ будуть околами точки $0$, тому що всі вони містять відкритий окіл  точки $0$ (наприклад) $(\varepsilon,\varepsilon)$. 
+\end{example}
+
+\begin{remark}
+Відкритий окіл точки $x$ -- також окіл точки $x$.\\
+Дійсно, нехай $U$ -- відкритий окіл $x$. Тоді $\exists U$ -- відкритий окіл точки $x: U \supset U$. Тобто за означенням, $U$ -- просто окіл точки $x$.
+\end{remark}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$.\\
+Точка $x$ називається \textbf{внутрішньою для} $A$, якщо
+\begin{align*}
+\exists V \text{ -- окіл точки } x: V \subset A
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+$U$ -- відкрита $\iff \forall x \in U: x$ -- внутрішня точка для $U$.\\
+\textit{Це те саме звичне означення відкритої множини, яку ми давали в метричному просторі.}
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $U$ -- відкрита. Тоді якщо $x \in U$, то тоді $U$ -- відкритий окіл точки $x$, причому $U \subset U$. Тобто $x$ -- внутрішня точка для $U$.
+\bigskip \\
+\leftproof Дано: $\forall x \in U: x$ -- внутрішня точка для $U$. Тобто це означає, що $\exists V_x$ -- окіл точки $x: V_x \subset U$. Оскільки $V_x$ -- окіл точки $x$, то тоді $\exists U_x$ -- відкритий окіл точки $x: U_x \subset V_x \subset U$.\\
+Зауважимо, що $U = \displaystyle\bigcup_{x \in U} U_x$. Оскільки $\{U_x, x \in U\}$ -- сім'я відкритих множин, то в силу означення топології, $U$ буде відкритою як об'єднання.
+\end{proof}
+
+\subsection{Зв'язок з метричними просторами}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Топологічний простір називається \textbf{метризуючим}, якщо
+\begin{align*}
+\exists \rho \text{ -- метрика на множині } X: \tau_\rho = \tau
+\end{align*}
+Інакше кажучи, метрика $\rho$ \textbf{індукує ту саму топологію}, що була на початку.
+\end{definition}
+
+\begin{example}
+Зокрема дискретний топологічний простір $(X,\tau)$ буде метризуючим. Тому що існує метрика $d(x,y) = \begin{cases} 1, & x \neq y \\ 0, & x = y \end{cases}$ -- дискретна метрика. У цьому випадку (із теорії метричних просторів) будь-яка підмножина $X$ буде відкритою. Значить, $\tau_d = \tau$.
+\end{example}
+
+\begin{example}
+Але недискретний топологічний простір $(X,\tau)$ не буде метризуючим при $\#X \geq 2$.\\
+!Припустимо, що існує метрика $\rho$, яка індукує ту саму топологію. Зауважимо, що існує відкритий окіл $\emptyset \subsetneq B(x;r) \subsetneq X$ при деякому $r > 0$. Якби було навпаки, тобто $\forall r > 0$ було б $B(x;r) = X$, то звідси $\displaystyle\bigcap_{r \geq 0} B(x;r) = X = \{x\}$, проте у нас $X$ містить більше одного елементу.\\
+Таким чином, знайшли $B(x;r) \neq X, B(x;r) \neq \emptyset$ -- ще одна відкрита множина, але $B(x;r) \notin \tau$ -- суперечність!
+\end{example}
+
+\begin{remark}
+Один й той самий топологічний простір можна метризувати двома різними метриками (тобто нема ін'єктивності переходу з метричного в топологічний простори).
+\end{remark}
+
+\begin{example}
+\label{two_metric_spaces_same_topology}
+Маємо $(\mathbb{Z},\tau)$ -- дискретний топологічний простір, яка метризується метрикою $d$. Розглянемо іншу метрику $\rho(m,n) = |m-n|$ на $\mathbb{Z}$. Зауважимо, що тоді кожна множина -- відкрита. І дійсно, $B\left( \dfrac{1}{2},x \right) = \left\{ y \in \mathbb{Z} : |x-y| < \dfrac{1}{2} \right\} = \{x\}$ -- будь-яка одноточкова множина відкрита. Тому якщо брати довільні об'єднання, то тоді вони будуть відкритими.
+\end{example}
+
+\begin{remark}
+Не кожний топологічний простір може бути метризуючим (тобто нема сюр'єктивності переходу з метричного в топологічний простори).\\
+Дійсно, ми довели, що недискретний топологічний простір не може бути метризуючим.
+\end{remark}
+
+\begin{definition}
+Задані $(X,\rho)$ та $(X,\rho')$ -- два метричних простори.\\
+Метрики називаються \textbf{топологічно еквівалентнтими}, якщо
+\begin{align*}
+\tau_\rho = \tau_{\rho'}
+\end{align*}
+Тобто вони індукують одну й ту саму топологію.\\
+Позначення: $\rho \overset{\tau}{\sim} \rho'$.
+\end{definition}
+
+\begin{definition}
+Задані $(X,\rho)$ та $(X,\rho')$ -- два метричних простори.\\
+Метрики називаються \textbf{Ліпшицево еквівалентнтими}, якщо
+\begin{align*}
+\exists C, c > 0: \forall x,y \in X: c \rho(x,y) \leq \rho'(x,y) \leq C \rho(x,y)
+\end{align*}
+Позначення: $\rho \overset{\text{Lipsch}}{\sim} \rho'$.
+\end{definition}
+
+\begin{remark}
+Зрозуміло, що два означення задають відношення еквівалентності.
+\end{remark}
+
+\begin{proposition}
+Задані $(X,\rho)$ та $(X,\rho')$ -- два метричних простори. Відомо, що $\rho \overset{\text{Lipsch}}{\sim} \rho'$. Тоді $\rho \overset{\tau}{\sim} \rho'$.
+\end{proposition}
+
+\begin{proof}
+Нам треба доввести, що $\tau_\rho = \tau_{\rho'}$. Це теж саме, що довести, що\\ $U$ -- відкрита в $(X,\rho) \iff U$ -- відкрита в $(X,\rho')$.\\
+Нехай $U$ -- відкрита в $(X,\rho)$. Нехай $x \in U$, тоді за умовою, $\exists B_\rho(x;r) \subset U$. За умовою твердження, існують константи $c,C >0$, для яких $c \rho(x,y) \leq \rho'(x,y) \leq C \rho (x,y)$. Із цієї нерівності випливає $\rho'(x,y) \leq C \rho(x,y)$, а з неї випливає, що $B_{\rho'}(x, c r) \subset B_{\rho}(x,r)$. І дійсно,\\
+$y \in B_{\rho'}(x,cr) \implies \rho'(x,y) \leq cr \implies \rho(x,y) \leq \dfrac{1}{c} \rho'(x,y) \leq r \implies y \in B_{\rho}(x,r)$.\\
+Отже, $B_{\rho'}(x,cr) \subset U$, тобто знайшли такий окіл, а тому $x$ -- внутрішня точка $U$ відносно $(X,\rho')$. Оскільки це для довільної точки, то $U$ -- відкрита в $(X,\rho')$.\\
+Нехай $U$ -- відкрита в $(X,\rho')$, то тоді аналогічно доводиться. Просто цього разу в нерівності $c \rho(x,y) \leq \rho'(x,y) \leq C \rho(x,y)$ використовується права частина нерівності.
+\end{proof}
+
+\begin{remark}
+Якщо $\rho \overset{\tau}{\sim} \rho'$, то не обов'язково $\rho \overset{\text{Lipsch}}{\sim} \rho'$.
+\end{remark}
+
+\begin{example}
+Зокрема маємо $(\mathbb{Z},d)$ та $(\mathbb{Z},\rho)$ -- два метричних простори. Тут $d$ -- дискретна метрика та $\rho$ задається як $\rho(m,n) = |m-n|$. Із \exref{two_metric_spaces_same_topology}, вони генерують одну й ту саму топологію, тобто $\tau_d = \tau_\rho$. А це означає, що $d \overset{\tau}{\sim} \rho$.\\
+При цьому ми маємо $d \overset{\text{Lipsch}}{\not\sim} \rho$. Дійсно, нехай $C > 0$. Можна підібрати $x = 2 [C] + 1,y = [C]$, причому тут $x,y \in \mathbb{Z}$, для яких $\rho(x,y) > C d(x,y)$.
+\end{example}
+
+\subsection{Збіжність в топологічному просторі}
+\begin{definition}
+Задані $(X,\tau)$ -- топологічний простір та послідовність $\{x_n \in X, n \geq 1\}$.\\
+Послідовність \textbf{збігається до точки} $x \in X$, якщо
+\begin{align*}
+\forall U \text{ -- відкритий окіл точки } x: \exists N \in \mathbb{N}: \forall n \geq N: x_n \in U
+\end{align*}
+\end{definition}
+
+\begin{example}
+Розглянемо $(X,\tau_{\text{disc}})$ -- дискретний топологічний простір.\\
+Послідовність $\{x_n \in X, n \geq 1\}$ збігається до точки $x \in X \iff \exists N: \forall n \geq N: x_n = x$.\\
+\rightproof Дано: $\{x_n\}$ збігається до $x \in X$. Тоді для будь-якого відкритого околу точки $x$, зокрема для $\{x\}$ існує номер $N$, де $\forall n \geq N: x_n \in \{x\}$, тобто $x_n = x, \forall n \geq N$.
+\bigskip \\
+\leftproof Дано: $\exists N: \forall n \geq N: x_n = x$. Нехай $U$ -- відкритий окіл точки $x$. У нас є номер $N$, де $\forall n \geq N: x \in U$, зокрема звідси $x_n \in U$, а тому звідси $\{x_n\}$ збігається до точки $x \in X$.
+\end{example}
+
+\begin{example}
+Розглянемо $(X,\tau_{\text{indisc}})$ -- недискретний топологічний простір. Тоді довільна послідовність $\{x_n \in X, n \geq 1\}$ збігається до будь-якої точки $x \in X$.\\
+Дійсно, нехай $U$ -- відкритий окіл точки $x \in X$. У недискретному просторі лише $U = X$ буде відкритим околом точки $x$. А значить, існує номер $N =1$, де $\forall n \geq N: x_n \in X$.
+\end{example}
+
+\noindent Для того, щоб позбутися такої аномалії, нам треба нова класифікація топологічних просторів. Але це буде трошки пізніше.
+
+\subsection{Неперервні відображення}
+\begin{definition}
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори.\\
+Відображення $f \colon X \to Y$ називається \textbf{неперервним}, якщо
+\begin{align*}
+\forall U \in \tilde{\tau} : f^{-1}(U) \in \tau
+\end{align*}
+Або простіше кажучи казати так:
+\begin{align*}
+\forall U \text{ -- відкрита в } Y: f^{-1}(U) \text{ -- відкрита в } X
+\end{align*}
+\end{definition}
+
+\begin{example}
+Задано відображення $f \colon X \to Y$, де $(X,\rho), (Y,\rho')$ -- два метричних простори. Тоді звідси $f$ -- неперервне (в топологічному сенсі).
+\end{example}
+
+\begin{example}
+Задано відображення $f \colon X \to Y$, де $(X,\tau_{\text{discr}})$ -- дискретний топологічний простір. Тоді $f$ -- неперервне.\\
+Справді, беремо $U$ -- відкриту множину в $Y$. Тоді прообраз $f^{-1}(U)$ буде відкритим в $X$, бо в дискретній топології всі множини -- відкриті.
+\end{example}
+
+\begin{example}
+Задано відображення $f \colon X \to Y$, де $(Y,\tau_{\text{indiscr}})$ -- недискретний топологічний простір. Тоді $f$ -- неперервне.\\
+Справді, оберемо $\emptyset,Y$ -- єдині відкриті множини в $Y$. Тоді $f^{-1}(\emptyset) = \emptyset$ та $f^{-1}(Y) = X$ -- обидва відкриті в $X$.
+\end{example}
+
+\begin{example}
+Задано відображення $\id \colon X \to X$, тут відображення між $(X,\tau)$ та $(X,\tau')$. Тоді $\id$ -- неперервне $\iff \tau$ сильніша за $\tau'$.\\
+\rightproof Дано: $\id$ -- неперервне. Тобто $\forall U \in \tau': \id^{-1}(U) = U \in \tau$. А це в точності $\tau' \subset \tau$.
+\bigskip \\
+\leftproof Дано: $\tau' \subset \tau$. Тобто $\forall U \in \tau': U \in \tau$, але при цьому $U = \id^{-1}(U) \in \tau$. Отже, $\id$ -- неперервне.
+\end{example}
+
+\begin{proposition}
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори.\\
+Відображення $f \colon X \to Y$ -- неперервне $\iff \forall U \text{ -- замкнена в } Y: f^{-1}(U) \text{ -- замкнена в } X$.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $f$ -- неперервне. Оберемо $U$ -- замкнену в $Y$. За означенням, $X \setminus U$ -- відкрита в $Y$, а тому за неперервністю, $f^{-1}(X \setminus U)$ -- відкрита в $X$. Зауважимо, що $f^{-1}(X \setminus U) = X \setminus f^{-1}(U)$ -- відкрита в $X$. Отже, $f^{-1}(U)$ -- замкнена в $X$.
+\bigskip \\
+\leftproof \textit{Цілком аналогічно доводиться.}
+\end{proof}
+
+\noindent В принципі, часто про відображення кажуть просто про неперервність, не уточнюючи в якій точці. Але для такого сценарія означення теж є.
+
+\begin{definition}
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори.\\
+Відображення $f \colon X \to Y$ називається \textbf{неперервним в точці $x \in X$}, якщо
+\begin{align*}
+\forall V \text{ -- окіл точки } f(x) : \exists U \text{ -- окіл точки }x : f(U) \subset V
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори.\\
+Відображення $f \colon X \to Y$ -- неперервне $\iff \forall x \in X: f $ -- неперервне в точці $x$.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $f$ -- неперервне. Оберемо будь-яку точку $x \in X$. Нехай $V$ -- окіл точки $f(x)$. Тоді існує $\tilde{V}$ -- відкритий окіл точки $f(x)$, де $V \supset \tilde{V}$. Значить, за неперервністю, $f^{-1}(\tilde{V})$ -- відкритий окіл точки $x$. Також із $V \supset \tilde{V}$ випливає $f^{-1}(V) \supset f^{-1}(\tilde{V})$. Таким чином, $f^{-1}(V)$ -- окіл точки $x$. Нарешті, варто зауважити, що виконується $f(f^{-1}(V)) \subset V$.\\
+Таким чином, $f$ -- неперервне в точці $x \in X$, причому довільній.
+\bigskip \\
+\leftproof Данл: $\forall x \in X: f $ -- неперервне в точці $x$. Нехай $U$ -- відкрита множина в $Y$. Хочемо показати, що $f^{-1}U$ -- відкрита, тобто всі точки внутрішні.\\
+Нехай $x \in f^{-1}U$, тобто $f(x) \in U$, тоді за означення неперервності в точці, існує окіл $U_x$ точки $x$, де $f(U_x) \subset U \implies U_x \subset f^{-1}U$. Отже, $x$ -- внутрішня точка.\\
+Таким чином, $f$ -- неперервне відображення.
+\end{proof}
+
+\begin{proposition}["Означення Гейне"]
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори та відображення $f \colon X \to Y$ -- неперервне. Тоді виконується "означення Гейне", тобто\\
+нехай $\{x_n \in X, n \geq 1\}$ збігається до точки $x \in X$. Тоді $\{f(x_n) \in Y, n \geq 1\}$ збігається до точки $f(x) \in Y$.
+\end{proposition}
+
+\begin{proof}
+Нехай $\{x_n \in X, n \geq 1\}$ збігається до точки $x$. Оберемо $U$ -- відкритий окіл точки $f(x)$, тоді за неперервністю, $f^{-1}(U)$ -- відкритий окіл точки $x$, а тому звідси за збіжністю, існує $N$, де $\forall n \geq N: x_n \in f^{-1}(U) \implies f(x_n) \in U$.
+\end{proof}
+
+\begin{remark}
+Якщо виконано означення Гейне, то з цього в загальному випадку неперервність НЕ випливає.
+\end{remark}
+
+\begin{proposition}[Інші властивості]
+1. $\id \colon X \to X$ -- неперервне відображення будь-якій топології $\tau$;\\
+2. Нехай $f \colon X \to Y$ та $g \colon Y \to Z$ -- обидва неперервні. Тоді $g \circ f \colon X \to Z$ -- неперервне.
+\bigskip \\
+1. \textit{Вказівка: $\id^{-1}(U) = U$.}\\
+2. \textit{Вказівка: $(g \circ f)^{-1}(U) = f^{-1}(g^{-1}(U))$.}
+\end{proposition}
+
+\begin{remark}
+Нехай відображення $f \colon X \to Y$ бієктивне. Якщо $f$ -- неперервне, то не обов'язково (!), щоб $f^{-1}$ було неперервним.
+\end{remark}
+
+\begin{example}
+Зокрема вже відомо, що $\id \colon \mathbb{R} \to \mathbb{R}$ буде неперервним відображенням, якщо в першому $(\mathbb{R},d)$ -- дискретний метричний простір та в другому $(\mathbb{R},\rho)$ -- стандартний евклідів простір. Тут виконується неперервність, оскільки $\tau_{\text{discr}}$ -- найсильніша топологія.\\
+Утім відображення $\id^{-1} \colon \mathbb{R} \to \mathbb{R}$ уже не буде неперервним. Тому що $[-1,1]$ -- відкрита множина відносно дискретної топології, але $\id^{-1}([-1,1]) = [-1,1]$ -- НЕ відкрита множина відносно евклідової топології.
+\end{example}
+
+\begin{example}
+\label{bijective_map_is_continuous_but_inverse_is_not}
+Більш геометричний приклад буде наступним. Маємо відображення $f \colon (0,1] \to S$, де $S = \{z \in \mathbb{C} : |z| = 1\}$ -- одиничне коло (метрика буде стандартною всюду). Визначимо $f(t) = e^{2 \pi i t}$. Зрозуміло, що це бієктивне відображення та є неперервним.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[very thick] (0,0)--(1,0);
+\node at (0,0) {$[$};
+\node at (1,0) {$)$};
+\node at (0,-0.3) {$0$};
+\node at (1,-0.3) {$1$};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw[->] (0,-1)--(1,-1) node at (0.5,-1.5) {$f$};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw (0,0) circle (1) node {$S$};
+\draw[dashed, ->] (-1.1,0)--(1.3,0);
+\draw[dashed, ->] (0,-1.1)--(0,1.3); 
+\end{tikzpicture}
+\caption*{У цьому напрямку неперервність означає, що ми $(0,1]$ деформували в коло $S$, просто об'єднавши тіпа края.}
+\end{figure}
+\noindent
+Але $f^{-1} \colon S \to (0,1]$ уже не буде неперервним.\\
+!Припустимо, що все-таки неперервне. Тоді оскільки $\left\{ 1-\dfrac{1}{n}, n \geq 1 \right\}$ збігається до $1$, а тому $f\left( 1 -\dfrac{1}{n} \right) \to f(1) = e^{2\pi i} = 1$. Утім в силу неперервності $f^{-1}$ ми маємо $f^{-1} \left(f\left( 1 - \dfrac{1}{n} \right)\right) = 1 - \dfrac{1}{n} \to 1$, хоча $f^{-1}(1) = 0$. Суперечність!\\
+Тут щоб із кола зробити палку, треба розірвати її в точці $z = 1$. Тому нема неперервності. Саме тому приходить новий розділ, де ми хочемо, щоб, деформувавши один об'єкт, отримали топологічно той самий об'єкт і навпаки.
+\end{example}
+
+\subsection{Гомеоморфність топологічних просторів}
+\begin{definition}
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори.\\
+Відображення $f \colon X \to Y$ називається \textbf{гомеоморфізмом}, якщо
+\begin{align*}
+f \text{ -- неперервне} \\
+f \text{ -- бієктивне} \\
+f^{-1} \text{ -- неперервне}
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори.\\
+Вони будуть називатися \textbf{гомеоморфними}, якщо
+\begin{align*}
+\exists f \colon X \to Y \text{ -- гомеоморфізм}
+\end{align*}
+Позначення: $X \cong Y$.
+\end{definition}
+
+\begin{remark}
+Топологічні простори, які є гомеоморфними, задають відношення еквівалентності.\\
+$X \cong X$, оскільки $\id \colon X \to X$ (одна топологія) -- гомеоморфізм.\\
+$X \cong Y \iff Y \cong X$ просто за означенням гомеоморфізма.\\
+$X \cong Y, Y \cong Z \implies X \cong Z$, тому що $g \circ f$ задає гомеоморфізм між ними. У цьому випадку $f \colon X \to Y, g \colon Y \to Z$ -- гомеоморфізми.
+\end{remark}
+
+\begin{example}
+Зокрема відрізок $[0,1] \cong [a,b]$, якщо встановити $f \colon [0,1] \to [a,b]$ як $f(t) = (1-t)a + tb$ -- і це відображення буде гомеоморфізмом.\\
+Дійсно, $f \in C([0,1])$ як лінійна функція. Далі знайдемо обернене відображення -- воно дорівнює $f^{-1}(u) = \dfrac{u-a}{b-a}$, причому $f^{-1} \in C([a,b])$ знову як лінійна функція.
+\end{example}
+
+\begin{example}
+Із цього прикладу можна отримати $[a,b] \cong [c,d]$, тому що\\
+$[a,b] \cong [0,1]$ та $[0,1] \cong [c,d] \implies [a,b] \cong [c,d]$.
+\bigskip \\
+Аналогічно можна довести, що $(a,b) \cong (c,d)$, \quad $(a,b] \cong (c,d] \cong [c,d) \cong [a,b)$.
+\end{example}
+
+\begin{example}
+За \exref{bijective_map_is_continuous_but_inverse_is_not}, ми отримали $(0,1] \not\cong S$.
+\end{example}
+
+\begin{example}
+Також маємо $(a,b) \cong \mathbb{R}$. Можна спочатку довести, що $(-1,1) \cong \mathbb{R}$, якщо задати $f(x) = \dfrac{x}{1-|x|}$ -- це дійсно буде гомеоморфізмом.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+  \draw[domain=-0.7:0.7, smooth, variable=\x, blue] plot ({\x}, {\x/(1-abs(\x))});
+  \draw[->] (-1,0)--(1,0) node[anchor = north west] {$x$};
+  \draw[->] (0,-2.5)--(0,2.5) node[anchor = south east] {$y$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+А вже далі в силу транзитивності, ми отримаємо $(a,b) \cong \mathbb{R}$.
+\end{example}
+
+\begin{example}
+Тепер розглянемо такі два об'єкти. Перший: кільце з внутрішнім радіусом $1$ та зовнішнім радіусом $2$, для зручності розташуємо центр на початку координат. Другий: циліндр без двох основ. Інтуїтивно вони будуть гомеоморфними, тому що:\\
+циліндр отримаємо з кільця, якщо його кільце намагатися розтягнути вгору;\\
+кільце отримаємо з циліндра, якщо його сплющити.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+\filldraw[fill=lightgray,draw=black] (0,0) circle (2);
+\filldraw[fill=white,draw=black] (0,0) circle (1);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) ellipse (1.25 and 0.5);
+\draw (-1.25,0) -- (-1.25,-3.5);
+\draw (-1.25,-3.5) arc (180:360:1.25 and 0.5);
+\draw [dashed] (-1.25,-3.5) arc (180:360:1.25 and -0.5);
+\draw (1.25,-3.5) -- (1.25,0);  
+\fill [gray,opacity=0.5] (-1.25,0) -- (-1.25,-3.5) arc (180:360:1.25 and 0.5) -- (1.25,0) arc (0:180:1.25 and -0.5);
+\end{tikzpicture}
+\end{figure}
+\noindent
+Строго можна довести гомеоморфність цих об'єктів, якщо задати відображення $(r \cos \theta, r \sin \theta) \mapsto (\cos \theta, \sin \theta,r)$, що буде гомеоморфізмом. У цьому випадку $r \in [1,2]$ та $\phi \in [0,2\pi]$.
+\end{example}
+
+\begin{example}
+Ще важливий приклад, $[a,b] \not\cong \mathbb{R}$.\\
+!Припустимо, що все ж таки $[a,b] \cong \mathbb{R}$, тобто існує між ними гомеоморфізм $f \colon [a,b] \to \mathbb{R}$. Оскільки $f \in C([a,b])$, то звідси воно досягає найбільшого значення $M$ та найменшого значення $m$. Тобто $f([a,b]) = [m,M]$. Але оскільки $f$ -- бієкція, то звідси $f([a,b]) = \mathbb{R}$. Але при цьому $[m,M] \neq \mathbb{R}$ -- суперечність!
+\end{example}
+
+\begin{example}
+Мабуть, в алгебраїчній топології буде доведено, що $\mathbb{R}^n \cong \mathbb{R}^m \iff n = m$.
+\end{example}
+
+\subsection{Конструкція топології за базою}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Клас $\mathcal{B}$ підмножин $X$ назвемо \textbf{базою топології $\tau$}, якщо
+\begin{align*}
+\forall U \in \tau: U = \bigcup_{V \in \mathcal{\tilde{B}}} V,\ \mathcal{\tilde{B}} \subset \mathcal{B}
+\end{align*}
+Тобто $\mathcal{B}$ називається базою, якщо кожна відкрита множина записується як об'єднання множин з класу $\mathcal{B}$.
+\end{definition}
+
+\begin{example}
+Зокрема маємо метричний простір $(X,\rho)$, де індукується топологія $\tau_\rho$. Тоді для неї база $\mathcal{B} = \{ B(x;r) \mid x \in X, r > 0 \}$ -- набір всіх відкритих куль. Дійсно, нехай $U$ -- відкрита множина, тоді $\forall x \in U: x$ -- відкрита, а тому $\exists B(x;r_x) \subset U$. Тоді звідси $U = \displaystyle\bigcup_{x \in X} B(x;r_x)$. 
+\end{example}
+
+\begin{example}
+Якщо $(X,\tau_{\text{discr}})$ -- дискретна топологія, то тоді $\mathcal{B} = \{\{x\} \mid x \in X\}$ -- база. Дійсно, кожна підмножина $U = \displaystyle\bigcup_{x \in U} \{x\}$, ну й $U$ уже апріорі відкрита.
+\end{example}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $\mathcal{B}$ -- база топології. Тоді:\\
+1. $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$ -- тобто $X$ записуємо як об'єданання всіх множин із бази;\\
+2. $\forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{\tilde{B}}} U$, де $\mathcal{\tilde{B}} \subset \mathcal{B}$ -- тобто перетин елементів з бази записуються як об'єднання з цієї самої бази.
+\end{proposition}
+
+\begin{proof}
+Дійсно, оскільки $\mathcal{B}$ -- база топології, то кожна відкрита множина -- це об'єдання множин із бази.\\
+1. Зокрема $X$ -- відкрита, тому $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$.\\
+2. Нехай $B_1,B_2 \in \mathcal{B}$. Вони вдвох є відкритими, тому що вони записані як об'єднання однієї множини з бази. Значить, $B_1 \cap B_2$ є відкритою множиною, а тому $B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
+\end{proof}
+
+\begin{definition}
+Нехай задано множину $X$ (уже не топологічний простір).\\
+Клас $\mathcal{B}$ підмножин $X$ назвемо \textbf{базою множини $X$}, якщо
+\begin{align*}
+\text{1. } X = \bigcup_{U \in \mathcal{B}} U \\
+\text{2. } \forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \bigcup_{U \in \mathcal{\tilde{B}}} U, \text{ де } \mathcal{\tilde{B}} \subset \mathcal{B}
+\end{align*} 
+\end{definition}
+\noindent
+Якщо $(X,\tau)$ -- топологія та $\mathcal{B}$ -- база топології, то $\mathcal{B}$ -- база множини.\\
+Виявляється, що якщо в нас є множина $X$, для якої ми хочемо згенерувати топологію, то нам потрібно створити базу $\mathcal{B}$ множини $X$.
+
+\begin{proposition}[Конструкція топології за базою]
+Задано $X$ -- множину та $\mathcal{B}$ -- база цієї множини. Створимо $\tau_{\mathcal{B}} = \left\{ \displaystyle\bigcup_{U \in \mathcal{\mathcal{\tilde{B}}}} U \mid \mathcal{\tilde{B}} \subset \mathcal{B} \right\}$ -- тобто клас, що складається з усіх можливих об'єднань елементів з бази. Тоді $(X,\tau_{\mathcal{B}})$ утворює топологічний простір. Ми $\tau_{\mathcal{B}}$ називаємо \textbf{топологією, що породжена базою $\mathcal{B}$}. Причому це єдина така топологія, де $\mathcal{B}$ -- база топології.
+\end{proposition}
+
+\begin{proof}
+Маємо $\tau_{\mathcal{B}} = \left\{ \displaystyle\bigcup_{U \in \mathcal{\mathcal{\tilde{B}}}} U \mid \mathcal{\tilde{B}} \subset \mathcal{B} \right\}$, перевіримо всі пункти для топології.\\
+1. $\emptyset \in \tau_{\mathcal{B}}$, тому що можна записати $\emptyset = \displaystyle\bigcup_{U \in \emptyset} U$, де $\emptyset \subset \mathcal{B}$. Також $X \in \tau_{\mathcal{B}}$, тому що $\mathcal{B}$ -- база множини $X$, а значить, $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$.\\
+2. Нехай $\{U_\alpha \mid U_\alpha \in \tau_{\mathcal{B}}\}$ -- сім'я відкритих множин. Тобто $U_\alpha = \displaystyle\bigcup_{\mathcal{B}_\alpha} U$, де $\mathcal{B}_\alpha \subset \mathcal{B}$. Тоді звідси $\displaystyle\bigcup_\alpha U_\alpha = \bigcup_{\bigcup_\alpha B_\alpha} U$, причому $\displaystyle\bigcup_\alpha \mathcal{B}_\alpha \subset \mathcal{B}$. Отже, $\displaystyle\bigcup_\alpha U_\alpha \in \tau_\mathcal{B}$.\\
+3. Нехай $U_1,U_2 \in \tau_\mathcal{B}$. Тобто звідси $U_1 = \displaystyle\bigcup_{U \in \mathcal{B}_1} U$ та $U_2 = \displaystyle\bigcup_{U \in \mathcal{B}_2} U$, де $\mathcal{B}_1,\mathcal{B}_2 \subset \mathcal{B}$. Значить, звідси $U_1 \cap U_2 = \displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} (U \cap V)$. Оскільки $U,V \in \mathcal{B}$, то в силу того, що $\mathcal{B}$ -- база множини $X$, звідси $U \cap V = \displaystyle\bigcup_{W \in \mathcal{\tilde{B}}_{U,V}} W$. Тоді $U_1 \cap U_2 = \displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} \bigcup_{W \in \mathcal{\tilde{B}}_{U,V}} W = \displaystyle\bigcup_{W \in \mathcal{\tilde{\tilde{B}}}} W$. Детально треба уточнити, що кожний $\mathcal{\tilde{B}}_{U,V} \subset \mathcal{B}$, тоді $\displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} \mathcal{\tilde{B}}_{U,V} \overset{\text{позн.}}{=} \mathcal{\tilde{\tilde{B}}} \subset \mathcal{B}$. Висновок: $U_1 \cap U_2$ записали як об'єднання множин з бази $\mathcal{B}$, тож $U_1 \cap U_2 \in \tau_{\mathcal{B}}$.\\
+Із цих пунктів випливає, що $\tau_\mathcal{B}$ -- дійсно топологія.
+\bigskip \\
+Також з цього випливає, що $\mathcal{B}$ -- не просто база множини $X$, а ще й база топології $\tau_{\mathcal{B}}$.\\
+Припустимо, що існує $\tau'$ -- якась інша топологія на $X$, яка має базу топології $\mathcal{B}$. Нам треба довести, що $\tau' = \tau_{\mathcal{B}}$.\\
+Нехай $U \in \tau'$, тоді звідси за означенням бази топології, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, де $\mathcal{\tilde{B}} \subset \mathcal{B}$. Але в силу того, як ми визначали $\tau_{\mathcal{B}}$, випливає, що $U \in \tau_{\mathcal{B}}$.\\
+Нехай $U \in \tau_{\mathcal{B}}$, тоді звідси за побудовою, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, але тоді $V \in \tau'$ -- відкрита множина як об'єднання однієї множини з бази. За означенням топології, $U \in \tau'$.\\
+Власне, з цього випливає, що $\tau_{\mathcal{B}} = \tau'$.
+\end{proof}
+
+\begin{proposition}
+Задані $(X,\tau), (Y,\tilde{\tau})$ -- топологічні простіри та $\tilde{\mathcal{B}}$ -- база топології $\tilde{\tau}$. Відомо, що $\forall U \in \tilde{\mathcal{B}}: f^{-1}(U) \in \tau$. Тоді $f \colon X \to Y$ -- неперервне.
+\end{proposition}
+
+\begin{remark}
+Тобто коли топологія побудована за базою, то для неперервності достатньо перевірити умову для елементів з бази, а не з усїєї топології.
+\end{remark}
+
+\begin{proof}
+Нехай $U$ -- відкрита множина в $Y$, тобто звідси $U = \displaystyle\bigcup_{V \in \mathcal{B}'} V$, де $\mathcal{B}' \subset \tilde{\mathcal{B}}$ за визначенням бази. Тоді звідси $f^{-1}(U) = \displaystyle\bigcup_{V \in \mathcal{B}'} f^{-1}(V)$, де всі $f^{-1}(V)$ відкриті за умовою. Отже, $f^{-1}(U)$ -- відкрита як об'єднання. Отже, $f \colon X \to Y$ -- неперервне.
+\end{proof}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $\mathcal{B}$ -- його база.\\
+Простір задовольняє \textbf{другу аксіому зліченності} (англ. \textbf{second-countable}), якщо
+\begin{align*}
+\mathcal{B} \text{ -- зліченна база}
+\end{align*}
+\end{definition}
+
+\begin{example}
+Зокрема $(\mathbb{R},\tau)$ з евклідовою топологією буде second-countable.\\
+Розглянемо $\mathcal{B} = \{ (a,b) \mid a,b \in \mathbb{Q} \}$. Варто спочатку довести, що вона утворює базу стандартної топології. Дійсно, нехай $U \in \tau$. Її можемо в стандартній топології записати як $U = \displaystyle\bigcup_{x \in U} (x-r,x+r)$.\\
+Надалі вся увага на $(x-r,x+r) \overset{\text{позн.}}{=} (u,v)$. Слід зауважити, що тут $u,v \in \mathbb{R}$. Але відомо, що для $u$ існує послідовність раціональних чисел $\{q_n, n \geq 1\}$ так, щоб $v \geq q_n \geq u$, а також $q_n \to u$. Аналогічно існує послідовність раціональних чисел $\{r_n, n \geq 1\}$ так, щоб $u \leq r_n \leq v$, а також $r_n \to v$. Тоді запишемо $(u,v) = \displaystyle\bigcup_{\substack{q_n,r_n \in \mathbb{Q} \\ q_n < r_n}} (q_n,r_n)$. Таким чином, отримали $(u,v)$ як об'єднання множин з бази, тобто $U$ записується як об'єднання множин з бази.\\
+Висновок: $\mathcal{B}$ -- база стандартної топології. Оскільки $\mathbb{Q}$ -- зліченна множина, то кількість інтервалів $(a,b)$ також буде зліченною, тому second-countable.
+%Wrong
+\iffalse
+Дійсно,\\
+$\mathbb{R} = \displaystyle\bigcup_{n \in \mathbb{N}} (-n,n)$.\\
+Нехай $B_1,B_2 \in \mathcal{B}$, тобто $B_1 = (a,b)$ та $B_2 = (c,d)$. Розглянемо $B_1 \cap B_2 = (a,b) \cap (c,d)$. Іллюстративно наведу кілька випадків:
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[->] (0,0)--(5,0);
+\node at (0.5,0) {$($};
+\node at (0.5,-0.5) {$a$};
+\node at (1.5,0) {$)$};
+\node at (1.5,-0.5) {$b$};
+\node at (2.5,0) {$($};
+\node at (2.5,-0.5) {$c$};
+\node at (4,0) {$)$};
+\node at (4,-0.5) {$d$};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw[->] (0,0)--(5,0);
+\node at (0.5,0) {$($};
+\node at (0.5,-0.5) {$a$};
+\node at (2.5,0) {$)$};
+\node at (2.5,-0.5) {$b$};
+\node at (1.5,0) {$($};
+\node at (1.5,-0.5) {$c$};
+\node at (4,0) {$)$};
+\node at (4,-0.5) {$d$};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw[->] (0,0)--(5,0);
+\node at (0.5,0) {$($};
+\node at (0.5,-0.5) {$c$};
+\node at (2.5,0) {$)$};
+\node at (2.5,-0.5) {$b$};
+\node at (1.5,0) {$($};
+\node at (1.5,-0.5) {$a$};
+\node at (4,0) {$)$};
+\node at (4,-0.5) {$d$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+1. $(a,b) \cap (c,d) = \emptyset$, але $\emptyset \in \mathcal{B}$, тому що $\emptyset = (q,q), q \in \mathbb{Q}$.\\
+2. $(a,b) \cap (c,d) = (c,b) \in \mathcal{B}$. Може бути інша перестановка літер, але суть ясна.\\
+3. $(a,b) \cap (c,d) = (a,b) \in \mathcal{B}$.\\
+Отже, $\mathcal{B}$ утворює базу $\mathbb{R}$, а тому звідси породжує топологію
+\fi
+\end{example}
+
+\subsection{Конструкція топології за передбазою}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Клас $\mathcal{S}$ підмножин $X$ назвемо \textbf{передбазою топології $\tau$}, якщо
+\begin{align*}
+\mathcal{B} \overset{\text{def.}}{=} \left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}
+\end{align*}
+утворює базу топології $\tau$. Тобто з цього випливає, що
+\begin{align*}
+\forall U \in \tau: U = \displaystyle\bigcup_{\bigcap_{i=1}^n S_i \in \mathcal{\tilde{B}}} \bigcap_{i=1}^n S_i, \text{ де } \mathcal{\tilde{B}} \subset \mathcal{B}
+\end{align*}
+Тобто кожна відкрита множина записується як об'єднання множин, кожна з яких записується лише як скінченні перетини множин з $\mathcal{S}$.
+\end{definition}
+
+\noindent Ми вже знаємо, що якщо є база $\mathcal{B}$, то тоді можна побудувати топологію. Тобто якщо ми хочемо, щоб $\mathcal{S}$ була передбазою, то треба спочатку утворити базу $\mathcal{B}$, а із бази вже утворити топологію.\\
+\textit{TODO: доповнити}
+
+\subsection{Характеристики точок множин}
+\noindent Нам вже відоме означення внутрішньої точки. Ще раз нагадаю:
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$.\\
+Точка $x$ називається \textbf{внутрішньою для} $A$, якщо
+\begin{align*}
+\exists V \text{ -- окіл точки } x: V \subset A
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Задано $(X,\tau$) -- топологічний простір та $A \subset X$.\\
+Точка $x \in X$ називається \textbf{граничною для} $A$, якщо
+\begin{align*}
+\forall V \text{ -- окіл точки } x: V \cap (A \setminus \{x\}) \neq \emptyset
+\end{align*}
+\end{definition}
+\noindent Є ще різні види точок, але поки зосередимось на них.\\
+У метричному просторі ми вводили поняття відкритих та замкнених множин як раз через внутрішні та граничні точки. У топологічному просторі ми означення відкритої множини звели до означення з використанням внутрішніх точок. Зробимо те саме для замкнених множин.
+
+\begin{proposition}
+Задано $(X,\tau$) -- топологічний простір та $A \subset X$.\\
+$A$ -- замкнена $\iff A$ містить всі граничні точки $A$.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $A$ -- замкнена, тобто $X \setminus A$ -- відкрита множина.\\
+!Припустимо, що $x$ -- гранична точка $A$, але $x \notin A$. Тобто $x \in X \setminus A$. Водночас звідси $x$ буде внутрішньою точкою $X \setminus A$, тобто існує $V$ -- окіл точки $x$, для якого $V \subset X \setminus A \implies V \cap (A \setminus \{x\}) = \emptyset$. Але для цього ж околу ми знаємо, що $V \cap A \setminus \{x\} \neq \emptyset$ -- суперечність!\\
+Отже, обов'язково треба вимагати $x \in A$.
+\bigskip \\
+\leftproof Дано: $A$ містить всі свої граничні точки. Доведемо, що $X \setminus A$ відкрита.\\
+Нехай $x \in X \setminus A$, тоді вона уже не є граничною точкою, тобто $\exists V$ -- окіл точки $x: V \cap (A \setminus \{x\}) = \emptyset$, зокрема звідси $V \subset X \setminus A$. Отже, $x$ -- внутрішня точка.\\
+Тож звідси $X \setminus A$ -- відкрита, тобто $A$ -- замкнена.
+\end{proof}
+
+\textit{TODO: дописати!}
+
+\subsection{Топологічний підпростір}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$.\\
+\textbf{Топологією підпростору на} $A$ називають таку множину:
+\begin{align*}
+\tau_A = \{ U \subset A \mid \exists W \in \tau: U = A \cap W\}
+\end{align*}
+Пара $(A,\tau_A)$ називається \textbf{підпростором} топологічного простору $(X,\tau)$.\\
+Якщо $U \in \tau_A$, то будемо казати, що $U$ відкрита на $A$. Також якщо $A \setminus U \in \tau_A$ будемо казати, що $U$ -- замкнена на $A$.
+\end{definition}
+
+\begin{proposition}
+$\tau_A$ задає топологію та $(A,\tau_A)$ теж утворює топологічний простір.
+\end{proposition}
+
+\begin{proof}
+1. $\emptyset,A \in \tau_A$ зі зрозумілих причин;\\
+2. Нехай $\{U_\alpha \in \tau_A\}$ -- сім'я відкритих. Тобто $U_\alpha = A \cap W_\alpha$, де $\{W_\alpha \in \tau\}$ -- сім'я відкритих в $(X,\tau)$. Тоді звідси $\displaystyle\bigcup_\alpha U_\alpha = A \cap \bigcup_\alpha W_\alpha$, де множина $\displaystyle\bigcup_\alpha W_\alpha \in \tau$. Отже, $\displaystyle\bigcup_\alpha U_\alpha \in \tau_A$.\\
+3. Нехай $U_1, U_2 \in \tau_A$, тобто $U_1 = A \cap W_1$ та $U_2 = A \cap W_2$ при $W_1,W_2 \in \tau$. Звідси маємо $U_1 \cap U_2 = A \cap (W_1 \cap W_2)$, де $W_1 \cap W_2 \in \tau$, але звідси $U_1 \cap U_2 \in \tau_A$.
+\end{proof}
+
+\begin{example}
+Зокрема в метричному просторі $(X,\rho)$, якщо $A \subset X$, ми вже знаємо, що $U$ -- відкрита на $A \iff U = A \cap W$ для деякої $W$ -- відкритої в $X$. Тобто, по суті, індукований простір $(A,\rho_A)$ індукує топологію підпростору $\tau_A$.
+\end{example}
+
+\begin{example}
+Маємо $(X,\tau_{\text{discr}})$ -- дискретний топологічний простір. Оберемо $A \subset X$, тоді підпростір $(A,\tau_{A})$ -- теж дискретний топологічний простір.\\
+Ну дійсно, $U \subset A \subset X$, а будь-яка підмножина в дискретному просторі -- відкрита.
+\end{example}
+
+\begin{example}
+\label{subspace_of_indiscrete_space_is_also_indiscrete}
+Маємо $(X,\tau_{\text{indiscr}})$ -- дискретний топологічний простір. Оберемо $A \subset X$, тоді підпростір $(A,\tau_{A})$ -- теж дискретний топологічний простір.\\
+Дійсно, нехай $U$ -- відкрита в $A$, тобто звідси $U = A \cap W$, де $W$ -- відкрита в $X$. Значить, або $W = \emptyset$, або $W = X$. Тоді звідси $U = A \cap X = A$ або $U = \emptyset$. Інших відкритих -- нема.
+\end{example}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$.\\
+$V$ -- замкнена на $A \iff \exists S$ -- замкнена в $X: V = A \cap S$.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $V$ -- замкнена на $A$, тобто $A \setminus V$ -- відкрита на $A$, а тому $A \setminus V = A \cap W$ при $W$ -- відкрита на $X$. Значить, звідси $V = A \setminus (A \setminus V) = A \setminus (A \cap W) = A \cap (X \setminus W)$. Позначимо $X \setminus W = S$, яка є замкненою в $X$. Звідси випливає, що $V = A \cap S$.
+\bigskip \\
+\leftproof \textit{Аналогічно.}
+\end{proof}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $U \subset A \subset X$. Відомо, що $U$ -- відкрита на $A$ та $A$ -- відкрита на $X$. Тоді $U$ -- відкрита на $X$.\\
+\textit{Аналогічно виконується, якщо всюди -- замкнені множини.}
+\end{proposition}
+
+\begin{proof}
+За умовою, $U$ -- відкрита на $A$, тобто звідси $U = A \cap W$; причому $W$ -- відкрита на $X$ та $A$ -- відкрита на $X$ за умовою. Отже, $U$ -- відкрита на $X$ як перетин.
+\end{proof}
+
+\begin{remark}
+У цьому твердженні дуже важливо, щоб $A$ була відкритою на $X$!
+\end{remark}
+
+\begin{example}
+Маємо $X = \mathbb{R}$ із евклідовою метрикою, $A = [0,+\infty)$ та $U = [0,1)$.\\
+У цьому випадку $A$ не є відкритою на $X$ -- зрозуміло. Далі зауважимо, що $U$ -- відкрита на $A$, просто тому що $[0,1) = [0,+\infty) \cap (1,+\infty)$, де $(1,+\infty)$ -- відкрита на $X$. Але $U$ -- не відкрита на $X$.
+\end{example}
+
+\begin{remark}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$. Означення топології підпростору на $A$ можна переписати по-інакшому. Для цього розглянемо вкладення $\imath_A \colon A \to X$, а далі зауважимо, що для кожної $W \subset X$ маємо $\imath_A^{-1}(W) = W \cap A$. Тоді звідси маємо:
+\begin{align*}
+\tau_A = \imath^{-1}_A(\tau)
+\end{align*}
+Тоді $\tau_A$ ще інколи називають \textbf{індукованою топологією} на $A$.
+\end{remark}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $A$ -- підпростір. Тоді вкладення $\imath_A \colon A \to X$ неперевне.\\
+\textit{Вказівка: $\imath_A^{-1}(W) = W \cap A$.}
+\end{proposition}
+
+\begin{remark}
+$\tau_A$ -- найслабша на $A$ топологія серед всіх інших, для якої $\imath$ -- неперервне. Тому що $\tau_A$ визначено так, що лише $\imath_A^{-1}(W)$ -- відкриті, більше нічого.
+\end{remark}
+
+\begin{proposition}
+\label{continuity_on_smaller_codomain_iff_continuity_on_bigger_codomain}
+Задано $(X,\tau)$ -- топологічний простір та $A$ -- підпростір. Нехай $(Y,\tilde{\tau})$ -- інший топологічний простір.\\
+Відображення $f \colon Y \to A$ -- неперервне $\iff \imath \circ f \colon Y \to X$ -- неперервне.
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+Y \arrow{r}{f} \arrow{dr}[swap]{\imath \circ f} & A \arrow{d}{\imath} \\
+&  X
+\end{tikzcd}
+\end{figure}
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $f \colon Y \to A$ -- неперервне. Тоді автоматично $\imath \circ f \colon Y \to X$ буде неперервним як композиція неперервних.
+\bigskip \\
+\leftproof Дано: $\imath \circ f \colon Y \to X$ -- неперервне. Оберемо $U$ -- відкриту на $A$, тобто $U = A \cap W$ при деякому $W$ -- відкрита на $X$. Розглянемо $f^{-1}(U) = f^{-1}(A \cap W) = f^{-1}(\imath^{-1}(W)) = (\imath \circ f)^{-1}(W)$. Але оскільки $W$ -- відкрита на $X$, то за умовою, $(\imath \circ f)^{-1}(W)$ -- відкрита на $Y$.
+\end{proof}
+
+\begin{example}
+Зокрема на стандартних топологіях маємо відображення $f \colon \mathbb{R} \to [-1,1]$ як $f(x) = \sin x$. Із мат.\ аналізу, воно є неперервним. Але за твердженням вище, $\imath \circ f \colon \mathbb{R} \to \mathbb{R}$, де мається $\imath \colon [-1,1] \to \mathbb{R}$, -- неперервне теж відображення.\\
+Тобто твердження каже, що властивість неперервності залишається, якщо збільшити чи зменшити область значень.
+\end{example}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $f \colon X \to Y$ -- неперервне. Тоді звуження $f \Big|_A \colon A \to Y$ -- теж неперервне, де $A \subset X$.\\
+\textit{Вказівка: $f \Big|_A = f \circ \imath$, де $\imath \colon A \to X$.}
+\end{proposition}
+
+\begin{example}
+Тобто маємо $f \colon \mathbb{R} \to [-1,1]$, що задано $f(x) = \sin x$, що неперервне. Тоді $f \Big|_{[-\pi,\pi]} \colon [-\pi,\pi] \to [-1,1]$ -- теж неперервне.
+\end{example}
+
+\begin{example}
+Тепер маємо $f \colon \mathbb{R} \to \mathbb{R}$, що задається як $f(x) = \dfrac{1}{x}$. У цьому випадку $f \Big|_{(0,+\infty)}$ буде неперервним відображенням з мат.\ аналізу, але $f$ -- не є неперервним.
+\end{example}
+
+\subsection{Добуток просторів}
+Нехай задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Хочеться задати топологію на $X_1 \times X_2$. Перше вгадування: чи буде множина $\{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}$ утворювати топологію? Ні, цього недостатньо.
+
+\begin{example}
+Зокрема маємо $(\mathbb{R},\tau_1)$ та $\mathbb{R},\tau_2)$ -- дві евклідові топології. Розглянемо множину $U_1 \times U_2 = (0,2) \times (0,2)$ та множину $V_1 \times V_2 = (1,3) \times (1,3)$. А далі треба подивитися на $(U_1 \times U_2) \cup (V_1 \times V_2)$ та зауважити наступне: це буде відкрита множина, але не потрапляє в нашу 'топологію', тому що я не можу її записати як $W_1 \times W_2$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\filldraw[fill = blue!20, draw = black, dashed] (0,0) rectangle (2,2) node[scale=0.7] at (0.5,0.5) {$U_1 \times U_2$};
+\filldraw[fill = red!20, draw = black, dashed] (1,1) rectangle (3,3) node[scale=0.7] at (1.5,1.5) {$V_1 \times V_2$};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw[dashed] (0,0)--(0,2)--(1,2)--(1,3)--(3,3)--(3,1)--(2,1)--(2,0)--cycle;
+\node[scale=0.7] at (1.2,1.5) {$(U_1 \times U_2) \cup (V_1 \times V_2)$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+Значить, треба трошки по-інакшому до цього підійти.
+\end{example}
+\noindent
+Розглянемо $\mathcal{B} = \{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}$. Якщо вона ще не утворює топологію, то спробуємо показати, що це утворює базу множини $X_1 \times X_2$. Дійсно:\\
+1. $X_1 \times X_2 \in \mathcal{B}$, навіть не обов'язково розписувати як об'єднання. Хоча можна це зробити, $X_1 \times X_2 = \displaystyle\bigcup_{U_1 \times U_2 \in \mathcal{B}} U_1 \times U_2$, і в це же об'єднання буде входити $X_1 \times X_2$, а тому рівність легітимна;\\
+2. Нехай $U,V \in \mathcal{B}$, тобто $U = U_1 \times U_2$ та $V = V_1 \times V_2$, у цьому випадку $U_1,V_1$ -- відкриті в $X_1$ та $U_2,V_2$ -- відкриті в $X_2$. Тоді звідси зауважимо, що $U \cap V = (U_1 \times U_2) \cap (V_1 \times V_2) = (U_1 \cap V_1) \times (U_2 \cap V_2)$. Оскільки $U_1 \cap V_1$ та $U_2 \cap V_2$ залишаються відкритими у себе, то звідси $U \cap V$ записали як добуток відкритих, тож $U \cap V \in \mathcal{B}$.\\
+Таким чином, $\mathcal{B}$ -- дійсно база $X_1 \times X_2$, а тому можна спородити топологію.
+
+\begin{definition}
+Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори.\\
+\textbf{Добутком топологій} $\tau_1,\tau_2$ назвемо топологію, яка породжена базою
+\begin{align*}
+\mathcal{B} = \{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}
+\end{align*}
+Позначення: $\tau_1 \times \tau_2 \overset{\text{def.}}{=} \tau_{\mathcal{B}}$.\\
+Це ще інколи називають \textbf{тіхоновською топологією}.
+\end{definition}
+
+\begin{proposition}
+Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Наступні твердження еквівалентні:\\
+1) $U$ -- відкрита на $X_1 \times X_2$;\\
+2) $U = \displaystyle\bigcup_\alpha U_1^\alpha \times U_2^\alpha$ для деяких сімей $\{U_1^\alpha\}$ та $\{U_2^\alpha\}$ відкритих множин відповідно на $X_1,X_2$;\\
+3) $\forall (x_1,x_2) \in U: \exists U_1,U_2$ -- відповідно відкриті околи точки $x_1,x_2: U_1 \times U_2 \subset U$.
+\end{proposition}
+
+\begin{proof}
+$\boxed{\text{1)} \Leftrightarrow \text{2)}}$ \textit{випливає з означення добутку топологій.}
+\bigskip \\
+$\boxed{\text{2)} \Rightarrow \text{3)}}$ \textit{зрозуміло.}
+\bigskip \\
+$\boxed{\text{2)} \Leftarrow \text{3)}}$ Дано: виконується 3), тоді для кожної точки $(x_1,x_2) \in U$ існують відкриті околи $U_1^x,U_2^x$, причому $U_1^x \times U_2^x \subset U$. Зауважимо, що $U = \displaystyle\bigcup_{(x_1,x_2) \in U} U_1^x \times U_2^x$, тож 2) виконано.
+\end{proof}
+
+\begin{theorem}
+Задано $\mathbb{R}^n$ із евклідовою топологією. Тоді вона буде збігатися з добутком топології $\mathbb{R} \times \dots \times \mathbb{R}$, де в $\mathbb{R}$ стоїть стандартна топологія.
+\end{theorem}
+
+\begin{remark}
+Зауважимо, що топологія з евклідовою метрикою збігається з топологією, що породжена метрикою $d_\infty = \displaystyle\max_{i = \overline{1,n}} |x_i-y_i|$. Це суттєво спростить доведення теореми.
+\end{remark}
+
+\begin{proof}
+Тобто треба довести, що $U$ -- відкрита в $\mathbb{R}^n \iff U$ -- відкрита в $\mathbb{R} \times \dots \times \mathbb{R}$.\\
+\rightproof Дано: $U$ -- відкрита в $\mathbb{R}^n$. \\
+Нехай $(x_1,\dots,x_n) \in U$, тоді звідси існує окіл $B_{d_\infty}(\vec{x},r) = (x_1-r,x_1+r) \times \dots \times (x_n-r,x_n+r) \subset U$. Позначимо $U_i = (x_i-r,x_i+r)$ -- отримали, що існують $U_i$ -- відкриті околи точок $x_i, i = \overline{1,n}$, для яких $U_1 \times \dots \times U_n \subset U$. А тому звідси $U$ -- відкрита на $\mathbb{R} \times \dots \times \mathbb{R}$.
+\bigskip \\
+\leftproof Дано: $U$ -- відкрита в $\mathbb{R} \times \dots \times \mathbb{R}$.\\
+Нехай $(x_1,\dots,x_n) \in U$, тоді існують відкриті околи $U_i$ точок $x_i, i = \overline{1,n}$, для яких $U_1 \times \dots \times U_n \subset U$. Оскільки $U_i$ -- відкриті околи, то існує $(x_i-r_i,x_i+r_i) \subset U_i$ при $r_i > 0$. Значить, $(x_1-r_1,x_1+r_1) \times \dots \times (x_n-r_n,x_n+r_n) \subset U$. Покладемо $r = \displaystyle\min_{i = \overline{1,n}} r_i$, тоді звідси $(x_1-r,x_1+r) \times \dots \times (x_n-r,x_n+r) \subset U$. Або, інакше кажучи, $B_{d_\infty}(\vec{x},r) \subset U$. Тобто звідси $U$ -- відкрита на $\mathbb{R}^n$ відносно $d_\infty$, а тому й відносно еквлідової метрики.
+\end{proof}
+
+\begin{proposition}
+Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Тоді відображення $\pr_1 \colon X_1 \times X_2 \to X_1$ та $\pr_2 \colon X_1 \times X_2 \to X_2$ -- неперервні.
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+X_1 & \arrow{l}[swap]{\pr_1} X_1 \times X_2 \arrow{r}{\pr_2} & X_2
+\end{tikzcd}
+\end{figure}
+\end{proposition}
+
+\begin{proof}
+Достатньо показати для $\pr_1$, бо з $\pr_2$ все симетрично.\\
+Нехай $U_1$ -- відкрита в $X_1$. Тоді звідси $\pr_1^{-1}(U_1) = \{ (x_1,x_2) \in X_1 \times X_2 \mid x_1 \in U_1 \} = U_1 \times X_2$ -- відкрита як добуток двох відкритих.
+\end{proof}
+
+\begin{remark}
+$\tau_1 \times \tau_2$ -- найслабша на $X_1 \times X_2$ топологія серед всіх інших, для якої проєкції -- неперервні. \textit{TODO: обміркувати}
+\end{remark}
+
+\begin{proposition}
+Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Нехай $(Z,\sigma)$ -- також топологічний простір, встановимо відображення $f \colon Z \to X_1 \times X_2$ як $z \mapsto (f_1(z),f_2(z))$.\\
+$f$ -- неперервне $\iff f_1,f_2$ -- обидва неперервні (покоординатно).
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $f$ -- неперервне. Зауважимо, що $f_1 = \pr_1 \circ f$ та $f_2 = \pr_2 \circ f$. Тоді $f_1,f_2$ -- неперервні як композиція неперервних.
+\bigskip \\
+\leftproof Дано: $f_1,f_2$ -- обидва неперервні.\\
+Нехай $U \in \mathcal{B}$ -- база топології $\tau_1 \times \tau_2$, тобто $U = U_1 \times U_2$, де $U_1,U_2$ -- відкриті на $X_1,X_2$. Звідси $f^{-1}(U) = \{ z \in Z \mid (f_1(z),f_2(z)) \in U_1 \times U_2\} = f_1^{-1}(U_1) \cap f_2^{-1}(U_2)$. За умовою, маємо $f_1^{-1}(U_1), f_2^{-1}(U_2)$ -- відкриті на $Z$. Тобто звідси випливає, що $f^{-1}(U)$ -- відкрита на $Z$.
+\end{proof}
+
+\begin{remark}
+Можна узагальнити означення добутку топології. Маємо $\{(X_\alpha,\tau_\alpha)\}$ -- сім'я топологічних просторів та $X = \displaystyle\prod_{\alpha} X_\alpha$ -- декартів добуток. Якщо визначити клас
+\begin{align*}
+\mathcal{B} = \left\{ \prod_{\alpha} U_\alpha \mid U_\alpha \in \tau_\alpha, U_\alpha \neq X_\alpha \text{ лише скінченне число разів} \right\},
+\end{align*}
+то вона утворить базу множини $X$, а тому можна утворити топологію.\\
+Позначення: $\displaystyle\prod_\alpha \tau_\alpha \overset{\text{def.}}{=} \tau_{\mathcal{B}}$.
+\end{remark}
+
+\subsection{Фактортопологія}
+\noindent
+Тут є куча варіантів, як це визначати, тому розглянемо всі.
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $q \colon X \to Y$ -- сюр'єктивне відображення.\\
+\textbf{Фактортопологію на $Y$} визначимо таким чином:
+\begin{align*}
+U \subset Y \text{ -- відкрита на } Y \iff q^{-1}U \text{ -- відкрита на } X
+\end{align*}
+Позначення: $\tau/_\sim$ (скоро це позначення буде виправданим).
+\end{definition}
+
+\begin{remark}
+$\tau/_{\sim}$ дійсно задає топологію та $(Y,\tau_\sim)$ утворює топологічний простір. Це випливає з властивостей прообразів.
+\end{remark}
+\noindent
+Оскільки $q$ сюр'єктивне відображення, то для кожної $y \in Y$ знайдеться $x \in X$, щоб $y = q(x)$. По-інакшому це можна сказати як $q^{-1}(\{y\}) \neq \emptyset$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\filldraw[fill = blue!20, draw = black] (1.5,2.5) rectangle (2,3) node[scale=0.75] at (2.2,3.2) {$q^{-1}(\{y_1\})$};
+\filldraw[fill = blue!20, draw = black] (0.5,0) rectangle (2,0.7) node[scale=0.75] at (1.2,0.3) {$q^{-1}(\{y_2\})$};
+\draw(0,0) rectangle (2,3);
+
+\draw(4,0) rectangle (6,3);
+\fill (5,1.5) circle (2pt) node[anchor = west]{$y_1$};
+\fill (5.5,0.6) circle (2pt) node[anchor = west]{$y_2$};
+\draw[dashed] (2,3)--(5,1.5);
+\draw[dashed] (2,2.5)--(5,1.5);
+
+\draw[dashed] (2,0.7)--(5.5,0.6);
+\draw[dashed] (2,0)--(5.5,0.6);
+
+\node at (1,-0.5) {$X$};
+\node at (5,-0.5) {$Y$};
+
+\draw[->] (2.5,1.5)--(3.5,1.5) node at (3,1.7) {$q$};
+\end{tikzpicture}
+\end{figure}
+\noindent Також в силу сюр'єктивності ми маємо розбиття множини $X$. Тобто звідси отримали $X = \displaystyle\bigsqcup_{y \in Y} q^{-1}(\{y\})$.
+\bigskip \\
+\noindent Навпаки, нехай множина $X$ має розбиття, тобто $X = \displaystyle\bigsqcup_{y} S_y$. Тоді можна визначити відображення $q$ таким чином: якщо $y \in S_y$, то тоді $S_y \ni x \overset{q}{\mapsto} y$, причому це задає сюр'єктивне відображення.
+\bigskip \\
+Нехай знову є розбиття множини $X$, тоді вона має відношення еквівалентності $x_1 \sim x_2 \iff x_1,x_2$ лежать в одній множині розбиття.\\
+А якщо є відношення еквівалентності на $X$, то зрозуміло, що відбувається розбиття класами еквівалентності $[x]$.
+\bigskip \\
+Коротше, у нас виникла така діаграма:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+q \colon X \to Y \text{ -- сюр'єктивне} \arrow[bend left]{r} & \arrow[bend left]{l} \text{розбиття $X$ по індексу $Y$} \arrow[bend left]{r} & \arrow[bend left]{l} \text{відношення еквівалентності по індексу $Y$}
+\end{tikzcd}
+\end{figure}
+\noindent
+Мораль така: ми можемо трьома різними способами задати фактортопологію: або через довільну сюр'єкцію, або через розбиття (досить рідко), або через відношення еквівалентності. Запишу інше означення:
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $\sim$ -- відношення еквівалентності на $X$.\\
+\textbf{Фактортопологію на $X/_\sim$} визначимо таким чином:
+\begin{align*}
+U \subset X/_\sim \text{ -- відкрита на } X/_\sim \iff \pi^{-1}(U) \text{ -- відкрита на }X,
+\end{align*}
+де $\pi \colon X \to X/_\sim$ -- факторвідображення (яке є сюр'єктивним).
+\end{definition}
+
+\begin{remark}
+Із означення випливає, що $\pi \colon X \to X/_\sim$ -- неперервне.
+\end{remark}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $\sim$ -- відношення еквівалентності на $X$.\\
+$V \subset X/_\sim$ -- замкнена на $X/_\sim \iff \pi^{-1}(V)$ -- замкнена на $X$.\\
+\textit{Вправа: довести.}
+\end{proposition}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $\sim$ -- відношення еквівалентності на $X$. Також нехай $(Y,\sigma)$ -- інший топологічний простір та відображення $f \colon X/_\sim \to Y$.\\
+$f$ -- неперервне $\iff f \circ \pi$ -- неперервне.
+\end{proposition}
+
+\begin{proof}
+\rightproof \textit{випливає з того, що $f,\pi$ одночасно неперервні.}
+\bigskip \\
+\leftproof Дано: $f \circ \pi$ -- неперервне. Нехай тепер $U$ -- відкрита в $Y$. За умовою, $(f \circ \pi)^{-1}(U)$ відкрита на $X$, але тоді $\pi^{-1} f^{-1}(U)$ відкрита на $X$. Значить, за означенням, $f^{-1}(U)$ -- відкрита на $X/_\sim$.
+\end{proof}
+
+\begin{example}
+Розглянемо відрізок $X = [-1,1]$. Ми можемо задати на ній відношення еквівалентності таким чином: $-1 \sim 1$. Інтуїтивно кажучи, відношення еквівалентності 'склеює' точки один з одним (тобто в цьому випадку $-1,1$ будуть склеєними). У результаті маємо отримати коло:
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[thick] (-1,0)--(1,0) node at (0,-0.5) {$X$};
+\fill (-1,0) circle (1pt) node[anchor = north] {$-1$};
+\fill (1,0) circle (1pt) node[anchor = north] {$1$};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw (0,0) circle (1);
+\fill (1,0) circle (1pt) node[anchor = west] {$-1 \sim 1$};
+\node at (0,0) {$\mathcal{S}^1$};
+\end{tikzpicture}
+\caption*{Тобто, інтуїтивно кажучи, $X/{_\sim} \cong \mathcal{S}^1$, саме гомеоморфні.}
+\end{figure}
+\noindent Скоро математично я це доведу.
+\end{example}
+\noindent \textit{TODO: доповнити!}
+
+\newpage
+\section{Компактні простори}
+\subsection{Компактність}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+\textbf{Покриттям} $X$ назвемо сім'ю підмножин $\{U_i \mid i \in I\}$ множини $X$, для яких
+\begin{align*}
+\bigcup_{i \in I} U_i = X
+\end{align*}
+Якщо множина індексів $I$ скінченна, то покриття називається \textbf{скінченним}. Якщо всі множини в сім'ї відкриті, то покриття називається \textbf{відкритим}.
+\end{definition}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір. Нехай $\{U_i \mid i \in I\}$ -- покриття $X$.\\
+\textbf{Підпокриттям} назвемо набір $\{U_i \mid i \in J\}$, де $J \subset I$, якщо це теж покриття.
+\end{definition}
+
+\begin{example}
+Зокрема множини $(n-1,n+1), n \in \mathbb{Z}$ утворюють відкрите покриття $\mathbb{R}$.
+\end{example}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Даний простір назвемо \textbf{компактним}, якщо
+\begin{align*}
+\forall \{ U_i \mid i \in I \} \text{ -- відкрите}: \exists \{U_i \mid i \in J\}, J \subset I, J \text{ -- скінченний індекс}
+\end{align*}
+Тобто для будь-якого відкриттого покриття $X$ існує скінченне підпокриття.
+\end{definition}
+
+\begin{example}
+$\mathbb{R}$ не є компактом.\\
+Дійсно, оберемо відкрите покриття $\{(n-1,n+1) \mid n \in \mathbb{Z}\}$. Якби існувало скінченне підпокриття $\{(n-1,n+1) \mid n \in J\}$, то тоді в $J \subset \mathbb{Z}$ є найбільший елемент $N \in \mathbb{Z}$. Тоді з цього випливає, що $N+1 \notin \displaystyle\bigcup_{n \in J} (n-1,n+1)$. Але водночас $\displaystyle\bigcup_{n \in J} (n-1,n+1) = \mathbb{R}$, тобто $N+1 \notin \mathbb{R}$ -- це неможливо.\\
+Висновок: знайшли покриття $\{(n-1,n+1) \mid n \in \mathbb{Z}\}$, яка не містить скінченне підпокриття.
+\end{example}
+
+\begin{example}
+Недискретний топологічний простір $(X,\tau_{\text{indiscr}})$ -- компактний.\\
+Дійсно, оберемо будь-яке відкрите покриття $\{U_i \mid i \in I\}$, у нас $\displaystyle\bigcup_{i \in I} U_i = X$. Кожний $U_i = \emptyset$ або $X$. Значить, існує множина $U_{i_0} = X$. Тоді $\{U_{i_0}\}$ формує скінченне підпокриття.
+\end{example}
+
+\begin{example}
+\label{finite_is_compact}
+Будь-який скінченний простір -- компактний.\\
+Маємо відкрите покриття $\{U_i \mid i \in I\}$, тобто $\displaystyle\bigcup_{i \in I} U_i = X$. Топологічний простір скінченний, тобто $X$ -- скінченний, тож $X = \{x_1,\dots,x_n\}$. Кожний $x_j \in U_{i_j}$. Тож існує скінченне підпокриття $\{U_{i_1},\dots,U_{i_j}\}$.
+\end{example}
+
+\begin{example}
+Дискретний простір $(X,\tau_{\text{discr}})$ -- компактний $\iff$ це скінченний простір.\\
+\rightproof Дано: $(X,\tau_{\text{discr}}$ -- компактний. Тобто для будь-якого відкритого покриття, зокрема для $\{ \{x\} \mid x \in X\}$ існує скінченне підпокриття $\{ x_1,x_2,\dots,x_n\}$, звідси $X = \displaystyle\bigcup_i \{x_i\}$.\\
+\leftproof \textit{див.} \exref{finite_is_compact}
+\end{example}
+
+\begin{definition}
+Задано множину $X$ та $A \subset X$.\\
+\textbf{Покриттям множини $A$} назвемо сім'ю $\{W_i \mid i \in I\}$ підмножин $X$, для яких
+\begin{align*}
+A \subset \bigcup_{i \in I} W_i
+\end{align*}
+$\{W_i \mid i \in J\}, J \subset I$ називаєтсья \textbf{підпокриттям}, якщо це теж покриття множини $A$.
+\end{definition}
+
+\begin{remark}
+Особливий випадок при $A = X$, із першим означенням збігається.
+\end{remark}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топлогічний простір та $A \subset X$.\\
+Множина (!) $A$ називається \textbf{компактом}, якщо
+\begin{align*}
+(A,\tau_A) \text{-- компактний простір},
+\end{align*}
+тобто будь-яке відкрите покриття $A$ підмножинами $A$ має скінченне підпокриття.
+\end{definition}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$.\\
+$A$ -- компактна $\iff$ будь-яке покриття $A$ відкритими підмножинами $X$ містить скінченне підпокриття.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $A$ -- компактна, тобто $(A,\tau_A)$ -- компактний простір. Нехай $\{W_i \subset X \mid i \in I\}$ -- відкрите покриття множини $A$, тобто звідси $A \subset \displaystyle\bigcup_{i \in I} W_i$. Але звідси випливає, що $A \cap \displaystyle\bigcup_{i \in I} W_i = \bigcup_{i \in I} (A \cap W_i) = A$. Отримали покриття $\{ A \cap W_i \mid i \in I\}$ множини $A$ підмножинами $A$. Оскільки $(A,\tau_A)$ -- компактний, то звідси існує скінченне підпокриття $\{ A \cap W_i \mid i \in J\}$, тобто звідси $\displaystyle\bigcup_{i \in J} (A \cap W_i) = A = A \cap \bigcup_{i \in J} (A \cap W_i)$. Значить, звідси $A \subset \displaystyle\bigcup_{i \in J} W_i$. Тобто $\{W_i \subset X \mid i \in J\}$ -- скінченне підпокриття.
+\bigskip \\
+\leftproof Дано: будь-яке покриття $A$ відкритими підмножинами $X$ містить скінченне підпокриття. Насправді, ідейно все те саме робиться.
+\end{proof}
+
+\subsection{Компактність та підпростори}
+\begin{example}
+Із курсу математичного аналізу, $[0,1]$ -- компактний (лема Гайне-Бореля). Однак $(0,1) \subset [0,1]$ більше не є компактом, тому що відкрите покриття $\{(\varepsilon,1) \mid \varepsilon > 0\}$ не містить скінченного підпокриття.
+\end{example}
+\noindent
+Тобто цей приклад показує, що треба додати певні обмеження, щоб підмножина була теж автоматично компактною.
+
+\begin{proposition}
+Задано $(X,\tau)$ -- компактний простір та $A \subset X$ -- замкнена. Тоді $(A,\tau_A)$ -- компактний.
+\end{proposition}
+
+\begin{proof}
+Нехай $\{W_i \subset X \mid i \in I\}$ -- відкрите покриття $A$, тобто $\displaystyle\bigcup_{i \in I} W_i \supset A$. Але ми знаємо, що $A$ -- замкнена, тобто $X \setminus A$ -- відкрита. Зауважимо, що $\displaystyle (X \setminus A) \cup \bigcup_{i \in I} W_i = X$. Тобто $\{X \setminus A\} \cup \{W_i \mid i \in I\}$ утворює відкрите покриття $X$. За компактністю, існує скінченне підпокриття $\{X \setminus A\} \cup \{W_i \mid i \in J\}$, тож звідси $\displaystyle (X \setminus A) \cup \bigcup_{j \in I} W_i = X$.\\
+Із цього випливає, що $\displaystyle\bigcup_{j \in I} W_i \supset A$. Тобто знайшли скінченне підпокриття $\{W_i \subset X \mid i \in J\}$.\\
+Висновок: $A$ -- компактна множина.
+\bigskip \\
+Окремо варто звернути увагу, коли із відкритого покриття $\{X \setminus A\} \cup \{W_i \mid i \in I\}$ може бути скінченне підпокриття $\{W_i \mid i \in K\}$. Тоді звідси $\displaystyle\bigcup_{i \in K} W_i = X \supset A$ --  автоматично доводиться.
+\end{proof}
+
+\noindent Коротше, будь-яка замкнена множина -- компактна. Але не кожна компактна множина буде замкненою.
+
+\begin{example}
+Зокрема маємо $(X,\tau_{\text{indiscr}})$ -- недискретний простір, оберемо $Y \subsetneq X$, утворимо знову недискретний простір $(Y,\tau_Y)$ за \exref{subspace_of_indiscrete_space_is_also_indiscrete}.\\
+Зауважимо, що $Y$ -- компактна множина, тому що $(Y,\tau_Y)$ -- компактний простір в силу недискретності. Але $Y$ -- НЕ замкнена множина, тобто $X \setminus Y$ -- НЕ відкрита множина, тому що в $(X,\tau_{\text{indiscr}})$ лише $\emptyset,X$ -- відкриті.
+\end{example}
+\noindent
+Утім можна зробити певні зміни, аби в зворотному напрямку це спрацювалю.
+
+\begin{proposition}
+Задано $(X,\tau)$ -- гаусдорфів (уже не компактний) простір та $A$ -- компактна множина. Тоді $A$ -- замкнена.
+\end{proposition}
+
+\begin{proof}
+Ми хочемо зараз довести, що $X \setminus A$ -- відкрита множина. Значить, нехай $x \in X \setminus A$. Оберемо також будь-який $a \in A$. У силу гаусдорфовості, існують околи $U_a,V_a$ -- відповідно відкриті околи точки $x,a$ такі, що $U_a \cap V_a = \emptyset$. Зауважимо, що $\displaystyle\bigcup_{a \in A} V_a \supset A$. Маємо $\{V_a \subset X\mid a \in A\}$ -- відкрите покриття, а за компактністю $A$, можна знайти скінченне підпокриття $\{V_a \subset X\mid a \in B\}$.\\
+Зафіксуємо $U = \displaystyle\bigcap_{a \in B} U_a$, який є теж відкритим (в силу скінченного перетину) та околом точки $x$. Доведемо, що $U \subset X \setminus A$.\\
+Нехай $y \in A$, тобто $y \in V_b$ при деякому $b \in B$. Але відомо, що $V_b \cap U_b = \emptyset$, а тому $b \notin U_b \implies b \notin U$.\\
+Висновок: $X \setminus A$ -- відкрита, а тому $A$ -- замкнена.
+\end{proof}
+
+\begin{corollary}
+Задано $(X,\tau)$ -- компактний та гаусдорфів простір.\\
+$A$ -- компактна $\iff A$ -- замкнена.
+\end{corollary}
+
+\subsection{Компактність та добуток просторів}
+\begin{theorem}[Теорема Тіхонова (скінченний варіант)]
+Задані $(X,\tau_1)$ та $(Y,\tau_2)$ -- компактні топологічні простори. Тоді $(X \times Y, \tau_1 \times \tau_2)$ -- теж компактний топологічний простір.
+\end{theorem}
+
+\begin{proof}
+Отже, нехай $\{S_i \mid i \in I\}$ -- відкрите покриття $X \times Y$. Для кожного $(x,y) \in X \times Y$ можна обрати $S_i \ni (x,y)$, а звідси можна обрати відкриті $U_{x,y}, W_{x,y}$ -- відповідно околи точки $x,y$, для яких $U_{x,y} \times W_{x,y} \subset S_i$. Сім'я множин $\{U_{x,y} \times W_{x,y} \mid x \in X, y \in Y\}$ -- відкрите покриття $X \times Y$, бо\\
+$\displaystyle\bigcup_{(x,y) \in X \times Y} (U_{x,y} \times W_{x,y}) = \bigcup_{x \in X} U_{x,y} \times \bigcup_{y \in y} W_{x,y} = X \times Y$.\\
+Тому достатньо шукати скінченне підпокриття саме для цієї сім'ї.\\
+Зафіксуємо $x \in X$. Зауважимо, що $\{W_{x,y} \mid y \in Y\}$ -- відкрите покриття $Y$. Але оскільки $(Y,\tau_2)$ -- компактний, то існує скінченне підпокриття $\{W_{w,y} \mid y \in \tilde{Y}\}$. Покладемо тепер $U_x = \displaystyle\bigcap_{y \in \tilde{Y}} U_{x,y}$, що також буде відкритим околом точки $x$. Тоді звідси випливає, що $U_x \times Y \subset \displaystyle\bigcup_{y \in \tilde{Y}} (U_{x,y} \times W_{x,y})$, бо\\
+$(x,y) \in U_x \times Y$, тому $x \in U_{x,y}$ для всіх $y \in \tilde{Y}$. Обравши довільний $y \in \tilde{Y}$, отримаємо $y \in W_{x,y}$.\\ 
+Тепер $\{U_x \mid x \in X\}$ -- відкрите покриття $X$ (за міркуваннями вище). Але оскільки $(X,\tau_1)$ -- компактний, то існує скінченне підпокриття $\{U_x \mid x \in \tilde{X}\}$.\\
+Нарешті, я стверджую, що $\{ U_{x,y} \times W_{x,y} \mid x \in \tilde{X}, y \in \tilde{Y} \}$ буде скінченним підпокриттям $X \times Y$. Те, що це скінченна, випливає зі скінченності $\tilde{X},\tilde{Y}$. Нехай тепер $(x,y) \in X \times Y$, тоді $x \in U_x$ для деякого $x \in \tilde{X}$, тож $(x,y) \in U_x \times Y$, але тоді $(x,y) \in U_{x,y} \times W_{x,y}$ для деякого $y \in \tilde{Y}$. 
+\end{proof}
+
+\begin{remark}
+Цілком зрозуміло, що теорема Тіхонова працює, коли в нас $n$ штук компактних топологічний просторів.
+\end{remark}
+
+\begin{example}
+Зокрема звідси $[0,1]^n$ буде компактною множиною, оскільки $[0,1]$ -- компактна.
+\end{example}
+
+\subsection{Компактність та факторпростори}
+\begin{lemma}
+Задані $(X,\tau),(Y,\tilde{\tau})$ -- два топологічних простори та $f \colon X \to Y$ -- неперервне. Якщо $X$ -- компактна, то тоді $fX$ -- компактна.
+\end{lemma}
+
+\begin{proof}
+Маємо $\{W_i \subset Y \mid i \in I\}$ -- відкрите покриття $fX$. Візьмемо сім'ю прообразів $\{f^{-1}(W_i) \subset X \mid i \in I\}$. Зауважимо:\\
+$\displaystyle\bigcup_{i \in I} f^{-1}(W_i) = f^{-1} \left( \bigcup_{i \in I} W_i \right) \supset f^{-1} f(X) = X$.\\
+Отже, $\{f^{-1}(W_i) \subset X \mid i \in I\}$ -- відкрите покриття $X$, але в силу компактності існує скінченне підпокриття $\{f^{-1}(W_i) \subset X \mid i \in J\}$. Залишилось показати, що $\{W_i \subset Y \mid i \in J\}$ (яке вже є скінченним) буде підпокриттям $fX$. І дійсно, ми маємо $X = \displaystyle\bigcup_{i \in J} f^{-1}(W_i) = \bigcup_{i \in J} W_i$. Але тоді \\ $fX = \displaystyle f\left( f^{-1} \bigcup_{i \in J} W_i \right) \subset \bigcup_{i \in J} W_i$.
+\end{proof}
+
+\iffalse
+\begin{corollary}
+Задано $(X,\tau)$ -- компактний простір та $f \colon X \to \mathbb{R}$ -- неперервна функція. Тоді $f$ -- обмежена та досягає найменшого та найбільшого значень (якщо $X \neq \emptyset$).
+\end{corollary}
+
+\begin{proof}
+Дійсно, $X$ -- компактна, а тому за лемою, $fX$ -- компактна. Звідси з курса мат аналізу, $fX$ обмежена та замкнена (лема Гайне-Бореля). Якщо $X \neq \emptyset$, то тоді $fX$ має супремум. $\sup A \in \Cl(A)$, якщо $A \subset \mathbb{R}$ непорожня та обмежена зверху
+\end{proof}
+\fi
+
+\begin{corollary}
+Будь-який факторпростір -- компактний простір.\\
+\textit{Випливає з того, що $\pi \colon X \to X/_\sim$ -- неперервне відображення.}
+\end{corollary}
+
+\begin{definition}
+Задані $(X,\tau),(Y,\tilde{\tau})$ -- два топологічних простори та $f \colon X \to Y$ -- відображення.\\
+$f$ називається \textbf{відкритим}, якщо
+\begin{align*}
+\forall U \subset \text{ -- відкрита в } X: fU \text{ -- відкрита в } Y
+\end{align*}
+$f$ називається \textbf{замкненим}, якщо
+\begin{align*}
+\forall V \subset \text{ -- замкнена в } X: fU \text{ -- замкнена в } Y
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+Задані $(X,\tau),(Y,\tilde{\tau})$ -- один компактний, а другий -- гаусдорфів простори та $f \colon X \to Y$ -- неперервне відображення. Тоді $f$ -- замкнене.
+\end{proposition}
+
+\begin{proof}
+Нехай $V$ -- замкнена на $X$, тоді $V$ -- компакт як множина. Значить, $fV$ -- компакт. У силу гаусдорфовості, $fV$ -- замкнена в $Y$.
+\end{proof}
+
+\noindent Уже якось було, що неперервна бієкція не гарантує гомеоморфність між двома просторами. Але, додавши певні обмеження, можна саме так і ствердити:
+
+\begin{proposition}
+Задані $(X,\tau),(Y,\tilde{\tau})$ -- один компактний, а другий -- гаусдорфів простори та $f \colon X \to Y$ -- неперервна бієкція. Тоді $f$ -- гомеоморфізм.
+\end{proposition}
+
+\begin{proof}
+Нам треба лишень довести, що $f^{-1} \colon Y \to X$ буде неперервним відображенням.\\
+Нехай $V$ -- замкнена в $X$ та розглянемо $(f^{-1})^{-1}(V) \overset{f \text{ -- бієкція}}{=} fV$. Нам уже відомо, що $f$ -- замкнене відображення, а тому $fV$ має бути замкненою на $Y$. Тобто $(f^{-1})^{-1}(V)$ -- замкнена на $Y$.
+\end{proof}
+
+\begin{example}
+Зокрема будь-які дві компактно-гаусдорфові простори будуть між собою гомеоморфними.
+\end{example}
+
+\begin{proposition}
+Задані $(X,\tau),(Y,\tilde{\tau})$ -- один компактний, а другий -- гаусдорфів простори та $f \colon X \to Y$ -- неперервна сюр'єкція. Тоді $Y \cong X/_\sim$. Тут відношення еквівалентності $x_1 \sim x_2 \iff f(x_1) = f(x_2)$.
+\end{proposition}
+
+\textit{TODO: доробити!}
+\newpage
+
+\section{Зв'язні простори}
+\subsection{Зв'язність}
+%Alternative definition
+\iffalse
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Ми назвемо простір \textbf{зв'язним}, якщо $X \neq \emptyset$ та
+\begin{align*}
+\exists U,V \in \tau: X = U \sqcup V \implies U = \emptyset \text{ або } V = \emptyset
+\end{align*}
+У протилежному випадку ми будемо це називати \textbf{незв'язним}.
+\end{definition}
+\fi
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Ми назвемо простір \textbf{незв'язним}, якщо
+\begin{align*}
+\exists U,V \in \tau: U \neq \emptyset, V \neq \emptyset: X = U \sqcup V
+\end{align*}
+У протилежному випадку ми будемо це називати \textbf{зв'язним}.
+\end{definition}
+
+\begin{example}
+Зокрема $X = \mathbb{R} \setminus \{0\}$ -- незв'язнии, тому що існують відкриті непорожні та неперетинні $(-\infty,0), (0,+\infty)$, які дають $(-\infty,0) \cup (0,+\infty) = X$.
+\end{example}
+
+\begin{example}
+Простір $\mathbb{Q}$ (як підпростір $\mathbb{R}$) -- незв'язний. Дійсно, нехай $U = (-\infty,\sqrt{2}) \cap \mathbb{Q}$ та $V = (\sqrt{2},+\infty) \cap \mathbb{Q}$ -- два відкритих, непорожніх та неперетинних множин. Тоді $U \cap V = \mathbb{Q}$ (оскільки $\sqrt{2}$ ірраціональне).
+\end{example}
+
+\begin{example}
+Будь-який $(X,\tau_{\text{dicsr}})$ -- дискретний топологічний простір -- незв'язний, якщо $\# X \geq 2$. Оберемо $x \in X$, тоді $\{x\} \sqcup (X \setminus \{x\}) = X$.
+\end{example}
+
+\begin{example}
+Будь-який $(X,\tau_{\text{indicsr}})$ -- недискретний топологічний простір -- зв'язний, якщо $X \neq \emptyset$. Розпишемо $X = U \sqcup V$, тут обидва відкриті. Але звідси вилпиває, що $U \in \{X, \emptyset\}$ та $V \in \{X,\emptyset\}$. Тобто дійсно, $U = \emptyset$ або $V = \emptyset$. Це означає, що порушується означення незв'язності.
+\end{example}
+
+\begin{lemma}
+Задані $(X,\tau), (Y,\tilde{\tau})$ -- топологічних простори та $f \colon X \to Y$ -- відображення. Нехай $U,V$ -- такі відкриті підмножини, що $U \sqcup V = X$.\\
+$f$ -- неперервне $\iff f|_U,\ f|_V$ -- неперервні.\\
+\textit{Дану лему часто називають pasting lemma}.
+\end{lemma}
+
+\begin{proof}
+\rightproof Дано $f$ -- неперервне. Тоді треба згадати, що $f|_U = f \circ \imath_U$ та $f|_V = f \circ \imath_V$. Вкладення вже неперервне, тобто звідси $f|_U, f|_V$ -- неперервні як композиція.
+\bigskip \\
+\leftproof Дано: $f|_U,\ f|_V$ -- неперервні. Нехай $W$ -- відкрита в $Y$. Тоді\\
+$f^{-1}(W) = \{x \in U \mid f(x) \in W\} \sqcup \{x \in V \mid f(x) \in W\} = (f|_U)^{-1}(W) \sqcup (f|_V)^{-1}(W)$.\\
+За умовою, $(f|_U)^{-1}(W)$ -- відкрита в $U$, але сама $U$ -- відкрита в $X$. Значить, $(f|_U)^{-1}(W)$ -- відкрита в $X$. Аналогічним чином $(f|_V)^{-1}(W)$ -- відкрита в $U$.\\
+Разом отримаємо $f^{-1}(W)$ -- відкрита в $X$.
+\end{proof}
+
+%using definition of connectedness from iffalse
+\iffalse
+\begin{remark}
+Згідно з означенням, $\emptyset$ не є ані зв'язним, ані незв'язним. Хоча деякі вважають $\emptyset$ за зв'язним.
+\end{remark}
+\fi
+
+\begin{remark}
+Згідно з означенням, $\emptyset$ буде зв'язним. Бачив авторів, які не вважали дану множину ані зв'язною, ані незв'язною.
+\end{remark}
+
+\begin{proposition}[Еквівалентні означення]
+Задано $(X,\tau), X \neq \emptyset$ -- топологічний простір. Наступні еквівалентні:\\
+1) $(X,\tau)$ -- зв'язний;\\
+2) єдині підмножини $X$, що є відкритими та замкненими одночасно, -- це $\emptyset, X$;\\
+3) будь-яке неперервне відображення $f \colon X \to D$, де $D$ -- дискрений простір, буде сталим.\\
+4) будь-яке неперервне відображення $f \colon X \to \{y_1,y_2\}$, де $\{y_1,y_2\}$ -- двоточковий дискретний простір, буде сталим.
+\end{proposition}
+
+\begin{proof}
+$\boxed{1) \Rightarrow 2)}$ Дано: $(X,\tau)$ -- зв'язний. Нехай $U$ -- замкнена та відкрита одночасно. Тобто $U,\ X \setminus U$ одночасно відкриті. При цьому вони неперетинні, непорожні, а тому звідси $U \sqcup (X \setminus U) = X$. У силу зв'язності єдина можлива опція -- це бути $U = X$ або $U = \emptyset$.
+\bigskip \\
+$\boxed{2) \Rightarrow 3)}$ Дано: єдині підмножини $X$, що є відкритими та замкненими одночасно, -- це $\emptyset, X$.\\
+Розглянемо неперервне відображення $f \colon X \to D$, де $D$ -- дискретний. Оберемо $x \in X$, тоді $\{f(x)\}$ -- відкрита й замкнена одночасно в $D$. У силу неперервності, $f^{-1}\{f(x)\}$ -- відкрита та замкнена в $X$, тоді $f^{-1}\{f(x)\} = \emptyset$ або $f^{-1}\{f(x)\} = X$. Перша рівність неможлива, бо точка $x$ там лежить. Значить, $f^{-1}\{f(x)\} = X$. Висновок: $f(y) = f(x), \forall y \in X$, тобто тут $f(x)$ грає роль константи.
+\bigskip \\
+$\boxed{3) \Rightarrow 4)}$ Дано: будь-яке неперервне відображення $f \colon X \to D$, де $D$ -- дискрений простір, буде сталим. Зокрема фіксуємо $D_{2 \text{ points}}$ -- довільний двоточковий дискретний простір -- закінчили.
+\bigskip \\
+$\boxed{4) \Rightarrow 1)}$ Дано: будь-яке неперервне відображення $f \colon X \to \{y_1,y_2\}$, де $\{y_1,y_2\}$ -- двоточковий дискретний простір, буде сталим. Нехай $U,V$ -- відкриті підмножини так, щоб $U \sqcup V = X$. Визначимо відображення $g \colon X \to \{y_1,y_2\}$, що задано як $g(x) = \begin{cases} y_1, & x \in U \\ y_2, & x \in V \end{cases}$. Тоді $g|_U, g|_V$ неперервні (легко ручками перевірити), а звідси $g$ -- неперервне за лемою. Але оскільки $g$ задовольняє умові 'дано', то звідси $g$ приймає стале значення. Тобто $U = X, V = \emptyset$ або навпаки.
+\end{proof}
+
+\begin{lemma}
+\label{connectedness_using_closure}
+Задано $(X,\tau)$ -- топологічний простір. Нехай $A,B \subset X$ такі, що $A \subset B \subset \Cl(A)$. Також нехай $A$ -- зв'язна. Тоді $B$ -- також зв'язна.
+\end{lemma}
+
+\begin{proof}
+Нехай $f \colon B \to D$ -- неперервне відображення до дискретного простору. Тоді $f|_A \colon A \to D$ також неперервне (композиція неперервних, бо $f|_A = f \circ \imath_A$). Тоді це стала функція, оскільки $A$ -- з'єднана область за умовою. Скажімо, $f|_A(a) = d, \forall a \in A$. Тепер, $d$ та $f$ -- обидва неперервні функції з $B$ в $D$ (який є гаусдорфовим). Зауважимо, що $A$ -- щільна на $B$ в силу $A \subset B \subset \Cl(A)$. Дійсно, якщо розглянути підпростір $(B,\tau_B)$, то $B$ -- замкнена та містить $A$, а тому $B \supset \Cl(A)$; отже, $B = \Cl(A)$. На щільній множині $A$ виконано $f(a) = a$, а тому $f(b) = d$ на всій множині $B$.\\
+Отже, $f \colon B \to D$ теж стале, тобто $B$ -- зв'язна.
+\end{proof}
+
+\begin{lemma}
+Задані $(X,\tau), (Y,\tilde{\tau})$ -- топологічні простори та $f \colon X \to Y$ -- неперервне. Відомо, що $X$ -- зв'язний. Тоді $f(X)$ -- також зв'язний.
+\end{lemma}
+
+\begin{proof}
+Спочатку розглянемо випадок, коли $f$ -- сюр'єктивне. У цьому випадку $f(X) = Y$. Маємо $U \sqcup V = Y$, де $U,V$ -- відкриті в $Y$, тоді $f^{-1}(U), f^{-1}(V)$ -- неперетинні та відкриті в $X$, при цьому $f^{-1}(Y) = X = f^{-1}(U) \sqcup f^{-1}(V)$. Оскільки $X$ -- зв'язний, то (наприклад) $f^{-1}(U) = \emptyset$, а за сюр'єктивністю, $U = \emptyset$.\\
+Якщо $f \colon X \to Y$ -- довільне, то тоді $g \colon X \to f(X)$, де $g \equiv f$, -- сюр'єктивне, і там закінчили.
+\end{proof}
+
+\begin{proposition}
+Задані $(X,\tau_1)$ та $(Y,\tau_2)$ -- два зв'язних топологічних простори. Тоді $(X \times Y, \tau_1 \times \tau_2)$ -- також зв'язний.
+\end{proposition}
+
+\begin{proof}
+Розглянемо неперервне відображення $f \colon X \times Y \to D$, де $D$ -- дискретний простір. Оберемо $(x,y), (x',y') \in X \times Y$. Зауважимо, що $\{x\} \times Y \cong Y$, тож звідси $\{x\} \times Y$ має бути зв'язною також. Значить, $f|_{\{x\} \times Y}$ буде сталою. Зокрема звідси $f(x,y) = f(x,y')$.\\
+Аналогічним чином $X \times \{y'\} \cong X$, а там через зв'язність отримаємо $f(x',y') = f(x,y')$.\\
+Разом отримали $f(x,y) = f(x',y')$, тобто $f$ -- стала. Отже, $X \times Y$ -- зв'язна.
+\end{proof}
+
+\begin{example}
+Із курсу матана, $[a,b]$ -- зв'язний. Але за твердженням, звідси випливає, що всі куби $[a_1, b_1] \times \dots \times [a_n, b_n]$ будуть зв'язними в $\mathbb{R}^n$.
+\end{example}
+
+\begin{lemma}
+Задано $(X,\tau)$ -- топологічний простір та $(A_i, i \in I)$ -- покриття $X$, причому всі $A_i$ -- зв'язні, та всі вони перетинаються між собою. Тоді $X$ -- зв'язна.
+\end{lemma}
+
+\begin{proof}
+Нехай $f \colon X \to D$ -- неперервне відображення, де $D$ -- дискретний простір. Тоді неперервним буде $f|_{A_i} \colon A_i \to D$, але в силу зв'язності $A_i$, ми маємо $f|_{A_i} \equiv d_i$. Оберемо інше звуження $f|_{A_j} \colon A_j \to D$, тоді аналогічно $f|_{A_j} \equiv d_j$. Проте $A_i \cap A_j \neq \emptyset$, тож звідси $d_i = d_j$. Таким чином, стала не залежить від $i \in I$, а тому $f$ буде сталою на $X$. Отже, $X$ -- зв'язна.
+\end{proof}
+
+\subsection{Лінійна зв'язність}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+\textbf{Шляхом} в $X$ називають неперервне відображення $\gamma \colon [0,1] \to X$. Ми називаємо $\gamma$ \textbf{шляхом від $x$ до $y$}, якщо $\gamma(0) = x, \gamma(1) = y$.\\
+Простір $X \neq \emptyset$ називається \textbf{лінійно зв'язним}, якщо
+\begin{align*}
+\forall x,y \in X: \exists \gamma \text{ -- шлях від $x$ до $y$}
+\end{align*}
+\end{definition}
+
+\begin{lemma}
+Задано $(X,\tau)$ -- топологічний простір. Нехай $X$ -- лінійно зв'язний. Тоді $X$ -- (просто) зв'язний.
+\end{lemma}
+
+\begin{proof}
+Нехай $f \colon X \to D$ -- неперервне, де $D$ -- дискретний простір. Оберемо $x,y \in X$, тоді, за умовою, існує шлях $\gamma \colon [0,1] \to X$, причому $\gamma(0) = x, \gamma(1) = y$. Звідси відображення $f \circ \gamma \colon [0,1] \to D$ -- також неперервне. Оскільки $[0,1]$ -- зв'язна, то тоді $f \circ \gamma$ -- стале відображення, зокрема $f(x) = f(\gamma(0)) = f(\gamma(1)) = f(y)$. Отже, $f$ -- також стале, а тому $X$ -- зв'язний.
+\end{proof}
+
+\begin{example}
+Підмножина $X \subset \mathbb{R}^n$ називається \textbf{випуклою}, якщо $\forall x,y \in X, \forall t \in [0,1]: (1-t)x + ty \in X$. Тоді кожна випукла підмножина $\mathbb{R}^n$ буде лінійно зв'язною, оскільки $t \mapsto (1-t)x + ty$ визначає довільний шлях з $x$ в $y$.\\
+Отже, всі випуклі підмножини $\mathbb{R}^n$ -- зв'язні.
+\end{example}
+\noindent
+Нехай задані шлях $\gamma$ з $x$ в $y$ та шлях $\delta$ з $y$ в $z$. Ми можемо їх об'єднати ці шляхи таким чином: визначаємо $\gamma*\delta \colon [0,1] \to X$, який задається ось так:
+\begin{align*}
+(\gamma*\delta)(t) = \begin{cases} \gamma(2t), & t \in \left[0, \dfrac{1}{2}\right] \\
+\delta(2t-1), & t \in \left[\dfrac{1}{2},1\right] \end{cases}
+\end{align*}
+Задане відображення досі залишається шляхом, тільки тепер з $x$ в $z$.
+
+\begin{example}
+Простір $\mathbb{R}^n \setminus \{0\}$ буде лінійно зв'язним при $n \geq 2$.\\
+Нехай $x,y \in \mathbb{R}^n$.\\ Якщо пряма між $x,y$ не проходить через $0$, то тоді дана пряма визначає шлях з $x$ в $y$.\\
+Інакше ми можемо обрати точку $z \in X$, що не лежить на цій прямій (це можливо в силу умови $n \geq 2$). Пряма через $x,z$ не проходить через $0$, тому це -- шлях з $x$ в $z$. Аналогічно пряма через $z,y$ не проходить через $0$, тому це -- шлях з $z$ в $y$. Отже, можна об'єднати два шляхи -- отримаємо шлях з $x$ в $y$.
+\end{example}
+
+\begin{lemma}
+\label{graph_function_homeomorphism}
+Задано $(X,\tau), (Y,\tilde{\tau})$ -- топологічні простори та $f \colon X \to Y$ -- неперервне. Тоді $\Gamma_f \cong X$, де $\Gamma_f = \left\{ (x,y) \in X \times Y : y = f(x) \right\}$ -- графік функції (для дійснозначних функцій це був би справді графік).
+\end{lemma}
+
+\begin{proof}
+Визначимо такі функції:\\
+$p \colon \Gamma_f \to X$ \qquad $(x,y) \mapsto x$ \\
+$q \colon X \to \Gamma_f$ \qquad $x \mapsto (x,f(x))$.\\
+Зауважимо, що $p \circ q = \id_X$ та $q \circ p = \id_{\Gamma_f}$. Тож вони взаємно оборотні. Залишилося довести, що ці два відображення -- неперервні.\\
+Для $p$ маємо $p = \pr \circ \imath$, де $\pr \colon X \times Y \to X,\ \imath \colon \Gamma_f \to X \times Y$. Оскільки ці два відображення неперервні, то композиція теж буде неперервною.\\
+Для $q$ ми розглянемо $\imath \circ q \colon X \to X \times Y$. Зауважимо, що $(\imath \circ q)(x) = (x,f(x)) = (\id_X(x),f(x))$ -- обидві функції неперервні, тож $\imath \circ q$ -- неперервне. За \prpref{continuity_on_smaller_codomain_iff_continuity_on_bigger_codomain}, $q$ -- неперервне.
+\end{proof}
+
+\begin{remark}
+Тепер, нарешті, можемо поговорити про те, що зворотне твердження не працює. Тобто зі зв'язності не випливає лінійна зв'язність в загальному випадку.
+\end{remark}
+
+\begin{example}
+Розглянемо підмножини $L = \{(0,y) \in \mathbb{R}^2 : -1 \leq y \leq 1\}$ та $C = \left\{ \left(x, \sin \dfrac{1}{x} \right) \in \mathbb{R}^2 : x > 0 \right\}$. Будемо зосереджені підпросторі $X = L \cup C$, яка називається \textbf{сіносуїдальною кривою тополога}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[samples=3000,domain=0.001:0.5,restrict y to domain =-1:1]
+\addplot[blue]plot (\x, {sin(deg(1/\x))});
+\addplot +[mark=none, very thick] coordinates {(0, -1) (0, 1)};
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+\noindent
+I. \textit{$X$ -- зв'язна.}\\
+Спочатку зауважимо, що $C \cong (0,+\infty)$ за \lmref{graph_function_homeomorphism} та $(0,+\infty)$ -- зв'язна, тож сама $C$ буде також зв'язною. Залишилося довести, що $\Cl(C) \supset X \supset C$ -- і тоді вже $X$ буде зв'язною за \lmref{connectedness_using_closure}.\\
+Нехай $(0,y) \in L$, тут $|y| \leq 1$. Оберемо довільне $\varepsilon > 0$. Тоді існує елемент $z > \dfrac{1}{\varepsilon}$, для якого $y = \sin z$. Покладемо $x = \dfrac{1}{z}$, тоді отримаємо $(x,y) \in C$, при цьому $\| (0,y), (x,y) \| = |x| < \varepsilon$. Таким чином, $(0,y) \in \Cl(C)$, що дає нам вкладення $\Cl(C) \supset L$. Проте оскільки $\Cl(C) \supset C$, то з цих двох вкладень випливає $\Cl(C) \supset X$. (насправді кажучи, $X = \Cl(C)$).
+\bigskip \\
+II. \textit{$X$ -- не лінійно зв'язна.}\\
+!Припустимо, що існує шлях $\gamma$ із точки $(0,0)$ до точки $\left( \dfrac{1}{\pi}, 0 \right)$. Маємо $\gamma(t) = (\gamma_1(t),\gamma_2(t))$, де $t \in [0,1]$. Оскільки $\gamma$ -- неперервний, то $\gamma_1,\gamma_2$ -- також неперервні. Але $[0,1]$ -- компакт, тож $\gamma_1,\gamma_2$ -- рівномірно неперервні, тож $\exists \delta > 0: \forall t,t' \in [0,1]: |t-t'| < \delta \implies |\gamma_2(t) - \gamma_2(t')| < 2$.\\
+Оберемо таке $N \in \mathbb{N}$, щоб $\dfrac{1}{N} < \delta$. Далі відрізок $[0,1]$ розіб'ємо на підвідрізки довжини $\dfrac{1}{N}$ рівномірним чином. Тобто $\left[0, \dfrac{1}{N} \right], \left[\dfrac{1}{N}, \dfrac{2}{N} \right], \dots, \left[ \dfrac{N-1}{N}, 1 \right]$. Оскільки $\gamma_1$ -- шлях від $0$ до $\dfrac{1}{\pi}$, то за теоремою Коші про середнє, існують $t_k \in [0,1]$, для яких $\gamma_1(t_k) = \dfrac{1}{\left( 2k + \dfrac{1}{2} \right)\pi}$. Тут в нас $k \geq 1$.\\
+Оскільки кількість $t_k$ нескінченна, то має знайтися інтервал $\left[ \dfrac{i-1}{N}, \dfrac{i}{N} \right]$, який містить хоча б дві точки формату $t_k$. Тобто тут будуть точки $t_k, t_m \in \left[ \dfrac{i-1}{N}, \dfrac{i}{n} \right]$, де припустимо $1 \leq k < m$. Звідси випливає, що $\dfrac{1}{\left( 2k + \dfrac{1}{2} \right) \pi} > \dfrac{1}{\left( 2k + \dfrac{3}{2} \right) \pi} > \dfrac{1}{\left( 2m + \dfrac{1}{2} \right) \pi}$. Знову за теоремою Коші про середнє, знайдеться точка $t$ між $t_k$ та $t_m$, для якої $\gamma_1(t) = \dfrac{1}{\left( 2k + \dfrac{3}{2}\right)\pi}$. Але тоді\\
+$\left| \gamma_2(t_k) - \gamma_2(t) \right| = |1-(-1)| = 2$, при цьому $|t_k-t| \leq \dfrac{1}{N} < \delta$ -- суперечність!
+\end{example}
+
+\noindent Тим не менш, існує критерій, для якого зв'язність та лінійна зв'язність -- це однакові речі, просто треба додати дещо.
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+$X$ -- лінійно зв'язний $\iff \begin{cases} X \text{ -- зв'язний} \\ \text{кожна точка $X$ має хоча б один окіл, який є лінійно зв'язний} \end{cases}$.
+\end{proposition}
+
+\begin{proof}
+\rightproof \textit{Уже доводили, що із лінійної зв'язності випливає зв'язність. Друга умова виконується, бо кожна точка $x \in X$ містить окіл $X$, який є лінійно зв'язним.}
+\bigskip \\
+\leftproof Дано: $\begin{cases} X \text{ -- зв'язний} \\ \text{кожна точка $X$ має хоча б один окіл, який є зв'язний шляхом} \end{cases}$.\\
+Зафіксуємо $x \in X$. Розглянемо множину $U = \{y \in X: \text{існує шлях між $x$ та $y$}\}$. Хочемо довести, що $U$ є відкритою та замкненою одночасно: таким чином, оскільки $X$ зв'язна, то $U = X$ (бо $x \in U$), а це буде означати, що між двома довільними точками знайдеться шлях; а тому $X$ буде лінійно зв'язним.\\
+Отже, нехай $y \in U$, тобто існує шлях між $x$ та $y$. За умовою, для точки $y$ можна взяти окіл $W_y$, який є лінійно зв'язним. Тоді для кожної точки $w \in W_y$ існує шлях між $y$ та $w_y$. Якщо склеїти два шляхи, отримаємо шлях між $x$ та $w$. Тож $w \in W_y$. Таким чином, $W_y \subset U \implies U$ -- відкрита.\\
+Тепер нехай $y \in X \setminus U$. За умовою, для точки $y$ можна взяти окіл $W_y$, який є лінійно зв'язним. Значить, $W_y \subset X \setminus U$. Якщо припустити, що це не так, то знайдеться точка $w \in W_y \cap U$; значить, існує шлях між $x,w$ та шлях між $w,y$ -- отримаємо шлях між $x,y$, але тоді $y \in U$ -- суперечить умові. Отже, $X \setminus U$ -- відкрита, тобто $U$ -- замкнена.
+\end{proof}
+
+\begin{lemma}
+Задані $(X,\tau), (Y,\tilde{\tau})$ -- топологічні простори та $f \colon X \to Y$ -- неперервне. Відомо, що $X$ -- лінійно зв'язний. Тоді $f(X)$ -- також лінійно зв'язний.
+\end{lemma}
+
+\begin{proof}
+Нехай $y,y' \in f(X)$. Тоді $y = f(x),\ y' = f(x')$ для $x,x' \in X$. Оскільки $X$ -- лінійно зв'язний, то існує шлях $\gamma \colon [0,1] \to X$ між $x,x'$ в просторі $X$. Тоді $f \circ\gamma \colon [0,1] \to Y$ -- шлях між $y,y'$ в просторі $Y$.
+\end{proof}
+
+\begin{proposition}
+Задані $(X,\tau_1)$ та $(Y,\tau_2)$ -- два лінійно зв'язних топологічних простори. Тоді $(X \times Y, \tau_1 \times \tau_2)$ -- також лінійно зв'язний.
+\end{proposition}
+
+\begin{proof}
+Нехай $(x,y), (x',y') \in X \times Y$. Оскільки $X,Y$ -- лінійно зв'язні, то існують шляхи: $\gamma_1$ між $x,x'$ в $X$; $\gamma_2$ між $y,y'$ в $Y$. Тож $\gamma = (\gamma_1, \gamma_2) \colon [0,1] \to X \times Y$ задає шлях між $(x,y), (x',y')$ уже в $X \times Y$.
+\end{proof}
+
+\subsection{Компоненти зв'язності та лінійної зв'язності}
+Задано $(X,\tau)$ -- непорожній топологічний простір. Задамо \textbf{відношення зв'язності}:
+\begin{align*}
+x \sim y \iff \exists C \subset X,  C \text{ -- зв'язна}: x,y \in C
+\end{align*}
+
+\begin{lemma}
+Відношення зв'язності задає відношення еквівалентності.
+\end{lemma}
+
+\begin{proof}
+I. Рефлексивність. Беремо $\{x\} \subset X$, що є зв'язною, тоді $x,x \in \{x\}$, тобто $x \sim x$.\\
+II. Симетричність. Миттєво видно з означення.\\
+III. Транзитивність. Маємо $x \sim y, y \sim z$, тобто існують множини $C, D \subset X$, що є зв'язними та $x,y \in C$, $y,z \in D$. Зауважимо, що $C \cup D \subset X$ буде також зв'язною, причому $x,z \in C \cup D$. Отже, $x \sim z$.
+\end{proof}
+\noindent
+Клас еквівалентності називають \textbf{компонентом зв'язності $X$}.
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та відношення зв'язності. Тоді:
+\begin{enumerate}[nosep, wide=0pt, label={\arabic*)}]
+\item кожний компонент зв'язності множини $X$ -- зв'язний;
+\item кожний компонент зв'язності множини $X$ -- максимальний серед інших зв'язних підпросторів;
+\item найбільший зв'язний підпростір $X$ -- компонент зв'язності.
+\end{enumerate}
+Отже, компоненти зв'язності топологічного простору -- найбільші зв'язні підпростори.
+\end{proposition}
+
+\begin{proof}
+Доведемо кожний пункт окремо.
+\begin{enumerate}[wide=0pt, label={\arabic*)}]
+\item Нехай $C$ -- компонент зв'язності $X$. Оскільки це клас еквівалентності, то $C = [x]$. Оберемо довільний $y \in C$, тоді $x \sim y$, тобто існує зв'язна підмножина $D_y \subset X$, для якої $x,y \in D_y$. Зауважимо, що для всіх $y \in C$ ми маємо $D_y \subset C$, оскільки для кожного $z \in D_y$ ми маємо $z \sim x$, тобто $z \in C$. Значить, $C = \displaystyle\bigcup_{y \in C} D_y$. Всі $D_y$ зв'язні, тож об'єднання буде також зв'язним.
+
+\item Нехай $C$ -- компонент зв'язності $X$. \\
+Припустимо, що існує $D \subset X$ -- такий зв'язний підпростір, що $D \supset C$. Тобто існує ще більша множина. Маємо $C = [x]$. Зауважимо, що $D \subset C$, адже при $z \in D$ маємо $x \in C \subset D$, тобто $x \sim z$ (за означенням $\sim$). Тобто $z \in C$. Таким чином, $D = C$.
+
+\item Нехай $C$ -- найбільший зв'язний підпростір $X$. У нас точно $C \neq \emptyset$, тож оберемо точку $x \in C$. Для кожного $y \in C$ ми маємо $x \sim y$, бо $C \ni x,y$ та є зв'язним. Значить, $C \subset [x]$. Із іншого боку, $[x]$ -- зв'язний за 1), тоді за максимальністю $C$, маємо $C = [x]$.
+\end{enumerate}
+Усі пункти доведені.
+\end{proof}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+$X$ -- зв'язний $\iff$ $X$ містить лише один компонент зв'язності.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $X$ -- зв'язний. Тоді дана множина є компонентом зв'язності $X$. Дійсно, $X \subset X, X$ -- зв'язна та $x,y \in X$.
+\bigskip \\
+\leftproof Дано: $X$ має лише один компонент зв'язності. Даний компонент зв'язності дорівнює $X$. Кожний компонент зв'язності -- зв'язний, тобто $X$ -- зв'язний.
+\end{proof}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір. Тоді кожний компонент зв'язності -- замкнена множина.
+\end{proposition}
+
+\begin{proof}
+Нехай $C$ -- компонент зв'язності $X$. За \lmref{connectedness_using_closure}, маємо $\Cl(C)$ -- зв'язна множина та $\Cl(C) \supset C$. Оскільки $C$ -- максимальна зв'язна множина, то звідси $C = \Cl(C)$, що гарантує замкненість.
+\end{proof}
+
+\begin{example}
+Компонентами зв'язності $\mathbb{R} \setminus \{0\}$ будуть $(-\infty,0)$ та $(0,+\infty)$.
+\end{example}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Простір називається \textbf{цілком незв'язним}, якщо
+\begin{align*}
+\text{кожний компонент зв'язності -- одноточкова множина.}
+\end{align*}
+Еквівалентно кажучи, якщо кожний зв'язний підпростір має рівно один елемент.
+\end{definition}
+
+\begin{example}
+Ми знаємо, що дискретний простір -- зв'язний, тільки якщо це простір з однієї точки. Оскільки кожний підпростір дискретного простору -- дискретний, то єдині зв'язні підпростори -- ці, що з одним елементом. Отже, дискретний простір -- цілком незв'язний.
+\end{example}
+
+\begin{example}
+$\mathbb{Q}$ -- цілком незв'язна множина (яка не є дискретною, бо $\{0\}$ не відкрита).\\
+Нехай $x,y \in \mathbb{Q}$ при $x \neq y$, тоді звідси $x \not\sim y$. Дійсно, ми можемо обрати ірраціональне число $u \in \mathbb{R}$ між $x,y$, а потім якщо $C \subset \mathbb{Q}$ містить $x,y$, ми матимемо неперетинні непорожні відкриті підмножини $(-\infty,u) \cap C$ та $C \cap (u,+\infty)$, об'єднання якого дає $C$. Тоді $C$ -- незв'язна.
+\end{example}
+
+\newpage
+
+\section*{Використані джерела}
+\begin{enumerate}
+\item \href{https://www.maths.ed.ac.uk/~tl/topology/topology_notes.pdf}{Tom Leinster, General Topology, 2014-2015}
+\end{enumerate}
+
+\iffalse
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Ми будемо це називати \textbf{гаусдорфовим простором}, якщо
+\begin{align*}
+\forall x,y \in X: x \neq y: \exists U_x,U_y \text{ -- відкриті околи точок } x,y: U_x \cap U_y = \emptyset
+\end{align*}
+\end{definition}
+\fi
+
+
+\end{document}
