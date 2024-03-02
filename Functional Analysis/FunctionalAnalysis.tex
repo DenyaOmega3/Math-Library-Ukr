@@ -1,0 +1,1056 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+%\usepackage[none]{hyphenat}
+\usepackage{fancyhdr} %create a custom header and footer
+\usepackage[utf8]{inputenc}
+\usepackage[english, main=ukrainian]{babel}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{physics}
+\usepackage[unicode]{hyperref}
+\usepgfplotslibrary{polar}
+\usepackage{ifthen}
+\usepackage{enumitem}
+\usetikzlibrary{spy}
+\usepackage{bbm}
+\usepackage{centernot}
+
+\fancyhead{}
+\fancyfoot{}
+\parindent 0ex
+\def\rightproof{$\boxed{\Rightarrow}$ }
+\def\leftproof{$\boxed{\Leftarrow}$ }
+
+\usepackage{pdfpages}
+
+\newtheoremstyle{theoremdd}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\normalfont}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\textnormal{\thmnote{ \textbf{#3}\\}}}
+
+\theoremstyle{theoremdd}
+\newtheorem{theorem}{Theorem}[subsection]
+  
+\theoremstyle{theoremdd}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{theoremdd}
+\newtheorem{samedef}[theorem]{Definition}
+
+\theoremstyle{theoremdd}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{theoremdd}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{theoremdd}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{theoremdd}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{theoremdd}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\makeatletter
+\renewenvironment{proof}[1][Proof.\\]{\par
+\pushQED{\hfill \qed}%
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\bfseries
+#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{%
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newenvironment{pf}{\vspace*{-3mm} \textbf{Proof. \\}}{$\blacksquare$}
+\newenvironment{pfMI}{\vspace*{-3mm} \textbf{Proof MI. \\}}{$\blacksquare$}
+\newenvironment{pfNoTh}{\textbf{Proof. \\}}{$\blacksquare$}
+
+\DeclareMathOperator{\Cl}{Cl}
+
+%delete
+
+\begin{document}
+\tableofcontents
+\newpage
+
+\section{Метричні простори та інше}
+\subsection{Означення метричних просторів}
+\begin{definition}
+Задано $X$ -- множина та $\rho \colon X \to X \to \mathbb{R}$ -- функція.\\
+Функція $\rho$ називається \textbf{метрикою}, якщо вона задовольняє таким властивостям:
+\begin{align*}
+\text{1) } \forall x,y \in X: \rho(x,y) \geq 0 ,\qquad \rho(x,y) = 0 \iff x = y \\
+\text{2) } \forall x,y \in X: \rho(x,y) = \rho(y,x) \\
+\text{3) } \forall x,y,z \in X: \rho(x,z) \leq \rho(x,y) + \rho(y,z)
+\end{align*}
+Метрика описує \textbf{відстань} між елементами $x,y$. \\
+Пара $(X,\rho)$ з метрикою називається \textbf{метричним простором}.
+\end{definition}
+
+
+\begin{example}
+Розглянемо декілька прикладів:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $X = \mathbb{R}$, \qquad $\rho(x,y) = |x-y|$;
+\item $X = \mathbb{R}^n$, можна задати дві метрики: \\
+$\rho_1(\vec{x}, \vec{y}) = \sqrt{(x_1-y_1)^2 + \dots + (x_n-y_n)^2}$, \qquad $\rho_2(\vec{x}, \vec{y}) = |x_1-y_1|+\dots+|x_n-y_n|$;
+\item $X = C([a,b])$, \qquad $\displaystyle \rho(f,g) = \max_{t \in [a,b]} |f(t)-g(t)|$.
+\end{enumerate}
+\end{example}
+
+\begin{example}
+Окремо розгляну даний приклад. Нехай $X$ -- будь-яка множина, ми визначимо так звану \textbf{дискретну метрику} $d(x,y) = \begin{cases} 1, & x \neq y \\ 0, & x = y \end{cases}$. Тоді $(X,d)$ задає \textbf{дикретний} метричний простір.
+\end{example}
+
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір.\\
+Пару $(Y,\tilde{\rho})$, де $Y \subset X$, назвемо \textbf{метричним підпростором} $(X,\rho)$, якщо
+\begin{align*}
+\forall x,y \in Y: \tilde{\rho}(x,y) = \rho(x,y).
+\end{align*}
+При цьому метрика $\tilde{\rho}$, кажуть, \textbf{індукована в} $Y$ \textbf{метрикою} $\rho$.
+\end{definition}
+
+\begin{proposition}
+Задано $(X,\rho)$ -- метричний простір та $(Y,\tilde{\rho})$ -- підпростір. Для функції $\tilde{\rho}$ всі три аксіоми зберігаються. Тобто $(Y,\tilde{\rho})$ залишається метричним простором.\\
+\textit{Вправа: довести.}
+\end{proposition}
+
+\begin{example}
+Маємо $X = F([a,b])$ -- множину обмежених функцій та $\rho(f,g) = \displaystyle \sup_{t \in [a,b]} |f(t)-g(t)|$. Тоді в $Y = C([a,b])$ маємо метрику $\tilde{\rho}(f,g) = \displaystyle \max_{t \in [a,b]} |f(t)-g(t)| = \displaystyle \sup_{t \in [a,b]} |f(t)-g(t)|$. Отже, $C([a,b])$ -- метричний підпростір простору $F([a,b])$.
+\end{example}
+
+\begin{definition}
+Задано $L$ -- лінійний простір над $\mathbb{R}$ або $\mathbb{C}$.\\
+Задамо функцію $\| \cdot \|: L \to \mathbb{R}$, що називається \textbf{нормою}, якщо виконуються умови:
+\begin{align*}
+\text{1) } \forall x \in L: ||x\| \geq 0 \\
+\text{2) } \forall x \in L: \forall \alpha \in \mathbb{R} \text{ або } \mathbb{C}: \|\alpha x\| = |\alpha| \|x\| \\
+\text{3) } \forall x,y \in L: \|x+y\| \leq \|x\| + \|y\|
+\end{align*}
+Тоді пару $(L, \|\cdot \|)$ назвемо \textbf{нормованим простором}.
+\end{definition}
+
+\begin{corollary}
+Задано $(L, \| \cdot \|)$ -- нормований простір. Тоді $\forall x,y \in L: \|x-y\| \geq \left| \|x\| - \|y\| \right|$.\\
+\textit{Вказівка: $\|x\| = \|x + y - x\|$ та $\|y\| = \|y + x -y \|$.}
+\end{corollary}
+
+\begin{proposition}
+Задано $(L, \| \cdot \|)$ -- нормований простір. Тоді $L$ з метрикою $\rho(x,y) = \|x-y\|$ утворює метричний простір.\\
+\textit{Вправа: перевірити три аксіоми.}
+\end{proposition}
+
+\begin{corollary}
+У такому разі справедливі додаткові властивості для заданої метрики:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\forall x,y,z \in L: \rho(x+z,y+z) = \rho(x,y)$ (інваріантність по відношенню до зсуву);
+\item $\forall x,y \in L, \forall \alpha \in \mathbb{R} \text{ або } \mathbb{C}: \rho(\alpha x, \alpha y) = |\alpha| \rho(x,y)$ (однорідність).
+\end{enumerate}
+\end{corollary}
+
+\begin{example}
+Зокрема дані простори будуть нормованими:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\mathbb{R}$, \qquad $\| x\| = |x|$;
+\item $\mathbb{R}^n$, \qquad $\| \vec{x} \| = \sqrt{x_1^2 + \dots + x_n^2}$ або навіть $\| \vec{x} \| = |x_1| + \dots + |x_n|$;
+\item $\mathbb{C}([a,b])$, \qquad $\displaystyle \| f\| = \max_{t \in [a,b]} |f(t)|$;
+\item $L_p(X,\lambda)$, \qquad $\|f\|_p = \displaystyle\left(\int_X |f|^p\,d\lambda\right)^{\frac{1}{p}}$.
+\end{enumerate}
+Тому всі вони будуть автоматично метричними просторами із метрикою, що вище задана.
+\end{example}
+
+\begin{example}
+Дискретний простір $(X,d)$ -- метричний, але не нормований.\\
+
+\end{example}
+
+\begin{example}
+Задано $(E, (\cdot, \cdot))$ -- евклідів простір. Ми можемо евклідів простір $E$ перетворити в нормований простір $(E, \| \cdot \|)$ функцією $\|x\| = \sqrt{(x,x)}$.\\
+Як наслідок, за твердженням вище, $(E, \rho)$ - метричний простір з $\rho(x,y) = \|x-y\|$.
+\end{example}
+
+\begin{example} Нехай $\vec{a} = (a_1,a_2,\dots)$ -- дійсна числова послідовність. Задамо простір $l_1 = \left\{ \vec{a} \mid \displaystyle\sum_{n=1}^\infty |a_n| < \infty \right\}$. Задаються такі операції:\\
+$\vec{a} + \vec{b} = (a_1,a_2,\dots) + (b_1,b_2,\dots) = (a_1+b_1,a_2+b_2,\dots)$\\
+$\alpha \vec{a} = (\alpha a_1, \alpha a_2, \dots)$\\
+Неважко переконатися, що $l_1$ -- лінійний простір над $\mathbb{R}$.\\
+Важливе зауваження: $\vec{a}+\vec{b}, \alpha \vec{a} \in l_1$, тому що маємо $\displaystyle\sum_{n=1}^\infty a_n$, $\displaystyle\sum_{n=1}^\infty b_n$ -- збіжні, а тому збіжним буде $\displaystyle \sum_{n=1}^\infty (a_n+b_n), \sum_{n=1}^\infty \alpha a_n$. Тобто операції замкнені.\\
+Можна задати нормований простір функцією $\| \vec{a} \| = \displaystyle \sum_{n=1}^\infty |a_n|$. А тому це -- метричний простір з $\rho(\vec{a}, \vec{b}) = \|\vec{a} - \vec{b}\|$.
+\bigskip \\
+Узагальнення: $l_p = \left\{ \vec{a} \text{ } | \displaystyle\sum_{n=1}^\infty |a_n|^p < \infty \right\}$, тут задається норма $\|\vec{a}\| = \left( \displaystyle\sum_{n=1}^\infty |a_n|^p \right)^{\frac{1}{p}}$.
+\end{example}
+
+\begin{example}
+Тут ще є така множина: $l_{\infty} = \{ \vec{a} \mid \vec{a} \text{ -- обмежені} \}$. Задані такі самі операції, що вище. Задається норма $\|\vec{a}\| = \displaystyle \sup_{n \in \mathbb{N}} |a_n|$. Отже, $l_{\infty}$ -- метричний простір.
+\end{example}
+
+\subsection{Відкриті та замкнені множини. Збіжні послідовності}
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір та $a \in X$.\\
+\textbf{Відкритою кулею радіусом $r$ з центром $a$} називають таку множину:
+\begin{align*}
+B(a;r) = \{x \in X \mid \rho(a,x) < r\}
+\end{align*}
+Її ще називають $r$\textbf{-околом точки $a$}.\\
+\textbf{Замкненою кулею радіусом $r$ з центром $a$} називають таку множину:
+\begin{align*}
+B[a;r] = \{x \in X \mid \rho(a,x) \leq r \}
+\end{align*}
+\end{definition}
+
+\begin{example}
+Розглянемо декілька прикладів:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $X = \mathbb{R}$, $\rho(x,y) = |x-y|$, \qquad $B(a;r) = \{x \in \mathbb{R} \mid |x-a| < r\} = (a-r,a+r)$;
+\item $X = \mathbb{R}^2$, $\rho(\vec{x}, \vec{y}) = \|\vec{x}-\vec{y}\|$, \qquad $B(0;1) = \{(x,y) \in \mathbb{R}^2 \mid x^2+y^2 <1 \}$.
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+Задано $A \subset X$ та $a \in A$.\\
+Точка $a$ називається \textbf{внутрішньою} для $A$, якщо
+\begin{align*}
+\exists \varepsilon > 0: B(a; \varepsilon) \subset A.
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Множина $A$ називається \textbf{відкритою}, якщо кожна точка множини $A$ -- внутрішня.
+\end{definition}
+
+\begin{example} 
+Розглянемо такі приклади:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Маємо $X = \mathbb{R}, \rho(x,y) = |x-y|$ та множину $A = [0,1)$. Точка $a = \dfrac{1}{2}$ -- внутрішня, оскільки $\exists \varepsilon = \dfrac{1}{4}: B\left(\dfrac{1}{2}; \dfrac{1}{4} \right) \subset A$, тобто $\left( \dfrac{1}{4}, \dfrac{3}{4} \right) \subset [0,1)$. Водночас точка $a = 0$ -- не внутрішня. Отже, $A$ -- не відркита, бо знайшли не внутрішню точку.
+
+\item Маємо $X = [0,1], \rho(x,y) = |x-y|$ та множину $A = [0,1)$. У цьому випадку точка $a = 0$ уже внутрішня (в попередньому прикладі ми могли $\varepsilon$-околом вийти за межі нуля ліворуч, а тут вже ні). Тут $A$ тепер відкрита.
+
+\item Маємо $X = \{0,1,2\}$ -- підпростір метричного простору $(\mathbb{R}, \rho(x,y) = |x-y|)$. Задамо множину $A = \{0,1\}$. Тут кожна точка -- внутрішня. Отже, $A$ -- відкрита.
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+Задано $A \subset X$ та $x_0 \in X$.\\
+Точка $x_0$ називається \textbf{граничною} для $A$, якщо
+\begin{align*}
+\forall \varepsilon > 0: (B(x_0;\varepsilon) \setminus \{x_0\}) \cap A \neq \emptyset
+\end{align*}
+Інколи ще множину $B(x_0;\varepsilon) \setminus \{x_0\} = \mathring{B}(x_0;\varepsilon)$ називають \textbf{проколеним околом точки $x_0$}.
+\end{definition}
+
+\begin{definition}
+Множина $A$ називається \textbf{замкненою}, якщо вона містить всі свої граничні точки.
+\end{definition}
+
+\begin{example}
+Розглянемо такі приклади:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Маємо $X = \mathbb{R}, \rho(x,y) = |x-y|$ та множину $A = (0,1)$. Точки $x_0 \in \left\{\dfrac{1}{2}, 0, 1\right\}$ -- граничні. Водночас точка $x_0 = \dfrac{3}{2}$ -- не гранична. Отже, $A$ -- не замкнена, бо $x_0 = 1$ хоча й гранична для $A$, але $x_0 \notin A$.
+\item Маємо $X = \mathbb{R}, \rho(x,y) = |x-y|$. Задамо множину $A = \{0,1 \}$. Тут жодна точка -- не гранична. Тим не менш, $A$ -- замкнена. Бо нема жодної граничної точки в $X$ для $A$, щоб порушити означення.
+\item $X, \emptyset$ -- замкнені в будь-якому метричному просторі.
+\end{enumerate}
+\end{example}
+
+\begin{theorem}
+Задано $(X,\rho)$, $A \subset X$.\\
+Множина $A$ -- відкрита $\iff$ множина $A^c$ -- замкнена
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $A$ -- відкрита.\\
+!Припустимо, що $A^c$ -- не замкнена, тобто $\exists x_0 \in A: x_0$ -- гранична для $A^c$, але $x_0 \notin A^c$. За умовою, оскільки $x_0 \in A$, то $x_0$ - внутрішня, тобто $\exists \varepsilon > 0: B(x_0;\varepsilon) \subset A$. Отже, $B(x_0;\varepsilon) \cap A^c = \emptyset$ -- суперечність!
+\bigskip \\
+\leftproof Дано: $A^c$ -- замкнена. Тоді вона містить всі граничні точки. Тоді $\forall x_0 \in A: x_0$ -- не гранична для $A^c$, тобто $\exists \varepsilon > 0: B(x_0;\varepsilon) \cap A^c = \emptyset \implies B(x_0;\varepsilon) \subset A$. Отже, $x_0$ -- внутрішня для $A$, а тому $A$ -- відкрита.
+\end{proof}
+
+\begin{theorem} 
+Задано $(X,\rho)$ -- метричний простір. Тоді справедливо наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Нехай $U_{\alpha} \subset X$, $\alpha \in I$ -- сім'я відкритих множин. Тоді $\displaystyle \bigcup_{\alpha \in I} U_{\alpha}$ -- відкрита множина;
+\item Нехай $U_k \subset X, k = \overline{1,n}$ -- сім'я відкритих множин. Тоді $\displaystyle \bigcap_{k=1}^n U_k$ -- відкрита множина;
+\item $\emptyset, X$ -- відкриті множини.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Доведемо кожний пункт окремо:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Задано множину $U = \displaystyle \bigcup_{\alpha \in I} U_{\alpha}$. Зафіксуємо $a \in U$. Тоді $\exists \alpha_0: a \in U_{\alpha_0} \implies a$ -- внутрішня для $U_{\alpha_0} \\ \Rightarrow \exists \varepsilon > 0: B(a;\varepsilon) \subset U_{\alpha_0} \subset U$. Отже, $U$ -- відкрита.
+
+\item Задано множину $U = \displaystyle \bigcap_{k=1}^n U_k$. Зафіксуємо $a \in U$. Тоді $\forall k = \overline{1,n}: a \in U_k \Rightarrow a$ -- внутрішня для $U_k \implies \exists \varepsilon_k > 0: B(a;\varepsilon_k) \subset U_k$. Задамо $\varepsilon = \displaystyle\min_{1 \leq k \leq n} \varepsilon_k \implies B(a;\varepsilon) \subset U$. Отже, $U$ -- відкрита.
+
+\item $\emptyset$ -- відкрита, бо нема внутрішніх точок, тому що там порожньо. Також $X$ -- відкрита, оскільки для $a \in X$, який б $\varepsilon > 0$ не обрав, $B(a;\varepsilon) \subset X$.
+\end{enumerate}
+Всі твердження доведені.
+\end{proof}
+
+\begin{remark}
+Відповідь на питання, чому в другому лише скінченна кількість відкритих множин. Розглянемо $X = \mathbb{R}$ із метрикою $\rho(x,y) = |x-y|$. Задана сім'я відкритих множин $U_n = \left( -\dfrac{1}{n}, \dfrac{1}{n} \right)$, причому $\forall n \geq 1$. Тоді зауважимо, що $\displaystyle\bigcap_{n=1}^\infty U_n = \{0\}$, але така множина вже не є відкритою.
+\end{remark}
+
+\begin{corollary}
+Задано $(X,\rho)$ -- метричний простір. Тоді справедливо наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Нехай $U_{\alpha} \subset X$, $\alpha \in I$ -- сім'я замкнених множин. Тоді $\displaystyle \bigcap_{\alpha \in I} U_{\alpha}$ -- замкнена множина;
+\item Нехай $U_k \subset X, k = \overline{1,n}$ -- сім'я замкнених множин. Тоді $\displaystyle \bigcup_{k=1}^n U_k$ -- замкнена множина;
+\item $\emptyset, X$ -- замкнені множини.
+\end{enumerate}
+\textit{Вказівка: скористатися де Морганом та TODO: вставити референс.}
+\end{corollary}
+
+\begin{remark} Такі твердження не є правдивими:\\
+$A$ -- не відкрита, а тому $A$ -- замкнена (наприклад, $[0,1)$ в $\mathbb{R}$);\\
+$A$ -- відкрита, а тому $A$ -- не замкнена (наприклад, $\emptyset$ в $\mathbb{R}$).
+\end{remark}
+
+\begin{proposition} Задано $(X,\rho)$ -- метричний простір, $a \in X, r > 0$. Тоді відкритий окіл $B(a;r)$ -- справді відкритий; замкнений окіл $B[a;r]$ -- справді замкнений.
+\end{proposition}
+
+\begin{proof}
+(про $B(a;r)$). Задамо точку $b \in B(a;r)$. Нехай $\varepsilon = r - \rho(a,b) > 0$. Тоді якщо $x \in B(b; \varepsilon)$, то тоді $\rho(x, a) \leq \rho(x, b) + \rho(b, a) < \varepsilon + \rho(b,a) = r$. Отже, $B(a;r)$ -- відкрита.
+\bigskip \\
+(про $B[a;r]$). Для цього достатньо довести, що $B^c[a;r] = \{x | \rho(a,x) > r\}$ -- відкрита. Якщо задати $\varepsilon = \rho(a,b) - r$ для точки $b \in B(a;r)$, то аналогічними міркуваннями отримаємо, що $B^c[a;r]$ -- відкрита. Отже, $B[a;r]$ - замкнена.
+\end{proof}
+
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір, послідовність $\{x_n, n \geq 1\} \subset X$ та $x_0 \in X$.\\
+Дана послідовність називається \textbf{збіжною} до $x_0$, якщо
+\begin{align*}
+\rho(x_n, x_0) \to 0, n \to \infty
+\end{align*}
+Позначення: $\displaystyle\lim_{n \to \infty} x_n = x_0$.
+\end{definition}
+
+\begin{theorem}
+Задано $(X,\rho)$ -- метричний простір, $A \subset X$ та $x_0 \in X$. Наступні твердження еквівалентні:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $x_0$ -- гранична точка для $A$;
+\item $\forall \varepsilon > 0: B(x_0;\varepsilon) \cap A$ - нескінченна множина;
+\item $\exists \{x_n, n \geq 1\} \subset A: \forall n \geq 1: x_n \neq x_0: x_n \to x_0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$\boxed{1) \Rightarrow 2)}$ Дано: $x_0$ - гранична для $A$.\\
+!Припустимо, що $\exists \varepsilon^* > 0: B(x_0;\varepsilon) \cap A$ -- скінченна множина, тобто маємо  $x_1,\dots,x_n \in B(x_0;\varepsilon^*)$. Тоді $\rho(x_0,x_1) < \varepsilon^*, \dots, \rho(x_0,x_n)^* < \varepsilon$. Оберемо найменшу відстань та задамо $\varepsilon^*_{new} = \displaystyle \min_{1\leq i \leq n} \rho(x_0,x_i)$. Створимо $B(x_0;\varepsilon^*_{new}) \subset B(x_0; \varepsilon)$. У новому шару жодна точка $x_1,\dots,x_n \in A$ більше сюди не потрапляє. Тоді $B((x_0;\varepsilon^*_{new}) \setminus \{x_0\}) \cap A = \emptyset$ - таке неможливо через те, що $x_0$ -- гранична точка. Суперечність!
+\bigskip \\
+$\boxed{2) \Rightarrow 3)}$ Дано: $\forall \varepsilon > 0: B(x_0;\varepsilon) \cap A$ - нескінченна множина. Встановимо $\varepsilon = \dfrac{1}{n}$. Тоді оскільки $\forall n \geq 1: B \left(x_0;\dfrac{1}{n} \right) \cap A$ -- нескінченна, то $\forall n \geq 1: \exists x_n \in A: \rho(x_0,x_n) < \dfrac{1}{n}$. Якщо далі $n \to \infty$, тоді $\rho(x_0,x_n) \to 0$. Остаточно, $\exists \{x_n, n \geq 1\} \subset A: x_n \neq x_0: x_n \to x_0$.
+\bigskip \\
+$\boxed{3) \Rightarrow 1)}$ Дано: $\exists \{x_n, n \geq 1\} \subset A: x_n \neq x_0: x_n \to x_0$. Тобто $\forall \varepsilon > 0: \exists N: \forall n \geq N: \rho(x_0,x_n) < \varepsilon$. Або, інакше кажучи, $\forall \varepsilon > 0: x_N \in B(x_0;\varepsilon) \cap A$. Тоді $\forall \varepsilon > 0: (B(x_0;\varepsilon) \setminus \{x_0\}) \cap A \neq \emptyset$.
+\end{proof}
+
+\subsection{Замикання множин}
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір, $A \subset X$ та $A'$ - множина граничних точок $A$.\\
+\textbf{Замиканням} множини $A$ називають таку множину
+\begin{align*}
+\bar{A} = A \cup A'
+\end{align*}
+Часто ще позначають замикання за $\Cl(A)$.
+\end{definition}
+
+\begin{example}
+Маємо $X = \mathbb{R}$, $\rho(x,y) = |x-y|$ та множину $A = (0,1)$. Тоді множина $A' = [0,1]$. Замикання $\bar{A} = A \cup A' = [0,1]$.
+\end{example}
+
+\begin{remark}
+Розглянемо зараз сукупність замкнених множин $A \subset A_{\alpha} \subset X$. Перетин $B = \displaystyle\bigcap_{\alpha} A_{\alpha}$ -- також замкнена, водночас $A\alpha \supset B \supset A$. Отже, $B$ -- найменша замкнена множина, що містить $A$.
+\end{remark}
+
+\begin{proposition}
+Задано $\bar{A}$ -- замикання. Тоді спредливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\bar{A}$ -- найменша замкнена множина, що містить $A$;
+\item $\overline{A \cup B} = \bar{A} \cup \bar{B}$ \qquad $\overline{A \cap B} \subset \bar{A} \cap \bar{B}$;
+\item $A$ -- замкнена $\iff A = \bar{A}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Доведемо кожне твердження окремо.
+\begin{enumerate}[wide=0pt, label={\arabic*)}]
+\item !Припустимо, що $\bar{A}$ не є найменшою замненою, що містить $A$, тобто $\exists B \subset \bar{A}: B \supset A$ -- замкнена. Зафіксуємо точку $x_0 \in \bar{A}$ -- гранична, тоді $x_0 \in A' \cup A$.\\
+Якщо $x_0 \in A'$, то тоді $x_0 \in B$, тому що $B$ містить всі граничні т. $A$\\
+Якщо $x_0 \in A$, то тоді $x_0 \in B$.\\
+В обох випадках $\bar{A} \subset B$. Отже, $\bar{A} = B$. Суперечність!
+
+\item $\overline{A \cup B} = (A \cup B)' \cup (A \cup B) \boxed{=}$\\
+$x_0 \in (A \cup B)' \iff x_0$ -- гранична точка $A \cup B \iff$ $\forall \varepsilon > 0: \\ B(x_0;\varepsilon) \cap (A \cup B) = (B(x_0;\varepsilon) \cap A) \cup (B(x_0; \varepsilon) \cap B) \neq \emptyset \text{(без т. } x_0) \iff$\\
+$\left[ \begin{gathered} x_0 - \text{гранична для } A \\ x_0 - \text{гранична для } B \end{gathered} \right. \iff \left[ \begin{gathered} x_0 \in A' \\ x_0 \in B' \end{gathered} \right. \iff x_0 \in A' \cup B'$\\
+Отже, $(A \cup B)' = A' \cup B'$.\\
+$\boxed{=} A' \cup B' \cup A \cup B = \bar{A} \cup \bar{B}$.
+\\
+$\overline{A \cap B} = (A \cap B)' \cup (A \cap B) \boxed{\subset}$\\
+$x_0 \in (A \cap B)' \iff x_0$ - гранична точка $A \cap B \iff$ $\forall \varepsilon > 0: \\ B(x_0;\varepsilon) \cap (A \cap B) = (B(x_0;\varepsilon) \cap A) \cap (B(x_0; \varepsilon) \cap B) \neq \emptyset \text{(без т. } x_0) \implies$\\
+$\begin{cases} x_0 - \text{гранична для } A \\ x_0 - \text{гранична для } B \end{cases} \iff \begin{cases} x_0 \in A' \\ x_0 \in B' \end{cases} \iff x_0 \in A' \cap B'$\\
+Отже, $(A \cap B)' \subset A' \cap B'$.\\
+$\boxed{\subset} (A' \cap B') \cup (A \cap B) = $ (TODO: обміркувати)
+
+\item Доведення в обидва боки.\\
+\rightproof Дано: $A$ - замкнена. Тоді $A$ містить всі свої граничні точки. Так само $A'$ містить граничні точки $A$. Тому $A = \bar{A}$.\\
+\leftproof Дано: $A = \bar{A}$. Тобто $A$ містить всі свої граничні точки. Отже, $A$ - замкнена.
+\end{enumerate}
+Всі твердження доведені.
+\end{proof}
+
+\begin{definition} Задано $(X, \rho)$ -- метричний простір та $A \subset X$.\\
+Множина $A$ називається \textbf{щільною} в $X$, якщо
+\begin{align*}
+\bar{A} = X
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Задано $(X, \rho)$ -- метричний простір.\\
+Метричний простір називається \textbf{сепарабельним}, якщо
+\begin{align*}
+\text{існує в даному просторі скінченна чи зліченна щільна підмножина.}
+\end{align*}
+\end{definition}
+
+\begin{example} Розглянемо такі приклади:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $(\mathbb{R}, \rho(x,y) = |x-y|)$ -- сепарабельний, тому що $\mathbb{Q}$ -- зліченна та щільна підмножина в $\mathbb{R}$.
+\item Маємо простір $l_2 = \left\{ \vec{a} \mid \displaystyle\sum_{n=1}^\infty a_n^2 < \infty \right\}$ -- нормований простір. Розглянемо множину \\
+$l_2O = \left\{ \vec{a} \in l_2 \mid \text{скінченна кількість членів не нуль} \right\}$. Розглянемо $\vec{a} = \{a_1,a_2,\dots\} \in l_2$. Доведемо, що вона -- гранична для $l_2O$.\\
+Задамо послідовність $\{\vec{a}_n, n \geq 1\} \subset l_2O$, де кожний елемент задається таким чином: \\ $\vec{a}_n = \{a_1,\dots,a_n,0,\dots\} \implies \rho(\vec{a}, \vec{a}_n) = \|\vec{a} - \vec{a}_n\| = \displaystyle\sum_{n=k+1}^\infty a_n^2 \to 0$, оскільки ряд збіжний, а тому хвіст ряду прямує до нуля. Отже, $\vec{a}_n \to \vec{a}$, тож $\vec{a}_n$ -- гранична точка.\\
+Тоді можна ствердити, що $l_2O$ -- щільна в $l_2$, або інакше $\overline{l_2O} = l_2$. А оскільки $l_2O \subset l_2$ та ще й нескінченна, то тоді $l_2$ -- сепарабельний.
+\item Простір $C([a,b])$ -- сепарабельний.\\
+\textit{Доведу пізніше, коли дізнаюсь про теорему Вейєрштрасса про наближення неперервної на відрізку функції многочленами}.
+\item А ось простір $l_{\infty}$ - не сепарабельний.\\
+\textit{Доведу пізніше}.
+\item Підпростір сепарабельного метричного простору - сепарабельний\\
+\textit{Доведу пізніше}.
+\end{enumerate}
+\end{example}
+
+\subsection{Повнота}
+\begin{definition}
+Задано $(X,\rho)$ - метричний простір.\\
+Послідовність $\{x_n, n \geq 1\}$ називається \textbf{фундаментальною}, якщо
+\begin{align*}
+\forall \varepsilon > 0: \exists N: \forall m,n \geq N: \rho(x_n,x_m) < \varepsilon
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Це означення можна інакше переписати, більш коротким чином:
+\begin{align*}
+\rho(x_n,x_m) \overset{m,n \to \infty}{\longrightarrow} 0
+\end{align*}
+\end{remark}
+
+\begin{proposition}
+Будь-яка збіжна послідовність є фундаментальною.
+\end{proposition}
+
+\begin{proof}
+Маємо $\{x_n, n \geq 1\}$ -- збіжна, тобто $\rho(x_n,x) \overset{n \to \infty}{\longrightarrow} 0$. За нерівністю трикутника, маємо $\rho(x_n,x_m) \leq \rho(x_n,x) + \rho(x,x_m)$. Якщо спрямувати одночасно $m.n \to \infty$, то тоді $\rho(x_n,x_m) \to 0$. Отже, $\{x_n, n \geq 1\}$ - фундаментальна.
+\end{proof}
+
+\begin{remark}
+Проте не кожна фундаментальна послідовність -- збіжна.
+\end{remark}
+
+\begin{example}
+Маємо $X = (0,1]$ -- підпростір $\mathbb{R}$. Розглянемо послідовність $\left\{ x_n = \dfrac{1}{n}, n \geq 1 \right\}$, де $x_n \to 0$ при $n \to \infty$ -- збіжна, проте $0 \not\in X$. Тому така послідовність не має границі в $X$, але вона -- фундаментальна за твердженням.
+\end{example}
+
+\begin{definition}
+Метричний простір $(X, \rho)$ називається \textbf{повним}, якщо 
+\begin{align*}
+\text{будь-яка фундаментальна послідовність має границю.}
+\end{align*}
+\end{definition}
+
+\begin{example} 
+Зокрема маємо наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $X = \mathbb{R}$ -- повний за критерієм Коші із матану;\\
+\item $X = (0,1]$ -- не повний, бо принаймні $\left\{x_n = \dfrac{1}{n}, n \geq 1 \right\}$ -- фундаментальна, проте не має границі.
+\end{enumerate}
+\end{example}
+
+\begin{proposition}
+Задано $(X,\rho)$ -- повний метричний простір та $(Y,\rho)$ -- підпрострір.\\
+$(Y,\rho)$ -- повний $\iff Y$ -- замкнена в $X$.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $(Y,\rho)$ -- повний.\\
+!Припустимо, що $Y$ -- не замкнена, тобто існує $x_0 \in X \setminus Y$ -- гранична точка для $Y$. Тоді існує послідовність $\{y_n\} \subset Y$, для якої $y_n \to x_0$ та $y_n \neq x_0$. Зауважимо, що $\{y_n\} \subset X$ збіжна саме в просторі $X$, тому саме в просторі $X$ послідовність $\{y_n\} \subset X$ -- фундаментальна. Проте зрозумло цілком, що $\{y_n\} \subset Y$ буде фундаментальною в просторі $Y$, проте в силу повноти $(Y,\rho)$, матимемо збіжність саме в $Y$. Таким чином, $x_0 \in Y$ -- суперечність!
+\bigskip \\
+\leftproof Дано: $Y$ -- замкнена в $X$. Візьмемо $\{y_n\} \subset Y \subset X$ -- фундаментальна. Тоді в силу повноти $X$, вона -- збіжна в просторі $X$. Скажімо, $y_n \to x_0$. Якщо точка $x_0 \in Y$, то тоді послідовність $\{y_n\}$ збіжна в $Y$. Інакше при $x_0 \in X \setminus Y$ зауважимо, що $y_n \neq x_0$, тому $x_0$ -- гранична точка $Y$. У силу замкненості ми отримаємо $x_0 \in Y$ -- послідовність $\{y_n\}$ знову збіжна в $Y$.
+\end{proof}
+
+\begin{definition}
+Повний нормований простір називається \textbf{банаховим}. Повний евклідів простір (відносно метрики, що породжена скалярним добутков) називається \textbf{гільбертовим}.
+\end{definition}
+
+\begin{proposition}
+Простір $C([a,b])$ зі стандартною нормою $\|x\| = \displaystyle\max_{t \in [a,b]} |x(t)|$ -- банахів.
+\end{proposition}
+
+\begin{proof}
+Задамо фундаментальну послідовність $\{x_n, n \geq 1\}$ на множині $C([a,b])$. Тоді \\ $\forall t_0 \in [a,b]: |x_n(t_0)-x_m(t_0)| \leq \|x_n-x_m\| = \displaystyle\max_{t \in [a,b]} |x_n(t)-x_m(t)|$. Із цієї нерівності випливає, що $\forall t_0 \in [a.b]: \{x_n(t_0), n \geq 1\}$ -- фундаментальна.\\
+За критерієм Коші (із матану), вона -- збіжна, тобто $x_n(t_0) \overset{n \to \infty}{\to} y(t_0)$. Щойно показали поточкову збіжність $\{x_n, n \geq 1\}$ до функції $y$. Доведемо, що вона збігається рівномірно (тобто за нормою).\\
+$\{x_n, n \geq 1\}$ -- фундаментальна, тобто $\forall \varepsilon > 0: \exists N: \forall m,n \geq N: \|x_n(t) - x_m(t)\| < \varepsilon$. Або $\forall t \in [a,b]: |x_n(t) - x_m(t)| < \varepsilon$. Зафіксуємо деякі $t \in [a,b]$ та $n \geq N$. А потім спрямуємо $m \to \infty$. Тоді $|x_n(t)-y(t)| < \varepsilon$. Це виконується $\forall t \in [a,b]$ та $n \geq N$, або це записується інакше:\\
+$\forall n \geq N: \|x_n - y\| < \varepsilon$. Отже, $x_n \to y$.
+\end{proof}
+
+\begin{example}
+Задамо підпростір $C([0,1])$ із нормою із $L_2([0,1],\lambda_1)$, де $\lambda_1$ -- міра Лебега. Доведемо, що в такому разі $C([0,1])$ уже не буде банаховим.\\
+Розглянемо таку функціональну послідовність $\{x_n,n \geq 1\} \subset C([0,1])$, що задається таким чином:\\
+$x_n(t) \begin{cases}
+0, & 0 \leq x \leq \dfrac{1}{2} - \dfrac{1}{n} \\
+\dfrac{nx}{2} - \dfrac{n}{4} + \dfrac{1}{2}, & \dfrac{1}{2} - \dfrac{1}{n} \leq x \leq \dfrac{1}{2} + \dfrac{1}{n} \\
+1, & \dfrac{1}{2} + \dfrac{1}{n} \leq x \leq 1
+\end{cases}$.\\
+Це набір функцій, де похила частина зі збільшенням $n$ перетворюється в вертикальну лінію. Зауважимо, що якщо вязти поточкову границю, то отримаємо $x(t) = \begin{cases} 0, & 0 \leq x \leq \dfrac{1}{2} \\1, & \dfrac{1}{2} < x \leq 1 \end{cases}$. При цьому\\
+$\|x_n - x\|_2^2 = \displaystyle\int_{[0,1]} |x_n-x|^2\,d\lambda_1 = \int_0^1 |x_n(t)-x(t)|^2\,dt = \dots = \dfrac{1}{6n} \to 0$ при $n \to \infty$.\\
+Отже, $\{x_n\}$ в просторі $C([0,1])$ із нормою $L_2$ збігається до точки $x \notin C([0,1])$, але при цьому буде граничною для $C([0,1])$. Тобто $C([0,1])$ не буде замкненим, тож $C([0,1])$ -- не повний, або не банахів.
+\end{example}
+
+\begin{proposition}
+Евклідів простір $l_2$ -- гільбертів.
+\end{proposition}
+
+\begin{proof}
+Задамо фундаментальну послідовність $\{\vec{x}_n, n \geq 1\}$ на множині $l_2$\\
+Тобто $\forall \varepsilon > 0: \exists N: \forall n, m \geq N: \|\vec{x}_n - \vec{x}_m\| < \varepsilon$\\
+$\Rightarrow \|\vec{x}_n - \vec{x}_m\|^2 = \displaystyle\sum_{k=1}^\infty (x_n^k - x_m^k)^2 < \varepsilon^2 \Rightarrow \forall k \geq 1: |x_n^k - x_m^k| < \varepsilon$\\
+Тоді послідовність $\{x_n^k, n \geq 1\}$ - фундаментальна - тому (за матаном) збіжна, $x_n^k \to y^k$\\
+Доведемо, що $\vec{x}$ збігається до $\vec{y}$ за нормою\\
+Маємо $\displaystyle\sum_{k=1}^\infty (x_n^k - x_m^k)^2 < \varepsilon^2 \Rightarrow \forall K \geq 1: \displaystyle\sum_{k=1}^K (x_n^k - x_m^k)^2 < \varepsilon^2$\\
+Спрямуємо $m \to \infty$, тоді $\displaystyle\sum_{k=1}^K (x_n^k - y^k)^2 < \varepsilon^2$\\
+Звідки випливає збіжність ряду $\displaystyle\sum_{k=1}^\infty (x_n^k - y^k)^2$ та його оцінка\\
+$\displaystyle\sum_{k=1}^\infty (x_n^k - y^k)^2 < \varepsilon^2 \Rightarrow \|\vec{x}_n - \vec{y}\| < \varepsilon$\\
+Отже, $\vec{x}_n \to \vec{y}$
+\end{proof}
+
+\begin{lemma}
+Задано $\{x_n, n \geq 1\}$ - фундаментальна та $\{x_{n_k}, k \geq 1\}$ - збіжна. Тоді $\{x_n, n \geq 1\}$ - збіжна
+\end{lemma}
+\begin{pf}
+Маємо $a_{n_k} \to a$, $k \to \infty$\\
+$\Rightarrow \forall \varepsilon > 0: \exists K: \forall k \geq K: \rho(a_{n_k}, a) < \varepsilon$\\
+Також відомо, що  $\forall n,m \geq N: \rho(a_n,a_m) < \varepsilon$\\
+Треба ще $n_k \geq N$. Тоді для $n \geq n_K$\\
+$\rho(a_n,a) \leq \rho(a_n,a_{n_K}) + \rho(a_{n_K},a) < 2\varepsilon$\\
+Отже, $a_n \to a_0$
+\end{pf}
+
+\begin{theorem}[Критерій Кантора]
+Умова Кантора: для кожної послдовності $\{B[a_n;r_n], n \geq 1\}$ такої, що $B[a_1;r_1] \supset B[a_2;r_2] \supset \dots$ та $r_n \to 0$, перетин $\displaystyle\bigcap_{n=1}^\infty B[a_n;r_n] \neq \emptyset$ (це послідовність куль, що стягується).\\
+$(X,\rho)$ -- повний $\iff$ виконується умова Кантора.
+\end{theorem}
+
+Перед доведенням треба зробити кілька зауважень.\\
+I. Точка, що належить перетину, буде в цьому випадку єдиною.\\
+!Припустимо, що це не так, тобто $\exists b^*, b^{**} \in \displaystyle \bigcap_{n=1}^\infty B[a_n;r_n]$. Тоді $\forall n \geq 1: \begin{cases} \rho(a_n, b^*) \leq r_n \\ \rho(a_n, b^{**}) \leq r_n \end{cases}$.\\
+$\implies \rho(b^*, b^{**}) \leq \rho(b^*,a_n) + \rho(a_n, b^{**}) \leq r_n + r_n = 2r_n$.\\
+Спрямуємо $n \to \infty$, тоді $\rho(b^*,b^{**}) \leq 0 \implies \rho(b^*,b^{**}) = 0 \implies b^{*} = b^{**}$. Суперечність!
+\bigskip \\
+II. Покажемо, що $\{a_n, n \geq 1\}$ -- послідовність центрів -- фундаментальна.\\
+За умовою, $r_n \to 0 \implies \forall \varepsilon > 0: \exists N: \forall n \geq N: r_n < \varepsilon$. Достатньо взяти лише $r_N < \varepsilon$. Тоді $\forall n,m \geq N: a_m,a_n \in B[a_N,r_N] \implies \rho(a_m,a_N) < r_N$ та $\rho(a_n,a_N) < r_N$.\\
+$\implies \rho(a_n,a_m) \leq \rho(a_n,a_N) + \rho(a_N,a_m) < 2r_N < 2 \varepsilon$. Отже, $\{a_n, n \geq 1\}$ - фундаментальна.
+
+\begin{proof}
+\rightproof Дано: $(X,\rho)$ - повний. Задамо послідовність куль $\{B[a_n;r_n], n \geq 1\}$, що стягується. Тоді послідовність $\{a_n, n \geq 1\}$ -- фундаментальна. Оскільки $X$ - повний, то тоді $\{a_n, n \geq 1\}$ -- збіжна, тобто $a_n \to a_0$. Оскільки $B[a_n;r_n]$ -- замкнені, то маємо, що $a_0 \in B_n$. Звідси $a_0 \displaystyle \in \bigcap_{n=1}^\infty B_n$.
+\bigskip \\
+\leftproof Дано: умова Кантора. Нехай $\{a_n, n \geq 1\}$ -- фундаментальна послідовність. Нам достатньо буде у неї взяти збіжну підпослідовність. Нехай маємо $n_1 \in \mathbb{N}$, щоб $\forall n \geq n_1: \rho(a_n,a_{n_1}) < \dfrac{1}{2}$.\\
+Тоді $\exists n_2 > n_1: \forall n \geq n_2: \rho(a_n,a_{n_2}) < \dfrac{1}{4}$\\
+\vdots \\
+Тоді маємо послідовність $n_1 < n_2 < n_3 < \dots$ із властивістю $\forall n \geq n_k: \rho(a_n,a_{n_k}) < \dfrac{1}{2^k}$.\\
+Маємо тоді кулі $B\left[a_{n_k}; \dfrac{1}{2^{k-1}} \right]$, що вкладені. Дійсно, $x \in B\left[a_{n_{k+1}}; \dfrac{1}{2^{k}} \right] \implies$\\
+$\rho(a_{n_k}, x) \leq \rho(a_{n_k}, a_{n_{k+1}}) + \rho(a_{n_{k+1}},x) \leq \dfrac{1}{2^{k-1}} \implies x \in B\left[a_{n_k}; \dfrac{1}{2^{k-1}} \right]$\\
+Якщо $a$ -- спільна точка куль, то $a_{n_k} \to a$.
+\end{proof}
+
+\begin{definition}
+Задано $(X,\rho)$ та $(Y, \tilde{\rho})$ -- два різних метричних простори.\\
+Відображення $f \colon X \to Y$ називається \textbf{ізометрією}, якщо
+\begin{align*}
+\forall x_1,x_2 \in X: \tilde{\rho}(f(x_1),f(x_2)) = \rho(x_1,x_2)
+\end{align*}
+Тобто суть ізометрії -- це збереження відстаней.
+\end{definition}
+
+\begin{remark}
+Кожна ізометрія $f$ -- уже автоматично ін'єктивна.\\
+Дійсно, припустимо, що $f(x_1) = f(x_2)$. За визначенням ізометрії, $\tilde{\rho}(f(x_1),f(x_2)) = \rho(x_1,x_2)$. Отримаємо $\rho(x_1,x_2) = 0$, тобто $x_1 = x_2$.
+\end{remark}
+
+\begin{definition}
+Метричні простори $(X,\rho), (Y,\tilde{\rho})$ називаються \textbf{ізометричними}, якщо
+\begin{align*}
+\exists f \colon X \to Y \text{ -- бієктивна ізометрія}
+\end{align*}
+\end{definition}
+
+\begin{example}
+Розглянемо $(\mathbb{R}, \tilde{\rho})$ та $\left( \left( -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right), \rho \right)$ -- два метричних простори. У цьому випадку $\rho$ -- стандартна метрика та $\tilde{\rho}(x,y) = |\arctg x - \arctg y|$. Ці два простори -- ізометричні.\\
+Дійсно, між ними існує ізометрія $\arctg \colon \mathbb{R} \to \left( -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right)$, що є бієктивною.
+\end{example}
+
+\begin{proposition}
+Задані $(X,\rho), (Y, \tilde{\rho})$ -- два ізоморфні метричні простори.\\
+$(X,\rho)$ -- повний $\iff (Y,\tilde{\rho})$ -- повний.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $(X,\rho)$ -- повний. Нехай $\{y_n, n \geq 1\}$ -- фундаментальна послідовність. Оскільки $X,Y$ ізометричні, то існує бієкція $f \colon X \to Y$, що є ізометрією. Тож звідси $\exists !x_n \in X: f(x_n) = y_n$. Розглянемо послідовність $\{x_n, n \geq 1\}$ та зауважимо, що $\rho(x_n,x_m) = \tilde{\rho}(y_n,y_m) \to 0$ в силу фундаментальності. Отже, $\{x_n, n \geq 1\}$ -- фундаментальна, тож збіжна за повнотою. Тобто $\rho(x_n,x) \to 0$. Позначимо $f(x) = y$. Звідси випливає, що $\tilde{\rho}(y_n,y) = \rho(x_n,x) \to 0$. Тобто $\{y_n, n \geq 1\}$ -- збіжна.
+\bigskip \\
+\leftproof \textit{зеркальне доведення.}
+\end{proof}
+
+\begin{definition}
+Задано $Y$ -- повний метричний простір.\\
+Він буде називатися \textbf{поповненням (completion)} метричного простору $X$, якщо
+\begin{align*}
+X \text{ -- ізометричний підпростір } Y; \\
+X \text{ -- щільна в } Y.
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+Для кожного метричного простору $(X,\rho)$ існує поповнення. Причому це поповнення єдине з точністю до ізометрії.
+\end{theorem}
+
+\begin{proof}
+І. \textit{Існування.}\\
+Позначимо $F$ за множина фундаментальних послідовностей $\{x_n\}$ в $X$. Стаціонарні послідовності є фундаментальними, тож звідси $X$ можна сприймати як підмножину $F$.\\
+Розглянемо функцію $d(\{x_n\},\{y_n\}) = \displaystyle\lim_{n \to \infty} \rho(x_n,y_n)$, яка визначена на $F \times F$. Для коректності треба довести існування даної границі. Ми доведемо, що $\{ \rho(x_n,y_n), n \geq 1\}$ -- фундаментальна (це числова послідовність, тому цього буде достатньо).\\
+Нам відомо, що $\{x_n\}, \{y_n\}$ фундаментальні, тобто $\exists N_1, N_2$, для яких $\rho(x_n,x_m) < \varepsilon, \rho(y_n,y_m) < \varepsilon$ для всіх $n,m \geq N_1, m,n \geq N_2$. Тоді при $N = \max \{N_1,N_2\}$ справедлива оцінка:\\
+$|\rho(x_n,y_n) - \rho(x_m,y_m)| \leq \rho(x_n,y_n) + \rho(x_m,y_m) \leq (\rho(x_n,x_m) + \rho(x_m,y_m) + \rho(y_m,y_n)) - \rho(x_m,y_m) < 2 \varepsilon$.\\
+Отже, функція $d$ визначена коректно. Вона майже метрика, оскільки (легко перевірити) виконуються всі властивості. На жаль, $d(\{x_n\},\{y_n\}) = 0 \centernot\implies \{x_n\} = \{y_n\}$ (приклад буде нижче).\\
+Створимо відношення еквівалентності $\{x_n\} \sim \{y_n\} \iff d(\{x_n\},\{y_n\}) = 0$. Утвориться фактормножина $F/_{\sim} = \hat{F}$. Елементи з $\hat{F}$ позначатимемо за $\overline{\{x_n\}}$. Наша мета буде довести, що саме $\hat{F}$ буде поповненням $X$. \\
+На фактормножині покладемо $\tilde{\rho}\left(\overline{\{x_n\}},\overline{\{y_n\}}\right) = d(\{x_n\},\{y_n\})$. Варто пересвідчитися, що воно визначено коректно.\\
+Нехай $\{x_n\} \sim \{x_n'\}$ та $\{y_n\} \sim \{y_n'\}$. Тобто $d(\{x_n\},\{x_n'\}) = 0$ та $d(\{y_n\},\{y_n'\}) = 0$. Тоді\\
+$d(\{x_n\},\{y_n\}) = \displaystyle\lim_{n \to \infty} \rho(x_n,y_n) \leq \lim_{n \to \infty} \rho(x_n,x_n') + \lim_{n \to \infty} \rho(x_n',y_n') + \lim_{n \to \infty} \rho(y_n',y_n) = d(\{x_n'\},\{y_n'\})$.\\
+Аналогічно отримаємо $d(\{x_n'\},\{y_n'\}) \leq d(\{x_n\},\{y_n\})$. Отже, $d(\{x_n'\},\{y_n'\}) = d(\{x_n\},\{y_n\})$, тобто $\tilde{\rho}$ визначилося коректним чином.\\
+Поставимо відображення $f \colon X \to \hat{F}$ таким чином: $f(x) = \overline{\{x\}}$. Це буде ізометрією, тому що\\
+$\tilde{\rho}(f(x_1),f(x_2)) = \tilde{\rho}( \overline{\{x_1\}},\overline{\{x_2\}} ) = d( \{x_1\}, \{x_2\} ) = \displaystyle \lim_{n \to \infty} \rho(x_1,x_2) = \rho(x_1,x_2)$. Відображення $f$ зобов'язане бути сюр'єктивним, оскільки повертається клас еквівалентності. Тобто $f$ -- бієктивна ізометрія, а тому $(X,\rho), (\hat{F},\tilde{\rho})$ -- ізометричні.\\
+Покажемо, що $(\hat{F},\tilde{\rho})$ -- повний метричний простір. (TODO: обміркувати).
+\bigskip \\
+II. \textit{Єдиність.}\\
+Розглянемо два поповнення $(Y_1,\tilde{\rho}_1), (Y_2,\tilde{\rho}_2)$ простору $(X,\rho)$. Тобто, за означенням, маємо $Y_1 \supset X_1 \sim X \sim X_2 \subset Y_2$, а також $\overline{X_1} = Y_1, \overline{X_2} = Y_2$. Під $\sim$ мається на увазі ізометричність. Із цього $X_1$ ізометричний до $X_2$, нехай $g$ -- відповідна ізометрія.\\
+Побудуємо $f \colon Y_1 \to Y_2$ за таким правилом: для кожного $y \in Y_1$ беремо таку послідовність $\{x_n\} \subset X_1$, щоб $x_n \to y$ -- тоді $f(y) = \displaystyle\lim_{n \to \infty} g(x_n)$. Треба пересвідчитися, що визначення коректне. Дійсно, нехай $\{x_n\}, \{x_n'\}$ -- такі дві послідовності, що $x_n \to y, x_n' \to y$. Тоді звідси вилпиває наступне:\\
+$\tilde{\rho}_2 (g(x_n),g(x_n')) \overset{\text{ізометричність}}{=} \tilde{\rho}_1(x_n,x_n') \leq \tilde{\rho}_1(x_n,y) + \tilde{\rho}_2(y,x_n') \to 0$ при $n \to \infty$.\\
+Таким чином, $\displaystyle\lim_{n \to \infty} g(x_n) = \lim_{n \to \infty} g(x_n')$, а тому значення функцій коректно визначено. (TODO: подумати над тим, чи правильно я все це розписав).
+\end{proof}
+
+\begin{example}
+Беремо стандартний метричний простір $\mathbb{R}$, послідовності $\{x_n\} = \{0.9, 0.99, 0.999, \dots\}$ та $\{y_n\} = \{1,1,1,\dots\}$. Зауважимо, що $d(\{x_n\},\{y_n\}) = \displaystyle\lim_{n \to \infty} \rho(x_n,y_n) = \lim_{n \to \infty} 0.\underset{n \text{ цифр}}{00\dots 01} = 0$. При цьому зрозуміло, що $\{x_n\} \neq \{y_n\}$.
+\end{example}
+
+\subsection{Неперервні відображення}
+\begin{definition}
+Задані $(X,\rho), (Y,\tilde{\rho})$ -- два метричних простори.\\
+Відображення $f \colon X \to Y$ називається \textbf{неперервним у точці $x_0$}, якщо
+\begin{align*}
+\forall \varepsilon > 0: \exists \delta > 0: \forall x \in X: \rho(x,x_0) < \delta \implies \tilde{\rho}(f(x),f(y)) < \varepsilon
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Дане означення можна записати більш компактним чином. Маємо $f \colon X \to Y$.\\
+$f$ -- неперервне в точці $x_0 \in X \iff \forall \varepsilon > 0: \exists \delta > 0: f(B(x_0;\delta)) \subset B(f(x_0);\varepsilon)$.
+\end{remark}
+
+\begin{proposition}
+Задані $(X,\rho), (Y,\tilde{\rho})$ -- два метричних простори та $f \colon X \to Y$.\\
+$f$ -- неперервне в точці $x_0 \in X \iff \forall \{x_n\} \subset X: x_n \to x_0 \text{ в } X \implies f(x_n) \to f(x_0) \text{ в } Y$.\\
+\textit{Вправа: довести.}
+\end{proposition}
+
+\begin{theorem}
+Задані $(X,\rho), (Y,\tilde{\rho})$ -- два метричних простори та $f \colon X \to Y$.\\
+$f$ -- неперервне (на множині $X$) $\iff \forall V$ -- замкнена в $Y: f^{-1}(U)$ -- замкнена в $X$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $f$ -- неперервне. Нехай $V$ -- замкнена в $Y$. Зафіксуємо $x_n \in f^{-1}(V)$ таким чином, що $x_n \to x_0$. Але за неперервністю, $f(x_n) \to f(x_0)$, та додатково $f(x_n) \in V$. Значить, за замкненістю $V$, точка $f(x_0) \in V \implies x_0 \in f^{-1}(V)$. Отже, $f^{-1}(V)$ -- замкнена.
+\bigskip \\
+\leftproof Дано: $\forall V$ -- замкнена в $Y: f^{-1}(U)$ -- замкнена в $X$. Оберемо $x_n \to x_0$.\\
+!Припустимо, що $f(x_n) \not\to f(x_0)$, тобто існує шар $B(f(x_0);\varepsilon)$, поза яким знаходиться підпослідовність $\{f(x_{n_k})\}$. Якщо $V$ -- замикання множини $\{f(x_{n_k})\}$, то звідси $x_{n_k} \in f^{-1}(V)$; $f(x_0) \notin V$. Тоді звідси $x_0 \notin f^{-1}(V)$, проте $x_{n_k} \to x_0$ та $x_0$ є граничною точкою для $f^{-1}(A)$. Суперечність!
+\end{proof}
+
+\begin{corollary}
+$f$ -- неперервне $\iff \forall U$ -- відкрита в $Y: f^{-1}(U)$ -- відкрита в $X$.\\
+\textit{Вказівка: застосувати попередню теорему та рівність $f^{-1}(A^c) = (f^{-1}(A))^c$.}
+\end{corollary}
+
+\begin{proposition}
+Задані $X,Y,Z$ -- метричні простори та $f \colon X \to Y, g \colon Y \to Z$. Нехай $f$ -- неперервне в точці $x_0 \in X$ та $g$ -- неперервне в точці $f(x_0) \in Y$. Тоді $g \circ f$ -- неперервне в точці $x_0 \in X$.\\
+\textit{Вправа: довести.}
+\end{proposition}
+
+\begin{proposition}
+Задано $(X,\rho)$ -- метричний простір та зафіксуємо $x_0 \in X$. Тоді функція $f(x) = \rho(x,x_0)$, де $f \colon X \to \mathbb{R}$, -- неперервна на $X$.
+\end{proposition}
+
+\begin{proof}
+Дійсно, нехай $y_0 \in X$. Припустимо, що $\{y_n\}$ така, що  $y_n \to y_0$. Хочемо $f(y_n) \to f(y_0)$. Справді,\\
+$|f(y_n) - f(y_0)| = |\rho(y_n,x_0) - \rho(y_0,x_0)| \leq |\rho(y_n,y_0)| \to 0$.\\
+\textit{Для $\mathbb{R}$ береться стандартна метрика, якщо нічого іншого не вказується зазвичай.}
+\end{proof}
+
+\begin{corollary}
+Задано $(L, \|\cdot \|)$ -- нормований простір. Тоді норма $\| \cdot \| \colon L \to \mathbb{R}$ -- неперервна.\\
+\textit{Вказівка: оскільки $\rho(x,y) = \|x-y\|$, то звідси $\|x\| = \rho(x,0)$.}
+\end{corollary}
+
+\begin{corollary}
+Задано $(E, (\cdot,\cdot))$ -- евклідів простір. Тоді при фіксованому $x_0 \in E$ маємо $(x,x_0)$ -- неперервне відображення.
+\end{corollary}
+
+\begin{proof}
+Нехай $\{y_n\}$ задана так, що $y_n \to y_0$. Хочемо довести, що $(y_n,x_0) \to (y_0,x_0)$.\\
+$|(y_n,x_0) - (y_0,x_0)| = |(y-y_0,x_0)| \leq \sqrt{\|y-y_0\|} \sqrt{\|x_0\|} \to 0$, оскільки $\| \cdot \|$ -- неперервне.
+\end{proof}
+
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір та $f \colon X \to X$.\\
+Дане відображення називається \textbf{стиском}, якщо
+\begin{align*}
+\exists q \in (0,1): \forall x,y \in X: \rho(f(x),f(y)) \leq q \cdot \rho(x,y)
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Стискаючі відображення -- неперервні.\\
+\textit{Вказівка: обрати $\delta = \dfrac{q}{\varepsilon}$ при всіх $\varepsilon > 0$.}
+\end{remark}
+
+\begin{theorem}[Теорема Банаха]
+Задано $(X,\rho)$ -- повний метричний просторі та $f \colon X \to X$ -- стискаюче відображення. Тоді існує єдина точка нерухома точка, тобто $\exists ! x \in X: f(x) = x$.
+\end{theorem}
+
+\begin{proof}
+І. \textit{Існування}.\\
+Нехай $x_0 \in X$ -- довільна точка. Зробимо позначення: $x_1 = f(x_0),\ x_2 = f(x_1),\ \dots, x_n = f(x_{n-1}), \dots$ Покажемо, що послідовність $\{x_n, n \geq 0\}$ -- фундаментальна. Дійсно, для $m \leq n$ маємо:\\
+$\rho(x_m, x_n) = \rho(f(x_{m-1}), f(x_{n-1})) \leq q \cdot \rho(x_{m-1},x_{n-1}) \leq \dots \leq q^m \rho(x_0,x_{n-m})$.\\
+$\rho(x_0,x_{n-m}) \leq \rho(x_0,x_1) + \rho(x_1,x_2) + \dots + \rho(x_{n-m-1}, x_{n-m}) \leq \rho(x_0,x_1)(1+q+\dots+q^{n-m-1}) \leq \\
+\leq \rho (x_0,x_1) \dfrac{1}{1-q}$.\\
+Разом отримаємо $\rho(x_m,x_n) \leq \dfrac{q^m}{1-q} \rho(x_0,x_1) \to 0, n,m \to \infty$.\\
+Оскільки $(X,\rho)$ -- повний, то $\{x_n\}$ -- збіжна, позначимо $a = \displaystyle\lim_{n \to \infty} x_n$. Зважаючи на неперервність стиска, отримаємо $\displaystyle f(a) = f\left( \lim_{n \to \infty} x_n \right) = \lim_{n \to \infty} f(x_n) = \lim_{n \to \infty} x_{n+1} = a$. Тобто $a$ -- це наша шукана нерухома точка.
+\bigskip \\
+II. \textit{Єдиність}.\\
+!Припустимо, що $f$ має дві різні нерухомі точки $a,b$. Буде суперечність! Дійсно,\\
+$0 < \rho(a,b) = \rho(f(a),f(b)) \leq q \cdot \rho(a,b) < \rho(a,b)$.
+\end{proof}
+
+\begin{remark}
+Насправді, в теоремі Банаха достатньо вимагати, щоб саме $f^n \overset{\text{def.}}{=} \underset{n\text{ разів}}{f \circ \dots \circ f}$ було стиском, а не відображення $f$.\\
+Дійсно, за теоремою Банаха, $f^n$ матиме єдину нерухому точку $a$, тобто $f^n(a) = a$. Тоді точка $f(a)$ буде теж нерухомою для $f^n$, оскільки $f^n(f(a)) = f(f^n(a)) = f(a)$. Але за єдиністю, $f(a) = a$ -- дві нерухомі мають збігатися. Єдиність нерухомої точки для $f$ доводиться неважко.
+\end{remark}
+
+\subsection{Компактність}
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір та $A \subset X$.\\
+Множина $A$ називається \textbf{компактом}, якщо
+\begin{align*}
+\forall \{x_n, n \geq 1\} \subset A: \exists \{x_{n_k}, k \geq 1\}: x_{n_k} \to x_0, k \to \infty, \text{ причому } x_0 \in A
+\end{align*}
+Якщо прибрати умову $x_0 \in A$, то тоді $A$ називається \textbf{передкомпактом}.
+\end{definition}
+
+\begin{proposition}
+Задано $(X,\rho)$ -- метричний простір та $A \subset X$.\\
+$A$ -- компакт $\iff $ $\forall B \subset A$, де $B$ -- нескінченна множина, існує $x_0 \in A$ -- гранична точка $B$.\\
+Якщо прибрати умову $x_0 \in A$, то вже мова буде йти про передкомпакт.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $A$ -- компакт. Нехай $B \subset A$ -- нескінченна множина. Оберемо послідовність $\{x_n, n \geq 1\} \subset B \subset A$, де всі вони між собою різні. Тоді за умовою компактності, існує підпослідовність $x_{n_k} \to x_0$, причому $x_0 \in A$. Зауважимо, що всі $x_{n_k} \neq x_0$, тож $x_0$ -- гранична точка $A$.\\
+Якби існували $k \in \mathbb{N}$, для яких $x_{n_k} = x_0$, то тоді ми би сформували підпослідовність $\{x_{n_{k_m}}\}$ без цих елементів, причому $x_{n_{k_m}} \to x_0$, а тепер $x_{n_{k_m}} \neq x_0$. Тож все одно $x_0$ залишається граничною точкою $A$.
+\bigskip \\
+\leftproof Дано: $\forall B \subset A$, де $B$ -- нескінченна множина, існує $x_0 \in A$ -- гранична точка $B$. Отже, нехай $\{x_n, n \geq 1\} \subset A$ -- довільна послідовність. У нас є два варіанти:\\
+I. Множина значень $\{x_n\}$ -- скінченна. Тоді можна відокремити стаціонарну підпослідовність.\\
+II. Множина значень $\{x_n\}$ -- нескінченна, всі ці значення покладемо в множину $B \subset A$. Тоді за умовою, існує $x_0 \in A$ -- гранична точка $B$. Отже, $B \cap B(x_0;\varepsilon)$ містить нескінченне число точок для всіх $\varepsilon > 0$. Зокрема:\\
+$\varepsilon = 1 \implies B \cap B(x_0;1)$ має нескінченну множину. Там існує елемент $y_1 \in B \cap B(x_0; 1)$, тобто це одне зі значень послідовності. Тобто $y_1 = x_{n_1}$.\\
+$\varepsilon = \dfrac{1}{2} \implies B \cap B\left( x_0;\dfrac{1}{2} \right)$ має нескінченну множину. Там існує елемент $y_2 \in B \cap B\left( x_0;\dfrac{1}{2} \right)$, тобто це одне зі значень послідовності. Тобто $y_2 = x_{n_2}$. Причому можна обрати $x_{n_2} > x_{n_1}$. Якби так не було можливо, то $B \cap B\left(x_0; \dfrac{1}{2}\right)$ була б скінченною множиною, що не наше випадок.\\
+\vdots \\
+Побудували підпослідовність $\{x_{n_k}, k \geq 1\}$, причому $\rho(x_0,x_k) < \dfrac{1}{k}$. Тож при $k \to \infty$ матимемо $x_{n_k} \to x_0 \in A$. Отже, $A$ -- компакт.
+\bigskip \\
+\textit{Випадок передкомпакту повторюється майже все слово в слово.}
+\end{proof}
+
+\begin{proposition}
+Задано $(X,\rho)$ -- компактний метричний простір. Тоді $(X,\rho)$ -- повний.
+\end{proposition}
+
+\begin{proof}
+Дійсно, нехай $\{x_n\} \subset X$ -- фундаментальна. Оскільки $X$ -- компакт, то існує збіжна підпослідовність $\{x_{n_k}\}$, де $x_{n_k} \to x, x \in X$. Ми вже знаємо, що тоді й сама послідовність $\{x_n\} \to x$ буде збіжною. Отже, $(X,\rho)$ -- повний метричний простір.
+\end{proof}
+
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір та $A \subset X$.\\
+Множина $A$ називається \textbf{обмеженою}, якщо
+\begin{align*}
+\exists R > 0: A \subset B(a;R)
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Задано $(X,\rho)$ -- метричний простір та $A \subset X$.\\
+Множина $A$ називається \textbf{цілком обмеженою}, якщо
+\begin{align*}
+\forall \varepsilon > 0: \exists C_\varepsilon = \{x_1,x_2,\dots,x_n\}: A \subset \displaystyle\bigcup_{x \in C_\varepsilon} B(x;\varepsilon)
+\end{align*}
+До речі, $C_\varepsilon$, для якої виконана $A \subset \displaystyle\bigcup_{x \in C_\varepsilon} B(x;\varepsilon)$, називається \textbf{скінченною $\varepsilon$-сіткою}.\\
+Тобто $A$ -- цілком обмежена, коли вона має скінченну $\varepsilon$-сітку для всіх $\varepsilon > 0$.
+\end{definition}
+
+\begin{proposition}
+Задано $(X,\rho)$ -- метричний простір та $A$ -- цілком обмежена множина. Тоді $A$ -- обмежена.
+\end{proposition}
+
+\begin{proof}
+Для множини $A$ існує $1$-сітка, тобто $C_1 = \{x_1,\dots,x_n\}$, для якої $A \subset \displaystyle\bigcup_{x \in C_1} B(x;1)$.\\
+Зафіксуємо $y \in X$ та оберемо $R = 1 +\displaystyle\max_{x \in C_1} \rho(x,y)$. Тоді хочемо довести, що $A \subset B(y;R)$.\\
+Нехай $a \in A$, тоді вже $a \in B(x;1)$ при деякому $x \in C_1$, а також $\rho(a;x) < 1$. Звідси\\
+$\rho(a;y) \leq \rho(a;x) + \rho(x;y) < 1 + \displaystyle\max_{x \in C_1} \rho(x;y) = R$.\\
+Отже, $A$ -- обмежена.
+\end{proof}
+
+\begin{remark}
+Не обов'язково вимагати, щоб $A$ була цілком обмежена. Подивившись на це доведення, ми можемо лише вимагати, щоб $A$ мала хоча б одну $\varepsilon$-сітку -- тоді буде обмеженість $A$.
+\end{remark}
+
+\begin{theorem}[Критерій Фреше-Хаусдорфа]
+Нехай $(X,\rho)$ -- повний метричний простір та $A \subset X$.\\
+$A$ -- цілком обмежена $\iff A$ -- передкомпакт.
+\end{theorem}
+
+\begin{remark}
+Під час доведення \leftproof нам не потрібна буде умова повноти метричного простору.
+\end{remark}
+
+\begin{proof}
+\rightproof Дано: $A$ -- цілком обмежена. Нехай $\{a_n, n \geq 1\} \subset A$ -- довільна послідовність. \\
+Оберемо $1$-сітку $C_1$, де $A \subset \displaystyle\bigcup_{x \in C_1} B(x;1)$. В одному з цих шарів нескінченне число членів послідовності, той шар позначу за $B(y_1;1)$; маємо підпослідовність $\{a_{n_k}, k \geq 1\} \subset B(y_1;1)$.\\
+Оберемо $\dfrac{1}{2}$-сітку $C_{\frac{1}{2}}$, де $A \subset \displaystyle\bigcup_{x \in C_{\frac{1}{2}}} B\left(x;\dfrac{1}{2}\right)$. В одному з цих шарів нескінченне число членів підпослідовності, той шар позначу за $B\left(y_2;\dfrac{1}{2}\right)$; маємо підпідпослідовність $\{a_{n_{k_m}}, k \geq 1\} \subset B\left(y_2;\dfrac{1}{2}\right)$.\\
+\vdots \\
+Отримали послідовність центрів $\{y_n, n \geq 1\}$, доведемо її фундаментальність.\\
+$\rho(y_n,y_m) \leq \rho(y_n,a_*) + \rho(a_*,y_m) < \dfrac{1}{n} + \dfrac{1}{m} \to 0$ при $n,m \to \infty$. У даному випадку ми підібрали елемент $a_* \in B\left( \dfrac{1}{n};y_n \right) \cap B\left( \dfrac{1}{m};y_m \right)$.\\
+Тепер розглянемо підпослідовність $\{a_{n_p}, p \geq 1\}$, яка будується таким чином: беремо перший елемент з $\{a_{n_k}\}$ (це наше $a_{n_1}$), потім перший елемент з $\{a_{n_{k_m}}\}$ (це наше $a_{n_2}$), \dots Доведемо, що $\{a_{n_p}, p \geq 1\}$ -- фундаментальна. Дійсно,\\
+$\rho(a_{n_p}, a_{n_t}) \leq \rho(a_{n_p}, y_p) + \rho(y_p,y_t) + \rho(y_t,a_{n_t}) < \dfrac{1}{p} + \dfrac{1}{t} + \rho(y_p,y_t) \to 0, t,p \to \infty$\\
+Оскільки $(X,\rho)$ -- повний, то звідси $\{a_{n_p}, n \geq 1\}$ -- збіжна підпослідовність. Довели, що $A$ -- передкомпакт.
+\bigskip \\
+\leftproof Дано: $A$ -- передкомпакт.\\
+!Припустимо, що $A$ -- це є цілком обмеженою. Тобто для деякого $\varepsilon > 0$ не існує $\varepsilon$-сітки. Нехай $x_1 \in A$. Тоді існує $x_2 \in A$, для якої $\rho(x_1,x_2) \geq \varepsilon$ (інакше якби для кожної $x_2 \in A$ була б $\rho(x_1,x_2) < \varepsilon$, то ми си знайшли $\varepsilon$-сітку $\{x_1\}$, що суперечить умові).\\
+Далі існує $x_3 \in A$, для якої $\rho(x_1,x_3) \geq \varepsilon$ та $\rho(x_2,x_3) \geq \varepsilon$ (аналогічно якби для кожної $x_3 \in A$ ці два нерівності не виконувалися би, то ми би знайшли один з трьох $\varepsilon$-сіток: $\{x_1\}$ або $\{x_2\}$ або $\{x_1,x_2\}$).\\
+\vdots \\
+Побудували послідовність $\{x_n, n \geq 1\} \subset A$, для якої справедлива $\rho(x_n,x_m) \geq \varepsilon$ при всіх $n \neq m$. За умовою передкомпактності, існує $\{x_{n_k}, n \geq 1\}$, для якої $x_{n_k} \to x_0$. Водночас звідси ми отримаємо, що існують номери $K_1,K_2$, для яких $\rho(x_{n_{K_1}}, x_{n_{K_2}}) \leq \rho(x_{n_{K_1}}, x_0) + \rho(x_0, x_{n_{K_2}}) < \varepsilon$. Суперечність!\\
+Отже, $A$ все ж таки має бути цілком обмеженою.
+\end{proof}
+
+\begin{theorem}
+Задано $(X,\rho)$ -- метричний простір та $A \subset X$.\\
+$A$ -- компакт $\iff$ для кожного відкритого покриття $A$ можна виділити скінченне підпокриття.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $A$ -- компакт.\\
+!Припустимо, що існує відрките покриття $\{U_\alpha\}$ множини $A$, від якої не можна відокремити скінченне підпокриття. Оскільки $A$ -- компакт, то $A$ -- цілком обмежена. Значить, існує $1$-сітка $C_1$ (причому можна підібрати так, щоб $C_1 \subset A$), для якої $A \subset \displaystyle\bigcup_{x \in C_1} B(x;1)$, або можна переписати як $A \subset \displaystyle\bigcup_{x \in C_1} A \cap B(x;1)$. Серед множин $A \cap B(x;1)$ існує одна з них, яка не покривається скінченним чином множинами $\{U_\alpha\}$. Дану множину позначу за $A'$.\\
+Сама множина $A'$ -- також цілком обмежена, тож існує $\dfrac{1}{2}$-сітка $C_{\frac{1}{2}}$ (знову підберемо так, щоб $C_{\frac{1}{2}} \subset A'$), для якої виконано $A' \subset \displaystyle\bigcup_{x \in C_{\frac{1}{2}}} A' \cap B\left(x; \dfrac{1}{2}\right)$. Знову ж таки, серед $A' \cap B\left(x; \dfrac{1}{2}\right)$ існує одна з них, що не покривається скінченним чином множинами $\{U_\alpha\}$. Дану множину позначу за $A''$. \\
+\vdots \\
+Продовжуючи процедуру, отримаємо набір куль $B_n = B\left(x_n;\dfrac{1}{n}\right)$, де центр $x_n \in B_{n-1} \cap A$. Позначимо $\overline{B_n \cap A} = K_n$ та зауважимо, що $K_n$ -- це замкнена куля в метричному підпросторі $A$, де $R = \dfrac{1}{2^n}$ та центр $y_n \in K_{n-1}$.\\
+Подвоїмо радіуси кожної з цих куль. Тоді отримаємо послідовність вкладених куль, які стягуються. Оскільки $A$ -- компакт, то $(A,\rho_A)$ -- повний метричний простір, тож за теоремою Кантора, існує $a \in A$ -- спільна точка цих куль. Зважаючи на покриття множини $A$, отримаємо $a \in U_{\alpha_0}$ при деякому $\alpha_0$. Оскільки $U_{\alpha_0}$ -- відкрита, то існує куля $B(z,\delta) \subset U_{\alpha_0}$. Ми можемо підібрати завжди такий $N \in \mathbb{N}$, щоб було виконано $\dfrac{1}{N} < \dfrac{\delta}{2}$, тоді звідси $K_n \subset B(z;\delta) \subset U_{\alpha_0}$. Таким чином, $K_n$ була покрита лише однією множиною із $\{U_\alpha\}$, проте ми обирали такі кулі (на початку), які не допускали скінченне підпокриття. Суперечність!
+\bigskip \\
+\leftproof Дано: кожне покриття $A$ має скінченне підпокриття.\\
+!Припустимо, що $A$ -- не компакт, тобто існує послідовність $\{x_n, n \geq 1\} \subset A$, що не має часткових границь. Тоді кожний відкритий окіл $U_a, a \in A$, містить скінченну кількість членів послідовності $\{x_n\}$ (якби існував окіл $U_a$ із нескінченним числом членів послідовності, то $a$ стала би граничною точкою, що неможливо). Набір $\{U_a, a \in A\}$ -- відкрите покриття множини $A$. За умовою, існує скінченне підпокриття $\{U_{a_1},\dots,U_{a_n}\}$ множини $A$, але тоді $A \subset \displaystyle\bigcup_{i=1}^n U_{a_i}$, де праворуч -- скінченна множина; ліворуч -- нескінченна в силу нескінченності послідовності $\{x_n\}$ -- суперечність!
+\end{proof}
+
+\begin{corollary}
+Задано $(X,\rho), (Y,\tilde{\rho})$ -- два метричних простори та $f \colon X \to Y$ -- неперервне відображення. Відомо, що $X$ -- компакт. Тоді $f(X)$ -- компакт.
+\end{corollary}
+
+\begin{proof}
+Маємо $\{U_\alpha\}$ -- відкрите покриття $f(X)$. Тоді $\{f^{-1}(U_\alpha)\}$ -- відкрите покриття $X$, але за компактністю, можна виділити скінченне підпокриття $\{f^{-1}(U_1),\dots,f^{-1}(U_m)\}$, тоді звідси $\{U_1,\dots,U_m\}$ буде скінченним підпокриттям $f(X)$.
+\end{proof}
+
+\begin{corollary}
+Задано $(X,\rho)$ -- метричний простір та $f \colon X \to \mathbb{R}$ -- числова неперервна функція. Відомо, що $X$ -- компакт. Тоді $f$ -- обмежена та досягає найбільшого та найменшого значень.
+\end{corollary}
+
+\begin{theorem}
+Задано $(X,\rho), (Y,\tilde{\rho})$ -- два метричних простори та $f \colon X \to Y$ -- неперервне, причому $X$ -- компакт. Тоді $f$ -- рівномірно неперервне.
+\end{theorem}
+
+\begin{proof}
+!Припустимо, що $\exists \varepsilon > 0: \forall \delta > 0: \exists x,y \in X: \rho(x,y) < \delta$, але $\tilde{\rho}(f(x),f(y)) \geq \varepsilon$.\\
+Оберемо $\delta = \dfrac{1}{n}, n \in \mathbb{N}$, тоді утвориться послідовність $\{x_n\}, \{y_n\} \subset X$. Оскільки $X$ -- компакт, то відокремимо збіжні підпослідовності $\{x_{n_k}\}, \{y_{n_k}\}$. Але оскільки $\rho(x_{n_k}, y_{n_k}) < \dfrac{1}{n_k}$, то звідси випливає $\displaystyle\lim_{k \to \infty} x_{n_k} = \lim_{k \to \infty} x_{n_k}$. Із іншого боку, $\displaystyle\lim_{k \to \infty} f(x_{n_k}) \neq \lim_{k \to \infty} f(y_{n_k})$, оскільки виконана нерівність $\tilde{\rho}(f(x_{n_k}), f(y_{n_k}) \geq \varepsilon$. Суперечність!
+\end{proof}
+\newpage
+
+\section{Початок функціонального аналізу}
+\subsection{Обмежені та неперервні лінійні оператори}
+\begin{definition}
+Задано $(X, \|\cdot \|_X),(Y, \| \cdot \|_Y)$ -- нормовані простори.\\
+Лінійний оператор $A \colon X \to Y$ називають \textbf{обмеженим}, якщо
+\begin{align*}
+\exists C > 0: \forall x \in X: \| Ax \|_Y \leq C \| x \|_X
+\end{align*}
+Надалі ми ці норми розрізняти не будемо, бо буде з контексту зрозуміло.
+\end{definition}
+
+\begin{remark}
+Зауважимо, що множина всіх констант, які обмежують оператор, тобто множина $\{C > 0 \mid \forall x \in X: \| Ax\| \leq C \|x\|\}$, буде непорожньою (можна взяти $C = \dfrac{\|Ax\|}{\|x\|} > 0$) та обмеженою знизу числом $0$. Значить, існує $\displaystyle\inf\{C > 0 \mid \forall x \in X: \| Ax\| \leq C \|x\|\}$.
+\end{remark}
+
+\begin{definition}
+Задано $X,Y$ -- нормовані простори.\\
+\textbf{Нормою} лінійного оператора $A$ називається величина
+\begin{align*}
+ \| A\| = \inf \{C > 0 \mid \forall x \in X: \| Ax \| \leq C \|x\|\}
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Зауважимо, що для всіх $x \in X$ виконується $\|Ax\| \leq \|A\| \cdot \|x\|$.\\
+Дійсно, для кожного $\varepsilon > 0$ існус стала $C_\varepsilon > 0$, для якої $C_\varepsilon < \|A\| + \varepsilon$. Тож для всіх $x \in X$ справедлива нерівність $\|A x\| \leq C_\varepsilon \|x\| < (\| A \| + \varepsilon) \|x\|$. Тому ця нерівність виконуватиметься також при $\varepsilon \to 0+0$. Таким чином, $\|A\| \in \{C > 0 \mid \forall x \in X: \|Ax\| \leq C \|x\|\}$, тобто інфімум досягається. \\
+Отже, норма $\|A\|$ -- це найменше число, що обмежує лінійний оператор $A$.
+\end{remark}
+
+\begin{theorem}
+Задано $X,Y$ -- нормовані простори та $A \colon X \to Y$ -- обмежений оператор. Тоді $\displaystyle\|A\| = \sup_{x \in X \setminus \{0\}} \dfrac{\| Ax\|}{\|x\|}$.
+\end{theorem}
+
+\begin{proof}
+Спочатку доведемо, що $\|A\| = \displaystyle\sup_{x \in X \setminus \{0\}} \dfrac{\| Ax\|}{\|x\|}$. Уже відомо, що $\forall x \in X: \|Ax \| \leq \|A \| \|x\|$, тоді звідси $\forall x \in X \setminus \{0\}: \dfrac{\|Ax\|}{\|x\|} \leq \|A\|$, таким чином $\displaystyle\sup_{x \in X \setminus \{0\}} \dfrac{\|Ax\|}{\|x\|} \leq \|A\|$. Залишилося довести, що строга нерівність не допускається.\\
+!Припустимо, що $\displaystyle\sup_{x \in X \setminus \{0\}} \dfrac{\|Ax\|}{\|x\|} < \|A\|$, тобто існує $\varepsilon > 0$, для якого $\displaystyle\sup_{x \in X \setminus \{0\}} \dfrac{\|Ax\|}{\|x\|} = \|A\|- \varepsilon$. Тоді звідси випливає, що $\forall x \in X \setminus \{0\}: \dfrac{\|Ax\| }{\|x\|} \leq \|A\| - \varepsilon \implies \forall x \in X: \|Ax\| \leq (\|A\|-\varepsilon) \|x\|$. Таким чином, $\|A\|-\varepsilon$ -- це константа, яка обмежує оператор, тоді за означенням норми, $\|A\| - \varepsilon \geq \|A\|$ -- суперечність!\\
+Отже, ми довели рівність, тобто $\|A\| = \displaystyle\sup_{x \in X \setminus \{0\}} \dfrac{\| Ax\|}{\|x\|}$.
+\end{proof}
+
+\begin{theorem}
+Задано $X,Y$ -- нормовані простори та $A \colon X \to Y$ -- обмежений оператор. Тоді $\displaystyle\|A\| = \sup_{\|x\| \leq 1} \|Ax\| = \sup_{\|x\| = 1} \|Ax\|$.
+\end{theorem}
+
+\begin{proof}
+Ми доведемо ось такий ланцюг нерівностей: $\|A\| = \displaystyle\sup_{x \neq 0} \dfrac{\|Ax\|}{\|x\|} \geq \sup_{\|x\|\leq 1} \|Ax\| \geq \sup_{\|x\| = 1} \|Ax\| \geq \sup_{x \neq 0} \dfrac{\|Ax\|}{\|x\|}$.\\
+Оберемо такий $x \neq 0$, щоб $\|x\| \leq 1$. Тоді виконується нерівність $\dfrac{\|Ax\|}{\|x\|} \geq \|A x\|$. Таким чином, $\displaystyle\sup_{\|x\| \leq 1} \|Ax\| \leq \sup_{\substack{\|x\| \leq 1 \\ x \neq 0 }} \dfrac{\|Ax\|}{\|x\|} \leq \sup_{x \neq 0} \dfrac{\|Ax\|}{\|x\|} = \|A\|$.\\
+Зрозуміло, що виконується нерівність $\displaystyle\sup_{\|x\| = 1} \|Ax\| \leq \sup_{\|x\| \leq 1} \|Ax\|$.\\
+Залишилося довести, що $\displaystyle\sup_{x \neq 0} \dfrac{\|Ax\|}{\|x\|} \leq \sup_{\|x\|=  1} \|Ax\|$. Дана нерівність є наслідком того, що для кожного $x \neq 0$ число $\dfrac{\|Ax\|}{\|x\|} = \left\| A \left( \dfrac{x}{\|x\|} \right) \right\|$ належить множині $\{ \|Ax\| \mid \|x\| = 1\}$.
+\end{proof}
+
+\begin{example}
+Задано лінійний оператор $A \colon l_2 \to l_2$ таким чином: $A(x_1,x_2,\dots) = (x_2,x_3,\dots)$. Довести, що $A$ -- обмежений оператор та знайду норму.\\
+Згадаємо, що норма $\|(x_1,x_2,\dots\| = \sqrt{|x_1|^2 + |x_2|^2 + \dots}$. Оцінимо оператор:\\
+$\|A (x_1,x_2,\dots)\| = \|(x_2,x_3,\dots)\| = \sqrt{|x_2|^2 + |x_3|^2 + \dots} \leq \sqrt{|x_1|^2 + |x_2|^2 + |x_3|^2 + \dots} = 1 \cdot \|(x_1,x_2,\dots)\|$.\\
+Отже, $A$ -- обмежений оператор, бо знайшли константу $C = 1$, що обмежує.\\
+$\|A\| = \displaystyle\sup_{\|(x_1,x_2,\dots)\| = 1} \|A(x_1,x_2,\dots)\| = \displaystyle\sup_{\|(x_1,x_2,\dots)\| = 1} \|(x_2,x_3,\dots)\| = \sup_{\|(x_1,x_2,\dots)\| = 1} \sqrt{|x_2|^2 + |x_3|^2 + \dots} = \\
+= \sup_{\|(x_1,x_2,\dots)\| = 1} \sqrt{1 - \|x_1\|^2} = 1$.
+\end{example}
+
+\begin{example}
+Задано лінійний оператор $A \colon C([0,1]) \to C([0,1])$, таким чином: $(Ax)(t) = \displaystyle\int_0^t \tau x(\tau)\,d\tau$. Довести, що $A$ -- обмежений оператор та знайти норму.\\
+Конкретно в цьому випадку розглядатиметься норма $\|f\| = \displaystyle\max_{t \in [0,1]} |f(t)|$.\\
+$\displaystyle\|Ax\| = \max_{t \in [0,1]} \left| \int_0^t \tau x(\tau)\,d\tau \right| \leq \max_{t \in [0,1]} \int_0^t |\tau| |x(\tau)|\,d\tau = \int_0^1 |\tau| |x(\tau)|\,d\tau \leq \int_0^1 |\tau| \max_{\tau \in [0,1]} |x(\tau)|\,d\tau = \\
+= \int_0^1 \tau \|x \|\,d\tau = \|x\| \dfrac{\tau^2}{2} \Big|_0^1 = \dfrac{1}{2} \|x\|$.\\
+Отже, $A$ -- обмежений оператор. Залишилося знайти норму.\\
+Оскільки $\|Ax\| \leq \dfrac{1}{2} \|x\|$, то звідси випливає $\|A\| = \displaystyle\sup_{\|x\| = 1} \|Ax\| \leq \dfrac{1}{2}$. Із іншого боку, оберемо функцію $x(t) = 1$, для якої $\|x\| = 1$. Тоді отримаємо, що $\|Ax\| = \displaystyle\max_{t \in [0,1]} \left|\int_0^\tau \tau\,d\tau\right| = \max_{t \in [0,1]} \dfrac{t^2}{2} = \dfrac{1}{2}$.\\
+Таким чином, отримаємо $\|A\| = \dfrac{1}{2}$.
+\end{example}
+
+\begin{proposition}
+Задано $X,Y$ -- нормовані простори та $\dim X < \infty$ та $A \colon X \to Y$ -- лінійний оператор. Тоді $A$ -- обмежений.\\
+Внаслідок цього, всі оператори між скінченновимірними векторними просторами -- обмежені.
+\end{proposition}
+
+\begin{proof}
+Дійсно, нехай $\{e_1,\dots,e_n\}$ -- базис $X$, нехай на неї стоїть норма $\|x\|_2$, тоді маємо наступне:\\
+$\|Ax\| = \|A (x_1 e_1 + \dots + x_n e_n) \| = \| x_1 A e_1 + \dots + x_n A e_n \| \leq |x_1| \|A e_1 \| + \dots + |x_n| \|A e_n \| \leq \\
+\leq \sqrt{|x_1|^2 + \dots + |x_n|^2} \sqrt{\|Ae_1\|^2 + \dots + \|Ae_n\|^2} = C \|x\|_2$.\\
+Якби була би інша норма $\| \cdot \|$, то вона еквівалентна $\| \cdot \|_2$, а тому обмеженість зберігається.
+\end{proof}
+
+\begin{theorem}
+Задано $X,Y$ -- нормовані простори та $A \colon X \to Y$ -- лінійний оператор.\\
+$A$ -- обмежений $\iff A $ -- неперервний в точці $0$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $A$ -- обмежений. Оберемо послідовність $\{x_n\} \subset X$ так, щоб $x_n \to 0$. Звідси отримаємо $\|Ax_n - A0\| = \|Ax_n\| \leq \|A\| \|x_n\| \to 0$. Отже, $Ax_n \to A0$ при $n \to \infty$, що підтверджує неперервність. 
+\bigskip \\
+\leftproof Дано: $A$ -- неперервний в точці $0$.\\
+!Припустимо, що $A$ -- необмежений оператор. Тоді для кожного $n \in \mathbb{N}$ існує точка $x_n \in X$, для якої $\|Ax_n\| > n \|x_n\|$ (ясно, що $x_n \neq 0$).  Таким чином, $\dfrac{\|Ax_n\|}{\|x_n\|} = \left\| A\left( \dfrac{x_n}{\|x_n\|} \right) \right\| > n$. Для зручності позначу $w_n = \dfrac{x_n}{\|x_n\|} \in X$, тобто ми вже маємо $\| Aw_n\| > n$. Оскільки відображення $A$ -- неперервне в нулі, то для послідовності $\left\{ \dfrac{1}{n}w_n, n \geq 1 \right\}$, для якої $\dfrac{1}{n} w_n \to 0$ виконується $A \dfrac{w_n}{n} \to A0 = 0$ -- суперечність в силу нерівності! Бо в нас $\left\| A \dfrac{w_n}{n} \right\| > 1$.
+\end{proof}
+
+\begin{remark}
+Насправді, $A$ -- неперервний в точці $0 \iff A$ -- неперервний на $X$.\\
+Сторона \leftproof зрозуміла. По стороні \rightproof маємо $x_0 \in X$ та припустимо, що $\{x_n\}$ -- довільна послідовність, де $x_n \to x_0$. Тоді цілком зрозуміло, що $x_n - x_0 \to 0$, але за неперервністю в нулі, маємо $A(x_n - x_0) = A x_n - A x_0 \to A0 = 0$. Таким чином, $A x_n \to A x_0$.
+\end{remark}
+
+\begin{theorem}
+Множина $\mathcal{B}(X,Y)$ -- множина всіх обмежених лінійних операторів -- буде підпростором $\mathcal{L}(X,Y)$, а також буде нормованим простором із заданою нормою за означенням вище.
+\end{theorem}
+
+\begin{proof}
+Дійсно, нехай $A,B \in \mathcal{B}(X,Y)$, тобто вони обмежені. Хочемо довести, що $A+B, \alpha A \in \mathcal{B}(X,Y)$, тобто вони теж обмежені. Дійсно, справедливі наступні оцінки:\\
+$\| (A+B) x \| = \| Ax + Bx \| \leq \|Ax \| + \|Bx\| \leq \|A\| \|x\| + \|B\| \|x \| = (\|A\| + \|B\|) \|x\|$.\\
+$\| (\alpha A) x \| = |\alpha| \|Ax\| \leq |\alpha| \|A\| \|x\|$.\\
+Отже, дійсно $A+B, \alpha A \in \mathcal{B}(X,Y)$. Тепер доведемо, що вищезгадана норма лінійного обмеженого оператора -- дійсно норма.\\
+$\|A\| \geq 0$ -- зрозуміло. Також якщо $\|A\| = 0$, то звідси $\|Ax\| \leq \|A\| \|x\| = 0$, тобто $Ax = 0$, причому для всіх $x \in X$; або $A = O$. Навпаки, якщо $A = O$, тобто $\|A\| = \displaystyle\sup_{\|x\| = 1} \|Ax\| = \sup_{\|x\|= 1} \{0\} = 0$.\\
+Ми вже маємо оцінку $\| \alpha Ax\| \leq |\alpha| \|A\| \|x\|$ при всіх $x \in X$, тому й при всіх $x$ з умовою $\|x\| = 1$. Таким чином, $\|\alpha A\| = \displaystyle\sup_{\|x\|= 1} \|\alpha Ax\| \leq |\alpha|\|A\|$. Із цієї оцінки випливає, що $\|A\| = \|\alpha^{-1} \alpha A\| \leq |\alpha^{-1}| \|\alpha A\| \implies \|\alpha A\| \geq |\alpha| \|A\|$. Таким чином, $\|\alpha A\| = |\alpha| \|A\|$ (у тому числі при $\alpha = 0$).\\
+Ми вже маємо оцінку $\| (A+B) x\| \leq (\|A\| + \|B\|) \|x\|$ при всіх $x \in X$, тому й при всіх $x$ з умовою $\|x\| = 1$. Таким чином, $\|A+B\| = \displaystyle\sup_{\|x\| = 1} \|(A+B)x\| \leq \|A\| + \|B\|$ -- третя властивість норми.
+\end{proof}
+
+\begin{theorem}
+Простір $\mathcal{B}(X,Y)$ буде повним, якщо $Y$ -- повний.
+\end{theorem}
+
+\begin{proof}
+Нехай $\{A_n, n \geq 1\} \subset \mathcal{B}(X,Y)$ -- фундаментальна послідовність. Зауважимо, що $\{A_nx, n \geq 1\} \subset Y$ -- фундаментальна також при всіх $x \in X$. Із фундаментальності $\{A_n\}$ маємо, що $\forall \varepsilon > 0: \exists N: \forall n,m \geq N: \|A_n-A_m\| < \varepsilon$, але тоді $\forall x \in X: \|(A_n-A_m)x\| \leq \|A_n-A_m\| \|x\| < \varepsilon \|x\|$, звідси й випливає фундаментальність.\\
+Тоді при кожному $x \in X$ існує $\displaystyle\lim_{n \to \infty} A_n x = z_x$. Ми можемо визначити як раз новий оператор $A \colon X \to Y$, де $x \mapsto z_x$ (границя єдина, тому визначення адекватне). Залишилися три етапи доведення.\\
+I. \textit{Лінійність}. \quad Дійсно, нехай $x,y \in X$ та $\alpha,\beta \in \mathbb{R}$, тоді маємо\\
+$A(\alpha x + \beta y) = \displaystyle\lim_{n \to \infty} A_n(\alpha x + \beta y) = \lim_{n \to \infty} (\alpha A_nx + \beta A_n y) = \alpha \lim_{n \to \infty} A_n x + \beta \lim_{n \to \infty} A_n y = \alpha Ax + \beta Ay$.\\
+II. \textit{Обмеженість}. \quad Оскільки $\{A_n\}$ -- фундаментальна, то $\{A_n\}$ -- обмежена: $\exists C > 0: \forall n \geq 1: \|A_n\| \leq C$. Тоді в силу неперервності норми матимемо $\|Ax\| = \displaystyle\lim_{n \to \infty} \|A_nx\| \leq C \|x\|$.\\
+III. \textit{$A_n \to A$}. \quad Згадаємо нерівність $\|(A_n-A_m)x\| < \varepsilon \|x\|$ при всіх $x \in X$, при всіх $\varepsilon > 0$ та $n,m \geq N$. Спрямуємо $m \to \infty$, тоді отримаємо $\|(A_n-A)x\| \leq \varepsilon \|x\|$, тому й $\|A_n-A\| \leq \varepsilon < 2\varepsilon$.
+\end{proof}
+\newpage
+
+\section*{Твердження, які потім вставлю в необхідне місце}
+\begin{proof}
+Достатньо довести, що всі норми еквівалентні до $\| \cdot \|_2$.\\
+Нехай $\{\vec{e}_1,\dots,\vec{e}_d\}$ -- стандартний базис $\mathbb{R}^d$, тоді звідси $\vec{x} = \displaystyle\sum_{i=1}^d x_i \vec{e}_i$.\\
+$\displaystyle\left\| \sum_{i=1}^d x_i \vec{e}_i
+ \right\| \leq \sum_{i=1}^d \| x_i e_i \| = \sum_{i=1}^d |x_i| \|e_i\| = \sqrt{\left( \sum_{i=1}^d |x_i| \|\vec{e}_i\| \right)^2} \overset{\text{К-Б}}{\leq} \sqrt{\sum_{i=1}^d \|e_i\|^2} \sqrt{\sum_{j=1}^d |x_j|^2} \leq \sqrt{\sum_{i=1}^d \|e_i\|^2} \sqrt{\sum_{j=1}^\infty |x_j|^2} = \sqrt{\sum_{i=1}^d \|e_i\|^2} \|\vec{x}\|_2 = M \|\vec{x}\|_2$.\\
+Зауважимо, що $M \in \mathbb{R}_{\geq 0}$ та не залежить від $\vec{x}$. Отже, $\|\vec{x}\| \leq M \|\vec{x}\|_2$.
+\bigskip \\
+Розглянемо тепер $S$ -- одинична сфера на $(\mathbb{R}^d, \|\cdot \|_2)$. Відомо, що $S$ -- замкнена множина та обмежена. Тож за лемою Гейне-Бореля, $S$ -- компактна множина. Відомо, що відображення $\| \cdot \| \colon S \to \mathbb{R}_{\geq 0}$ -- неперервне відображення, тож вона досягає найменшого значення $m$ для деякого $\vec{y} \in S$.\\
+Припустимо $m = 0$, тоді звідси $\|\vec{y}\| = 0 \implies \vec{y} = \vec{0} \implies \vec{y} \notin S$ -- неможливо. Отже, $m > 0$.\\
+Значить, $\forall \vec{y} \in \mathbb{R}^d: \|\vec{y}\|_2 = 1: \|y\| \geq m$. Треба довести те саме для інших векторів.\\
+Якщо $\vec{x} = \vec{0}$, то це виконано. Тому $\vec{x} \neq \vec{0}$. Покладемо вектор $\vec{y} = \dfrac{\vec{x}}{\| \vec{x} \|_2}$, причому $\|\vec{y}\|_2 = 1$. Із цього випливає, що $\| \vec{y} \|_2 \leq m \implies m \|\vec{x}\|_2 \leq \|\vec{x}\|$.
+\bigskip \\
+Всі інші норми будуть еквівалентними в силу транзитивності.
+\end{proof}
+
+\begin{definition}
+Задано $X,Y$ -- нормовані простори.\\
+Вони називаються \textbf{ізоморфними}, якщо існує бієктивний лінійний оператор $A \colon X \to Y$, для якого
+\begin{align*}
+\forall x \in X: \|Ax\|_Y = \|x\|_X
+\end{align*}
+Водночас такий оператор $A$ називають \textbf{ізоморфізмом}.\\
+Позначення: $X \cong Y$
+\end{definition}
+\end{document}
