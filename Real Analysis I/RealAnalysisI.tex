@@ -395,7 +395,7 @@
 	\end{proof}
 	\newpage
 	%\fi %IMPORTANT COMMENT
-    %\iffalse %IMPORTANT COMMENT
+    \iffalse %IMPORTANT COMMENT
     
 	\section{Множина дійсних чисел}
 	\iffalse
@@ -3519,7 +3519,7 @@ $\left((a^\pi+b^\pi)^2-(a^\pi-b^\pi)^2 \right)^{\frac{1}{\pi}} = ((a^\pi+b^\pi-a
 $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overset{\text{позн}}{=} \ln a$.
 	\newpage
 	
-	%\fi %IMPORTANT COMMENT
+	\fi %IMPORTANT COMMENT
 	%\iffalse %IMPORTANT COMMENT
 	%there must be section 3
 	\setcounter{section}{3}
@@ -3527,18 +3527,21 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	Залишу для початку загублену теорему, яка нам знадобиться надалі.
 	\begin{theorem}
 	Задано множину $A \subset \mathbb{R}$.\\
-	$a$ - гранична точка $A$ $\iff \exists$ $\{a_n, n \geq 1\}$ $\subset A: \displaystyle \lim_{n \to \infty} a_n = a$, причому $\forall n \geq 1: a_n \neq a$.
+	$a$ -- гранична точка $A$ $\iff \exists$ $\{a_n, n \geq 1\}$ $\subset A: \displaystyle \lim_{n \to \infty} a_n = a$, причому $\forall n \geq 1: a_n \neq a$.
 	\end{theorem}
 	
 	\begin{proof}
-	\rightproof Дано: $a$ - гранична т. $A$, тоді $\forall \varepsilon > 0: (a-\varepsilon, a + \varepsilon) \cap A$ - нескінченна множина.\\
+	\rightproof Дано: $a$ -- гранична точка $A$, тоді $\forall \varepsilon > 0: (a-\varepsilon, a + \varepsilon) \cap A$ -- нескінченна множина.\\
 	$\varepsilon = 1: \exists a_1 \in (a-1,a+1) \cap A$\\
 	$\varepsilon = \dfrac{1}{2}: \exists a_2 \in \left(a-\dfrac{1}{2}, a+\dfrac{1}{2}\right) \cap A$\\
 	$\vdots$\\
 	Побудували послідовність $\{a_n, n \geq 1\}$, таку, що $a_n \in \left(a-\dfrac{1}{n}, a+\dfrac{1}{n}\right) \cap A$. Тобто $a - \dfrac{1}{n} < a_n < a + \dfrac{1}{n}$. За теоремою про двох поліцаїв, якщо $n \to \infty$, то отримаємо, що $\exists \displaystyle \lim_{n \to \infty} a_n = a$.
 	\bigskip \\
-	\leftproof Дано: $\exists \{a_n, n \geq 1\} \subset A: \forall n \geq 1: a_n \neq a: \displaystyle \lim_{n \to \infty} a_n = a$. Тобто за умовою,\\ $\forall \varepsilon > 0: \exists N: \forall n \geq N: |a_n-a|<\varepsilon \implies a_n \in (a-\varepsilon,a+\varepsilon)$. А отже, $(a-\varepsilon,a+\varepsilon) \cap A$ - нескінченна множина, тож $a$ - гранична точка.
+	\leftproof Дано: $\exists \{a_n, n \geq 1\} \subset A: \forall n \geq 1: a_n \neq a: \displaystyle \lim_{n \to \infty} a_n = a$. Тобто за умовою,\\ $\forall \varepsilon > 0: \exists N: \forall n \geq N: |a_n-a|<\varepsilon \implies a_n \in (a-\varepsilon,a+\varepsilon)$. А отже, $(a-\varepsilon,a+\varepsilon) \cap A$ - нескінченна множина, тож $a$ -- гранична точка.
 \end{proof}
+
+%TODO shift this topic to another math subject
+\iffalse
 	\subsection{Основні поняття про функції}
 	\begin{definition}
 	Задано дві множини $X,Y$.\\
@@ -3876,16 +3879,17 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\end{remark}
 	
 	Наразі ми маємо такі функції, які називаються \textbf{елементарними}.\\ Основні: $x^n, \sqrt[n]{x}, \sin x, \cos x, \arcsin x, \arccos x, e^x, \ln x$
+	\fi
 	
-	\subsection{Границі функції}
+	\subsection{Означення границь функцій}
 	\begin{definition}
-	Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
-	Число $b$ називається \textbf{границею функції в т.} $x_0$, якщо
+	Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
+	Число $b$ називається \textbf{границею функції в точці $x_0$}, якщо
 	\begin{align*}
 	\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)-b|<\varepsilon \tag*{означення Коші}
 	\end{align*}
 	\begin{align*}
-	\forall \{x_n, n \geq 1\}\subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b \tag*{означення Коші}
+	\forall \{x_n, n \geq 1\}\subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b \tag*{означення Гейне}
 	\end{align*}
 	Позначення: $\displaystyle \lim_{x \to x_0} f(x) = b$.
 	\end{definition}
@@ -3896,9 +3900,9 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	
 	\begin{proof}
 	\rightproof Дано: означення Коші, тобто $\forall \varepsilon > 0: \exists \delta > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)-b|<\varepsilon$.\\
-	Зафіксуємо послідовність $\{x_n, n \geq 1\} \subset A$ таку, що $\forall n \geq 1: x_n \neq x_0: \displaystyle \lim_{n \to \infty} x_n = x_0$. На це ми мали права, оскільки $x_0$ - гранична точка $A$.\\
+	Зафіксуємо послідовність $\{x_n, n \geq 1\} \subset A$ таку, що $\forall n \geq 1: x_n \neq x_0: \displaystyle \lim_{n \to \infty} x_n = x_0$. На це ми мали права, оскільки $x_0$ -- гранична точка $A$.\\
 	Нехай $\varepsilon > 0$. Тоді для нашого заданого $\exists \delta$, а для нього $\exists N: \forall n \geq N: |x_n - x_0| < \delta \implies |f(x_n) - b| < \varepsilon$.\\
-	Таким чином, $\displaystyle \lim_{n \to \infty} f(x_n) = b$ - тим самим виконано означення Гейне.
+	Таким чином, $\displaystyle \lim_{n \to \infty} f(x_n) = b$ -- тим самим виконано означення Гейне.
 	\bigskip \\
 	\leftproof Дано: означення Гейне, або $\displaystyle \forall \{x_n, n \geq 1\}\subset A: x_n \neq x_0: \forall n \geq 1: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b$.\\
 	!Припустимо, що означення Коші не виконується, тобто виконується заперечення означення:\\
@@ -3909,12 +3913,13 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	
 	\begin{remark}
 	Границя функції має єдине значення.\\
-	\textit{Випливає з означення Гейне, оскільки границя числової послідовності є єдиною.}
+	\textit{Випливає з означення Гейне, оскільки границя числової послідовності -- єдина.}
 	\end{remark}
 	
 	\begin{example}
 	Задано функцію $f \colon \mathbb{R} \setminus \{2\} \to \mathbb{R}$, $f(x) = \dfrac{x^3-2x^2}{x-2}$. Довести, що $\displaystyle \lim_{x \to 2} \dfrac{x^3-2x^2}{x-2} = 4$.\\
 	За означенням Коші, ми хочемо, щоб $\forall \varepsilon > 0: \exists \delta > 0: \forall x: x \neq 2: |x-2|<\delta \Rightarrow \abs{\dfrac{x^3-2x^2}{x-2} - 4} <\varepsilon$.
+\\ \iffalse %uncomment picture
 	\begin{figure} [H]
 \centering
 {
@@ -3935,23 +3940,24 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 \node[white] at (2,4) [circle,fill,inner sep=1.5pt, draw = black]{};
 
 \end{tikzpicture}
-
 }
 \caption*{Наскільки ми б не відступали від $4$ по осі $OY$, ми завжди знайдемо окіл т. $2$ на осі $OX$.}
 \end{figure}
+\fi %uncomment picture
 	$\abs{\dfrac{x^3-2x^2}{x-2} - 4} = \abs{\dfrac{x^2(x-2)}{x-2} - 4} = |x^2-4| = |x-2||x+2| \text{ } \boxed{<}$\\
 	Необхідно якось обмежити $|x+2|$, щоб було все чудово. Можемо попросити, щоб $|x-2| < \underset{=\delta^*}{1}$. Тоді $-1<x-2<1 \Rightarrow |x+2|<5$.\\
 	$\boxed{<} \text{ } 5|x-2| \text{ } \boxed{\boxed{<}}$\\
 	А щоб отримати бажану оцінку, ми додатково просимо, щоб $|x-2| < \underset{=\delta^{**}}{\dfrac{\varepsilon}{5}}$.\\
 	$\boxed{\boxed{<}} \text{ } \varepsilon$\\
-	Ми використали одночасно нерівності $|x-2| < 1$, а також $|x-2| < \dfrac{\varepsilon}{5}$. Тому щоб дістатись до оцінки $\abs{\dfrac{x^3-2x^2}{x-2}-4}<\varepsilon$, необхідно вказати $\delta = \displaystyle \min \left\{1, \frac{\varepsilon}{5} \right\}$ - тоді наше означення Коші буде виконаним.\\
+	Ми використали одночасно нерівності $|x-2| < 1$, а також $|x-2| < \dfrac{\varepsilon}{5}$. Тому щоб дістатись до оцінки $\abs{\dfrac{x^3-2x^2}{x-2}-4}<\varepsilon$, необхідно вказати $\delta = \displaystyle \min \left\{1, \frac{\varepsilon}{5} \right\}$ -- тоді наше означення Коші буде виконаним.\\
 	Отже, $\displaystyle\lim_{x \to 2} \dfrac{x^3-2x^2}{x-2} = 4$.
 \end{example}
 
 	\begin{example}
 	Задано функцію $f \colon \mathbb{R} \to \mathbb{R}$, $f(x) = \dfrac{|x|}{x}$. Довести, що не існує границі $\displaystyle \lim_{x \to 0} \dfrac{|x|}{x}$.\\
-	За означенням та запереченням Гейне, зафіксуємо наступну послідовність: $\displaystyle \left\{x_n = \frac{(-1)^n}{2n}, n \geq 1\right\}$, де $\displaystyle \lim_{n \to \infty} x_n = 0$. Але $\displaystyle \lim_{n \to \infty} \dfrac{|x_n|}{x_n} = \left[ \begin{gathered} 1, n = 2k \\ -1, n = 2k-1 \end{gathered} \right.$ - не збіжна, бо має різні часткові границі.\\
+	За означенням та запереченням Гейне, зафіксуємо наступну послідовність: $\displaystyle \left\{x_n = \frac{(-1)^n}{2n}, n \geq 1\right\}$, де $\displaystyle \lim_{n \to \infty} x_n = 0$. Але $\displaystyle \lim_{n \to \infty} \dfrac{|x_n|}{x_n} = \left[ \begin{gathered} 1, n = 2k \\ -1, n = 2k-1 \end{gathered} \right.$ -- не збіжна, бо має різні часткові границі.\\
 	Таким чином, прийшли до висновку: границі не існує.
+\\ \iffalse %uncomment picture
 	\begin{figure} [H]
 	\centering
 	\begin{tikzpicture}
@@ -3968,11 +3974,12 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\end{tikzpicture}
 	\caption*{Червоні точки наближаються до нуля, але функція в цих точках скаче.}
 	\end{figure}
+\fi %uncomment picture
 	\end{example}
 	
 		\begin{definition}
-	Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
-	Функція \textbf{прямує до нескінченності в т.} $x_0$, якщо:
+	Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
+	Функція \textbf{прямує до нескінченності в точці $x_0$}, якщо:
 	\begin{align*}
 	\forall E > 0: \exists \delta(E) > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)|>E \tag*{означення Коші}
 	\end{align*}
@@ -3980,8 +3987,8 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\forall \{x_n, n \geq 1\}\subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = \infty \tag*{означення Гейне}
 	\end{align*}
 	Позначення: $\displaystyle \lim_{x \to x_0} f(x) = \infty$.\\
-	Якщо виконується $f(x) > E$, то тоді $\displaystyle \lim_{x \to x_0} f(x) = \infty$.\\
-	Якщо виконується $f(x) < -E$, то тоді $\displaystyle \lim_{x \to x_0} f(x) = -\infty$.
+	Якщо виконується $f(x) > E$ (це більш сильна вимога за $|f(x)| > E$), то тоді $\displaystyle \lim_{x \to x_0} f(x) = \infty$.\\
+	Якщо виконується $f(x) < -E$ (це більш сильна вимога за $|f(x)| > E$), то тоді $\displaystyle \lim_{x \to x_0} f(x) = -\infty$.
 	\end{definition}
 	
 	\begin{example}
@@ -3989,6 +3996,7 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	За означенням Коші, що ми хочемо, щоб $\forall E > 0: \exists \delta > 0: \forall x: x \neq 0: |x|<\delta \Rightarrow \dfrac{1}{x^2} > E$.\\
 	Із останньої нерівності, $x^2 < \dfrac{1}{E}$, тому одразу встановимо $\delta = \dfrac{1}{\sqrt{E}}$.\\
 	Отже, $\displaystyle\lim_{x \to 0} \dfrac{1}{x^2} = +\infty$.
+\\ \iffalse %uncomment picture
 \begin{figure} [H]
 \centering
 \begin{tikzpicture}[scale=0.8]
@@ -4003,8 +4011,9 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 \draw[thick, blue, dashed] (-0.5,4)--(-0.5,0) node[anchor = north east, scale=0.9] {$0-\delta$};
 \draw[thick, red, dashed] (-0.8,4)--(0.8,4) node at (0.1,4.2) {$E$};
 \end{tikzpicture}
-\caption*{Всі значення функції навколо околу т. $0$ знаходяться вище за червоної лінії.}
+\caption*{Всі значення функції навколо околу точці $0$ знаходяться вище за червоної лінії.}
 \end{figure}
+\fi %uncomment picture
 	\end{example}
 	
 	\begin{example}
@@ -4012,7 +4021,7 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\end{example}
 	
 	\begin{definition}
-	Задано функцію $f \colon A \to \mathbb{R}$ та $\infty$ - гранична точка для $A$.\\
+	Задано функцію $f \colon A \to \mathbb{R}$ та $\infty$ -- гранична точка для $A$.\\
 	Число $b$ називається \textbf{границею функції} при $x \to \infty$, якщо
 	\begin{align*}
 	\forall \varepsilon > 0: \exists \Delta(\varepsilon) > 0: \forall x \in \mathbb{R}: |x|>\Delta \Rightarrow |f(x)-b|<\varepsilon \tag*{означення Коші}
@@ -4021,22 +4030,22 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\forall \{x_n, n \geq 1\} \subset \mathbb{R}: \forall n \geq 1: \lim_{n \to \infty} x_n = \infty \Rightarrow \lim_{n \to \infty} f(x_n) = b \tag*{означення Гейне}
 	\end{align*}
 	Позначення: $\displaystyle \lim_{x \to \infty} f(x) = b$.\\
-	Якщо $x \to +\infty$, то ми вимагаємо $x > \Delta$.\\
-	Якщо $x \to -\infty$, то ми вимагаємо $x < \Delta$.
+	Якщо $x \to +\infty$, то ми вимагаємо $x > \Delta$ замість $|x| > \Delta$.\\
+	Якщо $x \to -\infty$, то ми вимагаємо $x < \Delta$ замість $|x| > \Delta$.
 	\end{definition}
 	
 	\begin{example}
 	Задано функцію $f \colon \mathbb{R} \setminus \{0\} \to \mathbb{R}$, $f(x) = \dfrac{1}{x}$. Доведемо, що $\displaystyle\lim_{x \to +\infty} \dfrac{1}{x} = 0$.\\
 	За означенням Коші, ми вимагаємо, щоб $\forall \varepsilon > 0: \exists \Delta > 0: \forall x: x > \Delta \Rightarrow \abs{\dfrac{1}{x}} < \varepsilon$.\\
-	Із цієї оцінки ми можемо встановити $\Delta = \dfrac{1}{\varepsilon}$. А тому $\displaystyle\lim_{x \to +\infty} \dfrac{1}{x} = 0$.
+	Із цієї оцінки ми можемо встановити $\Delta = \dfrac{1}{\varepsilon}$. А тому $\displaystyle\lim_{x \to +\infty} \dfrac{1}{x} = 0$. Аналогічними міркуваннями можна довести, що $\displaystyle\lim_{x \to -\infty} \dfrac{1}{x} = 0$.
 	\end{example}
 	
 	\begin{remark}
-	Можна самостійно записати означення Коші та означення Гейне для випадку $\displaystyle \lim_{x \to \infty} f(x) = \infty$.
+	Аналогічними міркуваннями можна самостійно записати означення Коші та означення Гейне для випадку, коли в нас $\displaystyle \lim_{x \to \infty} f(x) = \infty$.
 	\end{remark}
 	
 	\begin{remark}
-	Для інших варіацій границь функції: $\displaystyle\lim_{x \to x_0} f(x) = \infty, \lim_{x \to \infty} f(x) = b, \lim_{x \to \infty} f(x) = \infty$ - еквівалентність двох означень, за Коші та за Гейне, залишається в силі.
+	Для інших варіацій границь функції: $\displaystyle\lim_{x \to x_0} f(x) = \infty, \lim_{x \to \infty} f(x) = b, \lim_{x \to \infty} f(x) = \infty$ -- еквівалентність двох означень, за Коші та за Гейне, також залишається в силі.
 	\end{remark}
 	
 	\begin{remark}
@@ -4050,12 +4059,12 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\end{definition}
 	
 	\begin{definition}
-	Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
-	Функція $f$ називається \textbf{обмеженою в т. $x_0$}, якщо
+	Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
+	Функція $f$ називається \textbf{обмеженою в точці $x_0$}, якщо
 	\begin{align*}
 	\exists C > 0: \exists \delta > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)| \leq C
 	\end{align*}
-	Або
+	Або ще можна так сказати:
 	\begin{align*}
 	\forall \{x_n, n \geq 1\} \subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \{f(x_n), n \geq 1\} - \text{обмежена}
 	\end{align*}
@@ -4067,16 +4076,16 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	
 	\begin{proof}
 	\rightproof Дано: $\exists C > 0: \exists \delta > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \implies |f(x)| \leq C$.\\
-	Оскільки $x_0$ - гранична точка $A$, то створімо послідовність $\{x_n, n \geq 1\} \subset A$, щоб $x_n \overset{n \to \infty}{\longrightarrow} x_0$. Тоді для нашого $\delta > 0: \exists N: \forall n \geq N: |x_n-x_0|<\delta \implies |f(x_n)| \leq C$. Отже $\{f(x_n), n \geq 1\}$ - обмежена.
+	Оскільки $x_0$ -- гранична точка $A$, то створімо послідовність $\{x_n, n \geq 1\} \subset A$, щоб $x_n \overset{n \to \infty}{\longrightarrow} x_0$. Тоді для нашого $\delta > 0: \exists N: \forall n \geq N: |x_n-x_0|<\delta \implies |f(x_n)| \leq C$. Отже $\{f(x_n), n \geq 1\}$ -- обмежена.
 	\bigskip \\
 	\leftproof Дано: $\forall \{x_n, n \geq 1\} \subset A: \forall n \geq 1: x_n \neq x_0: \displaystyle \lim_{n \to \infty} x_n = x_0 \implies \{f(x_n), n \geq 1\} - \text{обмежена}$.\\
 	!Припустимо, що перше означення не виконане, тобто \\ $\forall C > 0: \forall \delta > 0: \exists x_{\delta} \in A: x_{\delta} \neq x_0: |x_{\delta} - x_0| < \delta \implies |f(x_{\delta})| > C$.\\
-	Нехай $C > 0$ та $\delta = \dfrac{1}{n}$. Тоді $\exists x_n \in A: x_n \neq x_0: |x_n-x_0|<\dfrac{1}{n}$, тож $\displaystyle\lim_{n \to \infty} x_n = x_0$, тоді за дано, маємо, що $\{f(x_n), n \geq 1\}$ - обмежена. Проте ми побудували таку послідовність, щоб $|f(x_n)| > C$, а це свідчить про необмеженість. Суперечність!
+	Нехай $C > 0$ та $\delta = \dfrac{1}{n}$. Тоді $\exists x_n \in A: x_n \neq x_0: |x_n-x_0|<\dfrac{1}{n}$, тож $\displaystyle\lim_{n \to \infty} x_n = x_0$, тоді за дано, маємо, що $\{f(x_n), n \geq 1\}$ -- обмежена. Проте ми побудували таку послідовність, щоб $|f(x_n)| > C$, а це свідчить про необмеженість. Суперечність!
 	\end{proof}
 	
 	\subsection{Односторонні границі та границі монотонних функцій}
 \begin{definition}
-Задано функцію $f \colon A \to \mathbb{R}$, та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
+Задано функцію $f \colon A \to \mathbb{R}$, та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
 Числом $b$ називають \textbf{границею справа}, якщо
 \begin{align*}
 \forall \varepsilon > 0: \exists \delta(\varepsilon)>0: \forall x \in A: x_0<x<x_0+\delta \Rightarrow |f(x)-b|<\varepsilon \tag*{означення Коші}\\
@@ -4092,26 +4101,24 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 \end{definition}
 
 \begin{theorem}
-Задано функцію $f \colon A \to \mathbb{R}$, та $x_0 \in \mathbb{R}$ - внутрішня та гранична точка для $A$.\\
+Задано функцію $f \colon A \to \mathbb{R}$, та $x_0 \in \mathbb{R}$ -- внутрішня та гранична точка для $A$.\\
 $\exists \displaystyle \lim_{x \to x_0} f(x) = b \iff \exists \begin{cases} \displaystyle \lim_{x \to x_0^+} f(x) = b \\ \displaystyle \lim_{x \to x_0^-} f(x) = b \end{cases}$
 \end{theorem}
 
 \begin{proof}
 $\exists \displaystyle \lim_{x \to x_0} f(x) = b \iff$
 $\forall \varepsilon > 0: \exists \delta: \forall x \in A: |x-x_0|<\delta \Rightarrow |f(x)-b|<\varepsilon$\\
-$\iff \forall \varepsilon > 0: \exists \delta: \forall x \in A: |x-x_0|<\delta \Rightarrow \begin{cases} x-x_0<\delta \\ x_0-x<\delta \end{cases} \Rightarrow |f(x)-b|<\varepsilon$ \\ $\iff \exists \begin{cases} \displaystyle \lim_{x \to x_0^+} f(x) = b \\ \displaystyle \lim_{x \to x_0^-} f(x) = b \end{cases}$
+$\iff \forall \varepsilon > 0: \exists \delta: \forall x \in A: |x-x_0|<\delta \Rightarrow \begin{cases} x-x_0<\delta \\ x_0-x<\delta \end{cases} \Rightarrow |f(x)-b|<\varepsilon \iff \exists \begin{cases} \displaystyle \lim_{x \to x_0^+} f(x) = b \\ \displaystyle \lim_{x \to x_0^-} f(x) = b \end{cases}$
 \end{proof}
 
 \begin{remark}
-Для функції $f(x) = \sqrt{x}$ є границя $\displaystyle\lim_{x \to 0+0} \sqrt{x} = 0$, але не існує $\displaystyle\lim_{x \to 0-0} \sqrt{x}$. Тобто не існує $\displaystyle\lim_{x \to 0} \sqrt{x}$ - звісно, ні. Ми маємо $\displaystyle\lim_{x \to 0} \sqrt{x} = 0$.\\
-Справа в тому, що попередню теорему можна застосовувати, коли т. $x_0 = 0$ була б визначена одночасно десь лівіше й правіше. А область визначення $A = [0,+\infty)$, тобто ми вже не можемо розглядати границі зліва.
+Для функції $f(x) = \sqrt{x}$ є границя $\displaystyle\lim_{x \to 0+0} \sqrt{x} = 0$, але не існує $\displaystyle\lim_{x \to 0-0} \sqrt{x}$. Тобто не існує $\displaystyle\lim_{x \to 0} \sqrt{x}$ -- звісно, ні. Ми маємо $\displaystyle\lim_{x \to 0} \sqrt{x} = \lim_{x \to 0+0} \sqrt{x} = 0$.\\
+Справа в тому, що попередню теорему можна застосовувати, коли точка $x_0 = 0$ була б визначена одночасно десь лівіше й правіше. А область визначення $A = [0,+\infty)$, тобто ми вже не можемо розглядати границі зліва.
 \end{remark}
 
 \begin{example}
-Повернімось до функції $f(x) = \dfrac{|x|}{x}$. Ми довели, що границя в т. $x=0$ не існує, проте\\
-$\displaystyle\lim_{x \to 0+0} \dfrac{|x|}{x} = 1 \qquad \lim_{x \to 0-0} \dfrac{|x|}{x} = -1$.
-\end{example}
-
+Повернімось до функції $f(x) = \dfrac{|x|}{x}$. Ми довели, що границя в точці $x=0$ не існує, проте $\displaystyle\lim_{x \to 0+0} \dfrac{|x|}{x} = 1 \qquad \lim_{x \to 0-0} \dfrac{|x|}{x} = -1$.
+\\ \iffalse %uncomment picture
 \begin{figure} [H]
 	\centering
 	\begin{tikzpicture}
@@ -4126,80 +4133,91 @@ $\displaystyle\lim_{x \to 0+0} \dfrac{|x|}{x} = 1 \qquad \lim_{x \to 0-0} \dfrac
 	\draw[red,->] (0.5,1)--(0.1,1);
 	\end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
+\end{example}
 
 \begin{definition}
 Задано функцію $f \colon (a,b) \to \mathbb{R}$.\\
-Функцію називають \textbf{монотонно}:\\
-\begin{tabular}{ll}
-\textbf{- строго зростаючою}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1)>f(x_2)$;\\
-\textbf{- не спадною}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \geq f(x_2)$;\\
-\textbf{- строго спадною}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) < f(x_2)$;\\
-\textbf{- не зростаючою}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \leq f(x_2)$.
-\end{tabular}
+Функцію $f$ називають \textbf{монотонно}:
+\begin{itemize}[nosep,wide=0pt,label={-}]
+\item \textbf{строго зростаючою}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1)>f(x_2)$;
+\item \textbf{не спадною}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \geq f(x_2)$;
+\item \textbf{строго спадною}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) < f(x_2)$;
+\item \textbf{не зростаючою}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \leq f(x_2)$.
+\end{itemize}
+Зростаюча або спадна строго або нестрого функція $f$ називається просто \textbf{монотонною}.
 \end{definition}
 
 \begin{example}
-Зокрема $f(x) = \sqrt{x}$ монотонно строго зростає. Дійсно, $x_1 > x_2$, де $x_1,x_2 \in [0,+\infty)$, маємо\\
+Зокрема $f(x) = \sqrt{x}$ монотонно строго зростає. Дійсно нехай $x_1,x_2 \in [0,+\infty)$ підібрані так, що $x_1 > x_2$. Тода маємо такий ланцюг:\\
 $f(x_1) - f(x_2) = \sqrt{x_1} - \sqrt{x_2} = \dfrac{x_1-x_2}{\sqrt{x_1} + \sqrt{x_2}} > 0 \implies f(x_1) > f(x_2)$.
 \end{example}
 
 \begin{definition}
-Функція $f \colon A \to \mathbb{R}$ називається \textbf{обмеженою}, якщо
+Функція $f \colon A \to \mathbb{R}$ називається \textbf{обмеженою} (на множині $A$), якщо
 \begin{align*}
 \exists M > 0: \forall x \in A: |f(x)| \leq M
 \end{align*}
 \end{definition}
 
 \begin{theorem}
-Задано функцію $f \colon (a,b) \to \mathbb{R}$ - монотонна. Тоді $\displaystyle \exists \lim_{x \to b^-} f(x) = d$ та $\displaystyle \exists \lim_{x \to a^+} f(x) = c$.
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ -- монотонна. Тоді $\displaystyle \exists \lim_{x \to b^-} f(x) = d$ та $\displaystyle \exists \lim_{x \to a^+} f(x) = c$.
 \end{theorem}
 
 \begin{proof}
 Доведу лише першу границю і буду вважати, що функція строго спадна. Для решти аналогічно.
 \bigskip \\
-Отже, $f$ - строго спадає, тобто $\forall x_1,x_2 \in (a,b): x_1>x_2 \Rightarrow f(x_1)<f(x_2)$. У нашому випадку $d = \displaystyle \inf_{x \in (a,b)} f(x)$. У інфімума кілька випадків.
+Отже, нехай $f$ -- строго спадає, тобто $\forall x_1,x_2 \in (a,b): x_1>x_2 \implies f(x_1)<f(x_2)$. У нашому випадку $d = \displaystyle \inf_{x \in (a,b)} f(x)$. У інфімума виникає кілька випадків.
 \bigskip \\
-I. $\displaystyle\inf_{x \in (a,b)} f(x)$ - скінченне.\\
-Доведемо, що вона є границею зліва. За критерієм $\inf$:\\
-1) $\forall x \in (a,b): f(x) \geq d$\\
+I. \textit{$\displaystyle\inf_{x \in (a,b)} f(x)$ -- скінченне}.\\
+Доведемо, що вона є границею зліва. За критерієм $\inf$, маємо наступне:\\
+1) $\forall x \in (a,b): f(x) \geq d$;\\
 2) $\forall \varepsilon > 0: \exists x_{\varepsilon} \in (a,b): f(x_{\varepsilon})< d + \varepsilon$.\\
-Оберемо $\delta = b - x_{\varepsilon} > 0$. Тоді $\forall x \in (a,b): b-x<\delta \Rightarrow x > b - (b-x_{\varepsilon}) = x_{\varepsilon} \Rightarrow f(x) < f(x_\varepsilon)$.\\
+Оберемо $\delta = b - x_{\varepsilon} > 0$. Тоді $\forall x \in (a,b): b-x<\delta \Rightarrow x > b - (b-x_{\varepsilon}) = x_{\varepsilon} \implies f(x) < f(x_\varepsilon)$.\\
 Звідси справедлива нерівність $d - \varepsilon < d \leq f(x) < f(x_\varepsilon) < d + \varepsilon \Rightarrow |f(x)-d| < \varepsilon$.\\
 Остаточно, за означенням Коші, $\exists \displaystyle \lim_{x \to b^-} f(x) =  d$.
 \bigskip \\
 II. $\displaystyle\inf_{x \in (a,b)} f(x) = -\infty$.\\
-Тоді функція $f$ - необмежена знизу на $(a,b) \implies \forall E>0: \exists x_E \in (a,b): f(x_E) < -E$.\\
+Тоді функція $f$ -- необмежена знизу на $(a,b) \implies \forall E>0: \exists x_E \in (a,b): f(x_E) < -E$.\\
 Оберемо $\delta = b - x_E > 0$. Тоді $\forall x \in (a,b): \underset{=x_E}{b-\delta} < x < b \implies f(x) < f(x_E) < -E$.\\
 Остаточно, за означенням Коші, $\exists \displaystyle \lim_{x \to b^-} f(x) = -\infty$.
+\bigskip \\
+Допускається випадок, коли $a = -\infty$ та/або $b = +\infty$. Окремо це розписувати не буду, проте доведення буде цілком аналогічним, просто трошки інше означення границі треба застоувати.
 \end{proof}
 
 \begin{example}
-Розглянемо декілька прикладів.\\
-1. $f(x) = e^{-x}$ - монотонно спадає на $\mathbb{R}$, тому $\displaystyle\lim_{x \to +\infty} e^{-x} = 0, \quad \lim_{x \to -\infty} e^{-x} = +\infty$\\
-2. $f(x) = \arctg x$ - монотонно зростає на $\mathbb{R}$, тому $\displaystyle\lim_{x \to +\infty} \arctg x = \dfrac{\pi}{2}, \quad \displaystyle\lim_{x \to -\infty} \arctg x = -\dfrac{\pi}{2}$.
+Розглянемо декілька прикладів.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $f(x) = e^{-x}$ -- монотонно спадає на $\mathbb{R}$, тому існують такі границі: \\
+$\displaystyle\lim_{x \to +\infty} e^{-x} = \inf_{x \in \mathbb{R}} e^{-x} = 0, \quad \lim_{x \to -\infty} e^{-x} = \sup_{x \in \mathbb{R}} e^{-x} = +\infty$;
+\item $f(x) = \arctg x$ -- монотонно зростає на $\mathbb{R}$, тому існують такі границі: \\
+$\displaystyle\lim_{x \to +\infty} \arctg x = \sup_{x \in \mathbb{R}} \arctg x = \dfrac{\pi}{2}, \quad \displaystyle\lim_{x \to -\infty} \arctg x = \inf_{x \in \mathbb{R}} \arctg x = -\dfrac{\pi}{2}$.
+\end{enumerate}
 \end{example}
 	
 	\subsection{Основні властивості}
-	\begin{theorem}[Арифметичні властивості н.м. та н.в. великих функцій]
-	Задані функції $f,g,h \colon A \to \mathbb{R}$ - відповідно н.м., н.в., обмежена в $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
-	1) $f(x) \cdot h(x)$ - н.м. в т. $x_0$;\\
-	2) $\displaystyle \frac{1}{f(x)}$ - н.в. в т. $x_0$;\\
-	3) $\displaystyle \frac{1}{g(x)}$ - н.м. в т. $x_0$.
+	\begin{theorem}[Арифметичні властивості нескінченно малих та великих функцій]
+	Задані функції $f,g,h \colon A \to \mathbb{R}$ - відповідно н.м., н.в., обмежена в $x_0 \in \mathbb{R}$ -- гранична точка для $A$.
+	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+	\item $f(x) \cdot h(x)$ -- н.м. в точці $x_0$;
+	\item $\displaystyle \frac{1}{f(x)}$ -- н.в. в точці $x_0$;
+	\item $\displaystyle \frac{1}{g(x)}$ -- н.м. в точці $x_0$.
+	\end{enumerate}
 	\end{theorem}
 	
 	\begin{proof}
 	Зафіксуємо $\{x_n, n \geq 1\}$, таку, що $\displaystyle \lim_{n \to \infty} x_n = x_0$. Тоді за Гейне, $\displaystyle \lim_{n \to \infty} f(x_n) = 0$, $\displaystyle \lim_{n \to \infty} g(x_n) = \infty$, отже:\\
-	$\{f(x_n), n \geq 1\}$ - н.м.;\\
-	$\{g(x_n), n \geq 1\}$ - н.в.;\\
-	$\{h(x_n), n \geq 1\}$ - обмежена.\\
-	За властивостями границь послідовності, $\left\{f(x_n) \cdot h(x_n) \right\}$ - н.м., $\left\{ \displaystyle \frac{1}{f(x_n)} \right\}$ - н.в., $\left\{ \displaystyle \frac{1}{g(x_n)} \right\}$ - н.м.\\
+	$\{f(x_n), n \geq 1\}$ -- н.м.;\\
+	$\{g(x_n), n \geq 1\}$ -- н.в.;\\
+	$\{h(x_n), n \geq 1\}$ -- обмежена.\\
+	За властивостями границь послідовності, $\left\{f(x_n) \cdot h(x_n) \right\}$ - н.м., $\left\{ \displaystyle \frac{1}{f(x_n)} \right\}$ -- н.в., $\left\{ \displaystyle \frac{1}{g(x_n)} \right\}$ -- н.м.\\
 	Ну а тому існують відповідні границі: $\displaystyle \lim_{n \to \infty} f(x_n) h(x_n) = 0$, $\displaystyle \lim_{n \to \infty} \frac{1}{f(x_n)} = \infty$, $\displaystyle \lim_{n \to \infty} \frac{1}{g(x_n)} = 0$.\\
 	За Гейне, отримаємо бажане: $\displaystyle\lim_{x \to x_0} f(x)h(x) = 0 \hspace{0.5cm} \displaystyle\lim_{x \to x_0} \dfrac{1}{f(x)} = \infty \hspace{0.5cm} \displaystyle\lim_{x \to x_0} \dfrac{1}{g(x)} = 0$.
 	\end{proof}
 	
 	\begin{example}
 	Знайти границю $\displaystyle\lim_{x \to 0} x \cos \dfrac{1}{x}$.\\
-	Маємо функцію $f(x) = x$ - н.м. в т. $x_0 = 0$. Маємо функцію $h(x) = \cos \dfrac{1}{x}$ - обмежена в т. $x_0 = 0$, бо $|h(x)| \leq 1$. Тоді за щойно доведеними властивостями, $f(x)h(x)$ - н.м., тобто $\displaystyle\lim_{x \to 0} x \cos \dfrac{1}{x} = 0$.
+	Маємо функцію $f(x) = x$ -- н.м. в т. $x_0 = 0$. Маємо функцію $h(x) = \cos \dfrac{1}{x}$ -- обмежена в т. $x_0 = 0$, бо $|h(x)| \leq 1$. Тоді за щойно доведеними властивостями, $f(x)h(x)$ -- н.м., тобто $\displaystyle\lim_{x \to 0} x \cos \dfrac{1}{x} = 0$.
 	\end{example}
 	
 	\begin{theorem} Задано функцію $f \colon A \to \mathbb{R}$, що містить границю в т. $x_0$. Тоді вона є обмеженою в околі т. $x_0$.
@@ -4213,15 +4231,17 @@ II. $\displaystyle\inf_{x \in (a,b)} f(x) = -\infty$.\\
 	\end{proof}
 	
 	\begin{example}
-	Зокрема функція $f(x) = x \cos \dfrac{1}{x}$ - обмежена в околі т. $x = 0$, тому що містить там границю.
+	Зокрема функція $f(x) = x \cos \dfrac{1}{x}$ -- обмежена в околі т. $x = 0$, тому що містить там границю.
 	\end{example}
 	
 	\begin{theorem}[Арифметика границь]
-	Задано функції $f,g \colon A \to \mathbb{R}$, такі, що $\exists \displaystyle \lim_{x \to x_0} f(x) = b_1$, $\exists \displaystyle \lim_{x \to x_0} g(x) = b_2$. Тоді:\\
-	1) $\forall c \in \mathbb{R}: \exists \displaystyle \lim_{x \to x_0} cf(x) = c b_1$;\\
-	2) $\exists \displaystyle \lim_{x \to x_0} (f(x)+g(x)) = b_1 + b_2$;\\
-	3) $\exists \displaystyle \lim_{x \to x_0} f(x)g(x) = b_1 b_2$;\\
-	4) $\exists \displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = \frac{b_1}{b_2}$ при $b_2, g(x) \neq 0$.\\
+	Задано функції $f,g \colon A \to \mathbb{R}$, такі, що $\exists \displaystyle \lim_{x \to x_0} f(x) = b_1$, $\exists \displaystyle \lim_{x \to x_0} g(x) = b_2$. Тоді:
+	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+	\item $\forall c \in \mathbb{R}: \exists \displaystyle \lim_{x \to x_0} cf(x) = c b_1$;
+	\item $\exists \displaystyle \lim_{x \to x_0} (f(x)+g(x)) = b_1 + b_2$;
+	\item $\exists \displaystyle \lim_{x \to x_0} f(x)g(x) = b_1 b_2$;
+	\item $\exists \displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = \frac{b_1}{b_2}$ при $b_2 \neq 0$.
+	\end{enumerate}
 	\textit{Випливають з властивостей границь числової послідовності, якщо доводити за Гейне. Доведу лише перший підпункт для прикладу.}
 	\end{theorem}
 	
@@ -4237,7 +4257,7 @@ II. $\displaystyle\inf_{x \in (a,b)} f(x) = -\infty$.\\
 	\end{example}
 	
 	\begin{theorem}
-	Задані функцію $f \colon A\to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$. Відомо, що в околі т. $x_0$ функція $f(x) < c$ та $\exists \displaystyle \lim_{x \to x_0} f(x) = b$. Тоді $b \leq c$.
+	Задані функцію $f \colon A\to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$. Відомо, що в околі т. $x_0$ функція $f(x) < c$ та $\exists \displaystyle \lim_{x \to x_0} f(x) = b$. Тоді $b \leq c$.
 	\end{theorem}
 
 	\begin{proof}
@@ -4245,13 +4265,13 @@ II. $\displaystyle\inf_{x \in (a,b)} f(x) = -\infty$.\\
 	\end{proof}
 	
 	\begin{corollary}
-	Задані функції $f,g \colon A \to \mathbb{R}$ такі, що в околі т. $x_0 \in \mathbb{R}$ - гранична точка для $A$ - справедлива $f(x) \leq g(x)$. Також $\exists \displaystyle \lim_{x \to x_0} f(x) = b_1$, $\exists \displaystyle \lim_{x \to x_0} g(x) = b_2$. Тоді $b_1 \leq b_2$.\\
+	Задані функції $f,g \colon A \to \mathbb{R}$ такі, що в околі т. $x_0 \in \mathbb{R}$ - гранична точка для $A$ -- справедлива $f(x) \leq g(x)$. Також $\exists \displaystyle \lim_{x \to x_0} f(x) = b_1$, $\exists \displaystyle \lim_{x \to x_0} g(x) = b_2$. Тоді $b_1 \leq b_2$.\\
 \textit{Вказівка: розглянути функцію} $h(x) = f(x) - g(x)$.
 	\end{corollary}
 	
 	\begin{theorem}[Теорема про 3 функції]
-Задані функції $f,g,h \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$. Відомо, що в околі т. $x_0$ виконується: $f(x) \leq g(x) \leq h(x)$ та $\exists \displaystyle \lim_{x \to x_0} f(x) = \lim_{x \to x_0} h(x) = a$. Тоді $\exists \displaystyle \lim_{x \to x_0} g(x) = a$.\\
-\textit{Випливає з теореми про поліцаїв в числової послідовності.}
+Задані функції $f,g,h \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$. Відомо, що в околі т. $x_0$ виконується: $f(x) \leq g(x) \leq h(x)$ та $\exists \displaystyle \lim_{x \to x_0} f(x) = \lim_{x \to x_0} h(x) = a$. Тоді $\exists \displaystyle \lim_{x \to x_0} g(x) = a$.\\
+\textit{Випливає з теореми про поліцаїв числової послідовності.}
 	\end{theorem}
 	
 	\begin{remark}
@@ -4268,14 +4288,14 @@ II. $\displaystyle\inf_{x \in (a,b)} f(x) = -\infty$.\\
 	\end{example}
 	
 	\begin{theorem}[Критерій Коші]
-Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
+Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
 $\exists \displaystyle \lim_{x \to x_0} f(x) \iff \forall \varepsilon > 0: \exists \delta(\varepsilon): \forall x_1,x_2 \in A: x_1,x_2 \neq x_0:$ 
 $\begin{cases} |x_1-x_0|<\delta \\ |x_2-x_0|<\delta \end{cases} \Rightarrow |f(x_1)-f(x_2)|<\varepsilon
-$
+$.
 	\end{theorem}
 	
 	\begin{proof}
-\rightproof Дано: $\exists \displaystyle \lim_{x \to x_0} f(x) = b$, тобто за def. Коші,\\
+\rightproof Дано: $\exists \displaystyle \lim_{x \to x_0} f(x) = b$, тобто за означенням Коші, маємо наступне:\\
 $\forall \varepsilon > 0: \exists \delta: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)-b|< \displaystyle \frac{\varepsilon}{2}$.\\
 Тоді $\forall x_1, x_2 \in A: |x_1 - x_0| < \delta$ і одночачно $|x_2 - x_0| < \delta \Rightarrow$\\
 $|f(x_1)-f(x_2)| = |f(x_1)-b + b - f(x_2)| \leq |f(x_1) - b| + |f(x_2)-b| < \varepsilon$.\\
@@ -4285,49 +4305,43 @@ $|f(x_1)-f(x_2)| = |f(x_1)-b + b - f(x_2)| \leq |f(x_1) - b| + |f(x_2)-b| < \var
 $\begin{cases} |x_1-x_0|<\delta \\ |x_2-x_0|<\delta \end{cases} \Rightarrow |f(x_1)-f(x_2)|<\varepsilon$.\\
 Розглянемо послідовність $\{t_n, n \geq 1\}$, таку, що $\displaystyle \lim_{n \to \infty} t_n = x_0$.\\
 Тоді за означенням, $\exists N: \forall n,m \geq N: \begin{cases} |t_n-x_0|<\delta \\ |t_m-x_0|<\delta \end{cases} \Rightarrow |f(t_n)-f(t_m)|<\varepsilon$.\\
-Отримаємо, що $\{f(t_n),n \geq 1\}$ - фундаментальна послідовність, а тому є збіжною, тобто\\
-$\exists \displaystyle \lim_{n \to \infty} f(t_n) = b$.\\
+Отримаємо, що $\{f(t_n),n \geq 1\}$ -- фундаментальна послідовність, тому збіжна, тобто $\exists \displaystyle \lim_{n \to \infty} f(t_n) = b$.\\
 А тепер час відповісти на питання, чи буде границя функції залежати від вибіру послідовності. Бо критерій Коші дає відповідь на збіжність, але не знає куди.\\
-!Припустимо, що є послідовність $\{s_n, n \geq 1\}$, таку, що $\displaystyle \lim_{n \to \infty} s_n = x_0$.\\
-Тоді за аналогічними міркуваннями, $\exists \displaystyle \lim_{n \to \infty} f(s_n) = a$, уже інша границя.
-\bigskip \\
-І нарешті, побудуємо послідовність $\{p_n, n \geq 1\}$ таким чином, що $p_{2k} = t_k$, $p_{2k-1} = s_k$. Тобто $\{s_1, t_1, s_2, t_2, \dots \}$.\\
-Тут $\exists \displaystyle \lim_{n \to \infty} p_n = x_0$. Тоді знову за аналогічними міркуваннями, $\exists \displaystyle \lim_{n \to \infty} f(p_n)$, але чому буде дорівнювати, зараз побачимо.\\
+!Припустимо, що є послідовність $\{s_n, n \geq 1\}$, таку, що $\displaystyle \lim_{n \to \infty} s_n = x_0$. Тоді за аналогічними міркуваннями, $\exists \displaystyle \lim_{n \to \infty} f(s_n) = a$, уже інша границя.\\
+Побудуємо послідовність $\{p_n, n \geq 1\}$ таким чином, що $p_{2k} = t_k$, $p_{2k-1} = s_k$. Тобто $\{s_1, t_1, s_2, t_2, \dots \}$. Тут $\exists \displaystyle \lim_{n \to \infty} p_n = x_0$. Тоді знову за аналогічними міркуваннями, $\exists \displaystyle \lim_{n \to \infty} f(p_n)$, але чому буде дорівнювати, зараз побачимо.\\
 Оскільки $\exists \displaystyle \lim_{n \to \infty} f(p_n)$, то одночасно $\exists \displaystyle \lim_{k \to \infty} f(p_{2k}) = b$, $\exists \displaystyle \lim_{k \to \infty} f(p_{2k-1}) = a$.\\
 У збіжної послідовності є лише одна часткова послідовність, тому $a = b$. Суперечність!\\
-Це означає, що результат не залежить від вибору послідовності.\\
-Тому за Гейне, отримаємо, що $\exists \displaystyle \lim_{x \to x_0} f(x) = b$.
+Це означає, що границя не залежить від вибору послідовності. Тому за Гейне, отримаємо, що $\exists \displaystyle \lim_{x \to x_0} f(x) = b$.
 \end{proof}
 
 \begin{theorem}[Границя від композиції функції]
-Задано функції $f \colon A \to B$, $g: B \to \mathbb{R}$ та композиція $h = g(f(x))$. Більш того, $x_0, y_0 \in \mathbb{R}$ - граничні точки відповідно для $A,B$ та $\exists \displaystyle \lim_{x \to x_0} f(x) = y_0$ та $\exists \displaystyle \lim_{y \to y_0} g(y) = b$.\\
-Тоді $\exists \displaystyle \lim_{x \to x_0} h(x) = b$.\\
+Задано функції $f \colon A \to B$, $g \colon B \to \mathbb{R}$ та композиція $h = g(f(x))$. Більш того, $x_0, y_0 \in \mathbb{R}$ -- граничні точки відповідно для $A,B$ та $\exists \displaystyle \lim_{x \to x_0} f(x) = y_0$ та $\exists \displaystyle \lim_{y \to y_0} g(y) = b$. Тоді $\exists \displaystyle \lim_{x \to x_0} h(x) = b$.\\
 \textit{Це ще називають \lq\lq заміною в границях\rq\rq}
 \end{theorem}
 
 \begin{proof}
-$\exists \displaystyle \lim_{y \to y_0} g(y) = b \overset{\textrm{def.}}{\Rightarrow} \forall \varepsilon > 0: \exists \delta: \forall y \in B: y \neq y_0: |y-y_0|<\delta \Rightarrow |g(y)-b|<\varepsilon$\\
-$\exists \displaystyle \lim_{x \to x_0} f(x) = y_0 \overset{\textrm{def.}}{\Rightarrow} \forall \delta > 0: \exists \tilde{\delta}: \forall x \in A: x \neq x_0: |x-x_0|<\tilde{\delta} \Rightarrow |f(x)-y_0|<\delta$\\
+$\exists \displaystyle \lim_{y \to y_0} g(y) = b \overset{\textrm{def.}}{\implies} \forall \varepsilon > 0: \exists \delta: \forall y \in B: y \neq y_0: |y-y_0|<\delta \Rightarrow |g(y)-b|<\varepsilon$\\
+$\exists \displaystyle \lim_{x \to x_0} f(x) = y_0 \overset{\textrm{def.}}{\implies} \forall \delta > 0: \exists \tilde{\delta}: \forall x \in A: x \neq x_0: |x-x_0|<\tilde{\delta} \Rightarrow |f(x)-y_0|<\delta$\\
 Таким чином, можемо отримати: $\forall \varepsilon > 0: \exists \delta > 0 \Rightarrow \exists \tilde{\delta}: \forall x \in A: x \neq x_0: |x-x_0| < \tilde{\delta} \Rightarrow \\ |f(x)-y_0| = |y-y_0|<\delta \Rightarrow |g(y)-b|=|g(f(x))-b| = |h(x)-b|<\varepsilon$\\
 Отже, $\exists \displaystyle \lim_{x \to x_0} h(x) = b$.
 \end{proof}
 
 \begin{example}
 Обчислити границю: $\displaystyle\lim_{x \to 1} \dfrac{x^3-2x^8+1}{x^{40}-3x^{10}+2}$.\\
-Ми не розпишемо це арифметичними властивостями, тому що (поки що за означенням Коші) ліміт чисельника - нуль, ліміт знаменика - нуль. І це - невизначеність.\\
+Ми не розпишемо це арифметичними властивостями, тому що (поки що за означенням Коші) ліміт чисельника -- нуль, ліміт знаменика -- нуль. І це -- невизначеність.\\
 Проведемо заміну: $x = t+1$. Оскільки $x \to 1$, то тоді $t \to 0$. А далі порахуємо таку границю:\\
 $\displaystyle\lim_{t \to 0} \dfrac{(t+1)^3-2(t+1)^8+1}{(t+1)^{40}-3(t+1)^{10}+2} \overset{\text{ф-ла бінома}}{=} \lim_{t \to 0} \dfrac{(t^3+3t^2+3t+1) - 2(t^8+8t^7+\dots+8t+1)+1}{(t^{40}+40t^{39}+\dots+40t+1)-3(t^{10}+10t^9+\dots+10t+1)+2} = \\ = \lim_{t \to 0} \dfrac{(t^3+3t^2+3t)-2(t^8+8t^7+\dots+8t)}{(t^{40}+40t^{39}+\dots+40t)-3(t^{10}+10t^9+\dots+10t)} = \lim_{t \to 0} \dfrac{(t^2+3t+3)-2(t^7+8t^6+\dots+8)}{(t^{39}+40t^{38}+\dots+40)-3(t^{9}+10t^8+\dots+10)} = \dfrac{3-2 \cdot 8}{40-3 \cdot 10} = -\dfrac{13}{10}$\\
 Отже, $\displaystyle\lim_{x \to 1} \dfrac{x^3-2x^8+1}{x^{40}-3x^{10}+2} = -\dfrac{13}{10}$.
 \bigskip \\
-Як тут використалась теорема про композицію. \\ У нас $h(x) = g(f(x)) = \dfrac{x^3-2x^8+1}{x^{40}-3x^{10}+2}$, від якої ми шукаємо ліміт. \\
-Далі, $f(x) = x-1$, \hspace{0.5cm} $g(y) = \dfrac{(y+1)^3+2(y+1)^8 + 1}{(y+1)^{40}-3(y+1)^{10}+2}$.\\
+Більш детально, як тут використалась теорема про композицію. У нас $h(x) = g(f(x)) = \dfrac{x^3-2x^8+1}{x^{40}-3x^{10}+2}$, від якої ми шукаємо ліміт. Далі, $f(x) = x-1, \qquad g(y) = \dfrac{(y+1)^3+2(y+1)^8 + 1}{(y+1)^{40}-3(y+1)^{10}+2}$.\\
 Знаємо, що $\displaystyle\lim_{x \to 1} f(x) = 0$, тобто $y \to 0$.\\
-Знаємо, що $\displaystyle\lim_{y \to 0} g(y) = -\dfrac{13}{10}$ - цей ліміт ми вже рахували через арифметичні властивості.\\
-А тому початковий ліміт, тобто $\displaystyle\lim_{x \to 0} h(x) = -\dfrac{13}{10}$.
+Знаємо, що $\displaystyle\lim_{y \to 0} g(y) = -\dfrac{13}{10}$ -- цей ліміт ми вже рахували через арифметичні властивості.\\
+Тому початковий ліміт, тобто $\displaystyle\lim_{x \to 0} h(x) = -\dfrac{13}{10}$. Надалі такі деталі розписувати не будемо.
 \end{example}
 
 \subsection{Перша чудова границя}
-Розглянемо такий геометричний малюнок:\\
+Розглянемо такий геометричний малюнок:
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 %\resizebox{0.5\textwidth}{!} 
@@ -4346,17 +4360,18 @@ $\displaystyle\lim_{t \to 0} \dfrac{(t+1)^3-2(t+1)^8+1}{(t+1)^{40}-3(t+1)^{10}+2
 \draw (1*3 cm, 1pt) -- (1*3 cm, -1pt) node[anchor = north west] {$1$};
 \end{tikzpicture}
 }
-\caption*{Коло радіусом $1$. Вважаємо поки $x \in \left(0, \dfrac{\pi}{2} \right)$.}
+\caption*{Коло радіуса $1$. Вважаємо поки $x \in \left(0, \dfrac{\pi}{2} \right)$.}
 \end{figure}
-Виділимо з малюнку наступні дані: $|AB|=\sin x, \quad |AC|=x, \quad |KC|=\tg x$.\\
+\fi %uncomment picture
+Відокремимо з малюнку наступні дані: $|AB|=\sin x, \quad |AC|=x, \quad |KC|=\tg x$.\\
 	Зрозуміло, що $|AB|<|AC|<|KC| \implies \sin x < x < \tg x$.\\
-	Розглянемо обидва сторони нерівності:\\
+	Розглянемо обидві сторони нерівності:\\
 	$\displaystyle \sin x < x \implies \frac{\sin x}{x} < 1$.\\
 	$\displaystyle x < \tg x = \frac{\sin x}{\cos x} \Rightarrow \frac{\sin x}{x} > \cos x = 1-2 \sin^2 \frac{x}{2} > 1 - 2 \frac{x^2}{4} = 1 - \frac{x^2}{2}$.\\
 	$\displaystyle 1- \frac{x^2}{2}<\frac{\sin x}{x} < 1$.\\
 Можна розширити інтервал до $\displaystyle \left(-\frac{\pi}{2},\frac{\pi}{2} \right)$, оскільки нерівність не змінюється. Тому за теоремою про 3 функції, маємо наступне:
 \begin{theorem}[I чудова границя]
-$\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$
+$\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$.
 \end{theorem}
 
 
@@ -4365,7 +4380,7 @@ $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$
 1) $\displaystyle \lim_{x \to 0} \frac{\tg x}{x} = 1$ \qquad 2) $\displaystyle \lim_{x \to 0} \frac{\arcsin x}{x} = 1$ \qquad 3) $\displaystyle \lim_{x \to 0} \frac{\arctg x}{x} = 1$
 \end{corollary}
 
-1) \textit{Вказівка: $\tg x = \dfrac{\sin x}{\cos x}$. Необіхдно знати про неперервність $\cos x$. (буде в наступного розділі)} \\
+1) \textit{Вказівка: $\tg x = \dfrac{\sin x}{\cos x}$. Необіхдно знати про неперервність $\cos x$. (буде в наступному розділі)} \\
 2) \textit{Вказівка: $\arcsin x = t$.} \\
 3) \textit{Вказівка: $\arctg x = t$.}
 
@@ -4379,7 +4394,7 @@ $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$
 	\end{definition}
 	
 	\begin{proposition}
-	Степенево-показникова функція не залежить від значення основи правої частини.
+	Степенево-показникова функція не залежить від основи правої частини.
 	\end{proposition}
 	
 	\begin{proof}
@@ -4388,14 +4403,14 @@ $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$
 	Таким чином, байдуже, що обирати, все чудово працює.
 	\end{proof}
 	
-	Зазвичай степенево-показникову функцію визначають через число Ейлера
+	Зазвичай степенево-показникову функцію визначають через число Ойлера, тобто через $e$:
 	$$ f(x)^{g(x)} = e^{g(x) \ln f(x)} $$
 	
 	\begin{example}
-	Приклади степенево-показникових функцій: $f(x) = x^x, g(x) = \left(1 + \dfrac{1}{x} \right)^x$, навіть $h(x) = x^{\sqrt{2}}$
+	Зокрема маємо такі приклади: $f(x) = x^x, g(x) = \left(1 + \dfrac{1}{x} \right)^x, h(x) = x^{\sqrt{2}}$.
 	\end{example}
 	
-	Степенева функція $y = x^{\alpha}, \alpha \in \mathbb{R}$ можна визначити як $y = e^{\alpha \ln x}$ при $x > 0$.
+	Степеневу функцію $y = x^{\alpha}, \alpha \in \mathbb{R}$ можна визначити як $y = e^{\alpha \ln x}$ при $x > 0$.
 
 \subsection{Друга чудова границя}
 Доведемо, що існує $\displaystyle\lim_{x \to +\infty} \left( 1 + \dfrac{1}{[x]} \right)^{[x]} = e$ за Гейне.\\
@@ -4417,11 +4432,7 @@ $\displaystyle \lim_{x \to +\infty} \left(1 +\frac{1}{x} \right)^x = e$
 \end{theorem}
 
 \begin{corollary}[Наслідки ІІ чудової границі]
-1) $\displaystyle \lim_{x \to -\infty} \left(1 +\frac{1}{x} \right)^x = e$\\
-2) $\displaystyle \lim_{x \to 0} \left(1 +x \right)^{\textstyle \frac{1}{x}} = e$\\
-3) $\displaystyle \lim_{x \to 0} \frac{\ln(1+x)}{x} = 1$\\
-4) $\displaystyle \lim_{x \to 0} \frac{e^x - 1}{x} = 1$\\
-5) $\displaystyle \lim_{x \to 0} \frac{(1+x)^\alpha - 1}{x} = \alpha$
+1) $\displaystyle \lim_{x \to -\infty} \left(1 +\frac{1}{x} \right)^x = e$ \qquad 2) $\displaystyle \lim_{x \to 0} \left(1 +x \right)^{\textstyle \frac{1}{x}} = e$ \qquad 3) $\displaystyle \lim_{x \to 0} \frac{\ln(1+x)}{x} = 1$ \\ 4) $\displaystyle \lim_{x \to 0} \frac{e^x - 1}{x} = 1$ \qquad 5) $\displaystyle \lim_{x \to 0} \frac{(1+x)^\alpha - 1}{x} = \alpha$.
 
 \begin{proof}
 1) $\displaystyle\lim_{x \to -\infty} \left(1 + \dfrac{1}{x} \right)^x \overset{x =-t}{=} \lim_{t \to +\infty} \left(1 - \dfrac{1}{t} \right)^{-t} = \lim_{t \to \infty} \left(1 + \dfrac{1}{t-1} \right)^t \overset{t-1 = y}{=} \lim_{y \to +\infty} \left(1 + \dfrac{1}{y} \right)^{y+1} = \\ = \lim_{y \to +\infty} \left( 1 + \dfrac{1}{y} \right) \lim_{y \to +\infty} \left( 1 + \dfrac{1}{y} \right)^y = 1 \cdot e = e$
@@ -4434,7 +4445,7 @@ $\displaystyle \lim_{x \to +\infty} \left(1 +\frac{1}{x} \right)^x = e$
 \end{corollary}
 
 \begin{example}
-Обчислити границю $\displaystyle\lim_{x \to 0} \dfrac{\ln (\cos 2x)}{\ln (\cos 3x)}$ - універсальний приклад.\\
+Обчислити границю $\displaystyle\lim_{x \to 0} \dfrac{\ln (\cos 2x)}{\ln (\cos 3x)}$ -- універсальний приклад.\\
 $\displaystyle\lim_{x \to 0} \dfrac{\ln (\cos 2x)}{\ln (\cos 3x)} = \lim_{x \to 0} \dfrac{\ln (1 + (\cos 2x - 1))}{\ln (1 + (\cos 3x - 1))} = \lim_{x \to 0} \dfrac{\dfrac{\ln (1 + (\cos 2x - 1))}{\cos 2x - 1}}{\dfrac{\ln (1 + (\cos 3x - 1))}{\cos 3x - 1}} \cdot \dfrac{\cos 2x -1}{\cos 3x - 1} = \\ = \dfrac{\displaystyle \lim_{x \to 0} \dfrac{\ln (1 + (\cos 2x - 1))}{\cos 2x - 1}}{\displaystyle \lim_{x \to 0} \dfrac{\ln (1 + (\cos 3x - 1))}{\cos 3x - 1}} \lim_{x \to 0} \dfrac{\cos 2x -1}{\cos 3x - 1} \boxed{=}$\\
 Заміна для першої границі: $\cos 2x - 1 = t$. Оскільки $x \to 0$, то звідси $t \to 0$.\\
 Заміна для другої границі: $\cos 3x - 1 = t$. Оскільки $x \to 0$, то звідси $t \to 0$.\\
@@ -4447,31 +4458,32 @@ $\boxed{\boxed{=}} \dfrac{\displaystyle \lim_{x \to 0} \dfrac{\sin x}{x} \lim_{x
 
 \subsection{Порівняння функцій, відношення О-велике, о-маленьке та еквівалентності}
 \begin{definition}
-Задано функції $f,g \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
+Задано функції $f,g \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
 Функція $f$ називається \textbf{порівнянною} з функцією $g$, якщо
 \begin{align*}
 \exists L>0: \exists \delta > 0: \forall x \in A: x \neq x_0: |x-x_0| < \delta \Rightarrow |f(x)| \leq L |g(x)|
 \end{align*}
-Позначення: $f(x) = O(g(x)), x \to x_0$\\
-Інакше називають, що $f$ - \textbf{обмежена відносно} $g$ при $x \to x_0$.
+Позначення: $f(x) = O(g(x)), x \to x_0$.\\
+Інакше називають, що $f$ \textbf{обмежена відносно} $g$ при $x \to x_0$. Або просто кажуть, що $f$ є \textbf{О-великою від} $g$ при $x \to x_0$.
 \end{definition}
 
 \begin{theorem}[Властивості]
-1) $f(x) = O(g(x)), x \to x_0 \iff \displaystyle \frac{f(x)}{g(x)}$ - обмежена в околі т. $x_0$.
-\bigskip \\
-2) Якщо $\exists \displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = c$, то $f(x) = O(g(x)), x \to x_0$.
-\bigskip \\
-3) Нехай $f_1(x) = O(g(x)), f_2(x) = O(g(x))$. Тоді:\\
-a) $f_1(x) + f_2(x) = O(g(x))$;\\
-b) $\forall \alpha \in \mathbb{R}: \alpha f_1(x) = O(g(x))$;\\
-c) $\forall \alpha \neq 0: f_1(x) = O(\alpha g(x))$;\\
-Всюди $x \to x_0$.
-\bigskip \\
-4) Нехай $f(x) = O(g(x))$, $g(x) = O(h(x))$. Тоді $f(x) = O(h(x)), x \to x_0$.
+Маємо наступні властивості:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $f(x) = O(g(x)), x \to x_0 \iff \displaystyle \frac{f(x)}{g(x)}$ -- обмежена в околі точки $x_0$.
+\item Якщо $\exists \displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = c$, то $f(x) = O(g(x)), x \to x_0$.
+\item Нехай $f_1(x) = O(g(x)), f_2(x) = O(g(x))$. Тоді всюди при $x \to x_0$ маємо:
+\begin{enumerate}[nosep,label={\alph*)}]
+\item $f_1(x) + f_2(x) = O(g(x))$;
+\item $\forall \alpha \in \mathbb{R}: \alpha f_1(x) = O(g(x))$;
+\item $\forall \alpha \neq 0: f_1(x) = O(\alpha g(x))$.
+\end{enumerate}
+\item Нехай $f(x) = O(g(x))$, $g(x) = O(h(x))$. Тоді $f(x) = O(h(x)), x \to x_0$.
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-Доведу лише 3 а). Інші зрозуміло.\\
+Доведу лише 3) а). Інші зрозуміло.\\
 $f_1(x) = O(g(x)) \Rightarrow \exists L_1: \exists \delta_1: \forall x : |x-x_0| < \delta_1 \Rightarrow |f_1(x)| \leq L_1 |g(x)| \\
 f_2(x) = O(g(x)) \Rightarrow \exists L_2: \exists \delta_2: \forall x : |x-x_0| < \delta_2 \Rightarrow |f_2(x)| \leq L_2 |g(x)|$\\
 Тоді $\exists \delta = \min\{\delta_1, \delta_2 \}: \forall x: |x-x_0|<\delta \Rightarrow$\\
@@ -4482,39 +4494,39 @@ $|f(x_1)+f(x_2)| \leq |f(x_1)|+|f(x_2)| \leq (L_1+L_2)|g(x)|$.\\
 \begin{example}
 Довести, що $x+x^2 = O(x), x \to 0$.\\
 Знайдемо наступну границю:\\
-$\displaystyle \lim_{x \to 0} \frac{x+x^2}{x} = \lim_{x \to 0}(1+x) = 1$\\
-Отже, $x+x^2 = O(x), x \to 0$.
+$\displaystyle \lim_{x \to 0} \frac{x+x^2}{x} = \lim_{x \to 0}(1+x) = 1$. Отже, $x+x^2 = O(x), x \to 0$.
 \end{example}
 
 \begin{remark}
-В математичному аналізі О-велике не використовується часто, це більше вже для дослідження алгоритмів в комп'ютерних науках.\\
-Зокрема існує такий алгоритм Binary Search для пошуку елемента в відсортованому масиві. Складність алгоритму оцінюється в $O(\log_2 n)$, де $n$ - кількість елементів.
+В математичному аналізі О-велике не використовується часто, це більше вже для дослідження алгоритмів в комп'ютерних науках. Зокрема існує такий алгоритм Binary Search для пошуку елемента в відсортованому масиві. Складність алгоритму оцінюється в $O(\log_2 n)$, де $n$ -- кількість елементів.
 \end{remark}
 
 \begin{definition}
-Задано функції $f,g \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
+Задано функції $f,g \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
 Функція $f$ називається \textbf{знехтувально малою} відносно $g$, якщо
 \begin{align*}
 \forall \varepsilon>0: \exists \delta > 0: \forall x \in A: x \neq x_0: |x-x_0| < \delta \Rightarrow |f(x)| < \varepsilon |g(x)|
 \end{align*}
 Позначення: $f(x) = o(g(x)), x \to x_0$.\\
-Інакше кажуть, що $f$ - \textbf{нескінченно мала/великою більш високого порядку, ніж} $g$ при $x \to x_0/\infty$.
+Інакше кажуть, що $f$ - \textbf{нескінченно мала більш високого порядку, ніж} $g$ при $x \to x_0$. Або просто кажуть, що $f$ є \textbf{о-малою від} $g$ при $x \to x_0$.
 \end{definition}
 
 \begin{theorem}[Властивості]
-1) $f(x) = o(g(x)), x \to x_0 \iff \displaystyle \exists \lim_{x \to x_0} \frac{f(x)}{g(x)} = 0$.
-\bigskip \\
-2) Нехай $f_1(x) = o(g(x)), f_2(x) = o(g(x))$. Тоді:\\
-a) $f_1(x) + f_2(x) = o(g(x))$;\\
-b) $\forall \alpha \in \mathbb{R}: \alpha f_1(x) = o(g(x))$;\\
-c) $\forall \alpha \neq 0: f_1(x) = o(\alpha g(x))$;\\
-Всюди $x \to x_0$.
-\bigskip \\
-3) Нехай $f(x) = o(g(x))$, $g(x) = o(h(x))$. Тоді $f(x) = o(h(x)), x \to x_0$.
+Маємо наступні властивості:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $f(x) = o(g(x)), x \to x_0 \iff \displaystyle \exists \lim_{x \to x_0} \frac{f(x)}{g(x)} = 0$.
+\item Нехай $f_1(x) = o(g(x)), f_2(x) = o(g(x))$. Тоді всюди при $x \to x_0$ маємо:
+\begin{enumerate}[nosep,label={\alph*)}]
+\item $f_1(x) + f_2(x) = o(g(x))$;
+\item $\forall \alpha \in \mathbb{R}: \alpha f_1(x) = o(g(x))$;
+\item $\forall \alpha \neq 0: f_1(x) = o(\alpha g(x))$.
+\end{enumerate}
+\item Нехай $f(x) = o(g(x))$, $g(x) = o(h(x))$. Тоді $f(x) = o(h(x)), x \to x_0$.
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-Доведу лише 1), Інші Зрозуміло.\\
+Доведу лише 1), інші зрозуміло.\\
 $f(x) = o(g(x)),x \to x_0 \iff \forall \varepsilon>0: \exists \delta: \forall x \in A: |x-x_0| < \delta \Rightarrow |f(x)| < \varepsilon |g(x)| \iff \\ \displaystyle \abs{\frac{f(x)}{g(x)} - 0} < \varepsilon \iff \exists \lim_{x \to x_0} \frac{f(x)}{g(x)} = 0$.
 \end{proof}
 
@@ -4523,6 +4535,7 @@ $f(x) = o(g(x)),x \to x_0 \iff \forall \varepsilon>0: \exists \delta: \forall x 
 Знайдемо наступну границю:\\
 $\displaystyle \lim_{x \to 1} \dfrac{x^3-x^2-x+1}{x-1} = \lim_{x \to 1} \dfrac{x^2(x-1)-(x-1)}{x-1} = \lim_{x \to 1} (x^2-1) = 0$.\\
 Отже, $x^3 - x^2 - x + 1 = o(x-1), x \to 1$.
+\\ \iffalse %uncomment picture
 \begin{figure} [H]
 \centering
 {
@@ -4537,25 +4550,28 @@ $\displaystyle \lim_{x \to 1} \dfrac{x^3-x^2-x+1}{x-1} = \lim_{x \to 1} \dfrac{x
 \caption*{Тут $x-1$ миттєво стала нулем і миттєво пішла далі. А $x^3-x^2-x+1$ набагато довше була близька в нулі.}
 }
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \begin{theorem}[Інші властивості]
-1.1) Нехай $f(x) = o(g(x))$ та $g(x) = O(h(x))$. Тоді $f(x) = o(h(x)), x \to x_0$.\\
-1.2) Нехай $f(x) = O(g(x))$ та $g(x) = o(h(x))$. Тоді $f(x) = o(h(x)), x \to x_0$.
-\bigskip \\
-2) Нехай $f(x) = o(g(x))$. Тоді $f(x) = O(g(x)), x \to x_0$.
+Додатково справедливі такі властивості:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Нехай $f(x) = o(g(x))$ та $g(x) = O(h(x))$. Тоді $f(x) = o(h(x)), x \to x_0$.
+\item Нехай $f(x) = O(g(x))$ та $g(x) = o(h(x))$. Тоді $f(x) = o(h(x)), x \to x_0$.
+\item Нехай $f(x) = o(g(x))$. Тоді $f(x) = O(g(x)), x \to x_0$.
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-1) для обох випадків\\
+1),2) для обох випадків\\
 $\displaystyle \lim_{x \to x_0} \frac{f(x)}{h(x)} = \lim_{x \to x_0} \frac{f(x)}{g(x)} \frac{g(x)}{h(x)} =$ (обм *н.м.) $= 0 \Rightarrow f(x) = o(h(x)), x \to x_0$.
 \bigskip \\
-2) \textit{Випливає з властивості 2 О-великого.}
+3) \textit{Випливає з властивості 2) О-великого.}
 \end{proof}
 
 \begin{definition}
-Задано функції $f,g \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ - гранична точка для $A$.\\
-Функція $f$ називається \textbf{еквівалентною} $g$, якщо
+Задано функції $f,g \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
+Функція $f$ називається \textbf{еквівалентною} до $g$, якщо
 \begin{align*}
 \exists \displaystyle\lim_{x \to x_0} \dfrac{f(x)}{g(x)} = 1
 \end{align*}
@@ -4572,25 +4588,28 @@ $f(x) \sim g(x), x \to x_0 \iff \displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)}
 \end{proof}
 
 \begin{theorem}[Граничний перехід]
-Задано $f_1(x) \sim g_1(x)$ та $f_2(x) \sim g_2(x)$, $x \to x_0$. Тоді:\\
-1) $\displaystyle \lim_{x \to x_0} f_1(x) f_2(x) = \lim_{x \to x_0} g_1(x) g_2(x)$;\\
-2) $\displaystyle \lim_{x \to x_0} \frac{f_1(x)}{f_2(x)} = \lim_{x \to x_0} \frac{g_1(x)}{g_2(x)}$.\\
-За умовою, що принаймні один з чотирьох лімітів існує, не обов'язково скінченний
+Задано $f_1(x) \sim g_1(x)$ та $f_2(x) \sim g_2(x)$, $x \to x_0$. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\displaystyle \lim_{x \to x_0} f_1(x) f_2(x) = \lim_{x \to x_0} g_1(x) g_2(x)$;\\
+\item $\displaystyle \lim_{x \to x_0} \frac{f_1(x)}{f_2(x)} = \lim_{x \to x_0} \frac{g_1(x)}{g_2(x)}$.
+\end{enumerate}
+За умовою, що принаймні один з чотирьох лімітів існує, не обов'язково скінченний.
 \end{theorem}
 
 \begin{proof}
 Із початкових умов отримаємо, що:\\
-$\displaystyle \exists \lim_{x \to x_0} \frac{f_1(x)}{g_1(x)} = 1$, $\displaystyle \exists \lim_{x \to x_0} \frac{f_2(x)}{g_2(x)} = 1$. Тоді маємо:\\
-1) $\displaystyle \lim_{x \to x_0} f_1(x) f_2(x) = \lim_{x \to x_0} \frac{f_1(x) f_2(x) g_1(x) g_2(x)}{g_1(x) g_2(x)} = \lim_{x \to x_0} \frac{f_1(x) f_2(x)}{g_1(x) g_2(x)} \lim_{x \to x_0} g_1(x) g_2(x) = \lim_{x \to x_0} g_1(x) g_2(x)$.\\
-2) $\displaystyle \lim_{x \to x_0} \frac{f_1(x)}{f_2(x)} = \lim_{x \to x_0} \frac{f_1(x)g_1(x)g_2(x)}{f_2(x)g_1(x)g_2(x)} = \lim_{x \to x_0} \frac{f_1(x)g_2(x)}{f_2(x)g_1(x)} \lim_{x \to x_0} \frac{g_1(x)}{g_2(x)} = \lim_{x \to x_0} \frac{g_1(x)}{g_2(x)}$.
+$\displaystyle \exists \lim_{x \to x_0} \frac{f_1(x)}{g_1(x)} = 1$, $\displaystyle \exists \lim_{x \to x_0} \frac{f_2(x)}{g_2(x)} = 1$. Тоді маємо:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\displaystyle \lim_{x \to x_0} f_1(x) f_2(x) = \lim_{x \to x_0} \frac{f_1(x) f_2(x) g_1(x) g_2(x)}{g_1(x) g_2(x)} = \lim_{x \to x_0} \frac{f_1(x) f_2(x)}{g_1(x) g_2(x)} \lim_{x \to x_0} g_1(x) g_2(x) = \lim_{x \to x_0} g_1(x) g_2(x)$.
+\item $\displaystyle \lim_{x \to x_0} \frac{f_1(x)}{f_2(x)} = \lim_{x \to x_0} \frac{f_1(x)g_1(x)g_2(x)}{f_2(x)g_1(x)g_2(x)} = \lim_{x \to x_0} \frac{f_1(x)g_2(x)}{f_2(x)g_1(x)} \lim_{x \to x_0} \frac{g_1(x)}{g_2(x)} = \lim_{x \to x_0} \frac{g_1(x)}{g_2(x)}$.
+\end{enumerate}
 \end{proof}
 
 \begin{remark}
-Еквівалентні функції задають відношення еквівалентності: \\
-рефлексивність, симетричність, транзитивність.
+Еквівалентні функції дійсно задають відношення еквівалентності.
 \end{remark}
 
-Використовуючи всі наслідки від чудових границь, ми можемо отримати наступні еквівалентні функції, коли $x \to 0$
+Використовуючи всі наслідки від чудових границь, ми можемо отримати наступні еквівалентні функції, коли $x \to 0$.
 \begin{center}
 \begin{tabular}{ c c }
  $\sin x \sim x$ & $\ln(1+x) \sim x$ \\ 
@@ -4608,9 +4627,9 @@ $\displaystyle \lim_{x \to 0} \frac{\arcsin x \cdot (e^x - 1)}{1 - \cos x} = \li
 
 \begin{remark}
 Узагальнене зауваження:\\
-$f(x) = O(1), x \to x_0 \iff f(x)$ - обмежена в околі т. $x_0$.\\
-$f(x) = o(1), x \to x_0 \iff f(x)$ - н.м. функція в околі т. $x_0$.
-\end{remark}
+$f(x) = O(1), x \to x_0 \iff f(x)$ -- обмежена в околі т. $x_0$.\\
+$f(x) = o(1), x \to x_0 \iff f(x)$ -- н.м. функція в околі т. $x_0$.
+\\ \iffalse %uncomment picture
 \begin{figure} [H]
 \centering
 \begin{tikzpicture}
@@ -4623,6 +4642,8 @@ $f(x) = o(1), x \to x_0 \iff f(x)$ - н.м. функція в околі т. $x_
 \end{tikzpicture}
 \caption*{В околі т. $x_0 = 0$ функція $\sin x$ дуже схожа на $x$, тобто однакова поведінка}
 \end{figure}
+\fi %uncomment picture
+\end{remark}
 \newpage
 %\fi %IMPORTANT COMMENT
 
@@ -4630,13 +4651,22 @@ $f(x) = o(1), x \to x_0 \iff f(x)$ - н.м. функція в околі т. $x_
 \section{Неперервність функції}
 \subsection{Неперервність в точці}
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$ та т. $x_0 \in A$.\\
-Функція $f(x)$ називається \textbf{неперервною в т.} $x_0$, якщо
-\begin{align*}
-\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall x \in A: |x-x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \varepsilon \text{ def. Коші} \\
-\forall \{x_n, n \geq 1\} \subset A: \displaystyle\lim_{n \to \infty} x_n = x_0 \Rightarrow \displaystyle\lim_{n \to \infty} f(x_n) = f(x_0) \text{ def. Гейне}
-\end{align*}
+Задано функцію $f \colon A \to \mathbb{R}$ та точка $x_0 \in A$.\\
+Функція $f(x)$ називається \textbf{неперервною в точці} $x_0$, якщо
+	\begin{align*}
+	\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall x \in A: |x-x_0|<\delta \Rightarrow |f(x)-f(x_0)|<\varepsilon \tag*{означення Коші}
+	\end{align*}
+	\begin{align*}
+	\forall \{x_n, n \geq 1\}\subset A: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = f(x_0) \tag*{означення Гейне}
+	\end{align*}
 \end{definition}
+
+	\begin{definition}
+	Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in \mathbb{R}$ -- гранична точка для $A$.\\
+	Число $b$ називається \textbf{границею функції в точці $x_0$}, якщо
+
+	Позначення: $\displaystyle \lim_{x \to x_0} f(x) = b$.
+	\end{definition}
 
 \begin{theorem}
 Означення Коші $\iff$ Означення Гейне.\\
@@ -4644,33 +4674,34 @@ $f(x) = o(1), x \to x_0 \iff f(x)$ - н.м. функція в околі т. $x_
 \end{theorem}
 
 \begin{proposition}
-Задано функцію $f: A \to \mathbb{R}$ та т. $x_0 \in A$ - ізольована. Тоді $f$ - неперервна в т. $x_0$.
+Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in A$ -- ізольована. Тоді $f$ -- неперервна в точці $x_0$.
 \end{proposition}
 
 \begin{proof}
-Якщо $x_0$ - ізольована, то $\exists \delta^* > 0: U_{\delta^*} \cap A = \{x_0\}$.\\
+Якщо $x_0$ -- ізольована, то $\exists \delta^* > 0: U_{\delta^*} \cap A = \{x_0\}$.\\
 Нехай $\varepsilon > 0$. Тоді $\exists \delta = \delta^* > 0: \forall x \in A: |x-x_0|< \delta \Rightarrow |f(x)-f(x_0)|<\varepsilon$.\\
 Якщо $x \in A$ та $|x-x_0|< \delta$, то звідси $x=x_0$. А для нього $|f(x)-f(x_0)| = 0 < \varepsilon$.
 \end{proof}
 
 \begin{proposition}[Стандартне означення неперервності функції в точці]
-Задано функцію $f: A \to \mathbb{R}$ та т. $x_0 \in A$ - гранична точка.\\
-$f$ - неперервна в т. $x_0 \iff$ $\displaystyle\lim_{x \to x_0} f(x) = f(x_0)$.
+Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in A$ -- гранична точка.\\
+$f$ -- неперервна в точці $x_0 \iff$ $\displaystyle\lim_{x \to x_0} f(x) = f(x_0)$.
 \end{proposition}
 
 \begin{proof}
-\leftproof Дано: $f$ - неперервна в т. $x_0$. \\
+\leftproof Дано: $f$ -- неперервна в т. $x_0$. \\
 Нехай є $\{x_n, n \geq 1\}$, причому $\forall n \geq 1: x_n \neq x_0$, оскільки $x_0 \in A$ - гранична, та $\displaystyle\lim_{n \to \infty} x_n = x_0$. Тоді $f(x_n) \to f(x_0)$. Отже, за Гейне, $\exists \displaystyle\lim_{x \to x_0} f(x) = f(x_0)$.
 \bigskip \\
 \rightproof Дано: $\exists \displaystyle\lim_{x \to x_0} f(x) = f(x_0)$. Тоді за Коші,
 $\forall \varepsilon > 0: \exists \delta > 0: \forall x \in A: 0 < |x-x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \varepsilon$.
-За Коші означення неперервності, отримали, що $f$ - неперервна в т. $x_0$.
+За Коші означення неперервності, отримали, що $f$ -- неперервна в т. $x_0$.
 \end{proof}
 
 \begin{example}
 Пояснювальний приклад, навіщо ми створили нестандартне означення.\\
-Маємо функцію $f(x) = \sqrt{x^2(x^2-1)}$, яка визначена на $(-\infty,-1] \cup [1,+\infty)$, а також в т. $x = 0$.\\
-І ось точка $x_0 = 0$ - ізольована точка. Отже, можна вважати, що $f$ - неперервна в т. $x_0$.
+Маємо функцію $f(x) = \sqrt{x^2(x^2-1)}$, яка визначена на $(-\infty,-1] \cup [1,+\infty)$, а також в точці $x = 0$.\\
+І ось точка $x_0 = 0$ -- ізольована точка. Отже, можна вважати, що $f$ -- неперервна в точці $x_0$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -4684,17 +4715,17 @@ $\forall \varepsilon > 0: \exists \delta > 0: \forall x \in A: 0 < |x-x_0| < \de
 \node at (-1,-0.2) {$-1$};
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \begin{example}
-Розглянемо функцію $f(x) = \begin{cases} \displaystyle \frac{\sin x}{x}, x \neq 0 \\ 1, x = 0 \end{cases}$.\\
-В т. $x_0$ функція $f(x)$ є неперервною, оскільки
+Розглянемо функцію $f(x) = \begin{cases} \displaystyle \frac{\sin x}{x}, x \neq 0 \\ 1, x = 0 \end{cases}$. У точці $x_0$ функція $f(x)$ є неперервною, оскільки
 $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} \overset{\textrm{I чудова границя}}{=} 1 = f(0)$.
 \end{example}
 
 \begin{definition}
-Задано функція $f: A \to \mathbb{R}$ та т. $x_0 \in A$.\\
-Функція $f$ називається \textbf{розривною в т.} $x_0$, якщо в цій точці функція не є неперервною. А сама т. $x_0$ називається \textbf{точкою розриву}.
+Задана функція $f \colon A \to \mathbb{R}$ та точка $x_0 \in A$.\\
+Функція $f$ називається \textbf{розривною в точці} $x_0$, якщо в цій точці функція не є неперервною. А сама точка $x_0$ називається \textbf{точкою розриву}.
 \end{definition}
 
 \begin{remark}
@@ -4703,18 +4734,21 @@ $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} \overset{\textrm{I чудова �
 
 \subsubsection*{Класифікації точок розриву}
 \subsubsection*{І роду}
-- \textbf{усувна}, якщо $\exists \displaystyle \lim_{x \to x_0} f(x) \neq f(x_0)$\\
-- \textbf{стрибок}, якщо $\exists \displaystyle \lim_{x \to x_0+0} f(x)$, $\exists \displaystyle \lim_{x \to x_0-0} f(x)$, але при цьому $\displaystyle \lim_{x \to x_0+0} f(x) \neq \lim_{x \to x_0-0} f(x)$
+\begin{itemize}[nosep,wide=0pt,label={-}]
+\item \textbf{усувна}, якщо $\exists \displaystyle \lim_{x \to x_0} f(x) \neq f(x_0)$;
+\item \textbf{стрибок}, якщо $\exists \displaystyle \lim_{x \to x_0+0} f(x)$, $\exists \displaystyle \lim_{x \to x_0-0} f(x)$, але при цьому $\displaystyle \lim_{x \to x_0+0} f(x) \neq \lim_{x \to x_0-0} f(x)$.
+\end{itemize}
 
 \subsubsection*{ІI роду}
 якщо виконується один з 4 випадків:\\
-1) $\displaystyle \lim_{x \to x_0-0} f(x) = \infty$ \hspace{3cm} 3) $\displaystyle \not\exists \lim_{x \to x_0-0} f(x)$ (якщо лівіше т. $x_0$ функція визначена)\\
-2) $\displaystyle \lim_{x \to x_0+0} f(x) = \infty$ \hspace{3cm} 4) $\displaystyle \not\exists \lim_{x \to x_0+0} f(x)$ (якщо правіше т. $x_0$ функція визначена)
+1) $\displaystyle \lim_{x \to x_0-0} f(x) = \infty$ \hspace{2cm} 3) $\displaystyle \not\exists \lim_{x \to x_0-0} f(x)$ (якщо лівіше точка $x_0$ функція визначена)\\
+2) $\displaystyle \lim_{x \to x_0+0} f(x) = \infty$ \hspace{2cm} 4) $\displaystyle \not\exists \lim_{x \to x_0+0} f(x)$ (якщо правіше точка $x_0$ функція визначена).
 
 \begin{example}
 Розглянемо тепер функцію $f(x) = \begin{cases} \displaystyle \frac{\sin x}{x}, x \neq 0 \\ 0, x = 0 \end{cases}$.\\
-У цьому випадку в т. $x_0$ буде розривом I роду, усувною, оскільки\\
-$\displaystyle \lim_{x \to 0} \frac{\sin x}{x} \overset{\textrm{I чудова границя}}{=} 1 \neq f(0) = 0$.\\
+У цьому випадку точка $x_0$ буде розривом I роду, зокрема усувною, оскільки\\
+$\displaystyle \lim_{x \to 0} \frac{\sin x}{x} \overset{\textrm{I чудова границя}}{=} 1 \neq f(0) = 0$.
+\\ \iffalse %uncomment picture
 \begin{figure} [H]
 \centering
 \resizebox{1\textwidth}{!}
@@ -4730,6 +4764,7 @@ $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} \overset{\textrm{I чудова �
 \end{tikzpicture}
 }
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \begin{example} Розглянемо функцію
@@ -4740,7 +4775,8 @@ $f(x) = \begin{cases}
 Тут проблема виникає в т. $x_0 = 2$. Розглянемо границі в різні сторони:\\
 $\displaystyle \lim_{x \to 2-0} \left(2x - \dfrac{x-2}{2-x}\right) = \lim_{x \to 2-0} (2x-1) = 3$\\
 $\displaystyle \lim_{x \to 2+0} \left(2x - \dfrac{x-2}{x-2}\right) = \lim_{x \to 2+0} (2x+1) = 5$\\
-Обидва ліміти не рівні, а отже, $x_0 = 2$ - розрив I роду, стрибок.
+Обидва ліміти не рівні, а отже, $x_0 = 2$ -- розрив I роду, зокрема стрибок.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 {
@@ -4761,11 +4797,12 @@ $\displaystyle \lim_{x \to 2+0} \left(2x - \dfrac{x-2}{x-2}\right) = \lim_{x \to
 \end{tikzpicture}
 }
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
-\begin{example} Маємо функцію $f(x) = \dfrac{1}{x+1}$.
-Проблема в т. $x_0 = -1$. Але принаймні по одну сторону, наприклад $\displaystyle \lim_{x \to -1^+0} =\dfrac{1}{x+1} = +\infty$, матимемо нескінченність.\\
-Тому одразу т. $x_0 = -1$ - розрив II роду.
+\begin{example} Маємо функцію $f(x) = \dfrac{1}{x+1}$ та $f(-1) = 0$. Проблема в точці $x_0 = -1$. Але принаймні по одну сторону, наприклад $\displaystyle \lim_{x \to -1^+0} =\dfrac{1}{x+1} = +\infty$, матимемо нескінченність. Тому одразу точка $x_0 = -1$ -- розрив II роду.\\
+До речі, якби функція $f$ була визначена на $\mathbb{R} \setminus \{-1\}$, то $f$ була би, технічно кажучи, неперервною. І не треба було би досліджувати на точки розриву.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 {
@@ -4781,76 +4818,75 @@ $\displaystyle \lim_{x \to 2+0} \left(2x - \dfrac{x-2}{x-2}\right) = \lim_{x \to
 \end{tikzpicture}
 }
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \begin{theorem}[Арифметичні властивості неперервних функцій]
-Задано функції $f,g: A \to \mathbb{R}$ та $x_0 \in A$. Відомо, що $f,g$ - неперервні в т. $x_0$. Тоді:\\
-1) $\forall c \in \mathbb{R}: (cf)(x)$ - неперервна в т. $x_0$;\\
-2) $(f+g)(x)$ - неперервна в т. $x_0$;\\
-3) $(fg)(x)$ - неперервна в т. $x_0$;\\
-4) $\dfrac{f}{g}(x)$ - неперервна в т. $x_0$ при $g(x_0) \neq 0$.\\
-\textit{1),2),3),4) - всі вони випливають із означення. Але в 4) більш детально розпишу одну штуку.}
+Задано функції $f,g \colon A \to \mathbb{R}$ та $x_0 \in A$. Відомо, що $f,g$ -- неперервні в точці $x_0$. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\forall c \in \mathbb{R}: (cf)(x)$ -- неперервна в точці $x_0$;
+\item $(f+g)(x)$ - неперервна в точці $x_0$;
+\item $(fg)(x)$ - неперервна в точці $x_0$;
+\item $\dfrac{f}{g}(x)$ - неперервна в точці $x_0$ при $g(x_0) \neq 0$.
+\end{enumerate}
+\textit{1),2),3),4) -- всі вони випливають із означення. Але в 4) більш детально розпишу одну штуку.}
 \end{theorem}
-Переконаємось, що все буде коректно визначено в 4)\\
-$g$ - неперервна в $x_0$, тобто $\forall \varepsilon > 0: \exists \delta: \forall x \in A: |x-x_0|<\delta \Rightarrow |g(x)-g(x_0)|<\varepsilon$.\\
-Оберемо $\varepsilon = \dfrac{|g(x_0)|}{2}$.\\
-Тоді $g(x_0)-\varepsilon <g(x) <g(x_0)+\varepsilon$.\\
+Переконаємось, що все буде коректно визначено в 4).
+$g$ -- неперервна в $x_0$, тобто $\forall \varepsilon > 0: \exists \delta: \forall x \in A: |x-x_0|<\delta \Rightarrow |g(x)-g(x_0)|<\varepsilon$.\\
+Оберемо $\varepsilon = \dfrac{|g(x_0)|}{2}$. Тоді $g(x_0)-\varepsilon <g(x) <g(x_0)+\varepsilon$.\\
 Якщо $g(x_0) > 0$, то $\varepsilon = \dfrac{g(x_0)}{2} \Rightarrow 0 < g(x) < \dfrac{3}{2}g(x_0)$.\\
 Якщо $g(x_0) < 0$, то $\varepsilon = -\dfrac{g(x_0)}{2} \Rightarrow \dfrac{3}{2}g(x_0) < g(x) < \dfrac{1}{2}g(x_0) < 0$.\\
-Тобто $\exists \delta: \forall x \in A: |x-x_0|<\delta \Rightarrow g(x) \neq 0$.\\
-Отже, наше означення є коректним.
+Тобто $\exists \delta: \forall x \in A: |x-x_0|<\delta \Rightarrow g(x) \neq 0$. Отже, наше означення є коректним.
 
 \begin{theorem}[Неперервність композиції]
-Задано функції $f: A \to B, g: B \to \mathbb{R}$ та $h = g \circ f$. Відомо, що $f$ неперервна в т. $x_0 \in A$; та $g$ - неперервна в т. $f(x_0) = y_0 \in B$.\\
-Тоді $h$ - неперервна в т. $x_0$.\\
+Задано функції $f \colon A \to B, g \colon B \to \mathbb{R}$ та $h = g \circ f$. Відомо, що $f$ неперервна в точці $x_0 \in A$; та $g$ -- неперервна в точці $f(x_0) = y_0 \in B$. Тоді $h$ -- неперервна в точці $x_0$.\\
 \textit{Випливає з означення та властивості композиції.}
 \end{theorem}
 
 \begin{definition}
-Функція $f: A \to \mathbb{R}$ називається \textbf{неперервною на множині} $A$, якщо вона є неперервною $\forall x \in A$.\\
-Позначення: $C(A)$ - множина неперервних функцій в $A$.\\
+Функція $f \colon A \to \mathbb{R}$ називається \textbf{неперервною на множині} $A$, якщо
+\begin{align*}
+\text{$f$ -- неперервна $\forall x \in A$}.
+\end{align*}
+Позначення: $C(A)$ -- множина неперервних функцій в $A$.
 \end{definition}
 
 \subsection{Неперервність функції на відрізку}
-Надалі ми розглядаємо лише функції $f \in C([a,b])$, тобто неперервні функції на відрізку. Саме для них будуть працювати такі теореми:
+Надалі ми розглядаємо лише функції $f \in C([a,b])$, тобто неперервні функції на відрізку. Саме для них будуть працювати нижчезгадані теореми.
 
 \begin{theorem}[Теорема Ваєрштраса 1]
 Задано функцію $f \in C([a,b])$. Тоді вона є обмеженою на $[a,b]$.
 \end{theorem}
 
 \begin{proof}
-!Припустимо, що $f$ не є обмежено, тобто $\forall n \geq 1: \exists x_n \in [a,b]: |f(x_n)| > n$.\\
-Отримаємо послідовність $\{x_n,n \geq 1\}$. Є два випадки, тому виділимо 2 підпослідовності:\\
-1) $\{x_{n_k}, k \geq 1\}: f(x_{n_k})>n_k$;\\
-2) $\{x_{n_m}, m \geq 1\}: f(x_{n_m})<-n_m$.\\
-Розглянемо другу. Вона є обмеженою, оскільки $\{x_{n_m}, m \geq 1\} \subset [a,b]$.\\
-Тоді за Ваєрштрасом, для підпослідовності $\{x_{n_{m_p}}, p \geq 1\}: \exists \displaystyle \lim_{n \to \infty} x_{n_{m_p}} =x_*$.\\
-Тому за означенням Гейне і за неперервністю, $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = f(x_*)$.\\
-Але водночас ми маємо, що функція не є обмеженою знизу, тобто $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = -\infty$. Суперечність!\\
-Для першого пункту все аналогічно і теж є суперечність.\\
-Отже, $f$ - все ж таки обмежена на $[a,b]$.
+!Припустимо, що $f$ не є обмежено, тобто $\forall n \geq 1: \exists x_n \in [a,b]: |f(x_n)| > n$. Отримаємо послідовність $\{x_n,n \geq 1\}$. Є два випадки, тому виділимо 2 підпослідовності:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\{x_{n_k}, k \geq 1\}: f(x_{n_k})>n_k$;
+\item $\{x_{n_m}, m \geq 1\}: f(x_{n_m})<-n_m$.
+\end{enumerate}
+Розглянемо другу. Вона є обмеженою, оскільки $\{x_{n_m}, m \geq 1\} \subset [a,b]$. Тоді за Ваєрштрасом, для підпослідовності $\{x_{n_{m_p}}, p \geq 1\}: \exists \displaystyle \lim_{n \to \infty} x_{n_{m_p}} =x_*$. Тому за означенням Гейне і за неперервністю, $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = f(x_*)$. Але водночас ми маємо, що функція не є обмеженою знизу, тобто $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = -\infty$. Суперечність!\\
+Для першого пункту все аналогічно і теж буде суперечність.\\
+Отже, $f$ -- все ж таки обмежена на $[a,b]$.
 \end{proof}
 
 \begin{theorem}[Теорема Ваєрштраса 2]
-Задано функцію $f \in C([a,b])$. Тоді виконуються два твердження одночасно:\\
-- $\displaystyle \exists x_* \in [a,b]: f(x_*) = \min_{x \in [a,b]} f(x)$\\
-- $\displaystyle \exists x^* \in [a,b]: f(x^*) = \max_{x \in [a,b]} f(x)$
+Задано функцію $f \in C([a,b])$. Тоді $f$ досягає найбільшого та найменшого значень. Тобто:\\
+$\displaystyle \exists x_* \in [a,b]: f(x_*) = \min_{x \in [a,b]} f(x)$;\\
+$\displaystyle \exists x^* \in [a,b]: f(x^*) = \max_{x \in [a,b]} f(x)$.
 \end{theorem}
 
 \begin{proof}
-Доведемо перший випадок, другий є аналогічним.\\
-Нехай $\displaystyle \inf_{x \in [a,b]} f(x) = c$. За означенням:\\
-1) $\forall x \in [a,b]: f(x) \geq c$;\\
-2) $\forall \varepsilon > 0: \exists x_{\varepsilon} \in [a,b]: f(x_{\varepsilon}) < c + \varepsilon$.\\
-Зафіксуємо $\varepsilon = \dfrac{1}{n}$. Тоді $\exists x_n \in [a,b]: c \leq f(x_n) < c + \dfrac{1}{n}$.\\
-Ми також маємо обмежену послідовність $\{x_n, n \geq 1\} \subset [a,b]$. Тому за Ваєрштрасом, для послідовності $\{x_{n_k},k \geq 1\}$ існує $\displaystyle \lim_{n \to \infty} x_{n_k} = x_*$. Отже, за Гейне і за неперервністю, $\displaystyle \exists \lim_{k \to \infty} f(x_{n_k}) = f(x_*)$.\\
-Але в той самий час $\exists x_{n_k} \in [a,b]: c \leq f(x_{n_k}) < c + \dfrac{1}{n_k}$.\\
-Коли $k \to \infty$, то за теоремою про поліцаїв, $\exists \displaystyle \lim_{k \to \infty} f(x_{n_k}) = c$.\\
-Таким чином, отримали, що $c = f(x_*) = \displaystyle \inf_{x \in [a,b]} f(x) = \min_{x \in [a,b]} f(x)$.
+Доведемо, що $f$ досягає найменшого значення. Для найбільшого буде аналогічно.\\
+Нехай $\displaystyle \inf_{x \in [a,b]} f(x) = c$. За критерієм $\inf$, отримаємо наступне:\\
+$\forall x \in [a,b]: f(x) \geq c$;\\
+$\forall \varepsilon > 0: \exists x_{\varepsilon} \in [a,b]: f(x_{\varepsilon}) < c + \varepsilon$.\\
+Зафіксуємо $\varepsilon = \dfrac{1}{n}$. Тоді $\exists x_n \in [a,b]: c \leq f(x_n) < c + \dfrac{1}{n}$. Ми також маємо обмежену послідовність $\{x_n, n \geq 1\} \subset [a,b]$. Тому за Ваєрштрасом, для послідовності $\{x_{n_k},k \geq 1\}$ існує $\displaystyle \lim_{n \to \infty} x_{n_k} = x_*$. Отже, за Гейне і за неперервністю, $\displaystyle \exists \lim_{k \to \infty} f(x_{n_k}) = f(x_*)$.\\
+Але водночас $\exists x_{n_k} \in [a,b]: c \leq f(x_{n_k}) < c + \dfrac{1}{n_k}$. Коли $k \to \infty$, то за теоремою про поліцаїв, $\exists \displaystyle \lim_{k \to \infty} f(x_{n_k}) = c$. Таким чином, отримали, що $c = f(x_*) = \displaystyle \inf_{x \in [a,b]} f(x) = \min_{x \in [a,b]} f(x)$.
 \end{proof}
 
 \begin{theorem}[Теорема Больцано-Коші про нульове значення]
 Задано функцію $f \in C([a,b])$, причому $f(a) \cdot f(b) < 0$. Тоді $\exists x_0 \in (a,b): f(x_0) = 0$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -4863,6 +4899,7 @@ $g$ - неперервна в $x_0$, тобто $\forall \varepsilon > 0: \exist
 \end{tikzpicture}
 \caption*{В цьому випадку $f(a) < 0, f(b) > 0$}
 \end{figure}
+\fi %uncomment picture
 \end{theorem}
 
 \iffalse %Перший спосіб доведення (ненадійний)
@@ -4894,17 +4931,13 @@ $\Rightarrow \dfrac{f(b)}{2} < f(x) < \dfrac{3f(b)}{2} \Rightarrow \forall x: |x
 
 \begin{proof}
 Будемо доводити випадок, коли $f(a) < 0$, $f(b) > 0$. Маємо відрізок $[a,b]$. \\ 
-Встановимо середину $c = \dfrac{a+b}{2}$. Розіб'ємо відрізок навпіл: $[a, c], [c, b]$. Якщо $f(c) = 0$, то доведено. Інакше два випадки:\\
-- $f(c) < 0$. Тоді беремо відрізок $[c,b]$;\\
-- $f(c) > 0$. Тоді беремо відрізок $[a,c]$.\\
+Встановимо середину $c = \dfrac{a+b}{2}$. Розіб'ємо відрізок навпіл: $[a, c], [c, b]$. Якщо $f(c) = 0$, то доведено. Інакше два випадки: або $f(c) < 0$ -- тоді беремо відрізок $[c,b]$; або $f(c) > 0$ -- тоді беремо відрізок $[a,c]$.\\
 Обраний відрізок позначимо за $[a_1,b_1]$, для якої $f(a_1) < 0, f(b_1) > 0$.\\
-Встановимо $c_1 = \dfrac{a_1+b_1}{2}$. Розіб'ємо знову навпіл: $[a_1,c_1],[c_1,b_1]$. Аналогічно якщо $f(c_1) = 0$, доведено. Інакше:\\
-- $f(c_1) < 0$. Тоді беремо відрізок $[c_1,b_1]$;\\
-- $f(c_1) > 0$. Тоді беремо відрізок $[a_1,c_1]$.\\
+Встановимо $c_1 = \dfrac{a_1+b_1}{2}$. Розіб'ємо знову навпіл: $[a_1,c_1],[c_1,b_1]$. Аналогічно якщо $f(c_1) = 0$, доведено. Інакше знову два випадки: або $f(c_1) < 0$ -- тода беремо відрізок $[c_1,b_1]$; або $f(c_1) > 0$ -- тоді беремо відрізок $[a_1,c_1]$.\\
 Обраний відрізок позначимо за $[a_2,b_2]$, для якої $f(a_2) < 0, f(b_2) > 0$.\\
 $\vdots$\\
-В результаті маємо вкладені відрізки $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$ \\
-Довжина кожного з відрізків $\dfrac{b-a}{2^n}$, а також $\forall n \geq 1: f(a_n) < 0, f(b_n) > 0$\\
+В результаті маємо вкладені відрізки $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$ Довжина кожного з відрізків $\dfrac{b-a}{2^n}$, а також $\forall n \geq 1: f(a_n) < 0, f(b_n) > 0$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -4921,6 +4954,7 @@ $\vdots$\\
 \draw[red] (2.76,0) circle (0.8pt) node[black, scale = 0.8] at (2.796,-0.5) {$x_0$};
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 За теоремою Кантора, $\exists! x_0 \in \mathbb{R}: \forall n \geq 1: x_0 \in [a_n,b_n]$. Значить,\\
 $\displaystyle\lim_{n \to \infty} a_n = x_0 \implies \displaystyle\lim_{n \to \infty} f(a_n) = f(x_0) \leq 0$\\
 $\displaystyle\lim_{n \to \infty} b_n = x_0 \implies \displaystyle\lim_{n \to \infty} f(b_n) = f(x_0) \geq 0$.\\
@@ -4935,26 +4969,26 @@ $\displaystyle\lim_{n \to \infty} b_n = x_0 \implies \displaystyle\lim_{n \to \i
 
 \subsection{Існування неперервної оберненої функції}
 \begin{lemma}
-Задано функцію $f \in C([a,b])$ та строго монотонно зростаюча. Тоді $E(f) = [c,d]$, де $c = f(a), d = f(b)$\\
-\textit{Для строго спадної функції всі леми знизу будуть аналогічними.}
+Задано функцію $f \in C([a,b])$ та строго монотонно зростаюча. Тоді $E(f) = [c,d]$, де $c = f(a), d = f(b)$.\\
+\textit{Для строго спадної функції всі леми знизу (і ця лему в тому числі) будуть аналогічними.}
 \end{lemma}
 
 \begin{proof}
-Маємо множину $E(f) = \{f(x): x \in [a,b] \}$\\
+Маємо множину $E(f) = \{f(x): x \in [a,b] \}$.
 Якщо $y \in E(f)$, то тоді $\exists x \in [a,b]: y = f(x)$. А оскільки $a < x < b$, то тоді $f(a) < y < f(b) \implies y \in [f(a),f(b)]$. Отже, $E(f) \subset [f(a),f(b)]$.\\
 Якщо $y \in [f(a),f(b)]$, то тоді за теоремою про проміжне значення, $\exists x \in [a,b]: y = f(x) \implies y \in E(f)$. Отже, $[f(a),f(b)] \subset E(f)$\\
 А це означає, що $E(f) = [f(a),f(b)]$.
 \end{proof}
 
 \begin{lemma}
-Задано функцію $f \in C([a,b])$ та строго монотонно зростаюча. Тоді $f$ - бієкція.
+Задано функцію $f \in C([a,b])$ та строго монотонно зростаюча. Тоді $f$ -- бієкція.
 \end{lemma}
 
 \begin{proof}
 !Припустимо, що $\forall y: \exists x_1,x_2 \in [a,b]: y = f(x_1), y = f(x_2)$, але при цьому $x_1 \neq x_2$.\\
 Якщо $x_1 > x_2$, то тоді $f(x_1) > f(x_2)$, що не можливо.\\
 Якщо $x_1 < x_2$, то тоді $f(x_1) < f(x_2)$, що не можливо.\\
-Виникає суперечність! Тому $\forall y: \exists! x \in [a,b]: y = f(x)$. Отже, $f$ - бієкція.
+Виникає суперечність! Тому $\forall y: \exists! x \in [a,b]: y = f(x)$. Отже, $f$ -- бієкція.
 \end{proof}
 
 Із цих двох лем ми отримали обернену функцію $g: [c,d] \to [a,b]$, для якої спрацьовують такі леми:
@@ -4966,7 +5000,7 @@ $\displaystyle\lim_{n \to \infty} b_n = x_0 \implies \displaystyle\lim_{n \to \i
 \begin{proof}
 Зафіксуємо $y_1,y_2 \in [c,d]$ так, щоб $y_1 > y_2$.\\
 !Припустимо, що $g(y_1) \leq g(y_2)$. Тоді отримаємо $y_1 = f(g(y_1)) \leq f(g(y_2)) = y_2$. Суперечність!\\
-Отже, $y_1 > y_2 \implies g(y_1) > g(y_2)$, тобто $g$ - строго монотонно зростає.
+Отже, $y_1 > y_2 \implies g(y_1) > g(y_2)$, тобто $g$ -- строго монотонно зростає.
 \end{proof}
 
 \begin{lemma}
@@ -4979,16 +5013,15 @@ $\exists \delta^* > 0: \forall N: \exists n \geq N: |g(y_n)-g(y_0)| \geq \delta^
 Тут $g(y_n) = x_n$ та $g(y_0) = x_0$, тоді $|x_n-x_0| \geq \delta^*$\\
 Зокрема для $N = 1: \exists n_1 \geq N$, для $N = n_1+1: \exists n_2 > n_1$, $\dots$\\
 Коротше, є підпослідовність $\{x_{n_k}, k \geq 1\}$, для якої $|x_{n_k} -x_0| \geq \delta^*$\\
-Оскільки $\{y_n\} \subset [c,d]$, то тоді $\{x_n \} \subset [a,b]$, ну й $\{x_{n_k}\} \subset [a,b]$ - обмежена. Тоді за Больцано-Ваєрштрасом, \\ $\exists \{x_{n_{k_m}}, m \geq 1\}$ така, що $\displaystyle\lim_{m \to \infty} x_{n_{k_m}} = x_{00}$. За граничним переходом, маємо, що $|x_{00}-x_0| \geq \delta^*$.\\
+Оскільки $\{y_n\} \subset [c,d]$, то тоді $\{x_n \} \subset [a,b]$, ну й $\{x_{n_k}\} \subset [a,b]$ - обмежена. Тоді за Больцано-Ваєрштрасом, $\exists \{x_{n_{k_m}}, m \geq 1\}$ така, що $\displaystyle\lim_{m \to \infty} x_{n_{k_m}} = x_{00}$. За граничним переходом, маємо, що $|x_{00}-x_0| \geq \delta^*$.\\
 Оскільки $f \in C([a,b])$, то звідси, $\displaystyle\lim_{m \to \infty} f(x_{n_{k_m}}) \lim_{m \to \infty} f(g(y_{n_{k_m}})) = \lim_{m \to \infty} y_{n_{k_m}} = y_0 = f(x_0) = f(x_{00})$.\\
-Виходить, що $x_{00} \neq x_0$, але $f(x_{00}) = f(x_0)$. Але ж $f$ - бієкція. Суперечність!
+Виходить, що $x_{00} \neq x_0$, але $f(x_{00}) = f(x_0)$. Але ж $f$ -- бієкція. Суперечність!
 \end{proof}
 
 Склеюючи всі чотири леми, ми сформуємо одну теорему
 
 \begin{theorem}
-Задано функцію $f: [a,b] \to [c,d]$ - строго монотонна і неперервна.\\
-Тоді існує функція $g: [c,d] \to [a,b]$ - строго монотонна (як і $f$) і неперервна, яка є оберненою до $f$.
+Задано функцію $f \colon [a,b] \to [c,d]$ -- строго монотонна і неперервна. Тоді існує функція $g \colon [c,d] \to [a,b]$ -- строго монотонна (як і $f$) і неперервна, яка є оберненою до $f$.
 \end{theorem}
 
 \begin{remark}
@@ -4996,22 +5029,21 @@ $\exists \delta^* > 0: \forall N: \exists n \geq N: |g(y_n)-g(y_0)| \geq \delta^
 \end{remark}
 
 \subsection{Неперервність елементарних функцій}
-0) Задано функцію $f(x) = x$.  $f \in C(\mathbb{R})$.
+0) Задано функцію $f(x) = x$. Тоді $f \in C(\mathbb{R})$.
 \begin{proof}
 $\forall \varepsilon > 0: \exists \delta = \varepsilon: \forall x: |x-x_0|<\delta \Rightarrow |f(x)-f(x_0)| = |x-x_0|<\delta = \varepsilon \implies f(x) = x \in C(\mathbb{R})$.
 \end{proof}
 
-1) Задано функцію $f(x) = a_0 + a_1 x + \dots + a_n x^n$.  $f \in C(\mathbb{R})$.
+1) Задано функцію $f(x) = a_0 + a_1 x + \dots + a_n x^n$ (многочлен). Тоді $f \in C(\mathbb{R})$.
 \begin{proof}
-Оскільки $x \in C(\mathbb{R})$, то $x^n = x \cdot \dots \cdot x \in C(\mathbb{R})$ як добуток функцій $\forall n \geq 1$.\\
-Отже, $f(x) = a_0 + a_1 x + \dots + a_n x^n \in C(\mathbb{R})$ як сума неперервних функцій, множених на константу.
+Оскільки $x \in C(\mathbb{R})$, то $x^n = x \cdot \dots \cdot x \in C(\mathbb{R})$ як добуток функцій $\forall n \geq 1$. Отже, $f(x) = a_0 + a_1 x + \dots + a_n x^n \in C(\mathbb{R})$ як сума неперервних функцій, множених на константу.
 \end{proof}
 
-2) Задано функцію $f(x) = \sin x$. $f \in C(\mathbb{R})$.
+2) Задано функцію $f(x) = \sin x$. Тоді $f \in C(\mathbb{R})$.
 \begin{proof}
-Вже відомо давно нерівність:\\
+Вже відома давно нерівність:\\
 $1 - \dfrac{x^2}{2} < \dfrac{\sin x}{x} < 1 \Rightarrow x - \dfrac{x^3}{2} < \sin x < x$.\\
-Якщо $x \to 0$, то за теоремою про 2 поліцая, $\displaystyle \lim_{x \to 0} \sin x = 0 = \sin 0$ - неперервна лише в т. $0$.\\
+Якщо $x \to 0$, то за теоремою про 2 поліцая, $\displaystyle \lim_{x \to 0} \sin x = 0 = \sin 0$ -- неперервна лише в т. $0$.\\
 Перевіримо неперервність в т. $x_0 \in \mathbb{R}$:\\
 $\displaystyle \lim_{x \to x_0} (\sin x - \sin x_0) = \lim_{x \to x_0} 2 \sin \dfrac{x-x_0}{2} \cos \dfrac{x+x_0}{2} \boxed{=} $\\
 Проведемо заміну: $\dfrac{x-x_0}{2} = t$. Тоді $t \to 0$\\
@@ -5019,37 +5051,38 @@ $\boxed{=} \displaystyle \lim_{t \to 0} 2 \sin t \cos (t+x_0) \overset{\text{н.
 $\Rightarrow \displaystyle \lim_{x \to x} \sin x = \sin x_0 \implies f(x) = \sin x \in C(\mathbb{R})$.
 \end{proof}
 
-3) Задано функцію $f(x) = \cos x$. $f \in C(\mathbb{R})$.
+3) Задано функцію $f(x) = \cos x$. Тоді $f \in C(\mathbb{R})$.
 \begin{proof}
 Розпишемо $\cos x = \sin \left( \dfrac{\pi}{2} -x \right)$. Оскільки $\dfrac{\pi}{2} - x \in C(\mathbb{R})$ та $\sin x \in C(\mathbb{R})$, то звідси $\cos x \in C(\mathbb{R})$ як композиція.
 \end{proof}
 
-4.1) Задано функцію $f(x) = \tg x$. $f \in C\left(\mathbb{R} \setminus \left\{\dfrac{\pi}{2} + \pi k, k \in \mathbb{Z}\right\} \right)$.\\
-4.2) Задано функцію $f(x) = \ctg x$. $f \in C\left(\mathbb{R} \setminus \left\{\pi k, k \in \mathbb{Z}\right\} \right)$.
+4) Задано функцію $f(x) = \tg x$. Тоді $f \in C\left(\mathbb{R} \setminus \left\{\dfrac{\pi}{2} + \pi k, k \in \mathbb{Z}\right\} \right)$.\\
+5) Задано функцію $f(x) = \ctg x$. Тоді $f \in C\left(\mathbb{R} \setminus \left\{\pi k, k \in \mathbb{Z}\right\} \right)$.
 \begin{proof}
-1.Розпишемо $\tg x = \dfrac{\sin x}{\cos x}$. Оскільки $\sin x \in \mathbb{R}$, $\cos x \in \mathbb{R}$, то врахуючи умову $\cos x \neq 0 \\ \implies x \neq \dfrac{\pi}{2} + \pi k, k \in \mathbb{Z}$, маємо $\tg x \in C\left(\mathbb{R} \setminus \left\{\dfrac{\pi}{2} + \pi k, k \in \mathbb{Z}\right\} \right)$ як частка.\\
-2. Для $\ctg x$ аналогічні міркування.
+Розпишемо $\tg x = \dfrac{\sin x}{\cos x}$. Оскільки $\sin x \in \mathbb{R}$, $\cos x \in \mathbb{R}$, то врахуючи умову $\cos x \neq 0 \\ \implies x \neq \dfrac{\pi}{2} + \pi k, k \in \mathbb{Z}$, маємо $\tg x \in C\left(\mathbb{R} \setminus \left\{\dfrac{\pi}{2} + \pi k, k \in \mathbb{Z}\right\} \right)$ як частка.\\
+Для $\ctg x$ аналогічні міркування.
 \end{proof}
 
-6) Задано функцію $f(x) = \arcsin x$. $f \in C([-1,1])$.
+6) Задано функцію $f(x) = \arcsin x$. Тоді $f \in C([-1,1])$.
 \begin{proof}
-Маємо функцію $g(x) = \sin x$, що визначена на $\left[ -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right]$. На цьому проміжку вона монотонно строго зростає, неперервна.\\
-Отже, за теоремою про існування оберненої функції, $g^{-1}(x) = f(x) = \arcsin x \in C([-1,1])$.
+Маємо функцію $g(x) = \sin x$, що визначена на $\left[ -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right]$. На цьому проміжку вона монотонно строго зростає, неперервна. Отже, за теоремою про існування оберненої функції, $g^{-1}(x) = f(x) = \arcsin x \in C([-1,1])$.
 \end{proof}
-7) Задано функцію $f(x) = \arccos x$. $f \in C([-1,1])$.\\
+
+7) Задано функцію $f(x) = \arccos x$. Тоді $f \in C([-1,1])$.\\
 \textit{Вказівка: $\arcsin x + \arccos x = \dfrac{\pi}{2}$.}
 \bigskip \\
-8) Задано функцію $f(x) = \arctg x$. $f \in C(\mathbb{R})$.
+8) Задано функцію $f(x) = \arctg x$. Тоді $f \in C(\mathbb{R})$.
+
 \begin{proof}
-Маємо функцію $g(x) = \tg x$, що визначена на $\left( -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right)$. На цьому проміжку вона монотонно строго зростає, неперервна.\\
-Отже, за теоремою про існування оберненої функції, $g^{-1}(x) = f(x) = \arctg x \in C(\mathbb{R})$.
+Маємо функцію $g(x) = \tg x$, що визначена на $\left( -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right)$. На цьому проміжку вона монотонно строго зростає, неперервна. Отже, за теоремою про існування оберненої функції, $g^{-1}(x) = f(x) = \arctg x \in C(\mathbb{R})$.
 \end{proof}
 
-9) Задано функцію $f(x) = \arcctg x$. $f \in C(\mathbb{R})$.\\
+9) Задано функцію $f(x) = \arcctg x$. Тоді $f \in C(\mathbb{R})$.\\
 \textit{Вказівка: $\arctg x + \arcctg x = \dfrac{\pi}{2}$.}
 \bigskip \\
 
-10) Задано функцію $f(x) = a^x$. $f \in C(\mathbb{R})$.
+10) Задано функцію $f(x) = a^x$. Тоді $f \in C(\mathbb{R})$.
+
 \begin{proof}
 Перш за все покажемо, що $\displaystyle\lim_{x \to 0} a^x = 1$. Нехай $\varepsilon > 0$. Розглядаємо випадок $a > 1$.\\
 Оскільки $\displaystyle\lim_{n \to \infty} \sqrt[n]{a} = 1$, то $\exists N_1: \forall n \geq N_1: |a^{\frac{1}{n}} - 1| < \varepsilon$. Зокрема $|a^{\frac{1}{N_1}} - 1| < \varepsilon$.\\
@@ -5061,46 +5094,45 @@ $\Rightarrow \displaystyle \lim_{x \to x} \sin x = \sin x_0 \implies f(x) = \sin
 $\displaystyle\lim_{x \to x_0} a^x = \lim_{x \to x_0} a^{x-x_0} a^{x_0} = a^{x_0} \implies a^x \in C(\mathbb{R})$.
 \end{proof}
 
-11) Задано функцію $f(x) = \log_a x$. $f \in C((0,+\infty))$.\\
+11) Задано функцію $f(x) = \log_a x$. Тоді $f \in C((0,+\infty))$.\\
 \textit{Вказівка: теорема про існування оберненої функції.}
 \bigskip \\
 
-12) Задано функцію $f(x) = \sqrt[n]{x^m}$. $f \in C([0,+\infty))$.
+12) Задано функцію $f(x) = \sqrt[n]{x^m}$. Тоді $f \in C([0,+\infty))$.
 \begin{proof}
 Оскільки $x^n \in C(\mathbb{R})$, як наслідок $x^n \in C([0,+\infty))$, то тоді $\sqrt[n]{x} \in C([0,+\infty))$ як обернена функція. Отже, $\sqrt[n]{x^m} \in C([0,+\infty))$ як добуток.
 \end{proof}
 
-	
-	\begin{theorem}
-	Задано функції $f,g: A \to \mathbb{R}$ так, що $f(x) > 0$. Відомо, що $f,g \in C$. \\
-	Тоді $f(x)^{g(x)} \in C$.
-	\end{theorem}
-	
-	Тепер можемо довести неперервність ще однієї функції.
-	\begin{proof}
+13) Задані функції $f,g \colon A \to \mathbb{R}$, причому $f(x) > 0$. Відомо, що $f,g \in C(A)$. Тоді $f^g \in C(A)$.
+
+\begin{proof}
 	Розпишемо $f(x)^{g(x)} = e^{g(x) \ln f(x)}$.\\
-	Маємо $f(x) \in C \implies \ln f(x) \in C$. Далі $g(x) \in C \implies g(x) \ln f(x) \in C$. Нарешті, $e^x \in C \implies e^{g(x) \ln f(x)} = f(x)^{g(x)} \in C$.
-	\end{proof}
+	Маємо $f(x) \in C(A) \implies \ln f(x) \in C(A)$. Далі $g(x) \in C(A) \implies g(x) \ln f(x) \in C(A)$. Нарешті, $e^x \in C(A) \implies e^{g(x) \ln f(x)} = f(x)^{g(x)} \in C(A)$.
+\end{proof}
+
+14) Задано функцыю $f(x) = x^\alpha, \alpha \in \mathbb{R}$. Тоді $f \in C((0,+\infty))$.\\
+\textit{Випливає з пункту 13).}
 
 \subsection{Рівномірна неперервність}
 \begin{definition}
-Функція $f$ називається \textbf{рівномірно неперервною на множині} $A$, якщо
+Функція $f \colon A \to \mathbb{R}$ називається \textbf{рівномірно неперервною на множині} $A$, якщо
 \begin{align*}
 \forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall x_1,x_2 \in A: |x_1-x_2|<\delta \Rightarrow |f(x_1) - f(x_2)| < \varepsilon
 \end{align*}
-Позначення: $C_{unif}(A)$ - множина рівномірно неперервних функцій на $A$.
+Позначення: $C_{\text{unif}}(A)$ -- множина рівномірно неперервних функцій на $A$.
 \end{definition}
 
 \begin{proposition}
-Задано функцію $f \in C_{unif}(A)$. Тоді $f \in C(A)$.\\
+Задано функцію $f \in C_{\text{unif}}(A)$. Тоді $f \in C(A)$.\\
 \textit{Випливає з означення рівномірної неперервності.}
 \end{proposition}
 
 \begin{example}
-Доведемо, що функція $f(x) = \sqrt{x} \in C_{unif}([0,+\infty))$.\\
-Розглянемо нерівність для т. $x_1,x_2 \in [0,+\infty)$ так, щоб $|x_1-x_2|<\delta$.\\
+Доведемо, що функція $f(x) = \sqrt{x} \in C_{\text{unif}}([0,+\infty))$.\\
+Розглянемо нерівність для точок $x_1,x_2 \in [0,+\infty)$ так, щоб $|x_1-x_2|<\delta$.\\
 $|f(x_1) - f(x_2)| = |\sqrt{x_1} - \sqrt{x_2}| = \sqrt{|\sqrt{x_1} - \sqrt{x_2}|^2} \leq \sqrt{|\sqrt{x_1}-\sqrt{x_2}| |\sqrt{x_1}+\sqrt{x_2}|} = \sqrt{|x_1-x_2|} < \sqrt{\delta} = \varepsilon$.\\
-Якщо зафіксуємо $\delta = \varepsilon^2$, то отримаємо, що $f \in C_{unif}$.
+Якщо зафіксуємо $\delta = \varepsilon^2$, то отримаємо, що $f \in C_{\text{unif}}([0,+\infty))$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -5129,24 +5161,26 @@ $|f(x_1) - f(x_2)| = |\sqrt{x_1} - \sqrt{x_2}| = \sqrt{|\sqrt{x_1} - \sqrt{x_2}|
 \draw[dashed] (3+\delt,{sqrt(3)-\eps})--(0,{sqrt(3)-\eps});
 \draw[dashed] (3+\delt,{sqrt(3)+\eps})--(0,{sqrt(3)+\eps});
 \end{tikzpicture}
-\caption*{Рівномірна неперервність означає таке: якщо візьмемо $\varepsilon>0$, ми знайдемо $\delta = \varepsilon^2$ в нашому випадку. Утворимо блакитний прямокутик - цей прямокутник не змінить довжини, тому що всюди червона частина функції потрапляє в цей прямокутник.}
+\caption*{Рівномірна неперервність означає таке: якщо візьмемо $\varepsilon>0$, ми знайдемо $\delta = \varepsilon^2$ в нашому випадку. Утворимо блакитний прямокутик -- цей прямокутник не змінить довжини, тому що всюди червона частина функції потрапляє в цей прямокутник.}
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \begin{example}
-Розглянемо функцію $f(x) = \ln x$, де $x \in (0,1)$. Доведемо, що $f(x) \not\in C_{unif}((0,1))$.\\
+Розглянемо функцію $f(x) = \ln x$, де $x \in (0,1)$. Доведемо, що $f(x) \not\in C_{\text{unif}}((0,1))$.\\
 Заперечення рівномірної неперервності має такий вигляд:\\
 $\exists \varepsilon^* > 0: \forall \delta > 0: \exists x_{1 \delta},x_{2 \delta} \in A: |x_{1 \delta}-x_{2 \delta}|<\delta$, але $|f(x_{1 \delta}) - f(x_{2 \delta})| \geq \varepsilon^*$.\\
 Маємо ось що:\\
 $|\ln x_{1 \delta} - \ln x_{2 \delta}| = \abs{\ln \dfrac{x_{1 \delta}}{x_{2 \delta}}} \geq 1 = \varepsilon^*$, якщо $\dfrac{x_{1 \delta}}{x_{2 \delta}} \geq e$.\\
 Ми вже зафіксували $\varepsilon^* = 1$, а тепер лишилось надати $x_{1 \delta}, x_{2 \delta}$.\\
 Маємо $x_{1 \delta} \geq e x_{2 \delta}$, а також $|x_{1 \delta} - x_{2 \delta}| < \delta$.\\
-Оскільки $\delta$ в нас задовільне, то $\exists n: \dfrac{1}{n} < \delta$. Тоді надамо $x_{1 \delta} = \dfrac{e}{3n}, x_{2 \delta} = \dfrac{1}{3n}$.
+Оскільки $\delta$ в нас довільне, то $\exists n: \dfrac{1}{n} < \delta$. Оберемо $x_{1 \delta} = \dfrac{e}{3n}, x_{2 \delta} = \dfrac{1}{3n}$.
 $x_{1 \delta} \geq e x_{2 \delta}$ буде виконана.\\
 $|x_{1 \delta} - x_{2 \delta}| = \dfrac{e}{3n} - \dfrac{1}{3n} = \dfrac{e-1}{3n} < \dfrac{1}{n} < \delta$.\\
 Що ми отримали:\\
 $\exists \varepsilon^* = 1: \forall \delta: \exists n: \exists x_{1 \delta} = \dfrac{e}{3n}, x_{2 \delta} = \dfrac{1}{3n}: |x_{1 \delta} - x_{2 \delta}| < \dfrac{1}{n} < \delta$, але $|f(x_{1\delta}) - f(x_{2 \delta})| \geq 1$.\\
 Що й доводить те, що функція НЕ є рівномірно неперервною.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -5163,14 +5197,15 @@ $\exists \varepsilon^* = 1: \forall \delta: \exists n: \exists x_{1 \delta} = \d
 
 \draw[thick, red, domain=0.05:{1/6+1/2}, variable=\x, samples = 40] plot({\x}, {ln(\x)});
 \end{tikzpicture}
-\caption*{В заданий прямокутник не потрапляють всі значення функції в точці з околу $x$. Тобто нам необхідно її розмір зменшати для неперервності. Тобто зміна розміру в залежності від точки $x$ - вже не буде рівномірно неперервною.}
+\caption*{В заданий прямокутник не потрапляють всі значення функції в точці з околу $x$. Тобто нам необхідно її розмір зменшати для неперервності. Тобто зміна розміру в залежності від точки $x$ -- вже не буде рівномірно неперервною.}
 \end{figure}
+\fi %uncomment picture
 
-Проте в звортньому напрямку твердження буде працювати, якщо зробити додаткове обмеження. Це буде записано в наступній теоремі:
+Проте в звортному напрямку твердження буде працювати, якщо зробити додаткове обмеження. Це буде записано в наступній теоремі:
 \end{example}
 
 \begin{theorem}[Теорема Кантора]
-Задано функцію $f \in C([a,b])$. Тоді $f \in C_{unif}([a,b])$.
+Задано функцію $f \in C([a,b])$. Тоді $f \in C_{\text{unif}}([a,b])$.
 \end{theorem}
 
 \begin{proof}
@@ -5185,7 +5220,7 @@ $\exists \varepsilon^* > 0: \forall \delta: \exists x_{1 \delta}, x_{2 \delta} \
 \end{proof}
 
 \begin{example}
-Функція $\arcsin x \in C([-1,1])$, тоді за теоремою Кантора, $\arcsin x \in C_{unif}([-1,1])$.
+Функція $\arcsin x \in C([-1,1])$, тоді за теоремою Кантора, $\arcsin x \in C_{\text{unif}}([-1,1])$.
 \end{example}
 
 \newpage
@@ -5196,7 +5231,7 @@ $\exists \varepsilon^* > 0: \forall \delta: \exists x_{1 \delta}, x_{2 \delta} \
 \section{Диференціювання}
 \subsection{Основні означення}
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$ та $x_0 \in A$ - гранична точка для $A$.\\
+Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in A$ -- гранична точка для $A$.\\
 Функцію $f$ називають \textbf{диференційованою} в т. $x_0$, якщо
 \begin{align*}
 \exists L \in \mathbb{R}: f(x) - f(x_0) = L(x-x_0)+o(x-x_0),x \to x_0
@@ -5204,55 +5239,56 @@ $\exists \varepsilon^* > 0: \forall \delta: \exists x_{1 \delta}, x_{2 \delta} \
 \end{definition}
 
 \begin{proposition}
-Задано функцію $f$ - диференційована в т. $x_0$. Тоді вона в т. $x_0$ неперервна.
+\label{differentiable_is_continuous}
+Задано $f$ -- диференційована в точці $x_0$. Тоді $f$ -- неперервна в точці $x_0$.
 \end{proposition}
 
 \begin{proof}
-$\displaystyle \lim_{x \to x_0} (f(x)-f(x_0)) = \lim_{x \to x_0}(L(x-x_0)+o(x-x_0)) = 0 \implies \lim_{x \to x_0} f(x) = f(x_0)$
+$\displaystyle \lim_{x \to x_0} (f(x)-f(x_0)) = \lim_{x \to x_0}(L(x-x_0)+o(x-x_0)) = 0 \implies \lim_{x \to x_0} f(x) = f(x_0)$.
 \end{proof}
 
 \begin{proposition}
-Функція $f$ - диференційована в т. $x_0 \iff \exists \displaystyle \lim_{x \to x_0} \frac{f(x)-f(x_0}{x-x_0} = L = f'(x_0)$.
+Функція $f$ -- диференційована в точці $x_0 \iff \exists \displaystyle \lim_{x \to x_0} \frac{f(x)-f(x_0}{x-x_0} \overset{\text{позн.}}{=} f'(x_0) = L$.
 \end{proposition}
 
 \begin{definition}
-Тут число $f'(x_0)$ називають \textbf{похідною} функції в т. $x_0$, якщо ліміт існує.
+Число $f'(x_0)$ називають \textbf{похідною} функції в точці $x_0$, якщо ліміт існує.
 \end{definition}
 
 \begin{proof}
-$f$ - диференційована в т. $x_0 \overset{\textrm{def.}}{\iff} \exists L: f(x)-f(x_0)=L(x-x_0)+o(x-x_0), x \to x_0 \iff \\ \iff \exists L: o(x-x_0) = f(x)-f(x_0)-L(x-x_0), x \to x_0 \iff \\ \iff \displaystyle \lim_{x \to x_0} \frac{f(x)-f(x_0)-L(x-x_0)}{x-x_0} = 0 \iff \lim_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0} = L = f'(x_0)$.
+$f$ -- диференційована в т. $x_0 \overset{\textrm{def.}}{\iff} \exists L: f(x)-f(x_0)=L(x-x_0)+o(x-x_0), x \to x_0 \iff \\ \iff \exists L: o(x-x_0) = f(x)-f(x_0)-L(x-x_0), x \to x_0 \iff \\ \iff \displaystyle \lim_{x \to x_0} \frac{f(x)-f(x_0)-L(x-x_0)}{x-x_0} = 0 \iff \lim_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0} = L = f'(x_0)$.
 \end{proof}
 
 \begin{remark}
-Задамо $\Delta x = x - x_0$, яку називають \textbf{прирістом аргумента}. Тоді похідну функції в т. $x_0$ можна записати іншою формулою: $f'(x_0) = \displaystyle\lim_{\Delta x \to 0} \dfrac{f(x_0+\Delta x) - f(x_0)}{\Delta x}$. \\
+Задамо $\Delta x = x - x_0$, яку називають \textbf{прирістом аргумента}. Тоді похідну функції в точці $x_0$ можна записати іншою формулою: $f'(x_0) = \displaystyle\lim_{\Delta x \to 0} \dfrac{f(x_0+\Delta x) - f(x_0)}{\Delta x}$. \\
 А диференційованість ось так: $f(x_0+\Delta x) - f(x_0) = L \Delta x + o(\Delta x), \Delta x \to 0$.
 \end{remark}
 
 \begin{proposition}[Арифметичні властивості]
-Задано функції $f,g$ - диференційовані в т. $x_0$, \hspace{0.3cm} $f'(x_0),g'(x_0)$ - їхні похідні. Тоді:\\
-1) $\forall c \in \mathbb{R}: cf$ - диференційована в т. $x_0$, а її похідна
-$(cf)'(x_0) = cf'(x_0)$;\\
-2) $f \pm g$ - диференційована в т. $x_0$, а її похідна
-$(f+g)'(x_0)=f'(x_0)+g'(x_0);$\\
-3) $f \cdot g$ - диференційована в т. $x_0$, а її похідна
-$(f \cdot g)(x_0) = f'(x_0)g(x_0)+f(x_0)g'(x_0)$;\\
-4) $\displaystyle \frac{f}{g}$ - диференційована в т. $x_0$ при $g(x_0) \neq 0$, а її похідна
+Задано функції $f,g$ -- диференційовані в точці $x_0$, причому $f'(x_0),g'(x_0)$ -- їхні похідні. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\forall c \in \mathbb{R}: cf$ -- диференційована в точці $x_0$, а її похідна
+$(cf)'(x_0) = cf'(x_0)$;
+\item $f \pm g$ -- диференційована в точці $x_0$, а її похідна
+$(f+g)'(x_0)=f'(x_0)+g'(x_0);$
+\item $f \cdot g$ -- диференційована в точці $x_0$, а її похідна
+$(f \cdot g)(x_0) = f'(x_0)g(x_0)+f(x_0)g'(x_0)$;
+\item $\displaystyle \frac{f}{g}$ -- диференційована в точці $x_0$ при $g(x_0) \neq 0$, а її похідна
 $\displaystyle \left(\frac{f}{g}\right)'(x_0) = \frac{f'(x_0)g(x_0)-f(x_0)g'(x_0)}{(g(x_0))^2}$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Оскільки $f,g$ - диференційовані в т. $x_0$, то маємо при $x \to x_0$\\
+Оскільки $f,g$ -- диференційовані в точці $x_0$, то маємо при $x \to x_0$\\
 $f(x)-f(x_0) = f'(x_0)(x-x_0) + o(x-x_0)$;\\
 $g(x)-g(x_0) = g'(x_0)(x-x_0) + o(x-x_0)$.\\
 Доведемо почергово кожний пункт.
-\bigskip \\
-1) $(cf)(x)-(cf)(x_0) = cf(x)-cf(x_0)=c(f(x)-f(x_0))=c(f'(x_0)(x-x_0)+o(x-x_0))= \\ =\textcolor{red}{cf'(x_0)}(x-x_0)+o(x-x_0)$\\
-Отже, $cf$ - диференційована в т. $x_0$ та має похідну в червоному.
-\bigskip \\
-2) $(f+g)(x)-(f+g)(x_0) = (f(x)+g(x))-(f(x_0)+g(x_0)) = (f(x)-f(x_0))+(g(x)-g(x_0)) = f'(x_0)(x-x_0) + o(x-x_0) + g'(x_0)(x-x_0) + o(x-x_0) = (\textcolor{red}{f'(x_0)+g'(x_0)})(x-x_0)+o(x-x_0)$\\
-Отже, $f+g$ - диференційована в т. $x_0$ та має похідну в червоному.
-\bigskip \\
-3) $(fg)(x)-(fg)(x_0) = f(x)g(x)-f(x_0)g(x_0) = f(x)g(x)-f(x)g(x_0)+f(x)g(x_0)-f(x_0)g(x_0) = \\
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $(cf)(x)-(cf)(x_0) = cf(x)-cf(x_0)=c(f(x)-f(x_0))=c(f'(x_0)(x-x_0)+o(x-x_0))= \\ =\textcolor{red}{cf'(x_0)}(x-x_0)+o(x-x_0)$\\
+Отже, $cf$ -- диференційована в точці $x_0$ та має похідну в червоному.
+\item $(f+g)(x)-(f+g)(x_0) = (f(x)+g(x))-(f(x_0)+g(x_0)) = (f(x)-f(x_0))+(g(x)-g(x_0)) = f'(x_0)(x-x_0) + o(x-x_0) + g'(x_0)(x-x_0) + o(x-x_0) = (\textcolor{red}{f'(x_0)+g'(x_0)})(x-x_0)+o(x-x_0)$\\
+Отже, $f+g$ -- диференційована в точці $x_0$ та має похідну в червоному.
+\item $(fg)(x)-(fg)(x_0) = f(x)g(x)-f(x_0)g(x_0) = f(x)g(x)-f(x)g(x_0)+f(x)g(x_0)-f(x_0)g(x_0) = \\
 =f(x)(g(x)-g(x_0))+g(x_0)(f(x)-f(x_0)) = \\ = f(x)(g'(x_0)(x-x_0)+o(x-x_0)) + g(x_0)(f'(x_0)(x-x_0)+o(x-x_0)) = \\
 = f(x)g'(x_0)(x-x_0) + f(x)o(x-x_0) + g(x_0)f'(x_0)(x-x_0)+g(x_0)o(x-x_0) = \\
 = (f'(x_0)g(x_0)+f(x_0)g'(x_0))(x-x_0)+ (f(x)-f(x_0)+f(x_0))o(x-x_0) + o(x-x_0) = \\
@@ -5260,12 +5296,13 @@ $g(x)-g(x_0) = g'(x_0)(x-x_0) + o(x-x_0)$.\\
 Використовуються формули о-маленьких, які є на практичному pdf-файлі\\
 $\boxed{=} (f'(x_0)g(x_0)+f(x_0)g'(x_0))(x-x_0) + f'(x_0)o((x-x_0)^2)+o(x-x_0) = \\ 
 = (\textcolor{red}{f'(x_0)g(x_0)+f(x_0)g'(x_0)})(x-x_0) + o(x-x_0)$\\
-Отже, $f \cdot g$ - диференційована в т. $x_0$ та має похідну в червоному.
-\bigskip \\
-4) доведу трошки інакше. Спочатку покажемо, що $\dfrac{1}{g}$ має похідну\\
+Отже, $f \cdot g$ -- диференційована в т. $x_0$ та має похідну в червоному.
+\item доведу трошки інакше. Спочатку покажемо, що $\dfrac{1}{g}$ має похідну\\
 $\left( \dfrac{1}{g} \right)'(x_0) = \displaystyle\lim_{x \to x_0} \dfrac{\dfrac{1}{g(x)} - \dfrac{1}{g(x_0)}}{x-x_0} = \lim_{x \to x_0} \dfrac{g(x_0)-g(x)}{(x-x_0)g(x)g(x_0)} = -\dfrac{1}{(g(x_0))^2}$\\
-Отже, $\dfrac{1}{g}$ - диференційована в т. $x_0$, а тому за 3), $\dfrac{f}{g} = f \cdot \dfrac{1}{g}$ - диференційована в т. $x_0$. Похідна\\
+Отже, $\dfrac{1}{g}$ -- диференційована в т. $x_0$, а тому за 3), $\dfrac{f}{g} = f \cdot \dfrac{1}{g}$ -- диференційована в т. $x_0$. Похідна\\
 $\left( \dfrac{f}{g} \right)'(x_0) = f'(x_0) \dfrac{1}{g(x_0)} - f(x_0) \dfrac{1}{(g(x_0))^2} = \dfrac{f'(x_0)g(x_0)-f(x_0)g(x_0)}{(g(x_0))^2}$
+\end{enumerate}
+Для всіх функціях диференційованість доведена.
 \end{proof}
 
 %Інше доведення
@@ -5283,18 +5320,17 @@ $\left( \dfrac{f}{g} \right)'(x_0) = f'(x_0) \dfrac{1}{g(x_0)} - f(x_0) \dfrac{1
 \fi
 
 \begin{proposition}[Похідна від композиції функцій]
-Задано функції $f,g$ та $h=g \circ f$. Відомо, що $f$ - диференційована в т. $x_0$, а $g$ - диференційована в т. $y_0 = f(x_0)$.\\
-Тоді функція $h$ - диференційована в т. $x_0$, а її похідна $h'(x) = g'(f(x_0)) \cdot f'(x_0)$.
+Задано функції $f,g$ та $h=g \circ f$. Відомо, що $f$ -- диференційована в точці $x_0$, а $g$ - диференційована в точці $y_0 = f(x_0)$. Тоді функція $h$ -- диференційована в точці $x_0$, а її похідна $h'(x) = g'(f(x_0)) \cdot f'(x_0)$.
 \end{proposition}
 
 \begin{proof}
-$f$ - диференційована в т. $x_0$, тобто $f(x)-f(x_0)=f'(x_0)(x-x_0)+o(x-x_0), x \to x_0$.\\
-$g$ - диференційована в т. $y_0$, тобто $g(y)-g(y_0)=g'(y_0)(y-y_0)+o(y-y_0), y \to y_0$.\\
+$f$ -- диференційована в точці $x_0$, тобто $f(x)-f(x_0)=f'(x_0)(x-x_0)+o(x-x_0), x \to x_0$.\\
+$g$ -- диференційована в точці $y_0$, тобто $g(y)-g(y_0)=g'(y_0)(y-y_0)+o(y-y_0), y \to y_0$.\\
 $h(x)-h(x_0) = g(f(x))-g(f(x_0)) = g'(f(x_0))(f(x)-f(x_0))+o(f(x)-f(x_0)) = \\
 = g'(f(x_0))(f'(x_0)(x-x_0) + o(x-x_0)) + o(f(x)-f(x_0)) \boxed{=}$\\
 Оскільки $x \to x_0$, то звідси $f(x) \to f(x_0)$. Зрозуміло, що $o(f(x)-f(x_0)) = o(x-x_0)$.\\
 $\boxed{=} \textcolor{red}{g'(f(x_0))f'(x_0)}(x-x_0) + o(x-x_0), x \to x_0$\\
-Отже, $g \circ f$ - диференційована в т. $x_0$ та має похідну в червоному.
+Отже, $g \circ f = h$ -- диференційована в т. $x_0$ та має похідну в червоному.
 \end{proof}
 
 %Інше доведення
@@ -5308,17 +5344,17 @@ $\boxed{=} \displaystyle \lim_{y \to y_0} \frac{g(y)-g(y_0)}{y-y_0} \lim_{x \to 
 \fi
 
 \begin{proposition}[Похідна від оберненої функції]
-Задано функції $f,g$ - взаємно обернені. Відомо, що $f$ - диференційована в т. $x_0$ та $f'(x_0) \neq 0$. \\ Тоді $g$ - диференційована в т. $y_0 = f(x_0)$, а її похідна 
+Задано функції $f,g$ -- взаємно обернені. Відомо, що $f$ -- диференційована в точці $x_0$ та $f'(x_0) \neq 0$. Тоді $g$ -- диференційована в точці $y_0 = f(x_0)$, а її похідна 
 $g'(y_0) = \displaystyle \frac{1}{f'(x_0)}$.
 \end{proposition}
 
 \begin{proof}
-$f$ - диференційована в т. $x_0$, тобто $f(x)-f(x_0)=f'(x_0)(x-x_0)+o(x-x_0), x \to x_0$.\\
+$f$ -- диференційована в точці $x_0$, тобто $f(x)-f(x_0)=f'(x_0)(x-x_0)+o(x-x_0), x \to x_0$.\\
 Також через взаємну оберненість маємо, що $x = g(y), x_0 = g(y_0)$, тоді рівняння матиме вигляд\\
 $f(g(y))-f(g(y_0)) = f'(x_0)(g(y)-g(y_0)) + o(g(y)-g(y_0)), g(y) \to g(y_0)$\\
 $y-y_0 = f'(x_0)(g(y)-g(y_0)) + o(y-y_0), y \to y_0$.\\
 $g(y)-g(y_0) = \textcolor{red}{\dfrac{1}{f'(x_0)}}(y-y_0) + o(y-y_0), y \to y_0$.\\
-Отже, $g$ - диференційована в т. $y_0$ та має похідну в червоному.
+Отже, $g$ -- диференційована в точці $y_0$ та має похідну в червоному.
 \end{proof}
 
 %Інше доведення
@@ -5333,7 +5369,7 @@ $\boxed{=} \displaystyle \lim_{x \to x_0}\frac{x-x_0}{f(x)-f(x_0)} = \frac{1}{f'
 \begin{definition}
 Функція $f$ є \textbf{диференційованою на множині} $A$, якщо
 \begin{align*}
-\forall x_0 \in A: f \text{ - диференційована в т. } x_0
+\forall x \in A: f \text{ -- диференційована в точці } x_0
 \end{align*}
 \end{definition}
 
@@ -5375,154 +5411,145 @@ $\boxed{=} \displaystyle \lim_{x \to x_0}\frac{x-x_0}{f(x)-f(x_0)} = \frac{1}{f'
 \end{tabular}
 \end{center}
 
-Почергово доведемо кожну похідну:\\
-1. $f(x) = const$\\
+Почергово доведемо кожну похідну:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $f(x) = const$\\
 $f'(x_0) = \displaystyle \lim_{x \to x_0} \frac{c-c}{x-x_0} = \lim_{x \to x_0} 0 = 0$
-\bigskip \\
 
-2. $f(x) = x^{\alpha}$\\
+\item  $f(x) = x^{\alpha}$\\
 $f'(x_0) = \displaystyle \lim_{x \to x_0} \frac{x^{\alpha} - x_0^{\alpha}}{x-x_0} \overset{x-x_0 = t \to 0}{=} \lim_{t \to 0} \frac{(t+x_0)^{\alpha} - x_0^{\alpha}}{t} = x_0^{\alpha-1} \lim_{t \to 0} \frac{\left(1 + \frac{t}{x_0}\right)^{\alpha} - 1}{\frac{t}{x_0}} = \alpha x_0^{\alpha-1}$
-\bigskip \\
 
-3. $f(x) = e^x$\\
+\item  $f(x) = e^x$\\
 $f'(x_0) = \displaystyle \lim_{x \to x_0} \frac{e^x-e^{x_0}}{x-x_0} = \lim_{x \to x_0} \frac{e^{x_0}(e^{x-x_0}-1)}{x-x_0} = e^{x_0}$
-\bigskip \\
 
-4. $h(x) = a^x$\\
+\item $h(x) = a^x$\\
 Перепишемо інакше: $h(x) = e^{x \cdot \ln a}$\\
 Побачимо, що $y = f(x) = x \cdot \ln a$, а в той час $g(y) = e^y \Rightarrow h(x)=g(f(x))$\\
 Тоді за композицією, $h'(x_0) = g'(y_0) f'(x_0) = e^{y_0} \ln a = e^{x_0 \ln a} \ln a = a^{x_0} \ln a$
-\bigskip \\
 
-5. $f(x) = \sin x$\\
+\item $f(x) = \sin x$\\
 $f'(x_0) = \displaystyle \lim_{x \to x_0} \frac{\sin x - \sin x_0}{x-x_0} = \lim_{x \to x_0} \frac{2 \sin \frac{x-x_0}{2} \cos \frac{x-x_0}{2}}{x-x_0} = \lim_{x \to x_0} \frac{\sin \frac{x-x_0}{2}}{\frac{x-x_0}{2}} \cos \frac{x-x_0}{2} = \cos x_0$
-\bigskip \\
 
-6. $h(x) = \displaystyle \cos x = \sin \left(\frac{\pi}{2} - x \right)$\\
+\item $h(x) = \displaystyle \cos x = \sin \left(\frac{\pi}{2} - x \right)$\\
 $f(x) = \displaystyle \frac{\pi}{2} - x$, $g(y) = \sin y \Rightarrow h(x) = g(f(x))$\\
 Отже, $h'(x_0) = g'(y_0)f'(x_0) = \cos y_0 (-1) = \displaystyle -\cos \left(\frac{\pi}{2} - x \right) = -\sin x$
-\bigskip \\
 
-7. $f(x) = \tg x$\\
+\item $f(x) = \tg x$\\
 Або $f(x) = \displaystyle \frac{\sin x}{\cos x}$\\
 Тоді $f'(x) = \displaystyle \frac{(\sin x)' \cos x - \sin x (\cos x)'}{\cos^2 x} = \frac{\cos^2 x + \sin^2x}{\cos^2 x} = \frac{1}{\cos^2 x}$
-\bigskip \\
 
-8. $f(x) = \ctg x$\\
+\item $f(x) = \ctg x$\\
 \textit{За аналогічними міркуваннями до 7.}
-\bigskip \\
 
-9. $g(y) = \ln y$\\
+\item $g(y) = \ln y$\\
 Маємо функцію $f(x) = e^x$, тоді $f,g$ - взаємно обернені\\
 Тоді оскільки $f'(x_0) = e^{x_0}$, то $g'(y_0) = \displaystyle \frac{1}{f'(x_0)} = \frac{1}{e^{x_0}} = \frac{1}{e^{\ln y_0}} = \frac{1}{y_0}$
-\bigskip \\
 
-10. $f(x) = \log_a x$\\
+\item $f(x) = \log_a x$\\
 Або $f(x) = \displaystyle \frac{\ln x}{\ln a} \Rightarrow f'(x_0) = \frac{1}{\ln a} \frac{1}{x_0}$
-\bigskip \\
 
-11. $g(y) = \arcsin y$\\
+\item $g(y) = \arcsin y$\\
 Маємо функцію $f(x) = \sin x$, тоді $f,g$ - взаємно обернені\\
 Тоді оскільки $f'(x_0) = \cos x_0$, то $g'(y_0) = \displaystyle \frac{1}{f'(x_0)} = \frac{1}{\cos x_0}= \frac{1}{\cos (\arcsin y_0)} = \\ = \frac{1}{\sqrt{1- \sin^2(\arcsin y_0)}} = \frac{1}{\sqrt{1-y_0^2}}$\\
 Важливо, що тут функція $f: \displaystyle \left[-\frac{\pi}{2},\frac{\pi}{2}\right] \to [-1,1]$
-\bigskip \\
 
-12. $f(x) = \arccos x$\\
+\item $f(x) = \arccos x$\\
 Або $f(x) = \displaystyle \frac{\pi}{2} - \arcsin x \Rightarrow f'(x_0) = - \frac{1}{\sqrt{1-x_0^2}}$
-\bigskip \\
 
-13. $g(y) = \arctg y$\\
+\item $g(y) = \arctg y$\\
 \textit{За аналогічними міркуваннями до 11.}, але тут вже $f: \displaystyle \left(-\frac{\pi}{2},\frac{\pi}{2}\right) \to \mathbb{R}$, $f(x) = \tg x$
-\bigskip \\
 
-14. $f(x) = \arcctg x$\\
+\item $f(x) = \arcctg x$\\
 \textit{За аналогічними міркуваннями до 12.}, але $\arcctg x = \displaystyle \frac{\pi}{2} - \arctg x$
-\bigskip \\
 
-15. $f(x) = \ln(x + \sqrt{1+x^2})$\\
+\item $f(x) = \ln(x + \sqrt{1+x^2})$\\
 $f'(x_0) = \displaystyle \frac{1}{x_0+ \sqrt{1+x_0^2}} \cdot (x+ \sqrt{1+x^2})'_{x = x_0} = \frac{1+ \frac{1}{2\sqrt{1+x_0^2}} \cdot (1+x^2)'_{x=x_0}}{x_0+ \sqrt{1+x_0^2}} = \frac{1+ \frac{x_0}{\sqrt{1+x_0^2}}}{x_0 + \sqrt{1+x_0^2}} = \\ = \frac{\sqrt{1+x_0^2}+x_0}{x_0 + \sqrt{1 + x_0^2}} \frac{1}{\sqrt{1+x_0^2}} = \frac{1}{\sqrt{1+x_0^2}}$
+\end{enumerate}
 %\bigskip \\
 
 \iffalse
 Тут треба більш детально про $f(x) = \ln(x+\sqrt{1+x^2})$ сказати.\\
 Розглянемо рівняння $\sh x = y$.\\
 Розв'яжемо її відносно $x$.\\
-$\displaystyle \frac{e^x-e^{-x}}{2} = y \Rightarrow e^x-e^{-x}=2y \Rightarrow e^{2x}- 2y e^x - 1 = 0$\\
+$\displaystyle \dfrac{e^x-e^{-x}}{2} = y \Rightarrow e^x-e^{-x}=2y \Rightarrow e^{2x}- 2y e^x - 1 = 0$\\
 $\Rightarrow e^x = y \pm \sqrt{1+y^2} \Rightarrow e^x = y + \sqrt{1+y^2}$\\
 $\Rightarrow x = \ln(y + \sqrt{1+y^2})$\\
 Таким чином, можна стверджувати, що $\ln(y+\sqrt{1+y^2}) = \textrm{arcsh } y$.\\
 Але найбільше застосування все ж таки виявляється згодом (коли підуть інтеграли).
 \fi
 
-\begin{example} Обчислити похідну функції $f(x) = \sqrt[3]{\dfrac{1+x^2}{1-x^2}} + 2022$.\\
-$f'(x) = \left( \sqrt[3]{\dfrac{1+x^2}{1-x^2}} + 2022 \right)' + \left(\left( \dfrac{1+x^2}{1-x^2} \right)^{\frac{1}{3}} \right)' + (2022)' = \dfrac{1}{3} \left( \dfrac{1+x^2}{1-x^2} \right)^{-\frac{2}{3}} \cdot \left( \dfrac{1+x^2}{1-x^2} \right)' + 0 = \\ = \dfrac{1}{3} \left( \dfrac{1+x^2}{1-x^2} \right)^{-\frac{2}{3}} \dfrac{2x(1-x^2)+2x(1+x^2)}{(1-x^2)^2} = \dfrac{1}{3} \left( \dfrac{1+x^2}{1-x^2} \right)^{-\frac{2}{3}} \dfrac{4x}{(1-x^2)^2}$
+\begin{example} Обчислити похідну функції $f(x) = \sqrt[3]{\dfrac{1+x^2}{1-x^2}} + \the\year$.\\
+$f'(x) = \left( \sqrt[3]{\dfrac{1+x^2}{1-x^2}} + \the\year \right)' + \left(\left( \dfrac{1+x^2}{1-x^2} \right)^{\frac{1}{3}} \right)' + (\the\year)' = \dfrac{1}{3} \left( \dfrac{1+x^2}{1-x^2} \right)^{-\frac{2}{3}} \cdot \left( \dfrac{1+x^2}{1-x^2} \right)' + 0 = \\ = \dfrac{1}{3} \left( \dfrac{1+x^2}{1-x^2} \right)^{-\frac{2}{3}} \dfrac{2x(1-x^2)+2x(1+x^2)}{(1-x^2)^2} = \dfrac{1}{3} \left( \dfrac{1+x^2}{1-x^2} \right)^{-\frac{2}{3}} \dfrac{4x}{(1-x^2)^2}$
 \end{example}
 
 \subsection{Похідні по один бік}
 \begin{definition}
-\textbf{Односторонню похідну} функції $f(x)$ в т. $x_0$ називають:\\
+\textbf{Односторонню похідну} функції $f(x)$ в точці $x_0$ називають:\\
 -якщо \textbf{справа}: $\displaystyle f'(x_0+0) \overset{\text{або}}{=} f'(x_0+0) = \lim_{x \to x_0+0} \frac{f(x)-f(x_0)}{x-x_0}$.\\
 - якщо \textbf{зліва}: $\displaystyle f'(x_0-0) \overset{\text{або}}{=} f'(x_0-0) = \lim_{x \to x_0-0} \frac{f(x)-f(x_0)}{x-x_0}$.
 \end{definition}
 
 \begin{theorem}
-Функція $f$ - диференційована в т. $x_0$ $\iff$ вона містить похідну зліва та справа, а також $f'(x_0+0) = f'(x_0-0)$.
+Функція $f$ -- диференційована в точці $x_0$ $\iff$ вона містить похідну зліва та справа, а також $f'(x_0+0) = f'(x_0-0)$.
 \end{theorem}
 
 \begin{proof}
-$f$ - диференційована в т. $x_0$ $\iff$ $\exists f'(x_0)$, тобто $\exists$ границя $\iff$ $\exists$ та сама границя зліва та справа, які рівні $\iff$ вона містить похідну зліва та справа та $f'(x_0^+) = f'(x_0^-)$.
+$f$ -- диференційована в точці $x_0$ $\iff$ $\exists f'(x_0)$, тобто $\exists$ границя $\iff$ $\exists$ та сама границя зліва та справа, які рівні $\iff$ вона містить похідну зліва та справа та $f'(x_0^+) = f'(x_0^-)$.
 \end{proof}
 
 \begin{example}
 Знайти похідну функції $f(x) = |x|$.\\
-Якщо $x>0$, то $f(x) = x \Rightarrow f'(x) = 1$.\\
-Якщо $x<0$, то $f(x) = -x \Rightarrow f'(x) = -1$.\\
-Перевіримо існування похідної в т. $x_0 = 0$.\\
+Якщо $x>0$, то $f(x) = x \implies f'(x) = 1$.\\
+Якщо $x<0$, то $f(x) = -x \implies f'(x) = -1$.\\
+Перевіримо існування похідної в точці $x_0 = 0$.\\
 $f'(0+0) = \displaystyle \lim_{x \to 0+0} \frac{|x|-|0|}{x-0} = 1 \hspace{1cm}$
 $f'(0-0) = \displaystyle \lim_{x \to 0-0} \frac{|x|-|0|}{x-0} = -1$\\
-$\Rightarrow f'(0+0) \neq f'(0-0)$, отже $\not \exists f'(0)$. \\ До речі кажучи, похідну функції можна переписати інакше: $f'(x) = \displaystyle \frac{|x|}{x}$.\\
-Також приклад того, що $f$ в т. $0$ неперервна, але не диференційована - контрприклад для \textbf{Prp 5.1.2}.
+$\implies f'(0+0) \neq f'(0-0)$, отже $\not \exists f'(0)$. \\ До речі кажучи, похідну функції можна переписати інакше: $f'(x) = \displaystyle \frac{|x|}{x}$.\\
+Також приклад того, що $f$ в точці $0$ неперервна, але не диференційована -- контрприклад. Тобто зворотне твердження \prpref{differentiable_is_continuous} не працює.
 \end{example}
 
 \begin{remark}
-У першому означенні розділу взагалі треба вимагати т. $x_0 \in A$ бути внутрішньою. Утім в рамках аналізу $\mathbb{R}$ гранична точка теж припустима, оскільки ми маємо таке поняття як похідна справа та зліва, $f'(x_0+0),f'(x_0-0)$. Чого не можна сказати в аналізі $\mathbb{R}^n$.\\
+У першому означенні розділу взагалі треба вимагати т. $x_0 \in A$ бути внутрішньою. Утім в рамках аналізу $\mathbb{R}$ гранична точка теж припустима, оскільки ми маємо таке поняття як похідна справа та зліва, $f'(x_0+0),f'(x_0-0)$. Чого не можна сказати буде в аналізі $\mathbb{R}^n$, який будемо проходити пізніше.\\
 Якщо мені дадуть функцію $f: [0,1] \to \mathbb{R}$, де $f(x) = e^x$, то з похідними в внутрішніх точок все зрозуміло. А ось на кінцях, що не є вже внутрішніми, але граничними, $\exists f'(0) = f'(0+0)$, а також $\exists f'(1) = f'(1-0)$.
 \end{remark}
 
 \subsection{Дотична та нормаль до графіку функції}
 \begin{definition}
-Пряма $y = k (x-x_0) + f(x_0)$ називається \textbf{дотичною до графіку функції} $f(x)$ \textbf{в т.} $x_0$, якщо
+Пряма $y = k (x-x_0) + f(x_0)$ називається \textbf{дотичною до графіку функції} $f(x)$ \textbf{в точці} $x_0$, якщо
 \begin{align*}
 f(x) - [k(x-x_0)+f(x_0)] = o(x-x_0), x\to x_0
 \end{align*}
 \end{definition}
 
 \begin{proposition}
-Функція $f$ має дотичну в т. $x_0 \iff f$ - диференційована в т. $x_0$. \\ При цьому $k = f'(x_0)$.
+Функція $f$ має дотичну в точці $x_0 \iff f$ -- диференційована в точці $x_0$. \\ При цьому $k = f'(x_0)$.
 \end{proposition}
 
 \begin{proof}
-$f$ має дотичну в $x_0 \iff f(x) - [k(x-x_0)+f(x_0)] = o(x-x_0), x \to x_0 \iff \\ \iff f(x)-f(x_0) = k(x-x_0) + o(x-x_0), x \to x_0 \overset{\textrm{def.}}{\iff}$ $f$ - диференційована в т. $x_0$, $k=f'(x_0)$.
+$f$ має дотичну в точці $x_0 \iff f(x) - [k(x-x_0)+f(x_0)] = o(x-x_0), x \to x_0 \iff \\ \iff f(x)-f(x_0) = k(x-x_0) + o(x-x_0), x \to x_0 \overset{\textrm{def.}}{\iff}$ $f$ -- диференційована в точці $x_0$, $k=f'(x_0)$.
 \end{proof}
 Таким чином, рівняння дотичної задається формулою $$y - f(x_0) = f'(x_0)(x-x_0)$$
-\bigskip \\
+
+%another explanation
+\iffalse
 Є ще інше пояснення дотичної:\\
 Нехай є фіксована точка $(x_0,f(x_0))$ та точка $(x^*,f(x^*))$. Через ці дві точки проведемо пряму - її ще називають \textbf{січною}. Маємо таке рівняння:\\
 $\dfrac{x-x_0}{x^*-x_0} = \dfrac{y-f(x_0)}{f(x^*) - f(x_0)} \Rightarrow \dfrac{f(x^*)-f(x_0)}{x^*-x_0}(x-x_0) = y - f(x_0)$.\\
 Ну а далі спрямуємо $x^* \to x_0$. І якщо функція $f$ - диференційована в т. $x_0$, то одразу маємо\\
 $f - f(x_0) = f'(x_0)(x-x_0)$.\\
 Що й хотіли.
+\fi
 
 \begin{definition}
-Пряма, яка проходить через т. дотику $(x_0, f(x_0))$ та перпендикулярна до дотичної, називається \textbf{нормаллю до графіку функції} $f(x)$ \textbf{в т.} $x_0$.
+Пряма, яка проходить через точку дотику $(x_0, f(x_0))$ та перпендикулярна до дотичної, називається \textbf{нормаллю до графіку функції} $f(x)$ \textbf{в точці} $x_0$.
 \end{definition}
 
 Знайдемо безпосередньо рівняння нормалі. Маємо рівняння дотичної:
 $f'(x_0)(x-x_0) - (y-f(x_0)) = 0$.\\
-Нормальний вектор дотичної задається координатами $\vec{n} = (f'(x_0); -1)$.\\
-Тоді для рівняння нормалі даний вектор буде напрямленим. Нам також відомо, що нормаль проходить через т. $(x_0,f(x_0))$, а отже,\\
+Нормальний вектор дотичної задається координатами $\vec{n} = (f'(x_0); -1)$. Тоді для рівняння нормалі даний вектор буде напрямленим. Нам також відомо, що нормаль проходить через т. $(x_0,f(x_0))$, а отже,\\
 $\displaystyle \frac{x-x_0}{f'(x_0)} = \frac{y-f(x_0)}{-1} \Rightarrow f'(x_0)(y-f(x_0)) = -(x-x_0)$.\\
 Таким чином, рівняння нормалі задається формулою $$y-f(x_0) = \displaystyle -\frac{1}{f'(x_0)}(x-x_0)$$
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -5535,9 +5562,10 @@ $\displaystyle \frac{x-x_0}{f'(x_0)} = \frac{y-f(x_0)}{-1} \Rightarrow f'(x_0)(y
 \end{tikzpicture}
 	\caption*{Графік функції, до якої проведена дотична (червоний) та нормаль (синій).}
 \end{figure}
+\fi %uncomment picture
 
 \begin{example}
-Знайти дотичну до графіку функції $f(x) = 2 \cos x + 5$ в т. $x_0 = \displaystyle \frac{\pi}{2}$.\\
+Знайти дотичну до графіку функції $f(x) = 2 \cos x + 5$ в точці $x_0 = \displaystyle \frac{\pi}{2}$.\\
 $y = f'(x_0)(x-x_0)+f(x_0)$\\
 $f(x_0) = \displaystyle f(\frac{\pi}{2}) = 5$\\
 $f'(x_0) = \displaystyle f'(\frac{\pi}{2}) = -2 \sin x |_{x = \frac{\pi}{2}} = -2$\\
@@ -5551,12 +5579,13 @@ $f'(x_0) = \displaystyle \lim_{x \to x_0} \dfrac{f(x)-f(x_0)}{x-x_0} = \pm \inft
 Одразу зауважу, що просто $\infty$ границі бути не може.
 
 \begin{example}
-Нехай є функція $f(x) = \sqrt[3]{x^2}$. Знайдемо похідну цієї штуки в т. $x_0 = 0$ за означенням.\\
+Нехай є функція $f(x) = \sqrt[3]{x^2}$. Знайдемо похідну цієї штуки в точці $x_0 = 0$.\\
 $f'(0) = \displaystyle \lim_{x \to 0} \dfrac{\sqrt[3]{x^2} - 0}{x} = \lim_{x \to 0} \dfrac{1}{\sqrt[3]{x}} = \infty$\\
 Проте для існування похідної необхідно і достатньо існування похідних з різних боків, а тут\\
 $f'(0^-) = \displaystyle \lim_{x \to 0^-} \dfrac{\sqrt[3]{x^2} - 0}{x} = -\infty$\\
 $f'(0^+) = \displaystyle \lim_{x \to 0^+} \dfrac{\sqrt[3]{x^2} - 0}{x} = +\infty$.\\
-Зрозуміло, що жодним чином $f'(0-0) \neq f'(0+0)$, тож похідна в $\infty$ існувати точно не може.
+Зрозуміло, що жодним чином $f'(0-0) \neq f'(0+0)$, тож похідна існувати точно не може.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 {
@@ -5570,17 +5599,18 @@ $f'(0^+) = \displaystyle \lim_{x \to 0^+} \dfrac{\sqrt[3]{x^2} - 0}{x} = +\infty
 \end{tikzpicture}
 }
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
-А тепер повернімось до геометричних застосувань. Вже відомо, що $f'(x_0) = \tg \alpha$ для дотичних.\\
-Якщо $f'(x_0) \to \pm \infty$, тобто $\tg \alpha \to \pm \infty$, то тоді кут $\alpha \to \pm \dfrac{\pi}{2}$. Тобто це означає, що ми матимемо справу з дотичною, яка є вертикальною прямою в т. $x_0$, тобто\\
+А тепер повернімось до геометричних застосувань. Вже відомо, що $f'(x_0) = \tg \alpha$ для дотичних. Якщо $f'(x_0) \to \pm \infty$, тобто $\tg \alpha \to \pm \infty$, то тоді кут $\alpha \to \pm \dfrac{\pi}{2}$. Тобто це означає, що ми матимемо справу з дотичною, яка є вертикальною прямою в т. $x_0$, тобто\\
 $x=x_0$.
 
 \begin{example}
-Нехай є функція $f(x) = \sqrt[3]{x-1}$. Знайдемо похідну цієї штуки в т. $x_0 = 1$ за означенням.\\
+Нехай є функція $f(x) = \sqrt[3]{x-1}$. Знайдемо похідну цієї штуки в точці $x_0 = 1$.\\
 $f'(1) = \displaystyle \lim_{x \to 1} \dfrac{\sqrt[3]{x-1}-0}{x-1} = \lim_{x \to 1} \dfrac{1}{\sqrt[3]{(x-1)^2}} = + \infty$\\
 Похідна існує. Це можна навіть перевірити, пошукавши похідну зліва та справа.\\
-Тоді дотичною графіка функції $f$ в т. $x_0 = 0$ буде вертикальна пряма $x = 1$.\\
+Тоді дотичною графіка функції $f$ в точці $x_0 = 0$ буде вертикальна пряма $x = 1$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 {
@@ -5596,27 +5626,28 @@ $f'(1) = \displaystyle \lim_{x \to 1} \dfrac{\sqrt[3]{x-1}-0}{x-1} = \lim_{x \to
 \end{tikzpicture}
 }
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \subsection{Диференціал функції}
 \begin{definition}
-Задано функцію $f$ - диференційована.\\
-\textbf{Диференціалом} функції $f$ в т. $x_0$ називають
+Задано функцію $f$ -- диференційована.\\
+\textbf{Диференціалом} функції $f$ в точці $x_0$ називають вираз
 \begin{align*}
-df(x_0,\Delta x) = f'(x_0) \Delta x
+df(x_0,\Delta x) = f'(x_0) \Delta x.
 \end{align*}
 \end{definition}
 
 \begin{example}
-Розглянемо функцію $f(x) = x$. Вона має похідну $f'(x) = 1$, тому диференційована. Тоді диференціал $df(x,\Delta x)$ запишеться так:\\
-$df(x,\Delta x) = \Delta x$
+Розглянемо функцію $f(x) = x$. Вона має похідну $f'(x) = 1$, тому диференційована. Тоді диференціал $df(x,\Delta x)$ запишеться так: $df(x,\Delta x) = \Delta x$
 \end{example}
+
 Зазвичай надалі опускають другий аргумент диференціалу та пишут уже так: $dx = \Delta x$. А тому диференціал функції $f$ можна записати іншим чином:
 $$ df(x_0) = f'(x_0)\,dx $$
 
 \begin{remark}
-Геометричний зміст диференціала функції $f(x)$ в т. $x_0$ - це приріст дотичної.
-\end{remark}
+Геометричний зміст диференціала функції $f(x)$ в т. $x_0$ -- це приріст дотичної.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[spy using outlines={circle,yellow,magnification=5,size=6cm, connect spies}]
@@ -5636,19 +5667,21 @@ $$ df(x_0) = f'(x_0)\,dx $$
 \end{tikzpicture}
 \caption*{Синій - це $df(x_0)$: приблизна різниця між функціями в двох точках. А синій + зелений - це $\Delta f(x_0)$: точна різниця між функціями в двох точках.}
 \end{figure}
+\fi %uncomment picture
+\end{remark}
 
 \subsection{Інваріантність форми першого диференціалу}
-Задано функцію $f(x)$ - диференційована. Тоді диференціал $df(x) = f'(x)\,dx$\\
-Нехай задано функцію $x = x(t)$ - теж диференційована. Отримаємо складену функцію $f(x(t))$, від якої знайдемо диференціал.\\
+Задано функцію $f(x)$ -- диференційована. Тоді диференціал $df(x) = f'(x)\,dx$.\\
+Нехай задано функцію $x = x(t)$ -- теж диференційована. Отримаємо складену функцію $f(x(t))$, від якої знайдемо диференціал.\\
 $df(x(t)) = (f(x(t)))'\,dt = f'(x(t))x'(t)\,dt = f'(x(t))\,dx(t)$\\
 Отримали, що $df(x(t)) = f'(x(t))\,dx(t)$.\\
-Коли $x$ - залежна змінна, то формула диференціалу все рівно залишається такою самою. Це й є \textbf{інваріантність форми першого диференціалу}
+Коли $x$ -- залежна змінна, то формула диференціалу все рівно залишається такою самою. Це й є \textbf{інваріантність форми першого диференціалу}.
 
 \subsection{Приблизне обчислення значень для диференційованих функцій}
-Задано функцію $f$ - диференційована в т. $x_0$. \\ Тоді за твердженням, функція має дотичну $y = f'(x_0)(x-x_0)+f(x_0)$, для якого:\\
+Задано функцію $f$ -- диференційована в точці $x_0$. Тоді за твердженням, функція має дотичну $y = f'(x_0)(x-x_0)+f(x_0)$, для якого:\\
 $f(x)-y = o(x-x_0), x \to x_0$.\\
-Права частина - якесь нескінченно мале число, яким можна знехтувати.
-Тому коли $x$ 'близьке' до $x_0$, тобто $|x-x_0| <<1$, то маємо: $f(x) -y \approx 0 \Rightarrow$ маємо таку формулу: 
+Права частина -- якесь нескінченно мале число, яким можна знехтувати.
+Тому коли $x$ 'близьке' до $x_0$, тобто $|x-x_0| \ll 1$, то маємо: $f(x) -y \approx 0$, тому маємо таку формулу: 
 $$f(x) \approx f'(x_0)(x-x_0)+f(x_0)$$
 
 \begin{example}
@@ -5656,7 +5689,7 @@ $$f(x) \approx f'(x_0)(x-x_0)+f(x_0)$$
 Перетворимо значення іншим чином:\\
 $\sqrt{65} \displaystyle = \sqrt{64 \cdot \frac{65}{64}} = 8 \sqrt{\frac{65}{64}} = 8 \sqrt{1 + \frac{1}{64}}$.\\
 А тепер розглянемо функцію $f(x) = 8\sqrt{x}$. Тут $x = \displaystyle \frac{65}{64}$, в той час $x_0 = 1$.\\
-$|x-x_0| = \displaystyle \abs{\frac{65}{64} - 1} = \frac{1}{64} <<1$\\
+$|x-x_0| = \displaystyle \abs{\frac{65}{64} - 1} = \frac{1}{64} \ll 1$\\
 Знайдемо значення функції та похідну в т. $x_0$:\\
 $f(x_0) = f(1) = 8$\\
 $f'(x_0) = f'(1) = \displaystyle 8\frac{1}{2 \sqrt{x}} |_{x = 1} = 4$\\
@@ -5667,12 +5700,20 @@ $\sqrt{65} \approx \displaystyle 4\left(\frac{65}{64}-1\right)+8 = \frac{1}{16} 
 \subsection{Похідна та диференціал вищих порядків}
 \begin{definition}
 Задано функцію $f$, для якої $\exists f'(x)$.\\
-\textbf{Похідною $2$-го порядку від} $f(x)$ називають $f''(x) = (f'(x))'$, якщо вона існує.
+\textbf{Похідною $2$-го порядку від} $f(x)$ називають
+\begin{align*}
+f''(x) = (f'(x))',
+\end{align*}
+якщо така похідна існує.
 \end{definition}
 
 \begin{definition}
 Задано функцію $f$, для якої $\exists f^{(n)}(x)$.\\
-\textbf{Похідною $(n+1)$-го порядку від} $f(x)$ називають $f^{(n+1)}(x) = (f^{(n)}(x))'$, якщо вона існує.
+\textbf{Похідною $(n+1)$-го порядку від} $f(x)$ називають
+\begin{align*}
+f^{(n+1)}(x) = (f^{(n)}(x))',
+\end{align*}
+якщо така похідна існує.
 \end{definition}
 
 \begin{example}
@@ -5690,15 +5731,13 @@ $(\cos x)^{(n+1)} = \left((\cos x)^{(n)}\right)' = \displaystyle \left( \cos \le
 $\forall n \geq 1: f^{(n)}(x) = \displaystyle \cos \left(x + \frac{n\pi}{2} \right)$.
 \end{example}
 
-А тепер уявімо собі іншу проблему: задано функції $f,g$, для яких існують $n$ похідних. Спробуємо знайти $(fg)^{(n)}$\\
-Будемо робити по черзі:\\
+А тепер уявімо собі іншу проблему. Задано функції $f,g$, для яких існують $n$ похідних. Спробуємо знайти $(fg)^{(n)}$. Будемо робити по черзі:\\
 $(fg)' = f'g+fg'$\\
 $(fg)''=((fg)')'=(f'g+fg')'=(f'g)'+(fg')'=(f''g+f'g')+(f'g'+fg'')= f''g + 2f'g' + fg''$\\
 $(fg)''' = ((fg)'')' = (f''g + 2f'g' + fg'')' = f'''g+f''g+2f''g'+2f'g''+f'g''+fg''' = \\ = f'''g + 3f''g' + 3f'g'' + fg'''$\\
-Це можна продовжувати до нескінченності, але можна зробити деякі зауваження, що форма виразу схожа дуже на формулу Бінома-Ньютона, якщо порядок похідної замінити уявно на степінь.\\
-Тоді якщо посилатись на МІ, то доведемо таку формулу:
+Це можна продовжувати до нескінченності, але можна зробити деякі зауваження, що форма виразу схожа дуже на формулу Бінома-Ньютона, якщо порядок похідної замінити уявно на степінь. Тоді якщо посилатись на МІ, то доведемо таку формулу:
 
-\begin{theorem}[Формула Лейбніца]
+\begin{theorem}[Формула Ляйбніца]
 $(f(x)g(x))^{(n)} = \displaystyle \sum_{k=0}^n C_n^k f^{(k)}(x) g^{(n-k)}(x)$
 \end{theorem}
 
@@ -5707,12 +5746,11 @@ $(f(x)g(x))^{(n)} = \displaystyle \sum_{k=0}^n C_n^k f^{(k)}(x) g^{(n-k)}(x)$
 $f(x) = x^2 \Rightarrow f'(x) = 2x \Rightarrow f''(x) = 2 \Rightarrow f'''(x) = 0 \Rightarrow \dots$\\
 Коротше, $\forall n \geq 3: f^{(n)}(x) = 0$.\\
 $g(x) = \cos x \overset{\textrm{попередній приклад}}{\Rightarrow} \forall n \geq 1: g^{(n)}(x) = \displaystyle \cos \left(x + \frac{n\pi}{2} \right)$\\
-Скористаємось ф-лою Лейбніца:\\
+Скористаємось формулою Ляйбніца:\\
 $y^{(n)} = (f(x) g(x))^{(n)} = \displaystyle \sum_{k=0}^n C_n^k f^{(k)}(x)g^{(n-k)}(x) = 
 \\ = C_n^0 f(x)g^{(n)}(x) + C_n^1 f'(x)g^{(n-1)}(x) + C_n^2 f''(x)g^{(n-2)}(x) + C_n^3 f'''(x)g^{(n-3)}(x) + \dots + C_n^n f^{(n)}(x)g(x) = \\
 = f(x)g^{(n)}(x) + n f'(x)g^{(n-1)}(x) + \frac{n(n-1)}{2} f''(x)g^{(n-2)}(x) + 0 = \\
-= x^2 \cos \left(x + \frac{n\pi}{2} \right) + 2nx \cos \left(x + \frac{(n-1)\pi}{2} \right) + n(n-1)\cos \left(x + \frac{(n-2)\pi}{2} \right)\\
-$.
+= x^2 \cos \left(x + \frac{n\pi}{2} \right) + 2nx \cos \left(x + \frac{(n-1)\pi}{2} \right) + n(n-1)\cos \left(x + \frac{(n-2)\pi}{2} \right)$.\\
 Тут зауважу, що \\ $\displaystyle \cos \left(x + \frac{(n-1)\pi}{2} \right) = \cos \left(x + \frac{n\pi}{2} - \frac{\pi}{2} \right) = \sin \left(x + \frac{n\pi}{2} \right)$\\
 $\displaystyle \cos \left(x + \frac{(n-2)\pi}{2} \right) = \cos \left(x + \frac{n\pi}{2} - \pi \right) = - \cos \left(x + \frac{n\pi}{2} \right)$\\
 $= \displaystyle [x^2 - n(n-1)]\cos \left(x + \frac{n\pi}{2} \right) + 2nx \sin \left(x + \frac{n\pi}{2} \right)$.\\
@@ -5737,17 +5775,16 @@ $$ d^n f = f^{(n)} \,dx^n $$
 
 \begin{example}
 Маємо функцію $f(x) = \cos x$, знайдемо диференціал $n$-го порядку.\\
-Знаємо похідну $f^{(n)}(x) = \cos \left(x + \dfrac{n \pi}{2} \right)$, тому диференціал\\
-$d^n \cos x = \cos \left(x + \dfrac{n \pi}{2} \right) \,dx^n$.
+Знаємо похідну $f^{(n)}(x) = \cos \left(x + \dfrac{n \pi}{2} \right)$, тому диференціал $d^n \cos x = \cos \left(x + \dfrac{n \pi}{2} \right) \,dx^n$.
 \end{example}
 
 \subsection{Неінваріантність форми другого диференціалу}
-Задано функцію $f(x)$ - диференційована. Тоді другий диференціал $d^2f(x) = f''(x)\,dx^2$.\\
-Нехай задано функцію $x = x(t)$ - теж диференційована. Отримаємо складену функцію $f(x(t))$, від якої знайдемо другий диференціал.\\
+Задано функцію $f(x)$ -- диференційована. Тоді другий диференціал $d^2f(x) = f''(x)\,dx^2$.\\
+Нехай задано функцію $x = x(t)$ -- теж диференційована. Отримаємо складену функцію $f(x(t))$, від якої знайдемо другий диференціал.\\
 $d^2 f(x(t)) = (f(x(t)))'' \,dt^2 = [f'(x(t))x'(t)]'\,dt^2 = [f''(x(t))(x'(t))^2 + f'(x(t))x''(t)]\,dt^2 = \\ 
 = f''(x(t))(x'(t))^2\,dt^2 + f'(x(t))x''(t)\,dt^2 = f''(x(t)) dx(t)^2 + f'(x(t))\,d^2 x(t)$\\
 Отримали, що $d^2f(x(t)) \neq f''(x(t))\,dx(t)^2$.\\
-Маємо уже випадок \textbf{неінваріантності} \\ Єдине, що якщо $x$ - якась лінійна функція, то тоді інваріантність залишається.
+Маємо уже випадок \textbf{неінваріантності}. Єдине, що якщо $x$- - якась лінійна функція, то тоді інваріантність залишається.
 
 \subsection{Похідна від параметрично заданої функції}
 Задано параметричну функцію $y: \begin{cases} y = y(t) \\ x = x(t) \end{cases}$.\\
@@ -5760,34 +5797,29 @@ y'_x: \begin{cases} y'_x = \dfrac{y'_t(t)}{x'_t(t)} \\ x = x(t) \end{cases}
 
 \begin{example}
 Знайти похідну від функції: $y: \begin{cases} x = \ln t \\ y = t^3 \end{cases}$\\
-$x'_t = \displaystyle \frac{1}{t}$,    $y'_t = 3t^2$\\
-$\Rightarrow \displaystyle  y'_x: \begin{cases} x = \ln t \\ y'_x = \displaystyle \frac{3t^2}{\frac{1}{t}} = 3t^3 \end{cases}$\\
-Сюди ми ще повернемось
+$x'_t = \displaystyle \frac{1}{t}$,    $y'_t = 3t^2 \implies \displaystyle  y'_x: \begin{cases} x = \ln t \\ y'_x = \displaystyle \frac{3t^2}{\frac{1}{t}} = 3t^3 \end{cases}$\\
+Сюди ми ще повернемось.
 \end{example}
 
 Знайдемо другу похідну:\\
 $\displaystyle y''_{x^2}(t) = (y'_x(t))'_x = \frac{(y'_x(t))'_t}{x'_t(t)} = \frac{y''_{t^2}(t)x'_t(t)-x''_{t^2}(t)y'_t(t)}{(x'_t(t))^3}$.
 \bigskip \\
 Складно виглядає, тому краще повернемось до прикладу.\\
-Маємо $y: \begin{cases} x = \ln t \\ y = t^3 \end{cases}$\\
-$x'_t = \displaystyle \frac{1}{t}$,    $y'_t = 3t^2 \Rightarrow y'_x = 3t^3$\\
-Тоді отримаємо, що $y''_{x^2} = \displaystyle \frac{(y'_x)'_t}{x'_t} = \frac{9t^2}{t^3} = \frac{9}{t}$.\\
-$y''_{x^2}: \begin{cases} x = \ln t \\ y''_{x^2} = \dfrac{9}{t} \end{cases}$
+Маємо $y: \begin{cases} x = \ln t \\ y = t^3 \end{cases}$, \qquad $x'_t = \displaystyle \frac{1}{t}$,    $y'_t = 3t^2 \implies y'_x = 3t^3$\\
+Тоді отримаємо, що $y''_{x^2} = \displaystyle \frac{(y'_x)'_t}{x'_t} = \frac{9t^2}{t^3} = \frac{9}{t} \implies y''_{x^2}: \begin{cases} x = \ln t \\ y''_{x^2} = \dfrac{9}{t} \end{cases}$
 
 \subsection{Основні теореми}
 \begin{theorem}[Лема Ферма]
-Задано функцію $f: (a,b) \to \mathbb{R}$ - диференційована в т. $x_0 \in (a,b)$. Більш того, в т. $x_0$ функція $f$ приймає найбільше (або найменше) значення. \\ Тоді $f'(x_0)=0$.
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ -- диференційована в точці $x_0 \in (a,b)$. Більш того, в точці $x_0$ функція $f$ приймає найбільше (або найменше) значення. Тоді $f'(x_0)=0$.
 \end{theorem}
 
 \begin{proof}
-Розглянемо випадок $\max$. Для $\min$ аналогічно.\\
-В т. $x_0$ функція $f$ приймає найбільше значення, тобто $\forall x \in (a,b): f(x_0) \geq f(x)$.\\
-Оскільки $\exists f'(x_0)$, то тоді $\exists f'(x_0^+), \exists f'(x_0^-)$\\
+Розглянемо випадок, коли в точці $x_0$ досягається $\max$. Для $\min$ аналогічно.\\
+Тобто маємо $\forall x \in (a,b): f(x_0) \geq f(x)$. Оскільки $\exists f'(x_0)$, то тоді $\exists f'(x_0^+), \exists f'(x_0^-)$.\\
 $f'(x_0^+) \displaystyle \overset{\textrm{def.}}{=} \lim_{x \to x_0^+} \frac{f(x)-f(x_0)}{x-x_0}$  $\left( \frac{\leq 0}{> 0} \right)$ $\leq 0$.\\
 $f'(x_0^-) \displaystyle \overset{\textrm{def.}}{=} \lim_{x \to x_0^-} \frac{f(x)-f(x_0)}{x-x_0}$ $\left( \frac{\leq 0}{< 0} \right)$ $\geq 0$.\\
-Таким чином, $0 \leq f'(x_0^-) = f'(x_0^+) \leq 0 \Rightarrow f'(x_0^-) = f'(x_0^+) = 0 \implies f'(x_0) = 0$.
-\end{proof}
-
+Таким чином, $0 \leq f'(x_0^-) = f'(x_0^+) \leq 0 \implies f'(x_0^-) = f'(x_0^+) = 0 \implies f'(x_0) = 0$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -5799,6 +5831,8 @@ $f'(x_0^-) \displaystyle \overset{\textrm{def.}}{=} \lim_{x \to x_0^-} \frac{f(x
 \draw [thick, red] (3.5,2)--(4.5,2) node [anchor = south, black] {$f'(x_0) = 0$};
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
+\end{proof}
 
 \begin{remark}
 Головне питання, чому не відрізок або напівінтервал.\\
@@ -5806,37 +5840,33 @@ $f'(x_0^-) \displaystyle \overset{\textrm{def.}}{=} \lim_{x \to x_0^-} \frac{f(x
 \end{remark}
 
 \begin{theorem}[Теорема Ролля]
-Задано функцію $f: [a,b] \to \mathbb{R}$, $f \in C([a,b])$ та диференційована на $(a,b)$. Більш того, $f(a) = f(b)$. Тоді $\exists \xi \in (a,b): f'(\xi) = 0$.
+Задано функцію $f \colon [a,b] \to \mathbb{R}$, причому $f \in C([a,b])$ та диференційована на $(a,b)$. Більш того, $f(a) = f(b)$. Тоді $\exists \xi \in (a,b): f'(\xi) = 0$.
 \end{theorem}
 
 \begin{proof}
-Оскільки $f \in C([a,b])$, то за Th. Вейерштраса,\\
+Оскільки $f \in C([a,b])$, то за теоремою Ваєрштраса,\\
 $\exists x_1 \in [a,b]: f(x_1) = \displaystyle \min_{x \in [a,b]} f(x)$.\\
 $\exists x_2 \in [a,b]: f(x_2) = \displaystyle \max_{x \in [a,b]} f(x)$.\\
 Розглянемо два випадки:\\
-I. $f(x) = const \Rightarrow f'(x) = 0, \forall x \in (a,b)$, $\xi = x$.\\
-II. $f(x) \neq const \Rightarrow$ або є $x_1$, або є $x_2$, або навіть обидва.\\
-Якщо беремо $x_2$, то функція $f$ приймає найбільше значення, тому за лемою Ролля, $f'(x_2) = 0 \Rightarrow \xi = x_2$.\\
-Для $x_1$ - аналогічно.
+I. $f(x) = const \implies f'(x) = 0, \forall x \in (a,b)$, $\xi = x$.\\
+II. $f(x) \neq const \implies$ або є $x_1$, або є $x_2$, або навіть обидва. Якщо беремо $x_2$, то функція $f$ приймає найбільше значення, тому за лемою Ролля, $f'(x_2) = 0 \implies \xi = x_2$. Для $x_1$ -- аналогічно.
 \end{proof}
 
 \begin{remark}
-Диференційованість в т. $x_0=a,x_0=b$ не обов'язкова.\\
-Маємо функцію $f(x) = \sqrt{1-x^2}$. Що в нас є: $f(-1) = f(1)$, $f \in C([-1,1])$, диференційована всюди, але не в т. $x_0 = \pm 1$. При цьому $\exists \xi = 0: f'(\xi) = 0$.
+Диференційованість в точці $x_0=a,x_0=b$ не обов'язкова.\\
+Маємо функцію $f(x) = \sqrt{1-x^2}$. Що в нас є: $f(-1) = f(1)$, $f \in C([-1,1])$, диференційована всюди, але не в точці $x_0 = \pm 1$. При цьому $\exists \xi = 0: f'(\xi) = 0$.
 \end{remark}
 
 \begin{theorem}[Теорема Лагранжа]
-Задано функцію $f: [a,b] \to \mathbb{R}$, $f \in C([a,b])$ та диференційована на $(a,b)$. \\ Тоді $\exists c \in (a,b): f'(c) = \displaystyle \frac{f(b)-f(a)}{b-a}$.
+Задано функцію $f \colon a,b] \to \mathbb{R}$, $f \in C([a,b])$ та диференційована на $(a,b)$. Тоді $\exists c \in (a,b): \\ f'(c) = \displaystyle \frac{f(b)-f(a)}{b-a}$.
 \end{theorem}
 
 \begin{proof}
-Розглянемо функцію $h(x) = \displaystyle (f(x)-f(a))- \frac{f(b)-f(a)}{b-a}(x-a)$.\\
-За сумою та добутками, маємо, що $h \in C([a,b])$ і теж диференційована на $(a,b)$.\\
+Розглянемо функцію $h(x) = \displaystyle (f(x)-f(a))- \frac{f(b)-f(a)}{b-a}(x-a)$. За сумою та добутками, маємо, що $h \in C([a,b])$ і теж диференційована на $(a,b)$.\\
 $h'(x) = \displaystyle f'(x) - \frac{f(b)-f(a)}{b-a}$.\\
 Зауважимо, що $h(a) = 0$ та $h(b) = 0 \Rightarrow h(a) = h(b)$. Тому за теоремою Ролля, \\
 $\exists \xi = c \in (a,b): f'(c) = 0 \implies f'(c) = \displaystyle \frac{f(b)-f(a)}{b-a}$.
-\end{proof}
-
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -5851,41 +5881,32 @@ $\exists \xi = c \in (a,b): f'(c) = 0 \implies f'(c) = \displaystyle \frac{f(b)-
 \end{tikzpicture}
 \caption*{Для $f$ в т. $c$ проведемо дотичну. І в цій точці відрізок, що сполучає початкову та кінцеву точку, буде паралельна дотичній.}
 \end{figure}
+\fi %uncomment picture
+\end{proof}
 
 \begin{corollary}[Наслідки з теореми Лагранжа]
-1. Якщо $\forall x \in (a,b): f'(x) = 0$, то $f(x) = const$.\\
-2. Якщо $\forall x \in (a,b): f'(x) = k$, то $f(x) = kx + q$.\\
-3. Нехай $g$ - така ж за властивостями як і $f$. Якщо $\forall x \in (a,b): f'(x) = g'(x)$, то $f(x) = g(x) + C$.\\
-4. Якщо додатково $f'$ - обмежена, то $f$ задовільняє умові Ліпшиця (буде згодом).
+Справедливі наступні твердження:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Якщо $\forall x \in (a,b): f'(x) = 0$, то $f(x) = const$;
+\item Якщо $\forall x \in (a,b): f'(x) = k$, то $f(x) = kx + q$;
+\item Нехай $g$ -- така ж за властивостями як і $f$. Якщо $\forall x \in (a,b): f'(x) = g'(x)$, то $f(x) = g(x) + C$;
+\item Якщо додатково $f'$ -- обмежена, то $f$ задовольняє умові Ліпшиця (буде згодом).
+\end{enumerate}
 \end{corollary}
 
-\begin{proof}
-1. $\exists c: f(b)-f(a) = f'(c)(b-a) \Rightarrow f(b) = f(a)$.\\
-Але взагалі-то кажучи $\exists c \in (x_1,x_2) \subset (a,b): f(x_1) = f(x_2)$.\\
-Коротше, $f(x) = const$.
-\bigskip \\
-
-2. Розглянемо функцію $g(x) = f(x) - kx$, теж неперервна і диференційована на $(a,b)$.\\
-Тоді $g'(x) = f'(x) - k \Rightarrow g'(x) = 0 \overset{\textrm{насл 1.}}{\Rightarrow} g(x) = q$.\\
-Отже, $g(x) = kx + q$.
-\bigskip \\
-
-3. Розглянемо функцію $h(x) = f(x) - g(x)$, теж неперервна і диференційована на $(a,b)$.\\
-Тоді $h'(x) = f'(x) - g'(x) = 0 \overset{\textrm{насл 1.}}{\Rightarrow} h(x) = C \Rightarrow f(x) = g(x) + C$.
-\bigskip \\
-
-Зробимо невеличкий відступ.
+Перед цим все ж таки наведу означення.
 \begin{definition}
-Задано функцію $f: [a,b] \to \mathbb{R}$.\\
-Функція $f$ \textbf{задовільняє умові Ліпшиця}, якщо
+Задано функцію $f \colon [a,b] \to \mathbb{R}$.\\
+Функція $f$ \textbf{задовольняє умові Ліпшиця}, якщо
 \begin{align*}
 \exists L > 0: \forall x_1,x_2 \in [a,b]: |f(x_1)-f(x_2)| \leq L|x_1-x_2|
 \end{align*}
 \end{definition}
 Щоб зрозуміти сенс, я зміню трошки означення.\\
-Зафіксую т. $x_1$, а $x_2 = x$ Перепишу останню нерівність в іншому вигляді:\\
+Зафіксую точки $x_1$, а $x_2 = x$ Перепишу останню нерівність в іншому вигляді:\\
 $|f(x_1)-f(x)| \leq L|x_1-x| \implies -L|x_1-x|+f(x_1) \leq f(x) \leq L|x_1-x|+f(x_1) $\\
-Це означає, що в кожній точці $x_1 \in [a,b]$ графік функції $f(x)$ буде лежати в блакитній області. Ліва та права частини - це прямі.
+Це означає, що в кожній точці $x_1 \in [a,b]$ графік функції $f(x)$ буде лежати в блакитній області. Ліва та права частини -- це прямі.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=0.8]
@@ -5902,113 +5923,117 @@ $|f(x_1)-f(x)| \leq L|x_1-x| \implies -L|x_1-x|+f(x_1) \leq f(x) \leq L|x_1-x|+f
 \draw[thick,->] (-3,0)--(4.5,0) node[anchor = north west] {$x$};
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 
-А тепер доведемо останній наслідок.\\
-4. $\exists c \in (x_1,x_2) \subset (a,b): f(x_2)-f(x_1)=f'(c)(x_2-x_1)$\\
-$\Rightarrow |f(x_2)-f(x_1)|=|f'(c)||x_2-x_1| \leq M|x_2-x_1|$. Тоді встановлюючи $L=M$, маємо умову Ліпшиця.
+\begin{proof}
+Тепер можемо довести всі наслідки.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $\exists c: f(b)-f(a) = f'(c)(b-a) \implies f(b) = f(a)$. Але взагалі-то кажучи $\exists c \in (x_1,x_2) \subset (a,b): f(x_1) = f(x_2)$. Коротше, $f(x) = const$.
+\item Розглянемо функцію $g(x) = f(x) - kx$, теж неперервна і диференційована на $(a,b)$. Тоді $g'(x) = f'(x) - k \implies g'(x) = 0 \overset{\text{1)}}{\implies} g(x) = q$. Отже, $g(x) = kx + q$.
+\item Розглянемо функцію $h(x) = f(x) - g(x)$, теж неперервна і диференційована на $(a,b)$. Тоді $h'(x) = f'(x) - g'(x) = 0 \overset{\text{1)}}{\implies} h(x) = C \implies f(x) = g(x) + C$.
+\item $\exists c \in (x_1,x_2) \subset (a,b): f(x_2)-f(x_1)=f'(c)(x_2-x_1) \implies |f(x_2)-f(x_1)|=|f'(c)||x_2-x_1| \leq M|x_2-x_1|$. Тоді встановлюючи $L=M$, маємо умову Ліпшиця.
+\end{enumerate}
+Усі наслідки доведені.
 \end{proof}
 
 \begin{example}
-Зокрема функція $f(x) =\sqrt{x^2+5}$ задовільняє умові Ліпшиця на $\mathbb{R}$, оскільки $f'(x) = \dfrac{x}{\sqrt{x^2+5}}$ - обмежена. Дійсно, $f'(x) \to \pm 1, x \to \pm \infty$, а також $f'$ зростає.
+Зокрема функція $f(x) =\sqrt{x^2+5}$ задовольняє умові Ліпшиця на $\mathbb{R}$, оскільки $f'(x) = \dfrac{x}{\sqrt{x^2+5}}$ -- обмежена. Дійсно, $f'(x) \to \pm 1, x \to \pm \infty$, а також $f'$ зростає.
 \end{example}
 
 \begin{theorem}[Теорема Коші]
-Задано функції $f,g: [a,b] \to \mathbb{R}$, $f \in C([a,b])$ та диференційовані на $(a,b)$. При цьому $g'(x) \not\equiv 0$.\\
-Тоді $\exists c \in (a,b): \displaystyle \frac{f'(c)}{g'(c)}  =  \frac{f(b)-f(a)}{g(b)-g(a)}$.\\
+Задані функції $f,g \colon [a,b] \to \mathbb{R}$, $f,g \in C([a,b])$ та диференційовані на $(a,b)$. При цьому $g'(x) \not\equiv 0$. Тоді $\exists c \in (a,b): \displaystyle \frac{f'(c)}{g'(c)}  =  \frac{f(b)-f(a)}{g(b)-g(a)}$.\\
 \textit{Доводиться аналогічно як теорема Лагранжа.}\\
 \textit{Вказівка: розглянути функцію $h(x) = (f(x) - f(a)) - \dfrac{f(b)-f(a)}{g(b)-g(a)}(g(x)-g(a))$.}
 \end{theorem}
 
+\begin{remark}
+Із теореми Коші випливає як раз теорема Лагранжа, якщо $g(x) = x$.
+\end{remark}
+
 \begin{example}
 Довести нерівність: $|\arctg a - \arctg b| \leq |a-b|$.\\
-Оскільки $\arctg x$ - неперервна та диференційована на $(a,b)$, то за теоремою Лагранжа,\\
-$\exists c \in (a,b): (\arctg x)'_{x = c} = \dfrac{\arctg b - \arctg a}{b-a}$.\\
-Тобто $\dfrac{1}{1+c^2} =\dfrac{\arctg b - \arctg a}{b-a}$.\\
+Оскільки $\arctg x$ -- неперервна на $[a,b]$ та диференційована на $(a,b)$, то за теоремою Лагранжа,\\
+$\exists c \in (a,b): (\arctg x)'_{x = c} = \dfrac{\arctg b - \arctg a}{b-a}$. Тобто $\dfrac{1}{1+c^2} =\dfrac{\arctg b - \arctg a}{b-a}$.\\
 Тоді $|\arctg a - \arctg b| = \abs{\dfrac{1}{1+c^2}} |a-b| \leq |a-b|$.
 \end{example}
 
 \subsection{Дослідження функції}
 \subsubsection{На монотонність}
-Означення монотонної функції можна побачити в розділу про границі функції. Тому приступимо безпосередньо до теорем.
+Означення монотонної функції можна побачити в розділу про границі функції. Тому перейдемо безпосередньо до теорем.
 \begin{theorem}
-Задано функцію $f: (a,b) \to \mathbb{R}$ та $f$ диференційована на $(a,b)$.\\
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ та $f$ диференційована на $(a,b)$.\\
 Функція $f$ нестрого монотонно $\left[ \begin{gathered} \textrm{зростає} \\ \textrm{спадає} \end{gathered} \right. \iff \forall x \in (a,b): \left[ \begin{gathered} f'(x) \geq 0 \\ f'(x) \leq 0 \end{gathered} \right.$.
 \end{theorem}
 
 \begin{proof}
 Розглянемо випадок зростаючої функції. Для спадної аналогічно.\\
-\rightproof Дано: $f$ - нестрого зростає, тобто $x_2 > x_1 \implies f(x_2) \geq f(x_1)$\\
-Оскільки диференційована $\forall x_0 \in (a,b)$, то $\exists f'(x_0)$, а тому \\ 
+\rightproof Дано: $f$ -- нестрого зростає, тобто $x_2 > x_1 \implies f(x_2) \geq f(x_1)$. Оскільки диференційована $\forall x_0 \in (a,b)$, то $\exists f'(x_0)$, а тому \\ 
 $\exists f'(x_0^+) = \displaystyle \lim_{x \to x_0^+} \frac{f(x)-f(x_0)}{x-x_0} \left( \frac{\geq 0}{\geq 0} \right) \geq 0$.\\
 $\exists f'(x_0^-) = \displaystyle \lim_{x \to x_0^-} \frac{f(x)-f(x_0)}{x-x_0} \left( \frac{\leq 0}{\leq 0} \right) \geq 0$.\\
 Також $f'(x_0^+) = f'(x_0^-)$, а отже, $\forall x_0 \in (a,b): f'(x_0) \geq 0$.
 \bigskip \\
-\leftproof Дано: $\forall x \in (a,b): f'(x) \geq 0$.\\
-Зафіксуємо такі $x_1,x_2$, щоб $x_2 > x_1$. Розглянемо функцію тепер на відрізку $[x_1,x_2] \subset (a,b)$.\\
-В кожній точці цього відрізку є похідна, тож $f \in C([x_1,x_2])$. Також можна розглядати диференційованість на $(x_1,x_2)$. Тоді за Лагранжом,\\
+\leftproof Дано: $\forall x \in (a,b): f'(x) \geq 0$. Зафіксуємо такі $x_1,x_2$, щоб $x_2 > x_1$. Розглянемо функцію тепер на відрізку $[x_1,x_2] \subset (a,b)$. В кожній точці цього відрізку є похідна, тож $f \in C([x_1,x_2])$. Також можна розглядати диференційованість на $(x_1,x_2)$. Тоді за Лагранжом,\\
 $\exists c \in (x_1,x_2): f(x_2)-f(x_1) = f'(c)(x_2-x_1) \geq 0$.\\
 Остаточно, $f(x_2) \geq f(x_1)$, тобто монотонно нестрого зростає.
 \end{proof}
 
 \begin{theorem}
-Задано функцію $f: (a,b) \to \mathbb{R}$ та $f$ диференційована на $(a,b)$\\
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ та $f$ диференційована на $(a,b)$.\\
 Функція $f$ строго монотонно $\left[ \begin{gathered} \textrm{зростає} \\ \textrm{спадає} \end{gathered} \right. \impliedby \forall x \in (a,b): \left[ \begin{gathered} f'(x) > 0 \\ f'(x) < 0 \end{gathered} \right.$.\\
 \textit{Доведення є аналогічним.}
 \end{theorem}
 
 \begin{remark}
-А тепер питання, куди зник знак $\implies$ в цій теоремі.\\
-Нехай задано функцію $f: (-1,1) \to \mathbb{R}$, де $f(x) = x^3$. Вона строго монотонно зростає.\\
-А тепер знайдемо похідну: $f'(x) = 3x^2$. Вона не для всіх точках строго додатня, для $x = 0$ маємо, що $f'(x) = 0$.
+А тепер питання, куди зникла імплікація $\implies$ в цій теоремі.\\
+Нехай задано функцію $f \colon (-1,1) \to \mathbb{R}$, де $f(x) = x^3$. Вона строго монотонно зростає. Маємо похідну $f'(x) = 3x^2$. Вона не для всіх точках строго додатна: для $x = 0$ маємо, що $f'(x) = 0$.
 \end{remark}
 
 \subsubsection{На локальні екстремуми}
 %\subsubsection{Локальні}
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$ та $x_0 \in A$.\\
+Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in A$.\\
 Точку $x_0$ називають точкою \textbf{локального}\\
 \begin{tabular}{ll}
-- \textbf{максимуму}, якщо & $\exists \delta > 0: \forall x \in (x_0-\delta, x_0 +\delta) \cap A: f(x_0) \geq f(x)$\\
-- \textbf{мінімуму}, якщо & $\exists \delta > 0: \forall x \in (x_0-\delta, x_0 +\delta) \cap A: f(x_0) \leq f(x)$
+\textbf{максимуму}, якщо & $\exists \delta > 0: \forall x \in (x_0-\delta, x_0 +\delta) \cap A: f(x_0) \geq f(x)$;\\
+\textbf{мінімуму}, якщо & $\exists \delta > 0: \forall x \in (x_0-\delta, x_0 +\delta) \cap A: f(x_0) \leq f(x)$.
 \end{tabular}\\
-Ці дві точки називають ще \textbf{точками локального екстремуму}.\\
-Якщо нерівність строга, то екстремуми називають \textbf{строгими} та не розглядаємо в околі т. $x_0$.
+Локальний максимум або мінімум ще називають \textbf{точками локального екстремуму}. Якщо нерівність строга, то екстремуми називають \textbf{строгими} та не розглядаємо в околі точці $x_0$.
 \end{definition}
 
 \begin{definition}
-Якщо в т. $x_0$ маємо $f'(x_0) = 0$ або $\not\exists f'(x_0)$, то таку точку називають \textbf{критичною}.
+Задано функцію $f \colon A \to \mathbb{R}$ та $x_0 \in A$.\\
+Точку $x_0$ називають \textbf{критичною}, якщо
+\begin{align*}
+f'(x_0) = 0 \text{ або } \not\exists f'(x_0)
+\end{align*}
 \end{definition}
 
-\begin{theorem}[Необхідна умова для екстремума]
-Задано функцію $f: (a,b) \to \mathbb{R}$ та т. $x_0 \in (a,b)$ - локальний екстремум. Тоді ця точка є критичною.\\
+\begin{theorem}[Необхідна умова екстремума]
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ та $x_0 \in (a,b)$ -- локальний екстремум. Тоді $x_0$ -- критична точка.
 \end{theorem}
 
 \begin{proof}
 Розглянемо випадок точки максимуму. Для мінімума аналогічно.\\
-$x_0$ - локальна точка максимуму - тобто, приймає в околі т. $x_0$ функція $f$ приймає найбільшого значення. Тоді за лемою Ферма, при існування похідної в т. $x_0$, $f'(x_0) = 0$.\\
-Або $\not\exists f'(x_0)$.
+$x_0$ -- локальна точка максимуму, тобто в околі точки $x_0$ функція $f$ приймає найбільшого значення. Тоді за лемою Ферма, при існуванні похідної в точці $x_0$, $f'(x_0) = 0$. Або $\not\exists f'(x_0)$.
 \end{proof}
 
 \begin{remark}
 Пояснювальний приклад, чому нас точки з неіснуючою похідною цікавить.\\
-$f(x) = |x|$ - в т. $x_0 = 0$ похідної нема, проте вона є точкою локального мінімуму.
+Маємо $f(x) = |x|$. У точці $x_0 = 0$ похідної нема, проте вона є точкою локального мінімуму.
 \end{remark}
 
 \begin{remark}
 Інший приклад, чому ця умова не є достатньою.\\
-$f(x) = x^3$, маємо похідну $f'(x) = 3x^2 \overset{f'(x) = 0}{\Rightarrow} x_0 = 0$, але вона не є естремумом, оскільки минулого разу дізнались, що така функція зростає всюди.
+Маємо $f(x) = x^3$, її похідна $f'(x) = 3x^2 \overset{f'(x) = 0}{\implies} x_0 = 0$, але вона не є естремумом, оскільки минулого разу дізнались, що така функція зростає всюди.
 \end{remark}
 
 \begin{theorem}[Достатня умова для екстремума]
-Задано функцію $f: (a,b) \to \mathbb{R}$ та т. $x_0 \in (a,b)$ - критична точка. Відомо, що \\ $\exists \delta > 0: \forall x \in \begin{cases} (x_0-\delta,x_0): f'(x) \leq 0 \\ (x_0,x_0+\delta): f'(x) \geq 0 \end{cases}$ (або нерівності навпаки). Тут я беру $\delta >0$, щоб інтервал цілком потрапляв в інтервал $(a,b)$.\\
-Тоді $x_0$ - точка локального мінімуму (максимуму).\\
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ та $x_0 \in (a,b)$ -- критична точка. Відомо, що $\exists \delta > 0: \forall x \in \begin{cases} (x_0-\delta,x_0): f'(x) \leq 0 \\ (x_0,x_0+\delta): f'(x) \geq 0 \end{cases}$ (або нерівності навпаки). Тут я беру $\delta >0$, щоб інтервал цілком потрапляв в інтервал $(a,b)$. Тоді $x_0$ -- точка локального мінімуму (максимуму).\\
 При строгої нерівності екстрему буде строгим.
 \end{theorem}
 
 \begin{proof}
-Розглянемо випадок, коли $\forall x \in \begin{cases} (x_0-\delta,x_0): f'(x) \leq 0 \\ (x_0,x_0+\delta): f'(x) \geq 0 \end{cases}$. Для нерівностей навпаки все аналогічно.\\
-Тоді звідси $f$ - спадає на $(x_0 - \delta, x_0)$ і зростає на $(x_0, x_0 + \delta)$.\\
-Або математично, $\forall x \in (x_0-\delta, x_0): f(x_0) \leq f(x)$ та $\forall x \in (x_0, x_0+\delta): f(x_0) \leq f(x)$.\\
+Розглянемо випадок, коли $\forall x \in \begin{cases} (x_0-\delta,x_0): f'(x) \leq 0 \\ (x_0,x_0+\delta): f'(x) \geq 0 \end{cases}$. (для нерівностей навпаки все аналогічно). Тоді звідси $f$ -- спадає на $(x_0 - \delta, x_0)$ і зростає на $(x_0, x_0 + \delta)$. Або математично, $\forall x \in (x_0-\delta, x_0): f(x_0) \leq f(x)$ та $\forall x \in (x_0, x_0+\delta): f(x_0) \leq f(x)$.\\
 За означенням, це й є точка локального мінімуму.
 \end{proof}
 
@@ -6022,6 +6047,7 @@ $f(x) = x^3$, маємо похідну $f'(x) = 3x^2 \overset{f'(x) = 0}{\Right
 $f'(x) = 3x^2-6x-9$\\
 $f'(x) = 0 \Rightarrow x^2-2x-3 = 0 \Rightarrow x = -1,x = 2$\\
 Перевіримо екстремуми на інтервалі.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -6033,11 +6059,13 @@ $f'(x) = 0 \Rightarrow x^2-2x-3 = 0 \Rightarrow x = -1,x = 2$\\
 \draw[thick, ->] (2.5,0.5)--(3,1);
 \end{tikzpicture}
 \end{figure}
-Стрілки вказують на зростання або на спадання функції на даному інтервалі. Тоді можемо зробити висновок, що $x=-1$ - локальний максимум, а $x=2$ - локальний мінімум.
+\fi %uncomment picture
+Стрілки вказують на зростання або на спадання функції на даному інтервалі. Тоді можемо зробити висновок, що $x=-1$ -- локальний максимум, а $x=2$ -- локальний мінімум.
 \end{example}
 
 \subsubsection{На опуклість}
-Розглянемо графік функції $f(x)$ на множині $A$. Із множини $A$ розглядаються дві точки $x_1,x_2$, так, що $x_1 > x_2$.
+Розглянемо графік функції $f(x)$ на множині $A$. Оберемо точки $x_1,x_2 \in A$ так, що $x_1 > x_2$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -6053,22 +6081,19 @@ $f'(x) = 0 \Rightarrow x^2-2x-3 = 0 \Rightarrow x = -1,x = 2$\\
 
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 Це приклад так називаємої \textbf{опуклої функції вниз}, коли на множині $A$ справедлива нерівність:
 \begin{align*}
 \forall x \in A: f(x) \leq l(x)
 \end{align*}
-Прийнято трошки інше означення, а це просто пояснення, звідки все це береться.\\
-Знайдемо рівняння прямої, що проходить через т. $(x_1,f(x_1)), (x_2,f(x_2))$\\
-$\dfrac{x-x_1}{x_2-x_1} = \dfrac{l(x)-f(x_1)}{f(x_2)-f(x_1)} \Rightarrow l(x) = f(x_1) + \dfrac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1)$.\\
-Її підставити можна в нерівність, проте таке означення все рівно не є зручним.\\
-Зафіксуємо $\lambda \in [0,1]$ та розглянемо точку $x = \lambda x_1 + (1-\lambda) x_2$.\\
-Для довільних $\lambda$ точка $x \in [x_1,x_2]$. \\
-А якщо це рівняння розв'язти відносно $\lambda$, ми отримаємо, що:\\
+Прийняте трошки інше означення, а це просто пояснення, звідки все це береться.\\
+Знайдемо рівняння прямої, що проходить через точки $(x_1,f(x_1)), (x_2,f(x_2))$.\\
+$\dfrac{x-x_1}{x_2-x_1} = \dfrac{l(x)-f(x_1)}{f(x_2)-f(x_1)} \implies l(x) = f(x_1) + \dfrac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1)$.\\
+Її підставити можна в нерівність, проте таке означення все рівно не є зручним. Зафіксуємо $\lambda \in [0,1]$ та розглянемо точку $x = \lambda x_1 + (1-\lambda) x_2$. Для довільних $\lambda$ точка $x \in [x_1,x_2]$. А якщо це рівняння розв'язти відносно $\lambda$, ми отримаємо, що:\\
 $\lambda = \dfrac{x_2-x}{x_2-x_1} \hspace{1cm} 1-\lambda = \dfrac{x-x_1}{x_2-x_1}$.\\
 Отримане $\lambda \in (0,1)$. Тоді\\
 $x = \dfrac{x_2-x}{x_2-x_1} x_1 + \dfrac{x-x_1}{x_2-x_1} x_2$, це все $\forall x_1 < x < x_2$.\\
-Але поки що обмежимось першим виглядом.\\
-Підставимо цю точку в рівняння прямої.\\
+Але поки що обмежимось першим виглядом. Підставимо цю точку в рівняння прямої.\\
 $l(x) = l(\lambda x_1 + (1-\lambda) x_2) = f(x_1) + \dfrac{f(x_2)-f(x_1)}{x_2-x_1} (\lambda x_1 + (1-\lambda)x_2 - x_1) = \\
 = f(x_1) + (f(x_2)-f(x_1))(1-\lambda) = \lambda f(x_1) + (1-\lambda)f(x_2)$.\\
 Таким чином, якщо повернутись до нерівності, то отримаємо наступне:
@@ -6079,7 +6104,7 @@ $l(x) = l(\lambda x_1 + (1-\lambda) x_2) = f(x_1) + \dfrac{f(x_2)-f(x_1)}{x_2-x_
 Аналогічні міркування будуть для \textbf{опуклої функції вгору}, але тут нерівність навпаки.
 
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$.\\
+Задано функцію $f \colon A \to \mathbb{R}$.\\
 Цю функцію називають \textbf{опуклою $\underset{\textrm{вниз}}{\textrm{вгору}}$}, якщо
 \begin{align*}
 \forall x_1,x_2 \in A: \forall \lambda \in [0,1]: f(\lambda x_1 + (1-\lambda)x_2) \underset{\geq}{\leq} \lambda f(x_1) + (1-\lambda)f(x_2)
@@ -6091,10 +6116,9 @@ $l(x) = l(\lambda x_1 + (1-\lambda) x_2) = f(x_1) + \dfrac{f(x_2)-f(x_1)}{x_2-x_
 \end{remark}
 
 \begin{lemma}[Лема про 3 хорди]
-Функція $f: A \to \mathbb{R}$ опукла вниз $\iff$ справедлива нерівність\\
-$\dfrac{f(x)-f(x_1)}{x-x_1} \leq \dfrac{f(x_2)-f(x_1)}{x_2-x_1} \leq \dfrac{f(x_2)-f(x)}{x_2-x}$\\
-де $x \in (x_1,x_2) \subset A$.
-\end{lemma}
+Функція $f \colon A \to \mathbb{R}$ опукла вниз $\iff$ справедлива нерівність:\\
+$\dfrac{f(x)-f(x_1)}{x-x_1} \leq \dfrac{f(x_2)-f(x_1)}{x_2-x_1} \leq \dfrac{f(x_2)-f(x)}{x_2-x}$, де $x \in (x_1,x_2) \subset A$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -6119,15 +6143,17 @@ $\dfrac{f(x)-f(x_1)}{x-x_1} \leq \dfrac{f(x_2)-f(x_1)}{x_2-x_1} \leq \dfrac{f(x_
 
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 Нерівність каже: кутовий коефіцієнт $PP_1 \leq$ кутовий коефіцієнт $P_2P_1 \leq$ кутовий коефіцієнт $P_2P$.
+\end{lemma}
 
 \begin{remark}
-Для опуклої вгору нерівність навпаки. Для строгої опуклості нерінвість буде строгою.
+Для опуклої вгору нерівність навпаки. Для строгої опуклості нерінвість строга.
 \end{remark}
 
 \begin{proof}
 Зафіксуємо точки $x_1,x_2 \in A$ та точку $x \in (x_1,x_2)$.\\
-$f$ - опукла вниз $\iff f(x) \leq \dfrac{x_2-x}{x_2-x_1}f(x_1) + \dfrac{x-x_1}{x_2-x_1}f(x_2)
+$f$ -- опукла вниз $\iff f(x) \leq \dfrac{x_2-x}{x_2-x_1}f(x_1) + \dfrac{x-x_1}{x_2-x_1}f(x_2)
 \iff \\ \iff (x_2-x_1) f(x) \leq (x_2-x)f(x_1) + (x-x_1)f(x_1)$\\
 $\iff (f(x)-f(x_1))(x_2-x_1) \leq (f(x_2)-f(x))(x-x_1)
 \iff \dfrac{f(x)-f(x_1)}{x-x_1} \leq \dfrac{f(x_2)-f(x)}{x_2-x}$ \\
@@ -6135,46 +6161,43 @@ $\iff (f(x)-f(x_1))(x_2-x_1) \leq (f(x_2)-f(x))(x-x_1)
 \end{proof}
 
 \begin{lemma}
-Задано функцію $f: A \to \mathbb{R}$ - диференційована на $A$.\\
+Задано функцію $f: A \to \mathbb{R}$ -- диференційована на $A$.\\
 $f$ - опукла $\underset{\textrm{вгору}}{\textrm{вниз}}$ $\iff$ $f'$ $\underset{\textrm{не зростає}}{\textrm{не спадає}}$ на $A$.
 \end{lemma}
 
 \begin{proof}
-\rightproof Дано: $f$ - опукла вниз.\\
-Розглянемо т. $x_1, x_2 \in A$, тоді $\dfrac{f(x)-f(x_1)}{x-x_1} \leq \dfrac{f(x_2)-f(x)}{x_2-x}$.\\
-Ба більше, оскільки $f$ - диференційована, то $\exists f'(x_1), \exists f'(x_2)$.\\
-Тоді отримаємо ось що, використовуючи границі в нерівностях:\\
+\rightproof Дано: $f$ -- опукла вниз. Розглянемо точки $x_1, x_2 \in A$, тоді $\dfrac{f(x)-f(x_1)}{x-x_1} \leq \dfrac{f(x_2)-f(x)}{x_2-x}$.\\
+Ба більше, оскільки $f$ -- диференційована, то $\exists f'(x_1), \exists f'(x_2)$. Тоді отримаємо ось що, використовуючи границі в нерівностях:\\
 $\left. \begin{gathered}
 f'(x_1) = \displaystyle \lim_{x \to x_1+0} \dfrac{f(x)-f(x_1)}{x-x_1} \leq \dfrac{f(x_2)-f(x_1)}{x_2-x_1} \\
 \dfrac{f(x_2)-f(x_1)}{x_2-x_1} \leq \displaystyle \lim_{x \to x_2-0} \dfrac{f(x_2)-f(x)}{x_2-x} = f'(x_2)
-\end{gathered} \right.$. Отже, $\forall x_1,x_2 \in A: x_2 > x_1 \Rightarrow f'(x_2) \geq f'(x_1)$.
+\end{gathered} \right.$. Отже, $\forall x_1,x_2 \in A: x_2 > x_1 \implies f'(x_2) \geq f'(x_1)$.
 \bigskip \\
-\leftproof Дано: $f'$ - неспадна на $A$, тобто $\forall x_1,x_2 \in A: x_1 < x_2 \Rightarrow f'(x_1) \leq f'(x_2)$.\\
-Оскільки $f$ - диференційована на $A$, то за теоремою Лагранжа,\\
+\leftproof Дано: $f'$ -- неспадна на $A$, тобто $\forall x_1,x_2 \in A: x_1 < x_2 \implies f'(x_1) \leq f'(x_2)$. Оскільки $f$ -- диференційована на $A$, то за теоремою Лагранжа,\\
 $\begin{gathered}
 f'(x_1) = \dfrac{f(c) - f(c_1)}{c- c_1}\\
 f'(x_2) = \dfrac{f(c_2) - f(c)}{c_2 - c}
 \end{gathered} \implies \dfrac{f(c) - f(c_1)}{c- c_1} \leq \dfrac{f(c_2) - f(c)}{c_2 - c}$.\\
-Тоді маємо, що $f$ - випукла вниз.
+Тоді маємо, що $f$ -- випукла вниз.
 \end{proof}
 
 \begin{remark}
-Майже аналогічно для строгої опуклості.\\
-Єдине, що в першій частині доведення треба застосувати теореми Лагранжа для точок $z_1 \in (x_1,x)$ та $z_2 \in (x,x_2)$.
+Майже аналогічно доводиться для строгої опуклості.\\
+Єдине, що в першій частині доведення треба застосувати теорему Лагранжа для точок $z_1 \in (x_1,x)$ та $z_2 \in (x,x_2)$.
 \end{remark}
 
 \begin{theorem}
-Задано функцію $f: (a,b) \to \mathbb{R}$ та $f$ диференційована двічі на $(a,b)$.\\
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ та $f$ диференційована двічі на $(a,b)$.\\
 Функція $f$ нестрого опукла $\left[ \begin{gathered} \textrm{вниз} \\ \textrm{вгору} \end{gathered} \right. \iff \forall x \in (a,b): \left[ \begin{gathered} f''(x) \geq 0 \\ f''(x) \leq 0 \end{gathered} \right.$.
 \end{theorem}
 
 \begin{proof}
-$f$ - опукла вниз на $(a,b) \iff f'$ - не спадає на $(a,b) \iff \forall x \in (a,b): f''(x) \geq 0$.\\
+$f$ -- опукла вниз на $(a,b) \iff f'$ -- не спадає на $(a,b) \iff \forall x \in (a,b): f''(x) \geq 0$.\\
 Аналогічно для опуклої вгору.
 \end{proof}
 
 \begin{theorem}
-Задано функцію $f: (a,b) \to \mathbb{R}$ та $f$ диференційована двічі на $(a,b)$.\\
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ та $f$ диференційована двічі на $(a,b)$.\\
 Функція $f$ строго опукла $\left[ \begin{gathered} \textrm{вниз} \\ \textrm{вгору} \end{gathered} \right. \impliedby \forall x \in (a,b): \left[ \begin{gathered} f''(x) > 0 \\ f''(x) < 0 \end{gathered} \right.$.\\
 \textit{Доведення аналогічне}.
 \end{theorem}
@@ -6185,7 +6208,7 @@ $f$ - опукла вниз на $(a,b) \iff f'$ - не спадає на $(a,b)
 
 \iffalse
 \begin{theorem}
-Задано функцію $f: (a,b) \to \mathbb{R}$, $f \in C([a,b])$ та диференційована на $(a,b)$.\\
+Задано функцію $f \colon (a,b) \to \mathbb{R}$, $f \in C([a,b])$ та диференційована на $(a,b)$.\\
 $f$ - опукла донизу на $(a,b) \iff \forall x_0 \in (a,b):$ дотична в т. $x_0$ лежить ничже графіка функції $f$.
 \end{theorem}
 
@@ -6216,7 +6239,7 @@ $\dfrac{f(x_1)-f(x)}{x_1-x} \leq \dfrac{f(x_2)-f(x)}{x_2-x}$.\\
 \fi
 
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$ - диференційована в т. $x_0$ - внутрішня.\\
+Задано функцію $f \colon A \to \mathbb{R}$ -- диференційована в точці $x_0$ -- внутрішня точка.\\
 Точку $(x_0,f(x_0))$ називають \textbf{точкою перегину}, якщо
 \begin{align*}
 \exists \delta > 0: \text{ інтервали } (x_0-\delta,x_0), (x_0,x_0+\delta) \text{ мають різну опуклість}
@@ -6225,16 +6248,13 @@ $\dfrac{f(x_1)-f(x)}{x_1-x} \leq \dfrac{f(x_2)-f(x)}{x_2-x}$.\\
 
 \begin{example}
 Маємо $f(x) = \displaystyle \frac{(x-1)^3}{4} + 2$.\\
-$f''(x) = \displaystyle \frac{3}{2}(x-1) = 0$. Тут буде т. $x_0 = 1$ - точка перегину.\\
-Дійсно, якщо $x > 1$, то $f''(x) > 0$. А якщо $x < 1$, то $f''(x) < 0$.\\
-Отже, на $(-\infty,1)$ - випукла догори, а на $(1,+\infty)$ - випукла донизу.
+$f''(x) = \displaystyle \frac{3}{2}(x-1) = 0$. Тут буде точка $x_0 = 1$ -- точка перегину. Дійсно, якщо $x > 1$, то $f''(x) > 0$; також якщо $x < 1$, то $f''(x) < 0$. Отже, на $(-\infty,1)$ - випукла догори, а на $(1,+\infty)$ - випукла донизу.
 \end{example}
 
 \begin{example}
 Маємо $f(x) = \sqrt[3]{x}$.\\
-$f''(x) = \dfrac{1}{3} \left( -\dfrac{2}{3} \right) x^{-\frac{5}{3}}$.\\
-Тут буде т. $x_0 = 0$ - точка перегину.\\
-Водночас $\exists y'(0^+) = \displaystyle \lim_{x \to 0^+} \dfrac{\sqrt[3]{x} - 0}{x - 0} = +\infty \hspace{0.3cm} \exists y'(0^-) = \displaystyle \lim_{x \to 0^-} \dfrac{\sqrt[3]{x} - 0}{x - 0} = +\infty$.
+$f''(x) = \dfrac{1}{3} \left( -\dfrac{2}{3} \right) x^{-\frac{5}{3}}$. Тут буде точка $x_0 = 0$ -- точка перегину. Водночас \\ $\exists y'(0^+) = \displaystyle \lim_{x \to 0^+} \dfrac{\sqrt[3]{x} - 0}{x - 0} = +\infty \hspace{0.3cm} \exists y'(0^-) = \displaystyle \lim_{x \to 0^-} \dfrac{\sqrt[3]{x} - 0}{x - 0} = +\infty$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -6245,61 +6265,62 @@ $f''(x) = \dfrac{1}{3} \left( -\dfrac{2}{3} \right) x^{-\frac{5}{3}}$.\\
 \draw[red, domain=-1.8:-0.001, variable=\x, samples = 1000] plot({\x}, {-(-\x)^(1/3)});
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \begin{example}
 Маємо $f(x) = \sqrt{|x|}$.\\
-Тут т. $x_0 = 0$ не може бути точкою перегину, оскільки $\not \exists f'(0)$.
+Тут точка $x_0 = 0$ не може бути точкою перегину, оскільки $\not \exists f'(0)$.
 \end{example}
 
 %Додати приклад f(x) = x^2, x <=0 та sinx, x > 0
 %Додати приклад f(x) = 0, x <=0 та x^2, x > 0
 
 \begin{theorem}[Необхідна умова для перегину]
-Задано функцію $f: A \to \mathbb{R}$ та т. $x_0 \in A$ - точка перегину. Тоді $f''(x_0) = 0$.\\
+Задано функцію $f \colon A \to \mathbb{R}$ та точка $x_0 \in A$ -- точка перегину. Тоді $f''(x_0) = 0$.\\
 \textit{Тут все зрозуміло.}
 \end{theorem}
 
 \begin{theorem}[Достатня умова для перегину]
-Задано функцію $f: A \to \mathbb{R}$, $f \in C(A)$ та диференційована в околі т. $x_0$ та має другу похідну. Якщо по обидва боки від точки $x_0$ маємо протилежні знаки, то тоді $x_0$ - точка перегину.\\
+Задано функцію $f \colon A \to \mathbb{R}$, $f \in C(A)$ та диференційована в околі точці $x_0$ та має другу похідну. Якщо по обидва боки від точки $x_0$ маємо протилежні знаки, то тоді $x_0$ -- точка перегину.\\
 \textit{Тут теж все зрозуміло.}
 \end{theorem}
 
 \begin{theorem}[Нерівність Єнсена]
-Задано функцію $f:(a,b) \to \mathbb{R}$ - опукла $\underset{\textrm{вгору}}{\textrm{вниз}}$. Тоді\\
-$\forall \alpha_1, \dots, \alpha_n \in (0,1): \displaystyle \alpha_1 + \dots + \alpha_n = 1:$\\
+Задано функцію $f \colon (a,b) \to \mathbb{R}$ - опукла $\underset{\text{вгору}}{\textrm{вниз}}$. Тоді $\forall \alpha_1, \dots, \alpha_n \in (0,1): \displaystyle \alpha_1 + \dots + \alpha_n = 1:$\\
 $\displaystyle f(\alpha_1 x_1 + \dots + \alpha_n x_n) \underset{>}{<} \alpha_1 f(x_1) + \dots + \alpha_n f(x_n)$.
 \end{theorem}
 
-\begin{pfMI}
-$n = 2$. Тоді $\forall \alpha_1, \alpha_2: \alpha_1 + \alpha_2 = 1 \Rightarrow \alpha_2 = 1- \alpha_1:$\\
-$f(\alpha_1 x_2 + \alpha_2 x_2) = f(\alpha_1 x_2 + (1-\alpha_1)x_2) < \alpha_1 f(x_1) + (1-\alpha_1)f(x_2)$, оскільки наша функція опукла вниз.\\
-Припустимо, що для $n-1$ нерівність виконана. Доведемо для $n$:\\
+\begin{proof}
+Доведення проведемо за МІ по числу $n$.\\
+\textit{База індукції}: $n = 2$. Тоді $\forall \alpha_1, \alpha_2: \alpha_1 + \alpha_2 = 1 \Rightarrow \alpha_2 = 1- \alpha_1:$\\
+$f(\alpha_1 x_2 + \alpha_2 x_2) = f(\alpha_1 x_2 + (1-\alpha_1)x_2) < \alpha_1 f(x_1) + (1-\alpha_1)f(x_2)$, бо наша функція опукла вниз.\\
+\textit{Припущення індукції}: для $n-1$ нерівність виконана. \\
+\textit{Крок індукції}: доведемо, що для $n$ де виконано. Маємо:\\
 $\forall \alpha_1,\dots,\alpha_n \in (0,1): \forall x \in (a,b):$\\
 $f(\alpha_1 x_1 + \dots + \alpha_n x_n) = \displaystyle f\left(\alpha_n x_n + (1-\alpha_n)\left(\frac{\alpha_1}{1-\alpha_n}x_1 + \dots + \frac{\alpha_{n-1}}{1-\alpha_{n-1}}x_{n-1} \right)\right) \boxed{<}$\\
 Зауважу, що $\displaystyle \frac{\alpha_1}{1-\alpha_n} + \dots + \frac{\alpha_{n-1}}{1-\alpha_{n-1}} = 1$ та всі доданки $>0$.\\
-$\boxed{<} \displaystyle \alpha_n f(x_n) + (1-\alpha_n)\left(\frac{\alpha_1}{1-\alpha_n}x_1 + \dots + \frac{\alpha_{n-1}}{1-\alpha_{n-1}}x_{n-1} \right) = \\ = \alpha_1 f(x_1) + \dots + \alpha_n f(x_n)$\\
+$\boxed{<} \displaystyle \alpha_n f(x_n) + (1-\alpha_n)\left(\frac{\alpha_1}{1-\alpha_n}x_1 + \dots + \frac{\alpha_{n-1}}{1-\alpha_{n-1}}x_{n-1} \right) = \alpha_1 f(x_1) + \dots + \alpha_n f(x_n)$.\\
 МІ доведено.
-\end{pfMI}
+\end{proof}
 
 \begin{example}
 Розглянемо функцію $f(x) = \ln x$.\\
 Вона є опуклою вгору, тому що $f''(x) = -\dfrac{1}{x^2} < 0$. Тоді за нерівністю Єнсена, отримаємо:\\
 $\ln(\alpha_1 x_1 + \dots + \alpha_n x_n) > \alpha_1 \ln x_1 + \dots + \alpha_n \ln x_n$, де $\alpha_1 + \dots + \alpha_n = 1$.\\
-Можемо встановити $\alpha_1 = \dots = \alpha_n = \dfrac{1}{n}$, сума буде також рівна одинички. Прийдемо до такої нерівності:\\
-$\ln \dfrac{x_1+\dots+x_n}{n} \geq \dfrac{1}{n} \left( \ln x_1 + \dots + \ln x_n \right)$.
+Можемо встановити $\alpha_1 = \dots = \alpha_n = \dfrac{1}{n}$, сума буде також рівна одинички. Прийдемо до такої нерівності: $\ln \dfrac{x_1+\dots+x_n}{n} \geq \dfrac{1}{n} \left( \ln x_1 + \dots + \ln x_n \right)$.
 \end{example}
 
 \subsubsection{На асимптоти}
 \begin{definition}
 Пряма $y = kx+b$ називається \textbf{похилою асимптотою} функції $f$, якщо
 \begin{align*}
-\lim_{x \to \pm \infty} (f(x) - (kx+b)) = 0
+\lim_{x \to \pm \infty} (f(x) - (kx+b)) = 0.
 \end{align*}
 \end{definition}
 
 \begin{theorem}
-$y = kx+b$ - похила асимптота $\iff  k = \displaystyle\lim_{x \to \pm \infty} \dfrac{f(x)}{x}$ та $b = \displaystyle\lim_{x \to \pm \infty} (f(x) - kx)$.
+$y = kx+b$ -- похила асимптота $\iff  k = \displaystyle\lim_{x \to \pm \infty} \dfrac{f(x)}{x}$ та $b = \displaystyle\lim_{x \to \pm \infty} (f(x) - kx)$.
 \end{theorem}
 
 \begin{proof}
@@ -6319,7 +6340,8 @@ $k = \displaystyle\lim_{x \to +\infty} \dfrac{f(x)}{x} = \lim_{x \to +\infty} \l
 Знаходимо другий коефіцієнт:\\
 $b = \displaystyle\lim_{x \to +\infty} (f(x) - kx) = \lim_{x \to +\infty} \left( \dfrac{\sin 10 x}{x} + x - x \right) = 0$.\\
 \textit{Для $-\infty$ все аналогічно.}\\
-Таким чином, $y = x$ - похила асимптота.
+Таким чином, $y = x$ -- похила асимптота.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale = 0.4]
@@ -6329,6 +6351,7 @@ $b = \displaystyle\lim_{x \to +\infty} (f(x) - kx) = \lim_{x \to +\infty} \left(
 \draw (0,0)--(10,10);
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \begin{remark}
@@ -6345,7 +6368,8 @@ $b = \displaystyle\lim_{x \to +\infty} (f(x) - kx) = \lim_{x \to +\infty} \left(
 \begin{example}
 Задано функцію $f(x) = e^{\frac{1}{x-1}}$. Розглянемо т. $x_0 = 1$.\\
 $\displaystyle \lim_{x \to 1+0} e^{-\frac{1}{x-1}} = +\infty$.\\
-Таким чином, $x_0 = 1$ - вертикальна асимптота.
+Таким чином, $x_0 = 1$ -- вертикальна асимптота.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale = 0.4]
@@ -6356,13 +6380,16 @@ $\displaystyle \lim_{x \to 1+0} e^{-\frac{1}{x-1}} = +\infty$.\\
 \draw (1,-1.5)--(1,8);
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 \end{example}
 
 \subsection{Правила Лопіталя}
 \begin{theorem}[I правило Лопіталя]
-Задані функції $f,g$ - диференційовані на $(a,b)$ та $\forall x \in (a,b): g'(x) \neq 0$. Також відомо, що:\\
-1. $\exists \displaystyle \lim_{x \to b^-} f(x) = 0$, $\exists \displaystyle \lim_{x \to b^-} g(x) = 0$\\
-2. $\exists \displaystyle \lim_{x \to b^-} \frac{f'(x)}{g'(x)} = L$\\
+Задані функції $f,g$ -- диференційовані на $(a,b)$ та $\forall x \in (a,b): g'(x) \neq 0$. Також відомо, що:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\exists \displaystyle \lim_{x \to b^-} f(x) = 0$, $\exists \displaystyle \lim_{x \to b^-} g(x) = 0$;
+\item $\exists \displaystyle \lim_{x \to b^-} \frac{f'(x)}{g'(x)} = L$.
+\end{enumerate}
 Тоді $\exists \displaystyle \lim_{x \to b^-} \frac{f(x)}{g(x)} = L$.\\
 \textit{Тут можна замість $x \to b^-$ записати $x \to a^+$, доведення аналогічне.}
 \end{theorem}
@@ -6377,16 +6404,17 @@ $\boxed{=} \displaystyle \lim_{c \to b^-} \frac{f'(c)}{g'(c)} = L$.
 
 \begin{example}
 Обчислити границю $\displaystyle\lim_{x \to 0} \dfrac{x-\sin x}{x^3}$.\\
-Маємо $f(x) = x - \sin x$, $g(x) = x^3$ - обидва неперервні та диференційовані. Також $f(x) \to 0, g(x) \to 0$, якщо $x \to 0$\\
-Тепер з'ясуємо, куди прямує $\dfrac{f'(x)}{g'(x)}$.\\
+Маємо $f(x) = x - \sin x$, $g(x) = x^3$ - обидва неперервні та диференційовані. Також $f(x) \to 0, g(x) \to 0$, якщо $x \to 0$. Тепер з'ясуємо, куди прямує $\dfrac{f'(x)}{g'(x)}$.\\
 $\displaystyle\lim_{x \to 0} \dfrac{1-\cos x}{3x^2} = \lim_{x \to 0} \dfrac{2 \sin^2 \dfrac{x}{2}}{3x^2} = \displaystyle\lim_{x \to 0} \dfrac{2x^2}{3x^2 \cdot 4} = \dfrac{1}{6}$.\\
 Всі пункти І правила Лопіталя виконуються. Отже, $\displaystyle\lim_{x \to 0} \dfrac{x-\sin x}{x^3} = \dfrac{1}{6}$.
 \end{example}
 
 \begin{theorem}[II правило Лопіталя]
-Задані функції $f,g$ - диференційовані на $(a,b)$ та $\forall x \in (a,b): g'(x) \neq 0$. Також відомо, що:\\
-1. $\exists \displaystyle \lim_{x \to b^-} g(x) = +\infty$\\
-2. $\exists \displaystyle \lim_{x \to b^-} \frac{f'(x)}{g'(x)} = L$\\
+Задані функції $f,g$ -- диференційовані на $(a,b)$ та $\forall x \in (a,b): g'(x) \neq 0$. Також відомо, що:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\exists \displaystyle \lim_{x \to b^-} g(x) = +\infty$;
+\item $\exists \displaystyle \lim_{x \to b^-} \frac{f'(x)}{g'(x)} = L$.
+\end{enumerate}
 Тоді $\exists \displaystyle \lim_{x \to b^-} \frac{f(x)}{g(x)} = L$.\\
 \textit{Тут можна замість $x \to b^-$ записати $x \to a^+$, доведення аналогічне.}
 \end{theorem}
@@ -6399,14 +6427,14 @@ $\displaystyle\lim_{x \to 0} \dfrac{1-\cos x}{3x^2} = \lim_{x \to 0} \dfrac{2 \s
 
 Дріб поділимо на $g(x)$. Ми це можемо, оскільки $g(x) > 0$ для $x > \max \{c_1,c_2\}$\\
 $\dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} = \dfrac{\dfrac{f(x)}{g(x)} - \dfrac{f(c_1)}{g(x)}}{1 - \dfrac{g(c_1)}{g(x)}} \implies \dfrac{f(x)}{g(x)} - \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} = \dfrac{f(c_1)}{g(x)} - \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} \dfrac{g(c_1)}{g(x)}$.\\
-З'ясуємо, куди прямує права частина, якщо $x \to b^-$. Ми знаємо, що $g(x) \to +\infty$, ну а $f(c_1),g(c_1)$ - визначені, тоді $\dfrac{f(c_1)}{g(x)} \to 0, \dfrac{g(c_1)}{g(x)} \to 0$. Дріб $\dfrac{f(x)-f(c_1)}{g(x)-g(c_1)}$ обмежена за використаною теоремою Коші, тому все чудово.\\
+З'ясуємо, куди прямує права частина, якщо $x \to b^-$. Ми знаємо, що $g(x) \to +\infty$, ну а $f(c_1),g(c_1)$ -- визначені, тоді $\dfrac{f(c_1)}{g(x)} \to 0, \dfrac{g(c_1)}{g(x)} \to 0$. Дріб $\dfrac{f(x)-f(c_1)}{g(x)-g(c_1)}$ обмежена за використаною теоремою Коші, тому все чудово.\\
 Отже, $\dfrac{f(x)}{g(x)} - \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} \to 0$, тож $\abs{\dfrac{f(x)}{g(x)} - \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)}} < \varepsilon$.\\
 За нерівністю трикутника, маємо, що $\abs{\dfrac{f(x)}{g(x)} - L} < 2\varepsilon$.\\
 Остаточно, $\exists \displaystyle\lim_{x \to b^-} \dfrac{f(x)}{g(x)} = L$.
 \bigskip \\
 Випадок, коли $L = +\infty$ ($-\infty$ аналогічно). Ми задаємо $E > 0$, тоді $\exists \delta_1: \forall x \in (b-\delta_1,b) \Rightarrow \dfrac{f'(x)}{g'(x)} > E$.\\
 Також $\exists \delta_2: \forall x \in (b-\delta_2, b) \Rightarrow g(x) > 0$.\\
-Знову позначу $c_1 = b-\delta_1,c_2 = b-\delta_2$. За аналогічними міркуваннями, $\Rightarrow \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} > E$. де $x > \max \{c_1,c_2\}$.\\
+Знову позначу $c_1 = b-\delta_1,c_2 = b-\delta_2$. За аналогічними міркуваннями, $\implies \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} > E$. де $x > \max \{c_1,c_2\}$.\\
 Оскільки $g(x) \to \infty$, то $\dfrac{1}{g(x)} \to 0$, тобто $-1 < \dfrac{1}{g(x)} < 1$ для деякого $\delta'$, маємо $c_3 = b-\delta'$. Тому якщо $x > \max\{c_1,c_2,c_3\}$, то\\
 $\dfrac{f(x)}{g(x)} = \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} + \dfrac{f(c_1)}{g(x)} - \dfrac{f(x)-f(c_1)}{g(x)-g(c_1)} \dfrac{g(c_1)}{g(x)} > E - f(c_1) + Eg(c_1) \implies \dfrac{f(x)}{g(x)} \to +\infty$.
 \end{proof}
@@ -6429,11 +6457,11 @@ $\boxed{=} e^0 = 1$
 \end{remark}
 
 \subsection{Формула Тейлора}
-Задача цього підрозділу полягає в тому, що ми хочемо навчитись апроксимувати функцію в вигляді многочлена навколо певній точці.\\
-Маємо функцію $f(x)$ та т. $x_0$.\\
-Перше наближення до многочлену - це буде $y = f(x_0)$. Досить грубе наближення.\\
-Друге наближення до многочлену - це буде $y = f(x_0) + f'(x_0)(x-x_0)$, якщо функція диференційована. А це вже - дотична, яка дає вже нормальне наближення.\\
-Третє наближення до многочлену - це буде $y = f(x_0) + f'(x_0)(x-x_0) + \dfrac{f''(x_0)}{2}(x-x_0)^2$, якщо функція двічі диференційована. Ділю я навпіл, тому що я вимагаю, щоб $y''=f''(x_0)$. Це вже краще наближення, використовуючи знання випуклості функції.\\
+Задача цього підрозділу полягає в тому, що ми хочемо навчитись апроксимувати функцію в вигляді многочлена навколо певній точці. Маємо функцію $f(x)$ та точці $x_0$.\\
+Перше наближення до многочлену -- це буде $y = f(x_0)$. Досить грубе наближення.\\
+Друге наближення до многочлену -- це буде $y = f(x_0) + f'(x_0)(x-x_0)$, якщо функція диференційована. А це вже -- дотична, яка дає вже нормальне наближення.\\
+Третє наближення до многочлену -- це буде $y = f(x_0) + f'(x_0)(x-x_0) + \dfrac{f''(x_0)}{2}(x-x_0)^2$, якщо функція двічі диференційована. Ділю я навпіл, тому що я вимагаю, щоб $y''=f''(x_0)$. Це вже краще наближення, використовуючи знання випуклості функції.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \begin{tikzpicture}
 \draw[thick, domain=-2:1, variable=\x, samples = 100] plot({\x}, {exp(\x)}) node[anchor = north east] {$f(x)$};
@@ -6462,27 +6490,28 @@ $\boxed{=} e^0 = 1$
 \draw[dashed] (0,0)--(0,1);
 \end{tikzpicture}
 \end{figure}
-Тощо, тощо, тощо
+\fi %uncomment picture
+Тощо, тощо, тощо\dots
 \begin{definition}
-Задано функцію $f$ - диференційована $n$ разів в т. $x_0$.\\
-\textbf{Многочленом Тейлора} функції $f$ в т. $x_0$ називається такий многочлен порядка $n$:
+Задано функцію $f$ -- диференційована $n$ разів в точці $x_0$.\\
+\textbf{Многочленом Тейлора} функції $f$ в точці $x_0$ називається такий многочлен порядка $n$:
 \begin{align*}
-P_n(x,x_0) = f(x_0) + \dfrac{f'(x_0)}{1!}(x-x_0) + \dfrac{f''(x_0)}{2!}(x-x_0)^2 + \dots + \dfrac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+P_n(x,x_0) = f(x_0) + \dfrac{f'(x_0)}{1!}(x-x_0) + \dfrac{f''(x_0)}{2!}(x-x_0)^2 + \dots + \dfrac{f^{(n)}(x_0)}{n!}(x-x_0)^n.
 \end{align*}
 \end{definition}
-Оскільки ми на кожному наближенні вимагали рівність похідних в т. $x_0$, то для многочлена Тейлора має бути теж саме.
+Оскільки ми на кожному наближенні вимагали рівність похідних в точці $x_0$, то для многочлена Тейлора має бути теж саме.
 \begin{lemma}
-$f^{(k)}(x_0) = (P_n(x,x_0))^{(k)}(x_0)$\\
+$f^{(k)}(x_0) = (P_n(x,x_0))^{(k)}(x_0)$.\\
 \textit{Зрозуміло.}
 \end{lemma}
 
-Я буду собі наближувати щоразу - і тоді в мене виникне певна похибка. Для цієї похибки є теорема, яку наведу після розмови, бо сприйняти буде важко.
+Я буду собі наближувати щоразу -- і тоді в мене виникне певна похибка. Для цієї похибки є теорема, яку наведу після розмови, бо сприйняти буде важко.
 \bigskip \\
-Розглянемо функцію $f$ - $n$ разів диференційована в т. $x_0$ та многочлен Тейлора $P_n(x,x_0)$.\\
+Розглянемо функцію $f$ -- $n$ разів диференційована в точці $x_0$ та многочлен Тейлора $P_n(x,x_0)$.\\
 Розглянемо функцію $g(t) = f(x) - P_n(x,t)$, або більш розгорнуто \\ 
 $g(t) = f(x) - \left( f(t) + \dfrac{f'(t)}{1!}(x-t) + \dfrac{f''(t)}{2!}(x-t)^2 + \dots + \dfrac{f^{(n)}(t)}{n!}(x-t)^n \right)$.\\
 $g(x) = 0$\\
-$g(x_0) \overset{\text{позн.}}{=} r_n(x,x_0) = f(x) - P(x,x_0)$, позначимо це як залишковий член - та сама похибка.\\
+$g(x_0) \overset{\text{позн.}}{=} r_n(x,x_0) = f(x) - P(x,x_0)$, позначимо це як залишковий член -- та сама похибка.\\
 Тут вимагаємо, щоб функція $f$ була $n$ разів диференційована на відрізку $[x_0,x]$, коли в нас $x_0 < x$. (*) \\
 Також вимагатимемо, щоб функція $f$ мала похідну $n+1$ порядку на інтервалі $(x_0,x)$. (**)\\
 Маючи (*),(**), ми можемо знайти похідну функції $g$, тоді:\\
@@ -6494,25 +6523,26 @@ $\exists c \in (x_0,x): \dfrac{g(x)-g(x_0)}{\varphi(x)-\varphi(x_0)} = \dfrac{g'
 Тому нехай задано функцію $\varphi(t) = (x-t)^{n+1}$, яка потрапляє під всіма умовами.\\
 Тоді маємо, що \\ $r_n(x,x_0) = \dfrac{\varphi(x) - \varphi(x_0)}{\varphi'(c)} \dfrac{f^{(n+1)}(c)}{n!}(x-c)^n = \dfrac{-(x-x_0)^{n+1}}{-(n+1)(x-c)^{n}} \dfrac{f^{(n+1)}(c)}{n!}(x-c)^n = \dfrac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}$.\\
 Таким чином, ми можемо сформулювати теорему:
+
 \begin{theorem}[Теорема Тейлора (у формі Лагранжа)]
-Задано функцію $f$ - диференційована $n$ разів на $[x_0,x]$ при $x_0 < x$ та має похідну $n+1$ порядка на $(x_0,x)$.\\
-Тоді $\exists c \in (x_0,x)$, така, що функція $f$ представляється у вигляді\\
+Задано функцію $f$ -- диференційована $n$ разів на $[x_0,x]$ при $x_0 < x$ та має похідну $n+1$ порядка на $(x_0,x)$. Тоді $\exists c \in (x_0,x)$, така, що функція $f$ представляється у вигляді\\
 $f(x) = f(x_0) + \dfrac{f'(x_0)}{1!}(x-x_0) + \dots + \dfrac{f^{(n)}(x_0)}{n!}(x-x_0)^n + \dfrac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}$.
 \end{theorem}
+
 Інше представлення формули Тейлора буде таким:\\
 Ми знову розглянемо функцію $g(x) = f(x) - P_n(x,x_0)$, але цього разу ми спробуємо довести, що $f(x) - P_n(x,x_0) = o((x-x_0)^n), x \to x_0$.\\
 Зрозуміло, що $g(x_0) = g'(x_0) = \dots = g^{(n)}(x_0) = 0$. Тепер обчислимо таку границю:\\
 $\displaystyle\lim_{x \to x_0} \dfrac{g(x)}{(x-x_0)^n} = \lim_{x \to x_0} \dfrac{g'(x)}{n(x-x_0)^{n-1}} = \lim_{x \to x_0} \dfrac{g''(x)}{n(n-1)(x-x_0)^{n-2}} = \dots = \lim_{x \to x_0} \dfrac{g^{(n)}(x)}{n!} = 0$.\\
 Тут ми використовували $n$ разів I правило Лопіталя. Таким чином, ми сформували теорему:
 \begin{theorem}[Теорема Тейлора (у формі Пеано)]
-Задано функцію $f$ - диференційована $n$ разів в т. $x_0$. Тоді \\
+Задано функцію $f$ -- диференційована $n$ разів в точці $x_0$. Тоді \\
 $f(x) = f(x_0) + \dfrac{f'(x_0)}{1!}(x-x_0) + \dots + \dfrac{f^{(n)}(x_0)}{n!}(x-x_0)^n + o((x-x_0)^n), x \to x_0$.
 \end{theorem}
 
 \begin{remark}
 Існують такі функції, де в певній точці апроксимація не спрацьовує. Такі функції називають \textbf{неаналітичними}.\\
-Зокрема $f(x) = \begin{cases} e^{\textstyle -\frac{1}{x^2}}, x \neq 0 \\ 0, x = 0 \end{cases}$\\
-В т. $x_0 = 0$ вийде многочлен Тейлора $P_n(x,0) \equiv 0$.\\
+Зокрема $f(x) = \begin{cases} e^{\textstyle -\frac{1}{x^2}}, x \neq 0 \\ 0, x = 0 \end{cases}$. У точці $x_0 = 0$ вийде многочлен Тейлора $P_n(x,0) \equiv 0$.
+\\ \iffalse %uncomment picture
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -6522,16 +6552,18 @@ $f(x) = f(x_0) + \dfrac{f'(x_0)}{1!}(x-x_0) + \dots + \dfrac{f^{(n)}(x_0)}{n!}(x
 \draw[red, domain=0.01:2.1, variable=\x, samples = 100] plot({\x}, {exp(-1/(\x)^2)});
 \end{tikzpicture}
 \end{figure}
+\fi %uncomment picture
 \end{remark}
 
 \subsubsection*{Основні розклади в Тейлора}
-Всі вони розглядатимуться в т. $x_0 = 0$, всюди $x \to x_0$.\\
-I. $e^x \displaystyle = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \dots + \frac{x^n}{n!} + o(x^n)$\\
-II. $\sin x \displaystyle = \frac{x}{1!} - \frac{x^3}{3!} + \dots + \frac{(-1)^n}{(2n+1)!}x^{2n+1} + o(x^{2n+2})$\\
-III. $\cos x \displaystyle = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \dots + \frac{(-1)^n}{(2n)!}x^{2n} + o(x^{2n+1})$\\
-IV. $(1+x)^{\alpha} \displaystyle = 1 + \frac{\alpha x}{1!} + \frac{\alpha (\alpha-1) x^2}{2!} + \dots + \frac{\alpha (\alpha-1)\dots(\alpha-(n-1)) x^n}{n!} + o(x^n)$\\
-V. $\ln(1+x) = x - \dfrac{x^2}{2} + \dots + (-1)^{n-1} \dfrac{x^n}{n} + o(x^n)$
-\bigskip \\
+Всі вони розглядатимуться в точці $x_0 = 0$, всюди $x \to x_0$.
+\begin{enumerate}[nosep,wide=0pt,label={\Roman*.}]
+\item $e^x \displaystyle = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \dots + \frac{x^n}{n!} + o(x^n)$;
+\item $\sin x \displaystyle = \frac{x}{1!} - \frac{x^3}{3!} + \dots + \frac{(-1)^n}{(2n+1)!}x^{2n+1} + o(x^{2n+2})$;
+\item $\cos x \displaystyle = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \dots + \frac{(-1)^n}{(2n)!}x^{2n} + o(x^{2n+1})$;
+\item $(1+x)^{\alpha} \displaystyle = 1 + \frac{\alpha x}{1!} + \frac{\alpha (\alpha-1) x^2}{2!} + \dots + \frac{\alpha (\alpha-1)\dots(\alpha-(n-1)) x^n}{n!} + o(x^n)$;
+\item $\ln(1+x) = x - \dfrac{x^2}{2} + \dots + (-1)^{n-1} \dfrac{x^n}{n} + o(x^n)$.
+\end{enumerate}
 А тепер полягає питання, який розклад використовувати: за Лагранжем чи Пеано. Відповідь на ці питання дадуть приклади нижче.
 \begin{example}
 Обчислити границю функції $\displaystyle \lim_{x \to 0} \frac{\displaystyle e^x-1-\sin x - \frac{x^2}{2}}{x(1-\cos x)}$\\
