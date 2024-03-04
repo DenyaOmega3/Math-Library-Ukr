@@ -93,6 +93,9 @@
 \newcommand\lmref[1]{\textbf{Lm.~\ref{#1}}}
 \newcommand\crlref[1]{\textbf{Crl.~\ref{#1}}}
 
+\DeclareMathOperator{\Up}{Upper}
+\DeclareMathOperator{\Low}{Lower}
+
 \begin{document}
 \includepdf{preview.jpg}
 \tableofcontents
@@ -1673,47 +1676,70 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	Отже, $[0,1]$ - незліченна множина, а тому тим паче $[0,1] \subset \mathbb{R}$ - незліченна множина.
 	\end{proof}
 	\newpage
+\fi
     
-\iffalse
+%\iffalse
     %Axiomatic approach
 	\section{Множина дійсних чисел}
 	\subsection{Аксіоматика множини дійсних чисел}
+	\begin{definition}
 	\textbf{Множину дійсних чисел} позначають за $\mathbb{R}$. Визначимо її так, щоб ми малі ті самі операції додавання, множення та відношення порядку як раніше:\\
-	\textbf{- додавання}\\
-	$a+b=b+a$ - комутативність;\\
-	$a+(b+c)=(a+b)+c$ - асоціативність;\\
-	$\exists 0 \in\mathbb{R}: a+0=a$ - існування нейтрального елементу;\\
-	$\exists (-a) \in\mathbb{R}: a+(-a)=0$ - існування оберненого елементу.
-	\bigskip \\
+	I. Додавання $+$.
+	\begin{figure}[H]
+	\centering
+	\begin{tabular}{ll}
+	$a+b=b+a$ & -- комутативність;\\
+	$a+(b+c)=(a+b)+c$ & -- асоціативність;\\
+	$\exists 0 \in\mathbb{R}: a+0=a$ & -- існування нейтрального елементу;\\
+	$\exists (-a) \in\mathbb{R}: a+(-a)=0$ & -- існування оберненого елементу.
+	\end{tabular}
+	\end{figure}
+	II. Множення $\cdot$.
+	\begin{figure}[H]
+	\centering
+	\begin{tabular}{ll}
+	$a \cdot b=b \cdot a$ & -- комутативність;\\
+	$(a \cdot b) \cdot c=a \cdot (b \cdot c)$ & -- асоціативність;\\
+	$\exists 1 \in\mathbb{R}: a \cdot 1=a$ & -- існування нейтрального елементу;\\
+	$\displaystyle \exists \left(\frac{1}{a}\right) \in\mathbb{R} \setminus \{0\}: a \cdot \frac{1}{a}=1$ & -- існування оберненого елементу;\\
+	$(a+b) \cdot c = a \cdot c + b \cdot c$ & -- дистрибутивність.
+	\end{tabular}
+	\end{figure}
+	III. Відношення порядку $\leq$.
+	\begin{figure}[H]
+	\centering
+	\begin{tabular}{ll}
+	$a \leq b$ та $b \leq a$ & $\implies a = b$;\\
+	$a \leq b$ та $b \leq c$ & $\implies a \leq c$;\\
+	$a \leq b$ & $\implies a+c \leq b+c$;\\
+	$a \leq b$ та $c>0$ & $\implies ac \leq bc$.
+	\end{tabular}
+	\end{figure}
+	IV. Аксіома неперервності.
+	\begin{align*}
+	\text{Нехай є дві множини $A,B \subset \mathbb{R}$. Відомо, що $\forall a \in A$, $\forall b \in B: a \leq b$. Тоді $\exists c \in \mathbb{R}: a \leq c \leq b$.}
+	\end{align*}
+	\end{definition}
 	
-	\textbf{- множення}\\
-	$a \cdot b=b \cdot a$ - комутативність;\\
-	$(a \cdot b) \cdot c=a \cdot (b \cdot c)$ - асоціативність;\\
-	$\exists 1 \in\mathbb{R}: a \cdot 1=a$ - існування нейтрального елементу;\\
-	$\displaystyle \exists \left(\frac{1}{a}\right) \in\mathbb{R} \setminus \{0\}: a \cdot \frac{1}{a}=1$ - існування оберненого елементу;\\
-	$(a+b) \cdot c = a \cdot c + b \cdot c$ - дистрибутивність.
-	\bigskip \\
+	На відміну від раціональних чисел $\mathbb{Q}$, в дійсних числах $\mathbb{R}$ виникая нова аксіома неперервності. Завдяки ньому, ми прибираємо \lq\lq дірки\rq\rq \text{} з числової прямої. Зокрема $\sqrt{2}$ буде вже на числовій прямій.
 	
-	\textbf{- відношення порядку}\\
-	Якщо $a \leq b$ та $b \leq a$, то $a = b$\\
-	Якщо $a \leq b$ та $b \leq c$, то $a \leq c$\\
-	Якщо $a \leq b$, то $a+c \leq b+c$\\
-	Якщо $a \leq b$ та $c>0$, то $ac \leq bc$
-	\bigskip \\	
+	\begin{remark}
+	Існують точно три варіанти, як строго побудувати множину дійсних чисел: через представлення числа в нескінченний десятковий дріб; через послідовності Коші; через переріз Дедекінда. Можливо, існують ще якісь. Займатися побудовою ми не стали, оскільки це абсолютно нудна робота.
+	\end{remark}
 	
-	На відміну від раціональних чисел, в дійсних числах виникая нова аксіома.
-	\bigskip \\
-	\textbf{Аксіома неперервності. }\\
-	Нехай є дві множини $A,B \subset \mathbb{R}$. Відомо, що $\forall a \in A$, $\forall b \in B: a \leq b$. Тоді $\exists c \in \mathbb{R}: a \leq c \leq b$
-	\bigskip \\
-	Тепер завдяки цьому, ми прибираємо \lq\lq дірки\rq\rq \text{} з числової прямої. Зокрема $\sqrt{2}$.
-	\bigskip \\
-	Надалі також ми будемо іноді користуватись множиною дійсних чисел, до якої ми додамо \lq\lq точки\rq\rq \text{} $-\infty$ та $+\infty$. А частіше навіть будемо використовувати \lq\lq точку\rq\rq \text{} $\infty$.
-	$$\bar{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty, \infty\}$$
-	Це такі спеціальні точки, для яких виконуються такі властивості: \\
-	$x + (\infty) = (\infty) + x = \infty$, якщо $x \neq \infty$;\\
-	$x \cdot \infty = \infty \cdot x = \infty$, якщо $x \neq \infty$;\\
-	$\forall x \in \mathbb{R}: -\infty < x < +\infty$.
+	Надалі також ми будемо іноді користуватись множиною дійсних чисел, до якої ми додамо \lq\lq точки\rq\rq \text{} $-\infty$ та $+\infty$. Якщо нас не цікавить знак, то будемо просто позначати $\infty$.
+	\begin{align*}
+	\bar{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}
+	\end{align*}
+	Це такі спеціальні точки, для яких виконуються такі властивості:
+	\begin{figure}[H]
+	\centering
+	\begin{tabular}{ll}
+	$x + (\infty) = (\infty) + x = \infty$, & якщо $x \neq \infty$;\\
+	$x \cdot \infty = \infty \cdot x = \infty$, & якщо $x \neq \infty$;\\
+	$\forall x \in \mathbb{R}: -\infty < x < +\infty$. &
+	\end{tabular}
+	\end{figure}
 
 \subsection{Точкові межі}
 \begin{definition}
@@ -1727,19 +1753,19 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\exists d \in \mathbb{R}: \forall b \in B: b \geq d
 	\end{align*}
 \end{definition}
-	Множину всіх чисел, що обмежують множину зверху, позначу за $UpA$, тобто
+	Множину всіх чисел, що обмежують множину зверху, позначу за $\Up A$, тобто
 	\begin{align*}
-	UpA = \{c \in \mathbb{R}: \forall a \in A: a \leq c \}
+	\Up A= \{c \in \mathbb{R} \mid \forall a \in A: a \leq c \}
 	\end{align*}
-	Множину всіх чисел, що обмежують множину зверху, позначу за $DownB$, тобто
+	Множину всіх чисел, що обмежують множину зверху, позначу за $\Low B$, тобто
 	\begin{align*}
-	DownB = \{d \in \mathbb{R}: \forall b \in B: b \geq d \}
+	\Low B = \{d \in \mathbb{R} \mid \forall b \in B: b \geq d \}
 	\end{align*}
 	
 	\begin{example}
-	Задано множину $A = \{1-2^{-n} | n \in \mathbb{N}\} = \left\{\dfrac{1}{2}, \dfrac{3}{4}, \dfrac{7}{8}, \dots \right\}$.\\
-	Є обмеженою зверху числом $2 \in \mathbb{R}$, тобто $\forall a \in A: a < 2$.\\
-	Є обмеженою знизу числом $0 \in \mathbb{R}$, тобто $\forall a \in A: a > 0$.
+	Задано множину $A = \{1-2^{-n} \mid n \in \mathbb{N}\} \overset{\text{або}}{=} \left\{\dfrac{1}{2}, \dfrac{3}{4}, \dfrac{7}{8}, \dots \right\}$. Вона є:\\
+	обмеженою зверху числом $2 \in \mathbb{R}$, тобто $\forall a \in A: a < 2$;\\
+	обмеженою знизу числом $0 \in \mathbb{R}$, тобто $\forall a \in A: a > 0$.
 	\begin{figure}[H]
 	\centering
 	\begin{tikzpicture}[scale = 4]
@@ -1762,46 +1788,53 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	Судячи з малюнку, ми розуміємо, що ми сильно грубо обмежили множину зверху та знизу. Ми хочемо більш точну межу. Для цього допоможе нам пару фактів.
 	
 	\begin{proposition}
-	Якщо $c \in UpA$ та $c_1 > c$, то $c_1 \in UpA$.
-	Якщо $d \in DownB$ та $d_1 < d$, то $d_1 \in DownB$.\\
-	\textit{Обидва твердження випливають з визначення множин.}
+	Якщо $c \in \Up A$ та $c_1 > c$, то $c_1 \in \Up A$.
 	\end{proposition}
 	
+	\begin{proposition}
+	Якщо $d \in \Low B$ та $d_1 < d$, то $d_1 \in \Low B$.
+	\end{proposition}
+	
+	\textit{Обидва твердження випливають з визначення множин $\Up A, \Low B$.}
+	
 	\begin{remark}
-	Множина $UpA$ обмежена знизу, а множина $DownB$ обмежена зверху.\\
+	Множина $\Up A$ обмежена знизу; множина $\Low B$ обмежена зверху.\\
 	\textit{Випливає з означень обмеженості.}
 	\end{remark}
 	
 	\begin{proposition}
-	Для множини $UpA$ існує мінімальний елемент, а для множини $DownB$ існує максимальний елемент. Причому, вони єдині.
+	Для множини $\Up A$ існує найменший елемент, а для множини $\Low B$ існує найбільший елемент. Причому вони єдині.
 	\end{proposition}
+	
 	\begin{proof}
-	Маємо множину $A$ та множину $UpA$ - всі числа, що обмежують зверху множину $A$.\\
-	Тобто $\forall a \in A: \forall c \in UpA: a \leq c$. За аксіомою відокремленості, $\exists c' \in \mathbb{R}: a \leq c' \leq c \Rightarrow c' \in UpA$\\
-	$\forall c \in UpA: c' \leq c \Rightarrow c' = \min UpA$\\
-	Доведемо єдиність.\\
-	!Припустимо, що $\exists c'' = \min UpA$.
-	Але це автоматично не є можливо, оскільки якщо $c'' > c'$, то $c''$ не є більше мінімальним елементом, а якщо $c'' < c'$, то вже $c'$ не є мінімальним елементом. Суперечність!
+	Доведення буде проводитися над множиною $\Up A$. Для множини $\Low B$ аналогічно.\\
+	І. \textit{Існування}.\\
+	Маємо множину $A$ та множину $\Up A$ -- всі числа, що обмежують зверху множину $A$. Тобто $\forall a \in A: \forall c \in UpA: a \leq c$. За аксіомою неперервності, $\exists c' \in \mathbb{R}: a \leq c' \leq c \implies c' \in \Up A$.\\
+	$\forall c \in \Up A: c' \leq c \implies c' = \min \Up A$.
 	\bigskip \\
-	Для $DownB$ доведення аналогічне.
+	II. \textit{Єдиність}.\\
+	!Припустимо, що $\exists c'' = \min \Up A$. Але це автоматично неможливо, оскільки якщо $c'' > c'$, то $c''$ не є більше мінімальним елементом, а якщо $c'' < c'$, то вже $c'$ не є мінімальним елементом. Суперечність!
 	\end{proof}
 	
 	\begin{definition} Задано множини $A,B \subset \mathbb{R}$.\\
-	\textbf{Точковою верхньою межею} називають таке число:
+	\textbf{Точною верхньою межею} (або \textbf{супремумом}) називають таке число:
 	\begin{align*}
-	\sup A = \min UpA
+	\sup A = \min \Up A
 	\end{align*}
-	\textbf{Точковою нижньою межею} називають таке число:
+	Тобто супремум -- це найменше число, що обмежує множину $A$ зверху.
+	\textbf{Точною нижньою межею} (або \textbf{інфімумом}) називають таке число:
 	\begin{align*}
-	\inf B = \max DownB
+	\inf B = \max \Low B
 	\end{align*}
+	Тобто інфімум -- це найбільше число, що обмежує множину $B$ знизу.
 	\end{definition}
 	
-	\begin{theorem}[Критерій супремуму або інфімуму]
+	\begin{theorem}[Критерій супремуму та інфімуму]
 		$c' = \sup A \iff \begin{cases}
 	 \forall a \in A: a \leq c' \\
 	 \forall c < c': \exists a \in A: a > c
-	\end{cases}$ \hspace{0.1cm} або \hspace{0.1cm}
+	\end{cases}$
+	\qquad\qquad
 	$d' = \inf B \iff \begin{cases} 
 	 \forall b \in B: b \geq d'\\
 	 \forall d > d': \exists b \in B: b < d
@@ -1830,21 +1863,18 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{theorem}
 	
 	\begin{proof}
-	\rightproof Дано: $c' = \sup A$\\
-	Тоді автоматично $c' \in UpA$, тобто $\forall a \in A: a \leq c'$.\\
-	Оскільки $c' = \min Up A$, то звідси $\forall c < c': c \not\in UpA$, тоді $\exists a \in A: a > x$.\\
-	Остання умова - це заперечення того, що $c$ обмежує множину $A$ зверху.
+	\rightproof Дано: $c' = \sup A$. Тоді автоматично $c' \in \Up A$, тобто $\forall a \in A: a \leq c'$. \\
+	Оскільки $c' = \min \Up A$, то звідси $\forall c < c': c \notin \Up A$, тоді $\exists a \in A: a > x$.\\
+	Остання умова -- це заперечення того, що $c$ обмежує множину $A$ зверху.
 	\bigskip \\
-	
-	\leftproof Дано: система з двох умов.\\
-	Із першої умови, $c' \in UpA$. Із другої умови, $c' = \min Up A$. Отже, $c' = \sup A$
+	\leftproof Дано: система з двох умов. Із першої умови, $c' \in \Up A$. Із другої умови, $c' = \min \Up A$. Отже, $c' = \sup A$.
 	\end{proof}
 	
 	\begin{corollary}[Інший вигляд критерію]
 	$c' = \sup A \iff \begin{cases} 
 	 \forall a \in A: a \leq c' \\
 	 \forall \varepsilon > 0: \exists a_{\varepsilon} \in A: a_{\varepsilon} > c' - \varepsilon
-	\end{cases}$ \hspace{0.1cm} або \hspace{0.1cm}
+	\end{cases}$ \qquad\qquad
 	$d' = \inf B \iff \begin{cases} 
 	 \forall b \in B: b \geq d'\\
 	 \forall \varepsilon > 0: \exists b_{\varepsilon} \in B: b_{\varepsilon} < d' + \varepsilon
@@ -1866,18 +1896,18 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\draw node at (2.8, -0.5) {$d' + \varepsilon$};
 	\draw[thick, red] (2,0)--(2.5,0);
 	\end{tikzpicture}
-	\caption*{Другий пункт кожного критерію звучить так. Якщо я цей супрему зменшу на певну величину, то це не буде супремумом, а значить, знайдеться певний елемент, що буде його перевищувати. Аналогічно з інфімумом.}
+	\caption*{Другий пункт кожного критерію звучить так. Якщо я цей супрему зменшу на скільки завгодно малу (а може, й немалу) величину, то це не буде супремумом; а значить, знайдеться певний елемент, що буде його перевищувати. Аналогічно з інфімумом.}
 	\end{figure}
-	\textit{Вказівка: $c = c'-\varepsilon$}.
+	\textit{Це випливає з попередньої теореми}.\\
+	\textit{Вказівка: $c = c'-\varepsilon$ для критерія з супремумом}.
 	\end{corollary}
 	
 	\begin{example}
-	Повернімось до множини $A = \{1-2^{-n} | n \in \mathbb{N}\} = \left\{\dfrac{1}{2}, \dfrac{3}{4}, \dfrac{7}{8}, \dots \right\}$.\\
-	Доведемо, що $\sup A = 1$.\\
+	Повернімось до множини $A = \{1-2^{-n} \mid| n \in \mathbb{N}\} \overset{\text{або}}{=} \left\{\dfrac{1}{2}, \dfrac{3}{4}, \dfrac{7}{8}, \dots \right\}$. Доведемо, що $\sup A = 1$.\\
 	Дійсно, $\forall a \in A: a = 1 - \dfrac{1}{2^n} < 1$.\\
-	Нехай $c < 1$. Знайдемо таке число $a \in A$, щоб $a > c$\\
+	Нехай $c < 1$. Знайдемо таке число $a \in A$, щоб $a > c$.\\
 	$1 - \dfrac{1}{2^n} > 1 - \dfrac{1}{2n} > c \iff \dfrac{1}{2n} < 1-c \iff n > \dfrac{1}{2-2c}$\\
-	Ця нерівність каже, що існує такий номер $n \in \mathbb{N}$, щоб взяти елемент $a \in A$, для якого, $a > c$. Але якщо точніше, ми можемо взяти $n = \left[ \dfrac{1}{2-2c} \right] + 1$, проте про цілу частину треба ще згодом поговорити.
+	Ця нерівність каже, що існує такий номер $n \in \mathbb{N}$, щоб взяти елемент $a \in A$, для якого, $a > c$. Але якщо точніше, ми можемо взяти $n = \left[ \dfrac{1}{2-2c} \right] + 1$, проте про цю штуку $[ \,\cdot\, ]$ (це називається ціла частина числа) треба ще згодом поговорити.
 	\bigskip \\
 	Аналогічно доводиться, що $\inf A = \dfrac{1}{2}$.
 	\begin{figure}[H]
@@ -1902,21 +1932,26 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{example}
 	
 	\begin{remark}
-	В цьому прикладі, до речі, $\inf A = \min A$, оскільки сам інфімум міститься на множині $A$. Водночас $\sup A \neq \max A$, тому що цей елемент не знаходиться на множині $A$.
+	До речі, у цьому прикладі $\inf A = \min A$, оскільки сам інфімум міститься на множині $A$. Водночас $\sup A \neq \max A$, тому що цей елемент не знаходиться на множині $A$.
 	\end{remark}
 	
 	\begin{definition}
-	Множина $F \subset \mathbb{R}$ називається \textbf{обмеженою}, якщо або вона є обмеженою зверху та знизу одночасно.
+	Множина $F \subset \mathbb{R}$ називається \textbf{обмеженою}, якщо
+	\begin{align*}
+	\text{$F$ -- обмежена зверху та знизу одночасно.}
+	\end{align*}
 	\end{definition}
 	
 	\begin{remark}
-	Означення того, що $F$ - \textbf{обмежена}, можна переписати в більш зручному вигляді:
+	Означення того, що $F$ -- обмежена, можна переписати в більш зручному вигляді:
 	\begin{align*}
 	\exists p>0: \forall f \in F: |f| \leq p
 	\end{align*}
 	\end{remark}
-	Якщо $A$ не є обмеженою зверху, то вважаємо $\sup A = +\infty$.\\
-	Якщо $B$ не є обмеженою знизу, то вважаємо $\inf B = -\infty$.\\
+	
+	Існує певна домовленість в особливих випадках. Зокрема:\\
+	якщо $A$ не є обмеженою зверху, то вважаємо $\sup A = +\infty$;\\
+	якщо $B$ не є обмеженою знизу, то вважаємо $\inf B = -\infty$.\\
 	
 	\subsection{Принцип Архімеда та її наслідки}
 	\begin{theorem}
@@ -1926,12 +1961,12 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	
 	\begin{proof}
 	!Припустимо, що все ж таки обмежена зверху, тобто $\forall n \in \mathbb{N}: n \leq a$.\\
-	Встановимо $\displaystyle\sup \mathbb{N} = u$. За критерієм, зокрема для $\varepsilon = 1: \exists m \in \mathbb{N}: m > u-1 \Rightarrow u < m+1$\\
+	Встановимо $\displaystyle\sup \mathbb{N} = u$. За критерієм, зокрема для $\varepsilon = 1: \exists m \in \mathbb{N}: m > u-1 \Rightarrow u < m+1$.\\
 	Проте маємо, що натуральне число $m+1$ перевищує супремуму. Суперечність!
 	\end{proof}
 	
 	\begin{corollary}
-	Множина цілих чисел $\mathbb{Z}$ взагалі не обмежена
+	Множина цілих чисел $\mathbb{Z}$ не обмежена ані зверху, ані знизу.
 	\end{corollary}
 	
 	\begin{proof}
@@ -1964,22 +1999,30 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	
 	\begin{proof}
 	Нехай маємо якийсь $x \in \mathbb{R}$, а також $y > 0$.\\
-	Задамо множину $S = \left\{l \in \mathbb{Z} :  x < ly \right\}$ - множина всіх цілих чисел, щоб чорна лінія $x$ була менше за довжиною ніж сума червоних відрізків $y$ з кількістю $l$.\\
-	Перепишемо інакше: $S = \left\{l \in \mathbb{Z} :  l > \dfrac{x}{y} \right\}$.\\
-	Множина $S$ - обмежена знизу; не порожня, тому що зверху не є обмеженою. Отже, можемо мати $\inf S = m$ (поки не знаємо, що це якесь ціле число). \\
-	За критерієм, $\exists k \in S \implies k \in \mathbb{Z}: m \leq k < m+1$. А тому $k = \min S$.\\
-	Таким чином, $k \in S$, отримали, що $k > \dfrac{x}{y} \implies x < ky$\\
-	Також тоді маємо, що $k-1 \not \in S$, тоді $k-1 \leq \dfrac{x}{y} \implies x \geq (k-1)y$.\\
+	Задамо множину $S = \left\{l \in \mathbb{Z} :  x < ly \right\}$ -- множина всіх цілих чисел, щоб чорна лінія $x$ була менше за довжиною ніж сума червоних відрізків $y$ з кількістю $l$. Перепишемо інакше: $S = \left\{l \in \mathbb{Z} :  l > \dfrac{x}{y} \right\}$.\\
+	Множина $S$ -- обмежена знизу; не порожня, тому що зверху не є обмеженою. Отже, можемо мати $\inf S = m$ (поки не знаємо, що це якесь ціле число). За критерієм інфімуму, \\
+	$\exists k \in S \implies k \in \mathbb{Z}: m \leq k < m+1$. А тому $k = \min S$.\\
+	Таким чином, $k \in S$, отримали, що $k > \dfrac{x}{y} \implies x < ky$.\\
+	Також тоді маємо, що $k-1 \notin S$, тоді $k-1 \leq \dfrac{x}{y} \implies x \geq (k-1)y$.\\
 	Остаточно: $(k-1)y \leq x < ky$.
 	\end{proof}
 	
+	\begin{definition}
+	\textbf{Цілою частиною числа} $x \in \mathbb{R}$ називають таке число:
+	\begin{align*}
+	[x] = \max \{ m \in \mathbb{Z} \mid m \leq x\}
+	\end{align*}
+	У зарубіжній літературі це ще називають \textbf{floor} та позначають по-інакшому: $\lfloor x \rfloor$.
+	\end{definition}
+	
 	\begin{remark}
-	Саме завдяки принципу Архімеда, ми можемо гарантувати коректність визначення цілої частини числа.\\
-	Якщо $x \in \mathbb{R}$ та встановимо $y = 1$, то тоді $\forall x \in \mathbb{R}: \exists !k \in \mathbb{Z}: k \leq x < k+1$. І тоді $k = [x]$.
+	Саме завдяки принципу Архімеда, ми можемо визначити цілу частину числа.\\
+	Якщо маємо $x \in \mathbb{R}$ та встановимо $y = 1$, то тоді $\forall x \in \mathbb{R}: \exists !k \in \mathbb{Z}: k \leq x < k+1$. Нерівність каже, що $k$ -- це найбільше ціле число, для якого $k \leq x$, оскільки далі $k+1 > x$, тож у нас існує $[x] = k$.
 	\end{remark}
 	
 	\begin{corollary}
-	$\forall \varepsilon > 0: \exists n \in \mathbb{N}: \dfrac{1}{n} < \varepsilon$
+	\label{each_fraction_1_over_n_is_always_less_than_some_positive_number}
+	$\forall \varepsilon > 0: \exists n \in \mathbb{N}: \dfrac{1}{n} < \varepsilon$.
 	\end{corollary}
 	
 	\begin{proof}
@@ -1991,34 +2034,29 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{corollary}
 	
 	\begin{proof}
-	!Припустимо, що $a \neq 0$, тобто $a > 0$. Тоді звідси $\dfrac{1}{a} > 0$\\
-	Тоді за щойно отриманим наслідком, $\exists n: \dfrac{1}{n} < a$.\\
-	Проте ми також маємо, що для $a < \dfrac{1}{n} = \varepsilon$. Суперечність!
+	!Припустимо, що $a \neq 0$, тобто $a > 0$. Тоді звідси $\dfrac{1}{a} > 0$. Тоді за щойно отриманим наслідком, $\exists n: \dfrac{1}{n} < a$. Проте ми також маємо, що для $a < \dfrac{1}{n} = \varepsilon$. Суперечність!
 	\end{proof}
 	
 	\begin{corollary}
-	Задано такі два числа $a,b \in \mathbb{R}$, що $a < b$.\\
-	Тоді в інтервалі $(a,b)$ знайдеться принаймні одне раціональне число.\\
+	Задано такі два числа $a,b \in \mathbb{R}$, що $a < b$. Тоді в інтервалі $(a,b)$ знайдеться принаймні одне раціональне число.\\
 	Математично кажучи, $\exists q \in \mathbb{Q}: a < q < b$.
 	\end{corollary}
 	
 	\begin{proof}
 	Оскільки $a<b$, то звідси $b-a>0$. Тоді $\exists n: \dfrac{1}{n} < b-a$.\\
 	Визначимо $q = \dfrac{[na]+1}{n}$. Перевіримо, що таке раціональне число дійсно лежить в $(a,b)$.\\
-	$q = \dfrac{\textcolor{red}{[na]}+1}{n} > \dfrac{\textcolor{red}{na-1}+1}{n} = a$\\
-	$q = \dfrac{\textcolor{red}{[na]}+1}{n} < \dfrac{\textcolor{red}{na}+1}{n}= a + \dfrac{1}{n} < a + b - a = b$\\
+	$q = \dfrac{\textcolor{red}{[na]}+1}{n} > \dfrac{\textcolor{red}{na-1}+1}{n} = a$;\\
+	$q = \dfrac{\textcolor{red}{[na]}+1}{n} < \dfrac{\textcolor{red}{na}+1}{n}= a + \dfrac{1}{n} < a + b - a = b$.\\
 	Отже, дійсно, $\exists q \in (a,b)$.
 \end{proof}
 
 	\begin{corollary}
-	Задано такі два числа $a,b \in \mathbb{R}$, що $a < b$.\\
-	Тоді в інтервалі $(a,b)$ знайдеться принаймні одне ірраціональне число.\\
+	Задано такі два числа $a,b \in \mathbb{R}$, що $a < b$. Тоді в інтервалі $(a,b)$ знайдеться принаймні одне ірраціональне число.\\
 	Математично кажучи, $\exists x \in \mathbb{R} \setminus \mathbb{Q}: a < q < b$
 	\end{corollary}
 	
 	\begin{proof}
-	Оскільки $a < b$, то звідси $\dfrac{a}{\sqrt{2}} < \dfrac{b}{\sqrt{2}}$. За попереднім наслідком, $\exists q \in \mathbb{Q}: \dfrac{a}{\sqrt{2}} < q < \dfrac{b}{\sqrt{2}}$.\\
-	Тоді якщо $x = q \sqrt{2}$, то звідси $a < x < b$. А число $x \in \mathbb{R} \setminus \mathbb{Q}$, бо квадратний корінь є ірраціональним.
+	Оскільки $a < b$, то звідси $\dfrac{a}{\sqrt{2}} < \dfrac{b}{\sqrt{2}}$. За попереднім наслідком, $\exists q \in \mathbb{Q}: \dfrac{a}{\sqrt{2}} < q < \dfrac{b}{\sqrt{2}}$. Тоді якщо покласти $x = q \sqrt{2}$, то $a < x < b$. А число $x \in \mathbb{R} \setminus \mathbb{Q}$, бо квадратний корінь є ірраціональним.
 	\end{proof}
 	
 	\subsection{Топологія множини дійсних чисел}
@@ -2052,43 +2090,57 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 \begin{align*}
 \exists \varepsilon > 0: U_{\varepsilon}(a) \subset A
 \end{align*}
-А множина $A$ називається \textbf{відкритою}, якщо кожна її точка - внутрішня.
+Водночас множина $A$ називається \textbf{відкритою}, якщо кожна її точка -- внутрішня.
 \end{definition}
 
 \begin{example}
 Розглянемо множини: $(a,b), [a,b], (a,b], [a,b), (a,+\infty), [a,+\infty), \emptyset, \mathbb{R}$.\\
-$(a,b)$ - відкрита, оскільки $\forall x \in (a,b): \exists \varepsilon = \min\{|x-a|,|x-b|\}:  U_{\varepsilon}(x) \subset (a,b)$.\\
-Тобто звідси кожна точка $x$ - внутрішня точка.
+$(a,b)$ -- відкрита.\\
+Справді, оскільки $\forall x \in (a,b): \exists \varepsilon = \min\{|x-a|,|x-b|\}:  U_{\varepsilon}(x) \subset (a,b)$. Тобто звідси кожна точка $x$ - внутрішня точка.
 \bigskip \\
-$[a,b]$ - НЕ відкрита.\\
-!Припустимо, що $a$ - внутрішня точка, тоді $\exists \varepsilon > 0: (a-\varepsilon, a+\varepsilon) \subset [a,b]$, проте $a-\dfrac{\varepsilon}{2} \in (a - \varepsilon, a + \varepsilon)$ і водночас $a-\dfrac{\varepsilon}{2} \not \in [a,b]$, тому т. $a$ не може бути внутрішньою. Суперечність! \\
-Аналогічні міркування для $b$. Решта - внутрішні, задавши той самий $\varepsilon$, як попередього разу.
+$[a,b]$ -- не відкрита.\\
+!Припустимо, що $a$ -- внутрішня точка, тоді $\exists \varepsilon > 0: (a-\varepsilon, a+\varepsilon) \subset [a,b]$, проте $a-\dfrac{\varepsilon}{2} \in (a - \varepsilon, a + \varepsilon)$ і водночас $a-\dfrac{\varepsilon}{2} \not \in [a,b]$, тому точка $a$ не може бути внутрішньою. Суперечність! \\
+Аналогічні міркування для $b$. Решта -- внутрішні, задавши той самий $\varepsilon$, як попередього разу.
 \bigskip \\
-Автоматично доводимо, що $(a,b],[a,b)$ - НЕ відкриті множини.
+Автоматично доводимо, що $(a,b],[a,b)$ -- не відкриті множини.
 \bigskip \\
-$(a,+\infty)$ - відкрита, тому що $\forall x: \exists \varepsilon = |x-a|$.
+$(a,+\infty)$ -- відкрита, тому що $\forall x: \exists \varepsilon = |x-a|$.
 \bigskip \\
-$[a,+\infty)$ - НЕ відкрита через т. $a$: не є внутрішньою. Міркування аналогічні. Решта - внутрішні з тим самим $\varepsilon$.
+$[a,+\infty)$ -- не відкрита через точка $a$: не є внутрішньою. Міркування аналогічні. Решта -- внутрішні з тим самим $\varepsilon$.
 \bigskip \\
-$\emptyset$ - відкрита. Оскільки порожня множина не містить точок, ми не зможемо знайти точку в порожній множині, яка НЕ Є внутрішньою, щоб зруйнувати означення.
+$\emptyset$ -- відкрита. \\
+Оскільки порожня множина не містить точок, ми не зможемо знайти точку в порожній множині, яка не є внутрішньою, щоб зруйнувати означення.
 \bigskip \\
-$\mathbb{R}$ - відкрита.
-\bigskip \\
+$\mathbb{R}$ -- відкрита\\
+Дійсно, в кожній точці існує окіл, що автоматично всередині $\mathbb{R}$.
 \end{example}
 
 \begin{proposition}
-Якщо $\{A_{\lambda}\}$ - сім'я зліченних відкритих підмножин, то $\displaystyle \bigcup_{\lambda} A_{\lambda}$ - відкрита.
+Якщо $\{A_{\lambda}\}$ -- сім'я зліченних відкритих підмножин, то $\displaystyle \bigcup_{\lambda} A_{\lambda}$ -- відкрита.
 \end{proposition}
 
 \begin{proof}
-Візьмемо довільну точку $a \in \displaystyle \bigcup_{\lambda} A_{\lambda} \Rightarrow$ принаймні одному з сімей множин $a \in A_{\lambda}$.\\
-Така множина є відкритою, а тому $a$ - внутрішня точка.\\
-Із нашого ланцюга отримаємо: $\forall a \in \displaystyle \bigcup_{\lambda} A_{\lambda} \Rightarrow a - $ внутрішня. Тобто $\displaystyle \bigcup_{\lambda} A_{\lambda}$ - відкрита.
+Візьмемо довільну точку $a \in \displaystyle \bigcup_{\lambda} A_{\lambda} \implies$ принаймні одному з сімей множин $a \in A_{\lambda}$. Така множина є відкритою, а тому $a$ -- внутрішня точка.\\
+Із нашого ланцюга отримаємо: $\forall a \in \displaystyle \bigcup_{\lambda} A_{\lambda} \implies a$ -- внутрішня. Тобто $\displaystyle \bigcup_{\lambda} A_{\lambda}$ -- відкрита.
 \end{proof}
 
 \begin{example}
 Маємо $A = (1,2) \cup (4,16) \cup (32, 64)$. Попередньо ми знаємо, що будь-який інтервал є відкритою множиною. Тому їхнє об'єднання, тобто $A$, буде відкритою множиною.
 \end{example}
+
+\begin{proposition}
+Якщо $\{A_1,\dots,A_n\}$ -- скінченна сім'я відкритих підмножин, то $\displaystyle \bigcap_{k=1}^n A_k$ -- відкрита.
+\end{proposition}
+
+\begin{proof}
+Візьмемо довільну точку $a \in \displaystyle\bigcap_{k=1}^n A_k \implies a \in A_k$ при всіх $1 \leq k \leq n$. Всі ці множині $A_k$ -- відркиті, а тому $a$ -- внутрішня точка в $A_k$.\\
+Тоді існують $\varepsilon_k > 0: U_{\varepsilon_k}(a) \subset A_k$. Поклавши $\varepsilon = \displaystyle\min_{1 \leq k \leq n} \varepsilon_k$, отримаємо окіл $U_{\varepsilon}(a) \subset U_{\varepsilon_k}(a) \subset A_k \implies U_{\varepsilon}(a) \subset \displaystyle\bigcap_{k=1}^n A_k \implies a$ -- внутрішня. Тобто $\displaystyle\bigcap_{k=1}^n A_k$ -- відкрита.
+\end{proof}
+
+\begin{remark}
+Приклад того, чого ми беремо тепер скінченну сім'ю.\\
+Маємо сім'ю множин $A_n = \left( -\dfrac{1}{n}, \dfrac{1}{n} \right)$ -- всі відкриті. Якщо ми зробимо перетин $\displaystyle\bigcap_{n=1}^\infty A_n = \{0\}$, то отримаємо одноточкову множину $\{0\}$, яка не є відкритою.
+\end{remark}
 
 \begin{definition}
 Задамо множину $A \subset \mathbb{R}$ та елемент $a \in \mathbb{R}$.\\
@@ -2096,56 +2148,55 @@ $\mathbb{R}$ - відкрита.
 \begin{align*}
 \forall \varepsilon > 0: \exists x \in A: x \in \overset{\circ}{U}_{\varepsilon}(a)
 \end{align*}
-А множина $A$ називається \textbf{замкненою}, якщо вона містить всі граничні точки.
+Водночас множина $A$ називається \textbf{замкненою}, якщо вона містить всі граничні точки.
 \end{definition}
 Поки приклад наводити не буду, оскільки таким означенням не завжди зручно перевіряти на замкненість певну множину. Тож потрібне інше означення.
+
 \begin{proposition}
-$a$ - гранична точка $A \iff$ $\forall \varepsilon > 0: A \cap U_{\varepsilon}(a)$ - нескінченна множина.
+$a$ -- гранична точка $A \iff$ $\forall \varepsilon > 0: A \cap U_{\varepsilon}(a)$ -- нескінченна множина.
 \end{proposition}
 
 \begin{proof}
-\rightproof Дано: $a$ - гранична точка $A$.\\
+\rightproof Дано: $a$ -- гранична точка $A$.\\
 !Припустимо, що $\exists \varepsilon^* > 0: A \cap (a-\varepsilon^*,a+\varepsilon^*)$ - скінченна, тобто\\
-$x_1,\dots,x_n \in A \cap (a-\varepsilon^*,a+\varepsilon^*) \Rightarrow \begin{cases} |x_1-a| < \varepsilon^* \\ \vdots \\ |x_n-a| < \varepsilon^* \end{cases}$.\\
-Оскільки $a$ - гранична т. $A$, то задамо $\varepsilon = \displaystyle\min_{i = \overline{1,n}} |x_i-a|$. Тоді $\exists x \in A: x \neq a: x \in (a-\varepsilon,a+\varepsilon)$.\\
-Проте це - неправда, оскільки ми отримали окіл ще менше, а при перетині ми не знайдемо жодної точки $x \neq a$. Суперечність!
+$x_1,\dots,x_n \in A \cap (a-\varepsilon^*,a+\varepsilon^*) \implies \begin{cases} |x_1-a| < \varepsilon^* \\ \vdots \\ |x_n-a| < \varepsilon^* \end{cases}$.\\
+Оскільки $a$ -- гранична т. $A$, то задамо $\varepsilon = \displaystyle\min_{i = \overline{1,n}} |x_i-a|$. Тоді $\exists x \in A: x \neq a: x \in (a-\varepsilon,a+\varepsilon)$.\\
+Проте це -- неправда, оскільки ми отримали окіл ще менше, а при перетині ми не знайдемо жодної точки $x \neq a$. Суперечність!
 \bigskip \\
-
-\leftproof Дано: $\forall \varepsilon > 0: A \cap U_{\varepsilon}(a)$ - нескінченна множина.\\
-Тоді $\forall \varepsilon > 0: \exists x \in A \cap U_{\varepsilon}(a)$. Зокрема $\exists x = a - \dfrac{\varepsilon}{2} \in A: x \neq a: |x-a| < \varepsilon$.\\
-Отже, $a$ - гранична т. $A$.
+\leftproof Дано: $\forall \varepsilon > 0: A \cap U_{\varepsilon}(a)$ -- нескінченна множина. Тоді $\forall \varepsilon > 0: \exists x \in A \cap U_{\varepsilon}(a)$. Зокрема $\exists x = a - \dfrac{\varepsilon}{2} \in A: x \neq a: |x-a| < \varepsilon$. Отже, $a$ -- гранична точка $A$.
 \end{proof}
 
 \begin{example}
 Розглянемо множини: $(a,b), [a,b], (a,b], [a,b), (a,+\infty), [a,+\infty), \emptyset, \mathbb{R}$.\\
-$(a,b)$ - НЕ замкнена.\\
-Розглянемо т. $a$. Вона є граничною для множини $(a,b)$, оскільки\\
-$\forall \varepsilon > 0: \exists x \in (a,b): x = a - \dfrac{\varepsilon}{2}: |x-a| < \varepsilon$\\
-Для точки $b$ аналогічні міркування. Але множина $(a,b)$ не містить граничну т. $a,b$.
+$(a,b)$ -- не замкнена. \\
+Дійсно, розглянемо точку $a$. Вона є граничною для множини $(a,b)$, оскільки $\forall \varepsilon > 0: \exists x \in (a,b): x = a - \dfrac{\varepsilon}{2}: |x-a| < \varepsilon$. Для точки $b$ аналогічні міркування. Але множина $(a,b)$ не містить граничну т. $a,b$.
 \bigskip \\
-
-$[a,b]$ - замкнена, тому що $\forall x \in [a,b]: \forall \varepsilon > 0: [a,b] \cap (x-\varepsilon,x+\varepsilon) = \left[
+$[a,b]$ -- замкнена. \\
+Дійсно, $\forall x \in [a,b]: \forall \varepsilon > 0: [a,b] \cap (x-\varepsilon,x+\varepsilon) = \left[
 \begin{gathered}
 \left[a,x+\varepsilon \right) \\
 \left(x-\varepsilon, x + \varepsilon \right) \\
 \left(x - \varepsilon, b\right] \\
 \left[a,b\right]
 \end{gathered}
- \right.$ - всі вони нескінченні множини.
+ \right.$ -- всі вони нескінченні множини.
 \bigskip \\
-Автоматично доводимо, що $(a,b], [a,b)$ - НЕ замкнені множини.
+Автоматично доводимо, що $(a,b], [a,b)$ -- не замкнені множини.
 \bigskip \\
-$(a,+\infty)$ - НЕ замкнена, тому що точка $a$ - гранична для $(a,+\infty)$, але множині не належить.
+$(a,+\infty)$ -- не замкнена. \\
+Дійсно, точка $a$ -- гранична для $(a,+\infty)$, але даній множині не належить.
 \bigskip \\
-$[a,+\infty)$ - замкнена (аналогічно).
+$[a,+\infty)$ -- замкнена (аналогічно).
 \bigskip \\
-$\emptyset$ - замкнена: вона містить всі свої граничні точки, яких просто нема.
+$\emptyset$ -- замкнена.\\
+Можна припустити, що існує гранична точка порожньої множини, яка не лежить в порожній множині. Далі прийдемо до суперечності. Тобто не існує точки, яка порушує означення замкненості.
 \bigskip \\
-$\mathbb{R}$ - замкнена.
+$\mathbb{R}$ -- замкнена.\\
+Беремо кожну точку та будь-який окіл, яка в перетині з $\mathbb{R}$ має давати той самий окіл, яка сама є нескінченною множиною.
 \end{example}
 
 \begin{example}
-Розглянемо множину $A = \left\{ \dfrac{1}{n} | n \in \mathbb{N} \right\}$. Знайдемо всі можливі граничні точки.
+Розглянемо множину $A = \left\{ \dfrac{1}{n} \mid n \in \mathbb{N} \right\}$. Знайдемо всі можливі граничні точки.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=1.5]
@@ -2154,50 +2205,67 @@ $\mathbb{R}$ - замкнена.
 	\fill[red] ({4/\i},0) circle (1pt);
 \end{tikzpicture}
 \end{figure}
-1. $x = 0$\\
-Нехай $\varepsilon > 0$. Тоді за \textbf{Crl. 1.3.5.}, $\exists n \in \mathbb{N}: \dfrac{1}{n} < \varepsilon$, або інакше: $\abs{\dfrac{1}{n}-0} < \varepsilon$\\
-Отже, за означенням, $x = 0$ - гранична точка для $A$
-\bigskip \\
-2. $x < 0$\\
+Ми будемо розглядати кілька можливих випадків.
+\begin{enumerate}[wide=0pt,label={\Roman*.}]
+\item $x = 0$.\\
+Нехай $\varepsilon > 0$. Тоді за \crlref{each_fraction_1_over_n_is_always_less_than_some_positive_number}, $\exists n \in \mathbb{N}: \dfrac{1}{n} < \varepsilon$, або інакше: $\abs{\dfrac{1}{n}-0} < \varepsilon$. Отже, за означенням, $x = 0$ -- гранична точка для $A$.
+\item $x < 0$.\\
 Існує $\varepsilon = -x$, такий, що $(x-\varepsilon,x+\varepsilon) \cap A = \emptyset$, тож жодна точка не буде граничною.
-\bigskip \\
-3. $x > 1$\\
+\item $x > 1$.\\
 Існує $\varepsilon = x-1$, такий, що $(x-\varepsilon,x+\varepsilon) \cap A = \emptyset$, тож жодна точка не буде граничною.
-\bigskip \\
-4. $x \in [0,1)$\\
-За принципом Архімеда, $\exists n \in \mathbb{N}: \dfrac{1}{n+1} < x \leq \dfrac{1}{n}$.\\
-Існує $\varepsilon = \min \left\{ x - \dfrac{1}{n+1}, \dfrac{1}{n} - x \right\}$, такий, що $(x-\varepsilon, x+\varepsilon) \cap A = \emptyset$ або $\dfrac{1}{n}$ - скінченна, тож жодна точка не буде граничною.
-\bigskip \\
-Остаточно, $x = 0$ - єдина гранична точка для $A$.
-
+\item $x \in [0,1)$.\\
+За принципом Архімеда, $\exists n \in \mathbb{N}: \dfrac{1}{n+1} < x \leq \dfrac{1}{n}$. Існує $\varepsilon = \min \left\{ x - \dfrac{1}{n+1}, \dfrac{1}{n} - x \right\}$ такий, що $(x-\varepsilon, x+\varepsilon) \cap A = \emptyset$ або $\dfrac{1}{n}$ -- скінченна множниа, тож жодна точка не буде граничною.
+\end{enumerate}
+Остаточно, $x = 0$ -- єдина гранична точка для $A$.
 \end{example}
 
 \begin{proposition}
-$A$ - відкрита множина $\iff \overline{A}$ - замкнена множина
+\label{open_iff_complement_closed}
+$A$ -- відкрита множина $\iff \overline{A}$ -- замкнена множина.
 \end{proposition}
 
 \begin{proof}
-\rightproof Дано: $A$ - відкрита множина.\\
-!Припустімо, що $\overline{A}$ - НЕ замкнена множина, тобто вона містить НЕ всі свої граничні точки, тобто $\exists a' \in A$, яка буде граничною для $\overline{A}$\\
-Оскільки $a' \in A$, то вона є внутрішньою, тобто $\exists \varepsilon > 0: (a'-\varepsilon,a'+\varepsilon) \subset A \Rightarrow (a'-\varepsilon,a'+\varepsilon) \cap \overline{A} = \emptyset$. Суперечність! Бо тут, навпаки, не має виконуватись рівність.
+\rightproof Дано: $A$ -- відкрита множина.\\
+!Припустімо, що $\overline{A}$ -- не замкнена множина, тобто вона містить не всі свої граничні точки, тобто $\exists a' \in A$, яка буде граничною для $\overline{A}$. Оскільки $a' \in A$, то вона є внутрішньою, тобто $\exists \varepsilon > 0: (a'-\varepsilon,a'+\varepsilon) \subset A \Rightarrow (a'-\varepsilon,a'+\varepsilon) \cap \overline{A} = \emptyset$. Суперечність! Бо тут, навпаки, не має виконуватись рівність.
 \bigskip \\
-\leftproof Дано: $\overline{A}$ - замкнена множина.\\
-!Припустімо, що $A$ - НЕ відкрита множина, тобто $\exists a \in A$, яка НЕ є внутрішньою, тобто\\
-$\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varepsilon}(a) \cap \overline{A} \neq \emptyset$, тобто $a$ - гранична точка $\overline{A}$.\\
-Оскільки $\overline{A}$ - замкнена, то вона містить всі свої граничні точки, проте $a \not\in \overline{A}$. Суперечність!
+\leftproof Дано: $\overline{A}$ -- замкнена множина.\\
+!Припустімо, що $A$ -- не відкрита множина, тобто $\exists a \in A$, яка не є внутрішньою, тобто\\
+$\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varepsilon}(a) \cap \overline{A} \neq \emptyset$, тобто $a$ -- гранична точка $\overline{A}$.\\
+Оскільки $\overline{A}$ - замкнена, то вона містить всі свої граничні точки, проте $a \notin \overline{A}$. Суперечність!
 \end{proof}
 
-\begin{remark}
-Факт: єдині множини, які є одночасно відкритими та замкненими, - це $\emptyset, \mathbb{R}$.
-\end{remark}
-
 \begin{proposition}
-Якщо $\{A_{\lambda}\}$ - сім'я замкнених підмножин, то $\displaystyle \bigcap_{\lambda} A_{\lambda}$ - замкнена.\\
-\textit{Випливає із} \textbf{Prp. 1.4.4.}, \textbf{Prp. 1.4.9.} \textit{та правила де Моргана.}
+Якщо $\{A_{\lambda}\}$ -- сім'я замкнених підмножин, то $\displaystyle \bigcap_{\lambda} A_{\lambda}$ -- замкнена.
 \end{proposition}
 
+\begin{proposition}
+Якщо $\{A_1,\dots,A_n\}$ -- скінченна сім'я замкнених підмножин, то $\displaystyle\bigcup_{k=1}^n A_k$ -- замкнена.
+\end{proposition}
+
+\textit{Вказівка: у двох твердженнях застосувати правило де Моргана, а згодом } \prpref{open_iff_complement_closed}.
+
+\begin{proposition}
+Задано $A \neq \emptyset$ -- обмежена та замкнена множина. Тоді множина містить найбільше та найменше число. 
+\end{proposition}
+
+\begin{proof}
+Оскільки $A$ -- непорожня та обмежена, то звідси існує $c = \sup A$. Ми доведемо, що $c = \max A$.\\
+Нехай $\varepsilon > 0$. За критерієм супремума, існує точка $x_\varepsilon \in A$, для якої $c \geq x_\varepsilon > c - \varepsilon$. Звідси випливає, що $|c-x_\varepsilon| < \varepsilon$. Тим самим доводимо, що $c$ -- гранична точка $A$. Проте оскільки $A$ -- замкнена, то звідси $c \in A$.\\
+Оскільки $\forall a \in A: c \geq a$ та $c \in A$, то отримали, що існує $c = \max A$.\\
+Доведення з мінімумом буде аналогічно.
+\end{proof}
+
+\begin{proposition}
+$\emptyset, \mathbb{R}$ -- єдині множини, що є відкритими та замкненими одночасно.
+\end{proposition}
+
+\begin{proof}
+!Припустимо, що $\emptyset \subsetneq A \subsetneq \mathbb{R}$ -- множина, яка відкрита та замкнена одночасно. Оберемо $a \in A$ та $b \in \mathbb{R} \setminus A$. Не втрачаючи загальності, ми припустимо $a < b$.\\
+Розглянемо множину $A \cap [a,b]$. Така множина замкнена та обмежена, тому існує найбільше число $c \in A \cap [a,b]$. Зауважимо, що $(c,b] \subset \mathbb{R} \setminus A$. Із цього випливатиме, що $\mathbb{R} \setminus A$ -- не замкнена, оскільки $c \notin \mathbb{R} \setminus A$, яка при цьому є граничною точкою $\mathbb{R} \setminus A$, за умовою вкладення. Значить, $A$ -- не відкрита. Суперечність!
+\end{proof}
+
 \begin{definition}
-Задано множину $A \subset \mathbb{R}$ та т. $x \in A$.\\
+Задано множину $A \subset \mathbb{R}$ та точка $x \in A$.\\
 Точка $x$ називається \textbf{ізольованою}, якщо
 \begin{align*}
 \exists \varepsilon > 0: U_{\varepsilon}(x) \cap A = \{x\}
@@ -2205,7 +2273,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 \end{definition}
 
 \begin{example}
-Маємо множину $A = [0,2] \cup \{4\}$. Тут т. $x = 4 \in A$ - ізольована.
+Маємо множину $A = [0,2] \cup \{4\}$. Тут точка $x = 4 \in A$ -- ізольована.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -2219,13 +2287,14 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 \end{figure}
 \end{example}
 
-Якщо придивитись уважно на означення, то тут записано заперечення того, що $x$ - гранична точка. Отже, маємо наслідок:
+Якщо придивитись уважно на означення, то тут записано заперечення того, що $x$ -- гранична точка. Отже, маємо наслідок:
+
 \begin{corollary}
-Точка $x \in A$ - ізольована $\iff x$ - не гранична для $A$.
+Точка $x \in A$ -- ізольована $\iff x$ -- не гранична для $A$.
 \end{corollary}
 
-Повернімось тепер до множини $\bar{\mathbb{R}}$. Самий час визначити, що таке $\varepsilon$-окіл для точок $+\infty$,$-\infty$,$\infty$ Хоча їх я буду називати $E$-околом для цих точок.\\
-Розглянемо таку картину - коло Рімана. Нижній дотик кола буде відповідати точці $0$, а верхня точка - точці $\infty$.
+Повернімось тепер до множини $\bar{\mathbb{R}}$. Самий час визначити, що таке $\varepsilon$-окіл для точок $+\infty$,$-\infty$,$\infty$ Хоча їх я буду називати $E$-околом для цих точок (просто для зручності, там воно буде ясніше чому).\\
+Розглянемо таку картину -- коло Рімана. Нижній дотик кола буде відповідати точці $0$, а верхня точка -- точці $\infty$.
 	\begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
@@ -2244,7 +2313,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\node[red, scale = 0.7] at (2+0.5,-0.5) {$x+\varepsilon$};
 	\end{tikzpicture}
 	\end{figure}
-	Проведемо промінь так, щоб вона перетнула вісь. Кожна точка кола ставить у відповідність точку на вісі - отже, й окіл теж. На цьому малюнку окіл т. $x$ кола ставить у відповідність звичний окіл т. $x$, тобто $$U_{\varepsilon}(x) = (x-\varepsilon,x+\varepsilon)$$
+	Проведемо промінь так, щоб вона перетнула вісь. Кожна точка кола ставить у відповідність точку на вісі -- отже, й окіл теж. На цьому малюнку окіл точка $x$ кола ставить у відповідність звичний окіл т. $x$, тобто $$U_{\varepsilon}(x) = (x-\varepsilon,x+\varepsilon)$$
 	Візьмемо тепер окіл в нескінченності. Я розглядатиму праву частину півкола, де $+\infty$, для іншої аналогічно. Відступимо від $+\infty$ трошки праворуч. Нарешті, проведемо між двома точками пряму\\
 	\begin{figure}[H]
 	\centering
@@ -2264,18 +2333,28 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{tikzpicture}
 	}
 	\end{figure}
-	Тоді якщо подивитись на малюнок, околом т. $+\infty$ визначається так $$U_{E}(+\infty) = \{x \in \mathbb{R}: x > E\} \overset{\text{або}}{=} (E,+\infty)$$\\
-	Аналогічними міркуваннями $$U_{E}(-\infty) = \{x \in \mathbb{R}: x < -E\} \overset{\text{або}}{=} (-\infty, E)$$\\
+	Тоді якщо подивитись на малюнок, околом точки $+\infty$ визначається так
+	\begin{align*}
+	U_{E}(+\infty) = \{x \in \mathbb{R}: x > E\} \overset{\text{або}}{=} (E,+\infty)
+	\end{align*}
+	Аналогічними міркуваннями визначається окіл точки $-\infty$.
+	\begin{align*}
+	U_{E}(-\infty) = \{x \in \mathbb{R}: x < -E\} \overset{\text{або}}{=} (-\infty, E)
+	\end{align*}
 	І нарешті, якщо провести промені, відступивши від $+\infty$ праворуч та $-\infty$ ліворуч, отримаємо
-	$$U_{E}(\infty) = \{x \in \mathbb{R}: |x| > E\} \overset{\text{або}}{=} U_{E}(-\infty) \cup U_E(+\infty) $$
+	\begin{align*}
+	U_{E}(\infty) = \{x \in \mathbb{R}: |x| > E\} \overset{\text{або}}{=} U_{E}(-\infty) \cup U_E(+\infty)
+	\end{align*}
 	
 	Додатково $+\infty, -\infty, \infty$ можуть бути внутрішніми, граничними точками певної множини, ніхто не забороняв. Просто ми на дослідження беремо окіл, який ми щойно отримали з геометричних міркувань.
 	
 	\subsection{Основні твердження аналізу}
 	\begin{theorem}[Лема Кантора про вкладені відрізки]
-	Задано відрізки таким чином: $\forall n \geq 1: [a_n, b_n] \supset [a_{n+1}, b_{n+1}]$. Тоді:\\
-	1) $\exists c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$\\
-	2) Якщо додатково $\forall \varepsilon > 0: \exists N \in \mathbb{N}: b_N - a_N < \varepsilon$, то тоді така точка - єдина.
+	Задано відрізки таким чином: $\forall n \geq 1: [a_n, b_n] \supset [a_{n+1}, b_{n+1}]$. Тоді справедливе наступне:
+	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+	\item $\exists c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$;
+	\item Якщо додатково $\forall \varepsilon > 0: \exists N \in \mathbb{N}: b_N - a_N < \varepsilon$, то тоді така точка -- єдина.
+	\end{enumerate}
 	\begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
@@ -2299,51 +2378,48 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{theorem}
 	
 	\begin{proof}
-	1) Із умови випливає, що $\forall n,m \in \mathbb{N}:$\\
-	$a_1 \leq a_2 \leq \dots \leq a_n \leq \dots < \dots \leq b_n \leq \dots \leq b_2 \leq b_1$\\
+	Доведемо кожний пункт окремо.
+	\begin{enumerate}[wide=0pt,label={\arabic*)}]
+	\item Із умови випливає, що $\forall n,m \in \mathbb{N}$ справедливий такий ланцюг:\\
+	$a_1 \leq a_2 \leq \dots \leq a_n \leq \dots < \dots \leq b_n \leq \dots \leq b_2 \leq b_1$.\\
 	Отже, $\forall n,m \in \mathbb{N}: a_n \leq b_m$.\\
 	Розглянемо множини $A = \{a_1,\dots,a_n\}, B = \{b_1, \dots, b_m\}$.
-	Тоді за принципом Дедекінда, $\exists c \in \mathbb{R}: \forall n,m \in \mathbb{N}: a_n \leq c \leq b_m$.
-	Таким чином, $\forall n \geq 1: c \in [a_n,b_n]$.
-	\bigskip \\
-	2) Розглянемо окремо, коли $\forall \varepsilon > 0: \exists N: b_N - a_N < \varepsilon$.\\
-	!Припустимо, що $\exists c' \in \mathbb{R}: \forall n \geq 1: c' \in [a_n,b_n]$, але $c \neq c'$\\
-	Задамо $\varepsilon = |c' - c| > 0$.
-	Тоді $\exists N: b_N - a_N < \varepsilon$\\
-	Але $c,c' \in [a_N,b_N]$, тому $\varepsilon = |c'-c| < a_n-b_n < \varepsilon$. Суперечність!\\
-	Отже, така точка - єдина.
+	Тоді за аксіомою неперервності, $\exists c \in \mathbb{R}: \forall n,m \in \mathbb{N}: a_n \leq c \leq b_m$. Таким чином, $\forall n \geq 1: c \in [a_n,b_n]$.
+	\item Розглянемо окремо, коли $\forall \varepsilon > 0: \exists N: b_N - a_N < \varepsilon$.\\
+	!Припустимо, що $\exists c' \in \mathbb{R}: \forall n \geq 1: c' \in [a_n,b_n]$, але $c \neq c'$. Задамо число $\varepsilon = |c' - c| > 0$. Тоді $\exists N: b_N - a_N < \varepsilon$. Але $c,c' \in [a_N,b_N]$, тому $\varepsilon = |c'-c| < a_n-b_n < \varepsilon$. Суперечність!\\
+	Отже, така точка -- єдина.
+	\end{enumerate}
+	Лема Кантора доведена.
 	\end{proof}
 	
 	\begin{theorem}[Лема Больцано-Ваєрштраса]
-	Задано множину $A$ - обмежена множина з нескінченною кількістю елементів. Тоді вона містить принаймні одну граничну точку.
+	Задано множину $A$ -- обмежена множина з нескінченною кількістю елементів. Тоді вона містить принаймні одну граничну точку.
 	\end{theorem}
 	
 	\begin{proof}
-	Оскільки $A$ - обмежена, то
+	Оскільки $A$ -- обмежена, то
 	$\begin{cases} \exists a \in \mathbb{R}: \forall x \in A: x \geq a \\
-	  \exists b \in \mathbb{R}: \forall x \in A: x \leq b \end{cases}$\\
-	Тобто маємо множину $[a,b] \supset A$.\\
+	  \exists b \in \mathbb{R}: \forall x \in A: x \leq b \end{cases}$. Тобто маємо множину $[a,b] \supset A$.\\
 	Розіб'ємо множину $[a,b]$ навпіл: $\left[a, \dfrac{a+b}{2}\right]$ та $\left[\dfrac{a+b}{2},b \right]$.\\
-	Оскільки $A$ має нескінченну кількість чисел, то принаймні одна з множин $\left[a, \dfrac{a+b}{2}\right] \cap A$ або $\left[\dfrac{a+b}{2}, b\right] \cap A$ - нескінченна множина. Ту половину позначимо за множину $[a_1,b_1]$ (якщо обидва нескінченні, то вибір довільний). Тоді $A \cap [a_1,b_1]$ - нескінченна множина.\\
+	Оскільки $A$ має нескінченну кількість чисел, то принаймні одна з множин $\left[a, \dfrac{a+b}{2}\right] \cap A$ або $\left[\dfrac{a+b}{2}, b\right] \cap A$ -- нескінченна множина. Ту половину позначимо за множину $[a_1,b_1]$ (якщо обидва нескінченні, то вибір довільний). Тоді $A \cap [a_1,b_1]$ -- нескінченна множина.\\
 	Розіб'ємо множину $[a_1,b_1]$ навпіл: $\left[a_1, \dfrac{a_1+b_1}{2}\right]$ та $\left[\dfrac{a_1+b_1}{2},b_1 \right]$.\\
-	І за аналогічними міркуваннями одна з множин нескінченна, позначу за $[a_2,b_2]$. Тоді $A \cap [a_2,b_2]$ - нескінченна множина.\\
+	І за аналогічними міркуваннями одна з множин нескінченна, позначу за $[a_2,b_2]$. Тоді $A \cap [a_2,b_2]$ -- нескінченна множина.\\
 	Розіб'ємо множину $[a_2,b_2]$ навпіл: $\left[a_2, \dfrac{a_2+b_2}{2}\right]$ та $\left[\dfrac{a_2+b_2}{2},b_2 \right]$.\\
 	$\vdots$\\
-	В результаті матимемо вкладені відрізки: $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$\\
-Причому, $\forall n \geq 1: b_n - a_n = \dfrac{b-a}{2^n}$.\\
+	В результаті матимемо вкладені відрізки: $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$, де $\forall n \geq 1: b_n - a_n = \dfrac{b-a}{2^n}$.\\
 	Зафіксуємо $\varepsilon > 0$ та перевіримо, чи існує $N$, що $b_N - a_N < \varepsilon$.\\
 	Маємо: $b_N - a_N = \dfrac{b-a}{2^N} < \dfrac{b-a}{N} < \varepsilon \implies N > \dfrac{b-a}{\varepsilon}$\\
 	Отже, маємо $N = \left[ \dfrac{b-a}{\varepsilon} \right]+1$, для якого нерівність $b_N-a_N < \varepsilon$ виконано. Тоді за лемою Кантора, $\exists! c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$.
 	\bigskip \\
-	А далі покажемо, що $c$ - дійсно гранична точка множини $A$.\\
+	А далі покажемо, що $c$ -- дійсно гранична точка множини $A$.\\
 	Зафіксуємо $\varepsilon > 0$. Знайдемо, чи існує $N$, щоб $b_N - a_N = \dfrac{b-a}{2^N} < \dfrac{\varepsilon}{2} \implies \dots \implies N > \dfrac{2(b-a)}{\varepsilon}$\\
 	Тоді $[a_N,b_N] \subset (c-\varepsilon, c+\varepsilon)$, оскільки $c-a_N \leq \dfrac{\varepsilon}{2}$ та $b_N -c \leq \dfrac{\varepsilon}{2}$. І це все виконується $\forall \varepsilon > 0$.\\
-	Таким чином, $A \cap (c-\varepsilon, c+\varepsilon) \supset A \cap [a_n,b_n]$ - нескінченна множина. Отже, $c$ - гранична точка $A$.
+	Таким чином, $A \cap (c-\varepsilon, c+\varepsilon) \supset A \cap [a_n,b_n]$ - нескінченна множина. Отже, $c$ -- гранична точка $A$.
 	\end{proof}
 	
 	\begin{definition}
 	Задано множину $A \subset \mathbb{R}$.\\
-	Система множин $\{U_{\alpha}\}$ називається \textbf{покриттям} множини $A$, якщо
+	Сім'я множин $\{U_{\alpha}\}$ називається \textbf{покриттям} множини $A$, якщо
 	\begin{align*}
 	A \subset \bigcup_{\alpha} U_{\alpha}
 	\end{align*}
@@ -2367,16 +2443,16 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{figure}
 	\end{example}
 	
-	\begin{theorem}[Лема Гейне-Бореля]
-	Будь-який відрізок можна покрити скінченною кількістю інтервалів.
+	\begin{theorem}[Лема Гайне-Бореля]
+	Будь-який відрізок можна покрити скінченною кількістю відкритих інтервалів.
 	\end{theorem}
 	
 	\begin{proof}
-	Задано відрізок $[a,b]$. Треба довести, що є такий набір інтервалів $U_k, k = \overline{1,n}$, де їхня кількість - скінченна.\\
+	Задано відрізок $[a,b]$. Треба довести, що є набір $U_k, k = \overline{1,n}$, що покриває $[a,b]$.\\
 	!Припустимо, що $[a,b]$ покривається лише нескінченною кількістю інтервалів. \\ 
 	Ідея доведення є майже аналогічним з лемою Больцано-Ваєрштраса. Ми ділимо відрізок навпіл. Після ділення ми обираємо той відрізок, який покривається нескінченною кількістю інтервалів. Із обраним відрізком робимо те саме.\\
 	Матимемо знову вкладені відрізки $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$. Причому, $b_n - a_n = \dfrac{b-a}{2^n}$. Ми вже доводили, що $\exists! c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$.\\
-	Оскільки $c \in [a_1,b_1]$, то тоді знайдеться інтервал $U = (\alpha,\beta) \ni c$ - один із інтервалів покриття.\\
+	Оскільки $c \in [a_1,b_1]$, то тоді знайдеться інтервал $U = (\alpha,\beta) \ni c$ -- один із інтервалів покриття.\\
 	Нехай задамо $\varepsilon = \min \{ c-\alpha, \beta-c \}$. Тоді ми можемо завжди знайти номер $N$, щоб $b_N - a_N = \dfrac{b-a}{2^N} < \varepsilon$ (аналогічна процедура).
 	\begin{figure}[H]
 	\centering
@@ -2393,11 +2469,11 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{proof}
 		
 	\begin{theorem}
-	Множина дійсних чисел $\mathbb{R}$ - незліченна.
+	Множина дійсних чисел $\mathbb{R}$ -- незліченна.
 	\end{theorem}
 	
 	\begin{proof}
-	Для початку перевіримо, що відрізок $I = [0,1]$ - незліченна множина.\\
+	Для початку перевіримо, що відрізок $I = [0,1]$ -- незліченна множина.\\
 	!Припустимо, що $I = \{x_1,x_2,x_3,\dots\}$, тобто зліченна множина.\\ Розіб'ємо $I$ на три (не обов'язково рівні) частини. Тоді принаймні в одному з розбитті не потрапить число $x_1$. Саме число $x_1$ може бути або в одному з трьох відрізків, або навіть одночасно в двох. Саме тому ми ділимо на три частини. Тому позначимо той відрізок, що не має $x_1$ як відрізок $I_1$\\
 	Розіб'ємо $I_1$ на три частини. Аналогічно, знайдеться відрізок, де не буде числа $x_2$. Позначимо цей відрізок $I_2$.\\
 	Розіб'ємо $I_2$ на три частини. І знову, є відрізок $I_3$, куди не потрапило число $x_3$.\\
@@ -2425,10 +2501,11 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	Тоді за лемою Кантора, знайдемо якусь т. $c$, яка належить будь-якому відрізку.\\
 	$c \in I_1 \implies c \neq x_1$, $c \in I_2 \implies c \neq x_2$, $c \in I_3 \implies c \neq x_3$, $\dots$\\
 	Можна зробити висновок, що $\forall n \geq 1: c \neq x_n$, а тому точка $c$ не має нумерації. Суперечність!\\
-	Отже, $[0,1]$ - незліченна множина, а тому тим паче $[0,1] \subset \mathbb{R}$ - незліченна множина.
+	Отже, $[0,1]$ -- незліченна множина, а тому тим паче $\mathbb{R} \supset [0,1] \subset \mathbb{R}$ -- незліченна множина.
 	\end{proof}
+		
 	\newpage
-\fi
+%\fi
 	%\fi %IMPORTANT COMMENT
 	
 	%\iffalse %IMPORTANT COMMENT
@@ -2437,7 +2514,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\begin{definition}
 	Неформально \textbf{числовою послідовністю} називають якийсь набір чисел 
 	\begin{align*}
-	\{a_1,a_2,a_3, \dots\} \text{\text{скорочено}}{=} \{a_n, n \geq 1\}.
+	\{a_1,a_2,a_3, \dots\} \overset{\text{скорочено}}{=} \{a_n, n \geq 1\}.
 	\end{align*}
 	А формально називають це відображенням $a \colon \mathbb{N} \to \mathbb{R}$, де $a(n) = a_n$. Тобто кожному номеру послідовності ставиться в відповідність єдине дійсне число.
 	\end{definition}
@@ -3519,7 +3596,7 @@ $\left((a^\pi+b^\pi)^2-(a^\pi-b^\pi)^2 \right)^{\frac{1}{\pi}} = ((a^\pi+b^\pi-a
 $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overset{\text{позн}}{=} \ln a$.
 	\newpage
 	
-	\fi %IMPORTANT COMMENT
+	%\fi %IMPORTANT COMMENT
 	%\iffalse %IMPORTANT COMMENT
 	%there must be section 3
 	\setcounter{section}{3}
@@ -3889,22 +3966,22 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)-b|<\varepsilon \tag*{означення Коші}
 	\end{align*}
 	\begin{align*}
-	\forall \{x_n, n \geq 1\}\subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b \tag*{означення Гейне}
+	\forall \{x_n, n \geq 1\}\subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b \tag*{означення Гайне}
 	\end{align*}
 	Позначення: $\displaystyle \lim_{x \to x_0} f(x) = b$.
 	\end{definition}
 	
 	\begin{theorem}
-	Означення Коші $\iff$ Означення Гейне.
+	Означення Коші $\iff$ Означення Гайне.
 	\end{theorem}
 	
 	\begin{proof}
 	\rightproof Дано: означення Коші, тобто $\forall \varepsilon > 0: \exists \delta > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)-b|<\varepsilon$.\\
 	Зафіксуємо послідовність $\{x_n, n \geq 1\} \subset A$ таку, що $\forall n \geq 1: x_n \neq x_0: \displaystyle \lim_{n \to \infty} x_n = x_0$. На це ми мали права, оскільки $x_0$ -- гранична точка $A$.\\
 	Нехай $\varepsilon > 0$. Тоді для нашого заданого $\exists \delta$, а для нього $\exists N: \forall n \geq N: |x_n - x_0| < \delta \implies |f(x_n) - b| < \varepsilon$.\\
-	Таким чином, $\displaystyle \lim_{n \to \infty} f(x_n) = b$ -- тим самим виконано означення Гейне.
+	Таким чином, $\displaystyle \lim_{n \to \infty} f(x_n) = b$ -- тим самим виконано означення Гайне.
 	\bigskip \\
-	\leftproof Дано: означення Гейне, або $\displaystyle \forall \{x_n, n \geq 1\}\subset A: x_n \neq x_0: \forall n \geq 1: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b$.\\
+	\leftproof Дано: означення Гайне, або $\displaystyle \forall \{x_n, n \geq 1\}\subset A: x_n \neq x_0: \forall n \geq 1: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b$.\\
 	!Припустимо, що означення Коші не виконується, тобто виконується заперечення означення:\\
 	$\exists \varepsilon^*>0: \forall \delta > 0: \exists x_{\delta} \in A: x_{\delta} \neq x_{0}: |x_{\delta} - x_0| < \delta \Rightarrow |f(x_{\delta}) - b| \geq \varepsilon^*$.\\
 	Зафіксуємо $\delta = \displaystyle \frac{1}{n}$. Тоді побудуємо послідовність $\{x_n, n \geq 1\}$ таким чином, що $x_n \in A, x_n \neq x_0$, а також $|x_n-x_0| < \displaystyle \frac{1}{n} \implies \exists \lim_{x \to \infty} x_n = x_0$ за теоремою про поліцаї, але водночас $|f(x_n) - b| \geq \varepsilon^*$.\\
@@ -3913,7 +3990,7 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	
 	\begin{remark}
 	Границя функції має єдине значення.\\
-	\textit{Випливає з означення Гейне, оскільки границя числової послідовності -- єдина.}
+	\textit{Випливає з означення Гайне, оскільки границя числової послідовності -- єдина.}
 	\end{remark}
 	
 	\begin{example}
@@ -3955,7 +4032,7 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 
 	\begin{example}
 	Задано функцію $f \colon \mathbb{R} \to \mathbb{R}$, $f(x) = \dfrac{|x|}{x}$. Довести, що не існує границі $\displaystyle \lim_{x \to 0} \dfrac{|x|}{x}$.\\
-	За означенням та запереченням Гейне, зафіксуємо наступну послідовність: $\displaystyle \left\{x_n = \frac{(-1)^n}{2n}, n \geq 1\right\}$, де $\displaystyle \lim_{n \to \infty} x_n = 0$. Але $\displaystyle \lim_{n \to \infty} \dfrac{|x_n|}{x_n} = \left[ \begin{gathered} 1, n = 2k \\ -1, n = 2k-1 \end{gathered} \right.$ -- не збіжна, бо має різні часткові границі.\\
+	За означенням та запереченням Гайне, зафіксуємо наступну послідовність: $\displaystyle \left\{x_n = \frac{(-1)^n}{2n}, n \geq 1\right\}$, де $\displaystyle \lim_{n \to \infty} x_n = 0$. Але $\displaystyle \lim_{n \to \infty} \dfrac{|x_n|}{x_n} = \left[ \begin{gathered} 1, n = 2k \\ -1, n = 2k-1 \end{gathered} \right.$ -- не збіжна, бо має різні часткові границі.\\
 	Таким чином, прийшли до висновку: границі не існує.
 \\ \iffalse %uncomment picture
 	\begin{figure} [H]
@@ -3984,7 +4061,7 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\forall E > 0: \exists \delta(E) > 0: \forall x \in A: x \neq x_0: |x-x_0|<\delta \Rightarrow |f(x)|>E \tag*{означення Коші}
 	\end{align*}
 	\begin{align*}
-	\forall \{x_n, n \geq 1\}\subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = \infty \tag*{означення Гейне}
+	\forall \{x_n, n \geq 1\}\subset A: \forall n \geq 1: x_n \neq x_0: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = \infty \tag*{означення Гайне}
 	\end{align*}
 	Позначення: $\displaystyle \lim_{x \to x_0} f(x) = \infty$.\\
 	Якщо виконується $f(x) > E$ (це більш сильна вимога за $|f(x)| > E$), то тоді $\displaystyle \lim_{x \to x_0} f(x) = \infty$.\\
@@ -4027,7 +4104,7 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\forall \varepsilon > 0: \exists \Delta(\varepsilon) > 0: \forall x \in \mathbb{R}: |x|>\Delta \Rightarrow |f(x)-b|<\varepsilon \tag*{означення Коші}
 	\end{align*}
 	\begin{align*}
-	\forall \{x_n, n \geq 1\} \subset \mathbb{R}: \forall n \geq 1: \lim_{n \to \infty} x_n = \infty \Rightarrow \lim_{n \to \infty} f(x_n) = b \tag*{означення Гейне}
+	\forall \{x_n, n \geq 1\} \subset \mathbb{R}: \forall n \geq 1: \lim_{n \to \infty} x_n = \infty \Rightarrow \lim_{n \to \infty} f(x_n) = b \tag*{означення Гайне}
 	\end{align*}
 	Позначення: $\displaystyle \lim_{x \to \infty} f(x) = b$.\\
 	Якщо $x \to +\infty$, то ми вимагаємо $x > \Delta$ замість $|x| > \Delta$.\\
@@ -4041,11 +4118,11 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\end{example}
 	
 	\begin{remark}
-	Аналогічними міркуваннями можна самостійно записати означення Коші та означення Гейне для випадку, коли в нас $\displaystyle \lim_{x \to \infty} f(x) = \infty$.
+	Аналогічними міркуваннями можна самостійно записати означення Коші та означення Гайне для випадку, коли в нас $\displaystyle \lim_{x \to \infty} f(x) = \infty$.
 	\end{remark}
 	
 	\begin{remark}
-	Для інших варіацій границь функції: $\displaystyle\lim_{x \to x_0} f(x) = \infty, \lim_{x \to \infty} f(x) = b, \lim_{x \to \infty} f(x) = \infty$ -- еквівалентність двох означень, за Коші та за Гейне, також залишається в силі.
+	Для інших варіацій границь функції: $\displaystyle\lim_{x \to x_0} f(x) = \infty, \lim_{x \to \infty} f(x) = b, \lim_{x \to \infty} f(x) = \infty$ -- еквівалентність двох означень, за Коші та за Гайне, також залишається в силі.
 	\end{remark}
 	
 	\begin{remark}
@@ -4089,13 +4166,13 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 Числом $b$ називають \textbf{границею справа}, якщо
 \begin{align*}
 \forall \varepsilon > 0: \exists \delta(\varepsilon)>0: \forall x \in A: x_0<x<x_0+\delta \Rightarrow |f(x)-b|<\varepsilon \tag*{означення Коші}\\
-\forall \{x_n,n\geq 1\} \subset A: \forall n \geq 1: x_n > x_0: \lim_{n \to \infty}x_n = x_0 \Rightarrow \lim_{n \to \infty}f(x_n) = b \tag*{означення Гейне}
+\forall \{x_n,n\geq 1\} \subset A: \forall n \geq 1: x_n > x_0: \lim_{n \to \infty}x_n = x_0 \Rightarrow \lim_{n \to \infty}f(x_n) = b \tag*{означення Гайне}
 \end{align*}
 Позначення: $\displaystyle\lim_{x \to x_0^+} f(x) \overset{\text{або}}{=} \lim_{x \to x_0+0} f(x) = b$.\\
 Числом $\tilde{b}$ називають \textbf{границею зліва}, якщо
 \begin{align*}
 \forall \varepsilon > 0: \exists \delta(\varepsilon)>0: \forall x \in A:  x_0-\delta<x<x_0 \Rightarrow |f(x)-\tilde{b}|<\varepsilon \tag*{означення Коші}\\
-\forall \{x_n,n\geq 1\} \subset A: \forall n \geq 1: x_n < x_0: \lim_{n \to \infty}x_n = x_0 \Rightarrow \lim_{n \to \infty}f(x_n) = \tilde{b} \tag*{означення Гейне}
+\forall \{x_n,n\geq 1\} \subset A: \forall n \geq 1: x_n < x_0: \lim_{n \to \infty}x_n = x_0 \Rightarrow \lim_{n \to \infty}f(x_n) = \tilde{b} \tag*{означення Гайне}
 \end{align*}
 Позначення: $\displaystyle\lim_{x \to x_0^-} f(x) \overset{\text{або}}{=} \lim_{x \to x_0-0} f(x) = \tilde{b}$.
 \end{definition}
@@ -4138,13 +4215,13 @@ $\iff \forall \varepsilon > 0: \exists \delta: \forall x \in A: |x-x_0|<\delta \
 
 \begin{definition}
 Задано функцію $f \colon (a,b) \to \mathbb{R}$.\\
-Функцію $f$ називають \textbf{монотонно}:
-\begin{itemize}[nosep,wide=0pt,label={-}]
-\item \textbf{строго зростаючою}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1)>f(x_2)$;
-\item \textbf{не спадною}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \geq f(x_2)$;
-\item \textbf{строго спадною}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) < f(x_2)$;
-\item \textbf{не зростаючою}, якщо $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \leq f(x_2)$.
-\end{itemize}
+Функцію $f$ називають \textbf{монотонно}:\\
+\begin{tabular}{ll}
+\textbf{строго зростаючою}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1)>f(x_2)$;\\
+\textbf{не спадною}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \geq f(x_2)$;\\
+\textbf{строго спадною}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) < f(x_2)$;\\
+\textbf{не зростаючою}, якщо & $\forall x_1,x_2 \in (a,b): x_1 > x_2 \Rightarrow f(x_1) \leq f(x_2)$.
+\end{tabular}\\
 Зростаюча або спадна строго або нестрого функція $f$ називається просто \textbf{монотонною}.
 \end{definition}
 
@@ -4206,13 +4283,13 @@ $\displaystyle\lim_{x \to +\infty} \arctg x = \sup_{x \in \mathbb{R}} \arctg x =
 	\end{theorem}
 	
 	\begin{proof}
-	Зафіксуємо $\{x_n, n \geq 1\}$, таку, що $\displaystyle \lim_{n \to \infty} x_n = x_0$. Тоді за Гейне, $\displaystyle \lim_{n \to \infty} f(x_n) = 0$, $\displaystyle \lim_{n \to \infty} g(x_n) = \infty$, отже:\\
+	Зафіксуємо $\{x_n, n \geq 1\}$, таку, що $\displaystyle \lim_{n \to \infty} x_n = x_0$. Тоді за Гайне, $\displaystyle \lim_{n \to \infty} f(x_n) = 0$, $\displaystyle \lim_{n \to \infty} g(x_n) = \infty$, отже:\\
 	$\{f(x_n), n \geq 1\}$ -- н.м.;\\
 	$\{g(x_n), n \geq 1\}$ -- н.в.;\\
 	$\{h(x_n), n \geq 1\}$ -- обмежена.\\
 	За властивостями границь послідовності, $\left\{f(x_n) \cdot h(x_n) \right\}$ - н.м., $\left\{ \displaystyle \frac{1}{f(x_n)} \right\}$ -- н.в., $\left\{ \displaystyle \frac{1}{g(x_n)} \right\}$ -- н.м.\\
 	Ну а тому існують відповідні границі: $\displaystyle \lim_{n \to \infty} f(x_n) h(x_n) = 0$, $\displaystyle \lim_{n \to \infty} \frac{1}{f(x_n)} = \infty$, $\displaystyle \lim_{n \to \infty} \frac{1}{g(x_n)} = 0$.\\
-	За Гейне, отримаємо бажане: $\displaystyle\lim_{x \to x_0} f(x)h(x) = 0 \hspace{0.5cm} \displaystyle\lim_{x \to x_0} \dfrac{1}{f(x)} = \infty \hspace{0.5cm} \displaystyle\lim_{x \to x_0} \dfrac{1}{g(x)} = 0$.
+	За Гайне, отримаємо бажане: $\displaystyle\lim_{x \to x_0} f(x)h(x) = 0 \hspace{0.5cm} \displaystyle\lim_{x \to x_0} \dfrac{1}{f(x)} = \infty \hspace{0.5cm} \displaystyle\lim_{x \to x_0} \dfrac{1}{g(x)} = 0$.
 	\end{proof}
 	
 	\begin{example}
@@ -4242,7 +4319,7 @@ $\displaystyle\lim_{x \to +\infty} \arctg x = \sup_{x \in \mathbb{R}} \arctg x =
 	\item $\exists \displaystyle \lim_{x \to x_0} f(x)g(x) = b_1 b_2$;
 	\item $\exists \displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = \frac{b_1}{b_2}$ при $b_2 \neq 0$.
 	\end{enumerate}
-	\textit{Випливають з властивостей границь числової послідовності, якщо доводити за Гейне. Доведу лише перший підпункт для прикладу.}
+	\textit{Випливають з властивостей границь числової послідовності, якщо доводити за Гайне. Доведу лише перший підпункт для прикладу.}
 	\end{theorem}
 	
 	\begin{proof}
@@ -4261,7 +4338,7 @@ $\displaystyle\lim_{x \to +\infty} \arctg x = \sup_{x \in \mathbb{R}} \arctg x =
 	\end{theorem}
 
 	\begin{proof}
-За Гейне, $\displaystyle \forall \{x_n, n \geq 1\} \subset A:  \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b$. За властивостями границь числової послідовності, $b \leq c$.
+За Гайне, $\displaystyle \forall \{x_n, n \geq 1\} \subset A:  \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = b$. За властивостями границь числової послідовності, $b \leq c$.
 	\end{proof}
 	
 	\begin{corollary}
@@ -4311,7 +4388,7 @@ $\begin{cases} |x_1-x_0|<\delta \\ |x_2-x_0|<\delta \end{cases} \Rightarrow |f(x
 Побудуємо послідовність $\{p_n, n \geq 1\}$ таким чином, що $p_{2k} = t_k$, $p_{2k-1} = s_k$. Тобто $\{s_1, t_1, s_2, t_2, \dots \}$. Тут $\exists \displaystyle \lim_{n \to \infty} p_n = x_0$. Тоді знову за аналогічними міркуваннями, $\exists \displaystyle \lim_{n \to \infty} f(p_n)$, але чому буде дорівнювати, зараз побачимо.\\
 Оскільки $\exists \displaystyle \lim_{n \to \infty} f(p_n)$, то одночасно $\exists \displaystyle \lim_{k \to \infty} f(p_{2k}) = b$, $\exists \displaystyle \lim_{k \to \infty} f(p_{2k-1}) = a$.\\
 У збіжної послідовності є лише одна часткова послідовність, тому $a = b$. Суперечність!\\
-Це означає, що границя не залежить від вибору послідовності. Тому за Гейне, отримаємо, що $\exists \displaystyle \lim_{x \to x_0} f(x) = b$.
+Це означає, що границя не залежить від вибору послідовності. Тому за Гайне, отримаємо, що $\exists \displaystyle \lim_{x \to x_0} f(x) = b$.
 \end{proof}
 
 \begin{theorem}[Границя від композиції функції]
@@ -4413,12 +4490,12 @@ $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$.
 	Степеневу функцію $y = x^{\alpha}, \alpha \in \mathbb{R}$ можна визначити як $y = e^{\alpha \ln x}$ при $x > 0$.
 
 \subsection{Друга чудова границя}
-Доведемо, що існує $\displaystyle\lim_{x \to +\infty} \left( 1 + \dfrac{1}{[x]} \right)^{[x]} = e$ за Гейне.\\
+Доведемо, що існує $\displaystyle\lim_{x \to +\infty} \left( 1 + \dfrac{1}{[x]} \right)^{[x]} = e$ за Гайне.\\
 Ми знаємо той факт, що $\displaystyle\lim_{n \to \infty} \left( 1 + \dfrac{1}{n} \right)^n = e$, тобто 
 $\forall \varepsilon > 0: \exists N: \forall n \geq N: \abs{\left( 1 + \dfrac{1}{n} \right)^n - e} < \varepsilon$.\\
 Нехай є послідовність $\{x_n, n \geq 1\}$ така, що $\displaystyle\lim_{n \to \infty} x_n = +\infty$. Тоді $\displaystyle\lim_{n \to \infty} [x_n] = +\infty$\\
 Тоді $\exists N': \forall n \geq N': [x_n] > N$, а оскільки $[x_n] \in \mathbb{N}$, то тоді $\abs{\left( 1 + \dfrac{1}{[x_n]} \right)^{[x_n]} - e} < \varepsilon$.\\
-Отже, $\displaystyle\lim_{n \to \infty} x_n = +\infty \implies \displaystyle\lim_{n \to \infty} \left( 1 + \dfrac{1}{[x_n]} \right)^{[x_n]} = e$. За Гейне, $\displaystyle\lim_{x \to +\infty} \left( 1 + \dfrac{1}{[x]} \right)^{[x]} = e$
+Отже, $\displaystyle\lim_{n \to \infty} x_n = +\infty \implies \displaystyle\lim_{n \to \infty} \left( 1 + \dfrac{1}{[x_n]} \right)^{[x_n]} = e$. За Гайне, $\displaystyle\lim_{x \to +\infty} \left( 1 + \dfrac{1}{[x]} \right)^{[x]} = e$
 \bigskip \\
 Наступне відомо, що $\forall x \in \mathbb{R}$ справедлива нерівність: $[x] \leq x < [x]+1$.\\
 Тоді можна дійти до цієї нерівності:\\
@@ -4657,7 +4734,7 @@ $f(x) = o(1), x \to x_0 \iff f(x)$ -- н.м. функція в околі т. $x
 	\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall x \in A: |x-x_0|<\delta \Rightarrow |f(x)-f(x_0)|<\varepsilon \tag*{означення Коші}
 	\end{align*}
 	\begin{align*}
-	\forall \{x_n, n \geq 1\}\subset A: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = f(x_0) \tag*{означення Гейне}
+	\forall \{x_n, n \geq 1\}\subset A: \lim_{n \to \infty} x_n = x_0 \Rightarrow \lim_{n \to \infty} f(x_n) = f(x_0) \tag*{означення Гайне}
 	\end{align*}
 \end{definition}
 
@@ -4669,8 +4746,8 @@ $f(x) = o(1), x \to x_0 \iff f(x)$ -- н.м. функція в околі т. $x
 	\end{definition}
 
 \begin{theorem}
-Означення Коші $\iff$ Означення Гейне.\\
-\textit{Доведення є аналогічним з означеннями Коші, Гейне в границях.}
+Означення Коші $\iff$ Означення Гайне.\\
+\textit{Доведення є аналогічним з означеннями Коші, Гайне в границях.}
 \end{theorem}
 
 \begin{proposition}
@@ -4690,7 +4767,7 @@ $f$ -- неперервна в точці $x_0 \iff$ $\displaystyle\lim_{x \to x
 
 \begin{proof}
 \leftproof Дано: $f$ -- неперервна в т. $x_0$. \\
-Нехай є $\{x_n, n \geq 1\}$, причому $\forall n \geq 1: x_n \neq x_0$, оскільки $x_0 \in A$ - гранична, та $\displaystyle\lim_{n \to \infty} x_n = x_0$. Тоді $f(x_n) \to f(x_0)$. Отже, за Гейне, $\exists \displaystyle\lim_{x \to x_0} f(x) = f(x_0)$.
+Нехай є $\{x_n, n \geq 1\}$, причому $\forall n \geq 1: x_n \neq x_0$, оскільки $x_0 \in A$ - гранична, та $\displaystyle\lim_{n \to \infty} x_n = x_0$. Тоді $f(x_n) \to f(x_0)$. Отже, за Гайне, $\exists \displaystyle\lim_{x \to x_0} f(x) = f(x_0)$.
 \bigskip \\
 \rightproof Дано: $\exists \displaystyle\lim_{x \to x_0} f(x) = f(x_0)$. Тоді за Коші,
 $\forall \varepsilon > 0: \exists \delta > 0: \forall x \in A: 0 < |x-x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \varepsilon$.
@@ -4864,7 +4941,7 @@ $g$ -- неперервна в $x_0$, тобто $\forall \varepsilon > 0: \exis
 \item $\{x_{n_k}, k \geq 1\}: f(x_{n_k})>n_k$;
 \item $\{x_{n_m}, m \geq 1\}: f(x_{n_m})<-n_m$.
 \end{enumerate}
-Розглянемо другу. Вона є обмеженою, оскільки $\{x_{n_m}, m \geq 1\} \subset [a,b]$. Тоді за Ваєрштрасом, для підпослідовності $\{x_{n_{m_p}}, p \geq 1\}: \exists \displaystyle \lim_{n \to \infty} x_{n_{m_p}} =x_*$. Тому за означенням Гейне і за неперервністю, $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = f(x_*)$. Але водночас ми маємо, що функція не є обмеженою знизу, тобто $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = -\infty$. Суперечність!\\
+Розглянемо другу. Вона є обмеженою, оскільки $\{x_{n_m}, m \geq 1\} \subset [a,b]$. Тоді за Ваєрштрасом, для підпослідовності $\{x_{n_{m_p}}, p \geq 1\}: \exists \displaystyle \lim_{n \to \infty} x_{n_{m_p}} =x_*$. Тому за означенням Гайне і за неперервністю, $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = f(x_*)$. Але водночас ми маємо, що функція не є обмеженою знизу, тобто $\exists \displaystyle \lim_{p \to \infty} f(x_{n_{m_p}}) = -\infty$. Суперечність!\\
 Для першого пункту все аналогічно і теж буде суперечність.\\
 Отже, $f$ -- все ж таки обмежена на $[a,b]$.
 \end{proof}
@@ -4880,7 +4957,7 @@ $\displaystyle \exists x^* \in [a,b]: f(x^*) = \max_{x \in [a,b]} f(x)$.
 Нехай $\displaystyle \inf_{x \in [a,b]} f(x) = c$. За критерієм $\inf$, отримаємо наступне:\\
 $\forall x \in [a,b]: f(x) \geq c$;\\
 $\forall \varepsilon > 0: \exists x_{\varepsilon} \in [a,b]: f(x_{\varepsilon}) < c + \varepsilon$.\\
-Зафіксуємо $\varepsilon = \dfrac{1}{n}$. Тоді $\exists x_n \in [a,b]: c \leq f(x_n) < c + \dfrac{1}{n}$. Ми також маємо обмежену послідовність $\{x_n, n \geq 1\} \subset [a,b]$. Тому за Ваєрштрасом, для послідовності $\{x_{n_k},k \geq 1\}$ існує $\displaystyle \lim_{n \to \infty} x_{n_k} = x_*$. Отже, за Гейне і за неперервністю, $\displaystyle \exists \lim_{k \to \infty} f(x_{n_k}) = f(x_*)$.\\
+Зафіксуємо $\varepsilon = \dfrac{1}{n}$. Тоді $\exists x_n \in [a,b]: c \leq f(x_n) < c + \dfrac{1}{n}$. Ми також маємо обмежену послідовність $\{x_n, n \geq 1\} \subset [a,b]$. Тому за Ваєрштрасом, для послідовності $\{x_{n_k},k \geq 1\}$ існує $\displaystyle \lim_{n \to \infty} x_{n_k} = x_*$. Отже, за Гайне і за неперервністю, $\displaystyle \exists \lim_{k \to \infty} f(x_{n_k}) = f(x_*)$.\\
 Але водночас $\exists x_{n_k} \in [a,b]: c \leq f(x_{n_k}) < c + \dfrac{1}{n_k}$. Коли $k \to \infty$, то за теоремою про поліцаїв, $\exists \displaystyle \lim_{k \to \infty} f(x_{n_k}) = c$. Таким чином, отримали, що $c = f(x_*) = \displaystyle \inf_{x \in [a,b]} f(x) = \min_{x \in [a,b]} f(x)$.
 \end{proof}
 
@@ -4916,7 +4993,7 @@ $\forall x \in M: x \leq x_0$\\
 Для $\varepsilon = \dfrac{1}{n}: \exists x_n \in M: x_n > x_0 - \dfrac{1}{n}$.\\
 Тобто $\forall n \geq 1: x_0 - \dfrac{1}{n} < x_n \leq x_0$.\\
 Розглянемо послідовність $\{x_n, n \geq 1\} \subset M: \exists \displaystyle \lim_{n \to \infty} x_n = x_0$.\\
-Отже, за Гейне та неперервністю, $\displaystyle \exists \lim_{n \to \infty} f(x_n) = f(x_0) \leq 0$.
+Отже, за Гайне та неперервністю, $\displaystyle \exists \lim_{n \to \infty} f(x_n) = f(x_0) \leq 0$.
 \\
 З іншого боку, ми маємо $\displaystyle \lim_{x \to b} f(x) = f(b)$\\
 $\Rightarrow$ для $\tilde{\varepsilon} = \dfrac{f(b)}{2}: \exists \tilde{\delta}: \forall x: |x-b| < \tilde{\delta} \Rightarrow |f(x)-f(b)|<\dfrac{f(b)}{2}$\\
@@ -5008,7 +5085,7 @@ $\displaystyle\lim_{n \to \infty} b_n = x_0 \implies \displaystyle\lim_{n \to \i
 \end{lemma}
 
 \begin{proof}
-!Припустимо, що $\exists y_0 = f(x_0) \in [c,d]$, де функція $g$ не є неперервною, тоді за Гейне, $\exists \{y_n, n \geq 1\} \subset [c,d]: \forall n \geq 1: y_n \neq y_0: \displaystyle\lim_{n \to \infty} y_n = y_0$, але $\displaystyle\lim_{n \to \infty} g(y_n) \neq g(y_0)$, тобто\\
+!Припустимо, що $\exists y_0 = f(x_0) \in [c,d]$, де функція $g$ не є неперервною, тоді за Гайне, $\exists \{y_n, n \geq 1\} \subset [c,d]: \forall n \geq 1: y_n \neq y_0: \displaystyle\lim_{n \to \infty} y_n = y_0$, але $\displaystyle\lim_{n \to \infty} g(y_n) \neq g(y_0)$, тобто\\
 $\exists \delta^* > 0: \forall N: \exists n \geq N: |g(y_n)-g(y_0)| \geq \delta^*$.\\
 Тут $g(y_n) = x_n$ та $g(y_0) = x_0$, тоді $|x_n-x_0| \geq \delta^*$\\
 Зокрема для $N = 1: \exists n_1 \geq N$, для $N = n_1+1: \exists n_2 > n_1$, $\dots$\\
@@ -5089,7 +5166,7 @@ $\Rightarrow \displaystyle \lim_{x \to x} \sin x = \sin x_0 \implies f(x) = \sin
 Нехай є послідовність $\{x_n, n \geq 1\}$, де $\displaystyle\lim_{n \to \infty} x_n =0$. Тоді $\exists N_2: \forall n \geq N_2: |x_n| < \dfrac{1}{N_1}$.\\
 Тоді $\forall n \geq N_2: |a^{|x_n|} - 1| < \abs{a^{\frac{1}{N_1}} - 1} < \varepsilon$. Отже, $\displaystyle\lim_{n \to \infty} a^{|x_n|} = 1$. Для $0 < a < 1$ маємо $b = \dfrac{1}{a}$.\\
 А далі оскільки $-|x_n| \leq x_n \leq |x_n|$, то звідси $a^{-|x_n|} \leq a^{x_n} \leq a^{|x_n|}$, тоді за теоремою про двох поліцаїв, $\displaystyle\lim_{n \to \infty} a^{x_n} = 1$.\\
-Тоді за Гейне, отримаємо, що $\displaystyle\lim_{x \to 0} a^x = 1 = a^0$ - неперервна в т. $x = 0$.
+Тоді за Гайне, отримаємо, що $\displaystyle\lim_{x \to 0} a^x = 1 = a^0$ - неперервна в т. $x = 0$.
 \bigskip \\
 $\displaystyle\lim_{x \to x_0} a^x = \lim_{x \to x_0} a^{x-x_0} a^{x_0} = a^{x_0} \implies a^x \in C(\mathbb{R})$.
 \end{proof}
