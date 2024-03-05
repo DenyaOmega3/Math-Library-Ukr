@@ -19,6 +19,8 @@
 \usepgfplotslibrary{fillbetween}
 \usepackage{tikz}
 \usepackage{graphicx}
+\usepackage{enumitem}
+
 \usepackage{physics}
 
 \fancyhead{}
@@ -91,314 +93,317 @@
 	\section{Диференціальні рівняння першого порядку}
 	\subsection{Основні означення}
 	\begin{definition}
- Задана область $D \subset \mathbb{R}^2$ - відкрита та однозв'язна; функція $f: D \rightarrow \mathbb{R}$\\
-	\textbf{Диференціальним рівнянням першого порядку} називається наступний вираз:
+ Задана область $D \subset \mathbb{R}^2$ -- відкрита та однозв'язна; функція $f\colon D \to \mathbb{R}$.\\
+	\textbf{Диференціальним рівнянням першого порядку} називається таке рівняння:
 	\begin{align}
+	\label{first_order_DE}
 	y' = f(x,y)
 	\end{align}
 	\end{definition}
 
 	\begin{definition}
- \textbf{Розв'язком рівняння} (1) називається функція $\\ y= \varphi(x)$, що визначений та диференційований на відкритому інтервалі $I \subset \mathbb{R}$, графік якої міститься в області $D$ та задовольняє рівнянню (1)
+ \textbf{Розв'язком рівняння} \eqref{first_order_DE} називається функція $y = \varphi(x)$, що визначений та диференційований на відкритому інтервалі $I \subset \mathbb{R}$, графік якої міститься в області $D$ та задовольняє рівнянню \eqref{first_order_DE}.
  	\end{definition}
  	
 	\begin{definition}
- Графіком розв'язку $y = \varphi(x)$ називається \textbf{інтегральною кривою}.
+	Графіком розв'язку $y = \varphi(x)$ називають \textbf{інтегральною кривою}.
 	\end{definition}
 	
 	\begin{example}
- Задане диференціальне рівняння: $\displaystyle y' = \frac{y}{x}$\\
-	Розв'язком буде функція $\varphi(x)=Cx$, причому:\\
-	$I=(0, +\infty)$, якщо $D=\{(x,y) \in \mathbb{R}^2: x>0\}$\\
-	$I=(-\infty, 0)$, якщо $D=\{(x,y) \in \mathbb{R}^2: x<0\}$
+ 	Задане диференціальне рівняння: $\displaystyle y' = \frac{y}{x}$. Розв'язком буде функція $\varphi(x)=Cx$, причому вона задається на:\\
+	$I=(0, +\infty)$, якщо $D=\{(x,y) \in \mathbb{R}^2: x>0\}$;\\
+	$I=(-\infty, 0)$, якщо $D=\{(x,y) \in \mathbb{R}^2: x<0\}$.
 	\end{example}
 	
-	\textbf{Геометричний зміст}\\
-	Якщо $y=\varphi(x)$ - розв'язок рівняння (1), то $\displaystyle k = \frac{d\varphi(x)}{dx}$ - кутовий коефіцієнт до графіку функції $y=\varphi(x)$ в т. $x$
+	\subsubsection*{Геометричний зміст}
+	Якщо $y=\varphi(x)$ -- розв'язок рівняння \eqref{first_order_DE}, то $\displaystyle k = \frac{d\varphi(x)}{dx}$ -- кутовий коефіцієнт до графіку функції $y=\varphi(x)$ в точці $x$.
 	
 	\begin{remark}
- Розв'язки рівняння (1) іноді зрузчно розглядати як $x=\psi(y)$. Тоді рівняння (1) записують так:
+ 	Розв'язки рівняння \eqref{first_order_DE} іноді зрузчно розглядати як $x=\psi(y)$. Тоді диференціальне рівняння \eqref{first_order_DE} записують так:
 	\begin{align*}
 	x'=\frac{1}{f(x,y)}
 	\end{align*}
 	\end{remark}
 	
 	\begin{remark}
- В загальному випадку розв'язок рівняння (1) може розглядатись як неявна функція $F(x,y)=0$. Тоді рівняння (1) записують так:
+	У загальному випадку розв'язок рівняння \eqref{first_order_DE} може розглядатись як неявна функція $F(x,y)=0$. Тоді рівняння \eqref{first_order_DE} записують так:
 	\begin{align*}
 	dy - f(x,y)dx=0
 	\end{align*}
 	\end{remark}
 	
 	\begin{definition}
- \textbf{Рівнянням Пфаффа} називають наступне рівняння:
+ \textbf{Рівнянням Пфаффа} називають ось таке диференціальне рівняння:
 	\begin{align}
 	M(x,y)dx + N(x,y)dy=0
 	\end{align}
 	\end{definition}
 
-	(TODO)
-	\bigskip \\
 	\begin{definition}
- Задана область $D \subset \mathbb{R}^2$ - відкрита та однозв'язна; точка $(x_0, y_0) \in D$\\
+ Задана область $D \subset \mathbb{R}^2$ -- відкрита та однозв'язна; точка $(x_0, y_0) \in D$.\\
 	\textbf{Задачею Коші з початковою умовою} $(x_0,y_0)$ називається система рівнянь:
 	\begin{align*}
 	\begin{cases}
 	\displaystyle \frac{dy}{dx}=f(x,y)\\
 	y(x_0)=y_0
-	\end{cases}
+	\end{cases}.
 	\end{align*}
-	\textbf{Розв'якзом} називають такий розв'язок функції першого рівняння $y=\varphi(x)$, для якого $\varphi(x_0)=y_0$
+	\textbf{Розв'якзом задачі Коші} називають розв'язок $y=\varphi(x)$ першого рівняння, для якого $\varphi(x_0)=y_0$.
 	\end{definition}
 	
 	\begin{example}
-	$
-	\begin{cases}
-	\displaystyle \frac{dy}{dx}=x\\
-	y(0)=0
-	\end{cases}
-	$\\
-	Для нього існує єдиний розв'язок $\displaystyle y = \frac{x^2}{2}$, $I=\mathbb{R}$
+	Маємо задачі Коші $ \begin{cases} \displaystyle \frac{dy}{dx}=x \\ y(0)=0 \end{cases}$. Для неї існує єдиний розв'язок $\displaystyle y = \frac{x^2}{2}$ на $I=\mathbb{R}$.
 	\end{example}
 	
 	\subsection{Деякі типи рівнянь першого порядку}
 	\subsubsection{Рівняння з відокремлювальними змінними}
-	Дане рівняння має наступний вигляд:
+	Розглянемо ось таке диференціальне рівняння:
 	\begin{align*}
-	M_1(x)M_2(y)\,dx+N_1(x)N_2(y)\,dy=0
+	M_1(x)M_2(y)\,dx+N_1(x)N_2(y)\,dy=0,
 	\end{align*}
-	або
+	\iffalse
+	або ще можна переписати інакшим чином:
 	\begin{align*}
 	\frac{dy}{dx} = f_1(x) f_2(y)
 	\end{align*}
-	$M_1, N_1, f_1$ - неперервні на $I_1$, а $M_2, N_2, f_2$ - неперервні на $I_2$.\\
-	Розглянемо випадок, коли $M_2(y) \not\equiv 0$, $N_1(x) \not\equiv 0$. Тоді рівняння перепишеться наступним чином:\\
-	$\displaystyle \frac{M_1(x)}{N_1(x)}\,dx = -\frac{N_2(y)}{M_2(y)}\,dy$\\
-	Далі проінтегруємо її:\\
-	$\displaystyle \int \frac{M_1(x)}{N_1(x)}\,dx = - \int \frac{N_2(y)}{M_2(y)}\,dy$\\
-	Якщо в обох частинах ми знайшли первісні $F_1(x), F_2(y)$, то розв'язок задається неявно таким чином:\\
-	$F_1(x)=-F_2(y)+C$\\
-	При якихось $x_* \in I_1, y_* \in I_2$ таких, що $M_2(y_*) = 0$, $N_1(x_*)=0$, ці точки будуть відкинуті. Тобто розв'язок задається на меншому інтервалі
-	
+	\fi
+	Ми припускаємо, що функції $M_1, N_1, f_1 \in C(I_1)$ та функції $M_2, N_2, f_2 \in C(I)$. Також будемо розглядати лише такі функції, де $M_2 \not\equiv 0, N_1 \not\equiv 0$. \\
+	Із урахуванням вимог, диференціальне рівняння перепишеться таким чином:\\
+	$\displaystyle \frac{M_1(x)}{N_1(x)}\,dx = -\frac{N_2(y)}{M_2(y)}\,dy$.\\
+	Далі проінтегруємо обидві частини рівності:\\
+	$\displaystyle \int \frac{M_1(x)}{N_1(x)}\,dx = - \int \frac{N_2(y)}{M_2(y)}\,dy$.\\
+	Нехай в обох частинах рівності ми знайшли первісні $F_1(x), F_2(y)$. Тоді розв'язок задається неявно таким чином:\\
+	$F_1(x)=-F_2(y)+C$.
+	\bigskip \\
+	При деяких $x_* \in I_1, y_* \in I_2$ таких, що $M_2(y_*) = 0, N_1(x_*)=0$, ці точки будуть відкинуті. Тобто розв'язок задається на меншому інтервалі.
+	\bigskip \\
+	До речі, початкове диференціальне рівняння можна записати іншим чином:
+	\begin{align*}
+	\frac{dy}{dx} = f_1(x) f_2(y),
+	\end{align*}
+	де $f_1(x) = \dfrac{M_1(x)}{M_2(x)}, \quad f_2(y) = \dfrac{N_1(y)}{N_2(y)}$. 
+		
 	\begin{example}
- Розв'язати рівняння: $\displaystyle \frac{dy}{dx}=2x \cos^2 y$\\
-	Спочатку перевіримо, коли $\cos^2 y=0$. Тоді\\ $\displaystyle y_* \equiv \frac{\pi}{2} + \pi k, k \in \mathbb{Z}$ - розв'язок\\
-	Тепер поділимо на $\cos ^2 y$:\\
+ Розв'язати диференціальне рівняння $\displaystyle \frac{dy}{dx}=2x \cos^2 y$.\\
+	Розглянемо окремо, коли $\cos^2 y=0$. Тоді $\displaystyle y_* \equiv \frac{\pi}{2} + \pi k, k \in \mathbb{Z}$ -- розв'язок.\\
+	Тепер випадок $\cos^2 y \not\equiv 0$. Тому ми поділимо на $\cos ^2 y$ -- отримаємо:\\
 	$\displaystyle \frac{dy}{\cos^2 y} = 2x\,dx$\\
-	Інтегруємо обидві частини та маємо:\\
-	$\displaystyle \tg y = x^2 + C$ на інтервалі $I = \mathbb{R} \setminus \{y_*\}$ - розв'язок\\
-	Можна привести в іншому вигляді:\\
-	$y = \arctg (x^2+C) + \pi m, m \in \mathbb{Z}$
+	Інтегруємо обидві частини -- маємо:\\
+	$\displaystyle \tg y = x^2 + C$ на інтервалі $I = \mathbb{R} \setminus \{y_*\}$ -- розв'язок. Можна записати розв'язок в іншому вигляді: $y = \arctg (x^2+C) + \pi m, m \in \mathbb{Z}$.
 	\end{example}
 	
 	\subsubsection{Однорідне рівняння}
 	\begin{definition}
- Функція $f(x,y)$ називається \textbf{однорідною}, якщо:
+ Функція $f(x,y)$ називається \textbf{однорідною}, якщо
 	\begin{align*}
 	\forall t \neq 0: f(tx, ty)=f(x,y)
 	\end{align*}
 	\end{definition}
 	
 	\begin{example}
- $\displaystyle f(x,y) = \frac{x^2+y^2}{xy}$ - однорідна, оскільки:\\
-	$\displaystyle f(tx, ty) = \frac{t^2x^2+t^2y^2}{t^2xy} = \frac{x^2+y^2}{xy} = f(x,y)$
+	Зокрема функція $\displaystyle f(x,y) = \frac{x^2+y^2}{xy}$ -- однорідна, оскільки \\ $\displaystyle f(tx, ty) = \frac{t^2x^2+t^2y^2}{t^2xy} = \frac{x^2+y^2}{xy} = f(x,y)$.
 	\end{example}
 	
 	\begin{proposition}
- Функція $f(x,y)$ - однорідна $\iff \displaystyle \exists F(z): \\f(x,y)=F\left(\frac{y}{x}\right)$.
+ Функція $f(x,y)$ -- однорідна $\iff \displaystyle \exists F: f(x,y)=F\left(\frac{y}{x}\right)$.
 	\end{proposition}
 
 	\begin{proof}
-	\leftproof Дано: $\displaystyle \exists F(z): f(x,y)=F\left(\frac{y}{x}\right)$\\
-	Тоді $\displaystyle f(tx,ty) = F\left(\frac{ty}{tx} \right) = F\left(\frac{y}{x} \right) = f(x,y)$. Отже, $f(x,y)$ - однорідна\\
-	\\
-	\rightproof Дано: $f(x,y)$ - однорідна\\
-	Тоді $\displaystyle f(x,y) = f\left(x\cdot1, x \cdot \frac{y}{x} \right) = f\left(t\cdot1, t \cdot \frac{y}{x} \right) \overset{f(tx,ty)=f(x,y)}{=} f\left(1, \frac{y}{x}\right)$\\
-	Тому оберемо $F(z) = f(1,z)$, що й завершує доведення 
+	\leftproof Дано: $\displaystyle \exists F: f(x,y)=F\left(\frac{y}{x}\right)$. Тоді $\displaystyle f(tx,ty) = F\left(\frac{ty}{tx} \right) = F\left(\frac{y}{x} \right) = f(x,y)$. \\
+	Отже, $f(x,y)$ -- однорідна.
+	\bigskip \\
+	\rightproof Дано: $f(x,y)$ - однорідна. Тоді $\displaystyle f(x,y) = f\left(x\cdot1, x \cdot \frac{y}{x} \right) = f\left(t\cdot1, t \cdot \frac{y}{x} \right) \overset{f(tx,ty)=f(x,y)}{=} f\left(1, \frac{y}{x}\right)$.\\
+	Тому оберемо функцію $F(z) = f(1,z)$, що й завершує доведення.
 	\end{proof}
 	
-	А тепер як розв'язувати. Дано стандартне диф. рівняння:
+	Тепер розглянемо класичне диференціальне рівняння першого порядку:
 	\begin{align*}
 	y'=f(x,y)
 	\end{align*}
-	Цього разу $f(x,y)$ - однорідна\\
-	Скористаємось наступною заміною:
-	\begin{align*}
-	y=xz, \textrm{де } z=z(x)
-	\end{align*}
-	Знайдемо її похідну:\\
-	$y' = z + xz'$\\
-	Тоді наше початкове рівняння матиме вигляд:\\
-	$\displaystyle z+xz'=f(x, xz) \overset{\textrm{однорідна}}{=} f(1,z) \overset{\textrm{позначу}}{=}g(z)$\\
-	$xz'=g(z)-z$\\
-	Прийшли до рівняння з відокремлювальними змінними\\
-	$\displaystyle \frac{dx}{x} = \frac{dz}{g(z)-z} ...$\\
-	Після інтегрування замінюємо: $\displaystyle z = \frac{y}{x}$. Ну а далі як вийде
+	Проте цього разу $f(x,y)$ -- однорідна функція. \\
+	Скористаємось наступною заміною: $y = xz$, де $z = z(x)$.\\
+	Якщо знайти похідну, то отримаємо $y' = z + xz'$. Тоді наше початкове рівняння матиме вигляд:\\
+	$\displaystyle z+xz'=f(x, xz) \overset{f \text{ -- однорідна}}{=} f(1,z) \overset{\textrm{позн.}}{=}g(z)$.\\
+	$xz'=g(z)-z$.\\
+	$z' = \dfrac{1}{x} (g(z) - z)$.\\
+	Прийшли до рівняння з відокремлювальними змінними, якщо позначити $f_1(x) = \dfrac{1}{x}$ та $f_2(z) = (g(z) - z)$. Таке рівняння ми вже навчилися розв'язувати. Коли завершимо розв'язок, то робимо зворотну заміну: $\displaystyle z = \frac{y}{x}$.
 	
 	\begin{example}
- Розв'язати рівняння: $\displaystyle y' = \frac{x+y}{x-y}$\\
-	Можна помітити, що $\displaystyle \frac{tx+ty}{tx-ty} = \frac{x+y}{x-y}$. Тобто ця функція - однорідна. Тому робимо заміну:\\
-	$y = xz, z=z(x) \Rightarrow y' = z + xz'$\\
-	$\displaystyle z+xz'=\frac{1+z}{1-z} \Rightarrow xz'=\frac{z^2+1}{1-z} \Rightarrow \frac{dx}{x} = \frac{1-z}{z^2+1} \,dz$\\
-	$\displaystyle \ln |x| + C = \arctg z - \frac{1}{2} \ln (z^2+1) |\cdot 2$\\
-	$\displaystyle \ln x^2 + \ln (z^2+1) C' = 2 \arctg z$\\
-	$\displaystyle z = \frac{y}{x}$\\
-	$\displaystyle 2 \arctg \frac{y}{x} = \ln C\sqrt{x^2+y^2}$
+ 	Розв'язати рівняння: $\displaystyle y' = \frac{x+y}{x-y}$.\\
+	Можна зауважити, що $\displaystyle \frac{tx+ty}{tx-ty} = \frac{x+y}{x-y}$. Тобто ця функція -- однорідна. Тому робимо заміну:\\
+	$y = xz, z=z(x) \implies y' = z + xz'$.\\
+	Підставивши цю заміну в рівняння, отримаємо таке:\\
+	$\displaystyle z+xz'=\frac{1+z}{1-z} \implies xz'=\frac{z^2+1}{1-z} \implies \frac{dx}{x} = \frac{1-z}{z^2+1} \,dz$.\\
+	$\displaystyle \ln |x| + C = \arctg z - \frac{1}{2} \ln (z^2+1) |\cdot 2$.\\
+	$\displaystyle \ln x^2 + \ln (z^2+1) C' = 2 \arctg z$.\\
+	Повернемо все як було, взявши зворотну заміну $\displaystyle z = \frac{y}{x}$. Тоді отримаємо розв'язок:\\
+	$\displaystyle 2 \arctg \frac{y}{x} = \ln C\sqrt{x^2+y^2}$.
 	\end{example}
 
 	
 	\subsubsection{Лінійне рівняння}
-	Розглядується рівняння наступного вигляду (TODO):
+	\begin{definition}
+	Розглянемо ось таке диференціальне рівняння:
 	\begin{align*}
-	y' + a(x)y = b(x)
+	y' + a(x)y = b(x),
 	\end{align*}
-	де $a,b \in C(I)$.\\
-	При $b(x) \equiv 0$ таке рівняння називають \textbf{однорідним}. В іншому випадку - \textbf{неоднорідним}\\
-	Розв'язок даного рівняння буде складатись так:\\ $y = y_{\textrm{g.h.}} + y_{\textrm{p.inh.}}$\\
-	$y_{\textrm{g.h.}}$ - загальний розв'язок однорідного диф. рівняння\\
-	$y_{\textrm{p.inh.}}$ - частковий розв'язок неоднорідного диф. рівняння\\
-	Знайдемо $y_{\textrm{g.h.}}$:\\
-	$y'+a(x)y=0 \Rightarrow \displaystyle \frac{dy}{y} = -a(x)\,dx \Rightarrow \ln |y| = -A(x) + C$\\ де $\displaystyle A(x) = \int a(x)\,dx$\\
-	$\displaystyle \Rightarrow y_{\textrm{g.h.}} = Ce^{-A(x)}$\\
-	Наступним кроком буде знайти $y_{\textrm{p.inh.}}$. Це можна зробити, якщо в початкове рівняння підставити цей раз наступне:\\
-	$\displaystyle y = C(x)e^{-A(x)}$, тут $C(x)$ - функція\\
-	Підставляючи, отримаємо задачу - знайти функція $C(x)$. Там рівняння буде з відокремленою змінною. Після чого ми підставляємо $C(x)$ в\\ $y = C(x)e^{-A(x)} = y_{\textrm{p.inh}}$
+	де $a,b \in C(I)$. Це називається \textbf{лінійним рівнянням}.\\
+	При $b(x) \equiv 0$ таке рівняння називають \textbf{однорідним}. В іншому випадку -- \textbf{неоднорідним}.
+	\end{definition}
+	
+	\subsubsection*{Розв'язок однорідного диференціального рівняння}
+	Ми розглянемо рівняння $y' + a(x) y = 0$. Насправді, це -- рівняння з відокремленими змінними. Розв'яжемо її:\\
+	$\dfrac{dy}{y} = -a(x) \,dx$.\\
+	$\ln |y| = -\displaystyle\int a(x)\,dx + \ln C$ або $y \equiv 0$, при цьому стала $C > 0$.\\
+	Якщо проекспонеціювати рівняння, отримаємо наступне: $y = C e^{-\int a(x)\,dx}$, причому цього разу $C \in \mathbb{R}$ в силу модуля та нульового розв'язку.
+	
+	\subsubsection*{Розв'язок неоднорідного диференціального рівняння}
+	Для такого рівняння існують кілька способів. Розглянемо кожний окремо.\\
+	I. \textit{Метод Лагранжа (метод варіації довільних сталих)}.\\
+	Ми маємо рівняння $y' + a(x) y = b(x)$. Спочатку ми розв'яжемо те саме рівняння тільки в однорідному вигляді, тобто $y' + a(x) y = 0$. Ми вже знайшли його розв'язок, це в нас $y_{\text{hom}} = C e^{-\int a(x)\,dx}$.\\
+	Метод варіації сталих полягає в наступному: розглянемо $y = \displaystyle C(x) e^{-\int a(x)\,dx}$. Тобто ми замість сталої $C$ поставили функцію $C$, що буде неперервно-диференційована. Підставимо його в неоднорідне рівняння -- отримаємо:\\
+	$\displaystyle C'(x) e^{-\int a(x)\,dx} - C(x) e^{-\int a(x)\,dx} a(x) + a(x) C(x) e^{-\int a(x)\,dx} = b(x)$.\\
+	$C'(x) e^{-\int a(x)\,dx} = b(x)$.\\
+	$C'(x) = b(x) e^{\int a(x)\,dx}$.\\
+	$C(x) = \displaystyle\int b(x) e^{\int a(x)\,dx}\,dx + D$, де $D \in \mathbb{R}$.\\
+	Знайшли функцію $C(x)$, яку можна підставити. Власне, $y = C(x) e^{-\int a(x)\,dx}$ задає розв'язок.
 	
 	\begin{example}
- Розв'язати рівняння: $\displaystyle y' + 2xy = xe^{-x^2}$\\
-	Тут буде демонструватись ті самі кроки\\
-	Спочатку знайдемо загальний однорідний розв'язок:\\
-	$y'+2xy=0 \Rightarrow \displaystyle \frac{dy}{y} = -2x \,dx \Rightarrow \ln |y| = -x^2 + C \Rightarrow y_{\textrm{g.h.}} = Ce^{-x^2}$\\
-	Задамо новий розв'язок: $y = C(x)e^{-x^2}$ та підставимо в початкове:\\
-	$C'(x)e^{-x^2} + C(x)e^{-x^2}(-2x) + 2xC(x)e^{-x^2} = xe^{-x^2}$\\
-	$C'(x) = x \Rightarrow \displaystyle C(x) = \frac{x^2}{2} + C_0$\\
+	 Розв'язати рівняння: $\displaystyle y' + 2xy = xe^{-x^2}$ методом Лагранжа.\\
+	 Тут буде демонструватись ті самі кроки. Спочатку знайдемо загальний однорідний розв'язок:\\
+	$y'+2xy=0 \implies \displaystyle \frac{dy}{y} = -2x \,dx \implies \ln |y| = -x^2 + C \implies y_{\text{hom}} = Ce^{-x^2}$.\\
+	Задамо новий розв'язок $y = C(x)e^{-x^2}$ та підставимо в початкове неоднорідне рівняння:\\
+	$C'(x)e^{-x^2} + C(x)e^{-x^2}(-2x) + 2xC(x)e^{-x^2} = xe^{-x^2}$.\\
+	$C'(x) = x \implies \displaystyle C(x) = \frac{x^2}{2} + D$.\\
 	Остаточно отримаємо, що:\\
-	$\displaystyle y = e^{-x^2} \left(\frac{x^2}{2} + C_0 \right) = e^{-x^2}C_0 + e^{-x^2} \frac{x^2}{2}$\\
-	\bigskip \\
-	Інший варіант розв'язку такого рівняння - це метод Бернуллі\\
-	Заміна: $y = uv$, де $u=u(x), v=v(x)$\\
-	$y' = u'v+v'u$\\
-	$\Rightarrow u'v + v'u + a(x)uv = b(x) \Rightarrow u'v + u(v'+a(x)v)=b(x)$\\
-	Далі ми $v'+a(x)v = 0$. Там достатньо одного розв'язку. Отримавши $v$, можемо знайти звідси $u$
+	$\displaystyle y = e^{-x^2} \left(\frac{x^2}{2} + D \right) = e^{-x^2}D + e^{-x^2} \frac{x^2}{2}$.
 	\end{example}
-
+	
+	II. \textit{Метод Бернуллі}.\\
+	Ми маємо рівняння $y' + a(x)y = b(x)$. Проведемо таку заміну: \\
+	$y = uv$, де $u=u(x), v=v(x)$.
+	$y' = u'v+v'u$.\\
+	Підставивши ці дві заміни, отримаємо наступне:\\
+	$u'v + v'u + a(x)uv = b(x) \implies u'v + u(v'+a(x)v)=b(x)$.\\
+	Далі ми оберемо таку функцію $v$, щоб $v'+a(x)v = 0$. Це ніщо інше як однорідне рівняння. Її розв'язок вже знаємо: $v = \displaystyle e^{-\int a(x)\,dx}$. Нам буде достатньо взяти один з розв'язків. Підставимо це рівняння в наше неоднорідне рівняння:\\
+	$-e^{-\int a(x)\,dx} \cdot u' = b(x)$.\\
+	$u' = -b(x) e^{\int a(x)\,dx}$.\\
+	$u = - \int b(x) e^{\int a(x)\,dx} + C$.\\
+	Загалом отримали розв'язок $y = uv = e^{-\int a(x)\,dx} \left( C - \int b(x) e^{\int a(x)\,dx} \right)$.\\
+	Виглядає, ніби розв'язок інший, проте все нормально. Розв'язки будуть двома способами одні й ті самі.
+	
+	\begin{example}
+	Розв'язати рівняння: $\displaystyle y' + 2xy = xe^{-x^2}$ методом Бернуллі.\\
+	Проводимо заміну: $y = uv$, тут $u = u(x), v = v(x)$; тоді звідси $y' = u'v + uv'$.\\
+	$u'v + uv' + 2xuv = xe^{-x^2} \implies u'v + u(v' + 2xv) = xe^{-x^2}$.\\
+	Оберемо таку функцію $v$, щоб $v' + 2xv = 0$. Якщо розв'язати її, отримаємо $v = e^{-x^2}$. Тоді\\
+	$u' e^{-x^2} = xe^{-x^2} \implies u' = x \implies u = \dfrac{x^2}{2} + C$.\\
+	Разом отримаємо наступне: $y = e^{-x^2} \left( \dfrac{x^2}{2} + C \right) = e^{-x^2} C + e^{-x^2}\dfrac{x^2}{2}$.
+	\end{example}
 	
 	\subsubsection{Рівняння Бернуллі}
-	Розглядується рівняння наступного вигляду:
+	\begin{definition}
+	Розглядується ось таке диференціальне рівняння:
 	\begin{align*}
-	y' + a(x)y = b(x)y^{\lambda}, \lambda \in \mathbb{R} \setminus \{0,1\}
+	y' + a(x)y = b(x)y^{\lambda},
 	\end{align*}
+	де $a,b \in C(I)$, а також $\lambda \in \mathbb{R} \setminus \{0,1\}$. Це називається \textbf{рівнянням Бернуллі}.
+	\end{definition}
+	
 	\begin{remark}
- При $\lambda = 0$ рівняння буде лінійним.\\
-	При $\lambda = 1$ рівняння буде з відокремленими змінними
+	При $\lambda = 0$ рівняння буде лінійним. При $\lambda = 1$ рівняння буде з відокремленими змінними. Ми їх вже вміємо розв'язувати, тому такі $\lambda$ я викинув.
 	\end{remark}
 	
-	Якщо $\lambda > 0$, то $y \equiv 0$ буде також розв'язком\\
-	
-	
-	А далі ділимо обидві частини на $y^{\lambda}$:\\
-	$\displaystyle y'y^{-\lambda} + a(x)y^{-\lambda+1} = b(x)$\\
-	Робимо заміну: $z = y^{-\lambda+1}$, $z=z(x)$\\
-	$z' = (-\lambda + 1)y^{-\lambda}y'$\\
-	$\Rightarrow \displaystyle \frac{z'}{1-\lambda} + a(x)z=b(x)$\\
-	А далі вже розв'язується лінійне рівняння...
+	Зауважимо, що коли $\lambda > 0$, то $y \equiv 0$ буде також розв'язком. \\
+	Далі ділимо обидві частини на $y^{\lambda}$ -- отримаємо:\\
+	$\displaystyle y'y^{-\lambda} + a(x)y^{-\lambda+1} = b(x)$.\\
+	Проведемо ось таку заміну: \\
+	$z = y^{-\lambda+1}$, де $z=z(x)$. $z' = (-\lambda + 1)y^{-\lambda}y'$.\\
+	Підставивши ці заміни, отримаємо, насправді кажучи, лінійне рівняння, яке вміємо робити:\\
+	$\displaystyle \frac{z'}{1-\lambda} + a(x)z=b(x)$.\\
+	Після розв'язку даного рівняння проводимо всі можливі зворотні заміни.
 	
 	\begin{example}
- Розв'язати рівняння: $\displaystyle y' + \frac{y}{x+1} + y^2 = 0$\\
-	(тут $\lambda = 2$)\\
-	$y \equiv 0$ - розв'язок. Далі ділимо на $y^2$:\\
-	$\displaystyle y'y^{-2} + \frac{y^{-1}}{x+1} + 1 = 0$\\
-	Заміна: $z = y^{-1} \Rightarrow z' = -y^{-2}y'$\\
-	$\displaystyle -z' + \frac{z}{x+1} + 1 = 0$\\
-	Заміна 2: $z = uv \Rightarrow z' = u'v+v'u$\\
-	$\displaystyle -u'v - v'u + \frac{uv}{x+1} + 1 = 0 \Rightarrow u'v - u\underset{=0}{(\frac{v}{x+1}-v')} = 1$\\
-	$\displaystyle \frac{v}{x+1} - v' = 0 \Rightarrow \cdots \Rightarrow v = \frac{1}{x+1}$\\
-	$\displaystyle u'\frac{1}{x+1} = 1 \Rightarrow \cdots \Rightarrow u = \frac{1}{2}(x+1)^2 + C$\\
-	Зворотня заміна 2: $\displaystyle z = uv = \frac{x+1}{2} + \frac{C}{x+1}$\\
-	Зворотня заміна 1: $\displaystyle z = y^{-1} = \frac{x+1}{2} + \frac{C}{x+1} = \frac{(x+1)^2+2C}{2(x+1)}$\\
-	Остаточно отримаємо:\\
-	$\displaystyle y = \frac{2(x+1)}{(x+1)^2 + 2C}$\\
-	$y \equiv 0$
+ Розв'язати рівняння: $\displaystyle y' + \frac{y}{x+1} + y^2 = 0$.
+ Зауважимо, що це справді рівняння Бернуллі: тут $\lambda = 2$. Тоді $y \equiv 0$ -- один з розв'язів. Далі поділимо на $y^2$:\\
+	$\displaystyle y'y^{-2} + \frac{y^{-1}}{x+1} + 1 = 0$.\\
+	Проводимо заміну: $z = y^{-1} \implies z' = -y^{-2}y'$. Підставимо її:\\
+	$\displaystyle -z' + \frac{z}{x+1} + 1 = 0$.\\
+	Отримали стандартне лінійне рівняння. Якщо розв'язати методами вище, отримаємо:\\
+	$z = \dfrac{x+1}{2} + \dfrac{C}{x+1}$.\\
+	Зробивши зворотну заміну, отримаємо наступне:\\
+$\displaystyle z = y^{-1} = \frac{x+1}{2} + \frac{C}{x+1} = \frac{(x+1)^2+2C}{2(x+1)}$.\\
+	Остаточно: $\displaystyle y = \frac{2(x+1)}{(x+1)^2 + 2C}$ або$y \equiv 0$.
 	\end{example}
 
 	
 	\subsubsection{Рівняння, що можна звести до однорідного}
-	Нехай задане ось таке рівняння:
+	Нехай задане ось таке диференціальне рівняння:
 	\begin{align*}
 	y' = \frac{a_1 x + b_1 y + c_1}{a_2 x + b_2 y + c_2}
 	\end{align*}
-	Оскільки ми "хочемо" \hspace{0.1cm} звести це рівняння до однорідної, то нам необхідно перетворити цю дріб на наступний вигляд
+	Оскільки ми "хочемо" звести це рівняння до однорідної, то нам необхідно перетворити цю дріб на наступний вигляд:
 	\begin{align*}
 	Y' = \frac{\alpha_1 X + \beta_1 Y}{\alpha_2 X + \beta_2 Y}
 	\end{align*}
-	Можна компоненти дробу розглянути як два рівняння прямої:\\
-	$\begin{cases}
+	Можна компоненти дробу розглянути як два рівняння прямої $\begin{cases}
 	\alpha_1 X + \beta_1 Y = 0\\
 	\alpha_2 X + \beta_2 Y = 0
 	\end{cases}
-	$\\
-	та помітити, що в них існує єдиний розв'язок $(0,0)$.\\ \\
-	В нашому конкретному випадку:\\
-	$\begin{cases}
+	$ та зауважити, що в них існує єдиний розв'язок $(0,0)$.\\
+	В нашому конкретному випадку $\begin{cases}
 	a_1 x + b_1 y + c_1 = 0\\
 	a_2 x + b_2 y + c_2 = 0
 	\end{cases}
-	$\\
-	Система матиме єдиний розв'язок при умові, що $\begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix} \neq 0$. Скажімо $(x_0, y_0)$. Тепер для однорідного вигляду я хочу таку заміну на $x$ та $y$ закласти, щоб згодом вони перетнулись в т. $(0,0)$.\\
-	Тоді заміна:\\
+	$. Система матиме єдиний розв'язок за умовою, що $\begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix} \neq 0$. Скажімо $(x_0, y_0)$ -- наш розв'язок. Тепер для однорідного вигляду я хочу таку заміну на $x$ та $y$ закласти, щоб згодом вони перетнулись в точку $(0,0)$.\\
+	Тоді проводиться ось така заміна:\\
 	$\begin{cases}
 	x = X + x_0\\
 	y = Y + y_0
-	\end{cases} \Rightarrow
+	\end{cases} \implies
 	\begin{cases}
 	dx = dX\\
 	dy = dY
 	\end{cases}
-	\Rightarrow \displaystyle \frac{dY}{dX} = Y'
-	$\\
-	Тому ми отримали рівнання, яку ми "захотіли". І якщо погратись з алгеброю, то буде саме такий вираз:\\
-	$\displaystyle Y' = \frac{a_1 X + b_1 Y}{a_2 X + b_2 Y}$\\
-	А далі це однорідне рівняння...
+	\implies \displaystyle \frac{dY}{dX} = Y'
+	$.\\
+	Отримали рівнання, яку ми "захотіли". Якщо погратись з алгеброю, то буде саме такий вираз:\\
+	$\displaystyle Y' = \frac{a_1 X + b_1 Y}{a_2 X + b_2 Y}$.\\
+	А далі це однорідне рівняння, яке ми навчилися розв'язувати.
 	
 	\begin{example}
- Розв'язати рівняння $\displaystyle y' = \frac{2y-x-5}{2x-y+4}$\\
-	Одразу зауважу, що $\begin{vmatrix} -1 & 2 \\ 2 & -1 \end{vmatrix} \neq 0$\\
-	Знайдемо точку перетину цих прямих:\\
+ Розв'язати рівняння $\displaystyle y' = \frac{2y-x-5}{2x-y+4}$.\\
+	Одразу зауважу, що $\begin{vmatrix} -1 & 2 \\ 2 & -1 \end{vmatrix} \neq 0$, тож наш спосіб спрацює. Знайдемо точку перетину цих прямих:\\
 	$\begin{cases}
 	- x + 2y - 5 = 0\\
 	2 x - y + 4= 0
-	\end{cases} \Rightarrow
+	\end{cases} \implies
 	\begin{cases}
 	x = -1\\
 	y = 2
 	\end{cases} 
 	$\\
-	Заміна:
+	Тепер проведемо заміну:
 	$\begin{cases}
 	X = x + 1\\
 	Y = y -2
-	\end{cases} \Rightarrow
+	\end{cases} \implies
 	\begin{cases}
 	dX = dx\\
 	dY = dy
 	\end{cases}
-	$\\
-	$\displaystyle Y' = \frac{2Y-X}{2X-Y}$\\
-	Заміна 2: $Y=ZX, Z=Z(X) \Rightarrow Y' = Z + XZ'$\\
-	$\displaystyle Z + XZ' = \frac{2Z-1}{2-Z} \Rightarrow XZ' = \frac{Z^2-1}{2-Z} \Rightarrow \frac{dX}{X} = \frac{2-Z}{Z^2-1}\,dZ$\\
-	$\displaystyle \ln|X| + C= \frac{1}{2} \ln |Z-1| - \frac{3}{2} \ln |Z+1|$\\
-	$\displaystyle \ln(CX)^2 = \ln \abs{\frac{Z-1}{(Z+1)^3}}$\\
-	$\displaystyle CX^2 = \frac{Z-1}{(Z+1)^3}$\\
-	Зворотня заміна 2:\\
-	$\displaystyle CX^2 = \frac{\frac{Y}{X}-1}{(\frac{Y}{X}+1)^3} = \frac{YX^2-X^3}{(Y+X)^3}$\\
-	$\displaystyle C = \frac{Y-X}{(Y+X)^3}$\\
-	Зворотня заміна і остаточна відповідь:\\
-	$\displaystyle C = \frac{y-x-3}{(y+x-1)^3}$
+	$.\\
+	$\displaystyle Y' = \frac{2Y-X}{2X-Y}$.\\
+	Отримали однорідне рівняння. Якщо розв'язати стандартним способом, отримаємо:\\
+	$\displaystyle CX^2 = \frac{\frac{Y}{X}-1}{(\frac{Y}{X}+1)^3} = \frac{YX^2-X^3}{(Y+X)^3}$.\\
+	$\displaystyle C = \frac{Y-X}{(Y+X)^3}$.\\
+	Проведемо зворотну заміну та отримаємо остаточну відповідь:\\
+	$\displaystyle C = \frac{y-x-3}{(y+x-1)^3}$.
 	\end{example}
 	
 	\subsection{Задача Коші}
 	\begin{definition}
- Задана область $D \subset \mathbb{R}^2$ та функція $f: D \rightarrow \mathbb{R}$\\
+ Задана область $D \subset \mathbb{R}^2$ та функція $f \colon D \to \mathbb{R}$.\\
 	Така функція \textbf{задовольняє умові Ліпшиця відносно} $y$, якщо
 	\begin{align*}
 	\exists L>0: \abs{f(x,y_1) - f(x,y_2)} \leq L\abs{y_1-y_2}
@@ -406,15 +411,16 @@
 	\end{definition}
 	
 	\begin{proposition}
- Задан прямокутник $\Pi = I_a \cross I_b \subset \mathbb{R}^2$. Відомо, що функція $f(x,y)$ має часткову похідну $f'_y$, яка обмежена в $D$. Тоді $f$ задовільняє умові Ліпшица в $D$, причому $\displaystyle L = \sup_{(x,y) \in D} |f'_y(x,y)|$
+ Заданий прямокутник $\Pi = I_a \cross I_b \subset \mathbb{R}^2$. Відомо, що функція $f(x,y)$ має частинну похідну $f'_y$, яка обмежена в $D$. Тоді $f$ задовільняє умові Ліпшица в $D$ відносно змінної $y$, причому $\displaystyle L = \sup_{(x,y) \in D} |f'_y(x,y)|$.
 	\end{proposition}
 
 	\begin{proof}
-	Зафіксуємо довільне значення $x$\\
-	За теоремою Лагранжа, $\exists \xi \in (y_1, y_2):\\f(x,y_1) - f(x,y_2) = f'_y(x, \xi)\cdot(y_1-y_2)$\\
-	Тоді $\displaystyle \abs{f(x,y_1) - f(x,y_2)} = \abs{f'_y{x, \xi}} \abs{y_1 - y_2} \leq \underset{\displaystyle \underset{L}{\rotatebox[origin=c]{90}{=}}}{\sup_{(x,y) \in D} |f'_y(x,y)|} \abs{y_1-y_2}$ 
-\end{proof}
+	Зафіксуємо довільне $x$. За теоремою Лагранжа, $\exists \xi \in (y_1, y_2): f(x,y_1) - f(x,y_2) = f'_y(x, \xi)\cdot(y_1-y_2)$. \\ Тоді $\displaystyle \abs{f(x,y_1) - f(x,y_2)} = \abs{f'_y{x, \xi}} \abs{y_1 - y_2} \leq \displaystyle \sup_{(x,y) \in D} |f'_y(x,y)| \abs{y_1-y_2}$.\\
+	Покладемо $\displaystyle L = \sup_{(x,y) \in D} |f'_y(x,y)|$ -- отримали умову Ліпшиця відносно $y$.
+	\end{proof}
 	
+	Насправді, таке твердження уже було в математичному аналізі першого семестру, коли перелічували наслідки з теорем Лангранжа. Тому тут не новина.
+	\bigskip \\
 	А тепер розглянемо задачу Коші:
 	\begin{align*}
 	\begin{cases}
@@ -422,159 +428,223 @@
 	y(x_0)=y_0
 	\end{cases}
 	\end{align*}
-	де $f: \Pi = I_a \cross I_b \rightarrow \mathbb{R}$\\
-	$I_a = [x_0-a, x_0+a], I_b = [y_0-b, y_0+b]$\\
+	де функція $f \colon \Pi = I_a \cross I_b \to \mathbb{R}$. У нашому випадку $I_a = [x_0-a, x_0+a], I_b = [y_0-b, y_0+b]$.\\
 	Наша головна мета: дізнатись, чи буде розв'язок задачі Коші єдиним взагалі і за якими умовами
 	
 	\begin{lemma}
- Функція $y(x)$ - розв'язок задачі Коші $\iff$ $y(x)$ задовільняє інтегральному рівнянню:
-	\begin{align*}
-	y(x) = y_0 + \int_{x_0}^x f(t,y(t))\,dt
-	\end{align*}
-	Причому $y: I \subset I_a \rightarrow I_b$ - диференційована
+ Функція $y(x)$ -- розв'язок задачі Коші $\iff$ $y(x)$ задовольняє інтегральному рівнянню $\displaystyle y(x) = y_0 + \int_{x_0}^x f(t,y(t))\,dt$.
 	\end{lemma}
 	
 	\begin{proof}
-	\rightproof Дано: $y(x)$ - розв'язок задачі Коші, тобто\\
-	$\displaystyle y'(t) = f(t,y(t)) \Rightarrow \int_{x_0}^x y'(t)\,dt = \int_{x_0}^x f(t,y(t))\,dt \Rightarrow y(x) = y_0 +  \int_{x_0}^x f(t,y(t))\,dt$
-	\\
-	\\
-	\leftproof Дано: $y(x)$ - розв'язок інтегрального рівняння\\
-	Продиференціюємо з обох сторін:\\
-	$\displaystyle y'(x) = 0 + f(x,y(x)) = f(x,y(x))$\\
-	Більш того, $\displaystyle y(x_0) = y_0 + \int_{x_0}^{x_0} f(t,y(t))\,dt = y_0$\\
-	Отримали, що $y(x)$ - розв'язок нашої задачі Коші 
+	\rightproof Дано: $y(x)$ -- розв'язок задачі Коші, тобто\\
+	$\displaystyle y'(t) = f(t,y(t)) \implies \int_{x_0}^x y'(t)\,dt = \int_{x_0}^x f(t,y(t))\,dt \implies y(x) = y_0 +  \int_{x_0}^x f(t,y(t))\,dt$.
+	\bigskip \\
+	\leftproof Дано: $y(x)$ -- розв'язок інтегрального рівняння. Продиференціюємо з обох сторін:\\
+	$\displaystyle y'(x) = 0 + f(x,y(x)) = f(x,y(x))$.\\
+	Більш того, $\displaystyle y(x_0) = y_0 + \int_{x_0}^{x_0} f(t,y(t))\,dt = y_0$. Отримали, що $y(x)$ -- розв'язок нашої задачі Коші.
 	\end{proof}
-	Ця лема знадобиться, оскільки розв'язок задачі Коші $y_*(x)$ ми будемо знаходити як границю рівномірно збіжної послідовності функцій \\$\{y_n(x), n \geq 1\}$ так, що:\\
-	$\displaystyle y_n(x) = y_0 + \int_{x_0}^x f(t,y_{n-1}(t))\,dt$  $\forall n \in \mathbb{N}$\\
-	$y_0(x) \equiv y_0$
+	
+	Ця лема знадобиться, оскільки розв'язок задачі Коші $y_*(x)$ ми будемо знаходити як границю рівномірно збіжної послідовності функцій $\{y_n(x), n \geq 1\}$ так, що:\\
+	$\displaystyle y_n(x) = y_0 + \int_{x_0}^x f(t,y_{n-1}(t))\,dt$  $\forall n \in \mathbb{N}$;\\
+	$y_0(x) \equiv y_0$.
 	
 	\begin{theorem}[Теорема Пікара]
-	Задана функція $f: \Pi \rightarrow \mathbb{R}$ така, що $f \in C(\Pi)$ та під умовою Ліпшиця відносно $y$\\
-	Тоді задача Коші містить \underline{єдиний} розв'язок $y_*(x)$ на інтервалі \\ $I_h = [x_0 - h, x_0 + h]$
+	Задана функція $f\colon \Pi \to \mathbb{R}$ така, що $f \in C(\Pi)$ та задовольняє умові Ліпшиця відносно $y$. Тоді задача Коші містить єдиний розв'язок $y_*(x)$ на інтервалі $I_h = [x_0 - h, x_0 + h]$.
 	\end{theorem}
 	
 	\begin{proof}
-	\textbf{Частина 1. Існування}\\
-	1) Доведемо \textbf{(MI)}, що всі $y_n$ знаходяться в прямокутнику $I_h \cross I_b \subset \Pi$, тобто $\forall n \geq1: \forall x \in I_h: |y_n(x)-y_0| \leq b$\\
-	$n = 1 \Rightarrow \displaystyle |y_1(x) - y_0(x)| = \abs{y_0 + \int_{x_0}^x f(t,y_0)\,dt - y_0} \leq \abs{\int_{x_0}^x |f(t,y_0)|\,dt} \leq$\\
-	Оскільки $f \in C(\Pi)$, то вона взагалі є обмеженою, тому $\exists M = \displaystyle \max_{(x,y)\in \Pi} |f(x,y)|$\\
-	$\displaystyle \leq M |x-x_0| \leq Mh \leq M \frac{b}{M}=b$\\
-	Нехай умова виконується для фіксованого $n$. Перевіримо твердження для $n+1$:\\
-	$\displaystyle |y_{n+1}(x)-y_0| = \abs{\int_{x_0}^x f(t,y_n(t))\,dt} \leq \abs{\int_{x_0}^x |f(t,y_{n}(t))|\,dt} \leq$\\
-	За припущенням, $y_n$ вже лежить в заданому прямокутнику. Тому $f(x,y_n(x))$ є також обмеженою\\
-	$\displaystyle \leq M|x-x_0| \leq Mh \leq M\frac{b}{M}= b$\\
-	Отже, всі $y_n$ лежать в прямокутнику $I_h \cross I_b$\\
-	\\
-	2) Доведемо, що послідовність $\{y_n(x), n \geq 1\}$ рівномірно збігається\\
-	Зауважимо, що\\
-	$y_n(x) = y_0 + (y_1(x) - y_0) + (y_2(x)-y_1(x)) + \cdots + (y_n(x)-y_{n-1}(x))$\\
-	Розглянемо ряд $\displaystyle \sum_{k=1}^{\infty} \left(y_k(x) -y_{k-1}(x)\right)$. \\
-	Спробуємо довести збіжність критерієм Вейерштрасса, тобто ми оцінимо $|y_k(x) - y_{k-1}(x)|$ $\forall x \in I_h$ таким чином, щоб було число\\
-	$\displaystyle |y_1(x) - y_0(x)| \overset{\textrm{п. 1)}}{\leq} M|x-x_0| = M \frac{|x-x_0|}{1!}$\\
-	$\displaystyle |y_2(x) - y_1(x)| = \abs{\int_{x_0}^x f(t,y_1(t)) - f(t,y_0(t))\,dt} \leq \abs{\int_{x_0}^x \abs{f(t,y_1(t)) - f(t,y_0(t))}\,dt} \leq \\ \overset{\textrm{умова Ліпшиця}}{\leq} \abs{\int_{x_0}^x L|y_1(t)-y_0|\,dt} \leq \abs{\int_{x_0}^x LM|t-x_0|\,dt} = ML\frac{|x-x_0|^2}{2!}$\\
-	\\
-	...\\
-	\\
-	Використовуючи \textbf{MI}, отримаємо таку оцінку $\forall k \geq 1$ і $\forall x \in I_h$:\\
-	$\displaystyle |y_k(x) - y_{k-1}(x)| \leq ML^{k-1} \frac{|x-x_0|^k}{k!} \leq ML^{k-1} \frac{h^k}{k!}$\\
-	Отримаємо мажорантний ряд $\displaystyle \sum_{k=1}^{\infty} ML^{k-1} \frac{h^k}{k!}$. Перевіримо на збіжність:\\
-	$\displaystyle \sum_{k=1}^{\infty} ML^{k-1} \frac{h^k}{k!} = \sum_{k=1}^{\infty} \frac{M}{L} \frac{(Lh)^k}{k!} = \frac{M}{L} \left(e^{Lh}-1\right)$ - збіжний\\
-	Отже, підсумовуючи, отримаємо, що $\displaystyle y_n(x)^\rightarrow_\rightarrow y_*(x)$
-	\bigskip \\
-	3) Доведемо, що $\displaystyle y_*(x) = \lim_{n \to \infty} y_n(x)$ також знаходиться в прямокутнику $I_h \cross I_b$\\
-	Згідно з п.1), можемо отримати, що:\\
-	$\displaystyle |y_*(x) - y_0| = |\lim_{n \to \infty} y_n(x) - y_0| = |\lim_{n \to \infty} (y_n(x) -y_0)| = \lim_{n \to \infty} |y_n(x)-y_0| \leq \\ \leq \lim_{n \to \infty} b = b$\\
-	\bigskip \\
-	4) Доведемо, що $y_*(x) \in C(\Pi)$ та є розв'язком задачі Коші\\
-	Оскільки $y_0(x), f(x,y) \in C(\Pi)$, то $f(x,y_0(x)) \in C(\Pi)$\\
-	Тоді $y_1(x) \in C(\Pi)$, а за \textbf{МІ}, $y_n(x) \in C(\Pi)$. І нарешті, через рівномірну збіжність, $y_*(x) \in C(\Pi)$\\
-	\\
-	$\displaystyle y_*(x) = \lim_{n \to \infty} y_n(x) =\lim_{n \to \infty} \left(y_0 + \int_{x_0}^x f(t,y_{n-1}(t))\,dt \right) = y_0 + \int_{x_0}^x f(t, \lim_{n \to \infty} y_{n-1}(t))\,dt = \\ = y_0 + \int_{x_0}^x f(t, y_*(t))\,dt$\\
-	Тоді за лемою, $y_*(x)$ - розв'язок задачі Коші. \textbf{Кінець частини 1.}\\
-	\bigskip \\
-	\textbf{Частина 2. Єдиність}\\
-	!Вважаємо, що існують два розв'язки задачі Коші: $y_*(x), y_{**}(x)$.\\
-	Розглянемо функцію $z(x) = y_{**}(x) - y_{*}(x)$ та оцінимо її:\\
-	$\displaystyle |z(x)| = \abs{\int_{x_0}^x f(t,y_{**}(t))-f(t,y_{*}(t))\,dt} \leq \abs{\int_{x_0}^x \abs{f(t,y_{**}(t))-f(t,y_{*}(t))} \,dt} \leq \abs{\int_{x_0}^x L\abs{y_{**}(t) - y_{*}(t)} \,dt} = \abs{\int_{x_0}^x L\abs{z(t)} \,dt} \leq LM'|x-x_0| \leq LM'h$
-	(TODO) 
+	I. \textit{Існування}.\\
+	Доведення інсування розіб'ємо на чотири основні кроки. Доведемо їх.
+	\begin{enumerate}[wide=0pt,label={\arabic*)}]
+	\item \textit{Всі $y_n$ знаходяться в прямокутнику $I_h \cross I_b \subset \Pi$.} \\
+	Тобто хочемо показати, що $\forall n \geq 1: \forall x \in I_h: |y_n(x)-y_0| \leq b$. Доведення буде за МІ.\\
+	\textit{База індукції}: $n = 1 \implies \displaystyle |y_1(x) - y_0(x)| = \abs{y_0 + \int_{x_0}^x f(t,y_0)\,dt - y_0} \leq \abs{\int_{x_0}^x |f(t,y_0)|\,dt} \boxed{\leq}$\\
+	Оскільки $f \in C(\Pi)$, то вона взагалі є обмеженою, тому $\exists M = \displaystyle \max_{(x,y)\in \Pi} |f(x,y)|$.\\
+	$\displaystyle \boxed{\leq} M |x-x_0| \leq Mh \leq M \frac{b}{M}=b$.\\
+	\textit{Припущення індукції}: умова виконується для фіксованого $n$.\\
+	\textit{Крок індукції}: перевіримо твердження для $n+1$.\\
+	$\displaystyle |y_{n+1}(x)-y_0| = \abs{\int_{x_0}^x f(t,y_n(t))\,dt} \leq \abs{\int_{x_0}^x |f(t,y_{n}(t))|\,dt} \boxed{\leq}$\\
+	За припущенням МІ, $y_n$ вже лежить в заданому прямокутнику. Тому $f(x,y_n(x))$ також обмежена.\\
+	$\displaystyle \boxed{\leq} M|x-x_0| \leq Mh \leq M\frac{b}{M}= b$.\\
+	Отже, всі $y_n$ лежать в прямокутнику $I_h \cross I_b$. МІ доведено.
+	
+	\item \textit{Послідовність $\{y_n(x), n \geq 1\}$ рівномірно збігається.}\\
+	Зауважимо, що $y_n(x) = y_0 + (y_1(x) - y_0) + (y_2(x)-y_1(x)) + \cdots + (y_n(x)-y_{n-1}(x))$.\\
+	Розглянемо ряд $\displaystyle \sum_{k=1}^{\infty} \left(y_k(x) -y_{k-1}(x)\right)$. Спробуємо довести збіжність критерієм Ваєрштраса, тобто ми оцінимо $|y_k(x) - y_{k-1}(x)|$ $\forall x \in I_h$ таким чином, щоб було число.\\
+	$\displaystyle |y_1(x) - y_0(x)| \overset{\text{1)}}{\leq} M|x-x_0| = M \frac{|x-x_0|}{1!}$.\\
+	$\displaystyle |y_2(x) - y_1(x)| = \abs{\int_{x_0}^x f(t,y_1(t)) - f(t,y_0(t))\,dt} \leq \abs{\int_{x_0}^x \abs{f(t,y_1(t)) - f(t,y_0(t))}\,dt} \leq \\ \overset{\text{умова Ліпшиця}}{\leq} \abs{\int_{x_0}^x L|y_1(t)-y_0|\,dt} \leq \abs{\int_{x_0}^x LM|t-x_0|\,dt} = ML\frac{|x-x_0|^2}{2!}$.\\
+	\vdots \\
+	Методами МІ отримаємо таку оцінку $\forall k \geq 1$ та $\forall x \in I_h$:\\
+	$\displaystyle |y_k(x) - y_{k-1}(x)| \leq ML^{k-1} \frac{|x-x_0|^k}{k!} \leq ML^{k-1} \frac{h^k}{k!}$.\\
+	Отримаємо мажорантний ряд $\displaystyle \sum_{k=1}^{\infty} ML^{k-1} \frac{h^k}{k!}$. Такий ряд буде збіжним. Дійсно,\\
+	$\displaystyle \sum_{k=1}^{\infty} ML^{k-1} \frac{h^k}{k!} = \sum_{k=1}^{\infty} \frac{M}{L} \frac{(Lh)^k}{k!} = \frac{M}{L} \left(e^{Lh}-1\right)$ -- збіжний.\\
+	Отже, підсумовуючи, отримаємо, що $\displaystyle y_n(x)^\rightarrow_\rightarrow y_*(x)$.
+	
+	\item \textit{$\displaystyle y_*(x) = \lim_{n \to \infty} y_n(x)$ також знаходиться в прямокутнику $I_h \cross I_b$.}\\
+	Згідно з 1), можемо отримати ось таку оцінку:\\
+	$\displaystyle |y_*(x) - y_0| = |\lim_{n \to \infty} y_n(x) - y_0| = |\lim_{n \to \infty} (y_n(x) -y_0)| = \lim_{n \to \infty} |y_n(x)-y_0| \leq \lim_{n \to \infty} b = b$.
+	
+	\item \textit{$y_*(x) \in C(\Pi)$ та є розв'язком задачі Коші.}\\
+	Оскільки $y_0(x), f(x,y) \in C(\Pi)$, то $f(x,y_0(x)) \in C(\Pi)$. Тоді $y_1(x) \in C(\Pi)$, а методами МІ доведемо $y_n(x) \in C(\Pi)$. Нарешті, через рівномірну збіжність, $y_*(x) \in C(\Pi)$.\\
+	$\displaystyle y_*(x) = \lim_{n \to \infty} y_n(x) =\lim_{n \to \infty} \left(y_0 + \int_{x_0}^x f(t,y_{n-1}(t))\,dt \right) = y_0 + \int_{x_0}^x f(t, \lim_{n \to \infty} y_{n-1}(t))\,dt = \\ = y_0 + \int_{x_0}^x f(t, y_*(t))\,dt$.\\
+	Тоді за лемою, $y_*(x)$ -- розв'язок задачі Коші.
+	\end{enumerate}
+	
+	II. \textit{Єдиність}.\\
+	!Припустимо, що існують два розв'язки задачі Коші: $y_*(x), y_{**}(x)$. Розглянемо функцію $z(x) = y_{**}(x) - y_{*}(x)$ та оцінимо її:\\
+	$\displaystyle |z(x)| = \abs{\int_{x_0}^x f(t,y_{**}(t))-f(t,y_{*}(t))\,dt} \leq \abs{\int_{x_0}^x \abs{f(t,y_{**}(t))-f(t,y_{*}(t))} \,dt} \leq \abs{\int_{x_0}^x L\abs{y_{**}(t) - y_{*}(t)} \,dt} = \abs{\int_{x_0}^x L\abs{z(t)} \,dt} \leq LM'|x-x_0| \leq LM'h$.\\
+	(TODO: дописати пруф.) 
 \end{proof}
 	\newpage
 	
 	
-	\section{Диференціальні рівняння n-го порядку}
+	\section{Диференціальні рівняння $n$-го порядку}
 	\subsection{Основні означення}
 	\begin{definition}
- Задана область $D \subset \mathbb{R}^{n+1}$ - відкрита та однозв'язна; функція $f: D \rightarrow \mathbb{R}$\\
-	\textbf{Диференціальним рівнянням n-го порядку} називається наступний вираз:
+ Задана область $D \subset \mathbb{R}^{n+1}$ -- відкрита та однозв'язна; функція $f\colon D \to \mathbb{R}$.\\
+	\textbf{Диференціальним рівнянням $n$-го порядку} називається таке рівняння:
 	\begin{align}
+	\label{n_order_DE}
+	\
 	y^{(n)} = f(x,y,y',\cdots,y^{(n-1)})
 	\end{align}
 	\end{definition}
 
 	\begin{definition}
- \textbf{Розв'язком рівняння} (3) називається функція \\ $y= \varphi(x)$, що визначений та диференційований $n$ разів на відкритому інтервалі $I \subset \mathbb{R}$, всі похідні якого містяться в області $D$ та задовольняє рівнянню (3)
+ \textbf{Розв'язком рівняння} \eqref{n_order_DE} називається функція $y= \varphi(x)$, що визначений та диференційований $n$ разів на відкритому інтервалі $I \subset \mathbb{R}$, всі похідні якого містяться в області $D$ та задовольняє рівнянню \eqref{n_order_DE}.
  	\end{definition}
  	
 	\begin{example}
- Задане диференціальне рівняння: $y'' = e^x$\\
-	Розв'язком буде функція $\varphi(x) = e^x + C_0x + C_1$ на інтервалі $I = \mathbb{R}$
+ Задане диференціальне рівняння: $y'' = e^x$. Розв'язком буде наступа функція $\varphi(x) = e^x + C_0x + C_1$ на інтервалі $I = \mathbb{R}$.
 	\end{example}
 	
 	\begin{definition}
- Задана область $D \subset \mathbb{R}^{n+1}$ - відкрита та однозв'язна; точка $(x_0, y_0, y_0', \cdots, y_0^{(n-1)}) \in D$\\
-	\textbf{Задачею Коші з початковою умовою} $(x_0, y_0, y_0', \cdots, y_0^{(n-1)})$ називається система рівнянь:
+ Задана область $D \! \subset \! \mathbb{R}^{n+1}$ -- відкрита, однозв'язна; точка $(x_0, y_0, y_0', \dots, y_0^{(n-1)}) \in D$.\\
+	\textbf{Задачею Коші з початковою умовою} $(x_0, y_0, y_0', \dots, y_0^{(n-1)})$ називається система рівнянь:
 	\begin{align*}
 	\begin{cases}
 	\displaystyle y^{(n)} = f(x,y,y',\cdots,y^{(n-1)})\\
 	y(x_0)=y_0\\
 	y'(x_0) = y_0'\\
-	\cdots\\
+	\vdots\\
 	y^{(n-1)}(x_0) = y_0^{(n-1)}
 	\end{cases}
 	\end{align*}
-	\textbf{Розв'якзом} називають такий розв'язок функції першого рівняння $\\y=\varphi(x)$, для якого $\varphi(x_0)=y_0$, $\varphi'(x_0)=y_0'$, $\cdots$, $\varphi^{(n-1)}(x_0)=y_0^{(n-1)}$
+	\textbf{Розв'якзом задачі Коші} називають розв'язок $y = \varphi(x)$ першого рівняння, для якого $\varphi(x_0)=y_0$, $\varphi'(x_0)=y_0'$, $\dots$, $\varphi^{(n-1)}(x_0)=y_0^{(n-1)}$.
 	\end{definition}
 	
 	\begin{example}
+	Маємо задачу Коші
  	$\begin{cases}
 	y'' = e^x\\
 	y(0) = 1\\
 	y'(0) = 1
-	\end{cases}$\\
-	Вже отримали, що $y = e^x + C_0 x + C_1$. Тоді якщо знайти всі похідні та підставити значення, то отримаємо:\\
+	\end{cases}$. Уже отримали, що $y = e^x + C_0 x + C_1$. Тоді якщо знайти всі похідні та підставити значення, то отримаємо:\\
 	$\begin{cases}
 	e^0 + C_1 = 1\\
 	e^0 + C_0 = 1\\
-	\end{cases} \Rightarrow C_0 = 0, C_1 = 0
-	$. Отже, $y=e^x$ - розв'язок задачі Коші
+	\end{cases} \implies C_0 = 0, C_1 = 0
+	$. Отже, $y=e^x$ - розв'язок задачі Коші.
+	\end{example}
+	
+	\subsection{Деякі типи рівнянь, що допускають зниження порядку}
+	\subsubsection{Рівняння, в якої немає залежності від $y$ в правій частині}
+	Розглянемо диференціальне рівняння такого типу:
+	\begin{align*}
+	y^{(n)} = f(x,y',y'',\dots, y^{(n-1)})
+	\end{align*}
+	Це рівняння, де праворуч немає залежності від $y$. Для нього проводиться така заміна: \\ $
+	z(x) = y'(x) \implies y'' = z, \dots, y^{(n)} = z^{(n-1)}$.	\\
+	Отримаємо таке рівняння:\\
+	$z^{(n-1)}=f(x,z,z',\dots,z^{(n-2)})$.\\
+	Ну а далі як пощастить з типажом рівняння. Загального рецепту нема в даному випадку.
+	\bigskip \\
+	Також можемо розглянути рівняння такого типу:
+	\begin{align*}
+	y^{(n)} = f(x,y^{(k)},y^{(k+1)},\dots, y^{(n-1)})
+	\end{align*}
+	Це рівняння, де праворуч нема залежності від $y,y',\dots,y^{(k)}$. Для нього проводиться така заміна: \\
+	$z(x) = y^{(k)}(x)$.\\	
+	Отримаємо таке рівняння:\\
+	$z^{(n-k)}=f(x,z,z',\dots,z^{(n-k-1)})$.\\
+	Аналогічно далі, як буде, як пощастить.
+	
+	\begin{example}
+	Розв'язати рівняння $xy^{(4)} - y'''=0$.\\
+	Проведемо заміну: $z = y''' \implies z' = y^{(4)}$. У результаті отримаємо:\\
+	$xz'-z=0 \implies \displaystyle \frac{dz}{z} = \frac{dx}{x} \implies z = C_1x$\\
+	$y''' = C_1x \implies \displaystyle y'' = C_1 \frac{x^2}{2} + C_2 \implies y' = C_1 \frac{x^3}{3!} + C_2x + C_3 \implies y = C_1 \frac{x^4}{4!} + C_2 \frac{x^2}{2!}+ C_3x + C_4$.\\
+	Але $C_1,C_2,C_3,C_4$ -- константи, тому можна записати іншим шляхом:\\
+	$y = C_1x^4 + C_2x^2 + C_3x + C_4$.
+	\end{example}
+	
+	\subsubsection{Рівняння, в якої немає залежності від $x$ в правій частині}
+	Розглянемо диференціальне рівняння такого типу:
+	\begin{align*}
+	y^{(n)} = f(y,y',y'',\dots, y^{(n-1)})
+	\end{align*}
+	Це рівняння, де праворуч нема залежності від $x$. Для нього проводиться така заміна: \\
+	$y' = p(y)$.\\
+	Далі рахуємо другі, треті і т.д. похідні, але достатньо часто буде другої:\\
+	$y'' = p'(y)y'=p'(y)p(y)$.\\
+	В результаті чого ми отримаємо рівняння від функції $p(y)$ $(n-1)$-го порядку.
+	
+	\begin{example}
+ Розв'язати рівняння: $\displaystyle y'' = \frac{1}{4\sqrt{y}}$.\\
+	Проведемо заміну: $y'=p(y) \implies y'' = p'(y)y' = p'p$. Тоді отримаємо:\\
+	$\displaystyle p'p = \frac{1}{4\sqrt{y}} \implies \frac{dp}{dy} p = \frac{1}{4\sqrt{y}} \implies p\,dp = \frac{dy}{4\sqrt{y}} \implies \frac{p^2}{2} = \frac{\sqrt{y}}{2} + C_1 \implies \\ p = \pm \sqrt{\sqrt{y}+C_1}$\\
+	$\displaystyle y' = \pm \sqrt{\sqrt{y}+C_1} \implies \frac{dy}{\sqrt{\sqrt{y}+C_1}} = \pm dx \implies \dots \implies \frac{4}{3}\sqrt{(\sqrt{y}+C_1)^3} - 4C_1\sqrt{\sqrt{y}+C_1} = C_2 \pm x$
+	\end{example}
+	
+	\subsubsection{Рівняння, в якої лише залежність від похідної на два порядка ниже за похідну в ліві частині}
+	Розглянемо диференціальне рівняння такого типу:
+	\begin{align*}
+	y^{(n)} = f(y^{(n-2)})
+	\end{align*}
+	Проведемо таку заміну: \\
+	$z(x) = y^{(n-2)}(x)$.\\
+	Тоді буде таке рівняння:\\
+	$z'' = f(z)$.\\
+	Домножимо обидві частини на $2z'$ і позначимо за $\displaystyle \int f(z)\,dz = F(z)$. Отримаємо:\\
+	$2z'z'' = 2z'f(z)$\\
+	$((z')^2)' = (2F(z))'$\\
+	$(z')^2 = 2F(z) + C_1 \implies z' = \displaystyle \pm \sqrt{F(z)+C_1}$.\\
+	Далі вже як піде.
+		
+	\begin{example}
+ Розв'язати рівняння: $\varphi'' = -k \sin \varphi$, де $\varphi = \varphi(t)$\\
+	$2 \varphi' \varphi'' = -2k \varphi' \sin \varphi$.\\
+	$((\varphi')^2)' = 2k(\cos \varphi)'$\\
+	$(\varphi')^2 = 2k\cos \varphi + C_1$\\
+	Нехай $C_1 = 0$ (для спрощення). Тоді:\\
+	$\varphi' = \pm \sqrt{2k\cos \varphi} \implies \displaystyle \frac{d\varphi}{\sqrt{2k \cos \varphi}} = \pm dt \implies t = \pm \frac{1}{\sqrt{2k}} \int \frac{d\varphi}{\sqrt{\cos\varphi}} + C_2$.
 	\end{example}
 	
 	\subsection{Задача Коші}
 	\begin{definition}
- Задана область $D \subset \mathbb{R}^{n+1}$ та функція $f: D \rightarrow 	\mathbb{R}$\\
+ Задана область $D \subset \mathbb{R}^{n+1}$ та функція $f\colon D \to 	\mathbb{R}$\\
 	Така функція \textbf{задовольняє умові Ліпшиця відносно} $y,y',\cdots,y^{(n-1)}$, якщо
 	\begin{align*}
-	\exists L>0: \abs{f(x,y_1, y'_1,\dots, y^{(n-1)}_1) - f(x,y_2, y'_2,\dots, y^{(n-1)}_2)} \leq \\ \leq L\left(\abs{y_1-y_2}+\abs{y'_1-y'_2}+\dots+\abs{y^{n-1}_1-y^{(n-1)}_2}\right)
+	\exists L>0: \abs{f(x,y_1, y'_1,\dots, y^{(n-1)}_1) - f(x,y_2, y'_2,\dots, y^{(n-1)}_2)} \leq L\left(\abs{y_1-y_2}+\abs{y'_1-y'_2}+\dots+\abs{y^{n-1}_1-y^{(n-1)}_2}\right)
 	\end{align*}	
 	\end{definition}
 	\begin{proposition}
- Задан прямокутник $\Pi = I_a \cross \Pi_b \subset \mathbb{R}^{n+1}$. Відомо, що функція $f(x,y,y',\cdots,y^{(n-1)})$ має всі частні неперервні похідні в $\Pi$. Тоді $f$ задовільняє умові Ліпшиця, причому $L=\max\{L_1,L_2, \dots, L_{n-1}\}$, $\displaystyle L_i = \sup_{(x,y,y',\cdots,y^{(n-1)})} \abs{f'_{y^{(i-1)}} (x,y,y',\dots,y^{(n-1)})}$
+ Заданий прямокутник $\Pi = I_a \cross \Pi_b \subset \mathbb{R}^{n+1}$. Відомо, що функція $f(x,y,y',\dots,y^{(n-1)})$ має всі частинні неперервні похідні в $\Pi$. Тоді $f$ задовольняє умові Ліпшиця, причому \\ $L=\max\{L_1,L_2, \dots, L_{n-1}\}$, \qquad $\displaystyle L_i = \sup_{(x,y,y',\dots,y^{(n-1)})} \abs{f'_{y^{(i-1)}} (x,y,y',\dots,y^{(n-1)})}$.
 	\end{proposition}
 
 	\begin{proof}
-	Ми розглянемо функціяю $g: [0,1] \rightarrow \mathbb{R}$ таку, що:\\
+	Ми розглянемо функціяю $g\colon [0,1] \to \mathbb{R}$ таку, що \\
 	$\displaystyle g(t) = f(x, (1-t)y_1 + ty_2, (1-t)y'_1+ty'_2, \dots, (1-t)y^{(n-1)}_1+ty^{(n-1)}_2)$\\
 	Зокрема отримаємо:\\
 	$g(0) = f(x,y_1, y'_1, \dots, y^{(n-1)}_1)$\\
 	$g(1) = f(x,y_2, y'_2, \dots, y^{(n-1)}_2)$\\
-	Часткові похідні неперервні, тому $g \in C^1([0,1])$. За теоремою Лагранжа,\\
-	$\exists \xi \in (0,1): g(0) - g(1) = -g'(\xi)$\\
-	де $\displaystyle g'(t) = \frac{\partial f}{\partial x} \frac{dx}{dt} +  \frac{\partial f}{\partial u} \frac{du}{dt} + \dots +  \frac{\partial f}{\partial u^{(n-1)}} \frac{du^{(n-1)}}{dt} \boxed{=}$\\
+	Частинні похідні неперервні, тому $g \in C^1([0,1])$. За теоремою Лагранжа,\\
+	$\exists \xi \in (0,1): g(0) - g(1) = -g'(\xi)$, де в нашому випадку \\
+	$\displaystyle g'(t) = \frac{\partial f}{\partial x} \frac{dx}{dt} +  \frac{\partial f}{\partial u} \frac{du}{dt} + \dots +  \frac{\partial f}{\partial u^{(n-1)}} \frac{du^{(n-1)}}{dt} \boxed{=}$\\
 	$u = (1-t)y_1+ty_2$, $\dots$, $u^{(n-1)} = (1-t)y^{(n-1)}_1 + ty^{(n-1)}_2$\\
-	$\displaystyle \boxed{=} \frac{\partial f}{\partial u} (y_2-y_1) + \dots +  \frac{\partial f}{\partial u^{(n-1)}} (y^{(n-1)}_2-y^{(n-1)}_1)$\\
+	$\displaystyle \boxed{=} \frac{\partial f}{\partial u} (y_2-y_1) + \dots +  \frac{\partial f}{\partial u^{(n-1)}} (y^{(n-1)}_2-y^{(n-1)}_1)$.\\
 	Залишилось зробити оцінку:\\
-	$|g(0) - g(1)| = |g'(\xi)| \leq |L_1(y_2-y_1)+\dots+L_{n-1}(y^{(n-1)}_2-y^{(n-1)}_1)| \leq \\ \leq |L_1(y_2-y_1)| +\dots+ |L_{n-1}(y^{(n-1)}_2-y^{(n-1)}_1)| \leq L\left(|y_1-y_2|+\dots+|y^{(n-1)}_2-y^{(n-1)}_1|\right)$ 
+	$|g(0) - g(1)| = |g'(\xi)| \leq |L_1(y_2-y_1)+\dots+L_{n-1}(y^{(n-1)}_2-y^{(n-1)}_1)| \leq \\ \leq |L_1(y_2-y_1)| +\dots+ |L_{n-1}(y^{(n-1)}_2-y^{(n-1)}_1)| \leq L\left(|y_1-y_2|+\dots+|y^{(n-1)}_2-y^{(n-1)}_1|\right)$. 
 \end{proof}
 	
 	Тепер розглянемо задачу Коші:
@@ -583,88 +653,16 @@
 	\displaystyle y^{(n)} = f(x,y,y',\cdots,y^{(n-1)})\\
 	y(x_0)=y_0\\
 	y'(x_0) = y_0'\\
-	\cdots\\
+	\vdots \\
 	y^{(n-1)}(x_0) = y_0^{(n-1)}
 	\end{cases}
 	\end{align*}
-	де $f: \Pi = I_a \cross \Pi_b \rightarrow \mathbb{R}$\\
-	$I_a = [x_0 - a, x_0 + a], \\ \Pi_b = [y_0 -b, y_0+b] \cross [y_0'-b,y_0'+b] \cross \cdots \cross [y_0^{(n-1)}-b, y_0^{(n-1)}+b]$
+	де функція $f\colon \Pi = I_a \cross \Pi_b \to \mathbb{R}$. У нашому випадку $I_a = [x_0 - a, x_0 + a], \\ \Pi_b = [y_0 -b, y_0+b] \cross [y_0'-b,y_0'+b] \cross \cdots \cross [y_0^{(n-1)}-b, y_0^{(n-1)}+b]$.
 	
 	\begin{theorem}[Теорема Пікара]
-	Задана функція $f: \Pi \rightarrow \mathbb{R}$ така, що $f \in C(\Pi)$ та під умовою Ліпшиця відносно $y,y',\cdots,y^{(n-1)}$\\
-	Тоді задача Коші містить єдиний розв'язок $y_*(x)$ на інтервалі $\\I_h = [x_0-h, x_0+h]$\\
-	\textit{Доведення проводиться аналогічним чином, як з рівнянням першого порядку}
+	Задана функція $f\colon \Pi \to \mathbb{R}$ така, що $f \in C(\Pi)$ та задовольняє умові Ліпшиця відносно $y,y',\cdots,y^{(n-1)}$. Тоді задача Коші містить єдиний розв'язок $y_*(x)$ на інтервалі $I_h = [x_0-h, x_0+h]$.\\
+	\textit{Доведення проводиться аналогічним чином, як з рівнянням першого порядку.}
 	\end{theorem}
-	
-	\subsection{Деякі типи рівнянь, що допускають зниження порядку}
-	\subsubsection{Рівняння, в якої немає залежності від $y$ в правій частині}
-	Тобто в нас рівняння буде такого типу:
-	\begin{align*}
-	y^{(n)} = f(x,y',y'',\dots, y^{(n-1)})
-	\end{align*}
-	Для нього проводиться наступна заміна: $z(x) = y'(x)$. Тоді\\
-	$y'' = z, \dots, y^{(n)} = z^{(n-1)}$\\
-	Отримаємо наступне рівняння:\\
-	$z^{(n-1)}=f(x,z,z',\dots,z^{(n-2)})$\\
-	Ну а далі як пощастить з типажом рівняння
-	\bigskip \\
-	Також можемо розглянути рівняння такого типу:
-	\begin{align*}
-	y^{(n)} = f(x,y^{(k)},y^{(k+1)},\dots, y^{(n-1)})
-	\end{align*}
-	Для нього проводиться наступна заміна: $z(x) = y^{(k)}(x)$\\
-	Тоді отримаємо наступне рівняння:\\
-	$z^{(n-k)}=f(x,z,z',\dots,z^{(n-k-1)})$\\
-	І т.д.
-	
-	\begin{example}
- Розв'язати рівняння: $xy^{(4)} - y^{'''}=0$\\
-	Заміна: $z = y''' \Rightarrow z' = y^{(4)}$\\
-	$xz'-z=0 \Rightarrow \displaystyle \frac{dz}{z} = \frac{dx}{x} \Rightarrow z = C_1x$\\
-	$y''' = C_1x \Rightarrow \displaystyle y'' = C_1 \frac{x^2}{2} + C_2 \Rightarrow y' = C_1 \frac{x^3}{3!} + C_2x + C_3 \Rightarrow \\ \Rightarrow y = C_1 \frac{x^4}{4!} + C_2 \frac{x^2}{2!}+ C_3x + C_4$\\
-	Але $C_1,C_2,C_3,C_4$ - константи, тому можна записати іншим шляхом:\\
-	$y = C_1x^4 + C_2x^2 + C_3x + C_4$
-	\end{example}
-	
-	\subsubsection{Рівняння, в якої немає залежності від $x$ в правій частині}
-	Тобто в нас рівняння буде такого типу:
-	\begin{align*}
-	y^{(n)} = f(y,y',y'',\dots, y^{(n-1)})
-	\end{align*}
-	Проведемо таку заміну: $y' = p(y)$\\
-	Далі рахуємо другі, треті і т.д. похідні, але достатньо часто буде другої:\\
-	$y'' = p'(y)y'=p'(y)p(y)$\\
-	В результаті чого ми отримаємо рівняння від функції $p(y)$ $(n-1)$-го порядку
-	
-	\begin{example}
- Розв'язати рівняння: $\displaystyle y'' = \frac{1}{4\sqrt{y}}$\\
-	Заміна: $y'=p(y) \Rightarrow y''=p'(y)y'=p'p$\\
-	$\displaystyle p'p = \frac{1}{4\sqrt{y}} \Rightarrow \frac{dp}{dy} p = \frac{1}{4\sqrt{y}} \Rightarrow p\,dp = \frac{dy}{4\sqrt{y}} \Rightarrow \frac{p^2}{2} = \frac{\sqrt{y}}{2} + C_1 \Rightarrow \\ p = \pm \sqrt{\sqrt{y}+C_1}$\\
-	$\displaystyle y' = \pm \sqrt{\sqrt{y}+C_1} \Rightarrow \frac{dy}{\sqrt{\sqrt{y}+C_1}} = \pm dx \Rightarrow \dots \\ \Rightarrow \frac{4}{3}\sqrt{(\sqrt{y}+C_1)^3} - 4C_1\sqrt{\sqrt{y}+C_1} = C_2 \pm x$
-	\end{example}
-
-	
-	\subsubsection{Рівняння тип 3}
-	Буде нехай таке рівняння:
-	\begin{align*}
-	y^{(n)} = f(y^{(n-2)})
-	\end{align*}
-	Проведемо наступну заміну: $z(x) = y^{(n-2)}(x)$\\
-	Тоді буде таке рівняння:\\
-	$z'' = f(z)$\\
-	Домножимо обидві частини на $2z'$ і нехай $\displaystyle \int f(z)\,dz = F(z)$\\
-	$2z'z'' = 2z'f(z)$\\
-	$((z')^2)' = (2F(z))'$\\
-	$(z')^2 = 2F(z) + C_1 \Rightarrow z' = \displaystyle \pm \sqrt{F(z)+C_1}$ І т.д.
-	
-	\begin{example}
- Розв'язати рівняння: $\varphi'' = -k \sin \varphi$, де $\varphi = \varphi(t)$\\
-	$2 \varphi' \varphi'' = -2k \varphi' \sin \varphi$\\
-	$((\varphi')^2)' = 2k(\cos \varphi)'$\\
-	$(\varphi')^2 = 2k\cos \varphi + C_1$\\
-	Нехай $C_1 = 0$ (для спрощення). Тоді:\\
-	$\varphi' = \pm \sqrt{2k\cos \varphi} \Rightarrow \displaystyle \frac{d\varphi}{\sqrt{2k \cos \varphi}} = \pm dt \Rightarrow t = \pm \frac{1}{\sqrt{2k}} \int \frac{d\varphi}{\sqrt{cos\varphi}} + C_2$
-	\end{example}
 	\newpage
 	
 	\section{Лінійні диференціальні рівняння}
@@ -699,7 +697,7 @@
 	Всі вони є неперервними функціями на $\Pi = I_a \cross \Pi_b$, тому що \\$a_0,\dots,a_{n-1} \in C(I), I_a \subset I$, $\Pi_b \subset \mathbb{R}^n$ - довільний паралелепіпед навколо точки умов Коші. Отже, функція під умовою Ліпшиця. А значить, спрацьовує теорема Пікара 
 \end{proof}
 
-	Визначимо оператор $L: C^n(I) \rightarrow C(I)$ такий, що:
+	Визначимо оператор $L\colon C^n(I) \to C(I)$ такий, що:
 	\begin{align*}
 	(Ly)(x) = y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y
 	\end{align*}
@@ -752,7 +750,7 @@
 	
 	\begin{definition}
  Задана система функцій $\{f_1, \dots, f_n\} \in C^{(n-1)}(I)$\\
-	Визначимо \textbf{детермінант Вронського} як функцію $W: I \rightarrow \mathbb{R}:$
+	Визначимо \textbf{детермінант Вронського} як функцію $W\colon I \to \mathbb{R}:$
 	\begin{align*}
 W[f_1,f_2,\dots,f_n](x) = 
 \begin{vmatrix} 
@@ -1098,7 +1096,8 @@ $\displaystyle W[y_1, \dots, y_n](x) = W[y_1, \dots, y_n](x_0)e^{\displaystyle -
 Метод розв'язку лінійних однорідних диференціальних рівнянь найчастіше другого порядку саме базується на теоремі Остроградського-Якобі. Спочатку ми вгадуємо перший частковий розв'язок, а далі за формулою шукаємо другий частковий, а згодом можна отримати загальний розв'язок
 \\
 \\
-\textbf{Example} Розв'язати рівняння: $(2x+1)y'' + 4xy' - 4y = 0$\\
+\begin{example}
+Розв'язати рівняння: $(2x+1)y'' + 4xy' - 4y = 0$\\
 Буду розглядувати на інтервалі $\displaystyle x>-\frac{1}{2}$\\
 $\displaystyle y'' + \frac{4x}{2x+1}y' - \frac{4}{2x+1}y = 0$\\
 Можна вгадати, що $y_1 = x$ - частковий розв'язок\\
@@ -1118,7 +1117,7 @@ $\displaystyle \frac{y_2}{x} = -W_1 \frac{e^{-2x}}{x}$\\
 $y_2 = -W_1e^{-2x}$\\
 Отже, остаточно загальний розв'язок:\\
 $y = C_1x + C_2e^{-2x}$
-\bigskip \\
+\end{example}
 
 \subsection{Неоднорідне рівняння}
 Спробуємо розв'язати рівняння
@@ -1223,7 +1222,7 @@ y^{(n)} + a_{n-1}y^{(n-1)}+\dots+a_1y'+a_0y = 0
 де $a_0, a_1,\dots,a_{n-1} \in \mathbb{R}$\\
 \\ 
 \textbf{Деяка інформація про комплекснозначні функції в полі дійсних чисел}\\
-$f: \mathbb{R} \rightarrow \mathbb{C}:$\\
+$f\colon \mathbb{R} \to \mathbb{C}:$\\
 $f(x) = u(x) + iv(x)$, де $u(x) = \Re f(x), v(x) = \Im f(x)$\\
 Похідна від цієї функції визначається таким чином:\\
 $f'(x) = u'(x) + iv'(x)$\\
@@ -1257,13 +1256,14 @@ P(\lambda) = \lambda^n + a_{n-1} \lambda^{n-1} + \dots + a_1 \lambda + a_0
 Згідно з \textbf{Ex. 3.1.3.}, така система є лінійно НЕзалежною. Оскільки $\mu_1, \dots, \mu_n \in \mathbb{R}$ - різні корені характеристичного полінома, то $e^{\mu_1 x}, \dots, e^{\mu_n x}$ - розв'язки нашого рівняння. Отже, за \textbf{Crl. 3.1.7.(2)}, система є фундаментальною 
 \end{proof}
 
-\textbf{Example 1.} Розв'язати рівняння: $y'' - y = 0$\\
+\begin{example}
+Розв'язати рівняння: $y'' - y = 0$\\
 Запишемо характеристичний поліном:\\
 $P(\lambda) = \lambda^2 - 1 = 0$\\
 Звідси $\lambda_1 = 1, \lambda_2 = -1 \overset{Th. 3.3.I.}{\Rightarrow} \{e^x, e^{-x}\}$ - фундаментальна система.
 Отже, $y = C_1e^x + C_2e^{-x}$
-\\
-\bigskip \\
+\end{example}
+
 \textbf{II. Випадок різних (можливо комплексних) коренів}
 \begin{theorem}
  Система $\\ \displaystyle \{e^{\mu_1 x}, \dots, e^{\mu_l x}\} \cup \{e^{\alpha_1 x} \cos \omega_1 x, e^{\alpha_1 x} \sin \omega_1 x, \dots, e^{\alpha_k x} \cos \omega_k x, e^{\alpha_k x} \sin \omega_k x\}$ \\ є фундаментальною системою розв'язків. Причому $\mu_1, \dots, \mu_l \in \mathbb{R}$ та $\lambda_1 = \alpha_1 + i\omega_1, \dots, \lambda_k = \alpha_k + i\omega_k \in \mathbb{C}$ - різні корені характеристичного полінома
@@ -1640,7 +1640,7 @@ $v' \sqrt{t} = H - Dv^2$ - рівняння з відокремленими зм
 \begin{align*}
 M(x,y)\,dx = N(x,y)\,dy = 0
 \end{align*}
-де $M,N: D \to \mathbb{R}, D \subset \mathbb{R}^2, M,N \in C(D)$, а також\\
+де $M,N\colon D \to \mathbb{R}, D \subset \mathbb{R}^2, M,N \in C(D)$, а також\\
 $|M(x,y)|+|N(x,y)| \not\equiv 0$
 
 \begin{definition}
