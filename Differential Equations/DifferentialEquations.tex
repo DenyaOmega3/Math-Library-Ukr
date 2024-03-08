@@ -665,15 +665,16 @@ $\displaystyle z = y^{-1} = \frac{x+1}{2} + \frac{C}{x+1} = \frac{(x+1)^2+2C}{2(
 	\end{theorem}
 	\newpage
 	
-	\section{Лінійні диференціальні рівняння}
+	\section{Лінійні диференціальні рівняння $n$-го порядку}
+	Я вирішив дане диференціальне рівняння $n$-го порядку перемістити в окремий розділ, оскільки тут чимало речей, які треба обережно обговорити.
+	\subsection{Основні означення}
 	\begin{definition}
- $n$ називається рівняння наступного вигляду:
+	Розглянемо ось таке диференціальне рівняння:
 	\begin{align*}
-	y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y=b(x)
+	y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y=b(x),
 	\end{align*}
-	де $a_0, a_1,\dots,a_{n-1},b \in C(I)$, $I \subset \mathbb{R}$\\
-	\textbf{Розв'язком} називається функція $\varphi \in C^{n}(J)$, $J \subset I$, якщо вона задовольняє цьому рівнянню\\
-	Якщо $b(x) \equiv 0$, то рівняння називається \textbf{однорідним}. В інакшому випадку - \textbf{неоднорідним}
+	де $a_0, a_1,\dots,a_{n-1},b \in C(I)$, $I \subset \mathbb{R}$. Це називається \textbf{лінійним рівнянням}.\\
+	При $b(x) \equiv 0$ таке рівняння називають \textbf{однорідним}. В іншому випадку -- \textbf{неоднорідним}.
 	\end{definition}
 	
 	\begin{theorem}
@@ -681,76 +682,50 @@ $\displaystyle z = y^{-1} = \frac{x+1}{2} + \frac{C}{x+1} = \frac{(x+1)^2+2C}{2(
  	\end{theorem}
  	
 	\begin{proof}
-	Отже, є в нас задача Коші:\\
+	Отже, є в нас задача Коші для лінійного диференціального рівняння:\\
 	$\begin{cases}
 	y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y=b(x)\\
 	y(x_0) = y_0\\
-	\cdots\\
+	\vdots\\
 	y^{(n-1)}(x_0) = y_0^{(n-1)}
 	\end{cases}
 	$\\
-	Доведення теореми буде посилатись на теорему Пікара в диф. рівнянні порядку $n$\\
-	Тому перше рівняння системи перепишемо в іншому вигляді:\\
-	$y^{(n)} = b(x) - a_{n-1}(x)y^{(n-1)} - \dots - a_1(x)y' - a_0(x)y$\\
-	Знайдемо всі її часткові похідні:\\
-	$f'_y = -a_0(x)$, $f'_{y'} = -a_1(x)$, $\dots$, $f'_{y^{(n-1)}} = -a_{n-1}(x)$\\
-	Всі вони є неперервними функціями на $\Pi = I_a \cross \Pi_b$, тому що \\$a_0,\dots,a_{n-1} \in C(I), I_a \subset I$, $\Pi_b \subset \mathbb{R}^n$ - довільний паралелепіпед навколо точки умов Коші. Отже, функція під умовою Ліпшиця. А значить, спрацьовує теорема Пікара 
+	Доведення теореми буде посилатись на теорему Пікара в диференціальних рівняннях $n$-го порядку. Тому перше рівняння системи перепишемо в іншому вигляді:\\
+	$y^{(n)} = b(x) - a_{n-1}(x)y^{(n-1)} - \dots - a_1(x)y' - a_0(x)y$.\\
+	Знайдемо всі її частинні похідні:\\
+	$f'_y = -a_0(x), \quad f'_{y'} = -a_1(x), \quad \dots, \quad f'_{y^{(n-1)}} = -a_{n-1}(x)$.\\
+	Всі вони є неперервними функціями на $\Pi = I_a \cross \Pi_b$, тому що $a_0,\dots,a_{n-1} \in C(I), I_a \subset I$, $\Pi_b \subset \mathbb{R}^n$ -- довільний паралелепіпед навколо точки умов Коші. Отже, функція під умовою Ліпшиця. А значить, спрацьовує теорема Пікара.
 \end{proof}
 
-	Визначимо оператор $L\colon C^n(I) \to C(I)$ такий, що:
+	Час підключити трошки лінійної алгебри. По-перше, нам уже відомо, що множина $C^k(I), k \geq 0$ -- підпростір векторного простору функцій. По-друге, установимо оператор $L \colon C^n(I) \to C(I)$, що визначається таким чином:
 	\begin{align*}
 	(Ly)(x) = y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y
 	\end{align*}
-	Тобто наше рівняння перепишеться як: $(Ly)(x) = b(x)$\\
-	\begin{lemma}
- Множина $C^{k}(I)$ є лінійним простором, для якого:
+	Наважко буде пересвідчитися, що даний оператор буде лінійним. По суті, ми розв'язуємо тепер рівняння:
 	\begin{align*}
-	(f_1+f_2)(x) = f_1(x) + f_2(x)\\
-	(\alpha f)(x) = \alpha f(x), \alpha \in \mathbb{R}
+	(Ly)(x) = b(x)
 	\end{align*}
-	\end{lemma}
-	
-	\begin{lemma}
- 	Оператор $L$ є лінійним
- 	\end{lemma}
-	
-	\begin{proof}
-	\begin{remark}
- $Ly \in C(I)$
- \end{remark}
-	Доведення безпосередньо за означенням:\\
-	$L(y+z) = (y+z)^{(n)} + a_{n-1}(x)(y+z)^{(n-1)}+\dots+a_1(x)(y+z)'+a_0(x)(y+z)= \\ =
-	y^{(n)} + z^{(n)} + a_{n-1}(x)y^{(n-1)} + a_{n-1}(x)z^{(n-1)} + \dots+a_1(x)y'+a_1(x)z'+a_0(x)y+a_0(x)z = \\ = Ly + Lz$\\
-	$L(\alpha y) = (\alpha y)^{(n)} + a_{n-1}(x)(\alpha y)^{(n-1)}+\dots+a_1(x)(\alpha y)'+a_0(x)(\alpha y)= \\ = \alpha y^{(n)} + \alpha a_{n-1}(x)y^{(n-1)}+\dots+\alpha a_1(x)y'+\alpha a_0(x)y = \alpha Ly$ 
-	\end{proof}
-	
-	\begin{proposition}
- Множина розв'язків утворюють лінійний простор $= \ker L$
-	\end{proposition}
 
-	\textit{Випливає з означення ядра}
-	
 	\begin{corollary}
  Якщо $y_1, \dots, y_n$ - розв'язки, то $y=C_1y_1+\dots+C_n y_n$ - розв'язок також
  \end{corollary}
 	Тепер перейдемо до розв'язку рівнянь
 	
 	\subsection{Однорідне рівняння}
-	Спробуємо розв'язати рівняння
+	Спробуємо розв'язати однорідне диференціальне рівняння:
 	\begin{align*}
-	y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y = 0
+	y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y = 0,
 	\end{align*}
-	де $a_0, a_1,\dots,a_{n-1}\in C(I)$, $I \subset \mathbb{R}$\\
-	Нагадуємо:\\
-	\begin{definition}
- Система функцій $\{f_1,\dots,f_n\} \subset C^k(I)$ називається:\\
-	- \textbf{лінійно НЕзалежними}, якщо із $\forall x \in I: c_1f_1(x) + \dots + c_n f_n(x) = 0$ випливає, що $c_1 = \dots = c_n = 0$\\
-	- \textbf{лінійно залежними}, якщо $\exists c_1, \dots, c_n: c_1^2 + \dots + c_n^2 \neq 0$, для яких $\forall x \in I: c_1f_1(x) + \dots + c_n f_n(x) = 0$
-	\end{definition}
+	де $a_0, a_1,\dots,a_{n-1}\in C(I)$, $I \subset \mathbb{R}$.\\
+	Мовою лінійної алгебри, нам треба розв'язати рівняння
+	\begin{align*}
+	(Ly)(x) = 0
+	\end{align*}
+	До речі кажучи, $\ker L$ як раз-таки буде задавати множину розв'язків.
 	
 	\begin{definition}
- Задана система функцій $\{f_1, \dots, f_n\} \in C^{(n-1)}(I)$\\
-	Визначимо \textbf{детермінант Вронського} як функцію $W\colon I \to \mathbb{R}:$
+ Задана система функцій $\{f_1, \dots, f_n\} \in C^{(n-1)}(I)$.\\
+	\textbf{Визначником Вронського} називають функцію $W \colon I \to \mathbb{R}$, що задана таким чином:
 	\begin{align*}
 W[f_1,f_2,\dots,f_n](x) = 
 \begin{vmatrix} 
@@ -771,12 +746,11 @@ W[f_1,f_2,\dots,f_n](x) =
 	0 &  0 & 2! & \dots & (k-1)(k-2)x^{k-3} \\
 	\vdots & \vdots & \vdots & \ddots & \vdots \\
 	0 &  0 & 0 & \dots & (k-1)! \\
-\end{vmatrix} = \\ = 1! 2! \dots (k-1)!$
+\end{vmatrix} = 1! \cdot 2! \dots (k-1)!$.
 	\end{example}
 	
 	\begin{example}[Дуже важливий приклад]
-	Нехай є система $\displaystyle \{e^{\lambda_1 x}, e^{\lambda_2 x}, \dots, e^{\lambda_n x}\}$\\
-	Тут $\lambda_1, \lambda_2, \dots, \lambda_n \in \mathbb{R} (\mathbb{C})$ та всі різні. Тоді маємо:\\
+	Задана система $\displaystyle \{e^{\lambda_1 x}, e^{\lambda_2 x}, \dots, e^{\lambda_n x}\}$, у цьому випадку $\lambda_1, \lambda_2, \dots, \lambda_n \in \mathbb{R} (\mathbb{C})$ -- всі різні. Тоді маємо:\\
 	$\displaystyle W[e^{\lambda_1 x}, e^{\lambda_2 x}, \dots, e^{\lambda_n x}](x) = 
 \begin{vmatrix} 
 	e^{\lambda_1 x} &  e^{\lambda_2 x} & \dots & e^{\lambda_n x} \\ 
@@ -794,28 +768,24 @@ e^{\lambda_1 x} e^{\lambda_2 x} \dots e^{\lambda_n x}
 	\lambda_1^{n-1} &  \lambda_2^{n-1} & \dots & \lambda_n^{n-1} \\
 \end{vmatrix} = e^{(\lambda_1+\lambda_2+\dots+\lambda_n)x} D_n(\lambda_1, \lambda_2, \dots, \lambda_n)
 $\\
-Останній множник - детермінант Вандеморда. Із курсу лінійної алгебри,\\
-$\displaystyle D_n(\lambda_1, \lambda_2, \dots, \lambda_n) = \prod_{1 \leq j < i \leq n} (\lambda_i-\lambda_j)$\\
-Тому остаточно матимемо:\\
-$\displaystyle W[e^{\lambda_1 x}, e^{\lambda_2 x}, \dots, e^{\lambda_n x}](x) = e^{(\lambda_1+\lambda_2+\dots+\lambda_n)x} \prod_{1 \leq j < i \leq n} (\lambda_i-\lambda_j)$
+Останній множник -- визначник Вандерморда. Із курсу лінійної алгебри, відомо, що це обчислюється як $\displaystyle D_n(\lambda_1, \lambda_2, \dots, \lambda_n) = \prod_{1 \leq j < i \leq n} (\lambda_i-\lambda_j)$. Тому остаточно матимемо:\\
+$\displaystyle W[e^{\lambda_1 x}, e^{\lambda_2 x}, \dots, e^{\lambda_n x}](x) = e^{(\lambda_1+\lambda_2+\dots+\lambda_n)x} \prod_{1 \leq j < i \leq n} (\lambda_i-\lambda_j)$.
 \end{example}
 
 	\begin{proposition}
- Якщо $\{f_1, \dots, f_n\} \subset C^{(n-1)}(I)$ - лінійно залежні над $\mathbb{R}$, то $W[f_1,\dots f_n](x) \equiv 0$
+ Якщо $\{f_1, \dots, f_n\} \subset C^{(n-1)}(I)$ -- лінійно залежні над $\mathbb{R}$, то $W[f_1,\dots f_n](x) \equiv 0$.
 	\end{proposition}
 
 	\begin{proof}
-Система - л.з., тобто при $c_1, \dots, c_n$, що не всі нулі: \\$c_1f_1(x) + \cdots + c_n f_n(x) = 0$
-Продиференціюємо рівняння $(n-1)$ разів. Тоді отримається система:\\
+Система -- лінійно залежна, тобто при $c_1, \dots, c_n$, що не всі нулі, $c_1f_1(x) + \cdots + c_n f_n(x) \equiv 0$. Продиференціюємо рівняння $(n-1)$ разів. Тоді отримається система, що виконана $\forall x \in I$:\\
 $\begin{cases}
 c_1f_1(x) + c_2f_2(x) + \cdots + c_n f_n(x) = 0 \\
 c_1f'_1(x) + c_2f'_2(x) + \cdots + c_n f'_n(x) = 0 \\
 \vdots \\
 c_1f^{(n-1)}_1(x) + c_2f^{(n-1)}_2(x) + \cdots + c_n f^{(n-1)}_n(x) = 0
 \end{cases}
-$\\
-Знову з курсу лінійної алгебри, система має нетрививіальний розв'язок $\iff$ детермінант коефіцієнтів $= 0$\\
-У нас $c_1, c_2 ,\dots, c_n$ - нетривіальні, тому матриця коефіцієнтів\\
+$.\\
+Знову з курсу лінійної алгебри, система має нетрививіальний розв'язок $\iff$ визначник коефіцієнтів нулевий. У нас $c_1, c_2 ,\dots, c_n$ -- нетривіальні, тому матриця коефіцієнтів\\
 $ \displaystyle 
 \begin{vmatrix} 
 	f_1(x) &  f_2(x) & \dots & f_n(x) \\ 
@@ -823,60 +793,58 @@ $ \displaystyle
 	\vdots &  \vdots & \ddots & \vdots \\
 	f^{(n-1)}_1(x) &  f^{(n-1)}_2(x) & \dots & f^{(n-1)}_n(x) \\ 
 \end{vmatrix} = W[f_1,f_2,\cdots,f_n](x) \equiv 0
-$ 
+$.
 	\end{proof}
 
 \begin{corollary}
- Якщо $\exists x_0: W[f_1,\dots,f_n](x_0) \neq 0$, то $\{f_1, \dots, f_n\}$ - лінійно НЕзалежна\\
-\textit{Тут записано просто обернене твердження}\\
+\label{linear_independency_with_wronskian}
+Якщо $\exists x_0: W[f_1,\dots,f_n](x_0) \neq 0$, то $\{f_1, \dots, f_n\}$ -- лінійно незалежна.\\
+\textit{Тут записано просто обернене твердження.}
 \end{corollary}
 
-Повертаючись до \textbf{Ex. 3.1.3.}, обидва детермінанта Вронського ненулеві. Тому система $\{1,x,\dots,x^{k-1}\}$ та $\displaystyle \{e^{\lambda_1 x}, e^{\lambda_2 x}, \dots, e^{\lambda_n x}\}$ - лінійно НЕзалежні
+\begin{example}
+Зокрема зауважимо, що $\{1,x,\dots,x^{k-1}\}$ -- лінійно незалежні, а також $\{e^{\lambda_1 x},\dots,e^{\lambda_n x}\}$ -- лінійно незалежні при різних $\lambda_i$. Просто тому що в обох випадках ми обчислили детермінант Вронського, що вийшов ненулевим.
+\end{example}
+
 \begin{remark}
- Якщо $W[f_1,\dots, f_n] \equiv 0$, то $\{f_1, \dots, f_n\}$ \underline{може} бути лінійно НЕзалежною
+Якщо $W[f_1,\dots, f_n] \equiv 0$, то $\{f_1, \dots, f_n\}$ може бути лінійно незалежною. Тобто зворотне твердження твердження не працює.
  \end{remark}
 
 \begin{example}
- Розгянемо систему $\{x^2, x|x|\} \subset C'((-2,2))$\\
+ Розгянемо систему $\{x^2, x|x|\} \subset C^1((-2,2))$. Обчислимо визначник Вронського:\\
 $\displaystyle W[x^2, x|x|](x) = 
 \begin{vmatrix} 
 	x^2 &  x|x| \\
 	2x &  2|x| \\ 
-\end{vmatrix} = 2x^2|x| - 2x^2|x| \equiv 0$\\
-Але за означенням л.н.з.,\\
-$\displaystyle \forall x \in (-2,2): C_1x^2 + C_2 x|x| = 0  \overset{x = 1, x = -1}{\Rightarrow}
+\end{vmatrix} = 2x^2|x| - 2x^2|x| \equiv 0$.\\
+При цьому система $\{x^2, x|x|\}$ -- лінійно незалежна. Дійсно,\\
+$\displaystyle \forall x \in (-2,2): C_1x^2 + C_2 x|x| = 0  \overset{x = 1, x = -1}{\implies}
 \begin{cases}
 C_1 - C_2 = 0\\
 C_1 + C_2 = 0
-\end{cases} \Rightarrow C_1 = C_2 = 0
-$\\
-Тому система - лінійно НЕзалежна
+\end{cases} \implies C_1 = C_2 = 0
+$.
 \end{example}
 
 \begin{theorem}
-Задані $y_1, \dots, y_n \in \ker L$ - тобто розв'язки нашого однорідного рівняння\\
-$\{y_1, \dots, y_n\}$ - л.н.з. над $\mathbb{R} \iff W[y_1, \dots, y_n](x) \not\equiv 0$
+Задані $y_1, \dots, y_n$ -- розв'язки нашого однорідного диференціального рівняння.\\
+$\{y_1, \dots, y_n\}$ -- лінійно незалежна над $\mathbb{R} \iff W[y_1, \dots, y_n](x) \not\equiv 0$.
 \end{theorem}
 
 \begin{proof}
-\leftproof Дано: $W[y_1, \dots, y_n](x) \not\equiv 0$. Тоді за \textbf{Crl 3.1.4.} система $\{y_1, \dots, y_n\}$ - л.н.з.\\
+\leftproof \crlref{linear_independency_with_wronskian}.
 \bigskip \\
-\rightproof Дано: $\{y_1, \dots, y_n\}$ - л.н.з.\\
-!Припустимо, що $\exists x_0 \in I: W[y_1, \dots, y_n](x_0) = 0$. Тоді система рівнянь:
+\rightproof Дано: $\{y_1, \dots, y_n\}$ -- л.н.з.\\
+!Припустимо, що $\exists x_0 \in I: W[y_1, \dots, y_n](x_0) = 0$. Тоді система рівнянь \\
 $\begin{cases}
 c_1y_1(x_0) + c_2y_2(x_0) + \cdots + c_n y_n(x_0) = 0 \\
 c_1y'_1(x_0) + c_2y'_2(x_0) + \cdots + c_n y'_n(x_0) = 0 \\
 \vdots \\
 c_1y^{(n-1)}_1(x_0) + c_2y^{(n-1)}_2(x_0) + \cdots + c_n y^{(n-1)}_n(x_0) = 0
 \end{cases}
-$
-має нетривіальні розв'язки\\
-Нехай $c_1 = c_1^0, \dots, c_n = c_n^0$\\
-Розглянемо функцію:\\
-$y(x) = c_1^0 y_1(x) + \dots + c_n^0 y_n(x)$\\
-Якщо продиференціювати $(n-1)$ раз та всюди $x=x_0$, то можна отримати, що:\\
-$y(x_0) = y'(x_0) = \dots = y^{(n-1)}(x_0) = 0$\\
-Таким чином отримана задача Коші:\\
+$\\
+має нетривіальні розв'язки. Нехай $c_1 = c_1^0, \dots, c_n = c_n^0$ -- ті самі нетривіальні розв'язки.\\
+Розглянемо функцію $y(x) = c_1^0 y_1(x) + \dots + c_n^0 y_n(x)$. Якщо продиференціювати $(n-1)$ раз та всюди підставити $x=x_0$, то можна отримати, що $y(x_0) = y'(x_0) = \dots = y^{(n-1)}(x_0) = 0$. Таким чином отримана задача Коші:\\
 $
 \begin{cases}
  Ly = 0\\
@@ -885,13 +853,12 @@ $
  y^{(n-1)}(x_0) = 0
 \end{cases}
 $\\
-Проте зауважимо, що $z(x) \equiv 0$ - також розв'язок задачі Коші. Тому в силу єдиності рішення задачі Коші, маємо, що $y(x) \equiv 0$\\
-Отже, для $c_1 = c_1^0, \dots, c_n = c_n^0$ отримали: $c_1^0 y_1(x) + \dots + c_n^0 y_n(x) = 0$. Це є означенням л.з., що суперечить нашим припущенням.\\
-Висновок: $W[y_1, \dots, y_n](x) \not\equiv 0$ 
+Проте зауважимо, що $z(x) \equiv 0$ -- також розв'язок задачі Коші. Тому в силу єдиності розв'язку задачі Коші, маємо $y(x) \equiv 0$. Отже, для $c_1 = c_1^0, \dots, c_n = c_n^0$ отримали $c_1^0 y_1(x) + \dots + c_n^0 y_n(x) = 0$. Це означає, що $\{y_1,\dots,y_n\}$ -- л.з. Суперечність!\\
+Висновок: $W[y_1, \dots, y_n](x) \not\equiv 0$.
 \end{proof}
 
 \begin{theorem}
- Позначу через $y_1, y_2, \dots, y_n$ наступні розв'язки задачі Коші:\\
+Позначу через $y_1, y_2, \dots, y_n$ розв'язки відповідних задач Коші:\\
 $y_1:
 \begin{cases}
  Ly = 0\\
@@ -918,42 +885,33 @@ y_n:
  y^{(n-1)}(x_0) = 1
 \end{cases}
 $\\
-Тоді $\{y_1, y_2, \dots, y_n\}$ утворюють лінійний базис в просторі розв'язків нашого рівняння
+Тоді $\{y_1, y_2, \dots, y_n\}$ утворюють лінійний базис в просторі розв'язків нашого рівняння, тобто базис в $\ker L$.
 \end{theorem}
 
 \begin{proof}
-Базис означає лінійну незалежність та презентацію кожного елементу в лінійну комбінацію\\
-Перевіримо на л.н.з.:\\
+I. \textit{Система -- л.н.з.}\\
 $\displaystyle W[y_1, y_2, \dots, y_n](x_0) = 
 \begin{vmatrix} 
 	1 &  0 & \dots & 0 \\ 
 	0 &  1 & \dots & 0 \\
 	\vdots &  \vdots & \ddots & \vdots \\
 	0 &  0 & \dots & 1 \\
-\end{vmatrix} = 1 \neq 0$\\Отже, за \textbf{Crl. 3.1.4.}, система - л.н.з.
-\\
-Доведемо, що будь-який розв'язок $y = y_1c_1 + \dots + y_n c_n$. Коротше, треба знайти $c_1, \dots, c_n$ і довести, що вони єдині\\
-Диференціюємо $(n-1)$ разів і вставляємо $x_0$ кожного разу. Тоді\\
-$c_1 = y(x_0), \dots, c_n=y^{(n-1)}(x_0)$. Ці константи виражаються єдиним чином\\
-Отже, $\exists! c_1,\dots,c_n: y = c_1 y_1 + \dots + c_n y_n$\\
-Висновок: $\{y_1, \dots. y_n\}$ - базис 
+\end{vmatrix} = 1 \neq 0 \implies $ система -- л.н.з. за \crlref{linear_independency_with_wronskian}.
+\bigskip \\
+II. \textit{Єдиність розкладу.}\\
+Маємо розв'язок $y = y_1c_1 + \dots + y_n c_n$. Треба знайти $c_1, \dots, c_n$ і довести, що вони єдині. Диференціюємо $(n-1)$ разів і підставляємо $x = x_0$ кожного разу. Тоді\\
+$c_1 = y(x_0), \dots, c_n=y^{(n-1)}(x_0)$. \\
+Ці константи виражаються єдиним чином. Отже, $\exists! c_1,\dots,c_n: y = c_1 y_1 + \dots + c_n y_n$.
 \end{proof}
 
 \begin{corollary}
- $\dim L = n$
+ $\dim \ker L = n$.
  \end{corollary}
-
-\begin{corollary}
- Будь-яка л.н.з. система з $n$ розв'язків утворює базис в просторі його рішень
- \end{corollary}
-
-\begin{definition}
- Лінійним базисом $\{y_1 \dots, y_n\}$ в просторі розв'язків рівняння називають \textbf{фундаментальною системою розв'язків}\\
-В той же час $y = c_1 y_1 + \dots + c_n y_n$ - \textbf{загальний розв'язок}\\
-\end{definition}
+ 
+По суті кажучи, ми довели, що $\{y_1,\dots,y_n\}$ утворює фундаментальну систему розв'язків. Звідси $y = c_1 y_1 + \dots + c_n y_n$ -- загальний розв'язок.
 
 \begin{lemma}
- Якщо $a_{ij} \in C'(I) i,j = \overline{1,n}$, то\\
+Задані функції $a_{ij} \in C^1(I) i,j = \overline{1,n}$. Тоді\\
 $\displaystyle \left(
 \begin{vmatrix} 
 	a_{11}(x) &  a_{12}(x) & \dots & a_{1n}(x) \\ 
@@ -975,34 +933,28 @@ $\displaystyle \left(
 	\vdots &  \vdots & \ddots & \vdots \\
 	a_{n1}(x) &  a_{n2}(x) & \dots & a_{nn}(x) \\ 
 \end{vmatrix}
-+ \\ \\ + \dots +
++ \dots +
 \begin{vmatrix} 
 	a_{11}(x) &  a_{12}(x) & \dots & a_{1n}(x) \\ 
 	a_{21}(x) &  a_{22}(x) & \dots & a_{2n}(x) \\ 
 	\vdots &  \vdots & \ddots & \vdots \\
 	a'_{n1}(x) &  a'_{n2}(x) & \dots & a'_{nn}(x) \\ 
 \end{vmatrix}
-$
+$.\\
+Щойно тут була взята похідна від даного визначника. Це буде просто сума визначників, де похідна береться в кожному рядку.
 \end{lemma}
 
 \begin{proof}
-Доведення проводимо за означенням:\\
+Доведення проводимо за означенням. Ми знаємо з лінійної алгебри, що\\
 $\displaystyle \begin{vmatrix} 
 	a_{11}(x) &  a_{12}(x) & \dots & a_{1n}(x) \\ 
 	a_{21}(x) &  a_{22}(x) & \dots & a_{2n}(x) \\ 
 	\vdots &  \vdots & \ddots & \vdots \\
 	a_{n1}(x) &  a_{n2}(x) & \dots & a_{nn}(x) \\ 
-\end{vmatrix} = \sum_{\sigma \in S_n} \epsilon_\sigma a_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x)$\\
-Тут $S_n$ - група перестановок множини $A_n = \{1,2,\dots,n\}$\\
-$\sigma(k) \in A_n$ - значення перестановки $\sigma$ на елементі $k \in A_n$\\
-$ \epsilon_\sigma = 
-\begin{cases}
-1, \textrm{парна перестановка}\\
--1, \textrm{непарна перестановка}
-\end{cases}
-$\\
-А тепер візьмемо похідну від правої частини:\\
-$\displaystyle \left(\sum_{\sigma \in S_n} \epsilon_\sigma a_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x)\right)' = \\ \sum_{\sigma \in S_n} \epsilon_\sigma a'_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x) + \\ + \sum_{\sigma \in S_n} \epsilon_\sigma a_{1 \sigma(1)}(x) \cdot a'_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x) + \\ + \dots + \sum_{\sigma \in S_n} \epsilon_\sigma a_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a'_{n \sigma(n)}(x) \overset{def}{=} \\
+\end{vmatrix} = \sum_{\sigma \in S_n} (-1)^{l(\sigma)} a_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x)$.\\
+У цьому випадку $S_n$ -- група перестановок множини $\{1,2,\dots,n\}$ та $l(\sigma)$ -- парність перестановки. А тепер візьмемо похідну від правої частини:\\
+$\displaystyle \left(\sum_{\sigma \in S_n} (-1)^{l(\sigma)} a_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x)\right)' = \\
+= \sum_{\sigma \in S_n} (-1)^{l(\sigma)} a'_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x) + \sum_{\sigma \in S_n} (-1)^{l(\sigma)} a_{1 \sigma(1)}(x) \cdot a'_{2 \sigma(2)}(x) \cdot \hdots \cdot a_{n \sigma(n)}(x) + \dots + \sum_{\sigma \in S_n} (-1)^{l(\sigma)} a_{1 \sigma(1)}(x) \cdot a_{2 \sigma(2)}(x) \cdot \hdots \cdot a'_{n \sigma(n)}(x) \overset{\text{означення визначника}}{=} \\
 \\
 =\begin{vmatrix} 
 	a'_{11}(x) &  a'_{12}(x) & \dots & a'_{1n}(x) \\ 
@@ -1016,27 +968,25 @@ $\displaystyle \left(\sum_{\sigma \in S_n} \epsilon_\sigma a_{1 \sigma(1)}(x) \c
 	a'_{21}(x) &  a'_{22}(x) & \dots & a'_{2n}(x) \\ 
 	\vdots &  \vdots & \ddots & \vdots \\
 	a_{n1}(x) &  a_{n2}(x) & \dots & a_{nn}(x) \\ 
-\end{vmatrix}
-+ \\ \\ + \dots +
+\end{vmatrix} + \dots +
 \begin{vmatrix} 
 	a_{11}(x) &  a_{12}(x) & \dots & a_{1n}(x) \\ 
 	a_{21}(x) &  a_{22}(x) & \dots & a_{2n}(x) \\ 
 	\vdots &  \vdots & \ddots & \vdots \\
 	a'_{n1}(x) &  a'_{n2}(x) & \dots & a'_{nn}(x) \\ 
 \end{vmatrix}
-$ 
+$.\\
+Під час диференціювання ми скористалися властивістю $(fg)' = f'g + fg'$.
 \end{proof}
 
 \begin{theorem}[Формула Остроградського-Якобі]
-Задана $\{y_1,\dots, y_n\}$ - фундаментальна система розв'язків нашого рівняння та якась т. $x_0 \in I$. Тоді
-\begin{align*}
-W[y_1, \dots, y_n](x) = W[y_1, \dots, y_n](x_0)e^{\displaystyle -\int_{x_0}^x a_{n-1}(t)\,dt}
-\end{align*}
+Задана $\{y_1,\dots, y_n\}$ -- фундаментальна система розв'язків рівняння та якась точка $x_0 \in I$. Тоді\\
+$W[y_1, \dots, y_n](x) = W[y_1, \dots, y_n](x_0)e^{\displaystyle -\int_{x_0}^x a_{n-1}(t)\,dt}$.
 \end{theorem}
 
 \begin{proof}
-Знайдемо похідну від детермінанта Вронського (\textbf{Lm. 3.1.9.}):\\
-$\displaystyle W'[y_1, \dots, y_n](x) = 
+Знайдемо похідну від визначника Вронського за щойно доведеною формулою:\\
+$\displaystyle W'[y_1, \dots, y_n](x) = \\ =
 \begin{vmatrix} 
 	y'_1(x) &  y'_2(x) & \dots & y'_n(x) \\ 
 	y'_1(x) &  y'_2(x) & \dots & y'_n(x) \\
@@ -1058,104 +1008,90 @@ $\displaystyle W'[y_1, \dots, y_n](x) =
 	\vdots &  \vdots & \ddots & \vdots \\
 	y^{(n-2)}_1(x) &  y^{(n-2)}_2(x) & \dots & y^{(n-2)}_n(x) \\ 
 	y^{(n)}_1(x) &  y^{(n)}_2(x) & \dots & y^{(n)}_n(x) \\ 
-\end{vmatrix} =
+\end{vmatrix} \boxed{=}
 $\\
-Тут всі детермінанти, окрім останнього, онуляться через однакові рядки\\
+Тут всі визначники, окрім останнього, онуляться через однакові рядки\\
 \\
-$\displaystyle = \begin{vmatrix} 
+$\displaystyle \boxed{=} \begin{vmatrix} 
 	y_1(x) &  y_2(x) & \dots & y_n(x) \\ 
 	y'_1(x) &  y'_2(x) & \dots & y'_n(x) \\
 	\vdots &  \vdots & \ddots & \vdots \\
 	y^{(n-2)}_1(x) &  y^{(n-2)}_2(x) & \dots & y^{(n-2)}_n(x) \\ 
 	y^{(n)}_1(x) &  y^{(n)}_2(x) & \dots & y^{(n)}_n(x) \\ 
-\end{vmatrix} \boxed{=}$\\
-Оскільки $y_1, \dots, y_n$ - розв'язки, то ми можемо виразити старші подіхні:\\
-$y^{(n)}_i = -a_0(x)y_j - a_1(x)y_j' -\dots - a_{n-1}(x)y_j^{(n-1)}, j=\overline{1,n}$\\
-Підставимо в наш детермінант і зробимо такі кроки:\\
-- помножимо перший рядок на $a_0$ і додамо до останнього рядка;\\
-- помножимо другий рядок на $a_1$ і додамо до останнього рядка;\\
-...\\
+\end{vmatrix} \boxed{\boxed{=}}$\\
+Оскільки $y_1, \dots, y_n$ -- розв'язки, то ми можемо виразити старші похідні з лінійного рівняння:\\
+$y^{(n)}_i = -a_0(x)y_j - a_1(x)y_j' -\dots - a_{n-1}(x)y_j^{(n-1)},\quad j=\overline{1,n}$.\\
+Підставимо в наш останній визначник і зробимо такі кроки:\\
+-- помножимо перший рядок на $a_0$ і додамо до останнього рядка;\\
+-- помножимо другий рядок на $a_1$ і додамо до останнього рядка;\\
+\vdots \\
 Нарешті, винесемо $-a_{n-1}$. Отримаємо:\\
-$\displaystyle \boxed{=} -a_{n-1}(x)\begin{vmatrix} 
+$\displaystyle \boxed{\boxed{=}} -a_{n-1}(x)\begin{vmatrix} 
 	y_1(x) &  y_2(x) & \dots & y_n(x) \\ 
 	y'_1(x) &  y'_2(x) & \dots & y'_n(x) \\
 	\vdots &  \vdots & \ddots & \vdots \\
 	y^{(n-1)}_1(x) &  y^{(n-1)}_2(x) & \dots & y^{(n-1)}_n(x) \\ 
-\end{vmatrix} = -a_{n-1}(x)W[y_1, \dots, y_n](x)$\\
-Отже, отримали таку тотожність:\\
-$W'[y_1, \dots, y_n](x) = -a_{n-1}(x)W[y_1, \dots, y_n](x)$\\
-А це - диф. рівняння з відокремленими змінними, яку ми розв'яжемо:\\
-$\displaystyle \frac{dW[y_1, \dots, y_n](t)}{dt} = -a_{n-1}(t)$\\
-$\displaystyle \frac{dW[y_1, \dots, y_n](t)}{W[y_1, \dots, y_n](t)} = -a_{n-1}(t)\,dt$\\
+\end{vmatrix} = -a_{n-1}(x)W[y_1, \dots, y_n](x)$.\\
+Отже, отримали таку рівність: $W'[y_1, \dots, y_n](x) = -a_{n-1}(x)W[y_1, \dots, y_n](x)$.\\
+А це -- диференціальне рівняння з відокремленими змінними, яку ми розв'яжемо:\\
+$\displaystyle \frac{dW[y_1, \dots, y_n](t)}{dt} = -a_{n-1}(t)$.\\
+$\displaystyle \frac{dW[y_1, \dots, y_n](t)}{W[y_1, \dots, y_n](t)} = -a_{n-1}(t)\,dt$.\\
 Інтегруємо на інтервалі $[x,x_0]$:\\
 $\displaystyle \ln \abs{\frac{W[y_1, \dots, y_n](x)}{W[y_1, \dots, y_n](x_0)}} = - \int_{x_0}^x a_{n-1}(t)\,dt$\\
 $\displaystyle W[y_1, \dots, y_n](x) = W[y_1, \dots, y_n](x_0)e^{\displaystyle -\int_{x_0}^x a_{n-1}(t)\,dt}$\\
-Взагалі, тут мав би бути знак $\pm$, але якщо підставити $x=x_0$, то залишиться лише $ +$ 
+Взагалі, тут мав би бути знак $\pm$, але якщо підставити $x=x_0$, то залишиться лише $ +$.
 \end{proof}
 
-Метод розв'язку лінійних однорідних диференціальних рівнянь найчастіше другого порядку саме базується на теоремі Остроградського-Якобі. Спочатку ми вгадуємо перший частковий розв'язок, а далі за формулою шукаємо другий частковий, а згодом можна отримати загальний розв'язок
-\\
-\\
+Метод розв'язку лінійних однорідних диференціальних рівнянь (найчастіше другого порядку) базується саме на теоремі Остроградського-Якобі. Спочатку ми вгадуємо перший частковий розв'язок, а далі за формулою шукаємо другий частковий, а згодом можна отримати загальний розв'язок.
+
 \begin{example}
-Розв'язати рівняння: $(2x+1)y'' + 4xy' - 4y = 0$\\
-Буду розглядувати на інтервалі $\displaystyle x>-\frac{1}{2}$\\
+Розв'язати рівняння: $(2x+1)y'' + 4xy' - 4y = 0$. Буду розглядувати на $\left(-\dfrac{1}{2},+\infty\right)$.\\
 $\displaystyle y'' + \frac{4x}{2x+1}y' - \frac{4}{2x+1}y = 0$\\
-Можна вгадати, що $y_1 = x$ - частковий розв'язок\\
-Тоді за формулою Остроградського-Якобі:\\
+Можна спробувати вгадати, що $y_1 = x$ -- частковий розв'язок. Тоді за формулою Остроградського-Якобі,\\
 $\displaystyle \begin{vmatrix}
 x & y_2 \\
 1 & y_2' \\
 \end{vmatrix}
-= W_0 e^{-\int_{1}^x \frac{4t}{2t+1}\,dt}$. Тут $x_0 = 1$\\
-$\displaystyle -\int_{1}^x \frac{4t}{2t+1}\,dt = \dots = -2x + \ln(2x+1) + 2 - \ln3$\\
-$\Rightarrow W_0 e^{-\int_{1}^x \frac{4t}{2t+1}\,dt} = W_0 e^{\ln(2x+1)} e^{-2x} e^{2 - \ln3} = W_1(2x+1)e^{-2x}$\\
-Таким чином за нашою формулою:\\
-$xy_2'-y_2=W_1(2x+1)e^{-2x}$\\
-Ну а тут стандартне диф. рівняння першого порядку. Поділимо на $x^2$ і зауважимо:\\
-$\displaystyle \frac{y_2'x-y_2}{x^2} = W_1 \frac{2^{-2x}2x + e^{-2x}}{x^2} \Rightarrow \left(\frac{y_2}{x}\right)' = -W_1 \left( \frac{e^{-2x}}{x} \right)'$\\
-$\displaystyle \frac{y_2}{x} = -W_1 \frac{e^{-2x}}{x}$\\
-$y_2 = -W_1e^{-2x}$\\
-Отже, остаточно загальний розв'язок:\\
-$y = C_1x + C_2e^{-2x}$
+= W_0 e^{\displaystyle-\int_{1}^x \frac{4t}{2t+1}\,dt}$.\\
+$\displaystyle -\int_{1}^x \frac{4t}{2t+1}\,dt = \dots = -2x + \ln(2x+1) + 2 - \ln3$.\\
+$\implies W_0 e^{-\displaystyle\int_{1}^x \frac{4t}{2t+1}\,dt} = W_0 e^{\ln(2x+1)} e^{-2x} e^{2 - \ln3} = W_1(2x+1)e^{-2x}$\\
+Таким чином за нашою формулою, $xy_2'-y_2=W_1(2x+1)e^{-2x}$. А тут стандартне дифереціальне рівняння першого порядку. Поділимо на $x^2$ і зауважимо, що\\
+$\displaystyle \frac{y_2'x-y_2}{x^2} = W_1 \frac{2^{-2x}2x + e^{-2x}}{x^2} \implies \left(\frac{y_2}{x}\right)' = -W_1 \left( \frac{e^{-2x}}{x} \right)'$.\\
+$\displaystyle \frac{y_2}{x} = -W_1 \frac{e^{-2x}}{x}$.\\
+$y_2 = -W_1e^{-2x}$.\\
+Отже, остаточно загальний розв'язок: $y = C_1x + C_2e^{-2x}$.
 \end{example}
 
 \subsection{Неоднорідне рівняння}
-Спробуємо розв'язати рівняння
+Спробуємо розв'язати неоднорідне диференціальне рівняння:
 \begin{align*}
-y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y = b(x)
+y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y = b(x),
 \end{align*}
-де $a_0, a_1,\dots,a_{n-1}, b\in C(I)$, $I \subset \mathbb{R}$
+де $a_0, a_1,\dots,a_{n-1}, b\in C(I)$, $I \subset \mathbb{R}$.\\
+Мовою лінійної алгебри, нам треба розв'язати рівняння
+\begin{align*}
+(Ly)(x) = b(x)
+\end{align*}
 
 \begin{theorem}[Про структуру розв'язків]
-$y$ - розв'язок неоднорідного рівняння $\iff y = y_{g.h.} + y_{p.inh.}$\\
-Де $y_{g.h.}$ - загальний розв'язок однорідного рівняння, а $y_{p.inh.}$ - частковий розв'язок неоднорідного рівняння
+$y$ -- розв'язок неоднорідного рівняння $\iff y = y_{\text{gen,hom}} + y_{\text{par,inhom}}$. У цьому випадку: \\
+$y_{\text{gen,hom,}}$ -- загальний розв'язок однорідного рівняння;\\ $y_{\text{par,inhom,}}$ -- частковий розв'язок неоднорідного рівняння.\\
+\textit{Доводиться аналогічно, як це було в теоремі про структуру розв'язків системи.}
 \end{theorem}
-
-\begin{proof}
-\rightproof Дано: $y$ - розв'язок неоднорідного рівняння\\
-Розглянемо $y_0 = y - y_{p.inh.}$. Для цього маємо:\\
-$Ly_0 = L(y - y_{p.inh,}) = Ly - Ly_{p.inh.} = b(x) - b(x) = 0$\\
-$\Rightarrow y_0 = y_{g.h} \Rightarrow y = y_{g.h.} + y_{p.inh.}$\\
-\\
-\leftproof Дано: $y = y_{g.h.} + y_{p.inh.}$\\
-Тоді $Ly = L(y_{g.h.} + y_{p.inh.}) = Ly_{g.h.} + Ly_{p.inh.} = b(x) \Rightarrow y$ - розв'язок неоднорідного рівняння 
-\end{proof}
 
 \begin{corollary}
 Якщо $y_1$ - розв'язок $Ly_1 = b_1(x)$, а $y_2$ - розв'язок $Ly_2 = b_2(x)$, то\\
 $y = \beta_1 y_1 + \beta_2 y_2$ - розв'язок $Ly = \beta_1 b_1(x) + \beta_2 b_2(x)$
 \end{corollary}
 
-Для неоднорідних рівнянь існує поки єдиний загальних вихід, як розв'язати рівняння\\
-\textbf{Метод варіації довільних сталих}\\
-Спочатку знайдемо $y_{g.h.}$ з нашого рівняння, тобто:\\
-$y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y = 0$\\
-Якщо вважати, що $y_1, \dots, y_n$ - фундаментальна система розв'язків, то\\
-$y_{g.h.} = c_1y_1 + \dots + c_n y_n$\\
-\\
-Наш розв'язок ми будемо шукати в такому вигляді:\\
-$y = c_1(x)y_1 + \dots + c_n(x)y_n$\\
-А тут $c_1(x), \dots, c_n(x)$ - такі функції, задовільняючи наступним умовам:\\
+Для неоднорідних рівнянь існує поки єдиний загальних вихід, як розв'язати рівняння.
+
+\subsubsection*{Метод Лагранжа (метод варіації довільних сталих)}
+Спочатку знайдемо $y_{\text{gen,hom}}$ з нашого лінійного однорідного диференціального рівняння, тобто\\
+$y^{(n)} + a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y = 0$.\\
+Якщо вважати, що $\{y_1, \dots, y_n\}$ -- фундаментальна система розв'язків, то $y_{\text{gen,hom}} = c_1y_1 + \dots + c_n y_n$.
+\bigskip \\
+Наш розв'язок неоднорідного рівняння будемо шукати в такому вигляді: $y = c_1(x)y_1 + \dots + c_n(x)y_n$. Тут $c_1(x), \dots, c_n(x)$ -- такі функції, що задовольняють таким умовам:\\
 $\begin{cases}
 c'_1(x)y_1 + c'_2(x)y_2 \dots + c'_n(x)y_n = 0 \\
 c'_1(x)y'_1 + c'_2(x)y'_2 \dots + c'_n(x)y'_n = 0 \\
@@ -1164,23 +1100,21 @@ c'_1(x)y^{(n-2)}_1(x) + c'_2(x)y^{(n-2)}_2(x) \dots + c'_n(x)y^{(n-2)}_n(x) = 0 
 \end{cases}
 $\\
 Використовуючи всі наші умови, ми підставимо наше $y$ до неоднорідного рівняння. Але перед цим знайдемо похідні:\\
-$y' = c'_1(x)y_1(x) + c_1(x)y'_1(x) + \dots + c'_n(x)y_n(x) + c_n(x)y'_n(x) \overset{\textrm{умова}}{=} \\ = c_1(x) y'_1(x) + \dots + c_n(x) y'_n(x)$\\
-$y'' = c'_1(x)y'_1(x) + c_1(x)y''_1(x) + \dots + c'_n(x)y'_n(x) + c_n(x)y''_n(x) \overset{\textrm{умова}}{=} \\ = c_1(x) y''_1(x) + \dots + c_n(x) y''_n(x)$\\
-...\\
+$y' = c'_1(x)y_1(x) + c_1(x)y'_1(x) + \dots + c'_n(x)y_n(x) + c_n(x)y'_n(x) \overset{\text{умова}}{=} c_1(x) y'_1(x) + \dots + c_n(x) y'_n(x)$;\\
+$y'' = c'_1(x)y'_1(x) + c_1(x)y''_1(x) + \dots + c'_n(x)y'_n(x) + c_n(x)y''_n(x) \overset{\text{умова}}{=} c_1(x) y''_1(x) + \dots + c_n(x) y''_n(x)$;\\
+\vdots \\
 $y^{(n-1)} = c'_1(x)y^{(n-2)}_1(x) + c_1(x)y^{(n-1)}_1(x) + \dots + c'_n(x)y^{(n-2)}_n(x) + c_n(x)y^{(n-1)}_n(x) \overset{\textrm{умова}}{=} \\ = c_1(x) y^{(n-1)}_1(x) + \dots + c_n(x) y^{(n-1)}_n(x)$\\
 Легко побачити, що завдяки системі зверху, ми можемо функції $c_1, \dots, c_n$ сприйняти як константу, що виноситься з похідної\\
-$y^{n} = c'_1(x)y^{(n-1)}_1(x) + c_1(x)y^{(n)}_1(x) + \dots + c'_n(x)y^{(n-1)}_n(x) + c_n(x)y^{(n)}_n(x)$\\
-Підставляємо в неоднорідне рівняння:\\
+$y^{n} = c'_1(x)y^{(n-1)}_1(x) + c_1(x)y^{(n)}_1(x) + \dots + c'_n(x)y^{(n-1)}_n(x) + c_n(x)y^{(n)}_n(x)$.\\
+Підставляємо все це в неоднорідне рівняння:\\
 $\left(c'_1(x)y^{(n-1)}_1(x) + \cdots + c'_n(x)y^{(n-1)}_n(x) + c_1(x)y^{(n)}_1(x) + \cdots + c_n(x)y^{(n)}_n(x) \right) + \\ + a_{n-1}(x)\left(c_1(x) y^{(n-1)}_1(x) + \dots + c_n(x) y^{(n-1)}_n(x)\right) + \dots + \\ + a_1(x)\left(c_1(x) y'_1(x) + \dots + c_n(x) y'_n(x)\right) + \\ + a_0(x)\left(c_1(x)y_1(x) + \dots + c_n(x)y_n(x)\right) = b(x)$\\
-І перегрупуємо ці доданки:\\
+Для зручності перегрупуємо всі ці доданки:\\
 $c_1(x)\left(y^{(n)}_1(x) + a_{n-1}(x)y^{(n-1)}_1(x) + \dots + a_1(x)y'_1(x) +a_0(x)y_1(x) \right) + \\ + c_2(x)\left(y^{(n)}_2(x) + a_{n-1}(x)y^{(n-1)}_2(x) + \dots + a_1(x)y'_2(x) +a_0(x)y_2(x) \right) + \dots + \\ + c_n(x)\left(y^{(n)}_n(x) + a_{n-1}(x)y^{(n-1)}_n(x) + \dots + a_1(x)y'_n(x) +a_0(x)y_n(x) \right) + \\ +
 c'_1(x)y_1^{(n-1)}(x) + \dots + c'_n(x)y_n^{(n-1)}(x)
 = b(x)$\\
-Але оскільки $y_1, \dots, y_n$ - фундаментальна система розв'язків, тобто \\ $Ly_i = 0$, $i = \overline{1,n}$, то залишається:\\
-$c'_1(x)y_1^{(n-1)}(x) + \dots + c'_n(x)y_n^{(n-1)}(x) = b(x)$\\
-Дане рівняння додамо до нашої системи.\\
-\\
-В результаті\\
+Але оскільки $\{y_1, \dots, y_n\}$ -- фундаментальна система розв'язків, тобто $Ly_i = 0, \quad i = \overline{1,n}$, то в нас вище залишається лише наступне:\\
+$c'_1(x)y_1^{(n-1)}(x) + \dots + c'_n(x)y_n^{(n-1)}(x) = b(x)$.\\
+Дане рівняння додамо до нашої системи. У результаті чого\\
 $\begin{cases}
 c'_1(x)y_1 + c'_2(x)y_2 \dots + c'_n(x)y_n = 0 \\
 c'_1(x)y'_1 + c'_2(x)y'_2 \dots + c'_n(x)y'_n = 0 \\
@@ -1188,38 +1122,34 @@ c'_1(x)y'_1 + c'_2(x)y'_2 \dots + c'_n(x)y'_n = 0 \\
 c'_1(x)y^{(n-2)}_1(x) + c'_2(x)y^{(n-2)}_2(x) \dots + c'_n(x)y^{(n-2)}_n(x) = 0 \\
 c'_1(x)y_1^{(n-1)}(x) + \dots + c'_n(x)y_n^{(n-1)}(x) = b(x)
 \end{cases}$\\
-Розв'язуючи відосно $c'_1(x) \dots, c'_n(x)$, отримаємо, що вона має єдиний розв'язок, оскільки детермінант матриці коефіцієнтів - детермінант Вронського - ненулевий, згідно з тим, що $y_1, \dots, y_n$ - фундаментальна система\\
-Залишилось їх проінтегрувати:\\
+Розв'язуючи відосно $c'_1(x) \dots, c'_n(x)$, отримаємо, що вона має єдиний розв'язок, оскільки детермінант матриці коефіцієнтів -- а це детермінант Вронського -- ненулевий, згідно з тим, що $\{y_1, \dots, y_n\}$ -- фундаментальна система. Залишилося $c_i'$ проінтегрувати -- отримаємо:\\
 $\displaystyle c_1(x) = \int_{x_0}^x c'_1(t)\,dt + \tilde{c_1}, \dots, c_n(x) = \int_{x_0}^x c'_n(t)\,dt + \tilde{c_n}$\\
-Та підставити в наш початковий $y$:\\
-$\displaystyle y = \left(\int_{x_0}^x c'_1(t)\,dt\right)y_1 + \dots + \left(\int_{x_0}^x c'_n(t)\,dt\right)y_n + \tilde{c_1}y_1 + \dots + \tilde{c_n}y_n = \\ = y_{p.inh.} + y_{g.h.} \iff y$ - розв'язок нашого неоднорідного рівняння\\
-\\
-Отже, враховуючи всі наші умови:\\ $y = c_1(x)y_1 + \dots + c_n(x)y_n$ - розв'язок лінійного неоднорідного рівняння
+Нарешті, підставимо в наш початковий $y$:\\
+$\displaystyle y = \left(\int_{x_0}^x c'_1(t)\,dt\right)y_1 + \dots + \left(\int_{x_0}^x c'_n(t)\,dt\right)y_n + \tilde{c_1}y_1 + \dots + \tilde{c_n}y_n = y_{\text{par,inhom}} + y_{\text{gen,hom}}$.\\
+Отже, враховуючи всі наші умови, $y = c_1(x)y_1 + \dots + c_n(x)y_n$ -- розв'язок лінійного неоднорідного рівняння.
 
 \begin{example}
- Розв'язати рівняння: $\displaystyle y'' + \frac{x}{1-x}y' - \frac{1}{1-x}y = x-1$\\
-Тут фундаментальна система розв'язків: $y_1 = e^x$, $y_2 = x$\\
-Запишемо загальний розв'язок:\\
-$y = c_1(x)e^x +c_2(x)x$\\
-Тут $c_1(x), c_2(x)$ - такі функції, задовільняючи умовам:\\
+Розв'язати рівняння $\displaystyle y'' + \frac{x}{1-x}y' - \frac{1}{1-x}y = x-1$.\\
+Тут фундаментальна система розв'язків $y_1 = e^x$, $y_2 = x$. Запишемо загальний розв'язок:\\
+$y = c_1(x)e^x +c_2(x)x$.\\
+У цьому випадку $c_1(x), c_2(x)$ -- такі функції, що задовольняють умовам:\\
 $\begin{cases}
 c'_1(x)e^x + c'_2(x)x = 0\\
 c'_1(x)e^x + c'_2(x) = x-1
-\end{cases}$\\
-Розв'язки системи: $c'_1(x) = xe^{-x}$, $c'_2(x) = -1$\\
-$\Rightarrow c_1(x) = \dots = -xe^{-x} -e^{-x} + \tilde{c_1}$\\
-$\Rightarrow c_2(x) = -x + \tilde{c_2}$\\
-Отже,\\
-$y = e^x(-xe^{-x}-e^{-x}+\tilde{c_1}) + x(-x+\tilde{c_2}) = -x - 1 + \tilde{c_1}e^x - x^2 + x \tilde{c_2}$\\
-$\Rightarrow y = \tilde{c_1}e^{x} + \tilde{c_2}x - (x^2 + 1)$
+\end{cases}$.\\
+Розв'язки системи: $c'_1(x) = xe^{-x}$, $c'_2(x) = -1$.\\
+$\implies c_1(x) = \dots = -xe^{-x} -e^{-x} + \tilde{c_1}$\\
+$\implies c_2(x) = -x + \tilde{c_2}$\\
+Отже, $y = e^x(-xe^{-x}-e^{-x}+\tilde{c_1}) + x(-x+\tilde{c_2}) = -x - 1 + \tilde{c_1}e^x - x^2 + x \tilde{c_2}$.\\
+Остаточно, $y = \tilde{c_1}e^{x} + \tilde{c_2}x - (x^2 + 1)$.
 \end{example}
 
-\subsection{Однорідне рівняння з постійними коефіцієнтами}
-Спробуємо розв'язати рівняння
+\subsection{Однорідне рівняння зі сталими коефіцієнтами}
+Спробуємо розв'язати однорідне дифереціальне рівняння:
 \begin{align*}
-y^{(n)} + a_{n-1}y^{(n-1)}+\dots+a_1y'+a_0y = 0
+y^{(n)} + a_{n-1}y^{(n-1)}+\dots+a_1y'+a_0y = 0,
 \end{align*}
-де $a_0, a_1,\dots,a_{n-1} \in \mathbb{R}$\\
+але цього разу замість функцій будуть числа $a_0, a_1,\dots,a_{n-1} \in \mathbb{R}$.\\
 \\ 
 \textbf{Деяка інформація про комплекснозначні функції в полі дійсних чисел}\\
 $f\colon \mathbb{R} \to \mathbb{C}:$\\
@@ -1229,150 +1159,134 @@ $f'(x) = u'(x) + iv'(x)$\\
 Всі властивості похідних зберігаються для комплекснозначних функцій
 \\
 \\
-Визначимо ще один оператор $D$ - оператор диференціювання:\\
-$Df = f'$\\
-Тобто наше рівняння матиме вигляд:\\
-$Ly = D^n y + a_{n-1}D^{n-1} y + \dots + a_1Dy + a_0Iy = 0$\\
-Розглянемо функцію $\displaystyle y = e^{\lambda x}, \lambda \in \mathbb{C}$. Підставимо в наше рівняння:\\
-$Le^{\lambda x} = \lambda^n e^{\lambda x} + a_{n-1} \lambda^{n-1} e^{\lambda x} + \dots + a_1 \lambda e^{\lambda x} + a_0 e^{\lambda x} = \\ = e^{\lambda x} \left( \lambda^n + a_{n-1} \lambda^{n-1} + \dots + a_1 \lambda + a_0 \right) = e^{\lambda x} P(\lambda) = 0$\\
-$\Rightarrow Le^{\lambda x} = e^{\lambda x} P(\lambda) = 0 \iff P(\lambda) = 0$\\
+Визначимо ще один лінійний оператор $D$ -- оператор диференціювання: $Df = f'$. Тобто наше рівняння матиме інший вигляд:\\
+$Ly = D^n y + a_{n-1}D^{n-1} y + \dots + a_1Dy + a_0Iy = 0$.\\
+Розглянемо функцію $\displaystyle y = e^{\lambda x},\ \lambda \in \mathbb{C}$. Підставимо в наше рівняння -- отримаємо:\\
+$Le^{\lambda x} = \lambda^n e^{\lambda x} + a_{n-1} \lambda^{n-1} e^{\lambda x} + \dots + a_1 \lambda e^{\lambda x} + a_0 e^{\lambda x} = e^{\lambda x} \left( \lambda^n + a_{n-1} \lambda^{n-1} + \dots + a_0 \right) = e^{\lambda x} P(\lambda) = 0$.\\
+$Le^{\lambda x} = e^{\lambda x} P(\lambda) = 0 \iff P(\lambda) = 0$.
+
 \begin{definition}
- \textbf{Характеристичним многочленом} будемо називати вираз:
+\textbf{Характеристичним многочленом} будемо називати вираз
 \begin{align*}
 P(\lambda) = \lambda^n + a_{n-1} \lambda^{n-1} + \dots + a_1 \lambda + a_0
 \end{align*}
 \end{definition}
-З наших міркувань отримали, що:\\
-	\begin{proposition}
- $\displaystyle e^{\lambda x}$ - корінь рівняння $\iff$ $\lambda \in \mathbb{C}$ - корінь характеристичного полінома $P(\lambda) = 0$
-	\end{proposition}
 
-\textbf{I. Випадок різних (лише дійсних) коренів}
+Із наших міркувань отримали наступне:
+	\begin{proposition}
+ $\displaystyle e^{\lambda x}$ -- корінь рівняння $\iff$ $\lambda \in \mathbb{C}$ -- корінь характеристичного многочлена.
+	\end{proposition}
+	
+У нас може бути кілька випадків, як далі буде йти розв'язок такого рівняння.
+
+\subsubsection{Випадок різних і лише дійсних коренів}
 \begin{theorem}
- Система $\displaystyle \{e^{\mu_1 x}, \dots, e^{\mu_n x}\}$ є фундаментальною системою розв'язків. Причому $\mu_1, \dots, \mu_n \in \mathbb{R}$ - різні корені характеристичного полінома
+ Система $\displaystyle \{e^{\mu_1 x}, \dots, e^{\mu_n x}\}$ -- фундаментальна системою розв'язків. У цьому випадку $\mu_1, \dots, \mu_n \in \mathbb{R}$ -- різні корені характеристичного многочлена.
 \end{theorem}
 
 \begin{proof}
-Згідно з \textbf{Ex. 3.1.3.}, така система є лінійно НЕзалежною. Оскільки $\mu_1, \dots, \mu_n \in \mathbb{R}$ - різні корені характеристичного полінома, то $e^{\mu_1 x}, \dots, e^{\mu_n x}$ - розв'язки нашого рівняння. Отже, за \textbf{Crl. 3.1.7.(2)}, система є фундаментальною 
+Ми вже якось показували, що така система є лінійно залежною. Оскільки $\mu_1, \dots, \mu_n \in \mathbb{R}$ -- різні корені характеристичного многочлена, то $e^{\mu_1 x}, \dots, e^{\mu_n x}$ -- розв'язки нашого рівняння. Але тоді така система є фундаментальною.
 \end{proof}
 
 \begin{example}
-Розв'язати рівняння: $y'' - y = 0$\\
-Запишемо характеристичний поліном:\\
-$P(\lambda) = \lambda^2 - 1 = 0$\\
-Звідси $\lambda_1 = 1, \lambda_2 = -1 \overset{Th. 3.3.I.}{\Rightarrow} \{e^x, e^{-x}\}$ - фундаментальна система.
-Отже, $y = C_1e^x + C_2e^{-x}$
+Розв'язати рівняння: $y'' - y = 0$.\\
+Запишемо характеристичний поліном $P(\lambda) = \lambda^2 - 1 = 0$. Звідси $\lambda_1 = 1, \lambda_2 = -1$ -- різні та дійсні корені, тому звідси $\{e^x,e^{-x}\}$ утворює фундаментальну систему розв'язків. Отже, $y = C_1e^x + C_2e^{-x}$ -- загальний розв'язок.
 \end{example}
 
-\textbf{II. Випадок різних (можливо комплексних) коренів}
+\subsubsection{Випадок різних коренів, серед яких вже є комплексні}
 \begin{theorem}
- Система $\\ \displaystyle \{e^{\mu_1 x}, \dots, e^{\mu_l x}\} \cup \{e^{\alpha_1 x} \cos \omega_1 x, e^{\alpha_1 x} \sin \omega_1 x, \dots, e^{\alpha_k x} \cos \omega_k x, e^{\alpha_k x} \sin \omega_k x\}$ \\ є фундаментальною системою розв'язків. Причому $\mu_1, \dots, \mu_l \in \mathbb{R}$ та $\lambda_1 = \alpha_1 + i\omega_1, \dots, \lambda_k = \alpha_k + i\omega_k \in \mathbb{C}$ - різні корені характеристичного полінома
+Система $\displaystyle \{e^{\mu_1 x}, \dots, e^{\mu_l x}\} \cup \{e^{\alpha_1 x} \cos \omega_1 x, e^{\alpha_1 x} \sin \omega_1 x, \dots, e^{\alpha_k x} \cos \omega_k x, e^{\alpha_k x} \sin \omega_k x\}$ -- фундаментальна система розв'язків. У цьому випадку $\mu_1, \dots, \mu_l \in \mathbb{R}$ та $\lambda_1 = \alpha_1 + i\omega_1, \dots, \lambda_k = \alpha_k + i\omega_k \in \mathbb{C}$ -- різні корені характеристичного многочлена.
 \end{theorem}
 
 \begin{proof}
-До речі, якщо $\lambda_1, \dots, \lambda_k$ - корні характеристичного полінома, то (курс ліналу) $\overline{\lambda_1}, \dots, \overline{\lambda_k}$ - також є коренями\\
-Отже, за умовою і \textbf{Prp. 3.3.2.}, фундаментальний розв'язок рівняння задається системою\\
-$\{e^{\mu_1 x}, \dots, e^{\mu_l x}, e^{\lambda_1 x}, e^{\overline{\lambda_1} x}, \dots, e^{\lambda_k x}, e^{\overline{\lambda_k} x}\}$\\
+Зауважимо, що в характеристичному многочлені $P(\lambda)$ всі коефцієнти -- дійсні. Тож звідси, якщо $\lambda_1, \dots, \lambda_k$ -- корні характеристичного полінома, то $\overline{\lambda_1}, \dots, \overline{\lambda_k}$ -- також є коренями. Отже, за умовою теореми та за твердженням вище, фундаментальний розв'язок рівняння задається системою $\{e^{\mu_1 x}, \dots, e^{\mu_l x}, e^{\lambda_1 x}, e^{\overline{\lambda_1} x}, \dots, e^{\lambda_k x}, e^{\overline{\lambda_k} x}\}$.\\
 Замінимо цю систему функцій наступною системою:\\
-$\displaystyle \{e^{\mu_1 x}, \dots, e^{\mu_l x}, \frac{e^{\lambda_1 x} + e^{\overline{\lambda_1} x}}{2}, \frac{e^{\lambda_1 x} - e^{\overline{\lambda_1} x}}{2i}, \dots, \frac{e^{\lambda_k x} + e^{\overline{\lambda_k} x}}{2}, \frac{e^{\lambda_k x} - e^{\overline{\lambda_k} x}}{2i}\}$\\
-Маємо права, оскільки від цього л.н.з. система не зміниться. В силу лінійності оператора $L$, вони теж будуть розв'зяками. Більш того, за формулами Ейлера:\\
-$\displaystyle \frac{e^{\lambda_j x} + e^{\overline{\lambda_j} x}}{2} = e^{\alpha_j x} \cos \omega_j x$\\
-$\displaystyle \frac{e^{\lambda_j x} - e^{\overline{\lambda_j} x}}{2i} = e^{\alpha_j x} \sin \omega_j x$\\
-Отримали, отримаємо бажану систему:\\
-$\{e^{\mu_1 x}, \dots, e^{\mu_l x}\} \cup \{e^{\alpha_1 x} \cos \omega_1 x, e^{\alpha_1 x} \sin \omega_1 x, \dots, e^{\alpha_k x} \cos \omega_k x, e^{\alpha_k x} \sin \omega_k x\}$ 
+$\displaystyle \left\{e^{\mu_1 x}, \dots, e^{\mu_l x}, \frac{e^{\lambda_1 x} + e^{\overline{\lambda_1} x}}{2}, \frac{e^{\lambda_1 x} - e^{\overline{\lambda_1} x}}{2i}, \dots, \frac{e^{\lambda_k x} + e^{\overline{\lambda_k} x}}{2}, \frac{e^{\lambda_k x} - e^{\overline{\lambda_k} x}}{2i}\right\}$.\\
+Маємо права, оскільки від елементарних перетворень лінійна незалежність не дінеться нікуди. В силу лінійності оператора $L$, вони теж будуть розв'зяками. Більш того, за формулами Ойлера,\\
+$\displaystyle \frac{e^{\lambda_j x} + e^{\overline{\lambda_j} x}}{2} = e^{\alpha_j x} \cos \omega_j x$.\\
+$\displaystyle \frac{e^{\lambda_j x} - e^{\overline{\lambda_j} x}}{2i} = e^{\alpha_j x} \sin \omega_j x$.\\
+Отже, отримаємо бажану систему:\\
+$\{e^{\mu_1 x}, \dots, e^{\mu_l x}\} \cup \{e^{\alpha_1 x} \cos \omega_1 x, e^{\alpha_1 x} \sin \omega_1 x, \dots, e^{\alpha_k x} \cos \omega_k x, e^{\alpha_k x} \sin \omega_k x\}$.
 \end{proof}
 
 \begin{remark}
- Тут всього $n$ функцій в системі: $l$ - дійсних і $2k$ - копмлексних. $l + 2k = n$
+ Тут всього $n$ функцій в системі: $l$ дійсних і $2k$  копмлексних. Разом $l + 2k = n$.
  \end{remark}
  
 \begin{example}
-Розв'язати рівняння: $y'' + y = 0$\\
-Запишемо характеристичний поліном:\\
-$P(\lambda) = \lambda^2 + 1 = 0$\\
-Звідси $\lambda_1 = i, \lambda_2 = -i \overset{Th. 3.3.II.}{\Rightarrow} \{\cos x, \sin x\}$ - фундаментальна система.
-Отже, $y = C_1 \cos x + C_2 \sin x$
+Розв'язати рівняння: $y'' + y = 0$.\\
+Запишемо характеристичний поліном $P(\lambda) = \lambda^2 + 1 = 0$. Звідси $\lambda_1 = i, \lambda_2 = -i$ -- різні корені, серед яких є комплексні, том звідси $\{\cos x, \sin x\}$ утворює фундаментальну систему розв'язків. Отже, $y = C_1 \cos x + C_2 \sin x$ -- загальний розв'язок.
 \end{example}
 
-\textbf{III. Випадок кратних (можливо комплексних) коренів}
+\subsubsection{Випадок кратних коренів, серед яких (можливо) є комплексні}
 \begin{theorem}
- Система $\\ \displaystyle \bigcup_{j=1}^l \{e^{\mu_j x}, x e^{\mu_j x}, \dots, x^{s_j-1}e^{\mu_j x}\} \cup \\ \cup \displaystyle \bigcup_{j=1}^k \{e^{\alpha_j x} \cos \omega_j x, e^{\alpha_j x} \sin \omega_j x, \dots, x^{r_j-1}e^{\alpha_j x} \cos \omega_j x, x^{r_j-1}e^{\alpha_j x} \sin \omega_j x\}$ \\ є фундаментальною системою розв'язків. Причому $\mu_1, \dots, \mu_l \in \mathbb{R}$ з кратністю $s_1, \dots, s_l$ та $\lambda_1 = \alpha_1 + i\omega_1, \dots, \lambda_k = \alpha_k + i\omega_k \in \mathbb{C}$ з кратністю $r_1, \dots, r_k$- різні корені характеристичного полінома
+Ось така величезна система буде фундаментальною системою розв'язків: \\
+$ \displaystyle \bigcup_{j=1}^l \{e^{\mu_j x}, x e^{\mu_j x}, \dots, x^{s_j-1}e^{\mu_j x}\} \cup \displaystyle \bigcup_{j=1}^k \{e^{\alpha_j x} \cos \omega_j x, e^{\alpha_j x} \sin \omega_j x, \dots, x^{r_j-1}e^{\alpha_j x} \cos \omega_j x, x^{r_j-1}e^{\alpha_j x} \sin \omega_j x\}$. \\
+У цьому випадку $\mu_1, \dots, \mu_l \in \mathbb{R}$ з кратністю $s_1, \dots, s_l$ відповідно та $\lambda_1 = \alpha_1 + i\omega_1, \dots, \lambda_k = \alpha_k + i\omega_k \in \mathbb{C}$ з кратністю $r_1, \dots, r_k$ відповідно. Всі $\mu_i$ та $\alpha_j + i \omega_j$ -- різні.
 \end{theorem}
 
-\begin{proof}
-Доведення дуже масивне. Тому розіб'ємо на 3 леми:
-
+Доведення цієї теореми доволі масивне. Тому розіб'ємо це на три етапи.
 \begin{lemma}
- Якщо $\lambda_j \in \mathbb{C}$ - корінь кратності $s_j$ характеристичного полінома $P{\lambda} = 0$, то розв'язком нашого рівняння буде:\\
-$\displaystyle y = x^p e^{\lambda_j x}, \forall p \in \mathbb{N}: 0 \leq p < s_j$
+Якщо $\lambda_j \in \mathbb{C}$ -- корінь кратності $s_j$ характеристичного многочлена $P(\lambda) = 0$, то розв'язком нашого диференціального рівняння буде $\displaystyle y = x^p e^{\lambda_j x}, \forall p \in \mathbb{N}: 0 \leq p < s_j$.
 \end{lemma}
 
 \begin{proof}
-Зазначимо, що справедлива така рівність:\\
-$\displaystyle  D^p_{\lambda} {e^{\lambda x}} \Big|_{\lambda = \lambda_j} = \left(\frac{d}{d \lambda}\right)^p {e^{\lambda x}} \Big|_{\lambda = \lambda_j} = x^p e^{\lambda_j x}$\\
+Зазначимо, що справедлива така рівність: $\displaystyle  D^p_{\lambda} {e^{\lambda x}} \Big|_{\lambda = \lambda_j} = \left(\frac{d}{d \lambda}\right)^p {e^{\lambda x}} \Big|_{\lambda = \lambda_j} = x^p e^{\lambda_j x}$.\\
 Отриманою функцією подіємо на оператор:\\
-$L\left(D^p_{\lambda} {e^{\lambda x}} \Big|_{\lambda = \lambda_j} \right) = \left(D^n_x + a_{n-1}D^{n-1}_x+\dots+a_1D_x +a_0I_x \right) \left(D^p_{\lambda} {e^{\lambda x}} \Big|_{\lambda = \lambda_j} \right) = $\\
-$D^a_\lambda D^b_x = D^b_x D^a_\lambda$\\
-$\displaystyle = D^p_{\lambda} \left(P(\lambda) e^{\lambda x} \right) \Big|_{\lambda = \lambda_j} \overset{\textrm{пр. Лейбниця}}{=} \sum_{q=0}^p C_p^q P^{(q)}(\lambda) (e^{\lambda x})^{(p-q)} \Big|_{\lambda = \lambda_j} = \sum_{q=0}^p C_p^q P^{(q)}(\lambda_j) \lambda_j^{p-q} e^{\lambda_j x}$\\
-Оскільки $\lambda_j$ - корінь кратності $s_j$, то з курсу ліналу,\\
-$P(\lambda_j) = \dots = P^{(s_j - 1)}(\lambda_j) = 0$, але $P^{(s_j)}(\lambda_j) \neq 0$\\
-Тому при $0 \leq p < s_j$ отримаємо, що:\\
-$\displaystyle \sum_{q=0}^p C_p^q P^{(q)}(\lambda_j) = 0 \Rightarrow L(x^p e^{\lambda_j x}) = 0$\\
-Отже, $x^p e^{\lambda_j x}$ - розв'язки 
+$L\left(D^p_{\lambda} {e^{\lambda x}} \Big|_{\lambda = \lambda_j} \right) = \left(D^n_x + a_{n-1}D^{n-1}_x+\dots+a_1D_x +a_0I_x \right) \left(D^p_{\lambda} {e^{\lambda x}} \Big|_{\lambda = \lambda_j} \right) = D^a_\lambda D^b_x = D^b_x D^a_\lambda$.\\
+$\displaystyle = D^p_{\lambda} \left(P(\lambda) e^{\lambda x} \right) \Big|_{\lambda = \lambda_j} \overset{\text{Th. Ляйбніца}}{=} \sum_{q=0}^p C_p^q P^{(q)}(\lambda) (e^{\lambda x})^{(p-q)} \Big|_{\lambda = \lambda_j} = \sum_{q=0}^p C_p^q P^{(q)}(\lambda_j) \lambda_j^{p-q} e^{\lambda_j x}$.\\
+Оскільки $\lambda_j$ -- корінь кратності $s_j$, то з курсу ліналу, $P(\lambda_j) = \dots = P^{(s_j - 1)}(\lambda_j) = 0$, але $P^{(s_j)}(\lambda_j) \neq 0$.\\
+Тому при $0 \leq p < s_j$ отримаємо, що: $\displaystyle \sum_{q=0}^p C_p^q P^{(q)}(\lambda_j) = 0 \Rightarrow L(x^p e^{\lambda_j x}) = 0$.\\
+Отже, $x^p e^{\lambda_j x}$ - розв'язки.
 \end{proof}
 
 \begin{lemma}
- Система $\{e^{\lambda x}, x e^{\lambda x}, \dots, x^{s-1} e^{\lambda x}\}$ є лінійно НЕзалежною над $\mathbb{C}$ (для довільних $j$ в нашому випадку)
- \end{lemma}
-
-\begin{proof}
-Припустимо, що ця система - л.з., тобто:\\
-$\exists C_0, \dots, C_{s-1} \in \mathbb{C}$ нетривіальні: $C_0e^{\lambda x} + C_1 xe^{\lambda x} + \dots + C_{s-1} x^{s-1}e^{\lambda x} = 0$\\
-Звідси випливає, що:\\
-$e^{\lambda x} (C_0 + C_1x + \dots + C_{s-1}x^{s-1}) = 0$\\
-Отримаємо, що права дужка має бути нулевою. Це означає, що система $\{1, x, \dots, x^{s-1}\}$ - л.з., що суперечить (в силу \textbf{Ex. 3.1.3.(1)}).\\
-Тому $\{e^{\lambda x}, x e^{\lambda x}, \dots, x^{s-1} e^{\lambda x}\}$ - л.н.з. 
-\end{proof}
-
-\begin{lemma}
- Якщо $\lambda_1, \dots, \lambda_m \in \mathbb{C}$ - різні комплексні числа з кратністю $s_1, \dots, s_m$, тоді система\\
-$\{e^{\lambda_1 x}, x e^{\lambda_1 x}, \dots, x^{s_1-1} e^{\lambda_1 x}\} \cup \dots \cup \{e^{\lambda_m x}, x e^{\lambda_m x}, \dots, x^{s_m-1} e^{\lambda_m x}\}$ є лінійно НЕзалежною над $\mathbb{C}$
+Система $\{e^{\lambda x}, x e^{\lambda x}, \dots, x^{s-1} e^{\lambda x}\}$ є лінійно незалежною над $\mathbb{C}$ (для довільних $j$ в нашому випадку).
 \end{lemma}
 
 \begin{proof}
-Знову припустимо, що ля система - л.з., тобто:\\
-$\exists C_{pq} \in \mathbb{C}$ не всі нулі: $\displaystyle \sum_{p=1}^m \sum_{q=0}^{s_p-1} C_{pq}x^qe^{\lambda_p x} = 0$\\
+!Припустимо, що ця система -- лінійно залежна, тобто $\exists C_0, \dots, C_{s-1} \in \mathbb{C}$ нетривіальні: \\
+$C_0e^{\lambda x} + C_1 xe^{\lambda x} + \dots + C_{s-1} x^{s-1}e^{\lambda x} = 0$. Звідси випливає, що \\
+$e^{\lambda x} (C_0 + C_1x + \dots + C_{s-1}x^{s-1}) = 0$\\
+Отримаємо, що права дужка має бути нулевою. Це означає, що система $\{1, x, \dots, x^{s-1}\}$ -- лінійно залежна -- суперечність!
+\end{proof}
+
+\begin{lemma}
+ Якщо $\lambda_1, \dots, \lambda_m \in \mathbb{C}$ -- різні комплексні числа з кратністю $s_1, \dots, s_m$, тоді система\\
+$\{e^{\lambda_1 x}, x e^{\lambda_1 x}, \dots, x^{s_1-1} e^{\lambda_1 x}\} \cup \dots \cup \{e^{\lambda_m x}, x e^{\lambda_m x}, \dots, x^{s_m-1} e^{\lambda_m x}\}$ є лінійно незалежною над $\mathbb{C}$.
+\end{lemma}
+
+\begin{proof}
+!Знову припустимо, що система -- лінійно залежна, тобто $\exists C_{pq} \in \mathbb{C}$ не всі нулі: $\displaystyle \sum_{p=1}^m \sum_{q=0}^{s_p-1} C_{pq}x^qe^{\lambda_p x} = 0$.\\
 Перепозначу $\displaystyle \sum_{q=0}^{s_p - 1} C_{pq}x^q = f_p(x)$. Тоді\\
-$f_1(x)e^{\lambda_1 x} + f_2(x)e^{\lambda_2 x} + \dots + f_m(x)e^{\lambda_m x} = 0$\\
-Через те, що не всі $C_{pq}$ нулеві, то принаймні одна з $f_p(x)$ є ненулевою. Вважатимемо, що $f_1(x) \not\equiv 0$\\
-Поділимо рівняння на $e^{\lambda_m x}$, отримавши:\\
-$f_1(x)e^{(\lambda_1-\lambda_m) x} + f_2(x)e^{(\lambda_2-\lambda_m) x} + \dots + f_m(x) = 0$\\
+$f_1(x)e^{\lambda_1 x} + f_2(x)e^{\lambda_2 x} + \dots + f_m(x)e^{\lambda_m x} = 0$.\\
+Через те, що не всі $C_{pq}$ нулеві, то принаймні одна з $f_p(x)$ є ненулевою. Вважатимемо, що $f_1(x) \not\equiv 0$.\\
+Поділимо рівняння на $e^{\lambda_m x}$ -- отримаємо:\\
+$f_1(x)e^{(\lambda_1-\lambda_m) x} + f_2(x)e^{(\lambda_2-\lambda_m) x} + \dots + f_m(x) = 0$.\\
 Продиференціюємо таку кількість разів, щоб позбутись від $f_m(x)$.
 Тут кожний доданок матиме наступний вираз:\\
-$\displaystyle \frac{d^l}{dx^l} \left(f_p(x)e^{(\lambda_p - \lambda_m)x} \right) = \sum_{q=0}^l C_l^q f_p^{(q)}(x)(\lambda_p - \lambda_m)^{l-q}e^{(\lambda_p - \lambda_m)x} \overset{\textrm{позн}}{=} \tilde{f_p(x)}e^{(\lambda_p - \lambda_m)x}$\\
-Зокрема для $k=1$:\\ $\displaystyle \tilde{f_1(x)} = \underbrace{f_1(x)(\lambda_1 - \lambda_m)^l}_{\neq 0} + \sum_{q=1}^l C_l^q f_1^{(q)}(x)(\lambda_1 - \lambda_m)^{l-q}e^{(\lambda_1 - \lambda_m)x} \neq 0$\\
-Отримаємо, що:\\
-$\tilde{f_1(x)}e^{(\lambda_1 - \lambda_m)x} + \tilde{f_2(x)}e^{(\lambda_2 - \lambda_m)x} + \dots + \tilde{f_{m-1}(x)}e^{(\lambda_{m-1} - \lambda_m)x} = 0$\\
+$\displaystyle \frac{d^l}{dx^l} \left(f_p(x)e^{(\lambda_p - \lambda_m)x} \right) = \sum_{q=0}^l C_l^q f_p^{(q)}(x)(\lambda_p - \lambda_m)^{l-q}e^{(\lambda_p - \lambda_m)x} \overset{\text{позн.}}{=} \tilde{f_p(x)}e^{(\lambda_p - \lambda_m)x}$\\
+Зокрема для $k=1$ \\
+$\displaystyle \tilde{f_1(x)} = \underbrace{f_1(x)(\lambda_1 - \lambda_m)^l}_{\neq 0} + \sum_{q=1}^l C_l^q f_1^{(q)}(x)(\lambda_1 - \lambda_m)^{l-q}e^{(\lambda_1 - \lambda_m)x} \neq 0$.\\
+Отримаємо, що $\tilde{f_1(x)}e^{(\lambda_1 - \lambda_m)x} + \tilde{f_2(x)}e^{(\lambda_2 - \lambda_m)x} + \dots + \tilde{f_{m-1}(x)}e^{(\lambda_{m-1} - \lambda_m)x} = 0$.\\
 Вийшла така ж сама тотожнсть по формі, що й з самого початку.\\
 Якщо продовжити за MI, то прийдемо до тотожності:\\
-$\overset{\vdots}{\tilde{f_1(x)}}e^{\lambda_1 x} = 0$\\
-Але за умовою, $f_1(x) \neq 0$, що суперечить нашему припущенню 
+$\overset{\vdots}{\tilde{f_1(x)}}e^{\lambda_1 x} = 0$.
+Але за умовою, $f_1(x) \neq 0$ -- суперечність!
 \end{proof}
 
-Ці 3 леми й завершують доведення теореми 
-\end{proof}
+Усі ці три леми завершують доведення основної теореми.
 
 \begin{example}
-Розв'язати рівняння: $y^{(8)}+8y^{(6)}+16y^{4} = 0$
-Запишемо характеристичний поліном:\\
-$P(\lambda) = \lambda^8 + 8 \lambda^6 + 16 \lambda^4 = 0$\\
-Звідси:\\
-$\lambda_1 = 0$ - кратність 4, тому тут система: $\{1, x, x^2, x^3\}$\\
-$\lambda_2 = 2i, \lambda_3 = -2i$ - кратності 2, тому тут система: $\{\cos 2x, \sin 2x, x \cos 2x, x \sin 2x \}$\\
-Отже, $y = C_1 + C_2 x + C_3 x^2 + C_4 x^3 + C_5 \cos x + C_6 \sin x + C_7 x \cos x + C_8 x \sin x$
+Розв'язати рівняння $y^{(8)}+8y^{(6)}+16y^{(4)} = 0$.\\
+Запишемо характеристичний поліном $P(\lambda) = \lambda^8 + 8 \lambda^6 + 16 \lambda^4 = 0$. Звідси:\\
+$\lambda_1 = 0$ -- кратність 4, тому тут система: $\{1, x, x^2, x^3\}$\\
+$\lambda_2 = 2i, \lambda_3 = -2i$ -- кратності 2, тому тут система: $\{\cos 2x, \sin 2x, x \cos 2x, x \sin 2x \}$.\\
+Отже, $y = C_1 + C_2 x + C_3 x^2 + C_4 x^3 + C_5 \cos x + C_6 \sin x + C_7 x \cos x + C_8 x \sin x$ -- загальний розв'язок.
 \end{example}
 
 \subsection{Неоднорідне рівняння з постійними коефіцієнтами}
+%TODO дописати
 Спробуємо розв'язати рівняння
 \begin{align*}
 y^{(n)} + a_{n-1}y^{(n-1)}+\dots+a_1y'+a_0y = b(x)
