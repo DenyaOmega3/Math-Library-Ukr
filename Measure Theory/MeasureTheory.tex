@@ -574,7 +574,47 @@ $\displaystyle\lim_{n \to \infty} \lambda([n,+\infty)) = \lim_{n \to \infty} \ca
 \end{example}
 
 \subsection{Про міру Жордана}
-\textit{TODO: додати}
+Із курсу математичного аналізу відомо, що з себе представляє міра Жордана та клас вимірних множин $\mathcal{K}_d$. Даний контент можна подивитися в іншому пдф більш детально. Однак я зазначу, що міра Жордана $m$ -- ще не міра в сенсі означення, що було задано вище. Нам бракує лише $\sigma$-адитивності. Це питання розв'яжеться згодом.
+
+\begin{lemma}
+Нехай $A \in \mathcal{K}_d$. Тоді $\forall \varepsilon > 0: \exists F_\varepsilon, U_\varepsilon \in \mathcal{K}_d$ -- відповідно замкнена та відкрита множина: $\begin{cases} m(A) - m(F_\varepsilon) < \varepsilon \\ m(U_\varepsilon) - m(A) < \varepsilon \end{cases}$. Причому до всього цього $F_\varepsilon \subset A \subset U_\varepsilon$.\\
+Тобто вимірну за Жорданом множину можна наблизити замкненим всередині множиною та відкритою зовні множиною.
+\end{lemma}
+
+\begin{proof}
+I. \textit{Існування замкненої множини}.\\
+$A$ -- вимірна за Жорданом, тоді $m(A) = \displaystyle\sup_{n \geq 0} m(F_{(n)})$, тоді існує $N$, для якого $m(F_{(N)}) > m(A) - \varepsilon$. Покладемо $F_\varepsilon = F_{(N)} \subset A$. Тоді звідси миттєво $m(A) - m(F_\varepsilon) < \varepsilon$. Ясно, що $F_\varepsilon$ вимірна за Жорданом.
+\bigskip \\
+II. \textit{Існування відкритої множини}.\\
+Знову $A$ вимірна за Жорданом, то $m(A) = \displaystyle\inf_{n \geq 0} m(F^{(n)})$, тоді існує $\tilde{N}$, для якого $m(F^{(\tilde{N})}) < m(A) + \dfrac{\varepsilon}{2}$. У нас зараз $F^{(\tilde{N})} \supset A$, але поки що замкнена множина.\\
+Згадаємо, що $F^{(\tilde{N})}$ складається зі скінченного об'єднання брусів вигляду $R = \displaystyle\prod_{i=1}^d \left[ \dfrac{k_i}{2^{\tilde{N}}}, \dfrac{k_i+1}{2^{\tilde{N}}} \right]$. Нехай $\delta > 0$ та замінимо замкнені бруси $R$ на відкриті бруси $R(\delta) =\displaystyle \prod_{i=1}^d \left( \dfrac{k_i}{2^{\tilde{N}}} - \delta, \dfrac{k_i+1}{2^{\tilde{N}}}+\delta \right)$. Зрозуміло, що $R(\delta) \supset R$, а тому звідси $F^{(\tilde{N})}(\delta) \supset F^{(\tilde{N})}$, де ось $F^{(\tilde{N})}(\delta)$ -- об'єднання відкритих брусів. Оскільки $m$ -- монотонна міра, то $m(F^{(\tilde{N})}) \leq m(F^{(\tilde{N})}(\delta))$. Звідси маємо наступне:\\
+$m(F^{(\tilde{N})}) \leq m(F^{(\tilde{N})}(\delta)) \overset{m \text{ -- напівадитивна}}{\leq} \displaystyle\sum m(R(\delta)) = \sum \prod_{i=1}^d \left( \dfrac{k_i+1}{2^{\tilde{N}}} + \delta - \left(\dfrac{k_i}{2^{\tilde{N}}} - \delta  \right)\right) = \\ = \sum \left( \dfrac{1}{2^{\tilde{N}}} + 2 \delta \right)^d \xrightarrow{\delta \to 0} \sum \left( \dfrac{1}{2^{\tilde{N}}} \right)^d = \sum \prod_{i=1}^d \left[ \dfrac{k_i+1}{2^{\tilde{N}}} - \dfrac{k_i}{2^{\tilde{N}}} \right] = \sum m(R) = m(F^{(\tilde{N})})$.\\
+Значить, звідси існує $\delta_1 > 0$, для якого $m(F^{(\tilde{N})}(\delta_1)) - m(F^{(\tilde{N})}) < \dfrac{\varepsilon}{2}$.\\
+Нарешті, покладемо $U_\varepsilon = F^{(\tilde{N})}(\delta_1) \supset F^{(\tilde{N})} \supset A$. Ясно, що це відкрита множина (як об'єднання відкритих) та вимірна за Жорданом. Тоді звідси\\
+$m(U_\varepsilon) - m(A) = (m(U_\varepsilon) - m(F^{(\tilde{N})})) + (m(F^{(\tilde{N})}) - m(A)) < \varepsilon$.
+%TODO see text and format brackets
+\end{proof}
+
+\begin{theorem}
+Міра Жордана $m$ -- міра (в сенсі означення вище) на кільці $\mathcal{K}_d$.
+\end{theorem}
+
+\begin{proof}
+Уже відомо, що $m$ -- невід'ємна функція множин, тому залишається $\sigma$-адитивність.\\
+Нехай $A_n \in \mathcal{K}_d$ -- неперетинні, причому $\displaystyle\bigsqcup_{n=1}^\infty A_n = A \in \mathcal{K}_d$. Ми хочемо довести $m(A) = \displaystyle\sum_{n=1}^\infty m(A_n)$.\\
+Зауважимо, що $\displaystyle\bigsqcup_{n=1}^j A_n \subset A$, тоді за монотонністю та скінченною адитивністю міри Жордана, $\displaystyle\sum_{n=1}^j m(A_n) \leq m(A)$. Якщо спрямуємо $j \to \infty$, то отримаємо $m(A) \geq \displaystyle\sum_{n=1}^\infty m(A_n)$.\\
+Далі застосуємо щойно доведену лему кілька разів. Нехай $\varepsilon > 0$. Для множини $A$ оберемо замкнену вимірну за Жорданом множину $F_\varepsilon \subset A$, для якої $m(A) - m(F_\varepsilon) < \varepsilon$. Для кожної множини $A_n$ оберемо відкриту вимірну за Жорданом множину $U_{\frac{\varepsilon}{2^n}} \supset A_n$, для якої $m(U_{\frac{\varepsilon}{2^n}}) - m(A) < \dfrac{\varepsilon}{2^n}$. Зауважимо, що $\displaystyle\bigcup_{n=1}^\infty U_{\frac{\varepsilon}{2^n}} \supset \bigcup_{n=1}^\infty A_n = A \supset F_\varepsilon$, тобто для $F_\varepsilon$ у нас є відкрите покриття $\left\{ U_{\frac{\varepsilon}{2^n}}, n \geq 1\right\}$. Оскільки $F_\varepsilon$ замкнена та обмежена, то вона є компактом. Значить, за лемою Гейне-Бореля, ми можемо відокремити скінченне підпокриття $\{U_1,\dots,U_k\}$, тобто $\displaystyle\bigcup_{i=1}^k U_i \supset F_\varepsilon$. Таким чином,\\
+$m(F_\varepsilon) \leq \displaystyle\sum_{i=1}^k m(U_i) \leq \sum_{i=1}^\infty m(U_i) < \sum_{i=1}^\infty \left(m(A) + \dfrac{\varepsilon}{2^i} \right) = \sum_{i=1}^\infty m(A) + \varepsilon$.\\
+Отже, $\displaystyle m(A) < \varepsilon + m(F_\varepsilon) < \sum_{i=1}^\infty m(A) + 2 \varepsilon$, а тому при $\varepsilon \to 0+0$ отримаємо $m(A) \leq \displaystyle\sum_{i=1}^\infty m(A_n)$.
+\end{proof}
+
+\begin{corollary}
+Розглянемо півкільце $\mathcal{P}_d = \displaystyle \left\{ \prod_{k=1}^d (a_k,b_k] \mid a_k,b_k \in \mathbb{R} \right\}$, а на ній функцію множин $\displaystyle \lambda_d \left( \prod_{k=1}^d (a_k,b_k] \right) = \prod_{k=1}^d (b_k-a_k)$. Тоді $\lambda_d$ задає міру на $\mathcal{P}_d$.
+\end{corollary}
+
+\begin{proof}
+Дійсно, $\mathcal{P}_d \subset \mathcal{K}_d$, тому звідси $\lambda_d(A) = m(A)$.
+\end{proof}
 
 \subsection{Зовнішні міри}
 \begin{definition}
