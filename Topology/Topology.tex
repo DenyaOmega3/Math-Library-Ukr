@@ -512,8 +512,12 @@ $[a,b] \cong [0,1]$ та $[0,1] \cong [c,d] \implies [a,b] \cong [c,d]$.
 \begin{align*}
 \forall U \in \tau: U = \bigcup_{V \in \mathcal{\tilde{B}}} V,\ \mathcal{\tilde{B}} \subset \mathcal{B}
 \end{align*}
-Тобто $\mathcal{B}$ називається базою, якщо кожна відкрита множина записується як об'єднання множин з класу $\mathcal{B}$.
+Тобто $\mathcal{B}$ -- база, якщо кожна відкрита множина записується як об'єднання множин з класу $\mathcal{B}$.
 \end{definition}
+
+\begin{remark}
+Всі множини з класу $\mathcal{B}$ -- відкриті автоматично, тобто $\mathcal{B} \subset \tau$, просто тому що їх можна сприймати як об'єднання з одного елементу.
+\end{remark}
 
 \begin{example}
 Зокрема маємо метричний простір $(X,\rho)$, де індукується топологія $\tau_\rho$. Тоді для неї база $\mathcal{B} = \{ B(x;r) \mid x \in X, r > 0 \}$ -- набір всіх відкритих куль. Дійсно, нехай $U$ -- відкрита множина, тоді $\forall x \in U: x$ -- відкрита, а тому $\exists B(x;r_x) \subset U$. Тоді звідси $U = \displaystyle\bigcup_{x \in X} B(x;r_x)$. 
@@ -532,7 +536,7 @@ $[a,b] \cong [0,1]$ та $[0,1] \cong [c,d] \implies [a,b] \cong [c,d]$.
 \begin{proof}
 Дійсно, оскільки $\mathcal{B}$ -- база топології, то кожна відкрита множина -- це об'єдання множин із бази.\\
 1. Зокрема $X$ -- відкрита, тому $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$.\\
-2. Нехай $B_1,B_2 \in \mathcal{B}$. Вони вдвох є відкритими, тому що вони записані як об'єднання однієї множини з бази. Значить, $B_1 \cap B_2$ є відкритою множиною, а тому $B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
+2. Нехай $B_1,B_2 \in \mathcal{B}$. Вони вдвох (див. зауваження). Значить, $B_1 \cap B_2$ є відкритою множиною, а тому $B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
 \end{proof}
 
 \begin{definition}
@@ -646,17 +650,41 @@ $\mathbb{R} = \displaystyle\bigcup_{n \in \mathbb{N}} (-n,n)$.\\
 Задано $(X,\tau)$ -- топологічний простір.\\
 Клас $\mathcal{S}$ підмножин $X$ назвемо \textbf{передбазою топології $\tau$}, якщо
 \begin{align*}
-\mathcal{B} \overset{\text{def.}}{=} \left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}
+\mathcal{B} \overset{\text{def.}}{=} \left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\} \text{ утворює базу топології } \tau.
 \end{align*}
-утворює базу топології $\tau$. Тобто з цього випливає, що
+\iffalse
+Тобто з цього випливає, що
 \begin{align*}
 \forall U \in \tau: U = \displaystyle\bigcup_{\bigcap_{i=1}^n S_i \in \mathcal{\tilde{B}}} \bigcap_{i=1}^n S_i, \text{ де } \mathcal{\tilde{B}} \subset \mathcal{B}
 \end{align*}
-Тобто кожна відкрита множина записується як об'єднання множин, кожна з яких записується лише як скінченні перетини множин з $\mathcal{S}$.
+\fi
+Тобто звідси випливає, що кожна відкрита множина записується як об'єднання скінченних перетинів множин з $\mathcal{S}$.
 \end{definition}
 
-\noindent Ми вже знаємо, що якщо є база $\mathcal{B}$, то тоді можна побудувати топологію. Тобто якщо ми хочемо, щоб $\mathcal{S}$ була передбазою, то треба спочатку утворити базу $\mathcal{B}$, а із бази вже утворити топологію.\\
-\textit{TODO: доповнити}
+\noindent Ми вже знаємо, що якщо є база $\mathcal{B}$, то тоді можна побудувати топологію. Тобто якщо ми хочемо, щоб $\mathcal{S}$ була передбазою, то треба спочатку утворити базу $\mathcal{B}$, а із бази вже утворити топологію.
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+$\mathcal{S}$ -- передбаза $X \iff \displaystyle\bigcup_{U \in \mathcal{S}} U = X$ (тут об'єднання всіх елементів з $\mathcal{S}$).
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $\mathcal{S}$ -- передбаза $X$, тоді $\mathcal{B} = \displaystyle\left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}$ утвроює базу топології, тому й базу $X$. Значить, $\displaystyle\bigcup_{V \in \mathcal{B}} V = X$. У цьому об'єднанні беруть участь множини $U \in \mathcal{S}$, а всі решта з об'єдання будуть перетинами з двох чи більше елементів $\mathcal{S}$. Таким чином, достатньо об'єднати $\displaystyle\bigcup_{U \in \mathcal{S}} U = X$.
+\bigskip \\
+\leftproof Дано: $\displaystyle\bigcup_{U \in \mathcal{S}} U = X$.\\
+Нам треба показати, що $\mathcal{B} = \displaystyle\left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}$ -- база $X$. Дійсно,\\
+$X = \displaystyle\bigcup_{U \in \mathcal{S}} U = \bigcup_{V \in \mathcal{B}} V = X$ (пояснення вище).\\
+Нехай $B_1,B_2 \in \mathcal{B}$, тобто $\displaystyle B_1 = \bigcap_{i=1}^{n_1} S_i$ та $\displaystyle B_2 = \bigcap_{j=1}^{n_2} S_j$. Тоді звідси $B_1 \cap B_2 = \displaystyle\bigcap_{i=1}^{n_1} S_i \cap \bigcap_{j=1}^{n_2} S_j = \bigcap_{k=1}^{m} S_k$.\\
+Отже, $\mathcal{B}$ -- база множини $X$, а тому $\mathcal{S}$ -- передбаза $X$.
+\end{proof}
+
+\iffalse
+\begin{example}
+Зокрема $\mathcal{S} = \{(-\infty,b), (a,+\infty) \mid a,b \in \mathbb{R}\}$ буде передбазою $\mathbb{R}$, причому породжена топологія повністю збігатиметься зі стандартною.\\
+Те, що це передбаза, -- цілком зрозуміло, якщо об'єднати всі інтервали. Залишилося довести, що $\tau_{\mathcal{S}} = \tau_{\text{stand}}$.\\
+Цілком зрозуміло, що $\tau_{\mathcal{S}} \subset \tau_{\text{stand}}$. Тепер нехай $U \in \tau_{\text{stand}}$. Ми знаємо, що $\tau_{\text{stand}} = \tau_{\mathcal{B}}$, причому $\mathcal{B} = \{(a,b) \mid a,b \in \mathbb{Q}\}$
+\end{example}
+\fi
 
 \subsection{Характеристики точок множин}
 \noindent Нам вже відоме означення внутрішньої точки. Ще раз нагадаю:
@@ -913,6 +941,33 @@ $f$ -- неперервне $\iff f_1,f_2$ -- обидва неперервні 
 Нехай $U \in \mathcal{B}$ -- база топології $\tau_1 \times \tau_2$, тобто $U = U_1 \times U_2$, де $U_1,U_2$ -- відкриті на $X_1,X_2$. Звідси $f^{-1}(U) = \{ z \in Z \mid (f_1(z),f_2(z)) \in U_1 \times U_2\} = f_1^{-1}(U_1) \cap f_2^{-1}(U_2)$. За умовою, маємо $f_1^{-1}(U_1), f_2^{-1}(U_2)$ -- відкриті на $Z$. Тобто звідси випливає, що $f^{-1}(U)$ -- відкрита на $Z$.
 \end{proof}
 
+\begin{proposition}[Ще один спосіб побудувати топологію]
+Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Розглянемо такий клас:
+\begin{align*}
+\mathcal{S} = \left\{ \pr_1^{-1}(U), U \in \tau_1 \right\} \cup \left\{ \pr_2^{-1}(V), V \in \tau_2 \right\}
+\end{align*}
+Тоді $\mathcal{S}$ утвроює передбазу множини $X_1 \times X_2$. У нас утвориться топологіч для $X_1 \times X_2$ -- і це буде та сама топологія, що була визначена через базу.
+\end{proposition}
+
+\begin{proof}
+Для доведення, що $\mathcal{S}$ -- передбаза, треба довести, що $\mathcal{B}' = \left\{ \bigcap S \mid S \in \mathcal{S}, \text{скінченні перетини} \right\}$ утворить базу множини $X_1 \times X_2$.\\
+$X_1 \times X_2 \in \mathcal{B}'$, просто тому що $X_1 \times X_2 = \pr_1^{-1}(X_1) \cap \pr_2^{-1}(X_2)$, тобто елемент $X_1 \times X_2$ ми розписали на скінченний перетин елементів з $\mathcal{S}$. Раз вже $X_1 \times X_2 \in \mathcal{B}'$, то автоматично $X_1 \times X_2 = \displaystyle\bigcup_{B \in \mathcal{B}'} B$.\\
+Нехай $A,B \in \mathcal{B}'$, тобто звідси $A = \displaystyle\bigcup \bigcap S_j,\ B = \displaystyle\bigcup \bigcap S'_j$. Звідси отримаємо, що\\
+$A \cap B = \displaystyle\bigcup \left( \bigcap S_j \cap \bigcap S_j' \right) = \bigcup \bigcap S''_j$.\\
+Отже, маємо $\tau_{\mathcal{S}}$, причому $\tau_{\mathcal{S}} = \tau_{\mathcal{B}}$, де база $\mathcal{B}$ -- вище описана.\\
+$\tau_{\mathcal{S}} \subset \tau_{\mathcal{B}}$ -- тут цілком зрозуміло.\\
+$\tau_{\mathcal{B}} \subset \tau_{\mathcal{S}}$, просто тому що $U \times V = \pr_1^{-1}(U) \cap \pr_2^{-1}(V)$.
+\end{proof}
+
+\subsubsection*{Узагальнення добутку топологій}
+Припустимо, що $\{(X_\alpha,\tau_\alpha, \alpha \in I \}$ -- довільна сім'я топологічних просторів. Ми вже з'ясували, що набору множин $\displaystyle\prod_{\alpha \in I} U_\alpha$, де $U_\alpha \in \tau_\alpha$, недостатньо для формування топології. Однак ми можемо знову розглянути наступний клас:
+\begin{align*}
+\mathcal{B} = \left\{ \prod_{\alpha \in I} U_\alpha \mid U_\alpha \in \tau_\alpha  \right\}
+\end{align*}
+Це утворює базу множини $\displaystyle\prod_{\alpha \in I} X_\alpha$, тому ми знайшли топологію $\tau_{\mathcal{B}}$ для множини $\displaystyle\prod_{\alpha \in I} X_\alpha$. Така топологія в зарубіжній літературі називається \textbf{box topology}.\\
+На жаль, дане наївне узагальнення призводить до певних проблем.
+
+\iffalse
 \begin{remark}
 Можна узагальнити означення добутку топології. Маємо $\{(X_\alpha,\tau_\alpha)\}$ -- сім'я топологічних просторів та $X = \displaystyle\prod_{\alpha} X_\alpha$ -- декартів добуток. Якщо визначити клас
 \begin{align*}
@@ -921,6 +976,7 @@ $f$ -- неперервне $\iff f_1,f_2$ -- обидва неперервні 
 то вона утворить базу множини $X$, а тому можна утворити топологію.\\
 Позначення: $\displaystyle\prod_\alpha \tau_\alpha \overset{\text{def.}}{=} \tau_{\mathcal{B}}$.
 \end{remark}
+\fi
 
 \subsection{Фактортопологія}
 \noindent
@@ -1619,6 +1675,49 @@ $f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$. (TODO: д
 
 \begin{proof}
 Припустимо, що $A,B$ -- замкнені та неперетинні множини. Тоді існує $f \colon X \to [0,1]$, що неперервна та задовільняє іншим умовам. Зауважимо, що $A \subset f^{-1} \left(\left[0, \dfrac{1}{2}\right)\right)$ та $B \subset f^{-1}\left(\left(\dfrac{1}{2},1\right]\right)$. Ці прообрази відкриті в силу неперервності, а також неперетинні в силу неперетинностей цих інтервалів. Тобто ми довели означення нормальності.
+\end{proof}
+
+\subsection{Функціональна збіжність}
+\begin{definition}
+Задані $(X,\tau), (Y,\tilde{\tau})$ -- топологічні простори та $\{f_n, n \geq 1\},\ f_n \colon X \to Y$ -- функціональна послідовність.\\
+Послідовність $\{f_n\}$ \textbf{збігається поточково} до функції $f \colon X \to Y$, якщо
+\begin{align*}
+\forall x \in X: \{f_n(x)\} \subset Y \text{ збігається до } f(x).
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Якщо $f_n \to f$ поточково та $f_n \colon X \to Y$ -- неперервні, то не обов'язково $f \colon X \to Y$ буде неперервною.\\
+\textit{Контрприклад дивіться в мат. аналізі II}.
+\end{remark}
+
+\begin{definition}
+Задані $(X,\tau), (Y,\rho)$ -- топологічний та метричний простори та $\{f_n, n \geq 1\},\ f_n \colon X \to Y$ -- функціональна послідовність.\\
+Послідовність $\{f_n\}$ \textbf{збігається поточково} до функції $f \colon X \to Y$, якщо
+\begin{align*}
+\forall \varepsilon > 0: \exists N \in \mathbb{N}: \forall n \geq N: \forall x \in X: \rho(f_n(x), f(x)) < \varepsilon
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+Задані $(X,\tau), (Y,\rho)$ -- топологічний та метричний простори. Відомо, що $\{f_n\},\ f_n \colon X \to Y$ -- збіжна рівномірно. Тоді $\{f_n\}$ -- збіжна поточково.
+\end{proposition}
+
+\begin{proof}
+Нехай $x \in X$, також нехай $B(f(x),\varepsilon)$ -- відкритий окіл $f(x)$. Тоді за нашим $\varepsilon > 0$ (в силу рівномірної неперервності) $\exists N: \forall n \geq N: \rho(f_n(x),f(x)) < \varepsilon$, тобто звідси $f_n(x) \in B(f(x),\varepsilon)$.
+\end{proof}
+
+\begin{remark}
+Зворотне твердження не працює.\\
+\textit{Контрприклад дивіться в мат. аналізі II}.
+\end{remark}
+
+\begin{proposition}
+Задані $(X,\tau), (Y,\rho)$ -- топологічний та метричний простори. Відомо, що $\{f_n\},\ f_n \colon X \to Y$ -- збіжна рівномірно та всі $f_n$ -- неперервні. Тоді $f$ -- неперервне.
+\end{proposition}
+
+\begin{proof}
+TODO: довести.
 \end{proof}
 \newpage
 
