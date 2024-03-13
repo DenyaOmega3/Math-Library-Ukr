@@ -16,6 +16,7 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{pgfplots}
+\usepackage{centernot}
 
 \usepackage{pdfpages}
 \usepackage{caption}
@@ -355,8 +356,8 @@ $y \in B_{\rho'}(x,cr) \implies \rho'(x,y) \leq cr \implies \rho(x,y) \leq \dfra
 Таким чином, $f$ -- неперервне відображення.
 \end{proof}
 
-\begin{proposition}["Означення Гейне"]
-Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори та відображення $f \colon X \to Y$ -- неперервне. Тоді виконується "означення Гейне", тобто\\
+\begin{proposition}[''Означення Гейне'']
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори та відображення $f \colon X \to Y$ -- неперервне. Тоді виконується ''означення Гейне'', тобто\\
 нехай $\{x_n \in X, n \geq 1\}$ збігається до точки $x \in X$. Тоді $\{f(x_n) \in Y, n \geq 1\}$ збігається до точки $f(x) \in Y$.
 \end{proposition}
 
@@ -690,6 +691,16 @@ $X = \displaystyle\bigcup_{U \in \mathcal{S}} U = \bigcup_{V \in \mathcal{B}} V 
 Отже, $\mathcal{B}$ -- база множини $X$, а тому $\mathcal{S}$ -- передбаза $X$.
 \end{proof}
 
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $\mathcal{S}$ -- передбаза топології. Тоді $\tau$ -- найслабша топологія, що містить $\mathcal{S}$.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $\mathcal{S}$ -- передбаза топології. Для зручності позначу початкову топологію за $\tau_{\mathcal{S}}$.\\
+Припустимо, що $\tau$ -- слабша топологія, що містить $\mathcal{S}$, тобто $\tau \subset \tau_{\mathcal{S}}$. Нам залишилося довести, що $\tau_{\mathcal{S}} \subset \tau$.\\
+Беремо $U \in \tau_{\mathcal{S}}$, тоді звідси $U = \displaystyle\bigcup \bigcap_{\text{скінченний}} W$, де $W \in \mathcal{S}$. Зауважимо, що $W \in \tau$ також, бо $\tau$ містить $\mathcal{S}$. Таким чином, $\displaystyle\bigcap_{\text{скінченний}} W \in \tau \implies U \in \tau$.
+\end{proof}
+
 \iffalse
 \begin{example}
 Зокрема $\mathcal{S} = \{(-\infty,b), (a,+\infty) \mid a,b \in \mathbb{R}\}$ буде передбазою $\mathbb{R}$, причому породжена топологія повністю збігатиметься зі стандартною.\\
@@ -858,7 +869,7 @@ Y \arrow{r}{f} \arrow{dr}[swap]{\imath \circ f} & A \arrow{d}{\imath} \\
 Нехай задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Хочеться задати топологію на $X_1 \times X_2$. Перше вгадування: чи буде множина $\{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}$ утворювати топологію? Ні, цього недостатньо.
 
 \begin{example}
-Зокрема маємо $(\mathbb{R},\tau_1)$ та $\mathbb{R},\tau_2)$ -- дві евклідові топології. Розглянемо множину $U_1 \times U_2 = (0,2) \times (0,2)$ та множину $V_1 \times V_2 = (1,3) \times (1,3)$. А далі треба подивитися на $(U_1 \times U_2) \cup (V_1 \times V_2)$ та зауважити наступне: це буде відкрита множина, але не потрапляє в нашу 'топологію', тому що я не можу її записати як $W_1 \times W_2$.
+Зокрема маємо $(\mathbb{R},\tau_1)$ та $\mathbb{R},\tau_2)$ -- дві евклідові топології. Розглянемо множину $U_1 \times U_2 = (0,2) \times (0,2)$ та множину $V_1 \times V_2 = (1,3) \times (1,3)$. А далі треба подивитися на $(U_1 \times U_2) \cup (V_1 \times V_2)$ та зауважити наступне: це буде відкрита множина, але не потрапляє в нашу ''топологію'', тому що я не можу її записати як $W_1 \times W_2$.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -937,10 +948,6 @@ X_1 & \arrow{l}[swap]{\pr_1} X_1 \times X_2 \arrow{r}{\pr_2} & X_2
 Нехай $U_1$ -- відкрита в $X_1$. Тоді звідси $\pr_1^{-1}(U_1) = \{ (x_1,x_2) \in X_1 \times X_2 \mid x_1 \in U_1 \} = U_1 \times X_2$ -- відкрита як добуток двох відкритих.
 \end{proof}
 
-\begin{remark}
-$\tau_1 \times \tau_2$ -- найслабша на $X_1 \times X_2$ топологія серед всіх інших, для якої проєкції -- неперервні. \textit{TODO: обміркувати}
-\end{remark}
-
 \begin{proposition}
 Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Нехай $(Z,\sigma)$ -- також топологічний простір, встановимо відображення $f \colon Z \to X_1 \times X_2$ як $z \mapsto (f_1(z),f_2(z))$.\\
 $f$ -- неперервне $\iff f_1,f_2$ -- обидва неперервні (покоординатно).
@@ -953,31 +960,60 @@ $f$ -- неперервне $\iff f_1,f_2$ -- обидва неперервні 
 Нехай $U \in \mathcal{B}$ -- база топології $\tau_1 \times \tau_2$, тобто $U = U_1 \times U_2$, де $U_1,U_2$ -- відкриті на $X_1,X_2$. Звідси $f^{-1}(U) = \{ z \in Z \mid (f_1(z),f_2(z)) \in U_1 \times U_2\} = f_1^{-1}(U_1) \cap f_2^{-1}(U_2)$. За умовою, маємо $f_1^{-1}(U_1), f_2^{-1}(U_2)$ -- відкриті на $Z$. Тобто звідси випливає, що $f^{-1}(U)$ -- відкрита на $Z$.
 \end{proof}
 
-\begin{proposition}[Ще один спосіб побудувати топологію]
+\begin{proposition}[Еквівалентний спосіб побудувати топологію]
 Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Розглянемо такий клас:
 \begin{align*}
 \mathcal{S} = \left\{ \pr_1^{-1}(U), U \in \tau_1 \right\} \cup \left\{ \pr_2^{-1}(V), V \in \tau_2 \right\}
 \end{align*}
-Тоді $\mathcal{S}$ утвроює передбазу множини $X_1 \times X_2$. У нас утвориться топологіч для $X_1 \times X_2$ -- і це буде та сама топологія, що була визначена через базу.
+Тоді $\mathcal{S}$ утвроює передбазу множини $X_1 \times X_2$. У нас утвориться топологія для $X_1 \times X_2$ -- і це буде та сама топологія, що була визначена через базу.
 \end{proposition}
 
 \begin{proof}
-Для доведення, що $\mathcal{S}$ -- передбаза, треба довести, що $\mathcal{B}' = \left\{ \bigcap S \mid S \in \mathcal{S}, \text{скінченні перетини} \right\}$ утворить базу множини $X_1 \times X_2$.\\
-$X_1 \times X_2 \in \mathcal{B}'$, просто тому що $X_1 \times X_2 = \pr_1^{-1}(X_1) \cap \pr_2^{-1}(X_2)$, тобто елемент $X_1 \times X_2$ ми розписали на скінченний перетин елементів з $\mathcal{S}$. Раз вже $X_1 \times X_2 \in \mathcal{B}'$, то автоматично $X_1 \times X_2 = \displaystyle\bigcup_{B \in \mathcal{B}'} B$.\\
-Нехай $A,B \in \mathcal{B}'$, тобто звідси $A = \displaystyle\bigcup \bigcap S_j,\ B = \displaystyle\bigcup \bigcap S'_j$. Звідси отримаємо, що\\
-$A \cap B = \displaystyle\bigcup \left( \bigcap S_j \cap \bigcap S_j' \right) = \bigcup \bigcap S''_j$.\\
-Отже, маємо $\tau_{\mathcal{S}}$, причому $\tau_{\mathcal{S}} = \tau_{\mathcal{B}}$, де база $\mathcal{B}$ -- вище описана.\\
-$\tau_{\mathcal{S}} \subset \tau_{\mathcal{B}}$ -- тут цілком зрозуміло.\\
-$\tau_{\mathcal{B}} \subset \tau_{\mathcal{S}}$, просто тому що $U \times V = \pr_1^{-1}(U) \cap \pr_2^{-1}(V)$.
+Нам треба об'єднати всі елементи даного класу. Маємо\\
+$\displaystyle\bigcup_{U \in \tau_1} \pr_1^{-1}(U) \cup \bigcup_{V \in \tau_2} \pr_2^{-1}(V) = \bigcup_{U \in \tau_1} (U \times X_2) \cup \bigcup_{V \in \tau_2} (X_1 \times V) = \left(\left( \bigcup_{U \in \tau_1} U \right) \times X_2\right) \cup \left( X_1 \times \left( \bigcup_{V \in \tau_2} V \right)\right) = \\
+= (X_1 \times X_2) \cup (X_1 \times X_2) = X_1 \times X_2$.\\
+У передостанній рівності два об'єднання замінилися на $X_1,X_2$ відповідно, просто тому що це найбільші множини, які також відкриті.\\
+Таким чином, у нас вже є топологія $\tau_\mathcal{S}$. Переконаємося, що це та сама топологія, що й $\tau_{\mathcal{B}}$.\\
+$\tau_{\mathcal{S}} \subset \tau_{\mathcal{B}}$ -- цілком зрозуміло.\\
+$\tau_{\mathcal{B}} \subset \tau_{\mathcal{S}}$, просто лише варто зауважити, що $U \times V = \pr_1^{-1}(U) \cap \pr_2^{-1}(V)$.
 \end{proof}
+
+\begin{remark}
+Таким чином, $\tau_1 \times \tau_2$ -- найслабша на $X_1 \times X_2$ топологія серед всіх інших, для якої проєкції -- неперервні. Просто тому що вона породжена передбазою, а така топологія -- найменша.
+\end{remark}
 
 \subsubsection*{Узагальнення добутку топологій}
 Припустимо, що $\{(X_\alpha,\tau_\alpha, \alpha \in I \}$ -- довільна сім'я топологічних просторів. Ми вже з'ясували, що набору множин $\displaystyle\prod_{\alpha \in I} U_\alpha$, де $U_\alpha \in \tau_\alpha$, недостатньо для формування топології. Однак ми можемо знову розглянути наступний клас:
 \begin{align*}
-\mathcal{B} = \left\{ \prod_{\alpha \in I} U_\alpha \mid U_\alpha \in \tau_\alpha  \right\}
+\mathcal{B}_{\blacksquare} = \left\{ \prod_{\alpha \in I} U_\alpha \mid U_\alpha \in \tau_\alpha  \right\}
 \end{align*}
 Це утворює базу множини $\displaystyle\prod_{\alpha \in I} X_\alpha$, тому ми знайшли топологію $\tau_{\mathcal{B}}$ для множини $\displaystyle\prod_{\alpha \in I} X_\alpha$. Така топологія в зарубіжній літературі називається \textbf{box topology}.\\
 На жаль, дане наївне узагальнення призводить до певних проблем.
+
+\begin{example}
+Розглянемо відображення $f \colon \mathbb{R} \to \mathbb{R}^{\mathbb{N}}$ таким чином: $f(x) = (x,x,x,\dots)$ Зауважимо, що множина $U = \displaystyle\prod_{n=1}^\infty \left( -\dfrac{1}{2^n}, \dfrac{1}{2^n} \right)$ -- відкрита множина в сенсі box topology. Проте $f^{-1}(U) = \{0\}$ уже не буде відкритою, якщо розглядати стандартну топологію. Тобто ми вже маємо відображення $f$, яке не є неперервним.\\
+При цьому подивимося на це відображення з іншої сторони, як на $f(x) = (f_1(x),f_2(x),\dots)$, де кожний $f_i(x) = x,\ f \colon \mathbb{R} \to \mathbb{R}$. Маючи стандартну топологію, ясно, що це неперервне відображення. Отже, у нас не виконується таке:\\
+$f$ -- неперервне $\centernot\iff f_i$ -- неперервні (тобто покоординатна неперервність).
+\end{example}
+
+\noindent
+Цей приклад можна трактувати інакше: у нас ''дуже багато'' відкритих множин, які нам заважають жити. Аби працювало твердження вище, ми трошки змінимо базу ось таким чином:
+\begin{align*}
+\mathcal{B} = \left\{ \prod_{\alpha \in I} U_\alpha \mid U_\alpha \in \tau_\alpha, U_\alpha \neq X_\alpha \text{ лише скінченне число разів} \right\}
+\end{align*}
+Даний клас також задаватиме базу топології за аналогічними міркуваннями. Тільки треба зазначити, що для $\displaystyle\prod_{\alpha} X_\alpha$ справедливе обмеження. Також якщо для $U,V \in \mathcal{B}$ виконано обмеження, то для $U \cap V$ теж. Така топологія в зарубіжні літературі називається \textbf{product topology}.
+\bigskip \\
+Існує альтернативний спосіб побудувати саме product topology. Розглянемо клас
+\begin{align*}
+\mathcal{S} = \displaystyle\bigcup_{\alpha \in I}\left\{ \pr_\alpha^{-1}(U_\alpha) \mid U_\alpha \in \tau_\alpha \right\}
+\end{align*}
+Зауважимо, що $\mathcal{S}$ утвроює передбазу множини $\displaystyle\prod_{\alpha \in I} X_\alpha$: аналогічним чином треба пооб'єднати всі елементи. Тоді в нас утвориться топологія $\tau_{\mathcal{S}}$, яка, насправді, збігається з product topology, тобто $\tau_{\mathcal{S}} = \tau_{\mathcal{B}}$.\\
+$\tau_{\mathcal{S}} \subset \tau_{\mathcal{B}}$. Дійсно, нехай $U \in \tau_{\mathcal{S}}$, тоді звідси $U = \displaystyle\bigcup \bigcap_{\text{скінченний}} W$, де кожний $W \in \mathcal{S}$, тобто $\displaystyle W = \pr_{\alpha_0}^{-1}(U_{\alpha_0}) = \prod_{\substack{\alpha \in I \\ \text{на $\alpha_0$ стоїть $U_{\alpha_0}$}}} X_\alpha$. Оскільки в нас скінченний перетин, то в нас буде скінченне число $\{\alpha_1,\alpha_2,\dots,\alpha_k\}$. Тобто будуть $W_{\alpha_i}$. Отримаємо, що $\displaystyle\bigcap W_{\alpha_i} = \prod_{\substack{\alpha \in I \\ \text{на $\alpha_i, i = \overline{1,k}$ стоїть $U_{\alpha_i}$}}} X_\alpha \overset{\text{позн.}}{=} R$. Отримали елемент $R \in \mathcal{B}$, бо там виконані обмеження. Отже, $U = \displaystyle\bigcup R, R \in \mathcal{B}$, тобто $U \in \tau_{\mathcal{B}}$.\\
+$\tau_\mathcal{B} \supset \tau_{\mathcal{S}}$. Дійсно, зауважимо, що $\displaystyle\prod_{\alpha \in I} U_\alpha = \bigcap_{\alpha \in I} \pr_\alpha^{-1}(U_\alpha)$ при $U_\alpha \neq X_\alpha$ лише при скінченній кількості. Із даного обмеження випливатиме, що перетин тут скінченний.
+
+\begin{remark}
+Box topology та product topology мають однаковий сенс при скінченній сім'ї топологічних просторів.
+\end{remark}
 
 \iffalse
 \begin{remark}
