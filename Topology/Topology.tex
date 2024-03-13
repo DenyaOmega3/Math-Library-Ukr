@@ -536,11 +536,11 @@ $[a,b] \cong [0,1]$ та $[0,1] \cong [c,d] \implies [a,b] \cong [c,d]$.
 \begin{proof}
 Дійсно, оскільки $\mathcal{B}$ -- база топології, то кожна відкрита множина -- це об'єдання множин із бази.\\
 1. Зокрема $X$ -- відкрита, тому $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$.\\
-2. Нехай $B_1,B_2 \in \mathcal{B}$. Вони вдвох (див. зауваження). Значить, $B_1 \cap B_2$ є відкритою множиною, а тому $B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
+2. Нехай $B_1,B_2 \in \mathcal{B}$. Вони вдвох -- відкриті (див. зауваження). Значить, $B_1 \cap B_2$ є відкритою множиною, а тому $B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
 \end{proof}
 
 \begin{definition}
-Нехай задано множину $X$ (уже не топологічний простір).\\
+Нехай задано множину $X$ (просто множина без топології).\\
 Клас $\mathcal{B}$ підмножин $X$ назвемо \textbf{базою множини $X$}, якщо
 \begin{align*}
 \text{1. } X = \bigcup_{U \in \mathcal{B}} U \\
@@ -548,7 +548,7 @@ $[a,b] \cong [0,1]$ та $[0,1] \cong [c,d] \implies [a,b] \cong [c,d]$.
 \end{align*} 
 \end{definition}
 \noindent
-Якщо $(X,\tau)$ -- топологія та $\mathcal{B}$ -- база топології, то $\mathcal{B}$ -- база множини.\\
+Якщо $(X,\tau)$ -- топологія та $\mathcal{B}$ -- база топології, то $\mathcal{B}$ -- база множини (щойно вище довели).\\
 Виявляється, що якщо в нас є множина $X$, для якої ми хочемо згенерувати топологію, то нам потрібно створити базу $\mathcal{B}$ множини $X$.
 
 \begin{proposition}[Конструкція топології за базою]
@@ -567,6 +567,18 @@ $[a,b] \cong [0,1]$ та $[0,1] \cong [c,d] \implies [a,b] \cong [c,d]$.
 Нехай $U \in \tau'$, тоді звідси за означенням бази топології, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, де $\mathcal{\tilde{B}} \subset \mathcal{B}$. Але в силу того, як ми визначали $\tau_{\mathcal{B}}$, випливає, що $U \in \tau_{\mathcal{B}}$.\\
 Нехай $U \in \tau_{\mathcal{B}}$, тоді звідси за побудовою, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, але тоді $V \in \tau'$ -- відкрита множина як об'єднання однієї множини з бази. За означенням топології, $U \in \tau'$.\\
 Власне, з цього випливає, що $\tau_{\mathcal{B}} = \tau'$.
+\end{proof}
+
+\begin{remark}
+Не хочеться це вставляти як окреме твердження, але є ось така еквівалентність:\\
+$\forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{\tilde{B}}} U$, де $\mathcal{\tilde{B}} \subset \mathcal{B} \iff \forall B_1,B_2 \in \mathcal{B}: \forall x \in B_1 \cap B_2: \exists W \in \mathcal{B}: x \in W \subset B_1 \cap B_2$.\\
+Зазвичай саме праву частину використовують в якості другої умови бази множини та в твердженні про конструкцію топології за базою. Тим не менш, цю еквівалетність доведу.
+\end{remark}
+
+\begin{proof}
+\rightproof Дано: ліва частина. Нехай $B_1,B_2 \in \mathcal{B}$, тоді звідси $B_1 \cap B_2 = \displaystyle\bigcup_{W \in \mathcal{\tilde{B}}} W$. Оберемо точку $x \in B_1 \cap B_2$, тоді звідси $x \in W_0$, де $W_0 \in \mathcal{B}$. Отже, ми знашли $W_0 \in \mathcal{B}$, для якої $x \in W_0 \subset B_1 \cap B_2$.
+\bigskip \\
+\leftproof Дано: права частина. Нехай $B_1,B_2 \in \mathcal{B}$, тоді $\forall x \in B_1 \cap B_2: \exists W_x \in \mathcal{B}: x \in W_x \subset B_1 \cap B_2$. Зауважимо, що звідси $B_1 \cap B_2 = \displaystyle\bigcup_{x \in B_1 \cap B_2} W_x$, причому ми об'єднуємо елементи з $\mathcal{B}$. 
 \end{proof}
 
 \begin{proposition}

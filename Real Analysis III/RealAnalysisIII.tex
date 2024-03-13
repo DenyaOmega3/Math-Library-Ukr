@@ -19,7 +19,9 @@
 \usepackage{pdfpages}
 \usepackage{tikz-3dplot}
 \usepackage{bbm}
+\usetikzlibrary{spy}
 \usepackage{tikz-cd}
+\usepackage{enumitem}
 \usetikzlibrary{spy,angles,quotes}
 \usetikzlibrary{decorations.markings}
 \tikzset{
@@ -115,6 +117,7 @@
 \newenvironment{pfNoTh}{\textbf{Proof. \\}}{$\blacksquare$}
 
 \newcommand\Norm[1]{\left\lVert#1\right\rVert}
+\DeclareMathOperator{\Int}{Int}
 
 \begin{document}
 
@@ -521,13 +524,13 @@ $1 \leq \dfrac{1}{\delta^2} \left( x_1 - \dfrac{i_1}{s_1}\right)^2 + \dots + \df
 \begin{definition}
 \textbf{Розбиття нульового порядку} простора $\mathbb{R}^2$ визначається ось так:
 \begin{align*}
-\mathbb{R}^2 = \bigcup_{n_1,n_2 \in \mathbb{Z}} Q^{(0)}(n_1,n_2),
+\mathbb{R}^2 = \bigcup_{n_1,n_2 \in \mathbb{Z}} Q^{(0)}(n_1,n_2), \\
+Q^{(0)}(n_1,n_2) = [n_1,n_1+1] \times [n_2,n_2+1]
 \end{align*}
-де
-\begin{align*}
-Q^{(0)} = \{ (x,y): x \in [n_1,n_1+1], \hspace{0.5cm} y \in [n_2,n_2+1]\}
-\end{align*}
-Тобто ми $\mathbb{R}^2$ розбиваємо на квадрати зі сторонами $1$ таким чином, щоб вершини були цілими числами.
+\iffalse
+Q^{(0)}(n_1,n_2) = \{ (x,y): x \in [n_1,n_1+1], \hspace{0.5cm} y \in [n_2,n_2+1]\} \\
+\fi
+Тобто ми $\mathbb{R}^2$ розбиваємо на квадрати зі сторонами $1$ таким чином, щоб координати вершин були цілими числами.
 \end{definition}
 
 \begin{figure}[H]
@@ -548,9 +551,11 @@ Q^{(0)} = \{ (x,y): x \in [n_1,n_1+1], \hspace{0.5cm} y \in [n_2,n_2+1]\}
 \end{figure}
 
 \begin{definition}
-\textbf{Розбиття першого порядку} простора $\mathbb{R}^2$ визначається ось так само, але тепер об'єднання з $Q^{(1)}(n_1,n_2)$, де
+\textbf{Розбиття першого порядку} простора $\mathbb{R}^2$ визначається ось таке саме об'єднання, але тепер об'єднання з $Q^{(1)}(n_1,n_2)$, де
 \begin{align*}
-Q^{(1)} = \left\{ (x,y): x \in \left[\dfrac{n_1}{2},\dfrac{n_1+1}{2} \right], \hspace{0.5cm} y \in \left[\dfrac{n_2}{2},\dfrac{n_2+1}{2} \right] \right\}
+Q^{(1)}(n_1,n_2) = \left[ \dfrac{n_1}{2}, \dfrac{n_1+1}{2} \right] \times \left[ \dfrac{n_2}{2}, \dfrac{n_2+1}{2} \right]
+\iffalse Q^{(1)} = \left\{ (x,y): x \in \left[\dfrac{n_1}{2},\dfrac{n_1+1}{2} \right], \hspace{0.5cm} y \in \left[\dfrac{n_2}{2},\dfrac{n_2+1}{2} \right] \right\}
+\fi
 \end{align*}
 Тобто ми $\mathbb{R}^2$ розбиваємо на квадрати зі сторонами $\dfrac{1}{2}$ так, щоб вершини були кратними до $\dfrac{1}{2}$.
 \end{definition}
@@ -572,73 +577,146 @@ Q^{(1)} = \left\{ (x,y): x \in \left[\dfrac{n_1}{2},\dfrac{n_1+1}{2} \right], \h
 \end{tikzpicture}
 \end{figure}
 
-Можна $Q^{(1)}(n_1,n_2)$ отримати від $Q^{(0)}(k_1,k_2)$ шляхом ділення відрізків навпіл. Таким чином, утвориться $2^{\textcolor{red}{2}} = 4$ брусів $Q^{(1)}$. Степінь $2$ - розмірність простору.
+На даному етапі можна зауважити, що $Q^{(1)}(n_1,n_2)$ можна отримати від $Q^{(0)}(k_1,k_2)$ шляхом ділення відрізків навпіл. Дійсно,\\
+$Q^{(0)}(k_1,k_2) = [k_1,k_1+1] \times [k_2,k_2+1] = \\ = \left(\left[ \dfrac{2k_1}{2}, \dfrac{2k_1+1}{2} \right] \cup \left[ \dfrac{2k_1+1}{2}, \dfrac{2k_1+2}{2} \right]\right) \times \left(\left[ \dfrac{2k_2}{2}, \dfrac{2k_2+1}{2} \right] \cup \left[ \dfrac{2k_2+1}{2}, \dfrac{2k_2+2}{2} \right]\right) = \\
+= Q^{(1)}\left( 2k_1, 2k_2 \right) \cup Q^{(1)}\left( 2k_1+1, 2k_2 \right) \cup Q^{(1)}\left( 2k_1, 2k_2+1 \right) \cup Q^{(1)}\left( 2k_1+1, 2k_2+1 \right)$.\\
+Таким чином, утвориться $2^{\textcolor{red}{2}} = 4$ брусів $Q^{(1)}$. Степінь $\textcolor{red}{2}$ -- розмірність простору. При вищій розмірності була б інша кількість брусів (думаю, зрозуміло яка).
 
 \begin{definition}
-\textbf{Розбиття $n$-го порядку} простора $\mathbb{R}^2$ визначається ось так само, але тепер об'єднання з $Q^{(n)}(n_1,n_2)$, де
+\textbf{Розбиття $n$-го порядку} простора $\mathbb{R}^2$ визначається ось таке саме об'єднання, але тепер об'єднання з $Q^{(n)}(n_1,n_2)$, де
 \begin{align*}
+Q^{(n)}(n_1,n_2) = \left[ \dfrac{n_1}{2^n}, \dfrac{n_1+1}{2^n} \right] \times \left[ \dfrac{n_2}{2^n}, \dfrac{n_2+1}{2^n} \right]
+\iffalse
 Q^{(n)} = \left\{ (x,y): x \in \left[\dfrac{n_1}{2^n},\dfrac{n_1+1}{2^n} \right], \hspace{0.5cm} y \in \left[\dfrac{n_2}{2^n},\dfrac{n_2+1}{2^n} \right] \right\}
+\fi
 \end{align*}
 \end{definition}
 
-Важливі зауваження:
-\begin{enumerate}
-\item Діаметр $Q^{(n)}$ дорівнює $\sqrt{\textcolor{red}{2}} \cdot 2^{-n}$
-\item Об'єм $Q^{(n)}$ дорівнює $\left( \dfrac{1}{2^n} \right)^{\textcolor{red}{2}}$
-\item $Q^{(n)}(n_1,n_2)$ та $Q^{(n)}(k_1,k_2)$, які різні між собою, не мають спільних внутрішніх точок
+\begin{remark}
+Важливі спостереження щодо цих брусів. Червоним написана розмірність простору:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $d\left(Q^{(n)}(n_1,n_2)\right) = \sqrt{\textcolor{red}{2}} \cdot 2^{-n}$;
+\item $m\left(Q^{(n)}(n_1,n_2)\right) = \left( \dfrac{1}{2^n} \right)^{\textcolor{red}{2}}$;
+\item $Q^{(n)}(n_1,n_2)$ та $Q^{(n)}(k_1,k_2)$, які різні, тобто $(n_1,n_2) \neq (k_1,k_2)$, можуть перетинатися між собою, проте ніколи не мають спільних внутрішніх точок, тото $\Int \left( Q^{(n)}(n_1,n_2) \right) \cap \Int \left( Q^{(n)}(k_1,k_2) \right) = \emptyset$;
 \item Задамо деяку обмежену множину $F \subset \mathbb{R}^2$. Тоді для будь-якого порядку розбиття $\mathbb{R}^2$ набір утворених брусів, що мають хоча б одну спільну точку з $F$, скінченний.
 \end{enumerate}
+\end{remark}
 
-Надалі будуть такі позначення:\\
-$\pi^{(n)} = \{ Q^{(n)}(n_1,n_2), n_1,n_2 \in \mathbb{Z}\}$\\
-$Q^0 \in \pi^{(n)}$ - множина всіх внутрішніх точок
+Позначення: $\pi^{(n)} = \{ Q^{(n)}(n_1,n_2) \mid n_1,n_2 \in \mathbb{Z}\}$ -- множина цих брусів довжиною $\dfrac{1}{2^n}$.
 
 \subsection{Вимірні множини. Міра Жордана}
-Уже відомо, що для бруса $Q = [a_1,b_1] \times [a_2,b_2]$ міра визначається як $m(Q) = (b_1-a_1)(b_2-a_2)$.
-\bigskip \\
-Нехай $G \subset \mathbb{R}^2$, яка допускає розклад в бруси $Q_i \in \pi^{(n)}$, тобто $G = \displaystyle\bigcup_{i=1}^s Q_i$. Тоді природно визначити \textbf{міру множини} $G$ ось так:
+Уже відомо, що для бруса $Q = [a_1,b_1] \times [a_2,b_2]$ міра визначається як
+\begin{align*} 
+m(Q) = (b_1-a_1)(b_2-a_2).
+\end{align*}
+Нехай $G \subset \mathbb{R}^2$, яка допускає розклад в різні бруси $Q_i \in \pi^{(n)}$ при деякому $n$, тобто $G = \displaystyle\bigcup_{i=1}^s Q_i$. Тоді природно визначити \textbf{міру множини} $G$ ось так:
 \begin{align*}
 m(G) = \sum_{i=1}^s m(Q_i)
 \end{align*}
 
 \begin{remark}
-Розклад $G$ не є єдиним, але міра так чи інакше зберігає значення. Це завдяки зауваженню після \textbf{Def. 2.1.2.}
+Розклад $G$ не є єдиним, як можна побачити нижче. Тим не менш, значення міри не буде залежати від розбиття, тобто міра коректно визначена.
 \end{remark}
-
-Нехай тепер $F \subset \mathbb{R}^2$ - деяка обмежена множина. Визначимо ось такі множини для кожного $n \geq 0$:
-\begin{align*}
-F_{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \subset F}} Q \\
-F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \\
-\Delta F_{(n)} = \bigcup_{\substack{Q \not\subset F_{(n)} \\ Q \subset F^{(n)}}} Q
-\end{align*}
-
+\iffalse
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
+\fill[black!20] (0,0) rectangle (1,1);
+\fill[black!40] (1,0.5) rectangle (2,2);
+\fill[black!60] (1,0) rectangle (2.5,0.5);
+\fill[black!20] (2.5,-1) rectangle (3.5,0.5);
+\fill[black!40] (1.5,-1) rectangle (2.5,0);
+\draw (0,0)--(0,1)--(1,1)--(1,2)--(2,2)--(2,0.5)--(3.5,0.5)--(3.5,-1)--(1.5,-1)--(1.5,0)--cycle node[anchor = east] {$G$};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\fill[black!20] (0,0) rectangle (1,1);
+\fill[black!40] (1,1) rectangle (2,2);
+\fill[black!60] (1,0) rectangle (2,1);
+\fill[black!80] (2,0) rectangle (2.5,0.5);
+\fill[black!20] (2.5,-1) rectangle (3.5,0.5);
+\fill[black!40] (1.5,-1) rectangle (2.5,0);
+\draw (0,0)--(0,1)--(1,1)--(1,2)--(2,2)--(2,0.5)--(3.5,0.5)--(3.5,-1)--(1.5,-1)--(1.5,0)--cycle node[anchor = east] {$G$};
+\end{tikzpicture}
+\end{figure}
+\fi
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\fill[black!20] (0,0) rectangle (1,1);
+\fill[black!20] (1,1) rectangle (2,2);
+\fill[black!40] (1,0) rectangle (2,1);
+\fill[black!20] (1,0) rectangle (2,-1);
+\fill[black!40] (2,0) rectangle (3,-1);
+\draw (0,0)--(0,1)--(1,1)--(1,2)--(2,2)--(2,0)--(3,0)--(3,-1)--(1,-1)--(1,0)--cycle;
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\fill[black!20] (0,0) rectangle (1,1);
+\fill[black!40] (0,0) rectangle (0.5,0.5);
+\fill[black!40] (0.5,0.5) rectangle (1,1);
+\fill[black!20] (1,1) rectangle (2,2);
+\fill[black!40] (1,1) rectangle (1.5,1.5);
+\fill[black!40] (1.5,1.5) rectangle (2,2);
+\fill[black!20] (1,0) rectangle (2,1);
+\fill[black!40] (1,0) rectangle (1.5,0.5);
+\fill[black!40] (1.5,0.5) rectangle (2,1);
+\fill[black!20] (1,0) rectangle (2,-1);
+\fill[black!40] (2,0) rectangle (1.5,-0.5);
+\fill[black!40] (1,-0.5) rectangle (1.5,-1);
+\fill[black!20] (2,0) rectangle (3,-1);
+\fill[black!40] (2.5,0) rectangle (3,-0.5);
+\fill[black!40] (2,-0.5) rectangle (2.5,-1);
+\draw (0,0)--(0,1)--(1,1)--(1,2)--(2,2)--(2,0)--(3,0)--(3,-1)--(1,-1)--(1,0)--cycle;
+\end{tikzpicture}
+\caption*{Одна й та сама фігура $G$, тільки одна з $\pi^{(n)}$, друга з $\pi^{(m)}$, причому $m > n$.}
+\end{figure}
+
+Насправді, ми вже пам'ятаємо, що кожний брус з $\pi^{(n)}$ можна розбити на об'єднання підбрусів з $\pi^{(m)}, m > n$. Тоді (також відомо) міра одного бруса дорівнює сумі мір підбрусів.
+\bigskip \\
+Нехай тепер $F \subset \mathbb{R}^2$ -- деяка обмежена множина. Визначимо ось такі множини для кожного $n \geq 0$:
+\begin{align*}
+F_{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \subset F}} Q \qquad\qquad
+F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \qquad\qquad
+\Delta F_{(n)} = \bigcup_{\substack{Q \not\subset F_{(n)} \\ Q \subset F^{(n)}}} Q
+\end{align*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
 \fill[blue!50] (0,0) rectangle (3,0.5);
 \fill[blue!50] (0.5,0.5) rectangle (3,1);
 \fill[blue!50] (0.5,1) rectangle (2,1.5);
 \draw[step=.5cm] (-0.4,-0.9) grid (3.9,2.4);
-\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
 
 \node[red] at (0.25,0.25) {$F$};
 \node[blue] at (2,-1.5) {$F_{(n)}$};
+\end{scope}
+\end{scope}
 \end{tikzpicture}
 \qquad
 \begin{tikzpicture}
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
 \fill[blue!50] (0,-0.5) rectangle (3,0);
 \fill[blue!50] (-0.4,0) rectangle (3.5,0.5);
 \fill[blue!50] (0,0.5) rectangle (3.5,1);
 \fill[blue!50] (0,1) rectangle (3,1.5);
 \fill[blue!50] (0.5,1.5) rectangle (2.5,2);
 \draw[step=.5cm] (-0.4,-0.9) grid (3.9,2.4);
-\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
 
 \node[red] at (0.25,0.25) {$F$};
 \node[blue] at (2,-1.55) {$F^{(n)}$};
+\end{scope}
+\end{scope}
 \end{tikzpicture}
 \qquad
 \begin{tikzpicture}
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
 \fill[blue!50] (0,-0.5) rectangle (3,0);
 \fill[blue!50] (-0.4,0) rectangle (0,0.5);
 \fill[blue!50] (3,0) rectangle (3.5,0.5);
@@ -648,10 +726,12 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \\
 \fill[blue!50] (2,1) rectangle (3,1.5);
 \fill[blue!50] (0.5,1.5) rectangle (2.5,2);
 \draw[step=.5cm] (-0.4,-0.9) grid (3.9,2.4);
-\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
 
 \node[red] at (0.25,0.25) {$F$};
 \node[blue] at (2,-1.55) {$\Delta F_{(n)}$};
+\end{scope}
+\end{scope}
 \end{tikzpicture}
 \caption*{Тут червона область заповнена всередині, не просто множиина лінія.}
 \end{figure}
@@ -663,6 +743,8 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \\
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
 \fill[blue!50] (0,-0.5) rectangle (3,0);
 \fill[blue!50] (-0.4,0) rectangle (0,0.5);
 \fill[blue!50] (3,0) rectangle (3.5,0.5);
@@ -672,13 +754,17 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \\
 \fill[blue!50] (2,1) rectangle (3,1.5);
 \fill[blue!50] (0.5,1.5) rectangle (2.5,2);
 %\draw[step=.5cm] (-0.4,-0.9) grid (3.9,2.4);
-\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill[red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
 
 \node[red] at (0.25,0.25) {$F$};
 \node[blue] at (2,-1.55) {$\Delta F_{(n)}$};
+\end{scope}
+\end{scope}
 \end{tikzpicture}
 \qquad
 \begin{tikzpicture}
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
 \fill[blue!50] (0,-0.5) rectangle (3,0);
 \fill[blue!50] (-0.4,0) rectangle (0,0.5);
 \fill[blue!50] (3,0) rectangle (3.5,0.5);
@@ -692,12 +778,13 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \\
 \draw[dashed] (0.5,1.5)--(2,1.5)--(2,1)--(3,1)--(3,0);
 
 %\draw[step=.5cm] (-0.4,-0.9) grid (3.9,2.4);
-\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
 
 \node[red] at (0.25,0.25) {$F$};
 \node[blue] at (2,-1.55) {$F^{(n)} \setminus F_{(n)}$};
+\end{scope}
+\end{scope}
 \end{tikzpicture}
-\caption*{Штрихом позначені загублені граничні точки.}
 \end{figure}
 
 \begin{remark}
@@ -748,66 +835,81 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \\
 \node[red] at (0.25,0.25) {$F$};
 \node[blue] at (2,-1.55) {$\Delta F_{(n)}$};
 \end{tikzpicture}
-\caption*{Тут червона область уже НЕ заповненав всередині, тобто $F$ - це просто лінія.}
+\caption*{Тут червона область уже НЕ заповненав всередині, тобто $F$ -- це просто лінія.}
 \end{figure}
 
 Згідно з цими визначеннями, має місце співвідношення:\\
 $F_{(n)} \subset F \subset F^{(n)} \hspace{3cm} F \setminus F_{(n)} \subset F^{(n)} \setminus F_{(n)} \subset \Delta F_{(n)}$.\\
-Міра множин $F_{(n)}, F^{(n)}, \Delta F^{(n)}$ визначається мірою вище. Якщо порожня множина, то $m(\emptyset) = 0$.\\
-$m(F_{(n)}) \leq m(F^{(n)})$, тому що $F^{(n)}$ містить всі бруси з $F_{(n)}$ та інші не з $F_{(n)}$.\\
-$m(\Delta F_{(n)}) = m(F^{(n)}) - m(F_{(n)})$. Тут спочатку показується, що $F^{(n)} = F_{(n)} \cup \Delta F_{(n)}$. А далі маємо:\\
+%uncomennt if details needed
+\iffalse
+Перший ланцюг вкладень цілком зрозумілий. У другому ланцюгу перше вкладення зліва також зрозуміле. Залишилося останнє.\\
+Якщо $x \in F^{(n)} \setminus F_{(n)}$, то $x$ потрапляє в брус $Q$, який має спільну точку з $F$, проте не лежить всередині $F$. Таким чином, $Q \subset F^{(n)}$ та $Q \not\subset F_{(n)}$, тож звідси $x \in \Delta F_{(n)}$. Зворотна сторона не працює за щойним зауваженням.\\
+\fi
+Міра множин $F_{(n)}, F^{(n)}, \Delta F^{(n)}$ визначається мірою вище, оскільки ці три множини розбиваються на об'єднання брусів з $\pi^{(n)}$. Якщо буде порожня множина (за зауваженням), то $m(\emptyset) \overset{\text{def.}}{=} 0$.
+
+\begin{remark}
+Справедлива нерівність $m(F_{(n)}) \leq m(F^{(n)})$.\\
+Дійсно, $F^{(n)}$ містить всі бруси з $F_{(n)}$ та інші не з $F_{(n)}$. Тому якщо розписати $m(F^{(n)})$ за визначенням вище, то отримається бажана нерівність.
+\end{remark}
+
+\begin{remark}
+Справедлива рівність $m(\Delta F_{(n)}) = m(F^{(n)}) - m(F_{(n)})$. \\
+Для початку слід зазначити, що $F^{(n)} = F_{(n)} \cup \Delta F_{(n)}$. Дійсно, оберемо брус $Q$ із $F^{(n)}$, тоді $Q \cap F \neq \emptyset$. Дана множина або $Q \subset F$, або ні. У першому випадку тоді брус $Q$ буде в $F_{(n)}$, у другому випадку ні, проте в інакшому випадку станеться $Q \not\subset F_{(n)}$ та $Q \subset F^{(n)}$ -- значить, $Q$ буде в $\Delta F_{(n)}$.\\
+А далі маємо такий ланцюг рівностей:\\
 $m(F^{(n)}) = \displaystyle\sum_{Q \cap F \neq \emptyset} m(Q) = \sum_{Q \subset F} m(Q) + \sum_{\substack{Q \not\subset F \\ Q \cap F \neq \emptyset}} m(Q) = m(F_{(n)}) + \sum_{\substack{Q \not\subset F_{(n)} \\ Q \subset F^{(n)}}} m(Q) = m(F_{(n)}) + m(\Delta F_{(n)})$.
-\bigskip \\
-Тепер розглянемо розбиття порядків $n$ та $n+1$ простору $\mathbb{R}^2$. Із властивості отримання брусів, випливає, що\\
-$F_{(n)} \subset F_{(n+1)}$ та $F^{(n+1)} \subset F^{(n)}$.\\
-Тоді для мір цих множин отримаємо:\\
-$0 \leq m(F_{(n)}) \leq m(F_{n+1}) \leq m(F^{(n+1)}) \leq m(F^{(n)})$\\
-Оскільки за властивістю 4 п. 2.1. $m(F_{(0)})$ та $m(F^{(0)})$ - скінченні, то тоді ми отримаємо, що послідовність $\{m(F_{(n)}), n \geq 0\}$ - монотонно неспадна та обмежена, водночас послідовність $\{m(F^{(n)}), n \geq 0\}$ - монотонно незростаюча та обмежена. Отримуємо нові означення:
+\end{remark}
+
+Тепер розглянемо розбиття порядків $n$ та $n+1$ простору $\mathbb{R}^2$. Із властивості отримання брусів, випливає, що $F_{(n)} \subset F_{(n+1)}$ та $F^{(n+1)} \subset F^{(n)}$. Тоді для мір цих множин отримаємо:\\
+$0 \leq m(F_{(n)}) \leq m(F_{n+1}) \leq m(F^{(n+1)}) \leq m(F^{(n)})$.\\
+Міри $m(F_{(0)})$ та $m(F^{(0)})$ -- скінченні, просто тому що множина $F$ обмежена. Тоді ми отримаємо, що послідовність $\{m(F_{(n)}), n \geq 0\}$ -- монотонно неспадна та обмежена; послідовність $\{m(F^{(n)}), n \geq 0\}$ -- монотонно незростаюча та обмежена. Отримаємо нові означення:
 
 \begin{definition}
-Задано $F \subset \mathbb{R}^2$ - обмежена множина.\\
+Задано $F \subset \mathbb{R}^2$ -- обмежена множина.\\
 \textbf{Внутрішньою мірою} множини $F$ називають число
 \begin{align*}
-m_*(F) = \lim_{n \to \infty} m(F_{(n)}) = \sup_{n \geq 0} m(F_{(n)})
+m_*(F) \overset{\text{def.}}{=} \lim_{n \to \infty} m(F_{(n)}) \overset{\text{або}}{=} \sup_{n \geq 0} m(F_{(n)})
 \end{align*}
 \textbf{Зовнішньою мірою} множини $F$ називають число
 \begin{align*}
-m^*(F) = \lim_{n \to \infty} m(F^{(n)}) = \inf_{n \geq 0} m(F_{(n)})
+m^*(F) \overset{\text{def.}}{=} \lim_{n \to \infty} m(F^{(n)}) \overset{\text{або}}{=} \inf_{n \geq 0} m(F_{(n)})
 \end{align*}
 \end{definition}
-Із нерівності міри трошки вище, отримаємо, що $0 \leq m_*(F) \leq m^*(F)$, для довільної обмеженої множини $F$.
+
+\begin{remark}
+Із нерівності зі зауваження вище та щойно отриманого означення випливає, що $0 \leq m_*(F) \leq m^*(F)$ для будь-якої обмеженої множини $F$.
+\end{remark}
 
 \begin{definition}
 Обмежена множина $F \subset \mathbb{R}^2$ називається \textbf{вимірною за Жорданом}, якщо
 \begin{align*}
-m_*(F) = m^*(F) = m(F)
+m_*(F) = m^*(F)
 \end{align*}
-Число $m(F)$ називається \textbf{мірою Жордана}.
+У такому разі позначають $m_*(F) = m^*(F) \overset{\text{позн.}}{=} m(F)$ Число $m(F)$ називається \textbf{мірою Жордана}.\\
+Позначення: $\mathcal{K}_m$ -- клас підмножин $\mathbb{R}^m$, що вимірні за Жорданом.
 \end{definition}
-Клас підмножин $\mathbb{R}^m$, що вимірні за Жорданом, позначимо через $\mathcal{K}_m$.
 
 \begin{remark}
-Клас $\mathcal{K}_2$ не є порожнім. \\
-Наприклад, беремо множину $F = [0,1] \times [0,1]$. Множина $F_{(n)} = F$ за властивостями розбиття $\mathbb{R}^2$.\\ Водночас $F^{(n)} = \left[ 0 - \dfrac{1}{2^n}, 1+\dfrac{1}{2^n} \right] \times \left[0 - \dfrac{1}{2^n}, 1+\dfrac{1}{2^n} \right]$.\\
-$m_*(F) = 1$ \hspace{2cm} $m^*(F) = \displaystyle\lim_{n \to \infty} \left( 1+\dfrac{1}{2^n} - 0 + \dfrac{1}{2^n} \right)^2 = 1$\\
+$\mathcal{K}_m \neq \emptyset$ (оскільки ми зараз розглядаємо переважно випадок $\mathcal{K}_2$, то я знайду множину на площині, яка вимірна за Жорданом. Для вищих розмірностей можна аналогічно побудувати приклад).\\
+Наприклад, беремо множину $F = [0,1] \times [0,1]$. Множина $F_{(n)} = F$ за властивостями розбиття $\mathbb{R}^2$. Водночас $F^{(n)} = \left[ 0 - \dfrac{1}{2^n}, 1+\dfrac{1}{2^n} \right] \times \left[0 - \dfrac{1}{2^n}, 1+\dfrac{1}{2^n} \right]$.\\
+$m_*(F) = 1, \qquad m^*(F) = \displaystyle\lim_{n \to \infty} \left( 1+\dfrac{1}{2^n} - 0 + \dfrac{1}{2^n} \right)^2 = 1$\\
 Отже, множина $F \in \mathcal{K}_2$.
 \end{remark}
 
 \begin{example}
-Довести, що якщо $F \in \mathcal{K}$ та не містить внутрішніх точок, то $m(F) = 0$.\\
-Маємо, що $m_*(F) = m^*(F)$. Покажемо, що $m_*(F) = 0$, а для цього ми покажемо, що $F_{(n)} = \emptyset, \forall n \geq 1$.\\
+Довести, що якщо $F \in \mathcal{K}$ та не містить внутрішніх точок, то $m(F) = 0$. Дане твердження працює для будь-якої розмірності, тому я індекс не писав.\\
+Маємо $m_*(F) = m^*(F)$. Покажемо, що $m_*(F) = 0$, а для цього ми покажемо, що $F_{(n)} = \emptyset, \forall n \geq 1$.\\
 !Припустимо, що $F_{(n)} \neq \emptyset$, тоді існує принаймні один брус $Q \subset F$. Оскільки брус $Q$ містить внутрішні точки, тому ці ж внутрішні точки лежать в $F$. Суперечність!\\
 Отже, $F_{(n)} = \emptyset \implies m_*(F) = 0 \implies m(F) = 0$.
 \end{example}
 
 \begin{theorem}
-Задано $F \subset \mathbb{R}^2$ - обмежена.\\
-$F \in \mathcal{K}_2 \iff m(\Delta F_{(n)}) \to 0, n \to \infty$\\
+Задано $F \subset \mathbb{R}^2$ -- обмежена.\\
+$F \in \mathcal{K}_2 \iff m(\Delta F_{(n)}) \to 0, n \to \infty$.\\
 \textit{Переформулювання означення вимірної множини.}
 \end{theorem}
 
 \begin{example}
-Довести, що $\{x\} \in \mathcal{K}_1$ та $m(\{x\}) = 0$.\\
+Довести, що $\{x\} \in \mathcal{K}_1$, причому $m(\{x\}) = 0$.\\
 Маємо $F_{(n)} = \emptyset, \forall n \geq 1$. Тоді $m_*(F) = 0$.\\
 Нехай $x \in [k,k+1]$. Маємо $F^{(0)} = [k,k+1]$, далі $F^{(1)}$ або перша половина, або друга половина $F^{(0)}$ в залежності від розташування $x$. $F^{(2)}$ або перша половина, або друга половина $F^{(1)}$ в залежності від розташування $x$\dots \\
 Отримаємо, що $m(F^{(n)}) = \dfrac{1}{2^n} \implies m^*(F) = 0$.\\
@@ -817,7 +919,7 @@ $F \in \mathcal{K}_2 \iff m(\Delta F_{(n)}) \to 0, n \to \infty$\\
 \begin{example}
 Довести, що $[a,b] \in \mathcal{K}_1$ та $m([a,b]) = b-a$.\\
 Спочатку зауважимо, що $\Delta [a,b]_{(n)}$ складається або з одного, або з двох відрізків довжинами $\dfrac{1}{2^n}$.\\
-В обох випадках ми отримаємо $m(\Delta [a,b]_{(n)}) \to 0$ при $n \to \infty$. Отже, $[a,b] \in \mathcal{K}_2$.\\
+В обох випадках ми отримаємо $m(\Delta [a,b]_{(n)}) \to 0$ при $n \to \infty$. Отже, $[a,b] \in \mathcal{K}_1$.\\
 Розглянемо тепер $[a,b]_{(n)}$. Зрозуміло, що $m([a,b]_{(n)}) \leq b-a$, оскільки $[a,b]_{(n)}$ складається з відрізків, що всередині $[a,b]$, а міра $m([a,b]_{(n)}) = r - l$, де $r,l$ - відповідно правий та лівий кінці, що лежать всередині $[a,b]$.\\
 Також зауважимо, що $m([a,b]_{(n)}) \geq b-a -2 \cdot \dfrac{1}{2^n}$, оскільки $r \geq b- \dfrac{1}{2^n}$ та $l \geq a- \dfrac{1}{2^n}$.\\
 Загалом маємо $b-a- 2 \cdot \dfrac{1}{2^n} \leq m([a,b]_{(n)}) \leq b-a$.\\
@@ -827,25 +929,31 @@ $F \in \mathcal{K}_2 \iff m(\Delta F_{(n)}) \to 0, n \to \infty$\\
 
 \begin{example}
 Показати, що $\mathbb{Q} \cap [0,1] \not\in \mathcal{K}_1$.\\
-Справді, $\left(\mathbb{Q} \cap [0,1] \right)_{(n)} = \emptyset$, оскільки не існує відрізка лише з раціональними числами за топологією $\mathbb{R}$, тоді $m_*(\mathbb{Q} \cap [0,1]) = 0$.\\
-Далі $\left( \mathbb{Q} \cap [0,1] \right)^{(n)} = [0,1] \cup \left[ 0 - \dfrac{1}{2^n}, 0 \right] \cup \left[ 1, 1 + \dfrac{1}{2^n} \right]$. У нас присутній відрізок $[0,1]$, оскільки будь-який відрізок з об'єднання матиме принаймні одне раціональне число за конструкцією розбиття $\mathbb{R}$. Тоді $m^*(\mathbb{Q} \cap [0,1]) = 1$.\\
+Дійсно, $\left(\mathbb{Q} \cap [0,1] \right)_{(n)} = \emptyset$, оскільки не існує відрізка лише з раціональними числами за топологією $\mathbb{R}$, тоді $m_*(\mathbb{Q} \cap [0,1]) = 0$.\\
+Далі $\left( \mathbb{Q} \cap [0,1] \right)^{(n)} = [0,1] \cup \left[ 0 - \dfrac{1}{2^n}, 0 \right] \cup \left[ 1, 1 + \dfrac{1}{2^n} \right]$. У нас присутній відрізок $[0,1]$, бо будь-який відрізок з об'єднання матиме принаймні одне раціональне число за конструкцією розбиття $\mathbb{R}$. Тоді $m^*(\mathbb{Q} \cap [0,1]) = 1$.\\
 Отже, $m_*(\mathbb{Q} \cap [0,1]) \neq m^*(\mathbb{Q} \cap [0,1])$, а тому множина $\mathbb{Q} \cap [0,1] \not\in \mathcal{K}_1$.\\
-Тобто $\mathbb{Q} \cap [0,1]$ - один з прикладів невимірних множин за Жорданом.
+Тобто $\mathbb{Q} \cap [0,1]$ -- один з прикладів невимірних множин за Жорданом.
 \end{example}
 
 \subsection{Властивості вимірних множин та міри Жордана}
 \begin{theorem}
-Задано $A,B \in \mathcal{K}$. Тоді $A \cup B, A \setminus B, A \cap B \in \mathcal{K}$.\\
-Таким чином, множина клас множин $\mathcal{K}$ - кільце (термінологія з теорії міри).
+Задано $A,B \in \mathcal{K}$. Тоді $A \cup B, A \setminus B$. Як наслідок, $A \cap B \in \mathcal{K}$.\\
+Із перших двох випливає, що клас множин $\mathcal{K}$ -- кільце (термінологія з теорії міри).
 \end{theorem}
 
-\begin{proof}
-Нехай $A,B \in \mathcal{K}$. Зауважимо, що $\forall n \geq 0$ виконується відношення:\\
-$\Delta (A \cup B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$\\
-$\Delta (A \setminus B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$.
+Мабуть, перед доведенням цього твердження, треба довести ось таку лему.
+
+\begin{lemma}
+Нехай $A,B \in \mathcal{K}$. Справедливе ось таке вкладення:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\Delta (A \cup B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$;
+\item $\Delta (A \setminus B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$.
+\end{enumerate}
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
 \fill[blue!50] (-0.25,-0.25) rectangle (0,0.75);
 \fill[blue!50] (0,-0.25) rectangle (3,0);
 \fill[blue!50] (3,-0.25) rectangle (3.25,0.75);
@@ -868,12 +976,16 @@ $\Delta (A \setminus B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$.
 \fill[blue!50] (0.25,1.25) rectangle (0,0.5);
 
 \draw[step=.25cm, black!75] (-0.4,-0.9) grid (4.9,2.9);
-\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
-\draw [red, thick] plot [smooth cycle] coordinates {(2,0.5) (2,2) (4,2.5) (4.5,1.5) (3,0.5)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(2,0.5) (2,2) (4,2.5) (4.5,1.5) (3,0.5)};
 \node[blue] at (2,-1.55) {$\Delta (A \cup B)_{(n)}$};
+\end{scope}
+\end{scope}
 \end{tikzpicture}
 \qquad
 \begin{tikzpicture}
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
 \fill[blue!50] (-0.25,-0.25) rectangle (0,0.75);
 \fill[blue!50] (0,-0.25) rectangle (3,0);
 \fill[blue!50] (3,-0.25) rectangle (3.25,0.75);
@@ -888,41 +1000,94 @@ $\Delta (A \setminus B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$.
 \fill[blue!50] (0.25,1.25) rectangle (0,0.5);
 
 \draw[step=.25cm, black!75] (-0.4,-0.9) grid (4.9,2.9);
-\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
-\draw [red, thick] plot [smooth cycle] coordinates {(2,0.5) (2,2) (4,2.5) (4.5,1.5) (3,0.5)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(2,0.5) (2,2) (4,2.5) (4.5,1.5) (3,0.5)};
 \node[blue] at (2,-1.55) {$\Delta (A \setminus B)_{(n)}$};
+\end{scope}
+\end{scope}
 \end{tikzpicture}
 \end{figure}
-Пояснимо строго кожне окремо.\\
-I. Оберемо якийсь брус $Q$, який бере участь в $\Delta (A \cup B)_{(n)}$, ну тобто $Q \subset \Delta (A \cup B)_{(n)}$.\\
-Це означає, що існують два елементи: $\vec{x} \in (Q \cap A) \cup (Q \cap B)$ та $\vec{y} \in Q \setminus (A \cup B)$. Просто подивись на якийсь блактиний квадрат із фігури $\Delta (A \cup B)_{(n)}$ та все буде ясно.\\
-Із того, що $\vec{y} \in Q \setminus (A \cup B)$, випливає $\vec{y} \in Q \setminus A$ та $y \in Q \setminus B$.\\
+\end{lemma}
+
+\begin{proof}
+Доведемо кожне вкладення окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Оберемо якийсь брус $Q$, який бере участь в $\Delta (A \cup B)_{(n)}$. Це означає, що обов'язково існують два елементи: $\vec{x} \in Q \cap (A \cup B)$ та $\vec{y} \in Q \setminus (A \cup B)$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[spy using overlays={size=2cm},connect spies]
+\begin{scope}[transparency group]
+\begin{scope}[blend mode=multiply]
+\fill[blue!50] (-0.25,-0.25) rectangle (0,0.75);
+\fill[blue!50] (0,-0.25) rectangle (3,0);
+\fill[blue!50] (3,-0.25) rectangle (3.25,0.75);
+\fill[blue!50] (3.25,0.75) rectangle (3.5,0.5);
+\fill[blue!50] (3.25,0.75) rectangle (4,1);
+\fill[blue!50] (3.75,1) rectangle (4.5,1.25);
+\fill[blue!50] (4.25,1.25) rectangle (4.75,1.5);
+\fill[blue!50] (4.5,1.5) rectangle (4.75,2);
+\fill[blue!50] (4.25,1.75) rectangle (4.5,2.5);
+\fill[blue!50] (4.25,2.5) rectangle (4,2.25);
+\fill[blue!50] (4,2.5) rectangle (4.25,2.75);
+\fill[blue!50] (4,2.75) rectangle (3.5,2.5);
+\fill[blue!50] (3.75,2.5) rectangle (2.25,2.25);
+\fill[blue!50] (2.5,2.25) rectangle (1.75,2);
+\fill[blue!50] (2,2) rectangle (1.25,1.75);
+\fill[blue!50] (0.75,2) rectangle (1.5,2.25);
+\fill[blue!50] (0.5,1.75) rectangle (1,2);
+\fill[blue!50] (0.75,1.75) rectangle (0.5,1.5);
+\fill[blue!50] (0.5,1.75) rectangle (0.25,1);
+\fill[blue!50] (0.25,1.25) rectangle (0,0.5);
+
+\draw[step=.25cm, black!75] (-0.4,-0.9) grid (4.9,2.9);
+\fill [red!50, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\fill [red!50, thick] plot [smooth cycle] coordinates {(2,0.5) (2,2) (4,2.5) (4.5,1.5) (3,0.5)};
+\node[blue] at (2,-1.55) {$\Delta (A \cup B)_{(n)}$};
+
+\fill ({0.25+0.2},{1.25-0.1}) circle(0.5pt);
+\fill ({0.25+0.04},{1.25-0.05}) circle(0.5pt);
+
+\spy [green,magnification=8]  on ({0.25+0.125},{1.25-0.125})   in node at (8,1);
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+\caption*{Я взяв окремий блакитний брус $Q$. Тут намальовані як раз точки $\vec{x},\vec{y}$.}
+\end{figure}
+%explanation in detail, why x and y must both exist
+\iffalse
+Якщо існують лише точки $\vec{x} \in Q \cap (A \cup B)$, то тоді брус $Q \subset (A \cup B)$, що неможливо, оскільки $Q \not\subset (A \cup B)_{(n)}$. Якщо існують лише точки $\vec{y} \in Q \setminus (A \cup B)$, то тоді $Q \cap (A \cup B) = \emptyset$, що теж неможливо.
+\fi
+Із того, що $\vec{y} \in Q \setminus (A \cup B)$, випливає $\vec{y} \in Q \setminus A$ та $\vec{y} \in Q \setminus B$.\\
 Якщо $\vec{x} \in A$, то звідси $\vec{x} \in Q \cup A$. Маючи $\vec{y} \in Q \setminus A$, отримаємо $Q \not\subset A_{(n)}$, а також $Q \cap A \neq \emptyset$. Таким чином, цей брус $Q$ бере участь в $\Delta A_{(n)}$, тобто $Q \subset \Delta A_{(n)}$.\\
-Аналогічно при $\vec{x} \in B$ маємо $\vec{y} \in Q \setminus B$, а тому $Q \subset \Delta B_{(n)}$.\\
+Якщо $\vec{x} \in B$, то аналогічно маємо $\vec{y} \in Q \setminus B$, а тому $Q \subset \Delta B_{(n)}$.\\
 Отже, будь-який брус $Q$, що бере участь в $\Delta (A \cup B)_{(n)}$, автоматично бере участь окремо в $\Delta A_{(n)}$ або в $\Delta B_{(n)}$. Також не забуваймо, що є бруси, що лежать в $\Delta A_{(n)}$ або $\Delta B_{(n)}$, але не в $\Delta (A \cup B)_{(n)}$.\\
-Звідси маємо, що $\Delta (A \cup B)_{(n)} \subset \Delta A_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$ або $\Delta (A \cup B)_{(n)} \subset \Delta B_{(n)} \subset \Delta B_{(n)} \cup \Delta A_{(n)}$.
-\bigskip \\
-%But for the sake of simplicity I'll leave here explanation for myself
-II. Оберемо якийсь брус $Q$, який бере участь в $\Delta (A \setminus B)_{(n)}$, ну тобто $Q \subset \Delta (A \setminus B)_{(n)}$.\\
-Це означає, що існують два елементи: $\vec{x} \in Q \cap (A \setminus B)$ та $\vec{y} \in Q \cap \overline{(A \setminus B)}$.\\
+Звідси маємо, що $\Delta (A \cup B)_{(n)} \subset \Delta A_{(n)}$ або $\Delta (A \cup B)_{(n)} \subset \Delta B_{(n)}$. Отже, $\Delta (A \cup B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$.
+
+\item Оберемо якийсь брус $Q$, який бере участь в $\Delta (A \setminus B)_{(n)}$. Це означає, що обов'язково існують два елементи: $\vec{x} \in Q \cap (A \setminus B)$ та $\vec{y} \in Q \cap \overline{(A \setminus B)}$ (аналогічно, як було в першому).\\
 Якщо $\vec{y} \not\in A$, то тоді $\vec{y} \in Q \setminus A$. Водночас із $\vec{x} \in Q \cap (A \setminus B)$ випливає $\vec{x} \in Q \cap A$. Маючи це все, отримаємо $Q \not\subset A_{(n)}$, а також $Q \cap A \neq \emptyset$. Таким чином, цей брус $Q$ бере участь в $\Delta A_{(n)}$, тобто $Q \subset \Delta A_{(n)}$.\\
 Якщо $\vec{y} \in A$, то також $\vec{y} \in B$, водночас із $\vec{x} \in Q \cap (A \setminus B)$ випливає $\vec{x} \in Q \setminus B$. Аналогічно звідси випливає, що $Q \subset \Delta B_{(n)}$.\\
 Отже, будь-який брус $Q$, що бере участь в $\Delta (A \setminus B)_{(n)}$, автоматично бере участь окремо в $\Delta A_{(n)}$ або в $\Delta B_{(n)}$. Також не забуваймо, що є бруси, що лежать в $\Delta A_{(n)}$ або $\Delta B_{(n)}$, але не в $\Delta (A \setminus B)_{(n)}$.\\
-Звідси маємо, що $\Delta (A \setminus B)_{(n)} \subset \Delta A_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$ або $\Delta (A \setminus B)_{(n)} \subset \Delta B_{(n)} \subset \Delta B_{(n)} \cup \Delta A_{(n)}$.
-\bigskip \\
-Все, ми обґрунтували співвідношення. Таким чином,\\
+Звідси маємо, що $\Delta (A \setminus B)_{(n)} \subset \Delta A_{(n)}$ або $\Delta (A \setminus B)_{(n)} \subset \Delta B_{(n)}$. Отже, $\Delta (A \setminus B)_{(n)} \subset \Delta A_{(n)} \cup \Delta B_{(n)}$.
+\end{enumerate}
+Довели кожне з двох вкладень.
+\end{proof}
+
+Повернімося до доведення нашої теореми.
+
+\begin{proof}
+Із щойно доведеної леми, ми отримаємо таку таку оцінку:\\
 $0 \leq m(\Delta (A \cup B)_{(n)}) \leq m(\Delta A_{(n)}) + m(\Delta B_{(n)})$\\
-$0 \leq m(\Delta (A \setminus B)_{(n)}) \leq m(\Delta A_{(n)}) + m(\Delta B_{(n)})$\\
-\textit{І хоча ми не доводили монотонність, але це можна спокійно довести для множин, що допускаються в розклад прямокутників.}\\
-За умовою, $m(\Delta A_{(n)}) \to 0, m(\Delta B_{(n)}) \to 0$ при $n \to \infty$. Тоді із нерівностей випливає, що \\ $m(\Delta (A \cup B)_{(n)}) \to 0, m(\Delta (A \setminus B)_{(n)}) \to 0$ при $n \to \infty$. За попередньою теоремою, $A \cup B, A \setminus B \in \mathcal{K}$.\\
+$0 \leq m(\Delta (A \setminus B)_{(n)}) \leq m(\Delta A_{(n)}) + m(\Delta B_{(n)})$.\\
+\textit{Хоча ми не доводили монотонність міри (про це буде згодом), але це можна спокійно довести для множин, що допускать розклад в бруси.}\\
+За умовою жорданової вимірності, $m(\Delta A_{(n)}) \to 0, m(\Delta B_{(n)}) \to 0$ при $n \to \infty$. Тоді із нерівностей випливає, що $m(\Delta (A \cup B)_{(n)}) \to 0, \quad m(\Delta (A \setminus B)_{(n)}) \to 0$ при $n \to \infty$. За попередньою теоремою, $A \cup B, A \setminus B \in \mathcal{K}$.\\
 $A \cap B \in \mathcal{K}$, оскільки $A \cap B = A \setminus (A \setminus B)$.
 \end{proof}
 
 \begin{theorem}
 Для міри Жордана виконуються такі властивості:
-\begin{enumerate}
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 \item $\forall A,B \in \mathcal{K}: m(A \cup B) \leq m(A) + m(B)$;
-\item $\forall A,B \in \mathcal{K}, A^\circ \cap B^\circ = \emptyset: m(A \cup B) = m(A) + m(B)$;
+\item $\forall A,B \in \mathcal{K}, \Int(A) \cap \Int(B) = \emptyset: m(A \cup B) = m(A) + m(B)$;
 \item $\forall A,B \in \mathcal{K}: A \subset B: m(A) \leq m(B)$
 \end{enumerate}
 \end{theorem}
@@ -932,12 +1097,12 @@ $A \cap B \in \mathcal{K}$, оскільки $A \cap B = A \setminus (A \setminu
 беремо якийсь брус $Q$ із $(A \cup B)_{(n)}$, тоді звідси $Q \subset A \cup B$. Тут є кілька варіантів:\\
 $\left[\begin{gathered} Q \subset A \\ Q \subset B \\ Q \not\subset A, Q \cap A \neq \emptyset, Q \not\subset B, Q \cap B \neq \emptyset \end{gathered} \right. \implies \left[ \begin{gathered} Q \text{ із } A_{(n)} \\ Q \text{ із } B_{(n)} \\ Q \text{ із } \Delta A_{(n)} \text{ та із } \Delta B_{(n)}   \end{gathered} \right. \\ \implies Q \text{ із } A_{(n)} \cup B_{(n)} \cup \Delta A_{(n)} \cup \Delta B_{(n)}$. Таким чином, отримаємо бажане.\\
 Тоді $m((A \cup B)_{(n)}) \leq m(A_{(n)}) + m(\Delta A_{(n)}) + m(B_{(n)}) + m(\Delta B_{(n)})$.\\
-\textit{Тут саме множини, що допускаються в розклад прямокутників. Монотонність для них виконана.}\\
+\textit{Тут саме множини, що допускають розклад в бруси. Монотонність для них виконана.}\\
 Отже, $m(A \cup B) = \displaystyle\lim_{n \to \infty} m((A \cup B)_{(n)}) \leq \lim_{n \to \infty} m(A_{(n)}) + 0 + \lim_{n \to \infty} m(B_{(n)}) + 0 = m(A) + m(B)$.
 \bigskip \\
 2. Для цього нам достатньо довести нерівність $m(A \cup B) \geq m(A) + m(B)$.\\
 Маємо $A_{(n)} \cup B_{(n)} \subset (A \cup B)_{(n)}$, причому $A_{(n)},B_{(n)}$ не мають спільних брусів $Q \in \pi^{(n)}$.\\
-!Припустимо, що це не так. Маємо $Q$ - брус для $A_{(n)}$ та $B_{(n)}$. Цей брус $Q$ ясно, що має внутрішні точки, тоді звідси $A_{(n)}, B_{(n)}$ мають ці внутрішні точки. Раз $A_{(n)},B_{(n)}$ мають внутрішні точки, то тоді $A,B$ мають ці внутрішні точки, тобто $A^\circ \cap B^\circ \neq \emptyset$, що суперечить!\\
+!Припустимо, що це не так. Маємо $Q$ - брус для $A_{(n)}$ та $B_{(n)}$. Цей брус $Q$ ясно, що має внутрішні точки, тоді звідси $A_{(n)}, B_{(n)}$ мають ці внутрішні точки. Раз $A_{(n)},B_{(n)}$ мають внутрішні точки, то тоді $A,B$ мають ці внутрішні точки, тобто $\Int(A) \cap \Int(B) \neq \emptyset$, що суперечить!\\
 Отже, $m(A_{(n)} \cup B_{(n)}) = m(A_{(n)}) + m(B_{(n)}) \leq m((A \cup B)_{(n)})$.\\
 \textit{Адитивність для множин, що допускаюються в розклад прямокутників, виконана.}\\
 Таким чином, $m(A \cup B) = \displaystyle\lim_{n \to \infty} m((A \cup B)_{(n)}) \geq \lim_{n \to \infty} m(A_{(n)}) + \lim_{n \to \infty} m(B_{(n)}) = m(A) + m(B)$.\\
