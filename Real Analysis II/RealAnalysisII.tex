@@ -54,7 +54,10 @@
 
 \theoremstyle{theoremdd}
 \newtheorem{theorem}{Theorem}[subsection]
-  
+
+\theoremstyle{theoremdd}
+\newtheorem*{theorem*}{Theorem.}
+ 
 \theoremstyle{theoremdd}
 \newtheorem{definition}[theorem]{Definition}
 
@@ -1651,6 +1654,40 @@ $f(x+1) - f(x) = f'(x)$.\\
 \fi
 \newpage
 %\fi
+
+На даному етапі нам буде достатньо інструментарію, щоб довести даний результат:
+\begin{theorem*}
+$\pi \notin \mathbb{Q}$.\\
+\textit{Нижчеописане доведення було придумано математиком Айвеном Нівеном.}
+\end{theorem*}
+
+\begin{proof}
+!Припустимо, що $\pi \in \mathbb{Q}$, тобто розпишемо $\pi = \dfrac{a}{b}$. Не втрачаючи загальності, ввжаємо $a,b \in \mathbb{N}$.\\
+Зафіксуємо $n \in \mathbb{N}$ та розглянемо функцію $f(x) = \dfrac{x^n (a-bx)^n}{n!}$. Також для зручності позначимо $F(x) = f(x) - f^{(2)}(x) + f^{(4)}(x) + \dots + (-1)^{n} f^{(2n)}(x)$ -- вона визначена коректно, бо функція $f$, зрозуміло, диференційована. Доведення буде в кілька етапів.
+\bigskip \\
+I. \textit{$F(0)+F(\pi) \in \mathbb{Z}$}.\\
+Розпишемо функцію $f$ в більш розгорнутому вигляді через біном-Ньютона -- маємо наступне:\\
+$f(x) = \dfrac{x^n}{n!} \displaystyle\sum_{k=0}^n (-1)^k C_n^k x^k b^k a^{n-k} = \sum_{k=0}^n \dfrac{(-1)^k C_n^k b^k a^{n-k}}{n!} x^{n+k} = \sum_{k=0}^n \dfrac{c_{n+k}}{n!}x^{n+k} = \\
+= \dfrac{c_0}{n!} + \dfrac{c_1}{n!}x + \dots + \dfrac{c_n}{n!}x^n + \dfrac{c_{n+1}}{n!}x^{n+1} + \dots + \dfrac{c_{n+k}}{n!}x^{n+k}$.\\
+У цьому випадку $c_m = 0$ при $m < n$, а в іншому випадку $c_m \in \mathbb{Z}$. Значить, звідси\\
+$f^{(m)}(0) = 0$ при $m < n$ \qquad $f^{(m)}(0) = \dfrac{m!}{n!} c_m$ при $n \leq m \leq 2n$. Причому $f^{(m)} \in \mathbb{Z}$.\\
+Таким чином, ми отримаємо $F(0) \in \mathbb{Z}$.\\
+Зауважимо, що $f(\pi - x) = f(x)$, тому звідси $f^{(m)}(\pi-x) = (-1)^m f^{(m)}(x)$. Зокрема при $x = \pi$ маємо $(-1)^m f^{(m)}(\pi) = f^{(m)}(0)$. Таким чином, отримаємо $F(\pi) \in \mathbb{Z}$ (насправді, $F(\pi) = F(0)$).
+\bigskip \\
+II. \textit{$\displaystyle\int_0^{\pi} f(x)\sin x\,dx = F(0) + F(\pi)$.}\\
+Продиференціюємо функцію $F$ двічі та зауважимо, що $f^{(2n+2)} \equiv 0$. Після цього можна зауважити таке співвідношення:\\
+$F''(x) + F(x) = f(x)$.\\
+Дана рівність дозволяє сказати нам, що $f(x) \sin x = (F'(x) \sin x - F(x) \cos x)'$. Тоді\\
+$\displaystyle\int_0^{\pi} f(x)\sin x\,dx = F'(x) \sin x - F(x) \cos x \Big|_{0}^{\pi} = F(0) + F(\pi)$.\\
+Можна було просто підставити $f = F'' + F$ та ручками пошукати невизначений інтеграл, якщо важко побачити.
+\bigskip \\
+III. \textit{$0 < F(0) + F(\pi) < 1$}.\\
+Зауважимо, що при $x \in (0,\pi)$ матиемо $f(x) > 0$. Також нам відомо, що $0 < \sin x < 1$. Таким чином, звідси $\displaystyle\int_0^{\pi} f(x) \sin x\,dx > 0$, а це означає, що $F(0) + F(\pi) \in \mathbb{N}$.\\
+Із іншого боку, при $x \in [0,\pi]$ ми матимемо $0 \leq x(a-bx) \leq \pi a$. Також нам відомо, що $0 \leq \sin x \leq 1$. Таким чином, звідси $\displaystyle\int_0^{\pi} f(x) \sin x\,dx \leq \pi \dfrac{(\pi a)^n}{n!}$. Нам відомо, що $\pi \cdot \dfrac{(\pi a)^n}{n!} \to 0$ при $n \to \infty$, тому знайдеться таке натуральне число $n \in \mathbb{N}$, щоб $F(0) + F(\pi) < 1$.
+\bigskip \\
+Нарешті, прийшли до суперечності!
+\end{proof}
+\newpage
 
 %\iffalse
 \section{Невласні інтеграли}
