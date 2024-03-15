@@ -1634,6 +1634,349 @@ $\mathbb{Q}$ -- зліченна множина.
 Установимо відображення $\phi \colon \mathbb{Q} \to \mathbb{Z} \times \mathbb{N}$ таким чином: $\phi\left( \dfrac{p}{q} \right) = (p,q)$. Цілком зрозуміло, що це -- ін'єктивне відображення. Далі треба пригадати, що $\mathbb{Z}, \mathbb{N}$ обидва зліченні, а тому $\mathbb{Z} \times \mathbb{N}$ -- також зліченна, звідси $\exists g \colon \mathbb{Z} \times \mathbb{N} \to \mathbb{N}$ -- ін'єкція. Тоді композиція $g \circ \phi \colon \mathbb{Q} \to \mathbb{N}$ задає ін'єкцію, що й доводить наслідок. 
 \end{proof}
 
+\subsection{Поняття відображення та функції}
+	\begin{definition}
+	Задано дві множини $X,Y$.\\
+	\textbf{Відображенням} $f$ із множини $X$ в множину $Y$ називають правило, де
+	\begin{align*}
+	\text{кожному елементу з $X$ ставиться у відповідність єдиний елемент з $Y$.}
+	\end{align*}
+	Позначення: $f \colon X \to Y$ або інколи $X \xrightarrow{f} Y$.
+	\begin{figure}[H]
+\centering {
+\begin{tikzpicture}
+\fill[red!40] (0,0) ellipse (1cm and 2cm);
+\fill[blue!40] (4,0) ellipse (1cm and 2cm);
+\node (A1) at (0.7,1) [circle,fill,inner sep=1.5pt]{};
+\node (A2) at (-0.5,-0.7) [circle,fill,inner sep=1.5pt]{};
+\node (A3) at (0.5,-0.1) [circle,fill,inner sep=1.5pt]{};
+
+\node (B1) at (4+0,1) [circle,fill,inner sep=1.5pt]{};
+\node (B2) at (4-0.8,0.2) [circle,fill,inner sep=1.5pt]{};
+\node (B3) at (4+0.5,-0.9) [circle,fill,inner sep=1.5pt]{};
+\node[anchor = south east] at (0,0) {$X$};
+\node[anchor = north west] at (4,0) {$Y$};
+
+\draw[thick, ->] (A1)--(B1);
+\draw[thick, ->] (A2)--(B3); \draw[thick, ->] (A3)--(B1);
+\end{tikzpicture}
+}
+\end{figure}
+	Множину $X$ ще називають \textbf{областю визначення} функції $f$. Для області визначення існує окреме позначення: $D(f)$ (від слова domain).
+	\end{definition}
+	
+	\begin{example}
+	Задано дві множини: \\
+	$X = \{0,\ 1,\ 2,\ 3 \}, \\ Y = \{-1,\ \sqrt{2},\ 17,\ \sqrt{101},\ 124,\ 1111\}$. \\
+	Можна побудувати відображення $f \colon X \to Y$ таким чином:\\
+	$0 \mapsto \sqrt{2}$; \quad (або ще пишуть дуже часто $f(0) = \sqrt{2}$)\\
+	$1 \mapsto 1111$;\\
+	$2 \mapsto \sqrt{2}$;\\
+	$3 \mapsto \sqrt{101}$.\\
+	Зауважимо, що ми пройшли всю область визначення, але деякі значення $Y$ функція не повертає. Наприклад, ми не можемо отримати $-1,\ 17,\ 124$.
+	\end{example}
+	
+	\begin{example}
+	Маємо відображення $f \colon [-4; 5] \to \mathbb{R}, \quad f(x) = x^3-x^2+4$.
+	\end{example}
+	
+	\begin{remark}
+	Зазвичай якщо маємо відображення $f \colon X \to Y$ та при цьому множини $X,Y$ містять числа, то таке відображення часто називають \textbf{функцією}.
+	\end{remark}
+	
+	\begin{definition}
+	Задано два відображення: $f \colon X \to Y,\ g \colon Y \to Z$.\\
+	\textbf{Композицією відображень} $f$ та $g$ називають таке відображення $h \colon X \to Z$, для якої
+	\begin{align*}
+	h(x) = g(f(x))
+	\end{align*}
+	Позначення: $h = g \circ f$.
+	\begin{figure}[H]
+\centering {
+\begin{tikzpicture}[scale = 0.7]
+\fill[red!40] (0,0) ellipse (1cm and 2cm);
+\fill[blue!40] (4,0) ellipse (1cm and 2cm);
+\fill[green!40] (8,0) ellipse (1cm and 2cm);
+
+\node[anchor = south east] at (0,1) {$X$};
+\node[anchor = south east] at (4,1) {$Y$};
+\node[anchor = south east] at (8,1) {$Z$};
+
+\draw[thick, ->](0.5,0) .. controls (2,1) .. (4,0) node at (2,1.2) {$f$};
+\draw[thick, ->](4.5,0) .. controls (6,1) .. (8,0) node at (6,1.2) {$g$};
+\draw[thick, ->](0.5,-0.1) .. controls (4,-1) .. (8,-0.1) node at (6,-1) {$h = g \circ f$};;
+
+\end{tikzpicture}
+}
+\end{figure}
+	\end{definition}
+	
+	\begin{example}
+	Маємо функції $f \colon [0,+\infty) \to \mathbb{R} \quad f(x) = x^2$ та $g \colon \mathbb{R} \to [-1,1] \quad g(x) = \sin x$. Визначимо композицію $h \colon [0,+\infty) \to [-1,1]$ як $h = g \circ f$. Тобто звідси $h(x) = g(f(x)) = \sin x^2$.
+	\end{example}
+	
+	\begin{proposition}[Асоціативність композиції]
+	Задані відображення $f \colon W \to X, \quad g \colon X \to Y, \quad h \colon Y \to Z$. Тоді \\ $h \circ (g \circ f) = (h \circ g) \circ f$.
+	\end{proposition}
+	
+	\begin{proof}
+	Із одного боку, $(h \circ (g \circ f)) (x) = h((g \circ f) (x)) = h(g(f(x)))$.\\
+	Із іншого боку, $((h \circ g) \circ f) (x) = (h \circ g) (f(x)) = h(g(f(x)))$.
+	\end{proof}
+	\begin{figure}[H]
+\centering {
+\begin{tikzpicture}[scale = 0.7]
+\fill[yellow!40] (0,0) ellipse (1cm and 2cm);
+\fill[red!40] (4,0) ellipse (1cm and 2cm);
+\fill[blue!40] (8,0) ellipse (1cm and 2cm);
+\fill[green!40] (12,0) ellipse (1cm and 2cm);
+
+\node[anchor = south east] at (0,1) {$W$};
+\node[anchor = south east] at (4,1) {$X$};
+\node[anchor = south east] at (8,1) {$Y$};
+\node[anchor = south east] at (12,1) {$Z$};
+
+\draw[thick, ->](0.5,0) .. controls (2,1) .. (4,0) node at (2,1.2) {$f$};
+\draw[thick, ->](4.5,0) .. controls (6,1) .. (8,0) node at (6,1.2) {$g$};
+\draw[thick, ->](4+4.5,0) .. controls (4+6,1) .. (4+8,0) node at (4+6,1.2) {$h$};
+\draw[thick, ->](0.5,-0.1) .. controls (4,-1) .. (8,-0.1) node at (6,0) {$g \circ f$};
+\draw[thick, ->](4+0.5,-0.1-1) .. controls (4+4,-1-1) .. (4+8,-0.1-1) node at (4+6,-1-1) {$h \circ g$};
+\draw[thick, ->] (0,1.5) .. controls (6,3) .. (12,1.5) node at(6,3.2) {$h \circ (g \circ f) = (h \circ g) \circ f$};
+\end{tikzpicture}
+}
+\end{figure}
+
+	\begin{definition}
+	Відображення $f \colon X \to Y$ називається: \\
+	\begin{tabular}{ll}
+	- \textbf{ін'єкцією}, якщо & $\forall x_1,x_2 \in X: f(x_1) = f(x_2) \implies x_1 = x_2$.\\
+	- \textbf{сюр'єкцією}, якщо & $\forall y \in Y: \exists x: f(x) = y$.\\
+	- \textbf{бієкцією}, якщо & $\forall y \in Y: \exists! x: f(x) = y$.
+	\end{tabular}
+	\end{definition}
+	
+	\begin{remark}
+	Означення ін'єкції можна переписати так: $\forall x_1,x_2 \in X: x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$.
+	\end{remark}
+	
+	\begin{example} Розглянемо такі приклади:\\
+	1) $f \colon \mathbb{R} \to [-1,1]$: $f(x) = \cos x$ -- сюр'єкція;\\
+	2) $f \colon \mathbb{R} \to \mathbb{R}$: $f(x)=3^x$ -- ін'єкція;\\
+	3) $f \colon \mathbb{R} \to \mathbb{R}$: $f(x) = x^3$ -- бієкція;\\
+	4) $f \colon \mathbb{R} \to \mathbb{R}$: $f(x) = |x|$ -- жодна з означень.
+\begin{figure}[H]
+\centering 
+\resizebox{1\textwidth}{!} {
+\begin{tikzpicture}[scale=0.7]
+\fill[red!40] (0,0) ellipse (1cm and 2cm);
+\fill[blue!40] (3,0) ellipse (1cm and 2cm);
+\node (A1) at (0,0.8) [circle,fill,inner sep=1.5pt]{};
+\node (A2) at (0,0) [circle,fill,inner sep=1.5pt]{};
+%\node (A3) at (0,-0.8) [circle,fill,inner sep=1.5pt]{};
+
+\node (B1) at (3+0,0.8) [circle,fill,inner sep=1.5pt]{};
+\node (B2) at (3+0,0) [circle,fill,inner sep=1.5pt]{};
+\node (B3) at (3+0,-0.8) [circle,fill,inner sep=1.5pt]{};
+\node[anchor = south east] at (0,1) {$X$};
+\node[anchor = south east] at (3,1) {$Y$};
+
+\draw[thick, ->] (A1)--(B1);
+\draw[thick, ->] (A2)--(B3);
+\node at (1.5,-3) {$\textrm{ін'єкція}$};
+\end{tikzpicture}
+\qquad
+
+\begin{tikzpicture}[scale=0.7]
+\fill[red!40] (0,0) ellipse (1cm and 2cm);
+\fill[blue!40] (3,0) ellipse (1cm and 2cm);
+\node (A1) at (0,0.8) [circle,fill,inner sep=1.5pt]{};
+\node (A2) at (0,0) [circle,fill,inner sep=1.5pt]{};
+\node (A3) at (0,-0.8) [circle,fill,inner sep=1.5pt]{};
+
+\node (B1) at (3+0,0.8) [circle,fill,inner sep=1.5pt]{};
+%\node (B2) at (4+0,0) [circle,fill,inner sep=1.5pt]{};
+\node (B3) at (3+0,-0.8) [circle,fill,inner sep=1.5pt]{};
+\node[anchor = south east] at (0,1) {$X$};
+\node[anchor = south east] at (3,1) {$Y$};
+
+\draw[thick, ->] (A1)--(B1);
+\draw[thick, ->] (A2)--(B3); \draw[thick, ->] (A3)--(B3);
+\node at (1.5,-3) {$\textrm{сюр'єкція}$};
+\end{tikzpicture}
+
+\qquad
+\begin{tikzpicture}[scale=0.7]
+\fill[red!40] (0,0) ellipse (1cm and 2cm);
+\fill[blue!40] (3,0) ellipse (1cm and 2cm);
+\node (A1) at (0,0.8) [circle,fill,inner sep=1.5pt]{};
+\node (A2) at (0,0) [circle,fill,inner sep=1.5pt]{};
+\node (A3) at (0,-0.8) [circle,fill,inner sep=1.5pt]{};
+
+\node (B1) at (3+0,0.8) [circle,fill,inner sep=1.5pt]{};
+\node (B2) at (3+0,0) [circle,fill,inner sep=1.5pt]{};
+\node (B3) at (3+0,-0.8) [circle,fill,inner sep=1.5pt]{};
+\node[anchor = south east] at (0,1) {$X$};
+\node[anchor = south east] at (3,1) {$Y$};
+
+\draw[thick, ->] (A1)--(B2);
+\draw[thick, ->] (A2)--(B1); 
+\draw[thick, ->] (A3)--(B3);
+\node at (1.5,-3) {$\textrm{бієкція}$};
+\end{tikzpicture}
+}
+\end{figure}
+\end{example}
+	
+	\begin{proposition}
+	Задане відображення $f \colon X \to Y$. \\
+	$f$ -- бієкція $\iff f$ -- одночасно сюр'єкція та ін'єкція.
+	\end{proposition}
+	
+	\begin{proof}
+	\rightproof Дано: $f$ -- бієкція, тобто $\forall y \in Y: \exists! x: f(x) = y$. Перевіримо дві властивості.\\
+	1) $\forall y \in Y: \exists x: f(x) = y$ -- те, що було за умовою -- сюр'єкція виконана;\\
+	2) якщо при $x_1 \neq x_2$ вважати, що $f(x_2) = f(x_1) = y$, то це суперечить умові бієкції. Тому $f(x_1) \neq f(x_2)$ -- ін'єкція виконана.\\
+	Отже, $f$ -- одночасно сюр'єкція та ін'єкція.
+	\bigskip \\
+	\leftproof Дано: $f$ -- одночасно сюр'єкцієя та ін'єкція.\\
+	Візьмемо довільне $y \in Y$. Тоді за сюр'єкцією $x \in X$ існує. При цьому воно єдине, тому що в протилежному випадку $\exists x_1, x_2: f(x_1) = f(x_2) = y$ -- суперечить ін'єкції.\\ 
+	Отже, $f$ - бієкція.
+	\end{proof}
+	
+	\begin{definition}
+	Функції $f \colon X \to Y,\ g \colon Y \to X$ називаються \textbf{взаємно оберненими}, якщо
+	\begin{align*}
+	\forall x \in X: g(f(x)) = x \\
+	\forall y \in Y: f(g(y)) = y
+	\end{align*}
+	Водночас функція $g$ називається \textbf{оберненою до функції $f$}.\\
+	Позначення: $g = f^{-1}$.
+\begin{figure}[H]
+\centering {
+\begin{tikzpicture}[scale=0.7]
+\fill[red!40] (0,0) ellipse (1cm and 2cm);
+\fill[blue!40] (4,0) ellipse (1cm and 2cm);
+
+\node[anchor = south east] at (0,1) {$X$};
+\node[anchor = south east] at (4,1) {$Y$};
+
+\draw[thick, ->](0.5,0) .. controls (2,1) .. (4,0) node at (2,1.2) {$f$};
+\draw[thick, ->](3.5,0) .. controls (2,-1) .. (0,0) node at (2,-1.2) {$g = f^{-1}$};
+\end{tikzpicture}
+}
+\end{figure}
+	\end{definition}
+	
+	\begin{example} Розглянемо такі приклади:\\
+	1) $f \colon \mathbb{R} \to \mathbb{R}$: \qquad $f(x) = x^3$ \qquad $g(x) = \sqrt[3]{x}$ -- обернена. \\
+	2) $f \colon \mathbb{R} \to \mathbb{R}$: \qquad
+	$f(x) = x^2$ -- оберненої не має (відповідь на питання дасть твердження нижче).
+	\end{example}
+	
+	\begin{proposition}
+	Задані функції $f \colon X \to Y, g \colon Y \to X$.\\
+	Функції $f,g$ -- взаємно обернені $\iff$ вони є бієкціями.
+	\end{proposition}
+	
+	\begin{proof}
+	\rightproof Дано: $g = f^{-1}$, тоді $\forall y \in Y: f(g(y)) = y$. Доведемо  властивість бієкції для функції $f$.\\
+	Візьмемо $y \in Y$. Тоді $\exists x = g(y): f(x) = f(g(y)) = y$ -- сюр'єкція виконана.\\
+	!Дано $x_1 \neq x_2$ і припустимо $f(x_1) = f(x_2) = y_0$. Тоді $g(y_0) = g(f(x_1)) = x_1$ та $g(y_0) = g(f(x_2)) = x_2$ і вони рівні. Отже, суперечність!\\ Тоді $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$ - ін'єкція виконана.\\
+	Разом отримуємо, що $f$ -- бієкція. Для функції $g$ все аналогічно.
+	\bigskip \\
+	\leftproof Дано: $f,g$ -- бієкції.\\
+	Розглянемо функцію $f \colon X \to Y$, щоб $y = f(x)$. Визначимо функцію $g \colon Y \to X$ так, щоб $x = g(y)$.\\
+	Нехай $y_0 \in Y$. Тоді $\exists! x \in X: y = f(x)$. А тепер візьмемо $x = g(y)$. Тоді для нього $\exists! y = y_0 \in Y: \\ x = g(y) = g(f(x))$. І так для будь-якого $y_0$. Аналогічно доводиться, що $y = f(g(y))$.\\
+	Отже, $g = f^{-1}$.
+	\end{proof}
+	
+	\begin{corollary}
+	Функція $f$ має обернену $\iff f $ -- бієкція.\\
+	\textit{Записав таке саме формулювання, але щоб було легше сприймати.}
+	\end{corollary}
+	
+	\begin{example} Знайдемо обернену функцію для $f(x) = \dfrac{x+4}{2x-5}$.\\
+	Позначимо $f(x) = y$. А тепер букви $x,y$ змінимо місцями -- отримаємо:\\
+	$x = \dfrac{y+4}{2y-5} \implies (2y-5)x = y+4 \implies y(2x-1) = 4+5x \implies y = \dfrac{4+5x}{2x-1}$.\\
+	Отримали обернену функцію $f^{-1}(x) = \dfrac{4+5x}{2x-1}$.	Щоб пересвідчитись, що це дійсно обернена, можна порахувати $f(f^{-1}(x))$ та $f^{-1}(f(x))$.
+	\bigskip \\
+	Буде, скоріш, коректно, якщо задати функцію так: \\ $f \colon \mathbb{R} \setminus \{2.5\} \to \mathbb{R} \setminus \{0.5\}$, а також $f^{-1} \colon \mathbb{R} \setminus \{0.5\} \to \mathbb{R} \setminus \{2.5\}$.\\ 
+	Бо якщо ми залишимо викинуті точки, то тоді ми не зможемо порахувати $f \circ f^{-1}$ та $f^{-1} \circ f$.
+	\end{example}
+	
+	\begin{example}
+	Маємо функцію $f \colon \left[ -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right] \to [-1,1]$, де $f(x) = \sin x$.\\
+	Оскільки саме така функція є бієктивною, то для неї існує обернена функція $g: [-1,1] \to \left[ -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right]$. Її вирішили обізвати арксінусом та позначати як $g(y) = \arcsin y$.
+	\end{example}
+	
+	\begin{definition}
+	Задано функцію $f \colon X \to Y$.\\
+	\textbf{Образом} множини $X_0 \subset X$ називається така множина:
+	\begin{align*}
+	f(X_0) = \{f(x) \in Y: x \in X_0 \}
+	\end{align*}
+	\textbf{Повним прообразом} множини $Y_0 \subset Y$ називається така множина:
+	\begin{align*}
+	f^{-1}(Y_0) = \{x \in X:  f(x) \in Y_0 \}
+	\end{align*}
+	
+	\begin{figure}[H]
+\centering {
+\begin{tikzpicture}
+\fill[black!20] (0,0) ellipse (1cm and 2cm);
+\fill[black!10] (4,0) ellipse (2cm and 3cm);
+\fill[black!20] (4,0) ellipse (1cm and 2cm);
+
+
+\fill[red!40] (0.3,-0.1) ellipse (0.3cm and 0.6cm);
+\fill[red!40] (4.5,0.1) ellipse (0.4cm and 0.5cm);
+
+\fill[blue!40] (4,-1.6) ellipse (0.8cm and 0.2cm);
+\fill[blue!40] (-0.3,-1) ellipse (0.5cm and 0.3cm);
+
+\draw[thick, dashed] (0.3,-0.1+0.6)--(4.5,0.1+0.5);
+\draw[thick, dashed] (0.3,-0.1-0.6)--(4.5,0.1-0.5);
+
+\draw[thick, dashed] (0,2)--(4,2);
+\draw[thick, dashed] (0,-2)--(4,-2);
+
+\draw[thick, dashed] (4,-1.6+0.2)--(-0.3,-1+0.3);
+\draw[thick, dashed] (4,-1.6-0.2)--(-0.3,-1-0.3);
+
+\node[scale=0.8] at (0.3,-0.1) {$X_0$};
+\node[scale=0.8] at (4.5,0.1) {$f(X_0)$};
+\node[scale=0.8] at (4,-1.6) {$Y_0$};
+\node[scale=0.8] at (-0.3,-1) {$f^{-1}(Y_0)$};
+
+\node[anchor = south east] at (0,0.6) {$X$};
+\node[anchor = south east] at (4.2,0.6) {$f(X)$};
+\node[anchor = south east] at (4,2.2) {$Y$};
+\end{tikzpicture}
+}
+\end{figure}
+Множину $f(X)$, тобто образ області визначення, ще називають \textbf{областю значень функції $f$}. Така множина має особливе позначення: $E(f)$.
+\end{definition}
+	
+	\begin{example} Задамо функцію $f \colon \mathbb{R} \to \mathbb{R}$: \quad $f(x) = x^2$ та множину $A = [-5, 4)$.\\
+	$f(A) = \{f(x) = x^2: x \in [-5, 4) \} = [0, 25]$\\
+	$f^{-1}(A) = \{x: f(x) = x^2 \in [-5, 4) \} \overset{x^2 < 4}{=} (-2, 2)$
+	\end{example}
+
+	\begin{proposition}[Властивості повних прообразів]
+	1) $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$;\\
+	2) $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$;\\
+	3) $f^{-1}(\overline{A}) = \overline{f^{-1}(A)}$.\\
+	\textit{Випливає з теорії множин.}
+	\end{proposition}
+	
+	\begin{remark}
+	Перші дві властивості можна застосовувати, навіть коли кількість множин в об'єднанні чи перетині нескінченна.
+	\end{remark}
+	
+	\begin{remark}
+	Властивість образів не часто збігаються. Зокрема: $f(A \cap B) \neq f(A) \cap f(B)$.
+	\end{remark}
+
 \subsection{Функція як окремий випадок відношення}
 Тут вивчається зв'язок між бінарними відношеннями та функціями.
 \begin{definition} 
