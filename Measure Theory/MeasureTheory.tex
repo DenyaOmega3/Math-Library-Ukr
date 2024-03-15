@@ -61,6 +61,7 @@
 \newcommand\tomeasure[1]{\overset{{#1}}{\to}}
 \newcommand\nottomeasure[1]{\overset{{#1}}{\centernot\to}}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator*{\esssup}{ess\,sup}
 
 \makeatletter
 \renewenvironment{proof}[1][Proof.\\]{\par
@@ -2514,6 +2515,76 @@ III. Випадок $f \in L_p$ -- довільна.\\
 Розглянемо зліченне півкільце множин $\displaystyle \tilde{\mathcal{P}}_d = \left\{ \prod_{k=1}^d (a_k,b_k] \mid a_k,b_k \in \mathbb{Q} \right\}$. Розглянемо $M$ -- набір функцій вигляду $\displaystyle\sum_{i=1}^j r_i \mathbbm{1}_{C_i}, r_i \in \mathbb{Q}, C_i \in \tilde{\mathcal{P}}_d, j \geq 1$. Можна зазначити, що $M$ -- зліченна множина. Ми доведемо, що $M$ буде щільною в $L_p$.\\
 Функціями з $M$ можна як завгодно близько за нормою $\| \cdot \|_p$ наближати функції вигляду $\displaystyle\sum_{i=1}^j c_i \mathbbm{1}_{C_i}, c_i \in \mathbb{R}, C_i \in \tilde{\mathcal{P}}_d$, а дані функції, у свою чергу, наближають функції типу $\displaystyle\sum_{i=1}^j c_i \mathbbm{1}_{D_i}, c_i \in \mathbb{R}, D_i \in \mathcal{P}_d$.\\
 Із попередньої теореми, маємо, що набір функцій такого вигляду -- щільна підмножина $L_p$.
+\end{proof}
+
+\subsection{Істотно обмежені функції}
+\begin{definition}
+Задано $(X,\mathcal{F},\lambda)$ -- вимірний простір та $f \colon X \to \mathbb{R}$ -- $\mathcal{F}$-вимірна.\\
+Функція $f$ називається \textbf{істотно обмеженою}, якщо
+\begin{align*}
+\exists c > 0: |f(x)| \leq c \pmod \lambda
+\end{align*}
+Інакше кажучи, $\lambda\{x \in X: |\lambda(x)| > c\} = 0$.
+\end{definition}
+
+\begin{definition}
+\textbf{Істотною верхьною гранню} називають найменше число, що обмежує істотно
+\begin{align*}
+\esssup_X |f| = \inf \{c > 0: \lambda\{x \in X: |f(x)| > c\} = 0 \}
+\end{align*}
+Дану штуку можна переписати в іншому вигляді: $\displaystyle\esssup_X |f| = \inf_{\lambda(N) = 0} \sup_{x \in X \setminus N} |f(x)|$.
+\end{definition}
+\noindent Позначення: $\tilde{L}_\infty(X,\lambda)$ -- множина всіх істотно обмежених функцій. Тобто
+\begin{align*}
+\tilde{L}_\infty(X,\lambda) = \{f \colon X \to \mathbb{R} \mid f \text{ -- } \mathcal{F}-\text{вимірна}, \esssup_X |f| < \infty\}
+\end{align*}
+Аналогічним чином ми профакторизуємо даний простір на основі відношення еквівалентності, що було задано в просторі $\tilde{L}_p$. Отримаємо простір $L_\infty = L_\infty(X,\lambda)$ -- множина класів еквівалентностей.
+
+\begin{proposition}
+$(L_\infty, \| \cdot \|_\infty)$ -- дійсний нормований простір, причому норма задається ось так:\\
+$\displaystyle\|f\|_\infty = \esssup_X |f|$.
+\end{proposition}
+
+\begin{proof}
+Нам треба просто перевірити властивості норми.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\|f\|_\infty \geq 0$ -- зрозуміло, бо ми проходимося по додатним константам $c$, які істотно обмежують. Також $\|f\|_\infty = 0 \iff \forall \varepsilon > 0: \exists c_\varepsilon > 0: c_\varepsilon < \varepsilon$. Зокрема зафіксуємо $\varepsilon = \dfrac{1}{k}$, тоді існують $c_k < \dfrac{1}{k}$, які обмежують істотно функцію $f$. Тобто $\exists N_k: \lambda(N_k) = 0: \forall x \in X \setminus N_k: |f(x)| \leq c_k < \dfrac{1}{k}$. Оберемо множину $N = \displaystyle\bigcup_{k \geq 1} N_k$, яка також є множиною міри нуль, тоді $\forall x \in X \setminus N: |f(x)| < \dfrac{1}{k}$. При $k \to \infty$ отримаємо $f = 0 \pmod \lambda$.\\ 
+\item $\|\alpha f\|_\infty = \displaystyle \esssup_X |\alpha f| = \inf \left\{ c > 0: \lambda \{x: |\alpha f(x)| > c \} = 0 \right\} = \inf \left\{ |\alpha| \dfrac{c}{|\alpha|} > 0 : \lambda \left\{ x: |f(x)| > \dfrac{c}{|\alpha|} \right\} \right\} \\ = |\alpha| \inf \left\{ \dfrac{c}{|\alpha|} > 0 : \lambda \left\{ x: |f(x)| > \dfrac{c}{|\alpha|} \right\} \right\} = |\alpha| \esssup_X |f| = |\alpha| \|f\|_\infty$.\\
+\item Мабуть, доведу це надзвичайно детально.\\
+Розглянемо множину $A = \{c > 0: \lambda\{x \in X: |f(x)+g(x)| > c\} = 0\}$ та дві множини $B_1 = \{c > 0: \lambda \{x \in X: |f(x)| > c\} = 0\}$ та $B_2 = \{c > 0: \lambda \{x \in X: |g(x)| > c\} = 0\}$. Із математичного аналізу ми вже знаємо, що з себе представляє множина $B_1 + B_2$. Ми хочемо довести, що $A \supset B_1 + B_2$ -- і таким чином, $\inf A \leq \inf (B_1 + B_2) = \inf B_1 + \inf B_2$ -- а це наша бажана нерівність $\|f+g\|_{\infty} \leq \|f\|_\infty + \|g\|_\infty$.\\
+Нехай $c \in B_1+B_2$, тобто $c = c_1 + c_2$, причому $c_1 \in B_1,c_2 \in B_2$. Тобто $\lambda\{x \in X: |f(x)| > c_1\} = 0,\ \\ \lambda\{x \in X: |g(x)| > c_2\} = 0$. Ми хочемо довести, що $\lambda \{x \in X: |f(x)+g(x)| > c\} = 0$.\\
+Зауважимо, що справджується $\{x \in X: |f+g| > c_1+c_2\} \subset \{x \in X: |f| > c_1\} \cup \{x \in X: |g| > c_2\}$, тому звідси випливає, що \\ $\lambda\{x \in X: |f(x)+g(x)| > c_1+c_2\} \leq \lambda\{x \in X: |f(x)| > c_1\} + \lambda\{x \in X: |g(x)| > c_2\} = 0$.\\
+Таким чином, ми довели, що $c \in A$ -- а це завершує доведення третьої властивості норми.
+\end{enumerate}
+Отже, у нас дійсно встановлений нормований простір.
+\end{proof}
+
+\begin{proposition}
+Установлений вище нормований простір $(L_\infty, \| \cdot \|_\infty)$ -- банахів.
+\end{proposition}
+
+\begin{proof}
+Нехай $\{f_n, n \geq 1\} \subset L_\infty$ -- фундаментальна послідовність. Позначимо кілька множин:\\
+$A_n = \{x \in X: |f_n(x)| > \|f_n\|_\infty\}$;\\
+$A_{nm} = \{x \in X: |f_n(x) - f_m(x)| > \|f_n-f_m\|_\infty\}$;\\
+$A = \displaystyle\bigcup_{n=1}^\infty A_n \cup \bigcup_{n,m=1}^\infty A_{mn}$.\\
+Зауважимо, що $\lambda(A_n) = 0$ та $\lambda(A_{nm}) = 0$ в силу істотно обмежених функцій $f_n$. Звідси $\lambda(A) = 0$.\\
+Якщо $x \in X \setminus \displaystyle\bigcup_{n,m=1}^\infty A_{nm}$, то тоді $|f_n(x) - f_m(x)| \leq \|x_n - x_m\|_\infty \to 0$, тобто тоді $\{f_n(x),n \geq 1\}$ -- фундаментальна як числова послідовність, тож $\exists \displaystyle\lim_{n \to \infty} f_n(x) = f(x)$. Якщо $x \in \displaystyle\bigcup_{n,m=1}^\infty A_{mn}$, то покладемо $f(x) = 0$.\\
+Хочемо довести, що знайдена $f$ -- границя для послідовності $\{f_n, n \geq 1\} \subset L_\infty$.\\
+Спочатку доведемо, що $f \in L_\infty$. Оскільки $\{f_n\}$ -- фундаментальна, то вона обмежена, тож $\exists c > 0: \forall n \geq 1: \|f_n\|_\infty \leq c$. Якщо $x \in X \setminus \displaystyle\bigcup_{n=1}^\infty A_n$, то тоді $|f_n(x)| \leq \|f_n\|_\infty \leq c$. Таким чином, для кожного $x \in X \setminus A$ маємо, що $|f(x)| \leq c$. Отже, ми довели, що $f \in L_{\infty}(X,\lambda)$.\\
+Залишилося показати $f_n \to f$. За фундаментальністю $\{f_n\}$, маємо, що $\forall \varepsilon > 0: \exists N: \forall n,m \geq N: \| f_n - f_m \|_\infty < \varepsilon$. Значить, $\forall x \in X \setminus A: |f_n(x) - f_m(x)| < \varepsilon$. Спрямуємо $m \to \infty$ -- отримаємо $\forall x \in X \setminus A: |f_n(x) - f(x)| < \varepsilon$. Тож звідси отримаємо $\|f_n-f\|_{\infty} < 2 \varepsilon$. Отже, $f_n \to f$.
+\end{proof}
+
+\begin{proposition}
+Задано $(X,\mathcal{F},\lambda)$ -- вимірний простір, де $\lambda$ -- скінченна. Тоді $\forall p \geq 1: L_\infty \subset L_p$. При цьому $\forall f \in L_\infty: \|f\|_\infty = \displaystyle\lim_{p \to \infty} \|f\|_p$.
+\end{proposition}
+
+\begin{proof}
+$L_\infty \subset L_p$.\\
+Нехай $f \in L_\infty$, тобто це істотно обмежена функція, тобто $\exists c > 0: \forall x \in X \setminus N: |f(x)| \leq c$ при $\lambda(N) = 0$. Отже, звідси $\displaystyle\int_X |f|^p\,d\lambda = \int_{X \setminus N} |f|^p\,d\lambda \leq \int_{X \setminus N} c^p \,d\lambda = c^p \lambda(X \setminus N) < \infty$. Значить, $f \in L_p$.
+\bigskip \\
+$\|f\|_\infty = \displaystyle\lim_{p \to \infty} \|f\|_p$.\\
+
 \end{proof}
 \newpage
 
