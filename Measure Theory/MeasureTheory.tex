@@ -47,6 +47,10 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{definition*}{Definition.}
+\newtheorem*{proposition*}{Proposition.}
+\newtheorem*{remark*}{Remark.}
+\newtheorem*{corollary*}{Corollary.}
 
 \newcommand\thref[1]{\textbf{Th.~\ref{#1}}}
 \newcommand\defref[1]{\textbf{Def.~\ref{#1}}}
@@ -2584,15 +2588,131 @@ $L_\infty \subset L_p$.\\
 Нехай $f \in L_\infty$, тобто це істотно обмежена функція, тобто $\exists c > 0: \forall x \in X \setminus N: |f(x)| \leq c$ при $\lambda(N) = 0$. Отже, звідси $\displaystyle\int_X |f|^p\,d\lambda = \int_{X \setminus N} |f|^p\,d\lambda \leq \int_{X \setminus N} c^p \,d\lambda = c^p \lambda(X \setminus N) < \infty$. Значить, $f \in L_p$.
 \bigskip \\
 $\|f\|_\infty = \displaystyle\lim_{p \to \infty} \|f\|_p$.\\
-
 \end{proof}
 \newpage
+
+\subsection*{Трошки про все те саме тільки в комплексному випадку}
+Нехай $(X,\mathcal{F},\lambda)$ -- вимірний простір з мірою (це дійсна міра). Ми тепер будемо розглядати функції $f \colon X \to \mathbb{C}$. Оскільки $f(x)$ повертає комплексне число, то тоді $f(x) = u(x) + iv(x)$, де в цьому випадку $u(x) = \Re f(x),\ v(x) = \Im f(x)$, обидві функції $u,v \colon X \to \mathbb{R}$.
+
+\begin{definition*}
+Комплекснозначна функція $f$ називається \textbf{$\mathcal{F}$-вимірною}, якщо
+\begin{align*}
+f \text{ -- } (\mathcal{F},\mathcal{B}(\mathbb{C})) \text{-вимірна}
+\end{align*}
+\end{definition*}
+
+\begin{proposition*}
+$f$ -- $\mathcal{F}$-вимірна (в комплексному сенсі) $\iff u,v$ -- $\mathcal{F}$-вимірні (в дійсному сенсі).
+\end{proposition*}
+
+\begin{proof}
+\rightproof Дано: $f$ -- $\mathcal{F}$-вимірна. Зокрема для кожного $a \in \mathbb{R}$ та для множини $A = \{z \in \mathbb{C}: \Re z < a\}$ (це відкрита множина, тому борельова) прообраз $f^{-1}(A) \in \mathcal{F}$. Із іншого боку, розпишемо прообраз детальніше:\\
+$f^{-1}(A) = \{x \in X: f(x) \in A\} = \{x \in X: \Re f(x) < a\} = \{x \in X: u(x) < a\} = u^{-1}((-\infty,a))$.\\
+Отже, ми довели: $\forall a \in \mathbb{R}: u^{-1}((-\infty,a)) \in \mathcal{F}$, тобто $u$ -- $\mathcal{F}$-вимірна.\\
+Аналогічно доведемо, що $v$ -- $\mathcal{F}$-вимірна, тільки для кожного $a \in \mathbb{R}$ треба розглянути множину $B = \{z \in \mathbb{C}: \Im z < a\}$ (теж відкрита, тож теж борельова).
+\bigskip \\
+\leftproof Дано: $u,v$ -- обидва $\mathcal{F}$-вимірні. Тут треба скористатися таким фактом, що $\mathbb{C}$ можна сприймати як $\mathbb{R}^2$, як схожі топологічні простори. Тоді нам треба довести, що $f$ тіпа $(\mathcal{F},\mathcal{B}(\mathbb{R}^2))$-вимірна. Ми знаємо, що $\mathcal{B}(\mathbb{R}^2) = \sigma a(\mathcal{P}_2)$, тому мені достатньо буде розглянути довільну множину $A \in \mathcal{P}_2$. Тобто $A = (a_1,b_1] \times (a_2,b_2]$. Значить,\\
+$f^{-1}(A) = \{ x \in X: f(x) \in A \} = \{x \in X: u(x) \in (a_1,b_1], v(x) \in (a_2,b_2]\} = u^{-1}((a_1,b_1]) \cap v^{-1}((a_2,b_2])$.\\
+Звідси отримали $f^{-1}(A) \in \mathcal{F}$ (до речі, ми вже таке робили, проте зайвий раз можна повторити). Отже, $f$ -- також $\mathcal{F}$-вимірна.
+\end{proof}
+
+\begin{corollary*}
+$f$ -- $\mathcal{F}$-вимірна (в комплексному сенсі). Тоді $|f|$ -- $\mathcal{F}$-вимірна (в дійсному сенсі).
+\end{corollary*}
+
+\begin{proof}
+Маємо $f$ -- $\mathcal{F}$-вимірна, тож звідси $u,v$ -- $\mathcal{F}$-вимірні. Звідси $u^2 + v^2$ -- $\mathcal{F}$-вимірна та, оскільки $g(x) = \sqrt{x}$ -- борельова, то $\sqrt{u^2 + v^2} = |f|$ -- $\mathcal{F}$-вимірна.
+\end{proof}
+
+\begin{definition*}
+Інтеграл Лебега для комплекснозначної функції визначатиметься таким чином:
+\begin{align*}
+\int_A f\,d\lambda = \int_A u\,dv + i \int_A v\,d\lambda,
+\end{align*}
+де $A \in \mathcal{F}$. Все це працює за умовою, що два інтеграли праворуч існують.
+\end{definition*}
+
+\noindent Розглянемо буквально ту саму множину, що було раніше:
+\begin{align*}
+\tilde{L}_p(X,\lambda) = \{f \colon X \to \mathbb{C} \mid f \text{ -- } \mathcal{F}\text{-вимірна}, |f|^p \in L(X,\lambda)\}
+\end{align*}
+Цього разу $|f|^p \in L(X,\lambda)$ -- інтегрована за Лебегом як дійсна функція. На ній знову задамо відношення еквівалентності
+\begin{align*}
+f \sim g \iff f = g \pmod \lambda
+\end{align*}
+Знову отримаємо простір $L_p = L_p(X,\lambda)$ при $1 \leq p < \infty$ -- множина класів еквівалентності. Аналогічним чином, ми будемо вважати, що $L_p$ -- то є просто набір функцій.
+
+\begin{remark*}
+$f \in L_p^{\mathbb{C}} \iff |f| \in L_p^{\mathbb{R}}$.\\
+Ця еквівалентність працюватиме лише за умовою, що $f$ буде $\mathcal{F}$-вимірною.
+\end{remark*}
+
+\begin{proposition*}
+Нехай $(X,\mathcal{F},\lambda)$ -- вимірний простір та $f = u + iv$.\\
+$f \in L_p^{\mathbb{C}} \iff u,v \in L_p^{\mathbb{R}}$.
+\end{proposition*}
+
+\begin{proof}
+Перед доведенням зауважимо, що справедлива така нерівність: $\max\{|u|,|v|\} \leq |f| \leq |u| + |v|$.
+\bigskip \\
+\rightproof Дано: $f \in L_p^{\mathbb{C}}$, тоді вона автоматично $\mathcal{F}$-вимірна, звідси $u,v$ теж автоматично $\mathcal{F}$-вимірні. Ліва нерівність каже нам про те, що\\
+$\displaystyle\int_X |u|^p\,d\lambda \leq \int_X |f|^p\,d\lambda < +\infty, \qquad \int_X |v|^p\,d\lambda \leq \int_X |f|^p\,d\lambda < +\infty$.\\
+Значить, звідси $u,v \in L_p^{\mathbb{R}}$.
+\bigskip \\
+\leftproof Дано: $u,v \in L_p^{\mathbb{R}}$, тоді вони автоматично $\mathcal{F}$-вимірні, звідси $f$ теж автоматично $\mathcal{F}$-вимірна. Згадаємо, що функція $x^p, p \geq 1,x \geq 0$ -- опукла. Тож за нерівністю Єнсена, а також за правою нерівністю вище, отримаємо:\\
+$|f|^p \leq (|u| + |v|)^p = 2^p \cdot \left( \dfrac{|u| + |v|}{2} \right)^p \overset{\text{нер-ть Єнсена}}{\leq} 2^p \cdot \dfrac{|u|^p + |v|^p}{2}$.\\
+Нарешті, $\displaystyle\int_X |f|^p\,d\lambda \leq 2^{p-1} \left( \int_X |u|^p\,d\lambda + \int_X |v|^p\,d\lambda \right) < +\infty$. Значить, звідси $f \in L_p^{\mathbb{C}}$.
+\end{proof}
+
+\begin{proposition*}
+Покладемо $\|f\|_p = \displaystyle \left( \int_X |f|^p\,d\lambda \right)^{\frac{1}{p}}$ -- буквально те саме. Тоді це -- теж норма для комплексного $L_p$.
+\end{proposition*}
+
+\begin{remark*}
+Знову варто пересвідчитися, що $L_p^{\mathbb{C}}$ -- векторний простір над $\mathbb{R}$ (да, саме над $\mathbb{R}$). Проте це випливає безспосередньо з того факту, що $L_p^{\mathbb{R}}$ -- векторний простір над $\mathbb{R}$ та з твердження вище.
+\end{remark*}
+
+\begin{proof}
+1), 2) цілком аналогічно доводиться.\\
+3) $\|f+g\|_p^{\mathbb{C}} = \| |f+g| \|_p^{\mathbb{R}} \overset{\text{3) із } L_p^{\mathbb{R}}}{\leq} \| |f| \|_p^{\mathbb{R}} + \| |g| \|_p^{\mathbb{R}} = \|f\|_p^{\mathbb{C}} + \|g\|_p^{\mathbb{C}}$.
+\end{proof}
+
+\begin{proposition*}
+Маємо послідовність $\{f_n\} \subset L_p^{\mathbb{C}}$, маємо розклад $f_n = u_n + iv_n$ та $f = u + iv$.\\
+$f_n \to f$ в $L_p^{\mathbb{C}} \iff u_n \to v, v_n \to v$ в $L_p^{\mathbb{R}}$. Тут все це відбувається при $n \to \infty$.
+\end{proposition*}
+
+\begin{proof}
+\rightproof Дано: $f_n \to f$, тобто звідси $\|f_n-f\|_p^{\mathbb{C}} \to 0$.\\
+$\| u_n - u\|_p^{\mathbb{R}} = \| |u_n - u| \|_p^{\mathbb{R}} \leq \| |f_n-f| \|_p^{\mathbb{C}} \to 0$.\\
+$\| v_n - v\|_p^{\mathbb{R}} = \| |v_n -v| \|_p^{\mathbb{R}} \leq \| |f_n-f| \|_p^{\mathbb{C}} \to 0$.\\
+Отже, дійсно $u_n \to u, v_n \to v$ в просторі $L_p^{\mathbb{R}}$.
+\bigskip \\
+\leftproof Дано: $u_n \to u,\ v_n \to v$, тобто $\|u_n-u\|_p^{\mathbb{R}} \to 0,\ \|v_n - v\|_p^{\mathbb{R}} \to 0$.\\
+$\|f_n - f\|_p^{\mathbb{C}} = \| |f_n - f| \|_p^{\mathbb{R}} \leq \| |u_n - u| + |v_n - v| \|_{p}^{\mathbb{R}} \leq \| |u_n - u| \|_p^{\mathbb{R}} + \| |v_n - v| \|_p^{\mathbb{R}} = \| u_n - u \|_p^{\mathbb{R}} + \| v_n - v \|_p^{\mathbb{R}} \to 0$.\\
+Отже, $f_n \to f$ в просторі $L_p^{\mathbb{C}}$.
+\end{proof}
+
+\begin{proposition*}
+Установлений вище комплексний нормований простір $(L_p, \| \cdot \|_p)$ -- банахів.
+\end{proposition*}
+
+\begin{proof}
+Дійсно, нехай $\{f_n\} \subset L_p^{\mathbb{C}}$ -- фундаментальна, маємо $f_n = u_n + i v_n$. Аналогічно можна довести, що $\| u_n - u_m \|_p \to 0$ та $\| v_n - v_m \|_p \to 0$ при $m,n \to \infty$. Звідси випливає, що $\{u_n\}, \{v_n\} \subset L_p^{\mathbb{R}}$ -- фундаментальні. Проте оскільки $L_p^{\mathbb{R}}$ -- банахів, то звідси $\{u_n\}, \{v_n\}$ -- збіжні, внаслідок чого $\{f_n\}$ буде також збіжним.
+\end{proof}
+
+\begin{proposition*}
+Якщо $L_p^{\mathbb{R}}$ -- сепарабельний, то тоді $L_p^{\mathbb{C}}$ -- сепарабельний.\\
+\textit{TODO: дописати.}
+\end{proposition*}
+
 
 \newpage
 \thispagestyle{empty}
 \section*{Список використаних джерел}
 \begin{enumerate}[wide=0pt]
 \item В.\ М.\ Радченко, плейліст "Теорія міри та інтеграли. Лекції" \quad \href{https://www.youtube.com/@vadymradchenko8925/playlists}{\textcolor{red}{*клік*}}
+\item В.\ М.\ Радченко, конспект "Курс теорії міри та інтеграла" \qquad \href{https://mechmat.knu.ua/wp-content/uploads/2018/08/measuretheoryradchenko_a4_2018.pdf}{\textcolor{red}{*клік*}}
 \item А.\ Я.\ Дороговцев, книга "Элементы общей теории меры и интеграла" \quad \href{https://www.slideshare.net/YuriyMaturin/ss-58815473}{\textcolor{red}{*клік*}}
 \end{enumerate}
 \end{document}
