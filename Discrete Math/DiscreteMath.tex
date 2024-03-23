@@ -1467,13 +1467,12 @@ $M_{\sim} = \begin{pmatrix}
 
 \subsection{Відношення порядку}
 \begin{definition}
-Задано відношення $R: A \to A$.\\
+Задане відношення $R \colon A \to A$.\\
 Його називають \textbf{відношенням порядку}, якщо
 \begin{align*}
 R \text{-- рефлексивне, антисиметричне, транзитивне одночасно}
 \end{align*}
-Водночас множина $A$ називається \textbf{частково впорядкованою}.\\
-Позначення: замість $x  \mathrel{R} y$ пишуть $x \preceq y$.
+Позначення: замість $x  \mathrel{R} y$ пишуть $x \preceq y$ (елемент $x$ передує за $y$).
 \end{definition}
 
 \begin{remark}
@@ -1482,14 +1481,21 @@ $x \succeq  y \iff y \preceq x$\\
 $x \succ y \iff y \prec x \iff (y \preceq x) \wedge (x \neq y)$
 \end{remark}
 
+\begin{definition}
+Множина $A$ є \textbf{частково впорядкованою}, якщо
+\begin{align*}
+\text{на ній задане відношення порядку}.
+\end{align*}
+\end{definition}
+
 \begin{example}
-Задано $A = \mathbb{R}$. Відошення $x \prec y \iff x \leq y$ - відношення порядку, тому що
+Задано $A = \mathbb{R}$. Відошення $x \prec y \iff x \leq y$ задає відношення порядку, тому що
 \begin{itemize}[nosep,wide=0pt,label={-}]
 \item $x \leq x$;
 \item $(x \leq y) \wedge (y \leq x) \Rightarrow x = y$;
 \item $(x \leq y) \wedge (y \leq z) \Rightarrow x \leq z$.
 \end{itemize}
-Тоді $x \preceq y \iff x \leq y$.
+Всі ці три пункти виконані в силу аксіоматики множини $\mathbb{R}$.
 \end{example}
 
 \begin{definition}
@@ -1498,15 +1504,44 @@ $x \succ y \iff y \prec x \iff (y \preceq x) \wedge (x \neq y)$
 \begin{align*}
 (x \preceq y) \vee (y \preceq x)
 \end{align*}
-Відношення $R$ будемо називати \textbf{відношенням лінійного порядку}, якщо
+Відношення $R$ є \textbf{відношенням лінійного порядку}, якщо
 \begin{align*}
 \forall x,y \in R: x,y \text{ -- порівняльні}
 \end{align*}
 \end{definition}
 
+\begin{definition}
+Множина $A$ є \textbf{лінійно впорядкованою}, якщо
+\begin{align*}
+\text{на ній задане відношення лінійного порядку}.
+\end{align*}
+\end{definition}
+
 \begin{example}
-Наприклад, множина $\mathbb{N}$ з відношенням порядку $\leq$ задає відношення лінійного порядку.
+Множина $\mathbb{N}$ -- лінійно впорядкована.
 \end{example}
+
+\begin{definition}
+Нехай $A$ -- частково впорядкована множина.\\
+Підмножина $B \subset A$ називається \textbf{обмеженою зверху}, якщо
+\begin{align*}
+\exists x \in A: \forall b \in B: b \preceq x
+\end{align*}
+Елемент $x$ тут називають \textbf{верхньою гранню} множини $B$.
+\end{definition}
+
+\begin{definition}
+Елемент $x \in A$ називається \textbf{максимальним} в $A$, якщо
+\begin{align*}
+c \preceq a \implies a = c
+\end{align*}
+\end{definition}
+
+\begin{lemma}[Лема Цорна]
+Нехай $A$ -- частково впорядкована множина. Відомо, що для кожного лінійно впорядкованої підмножини $B \subset A$ існує верхня грань. Тоді $A$ містить максимальний елемент.\\
+\textit{Без доведення.}\\
+\textit{До речі, дана лема працює, лише якщо дозволити використовувати так звану 'аксіому вибору'.}
+\end{lemma}
 
 \subsection{Розбиття множин, фактормножини}
 \begin{definition}
