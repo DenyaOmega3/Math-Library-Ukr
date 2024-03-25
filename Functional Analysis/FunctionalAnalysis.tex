@@ -1198,6 +1198,150 @@ $|L(x)| = e^{-i \varphi} L(x) = L(e^{-i \varphi} x) = M(e^{-i \varphi} x) = |M(e
 Зауважимо, що якщо $G$ -- лінійна множина (але не підпростір), то теорема Гана-Банаха все одно виконується.\\
 У цьому випадку $\bar{G}$ буде підпростором $E$. Функціонал $l$ продовжується неперервним чином на $\tilde{G}$, а далі застосовується доведена теорема.
 \end{remark}
+
+
+\subsection{Деякі наслідки з теореми Гана-Банаха}
+\begin{theorem}
+Нехай $E$ -- лінійний нормований простір та $G \subset E$ -- підпростір. Тоді для будь-якого вектора $y \notin G$ існує функціонал $l$ на $E$, для якого $\|l\| = 1,\ l(y) = \rho(y,G),\ l|_G = 0$.
+\end{theorem}
+
+\begin{proof}
+На підпросторі $F = \linspan\{G \cup \{y\}\}$ визначимо функціонал $l_0$ таким чином:\\
+$l_0(g + \lambda y) = \lambda \rho(y,G)$.\\
+Цілком зрозуміло, що $l_0$ -- лінійний неперервний функціонал на $F$, також $l_0(y) = \rho(y,G)$, нарешті $l_0(g) = l_0(g+0y) = 0$. Обчислимо $\|l_0\|$.\\
+$\|l_0\| = \displaystyle\sup \left\{ \dfrac{|l(g+\lambda y)|}{\|g+\lambda y\|} \mid g + \lambda y \in F \right\} = \sup\left\{ \dfrac{|\lambda| \rho(y,G)}{|\lambda| \cdot \|\lambda^{-1}g + y \|} \mid g+\lambda y \in F \right\} = \\ = \rho(y,G) \sup \{ \|g'-y\|^{-1} \mid g' \in G \} = \rho(y,G) \inf_{g' \in G} \|g'-y\| = 1$, де елемент $g' = \lambda^{-1}g \in G$.\\
+За теоремою Банаха, існує продовження $l$ до $E$, причому $\|l\| = \|l_0\| = 1$.
+\end{proof}
+
+\begin{corollary}
+Для кожного $y \in E \setminus \{0\}$ існує функціонал на $E$, що $\|l\| = 1,\ l(y) = \|y\|$.\\
+\textit{Вказівка: $G = \{0\}$}.
+\end{corollary}
+
+\begin{corollary}
+Лінійні непреревні функціонали розділяють точки нормованого простора $E$.\\
+Іншими словами, $\forall x_1,y_2 \in E: x_1 \neq x_2: \exists l$ -- функціонал на $E: l(x_1) \neq l(x_2)$.\\
+\textit{Вказівка: попередній наслідок, $y = x_1 - x_2 \neq 0$.}
+\end{corollary}
+
+\begin{definition}
+Задано $E$ -- нормований простір.\\
+Підмножина $M \subset E$ називається \textbf{тотальною}, якщо
+\begin{align*}
+\overline{\linspan{M}} = E
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+Нехай $E$ -- нормований простір та $M \subset E$.\\
+$M$ -- тотально в $E \iff \forall x \in M: l(x) = 0 \implies \forall x \in E: l(x) = 0$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $M$ -- тотальна множина. Нехай $l$ -- неперервний лінійний функціонал такий, що $\forall x \in M: l(x) = 0$. Оскільки функціонал лінійний, то $\forall x \in \linspan{M}: l(x) = 0$. Оскільки $\overline{\linspan{M}} = E$, то ми можемо неперервно продовжити $l$ до $E$. Отримаємо $l(x) = 0, \forall x \in E$.
+\bigskip \\
+\leftproof Дано: будь-який лінійно неперервний функціонал $l $ на $E$ такий, що $l(x) = 0, x \in M$ випливає $l(x) = 0, x \in E$.\\
+!Припустимо, що $M$ не є тотальною. Тобто $\overline{\linspan{M}} = G \neq E$, тобто існує вектор $y \in E \setminus G$. Внаслідок першої теореми даного підрозділу, існує функціонал $l$ на $E$ такий, що $\|l\| = 1,\ l|_G = 0$. Але з того, що $l|_G = 0$ випливає $l = 0$. Суперечність!
+\end{proof}
+
+\begin{proposition}
+Нехай $E$ -- нормований простір та $l$ -- лінійний неперервний функціонал з $E$. Тоді $\ker l$ -- підпростір $E$. Більш того, $\ker l$ буде гіперпідпростором, тобто це означає, що $E = \linspan\{\ker l \cup \{y\}\}$ при $y \notin \ker l$.
+\end{proposition}
+
+\begin{proof}
+Те, що $\ker l$ підпростір, тут все зрозуміло.\\
+Нехай $y \notin \ker l$. Тоді доведемо, що кожний елемент $x \in E$ записується як $x = g + \lambda y$, де $g \in \ker l, \lambda \in \mathbb{K}$. Покладемо $\lambda = \dfrac{l(x)}{l(y)}$ та розглянемо вектор $g = x - \lambda y$. Оскільки $l(g) = l(x) - \lambda l(y) = 0$, то звідси $g \in \ker l$. Отже, $x = g + \lambda y$ -- шукане представлення.
+\end{proof}
+
+\begin{proposition}
+Зафіксуємо лінійний функціонал $l$ на $E$. Покладемо множину $\Gamma_c = \{x \in E \mid l(x) = c\}$, що називається \textbf{гіперплощиною}. Позначимо $\Gamma_0 = \ker l$. Тоді існує такий вектор $z \in E$, що $\Gamma_c = \Gamma_0 + z \equiv \{g + z \mid g \in \Gamma_0 \}$.
+\end{proposition}
+
+\begin{proof}
+Дійсно, зафіксуємо $z \in \Gamma_c$. Тоді для кожного $x \in \Gamma_c$ маємо $l(x-z) = l(x) - l(z) = 0$, тобто $g = x-z \in \Gamma_0 \implies x = g +z$.
+\end{proof}
+
+\begin{definition}
+Нехай $E$ -- дійсний нормований простір та $A \subset E$, точка $x_0 \in \partial A$. Також нехай $l$ -- лінійний неперервний функціонал на $E$.\\
+Гіперплощина $\Gamma_c$ називається \textbf{опорною гіперплощиною} множини $A$, що проходить через точку $x_0$, якщо
+\begin{align*}
+x_0 \in \Gamma_c \\
+A \text{ лежить по одну сторону від гіперплощини } \Gamma_c \text{ (тобто $l(x) - c$ не міняє знак на $A$)}
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+Зокрема маємо $A = B[r;0]$ -- замкнуту кулю, границя $\partial A = S_r(0)$.\\
+Через будь-яку точку $x \in S_r(0)$ проходить опорна гіперплощина шара $B[r;0]$.
+\end{theorem}
+
+\begin{proof}
+Для кожної точки $x_0 \in S_r(0)$ існує лінійний неперервний функціонал $l$ на $E$, де $\|l\| = 1,\ l(x_0) = \|x_0\| = r$. Тоді гіперплощина $\Gamma_r$ -- наша шукана. Дійсно, $x_0 \in \Gamma_r$, бо $l(x_0) = r$.\\
+$\forall x \in B[r;0]: l(x) \leq |l(x)| \leq \|x\| \leq r$, тобто весь шар лежить по одну сторону від $\Gamma_r$.
+\end{proof}
+
+\subsection{Загальний вигляд лінійних неперервних функціоналів у деяких банахових просторах}
+\subsubsection{Базис Шаудера}
+\begin{definition}
+Нехай $E$ -- банахів простір.\\
+Послідовність $\{e_1,e_2,\dots\} \subset E$ називається \textbf{базисом Шаудера} простора $E$, якщо
+\begin{align*}
+\forall x \in E: \exists ! x_k \in \mathbb{K}: x = \displaystyle\sum_{k=1}^\infty x_k e_k
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Якщо в просторі $E$ існує базис Шаудера, то $E$ -- сепарабельний.\\
+Дійсно, оберемо $A = \left\{ \displaystyle\sum_{k=1}^\infty x_k e_k \mid x_k \in \mathbb{Q} \right\}$ у випадку дійсного нормованого простору або $A = \left\{ \displaystyle\sum_{k=1}^\infty x_k e_k \mid x_k = \alpha_k + i \beta_k, \alpha_k, \beta_k \in \mathbb{Q} \right\}$ у випадку комплексного нормованого простору. Для такої множини $\bar{A} = E$.
+\end{remark}
+
+\begin{remark}
+Можна загуглити приклад сепарабельного банахового простору, який не містить базис Шаудера. Доведено П.\ Енфло.
+\end{remark}
+
+\begin{theorem}
+Простір $l_p$ містить базис Шаудера. Причому цей базис матиме вигляд $\{e_1,e_2,e_3,\dots\}$, де $e_i$ містить нулі та одиницю на $i$-ій позиції.
+\end{theorem}
+
+\begin{proof}
+Фіксуємо елемент $x \in l_p$ , де $x = (x_1,x_2,\dots)$ та $\displaystyle\sum_{k=1}^\infty |x_k|^p < +\infty$. Покладемо елемент $s_n = x_1 e_1 + \dots + x_n e_n$ та доведемо, що послідовність $\{s_n, n \geq 1\}$ -- фундаментальна. При $n > m$\\
+$\|s_n - s_m \|_p = \left\| (0,\dots,0,x_{m+1},\dots,x_n,0,\dots \right\|_p = \displaystyle \left( \sum_{k=m+1}^n |x_k|^p \right)^{\frac{1}{p}}$.\\
+Фундаментальність $\{s_n\}$ випливає зі збіжності числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$. Оскільки $l_p$ -- повний простір, то $\{s_n\}$ -- збіжний, тобто $\displaystyle\sum_{k=1}^\infty x_k e_k$ збігається до деякого елемента. Зокрема доведемо, що $\displaystyle\sum_{k=1}^\infty x_k e_k = x$. Дійсно,\\
+$\|x-s_n\|_p = \displaystyle \left\| x - \sum_{k=1}^n x_k e_k \right\|_p = \| (0,\dots,0,x_{n+1},x_{n+2},\dots \|_p = \left( \sum_{k=n+1}^\infty |x_k| \right)^{\frac{1}{p}}$\\
+Знову в силу збіжноті числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$ випливає бажане.
+\end{proof}
+
+\subsubsection{Простір, що спряжений до $l_p$}
+\begin{theorem}
+Нехай $p,p' > 1$ таким чином, що $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Тоді для будь-якого лінійного неперервного функціонала на $l_p$ існує елемент $(f_k)_{k=1}^\infty \in l_{p'}$, такий, що $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ для всіх $x \in l_p$.
+\end{theorem}
+
+\begin{proof}
+Нехай $f \in (l_p)'$ (тобто лінійний неперервний функціонал). Тоді звідси отримаємо:\\
+$f(x) = \displaystyle f\left( \sum_{k=1}^\infty x_k e_k \right) = f\left( \lim_{n \to \infty} \sum_{k=1}^n x_k e_k \right) = \lim_{n \to \infty} \sum_{k=1}^n x_k f(e_k) = \sum_{k=1}^\infty x_k f(e_k) \overset{f(e_k) \overset{\text{покл.}}{=} f_k}{=} \sum_{k=1}^\infty f_k x_k$.\\
+Доведемо, що $(f_k)_{k=1}^\infty \in l_p$. Для цього розглянемо елемент $y \in l_p$ ось такий:\\
+$y = \left( |f_1|^{p'-1}e^{-i \arg f_1}, \dots, |f_n|^{p'-1}e^{-i \arg f_n}, 0, 0, \dots \right)$\\
+$f(y) = \displaystyle\sum_{k=1}^n f_k |f_k|^{p'-1} e^{-i \arg f_k} = \sum_{k=1}^n |f_k|^{p'}$.\\
+Оскільки $f$ обмежений, то звідси\\
+$\displaystyle |f(y)| \leq \|f\| \|y\| = \|f\| \left( \sum_{k=1}^n  ||f_k|^{p'-1} \cdot e^{-i \arg f_k}|^p \right)^{\frac{1}{p}} = \|f\| \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p}}$.\\
+Маючи нерівність та рівність вище, отримаємо\\
+$\displaystyle\sum_{k=1}^n |f_k|^{p'} \leq \| f\| \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p}}$\\
+$\displaystyle \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p'}} \leq \|f\|, \forall n \in \mathbb{N}$.\\
+Остання оцінка стверджує, що $(f_k)_{k=1}^{\infty} \in l_{p'}$.
+\end{proof}
+
+\begin{theorem}
+І навпаки: для кожного $(f_k)_{k=1}^\infty \in l_{p'}$ рівність $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ визначає функціонал $f \in (l_p)'$.
+\end{theorem}
+
+\begin{proof}
+Нехай $(f_k)_{k=1}^\infty \in l_{p'}$. Завдяки нерівності Гьольдера, отримаємо:\\
+$\displaystyle |f(x)| \leq \left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}} \left( \sum_{k=1}^\infty |x_k|^p \right)^{\frac{1}{p}} = c \| x \|_p < +\infty$.\\
+Отже, $f$ -- обмежений та $\|f\| \leq c$. Лінійність зрозуміла.
+\bigskip \\
+До речі, під час минулого доведення ми довели нерівність $c \leq \|f\|$. Звідси випливає, що $\|f\| = c$, тобто\\
+$\|f\| =  \displaystyle\left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}}$
+\end{proof}
 \newpage
 
 \section*{Твердження, які потім вставлю в необхідне місце}
