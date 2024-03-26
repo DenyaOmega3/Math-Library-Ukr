@@ -2304,6 +2304,12 @@ $\displaystyle\sum_{n=1}^\infty \dfrac{1}{n^\alpha} = 1 + \left( \dfrac{1}{2^\al
 Підсумуємо: $\huge \sum_{n=1}^{\infty} \dfrac{1}{n^{\alpha}}$ - $\left[ \begin{gathered} \textrm{розбіжний}, \alpha \leq 1 \\ \textrm{збіжний}, \alpha > 1   \end{gathered} \right.$.
 \end{example}
 
+\noindent До речі, на основі цього прикладу ми можемо визначити так звану $\zeta$-функцію Рімана таким чином:
+\begin{align*}
+\zeta(s) = \sum_{n=1}^\infty \dfrac{1}{n^s}
+\end{align*}
+У силу того, коли даний ряд збіжний, ми вимагаємо $s > 1$.
+
 \begin{theorem}[Ознака порівняння в границях]
 Задані $\huge \sum_{n=1}^{\infty} a_n \hspace{0.3cm} \sum_{n=1}^{\infty} b_n$, тут члени строго додатні. Відомо, що $\exists \huge \lim_{n \to \infty} \dfrac{a_n}{b_n} = l$. Тоді:\\
 1) Якщо $l \neq 0$ та $l \neq \infty$, то $\huge \sum_{n=1}^{\infty} a_n, \sum_{n=1}^{\infty} b_n$ збіжні або розбіжні одночасно;\\
@@ -2677,6 +2683,164 @@ $S_{3n+1} = S_{3n} + \dfrac{1}{4n+1} \to \dfrac{3}{2} \ln 2 \qquad S_{3n+2} = S_
 Таким чином, після перестановки отримаємо нове значення:\\
 $1 + \dfrac{1}{3} - \dfrac{1}{2} + \dfrac{1}{5} + \dfrac{1}{7} - \dfrac{1}{4} + \dfrac{1}{9} + \dfrac{1}{11} - \dfrac{1}{6} + \dots = \dfrac{3}{2} \ln 2$.
 \end{example}
+
+\subsection{Добуток Коші}
+\begin{definition}
+Задано $\displaystyle\sum_{n=0}^\infty a_n$ та $\displaystyle\sum_{n=0}^\infty b_n$ -- два ряди.\\
+\textbf{Добутком Коші} називають ось такий ряд:
+\begin{align*}
+\sum_{k=0}^\infty c_k \overset{\text{позн.}}{=} \sum_{i=0}^\infty a_i \cdot \sum_{j=0}^\infty b_j,
+\end{align*}
+де кожний член $c_k$ визначається ось таким чином:
+\begin{align*}
+c_k = \sum_{l=0}^k a_l b_{k-l}
+\end{align*}
+\end{definition}
+
+\begin{example}
+Задано два ряди $\displaystyle\sum_{n=0}^\infty a_n = \sum_{n=0}^\infty b_n = \dfrac{(-1)^n}{\sqrt{n+1}}$. Зауважимо, що ці два ряди збіжні за Ляйбніцом, проте добуток Коші, тобто $\displaystyle \sum_{i=0}^\infty a_i \cdot \sum_{j=0}^\infty b_j$ буде розбіжним. Дійсно, маємо\\
+$c_k = \displaystyle\sum_{l=0}^k \dfrac{(-1)^l}{\sqrt{l+1}} \dfrac{(-1)^{k-l}}{\sqrt{k-l+1}} = (-1)^k \sum_{l=0}^k \dfrac{1}{\sqrt{l+1} \sqrt{k-l+1}}$\\
+$|c_k| = \displaystyle\sum_{l=0}^k \dfrac{1}{\sqrt{l+1} \sqrt{k-l+1}} \overset{\text{нер-ть Коші}}{\geq} \sum_{l=0}^k \dfrac{2}{(l+1)+(k-l+1)} = \dfrac{2(k+1)}{k+2}$.\\
+Тоді через цю оцінку матимемо, що $c_k \not\to 0$ при $k \to \infty$. Порушується необхідна ознака збіжності, тому добуток Коші буде розбіжним.\\
+Тобто добуток двох збіжних рядів не обов'язково може давати збіжний ряд.
+\end{example}
+
+\begin{example}
+Задамо два ряди $\displaystyle\sum_{n=0}^\infty a_n$ та $\displaystyle\sum_{n=0}^\infty b_n$, де $a_n = \{2,2,2^2,2^3,\dots\}$ та $b_n = \{-1,1,1,\dots\}$. Цілком зрозуміло, що кожний такий ряд розбіжний, однак добуток Коші -- збіжний. Дійсно, $c_0 = -2$ та решта $c_n = 0$.
+\end{example}
+
+\begin{theorem}
+Задано $\displaystyle\sum_{n=0}^\infty a_n = a$ та $\displaystyle\sum_{n=0}^\infty b_n = b$ -- два збіжні ряди, причому збігаються абсолютно. Тоді $\displaystyle\sum_{i=0}^\infty a_i \sum_{j=0}^\infty b_j = ab$, тобто збіжний, причому теж абсолютно.
+\end{theorem}
+
+\begin{proof}
+Спочатку доведемо збіжність $\displaystyle\sum_{n=0}^\infty |c_n|$. Маємо таку оцінку:\\
+$\displaystyle\sum_{n=0}^k |c_n| = |a_0 b_0| + |a_1 b_0 + a_1 b_0| + \dots + |a_k b_0 + a_{k-1} b_1 + \dots + a_1 b_{k-1} + a_0 b_k| \leq \\
+\leq \displaystyle\sum_{i+j \leq k} |a_i| |b_j| = (|a_0| + |a_1| + \dots + |a_k|) (|b_0| + |b_1| + \dots + |b_k|) = \sum_{n=0}^k |a_k| \sum_{n=0}^k |b_k|$.\\
+Оскільки ряди $\displaystyle\sum_{n=0}^\infty |a_n|$ та $\displaystyle\sum_{n=0}^\infty |b_n|$ збіжні, то всі часткові суми обмежені -- разом з цим обмеженою буде $\displaystyle\sum_{n=0}^k |c_n|$, послідовність часткових сум. Послідовність часткових сум зростає для невід'ємних рядів. Отже, $\displaystyle\sum_{n=0}^\infty c_n$ збігається абсолютно.\\
+Тепер конкретно хочемо довести, що $\displaystyle\sum_{n=0}^\infty c_n = ab$. Перш за все, оскільки цей ряд збігається абсолютно, то ми можемо переставити члени ряду -- від цього сума не зміниться. Значить, $\displaystyle\sum_{n=0}^\infty c_n = \sum_{n=0}^\infty (a_n b_0 + \dots + a_0 b_n) \overset{\text{переставимо}}{=} \sum_{i,j \geq 0} a_i b_j$. Зауважимо, що\\
+$(a_0 + a_1 + \dots + a_n)(b_0 + b_1 + \dots + b_n) = \displaystyle\sum_{i+j \leq N} a_i b_j = S_N$,\\
+де $\{S_N, N \geq 0\}$ -- підпослідовність послідовності всіх часткових сум ряду $\displaystyle\sum_{i,j \geq 0} a_i b_j$. Причому $S_n \to ab$. Але оскільки наш ряд збіжний, то послідовність всіх часткових сум збіжний, зокрема й будь-яка підпослідовність (яка прямує до $ab$). Тому послідовність всіх часткових сум має прямувати до $ab$, тобтто $\displaystyle\sum_{i,j \geq 0} a_ib_j = ab$.
+\end{proof}
+
+\begin{theorem}[Теорема Мертенса]
+Задані $\displaystyle\sum_{n=0}^\infty a_n = a, \sum_{n=0}^\infty b_n = b$ -- два збіжні ряди, один з рядів збіжний абсолютно. Тоді $\displaystyle\sum_{i=0}^\infty a_i \sum_{j=0}^\infty b_j = ab$ -- збіжний абсолютно.
+\end{theorem}
+
+\begin{proof}
+Позначимо $A_N, B_N,C_N$ -- відповідні часткові суми ряда $\displaystyle\sum_{n=0}^\infty a_n, \sum_{n=0}^\infty b_n$ та добутку Коші. За умовою, $A_N \to A,\ B_N \to B$; припускаємо, що $A_N$ збігається абсолютним чином. Розглянемо часткову суму $C_N$ детальніше:\\
+$C_N = a_0 b_0 + (a_1 b_0 + a_1 b_0) + \dots + (a_0 b_N + \dots + a_N b_0) = \\ = a_0(b_0 + b_1 + \dots + b_N) + a_1(b_0 + \dots + b_{N-1}) + \dots + a_N b_0 = a_0 B_N + a_1 B_{N-1} + \dots + a_N b_0$.\\
+Позначимо хвіст ряду $\beta_N = \displaystyle\sum_{n=N+1}^\infty b_n$ -- отримаємо наступне:\\
+$C_N = a_0 (B - \beta_N) + a_1 (B - \beta_{N-1}) + \dots + a_N (B - \beta_0) = \\
+= B(a_0 + a_1 + \dots + a_N) - a_0 \beta_N - a_1 \beta_{N-1} - \dots - a_N \beta_0 = B A_N - \gamma_N$, де\\
+$\gamma_N = a_0 \beta_N + \dots + a_N \beta_0$.\\
+Для того, щоб $C_N \to BA$ при $N \to \infty$, нам треба довести, що $\gamma_N \to 0$.\\
+Перш за все, за умовою, $\displaystyle\sum_{n=0}^\infty |a_n|$ збіжний, тоді звідси $\exists M: \forall k \geq 1: \displaystyle\sum_{n=1}^k |a_n| \leq M$.\\
+Ще до цього, за умовою, $\beta_N \to 0$ як хвіст, тоді $\exists M_1: \forall N \geq 1: |\beta_N| \leq M_1$.\\
+Ми отримали константи $M,M_1$, із ними будемо далі працювати. Далі нехай $\varepsilon > 0$.\\
+Оскільки $\displaystyle\sum_{n=0}^\infty |a_n|$ збіжний, то звідси $\exists m: \forall n \geq m: \displaystyle\sum_{n=m+1}^\infty |a_n| < \dfrac{\varepsilon}{2M_1}$.\\
+Оскільки $\beta_N \to 0$, то звідси $\exists N_1: \forall N \geq N_1-m: |\beta_N| < \dfrac{\varepsilon}{2M}$.\\
+$|\gamma_N| = |a_0 \beta_N + \dots + a_m \beta_{N-m} + a_{m+1} \beta_{N-(m+1)} + \dots + a_N \beta_0| \leq \\ 
+\leq (|a_0 \beta_N| + \dots + |a_m \beta_{N-m}|) + (|a_{m+1} \beta_{N-(m+1)} + \dots + a_N \beta_0| < \\
+< \left( |a_0| \dfrac{\varepsilon}{2M} + \dots + |a_m| \dfrac{\varepsilon}{2M} \right) + \left( |a_{m+1}| M_1 + \dots + |a_N| M_1 \right) = \\ =\dfrac{\varepsilon}{2M} (|a_0| + \dots + |a_m|) + M_1 (|a_{m+1}| + \dots + |a_N|) < \dfrac{\varepsilon}{2M} \cdot M + M_1 \cdot \dfrac{\varepsilon}{2M_1} = \varepsilon$.
+\end{proof}
+
+\subsection{Нескінченні добутки}
+Думаю, на основні контенту даного пункту буде цілком зрозуміло скоро, чому я вирішив не відокремлювати йому окремий розділ.
+
+\begin{definition} 
+\textbf{Нескінченним добутком} називають добуток нескінченної послідовності ненульових чисел $\{a_n, n \geq 1\}$:
+\begin{align*}
+a_1 \cdot a_2 \cdots a_n \cdots = \prod_{n=1}^{\infty} a_n
+\end{align*}
+\textbf{Частковим добутком} даного добутку називають добуток перших $k$ членів:
+\begin{align*}
+P_k = \prod_{n=1}^k a_n = a_1 \cdot a_2 \cdots a_k
+\end{align*}
+\end{definition}
+У такому випадку в нас виникає послідовність часткових добутків $\{P_k, k \geq 1\}$.\\
+Якщо така послідовність часткових добутків є збіжною, то ряд $\displaystyle \prod_{n=1}^{\infty} a_n$ називають \textbf{збіжним} та \textbf{добуток} цього ряду дорівнює
+\begin{align*}
+\prod_{n=1}^{\infty} a_n = \lim_{k \to \infty} \prod_{n=1}^k a_n = \lim_{k \to \infty} P_k = P \neq 0
+\end{align*}
+Якщо сам $P = 0$, то кажуть, що добуток \textbf{розбіжий дл нуля}. Інакше -- просто \textbf{розбіжним}.
+
+\begin{proposition}[Необхідна ознака збіжності добутку]
+Задано $\displaystyle\prod_{n=1}^\infty a_n$ -- збіжний. Тоді $\displaystyle\lim_{k \to \infty} a_k = 1$.
+\end{proposition}
+
+\begin{proof}
+Дійсно, $\displaystyle\lim_{k \to \infty} a_k = \lim_{k \to \infty} \dfrac{a_1 \dots a_{k-1} a_k}{a_1 \dots a_{k-1}} = \lim_{k \to \infty} \dfrac{P_k}{P_{k-1}} = \dfrac{P}{P} = 1$.\\
+Оскільки в числовій послідовності в нас ненульові члени, то всі переходи легітимні.
+\end{proof}
+
+\begin{remark}
+Навпаки дане твердження не працює.
+\end{remark}
+
+\begin{example}
+Розглянемо добуток $\displaystyle\prod_{n=1}^\infty \left( 1 + \dfrac{1}{n} \right)$. Зауважимо, що вираз під добутком $1 + \dfrac{1}{k} \to 1$ при $k \to \infty$. Однак даний добуток -- розбіжний.\\
+Дійсно, розглянемо частковий добуток $\displaystyle\prod_{n=1}^k \left( 1 + \dfrac{1}{n} \right) = \prod_{n=1}^k \dfrac{n+1}{n} = \dfrac{2}{1} \dfrac{3}{2} \dots \dfrac{k+1}{k} = k+1$.\\
+Отримаємо, що в такому разі $\displaystyle\prod_{n=1}^\infty \left( 1 + \dfrac{1}{n} \right) = +\infty$. Отже, даний добуток -- розбіжний.
+\end{example}
+
+\begin{example}
+Доведемо, що $\displaystyle\prod_{n=1}^\infty \cos \dfrac{1}{2^n}$ збіжний.\\
+Розглянемо частковий добуток $P_k = \cos \dfrac{1}{2} \cos \dfrac{1}{2^2} \dots \cos \dfrac{1}{2^k}$. Помножимо та поділимо на $\sin \dfrac{1}{2^k}$, тож отримаємо:\\
+$P_k = \cos \dfrac{1}{2} \cos \dfrac{1}{2^2} \dots \cos \dfrac{1}{2^{k-1}} \dfrac{1}{2} \sin \dfrac{1}{2^{k-1}} \dfrac{1}{\sin \dfrac{1}{2^k}} = \cos \dfrac{1}{2} \cos \dfrac{1}{2^2} \dots \cos \dfrac{1}{2^{k-2}} \dfrac{1}{4} \sin \dfrac{1}{2^{k-2}} \dfrac{1}{\sin \dfrac{1}{2^k}} = \dots \\
+= \dfrac{1}{2^k} \dfrac{\sin 1}{\sin \dfrac{1}{2^k}} \xrightarrow{k \to \infty} \sin 1$.
+\end{example}
+
+\begin{example}
+Доведемо, що $\displaystyle\prod_{n=2}^\infty \left(1 + \dfrac{1}{n^2-1} \right)$ збіжний.\\
+$P_k = \displaystyle\prod_{n=2}^k \left( 1 + \dfrac{1}{n^2-1} \right) = \prod_{n=2}^k \dfrac{n^2}{n^2-1} = \prod_{n=2}^k \dfrac{n}{n-1} \prod_{n=2}^k \dfrac{n}{n+1} = k \cdot \dfrac{2}{k+1} \to 2$.
+\end{example}
+
+\begin{theorem}[Критерій збіжності добутку]
+$\displaystyle\prod_{n=1}^\infty a_n$ -- збіжний $\iff \displaystyle\sum_{n=1}^\infty \ln a_n$ -- збіжний. (тут припускається, що всі члени $a_n > 0$).\\
+При цьому маємо $\displaystyle\prod_{n=1}^\infty a_n = e^{\sum_{n=1}^\infty \ln a_n}$.\\
+\textit{На цьому етапі можна пояснити, чому добуток розбіжний в нулі. Просто тому що ряд буде розбіжним.}
+\end{theorem}
+
+\begin{proof}
+Розглянемо часткову суму $S_k = \displaystyle\sum_{n=1}^k \ln a_n = \ln \prod_{n=1}^k a_n = \ln P_k$. Тобто звідси $P_k = e^{S_k}$.\\
+\rightproof Дано: $\displaystyle\prod_{n=1}^\infty a_n$ -- збіжний, тобто $P_k \to P \in \mathbb{R} \implies S_k \to \ln P$.\\
+\leftproof Дано: $\displaystyle\sum_{n=1}^\infty a_n$ -- збіжний, тобто $S_k \to S \in \mathbb{R} \implies P_k \to e^S$.
+\end{proof}
+
+\begin{theorem}
+$\displaystyle\prod_{n=1}^\infty (1+a_n)$ -- збіжний $\iff \displaystyle\sum_{n=1}^\infty a_n$ -- збіжний (тут вимагається $a_n \geq 0$).
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $\displaystyle\prod_{n=1}^\infty (1+a_n)$ -- збіжний. Тоді за критерієм, $\displaystyle\sum_{n=1}^\infty \ln(1+a_n)$ має бути збіжним. Значить, $\ln(1+a_k) \to 0$ при $k \to \infty$, але тоді $a_k = e^{\ln(1+a_k)} - 1 \to 0$. Значить, $\ln(1+a_k) \sim a_k$, тож ряд $\displaystyle\sum_{n=1}^\infty a_n$ -- збіжний.
+\bigskip \\
+\leftproof майже аналогічно.
+\end{proof}
+
+\begin{remark}
+Теорема має місце і тоді, коли $-1 < u_n \leq 0$.
+\end{remark}
+
+\begin{theorem}
+Припустимо, що $\displaystyle\sum_{n=1}^\infty a_n,\ \sum_{n=1}^\infty a_n^2$ -- збіжні. Тоді $\displaystyle\prod_{n=1}^\infty (1+a_n)$ -- збіжний.
+\end{theorem}
+
+\begin{proof}
+Нам достатньо буде довести, що збіжним буде ряд $\displaystyle\sum_{n=1}^\infty \ln(1+a_n)$.\\
+Зауважимо, що $\displaystyle\sum_{n=1}^\infty (a_n - \ln(1+a_n))$ збіжний, тому що $a_n - \ln(1+a_n) \sim \dfrac{1}{2}a_n^2$ при $n \to \infty$, (за рахунок того, що $a_n \to 0$), при цьому $\displaystyle\sum_{n=1}^\infty a_n^2$ збіжний. Отже, $\displaystyle\sum_{n=1}^\infty \ln(1+a_n)$ збіжний за рахунок збіжності $\displaystyle\sum_{n=1}^\infty a_n$.
+\end{proof}
+
+\begin{definition}
+Добуток $\displaystyle\prod_{n=1}^\infty a_n$ називається \textbf{абсолютно збіжним}, якщо
+\begin{align*}
+\sum_{n=1}^\infty \ln a_n \text{ -- абсолютно збіжний.}
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Для абсолютно збіжного добутка можлива будь-яка перестановка множників без зміни значення добутка.
+\end{remark}
 \newpage
 %\fi
 
