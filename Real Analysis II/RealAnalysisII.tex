@@ -8,6 +8,11 @@
 \usepackage[english, main=ukrainian]{babel}
 \usepackage{pgfplots}
 \pgfplotsset{compat = newest}
+\usepackage{changepage}
+
+\usepackage{nccmath}
+
+\usepackage{enumitem}
 \usepgfplotslibrary{fillbetween}
 \usepackage{tikz}
 \usepackage{graphicx}
@@ -79,6 +84,14 @@
 \theoremstyle{theoremdd}
 \newtheorem{corollary}[theorem]{Corollary}
 
+\newcommand\thref[1]{\textbf{Th.~\ref{#1}}}
+\newcommand\defref[1]{\textbf{Def.~\ref{#1}}}
+\newcommand\exref[1]{\textbf{Ex.~\ref{#1}}}
+\newcommand\prpref[1]{\textbf{Prp.~\ref{#1}}}
+\newcommand\rmref[1]{\textbf{Rm.~\ref{#1}}}
+\newcommand\lmref[1]{\textbf{Lm.~\ref{#1}}}
+\newcommand\crlref[1]{\textbf{Crl.~\ref{#1}}}
+
 \makeatletter
 \renewenvironment{proof}[1][Proof.\\]{\par
 \pushQED{\hfill \qed}%
@@ -104,7 +117,7 @@
 \includepdf{preview.jpg}
 \tableofcontents
 \newpage
-%\iffalse
+\iffalse
 \section{Невизначений інтеграл}
 У рамках даного розділу розглядатимуться множини $I,J$, що будуть проміжками одного з типів:\\
 $[a,b], (a,b), (a,b]$, причому можливий нескінчений проміжок.
@@ -2817,6 +2830,10 @@ $\displaystyle\prod_{n=1}^\infty (1+a_n)$ -- збіжний $\iff \displaystyle\
 \bigskip \\
 \leftproof майже аналогічно.
 \end{proof}
+
+\begin{example}
+Зокрема $\displaystyle\prod_{n=1}^\infty \left( 1 + \dfrac{1}{n^2} \right)$ збіжний, оскільки $\displaystyle\sum_{n=1}^\infty \dfrac{1}{n^2}$ збіжний.
+\end{example}
 
 \begin{remark}
 Теорема має місце і тоді, коли $-1 < u_n \leq 0$.
@@ -5716,80 +5733,88 @@ $L''(x,y,z,\lambda_1) \vec{h}^2 = 6(h_1^2+h_2^2+h_3^2) > 0$\\
 \end{example}
 \fi
 \newpage
-%\fi
+\fi
 
 %\iffalse
 \section{Інтеграли з параметром}
 \subsection{Основні означення та властивості}
 \begin{definition}
-Задано функцію $f: [a,b] \times [c,d] \to \mathbb{R}$, таку, що $\forall y \in [c,d]: f \in \mathcal{R}([a,b])$.\\
-\textbf{Інтегралом з параметром} називають таку функцію $J: [c,d] \to \mathbb{R}$:
+Задана функція $f \colon [a,b] \times [c,d] \to \mathbb{R}$, така, що $\forall y \in [c,d]: f \in \mathcal{R}([a,b])$.\\
+\textbf{Інтегралом з параметром} називають таку функцію $J \colon [c,d] \to \mathbb{R}$:
 \begin{align*}
 J(y) = \int_a^b f(x,y)\,dx
 \end{align*}
 \end{definition}
 
-\begin{proposition}[Неперервність]
-Задано функцію $f: [a,b] \times [c,d] \to \mathbb{R}$, таку що $f \in C([a,b] \times [c,d])$. Тоді $J \in C([c,d])$.
+\begin{remark}
+Зауважимо, що якщо додатково вимагати $f \in C([a,b] \times [c,d])$, то отримаємо $\forall y \in [c,d]: f \in C([a,b])$. Таким чином, $\forall y \in [c,d]: f \in \mathcal{R}([a,b])$, а тому функція $J(y) = \displaystyle\int_a^b f(x,y)\,dx$ буде визначеною коректно.
+\end{remark}
+
+\begin{proposition}[Про неперервність інтеграла з параметром]
+\label{continuity_of_parametric_integral}
+Задана функція $f \colon [a,b] \times [c,d] \to \mathbb{R}$, така, що $f \in C([a,b] \times [c,d])$. Тоді $J \in C([c,d])$.
 \end{proposition}
 
 \begin{proof}
-Зауважимо, що $f \in C([a,b] \times [c,d])$. то звідси $\forall y \in [c,d]: f \in C([a,b]) \implies f \in \mathcal{R}([a,b])$. Тобто функція $J(y) = \huge\int_a^b f(x,y)\,dx$ коректно визначена.
-\bigline
-$f(x,y) \in C([a,b] \times [c,d]) \implies f(x,y) \in C_{unif}([a,b] \times [c,d]) \implies \\
-\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall (x_1,y_1),(x_2,y_2) \in [a,b] \times [c,d]: \Norm{(x_1,y_1)-(x_2,y_2)} = \\ = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} < \delta \Rightarrow |f(x_1,y_1)-f(x_2,y_2)| < \dfrac{\varepsilon}{b-a}$.\\
+$f(x,y) \in C([a,b] \times [c,d]) \implies f(x,y) \in C_{\text{unif}}([a,b] \times [c,d]) \implies \\
+\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall (x_1,y_1),(x_2,y_2) \in [a,b] \times [c,d]: \\
+\|(x_1,y_1)-(x_2,y_2)\| = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} < \delta \Rightarrow |f(x_1,y_1)-f(x_2,y_2)| < \dfrac{\varepsilon}{b-a}$.\\
 Тоді $|J(y_1)-J(y_2)| = \huge \abs{\int_a^b f(x,y_1)\,dx - \int_a^b f(x,y_2)\,dx} \leq \int_a^b |f(x,y_1)-f(x,y_2)| \boxed{<}$\\
-Якщо я оберу $(x,y_1),(x,y_2)$ так, що $\Norm{(x,y_1)-(x,y_2)} = \sqrt{(y_1-y_2)^2} = |y_1-y_2|<\delta$, то тоді \\ $|f(x,y_1)-f(x,y_2)| < \dfrac{\varepsilon}{b-a}$\\
+Якщо я оберу $(x,y_1),(x,y_2)$ так, що $\|(x,y_1)-(x,y_2)\| = \sqrt{(y_1-y_2)^2} = |y_1-y_2|<\delta$, то тоді \\ $|f(x,y_1)-f(x,y_2)| < \dfrac{\varepsilon}{b-a}$.\\
 $\boxed{<} \huge \int_a^b \dfrac{\varepsilon}{b-a} = \varepsilon$.\\
-Збираючи пазл, отримаємо $J \in C_{unif}([c,d]) \implies J \in C([c,d])$.
+Збираючи пазл, отримаємо $J \in C_{\text{unif}}([c,d]) \implies J \in C([c,d])$.
 \end{proof}
 
-\begin{proposition}[Диференційованість]
-Задано функцію $f: [a,b] \times [c,d] \to \mathbb{R}$, таку, що $f \in C([a,b] \times [c,d])$. Відомо, що $\exists \departial{f}{y} \in C([a,b] \times [c,d])$.
-Тоді $J$ - диференційована на $[c,d]$, при цьому $J'(y) = \huge\int_a^b \departial{f}{y}(x,y)\,dx$.
+\begin{proposition}[Про диференційованість інтеграла з параметром]
+\label{differentiability_of_parametric_integral}
+Задана функція $f \colon [a,b] \times [c,d] \to \mathbb{R}$, така, що $f \in C([a,b] \times [c,d])$. Відомо, що $\exists \departial{f}{y} \in C([a,b] \times [c,d])$.
+Тоді $J$ -- диференційована на $[c,d]$, причому $J'(y) = \huge\int_a^b \departial{f}{y}(x,y)\,dx$.
 \end{proposition}
 
 \begin{proof}
 Диференційованість означає існування похідної, тобто необхідно довести її існування.\\
 $\dfrac{J(y+\Delta y) - J(y)}{\Delta y} = \dfrac{1}{\Delta y} \huge \int_a^b f(x,y+\Delta y) - f(x,y)\,dx \boxed{=}$\\
-Згадаємо Ньютона-Лейбніца та властивості інтеграла та розпишемо підінтегральний вираз таким чином:\\
+Згадаємо Ньютона-Ляйбніца та властивості інтеграла, розпишемо підінтегральний вираз ось так:\\
 $f(x,y+\Delta y) - f(x,y) = \huge\int_y^{y+\Delta y} f'_y(x,t)\,dt = \int_y^{y+\Delta y} \departial{f}{y}(x,t)\,dt$\\
 $\boxed{=} \huge \dfrac{1}{\Delta y} \int_a^b \left( \int_y^{y+\Delta y} \departial{f}{y}(x,t)\,dt \right)dx$\\
-Тепер зафіксуємо т. $y_0$ та розпишемо праву частину рівності, що ми доводимо:\\
+Тепер зафіксуємо точку $y_0$ та розпишемо праву частину рівності, що ми доводимо:\\
 $\huge \int_a^b \departial{f}{y}(x,y_0)\,dx = \int_a^b \dfrac{1}{\Delta y} \left( \int_{y_0}^{y_0+\Delta y} \departial{f}{y}(x,y_0) \,dt \right)dx = \dfrac{1}{\Delta y} \int_a^b \left( \int_{y_0}^{y_0+\Delta y} \departial{f}{y}(x,y_0) \,dt \right)dx$\\
 Ну а тепер час доводити існування похідної:\\
 $\huge \abs{\dfrac{J(y_0+\Delta y) - J(y_0)}{\Delta y} - \huge\int_a^b \departial{f}{y}(x,y_0)\,dx}
 = \abs{\dfrac{1}{\Delta y} \int_a^b \left( \int_{y_0}^{y_0+\Delta y} \departial{f}{y}(x,t)\,dt \right)dx - \dfrac{1}{\Delta y} \int_a^b \left( \int_{y_0}^{y_0+\Delta y} \departial{f}{y}(x,y_0) \,dt \right)dx} = \\
 = \abs{\dfrac{1}{\Delta y} \int_a^b \left( \int_{y_0}^{y_0 + \Delta y} \departial{f}{y}(x,t) - \departial{f}{y}(x,y_0) \,dt \right)dx} \boxed{<}$\\
-За умовою твердження, \\ $\departial{f}{y}(x,y) \in C([a,b] \times [c,d]) \implies \departial{f}{y}(x,y) \in C_{unif}([a,b] \times [c,d]) \implies$\\
-$\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall (x,t),(x,y_0) \in [a,b]\times [c,d]: \Norm{(x,t)-(x,y_0)} < \delta \Rightarrow \abs{\departial{f}{y}(x,t) - \departial{f}{y}(x,y_0)} < \dfrac{\varepsilon}{b-a}$\\
+За умовою твердження, $\departial{f}{y}(x,y) \in C([a,b] \times [c,d]) \implies \departial{f}{y}(x,y) \in C_{\text{unif}}([a,b] \times [c,d]) \implies$\\
+$\forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall (x,t),(x,y_0) \in [a,b]\times [c,d]: \|(x,t)-(x,y_0)\| < \delta \Rightarrow \abs{\departial{f}{y}(x,t) - \departial{f}{y}(x,y_0)} < \dfrac{\varepsilon}{b-a}$\\
 $\boxed{<} \huge\int_a^b \int_{y_0}^{y_0+\Delta y} \dfrac{1}{\Delta y} \dfrac{\varepsilon}{b-a} \,dt \,dx = \varepsilon$\\
-Знову збираємо пазл - отримуємо, що: $\forall y_0 \in [c,d]: \\ \exists \huge \lim_{\Delta y \to 0} \dfrac{J(y_0+\Delta y)-J(y_0)}{\Delta y} = \int_a^b \departial{f}{y}(x,y_0)\,dx = J'(y_0)$.
-Отже, $J$ - диференційована на $[c,d]$.
+Збираємо пазл -- отримаємо, що: $\forall y_0 \in [c,d]: \exists \huge \lim_{\Delta y \to 0} \dfrac{J(y_0+\Delta y)-J(y_0)}{\Delta y} = \int_a^b \departial{f}{y}(x,y_0)\,dx = J'(y_0)$. Отже, $J$ -- диференційована на $[c,d]$.
 \end{proof}
 
-\begin{proposition}[Інтегрованість]
-Задано функцію $f: [a,b] \times [c,d] \to \mathbb{R}$, таку, що $f \in C([a,b] \times [c,d])$.\\
-Тоді $J \in \mathcal{R}([c,d])$, а також $\huge \int_c^d \underbrace{\int_a^b f(x,y)\,dx}_{=J(y)}\,dy = \int_a^b \int_c^d f(x,y)\,dy \,dx$.
+\begin{proposition}[Про інтегрованість інтеграла з параметром]
+Задана функція $f \colon [a,b] \times [c,d] \to \mathbb{R}$, така, що $f \in C([a,b] \times [c,d])$. Тоді $J \in \mathcal{R}([c,d])$, причому $\huge \int_c^d \underbrace{\int_a^b f(x,y)\,dx}_{=J(y)}\,dy = \int_a^b \int_c^d f(x,y)\,dy \,dx$.
 \end{proposition}
 
 \begin{proof}
-Розглянемо дві функції: $h(t) = \huge \int_c^t \int_a^b f(x,y) \,dx \,dy \hspace{0.5cm} g(t) = \int_a^b \int_c^t f(x,y)\,dy\,dx$. В нашому випадку $t \in [c,d]$. Якщо $t =c$, то маємо, що $h(c) = g(c) = 0$.\\
-Необхідно знайти, чому дорівнює $h'(t), g'(t)$. Зробимо позначення: $h(t) = \huge \int_c^t J(y) \,dy \hspace{0.5cm} g(t) = \int_a^b F(x,t)\,dx$.\\
-Маємо два інтеграли з параметром $t$. Другий інтеграл задовольняє умові з \textbf{Prp 3.1.3}, тоді можемо знайти похідну. Дійсно,\\
-$F(x,t) \in C([a,b] \times [c,d])$, тому що $\huge \abs{F(x,t) - F(x_0,t_0)} = \abs{\int_c^t f(x,y)\,dy - \int_c^{t_0} f(x_0,y)\,dy} = \\ =\abs{\int_c^t f(x,y)-f(x_0,y)\,dy - \int_{t_0}^t f(x_0,y)\,dy}$, далі неважко оцінити.\\
-А також $\departial{F}{t}(x,t) = f(x,t) \in C([a,b] \times [c,d])$.\\
-Перший - це інтеграл від верхньої межі, тому автоматично $h'(t) = J(t)$.\\
-Другий рахується за попереднім твердженням, всі умови виконані для цього.\\
-$g'(t) = \huge \int_a^b \departial{F}{t}(x,t)\,dt = \huge \int_a^b f(x,t)\,dx = J(t)$.\\
-Таким чином, $\forall t \in [c,d]: h'(t) = g'(t) \implies h(t) = g(t) + C$.\\
-Але оскільки $h(c)=g(c)=0$, то одразу $C=0 \Rightarrow h(t) = g(t)$.\\
-Ну а тоді $h(d) = g(d) \implies \huge \int_c^b \int_a^b f(x,y)\,dx\,dy = \int_a^b \int_c^d f(x,y)\,dy \,dx$.
+Розглянемо дві функції: $h(t) = \huge \int_c^t \int_a^b f(x,y) \,dx \,dy \hspace{0.5cm} g(t) = \int_a^b \int_c^t f(x,y)\,dy\,dx$. \\
+У нашому випадку $t \in [c,d]$. Якщо $t = c$, то маємо $h(c) = g(c) = 0$. Ми \textcolor{red}{хочемо зараз} довести, що $g'(t) = h'(t)$, і тоді за наслідком теореми Лагранжа, $h(t) = g(t) + C$. Підставивши $t = c$, отримаємо $C = 0$, тому $h(t) = g(t)$, зокрема $h(d) = g(d)$ -- бажана рівність.\\
+Доведемо те, що \textcolor{red}{хочемо}. Зробимо позначення: $h(t) = \huge \int_c^t J(y) \,dy, \qquad g(t) = \int_a^b F(x,t)\,dx$. У цьому випадку $F(x,t) = \displaystyle\int_c^t f(x,y)\,dy$\\
+Перший -- це інтеграл від верхньої межі, тому $h'(t) = J(t)$.\\
+Покажемо, що другий інтеграл задовольняє умові \prpref{differentiability_of_parametric_integral}, тоді можемо знайти похідну.\\
+Спочатку доведемо, що підінтегральна функція $F \in C([a,b] \times [c,d])$ (нижче припускаю $t > t_0$).\\
+$\displaystyle \left|F(x,t) - F(x_0,t_0)\right| = \abs{\int_c^t f(x,y)\,dy - \int_c^{t_0} f(x_0,y)\,dy} =\abs{\int_c^t f(x,y)-f(x_0,y)\,dy - \int_{t_0}^t f(x_0,y)\,dy} \leq \\
+\leq \int_c^t \abs{ f(x,y) - f(x_0,y) }\,dy + \int_{t_0}^t \abs{f(x_0,y)}\,dy$.\\
+Оскільки $f \in C([a,b] \times [c,d])$, то вона обмежена, тож $\exists M > 0: \forall (x,y) \in [a,b] \times [c,d]: |f(x,y)| \leq M$.\\
+Оберемо $\varepsilon > 0$. Оскільки $f \in C([a,b] \times [c,d])$, то $\exists \delta > 0: \forall (x,y): \| (x,y) - (x_0,y_0) \| < \delta \implies |f(x,y) - f(x_0,y_0)| < \varepsilon$. Зокрема оберемо $y_0 = y$, тоді $\forall x: |x-x_0| < \delta \implies |f(x,y) - f(x_0,y)| < \dfrac{\varepsilon}{d-c}$.\\
+Отже, $|F(x,t) - F(x_0,t_0)| < (t-c) \dfrac{\varepsilon}{d-c} + (t-t_0) M \leq \varepsilon + \tilde{\delta} M$.\\
+Оберемо $\tilde{\delta} = \min\left\{\delta,\dfrac{\varepsilon}{M}\right\}$. Тоді якщо обрати кожну точку $(x,t)$ так, що $\| (x,t) - (x_0,t_0) \| < \tilde{\delta}$, отримаємо $|F(x,t) - F(x_0,t_0)| < 2 \varepsilon$ (при $t < t_0$ все працюватиме).\\
+Тепер зауважимо, що $\departial{F}{t}(x,t) = f(x,t) \in C([a,b] \times [c,d])$.\\
+Отже, дійсно, $g$ можна продиференціювати за \prpref{differentiability_of_parametric_integral}, отримаємо наступне:\\
+$g'(t) = \displaystyle\int_a^b \departial{F}{t}(x,t)\,dt = \int_a^b f(x,t)\,dx = J(t)$.\\
+Разом ми довели, що хотіли, а саме $g'(t) = h'(t)$ для всіх $t \in [c,d]$. Завершили доведення.
 \end{proof}
 
 \begin{example}
 Обчислити $\huge \lim_{\alpha \to 0} \int_0^2 x^2 \cos \alpha x \,dx$.\\
-Маємо $I(\alpha) = \huge\int_0^2 x^2 \cos \alpha x \,dx$. Розглянемо функцію $f(x,\alpha) = x^2 \cos \alpha x$ на $[0,2] \times [-1,1]$ (можна й менше взяти другу сторону, головне щоб навколо т. $0$). Ця функція є неперервною, тоді $I(\alpha)$ неперервна, зокрема в т. $\alpha = 0$.\\
+Маємо $I(\alpha) = \huge\int_0^2 x^2 \cos \alpha x \,dx$. Розглянемо функцію $f(x,\alpha) = x^2 \cos \alpha x$ на $[0,2] \times [-1,1]$ (можна й менше взяти другу сторону, головне щоб навколо точки $0$). Ця функція є неперервною, тоді $I(\alpha)$ неперервна, зокрема в точці $\alpha = 0$.\\
 $\huge \lim_{\alpha \to 0} \int_0^2 x^2 \cos \alpha x \,dx = \lim_{\alpha \to 0} I(\alpha) = I(0) = \int_0^2 x^2 \,dx = \dfrac{x^3}{3} = \dfrac{8}{3}$.
 \end{example}
 
@@ -5803,14 +5828,14 @@ $I'(\alpha) = \huge \dfrac{1}{2} \int_1^2 e^{\alpha x^2}\,dx^2 = \dfrac{1}{2\alp
 \begin{example}
 Обчислити $\huge\int_0^1 \dfrac{x^b - x^\alpha}{\ln x}\,dx$, якщо $a,b>0$.\\
 Зауважимо, що $\dfrac{x^b - x^a}{\ln x} = \huge\int_a^b x^y\,dy$. Тоді взагалі маємо обчислити $\huge\int_0^1 \int_a^b x^y \,dy \,dx$.\\
-Оскільки функція $f(x,y) = x^y$ є неперервною на прямокутнику $[0,1] \times [a,b]$, то звідси ми можемо поміняти місцями порядок інтегрування, тобто\\
+Оскільки функція $f(x,y) = x^y$ є неперервною на прямокутнику $[0,1] \times [a,b]$, то звідси ми можемо змінити місцями порядок інтегрування, тобто\\
 $\huge\int_0^1 \int_a^b x^y \,dy \,dx = \int_a^b \int_0^1 x^y\,dx\,dy = \int_a^b \dfrac{x^{y+1}}{y+1}\Big|_0^1\,dy = \int_a^b \dfrac{1}{y+1}\,dy = \ln (y+1) \Big|_a^b = \ln \dfrac{b+1}{a+1}$.
 \end{example}
 
 Зараз будуть більш специфічні приклади. Але на них простіше зрозуміти узагальнення теореми про неперервність та диференційованість.
 \begin{example}
 Знайти $\huge\lim_{\alpha \to 0} \int_{\alpha}^{1+\alpha} \dfrac{dx}{1+x^2+\alpha^2}$.\\
-Інтуїтивно хочеться, щоб це дорівнювало $\huge\int_0^1 \dfrac{dx}{1+x^2}$. Наш ліміт тому запишемо так:\\
+Інтуїтивно хочеться, щоб це дорівнювало $\huge\int_0^1 \dfrac{dx}{1+x^2}$. Запишемо наш ліміт ось так:\\
 $\huge\lim_{\alpha \to 0} \int_{\alpha}^{1+\alpha} \dfrac{dx}{1+x^2+\alpha^2} = \lim_{\alpha \to 0} \left( \int_0^1 \dfrac{dx}{1+x^2+\alpha^2} + \int_1^{1+\alpha} \dfrac{dx}{1+x^2+\alpha^2} - \int_0^{\alpha} \dfrac{dx}{1+x^2+\alpha^2} \right)$.\\
 Перший інтеграл, тобто $\huge \lim_{\alpha \to 0} \int_0^1 \dfrac{dx}{1+x^2+\alpha^2} = \int_0^1 \dfrac{dx}{1+x^2}$. Тому задля нашої інтуіції, треба довести, що останні два інтеграла дорівнюють нулю.\\
 $\huge \abs{\int_0^\alpha \dfrac{dx}{1+x^2+\alpha^2}} \leq \int_0^\alpha \abs{\dfrac{dx}{1+x^2+\alpha^2}} \leq \int_0^\alpha M\,dx = M \alpha \to 0$.\\
@@ -5819,33 +5844,44 @@ $\huge \abs{\int_1^{1+\alpha} \dfrac{dx}{1+x^2+\alpha^2}} \leq M (1+\alpha-1) \t
 Отже, $\huge\lim_{\alpha \to 0} \int_\alpha^{1+\alpha} \dfrac{dx}{1+x^2+\alpha^2} = \int_0^1 \dfrac{dx}{1+x^2} = \dfrac{\pi}{4}$.
 \end{example}
 
-\begin{remark}
-Теорему про неперервність інтеграла з параметром можна узагальнити.\\
-Маємо $f \in C([a,b] \times [c,d])$ та $a(y),b(y) \in C([c,d])$, причому $a(y) \geq a$ та $b(y) \leq b$.\\
-Тоді $J(y) = \huge\int_{a(y)}^{b(y)} f(x,y)\,dx \in C([c,d])$.\\
-Доведення аналогічне тому, як попередній приклад розв'язувався.
-\end{remark}
+Отже, теорему про неперервність інтеграла з параметром можна узагальнити.
+
+\begin{theorem}
+Маємо $f \in C([a,b] \times [c,d])$ та $a(y),b(y) \in C([c,d])$, причому $a(y) \geq a$ та $b(y) \leq b$. Тоді $J(y) = \huge\int_{a(y)}^{b(y)} f(x,y)\,dx \in C([c,d])$.
+\end{theorem}
+
+\begin{proof}
+$\displaystyle\lim_{y \to y_0} \int_{a(y)}^{b(y)} f(x,y)\,dx = \lim_{y \to y_0}\left( \int_{a(y_0)}^{b(y_0)} f(x,y)\,dx \pm \int_{b(y_0)}^{b(y)} f(x,y)\,dx \pm \int_{a(y_0)}^{a(y)}f(x,y)\,dx \right)$.\\
+Знак $\pm$ залежить від взаємного розташування точок $a(y), b(y), a(y_0), b(y_0)$.\\
+Перший інтеграл неперервний, за \prpref{continuity_of_parametric_integral}. Другий та третій інтеграли оцінюються за модулем так само, як це було на прикладі. Маємо права, бо $f$ обмежується сталою $M$. Тоді там отримаємо, що ці інтеграли прямують до нуля.
+\end{proof}
 
 \begin{example}
 Знайти похідну функції $F(\alpha) = \huge\int_{\alpha}^{\alpha^2} \dfrac{\ln(1+\alpha x)}{x}\,dx$, нехай $\alpha \geq 0$.\\
 Інтуїтивно хочеться продиференціювати як інтеграл від межі та інтеграл від параметру.\\
-Оскільки $\dfrac{\ln(1+\alpha x)}{x} = f(x,\alpha)$ неперервна функція, то вона має первісну $H$. Тоді за формулою Ньютона-Лейбніца:\\
-$F(\alpha) = H(x,\alpha) \Big|_{\alpha}^{\alpha^2} = H(\alpha^2,\alpha) - H(\alpha,\alpha)$.\\
-$F'(\alpha) = \departial{H}{\alpha^2}(\alpha^2,\alpha) \dfrac{d\alpha^2}{d\alpha} + \departial{H}{\alpha}(\alpha^2,\alpha) - \departial{H}{\alpha}(\alpha,\alpha) \dfrac{d\alpha}{d\alpha} - \departial{H}{\alpha}(\alpha,\alpha) = \\ = \left( \departial{H}{\alpha^2}(\alpha^2,\alpha) \cdot 2\alpha  - \departial{H}{\alpha}(\alpha,\alpha) \cdot 1 \right) + \left( \departial{H}{\alpha}(\alpha^2,\alpha) - \departial{H}{\alpha}(\alpha,\alpha) \right) = \\
-= \left( f(\alpha^2,\alpha) \cdot 2\alpha - f(\alpha,\alpha) \cdot 1 \right) + \left( f(\alpha^2,\alpha) - f(\alpha,\alpha) \right)$.\\
+Оскільки $\dfrac{\ln(1+\alpha x)}{x} = f(x,\alpha)$ неперервна функція, то вона має первісну $H$. Тоді за формулою Ньютона-Ляйбніца:\\
+$F(\alpha) = H(x,\alpha) \Big|_{\alpha}^{\alpha^2} = H(\alpha^2,\alpha) - H(\alpha,\alpha) = H(u(\alpha),\alpha) - H(v(\alpha),\alpha)$, де $u(\alpha) = \alpha^2,\ v(\alpha) = \alpha$.
+\begin{fleqn}
+\begin{align*}
+F'(\alpha) & = \departial{H}{\alpha^2}(\alpha^2,\alpha) \dfrac{d\alpha^2}{d\alpha} + \departial{H}{\alpha}(\alpha^2,\alpha) - \departial{H}{\alpha}(\alpha,\alpha) \dfrac{d\alpha}{d\alpha} - \departial{H}{\alpha}(\alpha,\alpha) \\ 
+& = \left( \departial{H}{\alpha^2}(\alpha^2,\alpha) \cdot 2\alpha  - \departial{H}{\alpha}(\alpha,\alpha) \cdot 1 \right) + \left( \departial{H}{\alpha}(\alpha^2,\alpha) - \departial{H}{\alpha}(\alpha,\alpha) \right) \\
+& = \left( f(\alpha^2,\alpha) \cdot 2\alpha - f(\alpha,\alpha) \cdot 1 \right) + \left( f(\alpha^2,\alpha) - f(\alpha,\alpha) \right).
+\end{align*}
+\end{fleqn}
 Підставимо все, що маємо - отримаємо:\\
 $F'(\alpha) = \dfrac{\ln (1+\alpha^3)}{\alpha^2} \cdot 2\alpha - \dfrac{\ln(1+\alpha^2)}{\alpha} + \dfrac{\ln(1+\alpha^3)}{\alpha^2} - \dfrac{\ln(1+\alpha^2)}{\alpha} = \dfrac{\ln (1+\alpha^3)}{\alpha} \left( 2 + \dfrac{1}{\alpha} \right) - 2 \dfrac{\ln (1+\alpha^2)}{\alpha}$.
 \end{example}
 
-\begin{remark}
-Для диференціювання існує більш загальна формула, якщо досліджувати функцію $J(y) = \huge\int_{a(y)}^{b(y)} f(x,y)\,dx$. Вимагаємо $f, \departial{f}{y} \in C([a,b] \times [c,d])$, $a,b \in C([c,d])$, причому $a(y) \geq a$ та $b(y) \leq b$. Тоді маємо:\\
-$J'(y) = f(\psi(y),y)\psi'(y) - f(\varphi(y),y)\varphi'(y) + \huge\int_{\varphi(y)}^{\psi(y)} \departial{f}{y}(x,y)\,dx$.\\
-Для її доведення можна скористатися формулою Ньютона-Лейбніца.
-\end{remark}
+Для диференціювання існує більш загальна формула.
 
-\subsection{Невласні інтеграли з параметром. Ознаки збіжності}
+\begin{theorem}
+Маємо $f, \departial{f}{y} \in C([a,b] \times [c,d])$, $a,b \in C([c,d])$, причому $a(y) \geq a$ та $b(y) \leq b$. Тоді $J(y) = \displaystyle\int_{a(y)}^{b(y)} f(x,y)\,dx$ буде диференційованою на $[c,d]$, причому \\ $J'(y) = f(b(y),y)b'(y) - f(a(y),y)a'(y) + \huge\int_{a(y)}^{b(y)} \departial{f}{y}(x,y)\,dx$.\\
+\textit{Для її доведення можна скористатися формулою Ньютона-Ляйбніца.}
+\end{theorem}
+
+\subsection{Невласні інтеграли з параметром та ознаки збіжності}
 \begin{definition}
-Задано функцію $f: A \times B \to \mathbb{R}$, де $A,B \subset \mathbb{R}$, та $y_0 \in \mathbb{R}$ - гранична точка для $B$.\\
+Задана функція $f \colon A \times B \to \mathbb{R}$, де $A,B \subset \mathbb{R}$, та $y_0 \in \mathbb{R}$ -- гранична точка для $B$.\\
 Функція $f$ \textbf{поточково збігається} до функцї $\varphi$ при $y \to y_0$, якщо
 \begin{align*}
 \forall x \in A: \lim_{y \to y_0} f(x,y) = \varphi(x)
@@ -5857,7 +5893,7 @@ $J'(y) = f(\psi(y),y)\psi'(y) - f(\varphi(y),y)\varphi'(y) + \huge\int_{\varphi(
 Позначення: $f(x,y)^\rightarrow_\rightarrow \varphi(x), y \to y_0$.
 \end{definition}
 
-Новий вигляд збіжності можна призвести до збіжності функціональних послідовностей таким твердженням.
+Новий вигляд збіжності можна звести до збіжності функціональних послідовностей таким твердженням.
 
 \begin{proposition}
 $f(x,y)^\rightarrow_\rightarrow \varphi(x), y \to y_0$ на множині $A$ $\iff \forall \{y_n, n \geq 1\} \subset B: \forall n \geq 1: y_n \neq y_0: f(x,y_n)^\rightarrow_\rightarrow \varphi(x), n \to \infty$ на множині $A$.\\
@@ -5872,13 +5908,13 @@ $f(x,y)^\rightarrow_\rightarrow \varphi(x), y \to y_0$ на $A$ $\iff \forall \v
 \rightproof \textit{Вказівка: означення рівномірної границі та нерівність трикутника.}
 \bigskip \\
 \leftproof Дано: $\forall \varepsilon > 0: \exists \delta: \forall y_1,y_2 \in B, y_1,y_2 \neq y_0: \begin{cases} |y_1-y_0| < \delta \\ |y_2-y_0| < \delta \end{cases} \implies \huge\sup_{x \in A} |f(x,y_1)-f(x,y_2)| < \varepsilon$.\\
-Візьмемо деяку послідовність $\{y_n, n \geq 1\}$, де $y_n \neq y_0, y_n \to y_0$. Тоді \\ $\exists N: \forall n,m \geq N: |y_n-y_0| < \delta, |y_m - y_0| < \delta$ . За умовою, звідси $\huge\sup_{x \in A} |f(x,y_n) - f(x,y_m)| < \varepsilon$. За критерієм Коші рівномірної збіжності функціональної послідовності, $f(x,y_n)$ є рівномірно збіжною на $A$. Отже, $f(x,y)$ - рівномірно збіжний на $A$ за \textbf{Prp. 5.2.2.}
+Візьмемо деяку послідовність $\{y_n, n \geq 1\}$, де $y_n \neq y_0, y_n \to y_0$. Тоді \\ $\exists N: \forall n,m \geq N: |y_n-y_0| < \delta, |y_m - y_0| < \delta$ . За умовою, звідси $\huge\sup_{x \in A} |f(x,y_n) - f(x,y_m)| < \varepsilon$. За критерієм Коші рівномірної збіжності функціональної послідовності, $f(x,y_n)$ є рівномірно збіжною на $A$. Отже, $f(x,y)$ - рівномірно збіжний на $A$ за \textbf{Prp. 5.2.2. (TODO: лінкування)}
 \end{proof}
 
 Тепер уже до суті цього підрозділу.
 
 \begin{definition}
-Задано функцію $f: [a,\omega) \times A$, таку, що $\forall y \in A: \forall c \in [a,\omega): f\in \mathcal{R}([a,c])$. Також маємо збіжний невласний інтеграл із параметром $J(y)= \huge \int_a^\omega f(x,y)\,dx$, $\forall y \in A$.\\
+Задана функція $f \colon [a,\omega) \times A$, така, що $\forall y \in A: \forall c \in [a,\omega): f\in \mathcal{R}([a,c])$. Також маємо збіжний невласний інтеграл із параметром $J(y)= \huge \int_a^\omega f(x,y)\,dx$, $\forall y \in A$.\\
 Невласний інтеграл \textbf{збігається рівномірно} на множині $A$, якщо
 \begin{align*}
 \huge \sup_{y \in A} \abs{\int_a^\omega f(x,y)\,dx - \int_a^c f(x,y)\,dx} \overset{c \to \omega}{\to} 0
@@ -5890,15 +5926,17 @@ $f(x,y)^\rightarrow_\rightarrow \varphi(x), y \to y_0$ на $A$ $\iff \forall \v
 \end{remark}
 
 \begin{theorem}[Критерій Коші]
-$\huge \int_a^\omega f(x,y)\,dx$ - збіжний рівномірно на $A \iff \forall \varepsilon > 0: \exists C: \forall c_1,c_2 \in (C,\omega): \huge \sup_{y \in A} \abs{\int_{c_1}^{c_2} f(x,y)\,dx} < \varepsilon$.\\
+$\huge \int_a^\omega f(x,y)\,dx$ -- збіжний рівномірно на $A \iff \forall \varepsilon > 0: \exists C: \forall c_1,c_2 \in (C,\omega): \huge \sup_{y \in A} \abs{\int_{c_1}^{c_2} f(x,y)\,dx} < \varepsilon$.\\
 \textit{Випливає з критерію Коші рівномірної збіжності функцій.}
 \end{theorem}
 
-\begin{theorem}[Ознака Вейєрштраса]
-Задані функції $f: [a,\omega) \times A \to \mathbb{R}$, $g: [a,\omega) \to \mathbb{R}$ такі, що\\
-1) $\forall x \in [a,\omega): \forall y \in A: |f(x,y)| \leq g(x)$;\\
-2) $\huge \int_a^\omega g(x)\,dx$ - збіжний.\\
-Тоді $\huge \int_a^\omega f(x,y)\,dx$ - збіжний рівномірно на $A$.
+\begin{theorem}[Ознака Ваєрштраса]
+Задані функції $f \colon [a,\omega) \times A \to \mathbb{R}$, $g \colon [a,\omega) \to \mathbb{R}$ такі, що виконується наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\forall x \in [a,\omega): \forall y \in A: |f(x,y)| \leq g(x)$;
+\item $\huge \int_a^\omega g(x)\,dx$ -- збіжний.
+\end{enumerate}
+Тоді $\huge \int_a^\omega f(x,y)\,dx$ -- збіжний рівномірно на $A$.
 \end{theorem}
 
 \begin{proof}
@@ -5908,7 +5946,7 @@ $\huge \sup_{y \in A} \abs{\int_c^\omega f(x,y)\,dx} \leq \abs{\int_c^\omega g(x
 \begin{example}
 Довести, що $\huge\int_1^{+\infty} \dfrac{dx}{x^\alpha}$ рівномірно збіжний на множині $[1+\gamma,+\infty)$, якщо $\gamma > 0$.\\
 Маємо функцію $f(x,\alpha) = \dfrac{1}{x^\alpha}$. Також відома оцінка $x^\alpha > x^{1+\gamma} \implies \dfrac{1}{x^\alpha} < \dfrac{1}{x^{1+\gamma}}$, виконано $\forall x \geq 1$.\\
-Також $\huge\int_1^{+\infty} \dfrac{dx}{x^{1+\gamma}}$ - збіжний невласний інтеграл (еталон). Тому за ознакою Вейєрштрасса, $\huge\int_1^{+\infty} \dfrac{dx}{x^\alpha}$ рівномірно збіжний на множині $[1+\gamma,+\infty)$.
+Також $\huge\int_1^{+\infty} \dfrac{dx}{x^{1+\gamma}}$ -- збіжний невласний інтеграл (еталон). Тому за ознакою Вейєрштрасса, $\huge\int_1^{+\infty} \dfrac{dx}{x^\alpha}$ рівномірно збіжний на множині $[1+\gamma,+\infty)$.
 \end{example}
 
 \begin{example}
@@ -5916,114 +5954,108 @@ $\huge \sup_{y \in A} \abs{\int_c^\omega f(x,y)\,dx} \leq \abs{\int_c^\omega g(x
 Дійсно, $\huge\sup_{\alpha > 1} \abs{\int_c^{+\infty} \dfrac{dx}{x^\alpha}} = \sup_{\alpha >1} \left(\dfrac{1}{c^{\alpha-1}} \dfrac{1}{1-\alpha}\right) = +\infty \not\to 0$ при $c \to +\infty$.
 \end{example}
 
-\begin{theorem}[Ознака Діріхле та Абеля]
-Задані функції $f: [a,\omega) \times A \to \mathbb{R}$, $g: [a,\omega) \times A \to \mathbb{R}$ такі, що виконана одна з двох пар умов:
-%GB style
-\iffalse
-$a1) \huge \int_a^\omega f(x,y)\,dx$ - збіжний рівномірно на $A$\\
-$a2) \forall y \in A: g$ - монотонна від $x \in [a,\omega)$\\
-$a3) \exists D>0: \huge \sup_{y \in A} \sup_{c \in [a,\omega)} |g(x,y)| \leq D$
-\bigline
-$d1) \exists D>0: \huge \sup_{y \in A} \sup_{c \in [a,\omega)} \abs{\int_a^c f(x,y)\,dx} \leq D$\\
-$d2) \forall y \in A: g$ - монотонна від $x \in [a,\omega)$\\
-$d3) \huge \sup_{y \in A} |g(x,y)| \overset{x \to \omega}{\to} 0$\\
-\fi
-
-\begin{tabular}{c | c}
-$\huge\int_a^A f(x,y)\,dx$ - рівномірно обмежена на $[a,\omega)$. & $\huge\int_a^\omega f(x,y)\,dx$ - збіжний рівномірно на $A$. \\
-$g$ - монотонна на $[a,\omega)$ та $g(x,y)^\rightarrow_\rightarrow 0$, $x \to \omega$. & $g$ - монотонна на $[a,\omega)$ та рівномірно обмежена на $[a,\omega) \times A$.\\
-\textit{ознака Діріхле} & \textit{ознака Абеля}
-\end{tabular} \\
-Тоді $\huge \int_a^\omega f(x,y) g(x,y)\,dx$ - рівномірно збіжний на $A$.\\
-\textit{Поки без доведення.}
+\begin{theorem}[Ознака Діріхлє та Абеля]
+Задані функції $f,\ g \colon [a,\omega) \times A \to \mathbb{R}$ такі, що виконана одна з двох пар умов:\\
+ \begin{tabular}{c|c}
+$\huge\int_a^A f(x,y)\,dx$ -- рівномірно обмежена на $[a,\omega)$. & $\huge\int_a^\omega f(x,y)\,dx$ -- збіжний рівномірно на $A$. \\
+$g$ -- монотонна на $[a,\omega)$ ($\forall y \in A$) та  & $g$ -- монотонна на $[a,\omega)$ ($\forall y \in A$) та \\
+ $g(x,y)^\rightarrow_\rightarrow 0$, $x \to \omega$. & рівномірно обмежена на $[a,\omega) \times A$. \\
+\textit{ознака Діріхлє} & \textit{ознака Абеля}
+\end{tabular}\\
+Тоді $\huge \int_a^\omega f(x,y) g(x,y)\,dx$ -- рівномірно збіжний на $A$.\\
+\textit{Доведення теореми Діріхлє анаголігно доводиться, як це було в розділі про прості невласні інтеграли (TODO: лінкування). Так само із Діріхлє випливає Абеля аналогічним чином.}
 \end{theorem}
 
 \begin{example}
 Довести, що $\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1}\,dx$ збіжний рівномірно на $[\alpha,+\infty)$, $\alpha>0$.\\
 Розглянемо функції $f(x,y) = \sin xy$ та $g(x,y) = \dfrac{1}{\sqrt{x}+1}$.\\
-$\huge\int_0^A \sin xy\,dx = -\dfrac{1}{y} \cos xy \Big|_{0}^A = -\dfrac{1}{y} \cos Ay + \dfrac{1}{y}$. Ця штука - рівномірно обмежена на $[0,+\infty)$, тому що\\
+$\huge\int_0^A \sin xy\,dx = -\dfrac{1}{y} \cos xy \Big|_{0}^A = -\dfrac{1}{y} \cos Ay + \dfrac{1}{y}$. Ця штука -- рівномірно обмежена на $[0,+\infty)$, тому що\\
 $\dfrac{1}{y} \abs{1 - \cos Ay} \leq \dfrac{1}{y} \leq \dfrac{1}{\alpha}$, виконано $\forall A \in [0,+\infty)$.\\
 $\dfrac{1}{\sqrt{x}+1}$ ясно, що монотонна на $[0,+\infty)$ та рівномірно прямує до нуля при $x \to +\infty$.\\
-Отже, за ознакою Діріхле, $\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1}\,dx$ - збіжний рівномірно на $[\alpha,+\infty)$.
+Отже, за ознакою Діріхлє, $\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1}\,dx$ - збіжний рівномірно на $[\alpha,+\infty)$.
 \end{example}
 
 \begin{example}
 Довести, що $\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1} \arctg xy\,dx$ збіжний рівномірно на $[\alpha,+\infty)$, $\alpha>0$.\\
 Розглянемо функції $f(x,y) = \dfrac{\sin xy}{\sqrt{x}+1}$ та $g(x,y) = \arctg xy$.\\
-$\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1}$ - збіжний рівномірно, попередній приклад.\\
-$\arctg xy$ - монотонна по $x$, а також $\forall x: \forall y: |\arctg xy| \leq \dfrac{\pi}{2}$, тобто рівномірно обмежена.\\
-Отже, за ознакою Абеля, $\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1} \arctg xy\,dx$ - збіжний рівномірно на $[\alpha,+\infty)$.
+$\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1}$ -- збіжний рівномірно за попереднім прикладом.\\
+$\arctg xy$ -- монотонна по $x$, а також $\forall x: \forall y: |\arctg xy| \leq \dfrac{\pi}{2}$, тобто рівномірно обмежена.\\
+Отже, за ознакою Абеля, $\huge\int_0^{+\infty} \dfrac{\sin xy}{\sqrt{x}+1} \arctg xy\,dx$ -- збіжний рівномірно на $[\alpha,+\infty)$.
 \end{example}
 
 \begin{theorem}[Ознака Діні]
 Задано функцію $f \in C([a,\omega) \times [c,d])$. Також відомо, що $f \geq 0$ та $J(y) = \huge\int_a^\omega f(x,y)\,dx \in C([c,d])$.\\
-Тоді $J$ - збіжний рівномірно на $[c,d]$.\\
-\textit{Випливає з ознаки Діні рівномірної збіжності функціонального ряда}\\
-\textbf{TODO: додати ознаку Діні для цього випадку}
+Тоді $J$ -- збіжний рівномірно на $[c,d]$.
 \end{theorem}
 
-\subsection{Властивості невласного інтегралу}
-\begin{proposition}[Неперервність]
-Задано функцію $f: [a,\omega) \times [c,d] \to \mathbb{R}$, таку, що $f \in C([a,\omega) \times [c,d])$. Також $J$ - рівномірно збіжний на $[c,d]$. Тоді $J \in C([c,d])$.
-\end{proposition}
-
 \begin{proof}
-За означенням рівномірної збіжності, маємо, що $\huge \sup_{y \in [c,d]} \abs{\int_{\xi}^\omega f(x,y)\,dx} \to 0, \xi \to \omega$\\
-Тобто $\forall \varepsilon > 0: \exists \xi > a: \huge \sup_{y \in [c,d]} \abs{\int_{\xi}^\omega f(x,y)\,dx} < \dfrac{\varepsilon}{3}$.\\
-Оцінимо $J$:\\
-$\huge |J(y_1)-J(y_2)| = \abs{\int_a^\omega f(x,y_1)\,dx - \int_a^\omega f(x,y_2)\,dx} = \\ = \abs{\int_a^\xi f(x,y_1)\,dx - \int_a^\xi f(x,y_2)\,dx + \int_{\xi}^\omega f(x,y_1)\,dx - \int_{\xi}^\omega f(x,y_2)\,dx} \leq \\ \leq \abs{\int_a^\xi f(x,y_1)-f(x,y_2) \,dx} + \abs{\int_{\xi}^\omega f(x,y_1)\,dx} + \abs{\int_{\xi}^\omega f(x,y_2)\,dx} \boxed{<}$\\
-Перший модуль: $f \in C_{unif}([a,\xi] \times [c,d]) \\ \implies \exists \delta: \forall y_1,y_2: |y_1-y_2|<\delta \Rightarrow |f(x,y_1)-f(x,y_2)| < \dfrac{\varepsilon}{\xi-a}$\\
-Другий модуль: $\huge \sup_{y \in [c,d]} \abs{\int_{\xi}^\omega f(x,y)\,dx} < \dfrac{\varepsilon}{3} \implies \forall y \in [c,d]: \abs{\int_{\xi}^\omega f(x,y)\,dx} < \dfrac{\varepsilon}{3}$\\
-$\boxed{<} \huge \int_a^\xi \dfrac{\varepsilon}{\xi-a}\,dx + \dfrac{2 \varepsilon}{3} = \varepsilon$.\\
-Збираємо пазл та маємо, що $J \in C_{unif}([c,d]) \implies J \in C([c,d])$.
+Доведення ознаки прямо випливає з теореми Діні про рівномірну збіжність функціонального ряда. Для спрощення доведення розгляну випадок, коли $\omega = +\infty$.\\
+Розглянемо функціональну послідовність $g_n(y) = \displaystyle\int_a^{a+n} f(x,y)\,dx$, які визначені на $[c,d]$. Зауважимо, що $g_n \in C([c,d])$ за \prpref{continuity_of_parametric_integral}. Далі, $\displaystyle\lim_{n \to \infty} g_n(y) = \int_a^\infty f(x,y)\,dx = J(y) \in C([c,d])$. Нарешті, всі $g_n(y)$ неспадають в силу того, що $f \geq 0$.\\
+Отже, за ознакою Діні для функціональної послідовності, $g_n$ збігається рівномірно до $J$ при $n \to \infty$. Тоді звідси $\forall \varepsilon > 0: \exists N: \forall y \in [c,d]: |g_N(y) - J(y)| < \varepsilon$. Тобто маємо $\displaystyle\abs{\int_{a+N}^{+\infty} f(x,y)\,dx} < \varepsilon$.\\
+Оберемо $C = a+N$, тоді $\forall c > C$ та $\forall y \in [c,d]$ матимемо $\displaystyle\abs{\int_c^{+\infty} f(x,y)\,dx} < \varepsilon$. Власне, це доводить рівномірну збіжність $J$ на $[c,d]$.
 \end{proof}
 
-\begin{proposition}[Інтегрованість]
-Задана функція $f: [a,\omega) \times [c,d] \to \mathbb{R}$, така, що $f \in C([a,\omega) \times [c,d])$\\
-Також $J$ - рівномірно збіжний на $[c,d]$. Тоді $J \in D([c,d])$ та \\ $\huge \int_c^d \underset{=J(y)}{\int_a^\omega f(x,y)\,dx}\,dy = \int_a^\omega \int_c^d f(x,y)\,dy\,dx$.
+\subsection{Властивості невласного інтегралу}
+\begin{proposition}[Про неперервність невласного інтеграла з параметром]
+Задана функція $f \colon [a,\omega) \times [c,d] \to \mathbb{R}$, така, що $f \in C([a,\omega) \times [c,d])$. Також $J$ -- рівномірно збіжний на $[c,d]$. Тоді $J \in C([c,d])$.
 \end{proposition}
 
 \begin{proof}
-Розглянемо $\huge \int_c^d J(y)\,dy = \int_c^d \int_a^b f(x,y)\,dx\,dy + \int_c^d \int_b^\omega f(x,y)\,dx\,dy$\\
-Перший доданок - це визначений інтеграл, тому там виконується \textbf{Prp 3.1.4.}, тобто\\
-$\huge \int_c^d \int_a^b f(x,y)\,dx\,dy = \int_a^b \int_c^d f(x,y)\,dy\,dx$\\
-Другий доданок - цікавіше\\
-$\huge \abs{\int_c^d \int_b^\omega f(x,y)\,dx\,dy} \leq \int_c^d \abs{\int_b^\omega f(x,y)\,dx}\,dy \leq \int_c^d \sup_{y \in [c,d]} \abs{\int_b^\omega f(x,y)\,dx}\,dy = \\ = \sup_{y \in [c,d]} \abs{\int_b^\omega f(x,y)\,dx} (d-c) \to 0, b \to \omega$\\
-Якщо $b \to \omega$, то тоді отримаємо\\
+За означенням рівномірної збіжності, маємо $\huge \sup_{y \in [c,d]} \abs{\int_{\xi}^\omega f(x,y)\,dx} \to 0,\ \xi \to \omega$. Іншими словами, $\forall \varepsilon > 0: \exists \xi > a: \huge \sup_{y \in [c,d]} \abs{\int_{\xi}^\omega f(x,y)\,dx} < \dfrac{\varepsilon}{3}$. Тепер оцінимо $J$:\\
+$\huge |J(y_1)-J(y_2)| = \abs{\int_a^\omega f(x,y_1)\,dx - \int_a^\omega f(x,y_2)\,dx} = \\ = \abs{\int_a^\xi f(x,y_1)\,dx - \int_a^\xi f(x,y_2)\,dx + \int_{\xi}^\omega f(x,y_1)\,dx - \int_{\xi}^\omega f(x,y_2)\,dx} \leq \\ \leq \abs{\int_a^\xi f(x,y_1)-f(x,y_2) \,dx} + \abs{\int_{\xi}^\omega f(x,y_1)\,dx} + \abs{\int_{\xi}^\omega f(x,y_2)\,dx} \boxed{<}$\\
+Перший модуль: $f \in C_{\text{unif}}([a,\xi] \times [c,d])$, тоді $\exists \delta: \forall y_1,y_2: |y_1-y_2|<\delta \Rightarrow |f(x,y_1)-f(x,y_2)| < \dfrac{\varepsilon}{\xi-a}$.\\
+Другий модуль: $\huge \sup_{y \in [c,d]} \abs{\int_{\xi}^\omega f(x,y)\,dx} < \dfrac{\varepsilon}{3} \implies \forall y \in [c,d]: \abs{\int_{\xi}^\omega f(x,y)\,dx} < \dfrac{\varepsilon}{3}$.\\
+$\boxed{<} \huge \int_a^\xi \dfrac{\varepsilon}{\xi-a}\,dx + \dfrac{2 \varepsilon}{3} = \varepsilon$.\\
+Збираємо пазл та маємо $J \in C_{\text{unif}}([c,d]) \implies J \in C([c,d])$.
+\end{proof}
+
+\begin{proposition}[Про інтегрованість невласного інтеграла з параметром]
+Задана функція $f \colon [a,\omega) \times [c,d] \to \mathbb{R}$, така, що $f \in C([a,\omega) \times [c,d])$. Також $J$ -- рівномірно збіжний на $[c,d]$. Тоді $J \in \mathcal{R}([c,d])$, причому $\huge \int_c^d \underbrace{\int_a^\omega f(x,y)\,dx}_{=J(y)}\,dy = \int_a^\omega \int_c^d f(x,y)\,dy\,dx$.
+\end{proposition}
+
+\begin{proof}
+Розпишемо інтеграл $\huge \int_c^d J(y)\,dy = \int_c^d \int_a^b f(x,y)\,dx\,dy + \int_c^d \int_b^\omega f(x,y)\,dx\,dy$.\\
+Перший доданок -- це визначений інтеграл, тому там виконується \textbf{Prp 3.1.4.} (TODO: лінкування), тобто\\
+$\huge \int_c^d \int_a^b f(x,y)\,dx\,dy = \int_a^b \int_c^d f(x,y)\,dy\,dx$.\\
+Другий доданок уже цікавіше, його ми оцінимо:\\
+$\huge \abs{\int_c^d \int_b^\omega f(x,y)\,dx\,dy} \leq \int_c^d \abs{\int_b^\omega f(x,y)\,dx}\,dy \leq \int_c^d \sup_{y \in [c,d]} \abs{\int_b^\omega f(x,y)\,dx}\,dy = \\ = \sup_{y \in [c,d]} \abs{\int_b^\omega f(x,y)\,dx}\, (d-c) \to 0, b \to \omega$.
+Якщо $b \to \omega$, то тоді отримаємо \\
 $\huge \int_c^d J(y)\,dy = \huge \int_a^\omega \int_c^d f(x,y)\,dx\,dy + 0 = \huge \int_a^\omega \int_c^d f(x,y)\,dx\,dy$.
 \end{proof}
 
-\begin{proposition}[Диференційованість]
-Задана функція $f: [a,\omega) \times [c,d] \to \mathbb{R}$, така, що:\\
-1) $\exists y_0 \in [c,d]: J(y_0)$ - збіжний;\\
-2) $\departial{f}{y} \in C([a,\omega) \times [c,d])$;\\
-3) $\huge \int_a^\omega \departial{f}{y}(x,y)\,dx$ - рівномірно збіжний.\\
-Тоді $J$ - збіжний, диференційована в $[c,d]$, при цьому $J'(y) = \huge \int_a^\omega \departial{f}{y}(x,y)\,dx$.
+\begin{proposition}[Про диференційованість невласного інтеграла з параметром]
+Задана функція $f \colon [a,\omega) \times [c,d] \to \mathbb{R}$, така, що виконані умови:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\exists y_0 \in [c,d]: J(y_0)$ -- збіжний;
+\item $\departial{f}{y} \in C([a,\omega) \times [c,d])$;
+\item $\huge \int_a^\omega \departial{f}{y}(x,y)\,dx$ -- рівномірно збіжний.
+\end{enumerate}
+Тоді $J$ -- збіжний, диференційований на $[c,d]$, при цьому $J'(y) = \huge \int_a^\omega \departial{f}{y}(x,y)\,dx$.
 \end{proposition}
 
 \begin{proof}
-Розглянемо функцію $I(y) = \huge \int_a^\omega \departial{f}{y}(x,y)\,dx$ - неперервна за умовною рівномірна. Часткові похідні є неперервними також за умовою. Тоді за \textbf{Prp. 3.2.6.}, $I \in \mathcal{R}([y,y_0])$\\
-$\huge \int_{y_0}^y I(t)\,dt = \huge \int_a^\omega \int_{y_0}^y \departial{f}{y}(x,t)\,dt\,dx = \int_a^\omega f(x,y)-f(x,y_0)\,dx = J(y) - J(y_0)$\\
-$\Rightarrow J(y) = \huge \int_{y_0}^y I(t)\,dt - J(y_0)$ - обидва збіжні. Тому сума - збіжна\\
-Отже, $J$ - збіжний $\forall y \in [c,d]$\\
-$\Rightarrow J'(y) = I(y) - 0 = \huge \int_a^\omega \departial{f}{y}(x,y)\,dx$
+Розглянемо функцію $I(y) = \huge \int_a^\omega \departial{f}{y}(x,y)\,dx$. Оскільки $\departial{f}{y}$ неперервна та $I$ -- рівномірно збіжний, то тоді за \textbf{Prp. 3.2.6.} (TODO: лінкування), $I \in \mathcal{R}([y,y_0])$.\\
+$\huge \int_{y_0}^y I(t)\,dt = \huge \int_a^\omega \int_{y_0}^y \departial{f}{y}(x,t)\,dt\,dx = \int_a^\omega f(x,y)-f(x,y_0)\,dx = J(y) - J(y_0)$.\\
+Отже, $J(y) = \huge \int_{y_0}^y I(t)\,dt - J(y_0)$ -- збіжний $\forall y \in [c,d]$, як сума окремих збіжних доданків. Значить, $J'(y) = I(y) - 0 = \huge \int_a^\omega \departial{f}{y}(x,y)\,dx$.
 \end{proof}
 
 \begin{example}
 Обчислити $\huge\int_0^{\frac{\pi}{2}} \dfrac{\arctg (\tg x))}{\tg x}\,dx$.\\
-Ми розглянемо функцію $J(y) = \huge\int_0^{\frac{\pi}{2}} \dfrac{\arctg (y \tg x))}{\tg x}\,dx$. Про неї відомо, що:\\
-1) $\exists y_0 = 0: J(0) = 0$, тобто звіжний;\\
-2) $\departial{f}{y} = \dfrac{1}{1+y^2 \tg^2 x} \in C\left( \left[ 0, \dfrac{\pi}{2} \right) \times [-1,1] \right)$;\\
-3) $\huge\int_0^{\frac{\pi}{2}} \dfrac{1}{1+y^2 \tg^2 x}\,dx$ - збіжний рівномірно принаймні на $[-1,1]$ за мажорантною Вейєрштраса. Дійсно, $\dfrac{1}{1+y^2 \tg^2 x} \leq 1, \forall y \in [-1,1]$.\\
+Ми розглянемо функцію $J(y) = \huge\int_0^{\frac{\pi}{2}} \dfrac{\arctg (y \tg x))}{\tg x}\,dx$. Про неї відомо, що:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\exists y_0 = 0: J(0) = 0$, тобто звіжний;
+\item $\departial{f}{y} = \dfrac{1}{1+y^2 \tg^2 x} \in C\left( \left[ 0, \dfrac{\pi}{2} \right) \times [-1,1] \right)$;
+\item $\huge\int_0^{\frac{\pi}{2}} \dfrac{1}{1+y^2 \tg^2 x}\,dx$ -- збіжний рівномірно принаймні на $[-1,1]$ за мажорантною Ваєрштраса. Дійсно, $\dfrac{1}{1+y^2 \tg^2 x} \leq 1, \forall y \in [-1,1]$.\\
+\end{enumerate}
 Отже, ми можемо продиференціювати функцію $J(y)$ та отримати:\\
 $J'(y) = \huge\int_0^{\frac{\pi}{2}} \dfrac{1}{1+y^2 \tg^2 x}\,dx \overset{t = \tg x}{=} \dots = \dfrac{\pi}{2} \dfrac{1}{1+y}$.\\
 $J(y) = \huge\int \dfrac{\pi}{2} \dfrac{1}{1+y}\,dy = \dfrac{\pi}{2} \ln |1+y| + C$.\\
-Оскільки $J(0) = 0$, то звідси $C = 0$. Наша мета була - знайти $J(1)$.\\
-Таким чином, $J(1) = \huge\int_0^{\frac{\pi}{2}} \dfrac{\arctg (\tg x))}{\tg x}\,dx = \dfrac{\pi}{2} \ln 2$.
+Оскільки $J(0) = 0$, то звідси $C = 0$. Наша мета була -- це знайти $J(1)$. Таким чином, \\ $J(1) = \huge\int_0^{\frac{\pi}{2}} \dfrac{\arctg (\tg x))}{\tg x}\,dx = \dfrac{\pi}{2} \ln 2$.
 \end{example}
 
-\begin{proposition}[Невласне інтегрування невласного інтеграла]
+\begin{proposition}[Про невласне інтегрування невласного інтеграла з параметром]
 %GB style
+%Тут f довільна функція. Перші дві умови дають нам перші дві умови про неперервність. Третя умова гарантує рівномірну неперервність саме невід'ємної функції. Четверта умова зрозуміла
 \iffalse
 Задана функція $f: [a, +\infty) \times [c, +\infty) \to \mathbb{R}$ така, що $f \in C([a, +\infty) \times [c, +\infty))$, а також виконані умови:\\
 $1) \forall b > a: \huge \int_c^{+\infty} f(x,y)\,dy$ - збіжний рівномірно в $[a,b]$\\
@@ -6032,19 +6064,18 @@ $3) \huge \int_c^{+\infty} |f(x,y)|\,dy, \huge \int_a^{+\infty} |f(x,y)|\,dx$ - 
 $4) \huge \int_a^{+\infty} \int_c^{+\infty} |f(x,y)|\,dy\,dx$ або $\huge \int_c^{+\infty} \int_a^{+\infty} |f(x,y)|\,dx\,dy$ - збіжний\\
 Тоді обидва інтеграли - збіжні та \\ $\huge \int_a^{+\infty} \int_c^{+\infty} |f(x,y)|\,dy\,dx  = \huge \int_c^{+\infty} \int_a^{+\infty} |f(x,y)|\,dx\,dy$\\
 \textit{Поки без доведення}
+\bigskip \\
 \fi
-
-Задано функцію $f \in C([a,+\infty) \times [c,+\infty))$, причому $f \geq 0$. Також відомо, що $\huge\int_a^{+\infty} f(x,y)\,dx \in C([c,+\infty))$, а також $\huge\int_c^{+\infty} f(x,y)\,dy \in C([a,+\infty))$.\\
-Тоді якщо $\huge\int_c^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy$ - збіжний, то $\huge\int_a^{+\infty} \int_c^{+\infty} f(x,y)\,dy\,dx$ - збіжний. Навпаки теж. Нарешті,\\
+Задана функція $f \in C([a,+\infty) \times [c,+\infty))$, причому $f \geq 0$. Також відомо, що $\huge\int_a^{+\infty} f(x,y)\,dx \in C([c,+\infty))$, а також $\huge\int_c^{+\infty} f(x,y)\,dy \in C([a,+\infty))$. Тоді якщо $\huge\int_c^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy$ -- збіжний, то $\huge\int_a^{+\infty} \int_c^{+\infty} f(x,y)\,dy\,dx$ -- збіжний. Навпаки теж. Нарешті,\\
 $\huge\int_c^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy = \huge\int_a^{+\infty} \int_c^{+\infty} f(x,y)\,dy\,dx$.
 \end{proposition}
 
 \begin{proof}
-Позначимо $I(y) = \huge\int_a^{+\infty} f(x,y)\,dx$, про неї відомо, що $I \in C([c,+\infty))$, а також $\huge\int_c^{+\infty} I(y)\,dy$ - збіжний.\\
+Позначимо $I(y) = \huge\int_a^{+\infty} f(x,y)\,dx$, про неї відомо, що $I \in C([c,+\infty))$, а також $\huge\int_c^{+\infty} I(y)\,dy$ -- збіжний.\\
 Хочемо довести, що $\huge \lim_{R \to +\infty} \int_a^R \int_c^{+\infty} f(x,y)\,dy\,dx = \int_c^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy$.\\
 Відомо, що $\huge\int_c^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy$ - збіжний, тобто\\
 $\forall \varepsilon > 0: \exists \Delta_1: \forall d > c: d > \Delta_1 \implies \huge \abs{\int_d^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy} < \dfrac{\varepsilon}{2}$.\\
-Також відомо, що $\huge\int_a^{+\infty} f(x,y)\,dx$ - збіжний рівномірно за ознакою Діні, тоді\\
+Також відомо, що $\huge\int_a^{+\infty} f(x,y)\,dx$ -- збіжний рівномірно за ознакою Діні, тоді\\
 $\forall \varepsilon > 0: \exists \Delta_2: \forall R > a: R > \Delta_2 \implies \forall y \in [c,+\infty): \huge\abs{\int_R^{+\infty} f(x,y)\,dx} < \dfrac{\varepsilon}{2(d-c)}$.\\
 Оберемо $\Delta = \max \{\Delta_1,\Delta_2 \}$, фіксуємо довільне $d > \Delta$ та $R > \Delta$ таким чином, щоб $d > c, R > a$.\\
 А далі для доведення ліміту зробимо оцінку:\\
@@ -6054,28 +6085,28 @@ $\huge\abs{\int_c^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy - \int_c^{+\infty} \
 Таким чином, дійсно, $\huge\int_a^{+\infty} \int_c^{+\infty} f(x,y)\,dy\,dx = \int_c^{+\infty} \int_a^{+\infty} f(x,y)\,dx\,dy$.
 \end{proof}
 
-\subsection{Інтеграл Діріхле}
-Інтегралом Діріхле називають таку рівність, яку зараз доведу (про збіжність вже говорили)
+\subsection{Інтеграл Діріхлє}
+Інтегралом Діріхле називають таку рівність, яку зараз доведу (про збіжність вже говорили) (TODO: лінкування)
 \begin{align*}
 \int_0^{+\infty} \dfrac{\sin x}{x}\,dx = \dfrac{\pi}{2}
 \end{align*}
 
-Розглянемо функцію $J(a) = \huge\int_0^{+\infty} e^{-ax} \dfrac{\sin x}{x}\,dx$, причому підінтегральну функцію ви довизначимо в т. $0$. Тоді підінтегральна функція неперервна.\\
-Перш за все $J(a)$ - рівномірно збіжний на $[0,+\infty)$, бо за ознакою Абеля,\\
-$\huge\int_0^{+\infty} \dfrac{\sin x}{x}\,dx$ - збіжний рівномірно (доводили);\\
-$e^{-ax}$ - монотонна відносно $x$ та рівномірно обмежена, бо $|e^{-ax}| \leq 1$.\\
-Із цього ми отримуємо, що $J \in C([0,+\infty))$, а тому $\huge J(0) = \lim_{a \to 0} J(a)$.\\
-Далі маємо:\\
-1) $\exists a_0 = 0: J(0)$ - збіжний;\\
-2) $\departial{f}{a} = -e^{-ax} \sin x \in C([0,+\infty) \times [0,+\infty))$.\\
-3) $-\huge\int_0^{+\infty} e^{-ax}\sin x\,dx$ збіжний рівномірно на $[\gamma,+\infty)$, де $\gamma > 0$, за мажорантною Вейєрштраса. Дійсно,
-$|e^{-ax} \sin x| \leq e^{-\gamma x}$, а $\huge\int_0^{+\infty} e^{-\gamma x}\,dx$ - збіжний.\\
+Розглянемо функцію $J(a) = \huge\int_0^{+\infty} e^{-ax} \dfrac{\sin x}{x}\,dx$, причому підінтегральну функцію ми довизначимо в точці $0$. Тоді підінтегральна функція неперервна.\\
+Перш за все $J(a)$ -- рівномірно збіжний на $[0,+\infty)$, бо за ознакою Абеля, маємо:\\
+$\huge\int_0^{+\infty} \dfrac{\sin x}{x}\,dx$ -- збіжний рівномірно (доводили);\\
+$e^{-ax}$ -- монотонна відносно $x$ та рівномірно обмежена, бо $|e^{-ax}| \leq 1$.\\
+Із цього ми отримуємо, що $J \in C([0,+\infty))$, а тому $\huge J(0) = \lim_{a \to 0} J(a)$. Далі маємо наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\exists a_0 = 0: J(0)$ -- збіжний;
+\item $\departial{f}{a} = -e^{-ax} \sin x \in C([0,+\infty) \times [0,+\infty))$;
+\item $-\huge\int_0^{+\infty} e^{-ax}\sin x\,dx$ збіжний рівномірно на $[\gamma,+\infty)$, де $\gamma > 0$, за мажорантною Ваєрштраса. Дійсно,
+$|e^{-ax} \sin x| \leq e^{-\gamma x}$, а $\huge\int_0^{+\infty} e^{-\gamma x}\,dx$ -- збіжний.
+\end{enumerate}
 Таким чином, $J'(a) = -\huge\int_0^{+\infty} e^{-ax} \sin x \,dx = \dots = -\dfrac{1}{1+a^2}$.\\
-$\implies J(a) = -\arctg a + C$, причому ця рівність виконана $\forall a \in [\gamma,+\infty)$.
+$J(a) = -\arctg a + C$, причому ця рівність виконана $\forall a \in [\gamma,+\infty)$.
 Але водночас $J(0) = \huge\lim_{a \to 0} J(a) = C$.\\
-Але ми ще маємо, що $\huge |J(a)| = \abs{\int_0^{+\infty} e^{-ax} \dfrac{\sin x}{x}\,dx} \leq \int_0^{+\infty} \abs{e^{-ax} \dfrac{\sin x}{x}} \,dx \overset{|\sin x| \leq x}{\leq} \int_0^{+\infty} e^{-ax}\,dx = \dfrac{1}{a}$.\\
-А тому $J(a) \to 0$ при $a \to +\infty$. Звідси випливає, що\\
-$0 = -\dfrac{\pi}{2} + C \implies J(0) = \dfrac{\pi}{2}$.
+Проте ще маємо, що $\huge |J(a)| = \abs{\int_0^{+\infty} e^{-ax} \dfrac{\sin x}{x}\,dx} \leq \int_0^{+\infty} \abs{e^{-ax} \dfrac{\sin x}{x}} \,dx \overset{|\sin x| \leq x}{\leq} \int_0^{+\infty} e^{-ax}\,dx = \dfrac{1}{a}$.\\
+А тому $J(a) \to 0$ при $a \to +\infty$. Звідси випливає, що $0 = -\dfrac{\pi}{2} + C \implies J(0) = \dfrac{\pi}{2}$.
 \bigskip \\
 Додатково дослідимо ось такий інтеграл та доведемо рівність:
 \begin{align*}
@@ -6083,122 +6114,170 @@ $0 = -\dfrac{\pi}{2} + C \implies J(0) = \dfrac{\pi}{2}$.
 \end{align*}
 Поки обмежимось $a>0$, тоді\\
 $F(a) = \huge\int_0^{+\infty} \dfrac{\sin ax}{x}\,dx \overset{ax = t}{=} \int_0^{+\infty} \dfrac{\sin t}{t}\,dt = \dfrac{\pi}{2}$.\\
-$F(-a) = -F(a) = -\dfrac{\pi}{2}$ та $F(0) = 0$ - тут відносно ясно.
-%GB style
-\iffalse
-Розглянемо функцію $F(a) = \huge \int_0^{+\infty} \dfrac{\sin ax}{x}\,dx$\\
-Зауважимо, що якщо зробити заміну $ax =t$, то отримаємо, що \\ $F(a) = F(1)$. А також $F(-a) = -F(a)$, $F(0)=0$\\
-Із цих умою випливає, що $F(a)$ - розривна, тож $F(a)$ - не збіжна рівномірно на $\mathbb{R}$\\
-Розглянемо функцію $J(a) = \huge \int_0^{+\infty} \dfrac{\sin ax}{x} e^{-bx}\,dx$, $b \geq 0$\\
-Підінтегральна функція - неперервна, має неперервну часткову похідну $\departial{f}{a} = \cos ax \cdot e^{-bx}$, а також $\huge \int_0^{+\infty} \cos ax \cdot e^{-bx}\,dx$ - рівномірно збіжний (додати приклад)\\
-Остаточно отримаємо\\
-$F(a) = \huge \int_0^{+\infty} \dfrac{\sin ax}{x}\,dx = \lim_{b \to 0^+} \int_0^{+\infty} \dfrac{\sin ax}{x} e^{-bx}\,dx = \lim_{b \to 0^+} J(a) = \dfrac{\pi}{2}$
-\fi
+$F(-a) = -F(a) = -\dfrac{\pi}{2}$ та $F(0) = 0$ -- тут відносно ясно.
 
-\subsection{Інтеграл Ейлера-Пуассона}
-Інтегралом Ейлера-Пуассона називають таку рівність, яку зараз доведу
+\subsection{Інтеграл Ойлера-Пуассона}
+Інтегралом Ойлера-Пуассона називають таку рівність, яку зараз доведу
 \begin{align*}
 \int_0^{+\infty} e^{-x^2}\,dx = \dfrac{\sqrt{\pi}}{2}
 \end{align*}
-Позначимо $J = \huge \int_0^{+\infty} e^{-x^2}\,dx$. Зробимо заміну $x = at$. А потім помножимо обидві частини рівності на $e^{-a^2}$ Тоді;\\
+Позначимо $J = \huge \int_0^{+\infty} e^{-x^2}\,dx$. Зробимо заміну $x = at$. А потім помножимо обидві частини рівності на $e^{-a^2}$. Разом отримаємо рівність:\\
 $Je^{-a^2} = \huge \int_0^{+\infty} e^{-a^2} e^{-a^2 t^2}a \,dt$.\\
-А потім проінтегруємо обидві частини рівності по $a$ на $[0,+\infty)$ - отримаємо:\\
+А потім проінтегруємо обидві частини рівності по $a$ на $[0,+\infty)$ -- отримаємо:\\
 $\huge\int_0^{+\infty} Je^{-a^2}\,da = J \int_0^{+\infty} e^{-a^2}\,da = J^2$.\\
 А з іншого боку, ми отримали:\\
 $J^2 = \huge\int_0^{+\infty} \huge\int_0^{+\infty} e^{-a^2} e^{-a^2t^2} a\,dt \,da \overset{?}{=} \int_0^{+\infty} \int_0^{+\infty} e^{-a^2t^2-a^2} a\,da \,dt \overset{s =-a^2t^2-a^2}{=}$\\
 $= \huge \int_0^{+\infty} \dfrac{1}{2(t^2+1)} \int_{-\infty}^0 e^s\,ds\,dt = \int_0^{+\infty} \dfrac{1}{2(t^2+1)}\,dt = \dfrac{\pi}{4}$.\\
-$\implies J = \dfrac{\sqrt{\pi}}{2}$.\\
-Варто обґрунтувати рівняння зі знаком питання.\\
-Функція $f(t,a) = ae^{-a^2(t^2+1)} \in C([0,+\infty) \times [0,+\infty))$, причому $f \geq 0$.\\
-Також $\huge\int_0^{+\infty} ae^{-a^2(t^2+1)}\,da = \dfrac{1}{2} \dfrac{1}{t^2+1} \in C([0,+\infty))$ та $\huge\int_0^{+\infty} ae^{-a^2(t^2+1)}\,dt = Je^{-a^2} \in C([0,+\infty))$ (неважко довести, шо $J$ рівномірно збігається).\\
-Нарешті, $\huge\int_0^{+\infty} \int_0^{+\infty} ae^{-a^2(t^2+1)}\,da\,dt$ ми знайшли та виявився збіжним.\\
-Отже, рівність ? є справедливим.
+Отже, взявши квадратний корінь, отримаємо $J = \dfrac{\sqrt{\pi}}{2}$ (ясно, що $J$ -- невід'ємне число).\\
+Варто обґрунтувати рівняння зі знаком питання. Для цього перевіримо всі умови для невласного інтегрування невласного інтеграла. Функція $f(t,a) = ae^{-a^2(t^2+1)} \in C([0,+\infty) \times [0,+\infty))$, причому $f \geq 0$. Також \\
+$\huge\int_0^{+\infty} ae^{-a^2(t^2+1)}\,da = \dfrac{1}{2} \dfrac{1}{t^2+1} \in C([0,+\infty))$ та $\huge\int_0^{+\infty} ae^{-a^2(t^2+1)}\,dt = Je^{-a^2} \in C([0,+\infty))$ (неважко довести, шо $J$ рівномірно збігається).\\
+Нарешті, $\huge\int_0^{+\infty} \int_0^{+\infty} ae^{-a^2(t^2+1)}\,da\,dt$ ми знайшли вище, який виявився збіжним. Отже, рівність '?' є справедливою.
 
 \subsection{Гамма-функція}
 \begin{definition}
 \textbf{Гамма-функцією} називають таку функцію:
 \begin{align*}
-\Gamma(\alpha) = \huge \int_0^{+\infty} x^{\alpha-1}e^{-x}\,dx, \alpha > 0
+\Gamma(\alpha) = \huge \int_0^{+\infty} x^{\alpha-1}e^{-x}\,dx,\qquad \alpha > 0
 \end{align*}
 \end{definition}
 
 \begin{lemma}
-$\alpha > 0$ - область збіжності гамми-функції.
+При $\alpha > 0$ гамма-функція збіжна.
 \end{lemma}
 
 \begin{proof}
 $\huge \int_0^{+\infty} x^{\alpha-1}e^{-x}\,dx = \int_0^1 x^{\alpha-1}e^{-x}\,dx + \int_1^{+\infty} x^{\alpha-1}e^{-x}\,dx$.\\
-Розглянемо перший інтеграл. Особлива точка - це $x = 0$.\\ Порівняємо з інтегралом $\huge \int_0^1 x^{\alpha-1}\,dx$ - збіжний для $\alpha > 0$.\\
-$\huge \lim_{x \to 0} \dfrac{x^{\alpha-1} e^{-x}}{x^{\alpha -1}} = 1$. Отже, обидва збіжні, тому перший доданок - збіжний.\\
-Розглянемо другий інтеграл. Особлива точка - це $x = \infty$.\\ Порівняємо з інтегралом $\huge \int_1^{+\infty} e^{-\frac{x}{2}} \,dx$ - збіжний для $\alpha > 0$.\\
-$\huge \lim_{x \to \infty} \dfrac{x^{\alpha -1} e^{-x}}{ e^{-\frac{x}{2}}} = \left[ \begin{gathered} 0 \textrm{ за Лопіталя, } \alpha \geq 1 \\ \huge \lim_{x \to \infty} \dfrac{1}{x^{1-\alpha} e^{\frac{x}{2}}} = 0, \alpha < 1 \end{gathered} \right.$. Отже, обидва збіжні, тому другий доданок - збіжний.\\
-Остаточно, $\Gamma(\alpha)$ - збіжний при $\alpha > 0$.
+Розглянемо перший інтеграл. Особлива точка -- це точка $x = 0$. Порівняємо з інтегралом $\huge \int_0^1 x^{\alpha-1}\,dx$ -- збіжний при $\alpha > 0$. Маємо:\\
+$\huge \lim_{x \to 0} \dfrac{x^{\alpha-1} e^{-x}}{x^{\alpha -1}} = 1$. Отже, обидва збіжні, тому перший доданок -- збіжний.\\
+Розглянемо другий інтеграл. Особлива точка -- це $x = \infty$. Порівняємо з інтегралом $\huge \int_1^{+\infty} e^{-\frac{x}{2}} \,dx$ -- збіжний при $\alpha > 0$. Маємо:\\
+$\huge \lim_{x \to \infty} \dfrac{x^{\alpha -1} e^{-x}}{ e^{-\frac{x}{2}}} = \left[ \begin{gathered} 0 \textrm{ за Лопіталем, } \alpha \geq 1 \\ \huge \lim_{x \to \infty} \dfrac{1}{x^{1-\alpha} e^{\frac{x}{2}}} = 0, \alpha < 1 \end{gathered} \right.$. Отже, обидва збіжні, тому другий доданок -- збіжний.\\
+Остаточно, $\Gamma(\alpha)$ -- збіжний при $\alpha > 0$.
 \end{proof}
 
 \begin{lemma}
-$\Gamma \in C^{\infty} ((0,+\infty))$
+$\Gamma \in C^{\infty} ((0,+\infty))$.
 \end{lemma}
 
 \begin{proof}
-Коли будемо диференціювати $n$ разів $\Gamma$-функцію, ми очікуватимемо таке:\\
+Коли будемо диференціювати $n$ разів гамма-функцію, ми очікуватимемо таке:\\
 $\Gamma^{(n)}(\alpha) = \huge\int_0^{+\infty} x^{\alpha-1}e^{-x} \ln^n x\,dx$.\\
-Спробуємо зараз довести, що $\Gamma^{(n)}$ - рівномірно збіжний на проміжку $[a,b] \subset (0,+\infty)$.\\
+Спробуємо зараз довести, що $\Gamma^{(n)}$ -- рівномірно збіжний на проміжку $[a,b] \subset (0,+\infty)$.\\
 Маємо $\huge\int_0^{+\infty} x^{\alpha-1}e^{-x} \ln^n x\,dx = \huge\int_0^{1} x^{\alpha-1}e^{-x} \ln^n x\,dx + \huge\int_1^{+\infty} x^{\alpha-1}e^{-x} \ln^n x\,dx$.\\
-Розглянемо перший інтеграл. Використаємо мажорантну Вейєрштрасса:\\
+Розглянемо перший інтеграл. Використаємо мажорантну Ваєрштрасса:\\
 $|x^{\alpha-1}e^{-x} \ln^n x| = x^{\alpha-1}e^{-x} (-1)^n \ln^n x \leq \left[ \begin{gathered} (-1)^n x^{b-1}e^{-x}\ln^n x \\ (-1)^n x^{a-1}e^{-x}\ln^n x \end{gathered} \right.$.\\
-Ситуації тут можуть бути різними, але поведінка інтеграла не зміниться. Я буду на розгляд брати перший випадок.\\
-Тобто дослідимо $\huge\int_0^{1} x^{b-1}e^{-x}\ln^n x\,dx$ на збіжність. Відомо, що $\ln x = o(x^{-\varepsilon}), x \to 0$, де $\varepsilon > 0$. Тоді правилом Лопіталя можна довести, що $\ln^n x = o(x^{-\varepsilon}), x \to 0$.\\
-Завдяки цьому ми візьмемо $\huge\int_0^1 x^{b-1} x^{-\varepsilon} e^{-x}\,dx$ - збіжний, допоки $b > \varepsilon$. Це доводили під час попередньої леми.\\
-А далі $\huge\lim_{x \to 0} \dfrac{x^{b-1}e^{-x} \ln^n x}{x^{b-1} x^{-\varepsilon} e^{-x}} = \lim_{x \to 0} \dfrac{\ln^n x}{x^{-\varepsilon}} = 0$.\\
-Отже, $\huge\int_0^{1} x^{b-1}e^{-x} \ln^n x\,dx$ - збіжний. І тому за мажорантною Вейєрштрасса, $\huge\int_0^1 x^{\alpha-1}e^{-x} \ln^n x\,dx$ - збіжний рівномірно на $[a,b]$.
+Ситуації тут можуть бути різними, але поведінка інтеграла не зміниться. Я буду на розгляд брати перший випадок. Тобто дослідимо $\huge\int_0^{1} x^{b-1}e^{-x}\ln^n x\,dx$ на збіжність. Відомо, що $\ln x = o(x^{-\varepsilon}), x \to 0$, де $\varepsilon > 0$. Тоді правилом Лопіталя можна довести, що $\ln^n x = o(x^{-\varepsilon}), x \to 0$.\\
+Завдяки цьому, ми візьмемо $\huge\int_0^1 x^{b-1} x^{-\varepsilon} e^{-x}\,dx$ -- збіжний, допоки $b > \varepsilon$. Це доводили під час попередньої леми. А далі $\huge\lim_{x \to 0} \dfrac{x^{b-1}e^{-x} \ln^n x}{x^{b-1} x^{-\varepsilon} e^{-x}} = \lim_{x \to 0} \dfrac{\ln^n x}{x^{-\varepsilon}} = 0$.\\
+Отже, $\huge\int_0^{1} x^{b-1}e^{-x} \ln^n x\,dx$ -- збіжний. І тому за мажорантною Вейєрштрасса, $\huge\int_0^1 x^{\alpha-1}e^{-x} \ln^n x\,dx$ - збіжний рівномірно на $[a,b]$.
 \\
-Аналогічно доводиться, що $\huge\int_1^{+\infty} x^{\alpha-1} e^{-x}\ln^n x\,dx$ - збіжний рівномірно на $[a,b]$. Там та сама оцінка на мажоранту, а також треба використати $\ln x = o(x^{\varepsilon}), x \to +\infty$, де $\varepsilon >0$.\\ 
-Остаточно, $\huge\int_0^{+\infty} x^{\alpha-1}e^{-x} \ln^n x\,dx$ - збіжний рівномірно на $[a,b] \subset (0,+\infty)$, що й доводить $\Gamma \in C^{\infty}((0,+\infty))$.
+Аналогічно доводиться, що $\huge\int_1^{+\infty} x^{\alpha-1} e^{-x}\ln^n x\,dx$ -- збіжний рівномірно на $[a,b]$. Там та сама оцінка на мажоранту, а також треба використати $\ln x = o(x^{\varepsilon}), x \to +\infty$, де $\varepsilon >0$.\\ 
+Остаточно, $\huge\int_0^{+\infty} x^{\alpha-1}e^{-x} \ln^n x\,dx$ -- збіжний рівномірно на $[a,b] \subset (0,+\infty)$, що й доводить той факт, що $\Gamma \in C^{\infty}((0,+\infty))$.
 \end{proof}
 
 \begin{theorem}
 $\forall \alpha > 0: \Gamma (\alpha+1) = \alpha \Gamma (\alpha)$.\\
-\textit{Вказівка: ліву частину інтегруємо частинами}, $u = x^{\alpha}, dv = e^{-x}\,dx$.
+\textit{Вказівка: $\Gamma(\alpha+1)$ інтегруємо частинами, взявши за} $u = x^{\alpha},\ dv = e^{-x}\,dx$.
 \end{theorem}
 
-Особливий випадок при $\alpha \in \mathbb{N}$.\\
-$\Gamma(n+1) = n \Gamma (n) = n(n-1) \Gamma (n-1) = \dots = n(n-1)(n-2)\dots \cdot 2 \cdot 1 \Gamma (1)$\\
-$\Gamma(1) = \huge \int_0^{+\infty} e^{-x}\,dx = -e^{-x} \Big|_{0}^{+\infty} = 1$.\\
-Таки чином, маємо результат:
 \begin{corollary}
-$\Gamma(n+1) = n!$
+$\Gamma(n+1) = n!$ при $n \in \mathbb{N}$.
 \end{corollary}
-А далі перевіримо, чому дорівнює гамма-функція в т. $\alpha = \dfrac{1}{2}$.\\
-$\Gamma \left( \dfrac{1}{2} \right) = \huge \int_0^{+\infty} x^{-\frac{1}{2}}e^{-x}\,dx \overset{\textrm{Заміна: } t = \sqrt{x}}{=} 2 \huge \int_0^{+\infty} e^{-t^2}\,dt = 2 \dfrac{\sqrt{\pi}}{2} = \sqrt{\pi}$\\
-Далі скористаємось тотожністю $\Gamma(\alpha+1) = \Gamma(\alpha)$, щоб знайти $\Gamma \left( \dfrac{1}{2} + n \right)$. Отримаємо:
+
+\begin{proof}
+Дійсно, за попередньою теоремою, маємо таку рівність:\\
+$\Gamma(n+1) = n \Gamma (n) = n(n-1) \Gamma (n-1) = \dots = n(n-1)(n-2)\dots \cdot 2 \cdot 1 \Gamma (1)$.\\
+Нарешті, обчислимо $\Gamma(1) = \huge \int_0^{+\infty} e^{-x}\,dx = -e^{-x} \Big|_{0}^{+\infty} = 1$.
+\end{proof}
+
 \begin{corollary}
-$\Gamma \left( \dfrac{1}{2} + n \right) = \dfrac{(2n-1)!!}{2^n} \sqrt{\pi}$
+$\Gamma \left( \dfrac{1}{2} + n \right) = \dfrac{(2n-1)!!}{2^n} \sqrt{\pi}$.
 \end{corollary}
+
+\begin{proof}
+Дійсно, за попередньою теоремою, маємо таку рівність:\\
+$\Gamma\left( \dfrac{1}{2}+n\right) = \Gamma\left( n - \dfrac{1}{2} + 1 \right) = \left( n - \dfrac{1}{2} \right) \Gamma\left( n - \dfrac{3}{2} + 1\right) = \left( n - \dfrac{1}{2} \right) \left( n - \dfrac{3}{2} \right) \dots \left( n - \dfrac{2n-1}{2} \right) \Gamma\left( \dfrac{1}{2} \right) \\
+= \dfrac{(2n-1)(2n-3) \dots 1}{2^n} \Gamma\left( \dfrac{1}{2}\right) = \dfrac{(2n-1)!!}{2^n} \Gamma\left( \dfrac{1}{2}\right)$.\\
+Нарешті, обчислимо $\Gamma \left( \dfrac{1}{2} \right) = \huge \int_0^{+\infty} x^{-\frac{1}{2}}e^{-x}\,dx \overset{\textrm{Заміна: } t = \sqrt{x}}{=} 2 \huge \int_0^{+\infty} e^{-t^2}\,dt = 2 \dfrac{\sqrt{\pi}}{2} = \sqrt{\pi}$.
+\end{proof}
+
+\begin{remark}
+До речі кажучи, завдяки функціональному рівнянню $\Gamma(\alpha+1) = \alpha \Gamma(\alpha)$, ми можемо продовжити нашу функцію на $\mathbb{R} \setminus \mathbb{Z}$.\\
+Якщо я хочу порахувати $\Gamma(-0.5)$, то для цього я просто визначаю його як $\Gamma(-0.5) = \dfrac{\Gamma(0.5)}{-0.5}$. Для цілих чисел я продовження не можу зробити, бо $\Gamma(-1) = \dfrac{\Gamma(0)}{-1}$, проте $\Gamma(0)$ тупо не визначена.
+\end{remark}
+
+\subsubsection*{Графік гамма-функції}
+\begin{proposition}
+$\displaystyle\lim_{\alpha \to +\infty} \Gamma(\alpha) = +\infty$.
+\end{proposition}
+
+\begin{proof}
+Маємо $\Gamma(\alpha+1) = \alpha \Gamma(\alpha)$ для великих $\alpha > 0$. Оцінимо $\Gamma(\alpha)$.\\
+$\displaystyle\Gamma(\alpha) > \int_1^{+\infty} x^{\alpha-1}e^{-x}\,dx > \int_1^{+\infty} e^{-x}\,dx = \dfrac{1}{e}$.\\
+Таким чином, $\Gamma(\alpha+1) > \dfrac{\alpha}{e} \to +\infty$ при $\alpha \to +\infty$.
+\end{proof}
+
+\begin{proposition}
+Гамма-функція опукла вниз на проміжку $(0,+\infty)$.
+\end{proposition}
+
+\begin{proof}
+Дійсно, $\Gamma''(\alpha) = \displaystyle\int_0^{+\infty} x^{\alpha-1} e^{-x} \ln^2 x\,dx > 0$ при всіх $\alpha > 0$.
+\end{proof}
+
+\begin{proposition}
+$\Gamma'(1) = -\gamma$, де $\gamma$ -- константа Ойлера-Маскероні.
+\end{proposition}
+
+\begin{proof}
+$\Gamma'(1) = \displaystyle\int_0^{+\infty} e^{-x} \ln x\,dx \overset{\substack{\text{заміна:} \\ x = -\ln u}}{=} \int_0^1 \ln (-\ln u)\,du \boxed{=}$\\
+Пригадаємо, що $\ln a = \displaystyle\lim_{n \to \infty} n (\sqrt[n]{a}-1)$. За допомогою цього ліміту, ми можемо отримати наступне:\\
+$\boxed{=} \displaystyle \int_0^1 \ln \left( \lim_{n \to \infty} n(1-\sqrt[n]{u})\right)\,du \overset{?}{=} \lim_{n \to \infty} \int_0^1 \ln n + \ln(1-\sqrt[n]{u})\,du = \lim_{n \to \infty} \left( \ln n + \int_0^1 \ln(1-\sqrt[n]{u})\,du \right) \boxed{=}$\\
+Тепер згадаємо, що $\ln(1-t) = -\displaystyle\sum_{k=1}^\infty \dfrac{t^k}{k}$, тож звідси випливає наступне:\\
+$\displaystyle\int_0^1 \ln (1-\sqrt[n]{x})\,du = -\int_0^1 \sum_{k=1}^\infty \dfrac{(\sqrt[n]{u})^k}{k}\,du = -\sum_{k=1}^\infty \int_0^1 \dfrac{u^{\frac{k}{n}}}{k}\,du = -\sum_{k=1}^\infty \dfrac{1}{k} \dfrac{1}{\dfrac{k}{n}+1} = \sum_{k=1}^\infty \dfrac{n}{k(k+n)} = \\ = -\sum_{k=1}^\infty \left( \dfrac{1}{k} - \dfrac{1}{k+n} \right) = 1 + \dfrac{1}{2} + \dots + \dfrac{1}{n}$.\\
+$\boxed{=} \displaystyle\lim_{n \to \infty} \left( \ln n - \left( 1 + \dfrac{1}{2} + \dots + \dfrac{1}{n} \right) \right) = -\gamma$.
+\bigskip \\
+Окремо варто пояснити рівність $\overset{?}{=}$, щоб все було цілком строго. (TODO: додати)
+\iffalse
+$\displaystyle\int_0^{1-\varepsilon} \ln(-\ln u)\,du = \lim_{n \to \infty}\int_0^{1-\varepsilon} \ln n + \ln(1-\sqrt[n]{u})\,du$ для кожного $\varepsilon > 0$ виконується, оскільки функціональна послідовність $f_n(u) = \ln n + \ln(1-\sqrt[n]{u})$ прямує рівномірним чином до $f(u) = \ln(-\ln u))$ на $[0,1-\varepsilon]$ за ознакою Діні. Тепер розглянемо функціональну послідовність $g_n(\varepsilon) = \displaystyle\int_0^{1-\varepsilon} \ln n + \ln(1-\sqrt[n]{u})\,du$. Вона вже прямує до $g(\varepsilon) = \displaystyle\int_0^{1-\varepsilon} \ln(-\ln u)\,du$
+\fi
+\end{proof}
+
+\begin{proposition}
+Гамма-функція логарифмічно опукла вниз на проміжку $(0,+\infty)$.
+\end{proposition}
+
+\begin{proof}
+Тобто хочемо довести, що $\ln \Gamma$ опукла вниз на $(0,+\infty)$. Маємо\\
+$( \ln \Gamma)'' = \dfrac{1}{\Gamma^2} (\Gamma'' \Gamma - (\Gamma')^2)$.\\
+Також, за допомогою нерівності Коші-Буняковського, ми доведемо наступне:\\
+$(\Gamma'(\alpha))^2 = \displaystyle\left(\int_0^{+\infty} x^{\alpha-1}e^{-x} \ln x\,dx\right)^2 = \left( \int_0^{+\infty} \left( x^{\frac{\alpha-1}{2}}e^{-\frac{x}{2}} \right) \left( x^{\frac{\alpha-1}{2}}e^{-\frac{x}{2}} \ln x \right) \right)^2 \leq \\
+\leq \left( \int_0^{+\infty} \left(x^{\frac{\alpha-1}{2}} e^{-\frac{x}{2}}\right)^2 \,dx \right) \left( \int_0^{+\infty} \left(x^{\frac{\alpha-1}{2}} e^{-\frac{x}{2}} \ln x \right)^2 \,dx \right) = \int_0^{+\infty} x^{\alpha-1} e^{-x}\,dx \int_0^{+\infty} x^{\alpha-1}e^{-x}\ln^2 x\,dx = \\
+= \Gamma(\alpha) \Gamma''(\alpha)$.\\
+Власне, це доводить, що $(\Gamma')^2 - \Gamma \Gamma'' \leq 0$, а тому звідси $(\ln \Gamma)'' > 0$, що доводить бажане.
+\end{proof}
 
 \subsection{Бета-функція}
 \begin{definition}
 \textbf{Бета-функцією} називають таку функцію:
 \begin{align*}
-B(\alpha,\beta) = \int_0^1 x^{\alpha-1} (1-x)^{\beta-1}\,dx, \alpha,\beta>0
+B(\alpha,\beta) = \int_0^1 x^{\alpha-1} (1-x)^{\beta-1}\,dx,\qquad \alpha,\beta>0
 \end{align*}
 \end{definition}
 
 \begin{lemma}
-$\alpha, \beta >0$ - область збіжності бети-функції.
+При $\alpha, \beta >0$ бета-функція збіжна.
 \end{lemma}
 
 \begin{proof}
 $\huge \int_0^1 x^{\alpha-1} (1-x)^{\beta-1}\,dx = \int_0^{\frac{1}{2}} x^{\alpha-1} (1-x)^{\beta-1}\,dx +  \int_{\frac{1}{2}}^1 x^{\alpha-1} (1-x)^{\beta-1}\,dx$.\\
-Розглянемо перший інтеграл. Особлива точка - це $x =0$.\\
-Порівняємо з інтегралом $\huge \int_0^{\frac{1}{2}} x^{\alpha - 1} \,dx$ - збіжний для $\alpha > 0$.\\
-$\huge \lim_{x \to 0} \dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{x^{\alpha-1}} = 1$. Отже, обидва збіжні, тому перший доданок - збіжний.\\
+Розглянемо перший інтеграл. Особлива точка -- це точка $x =0$. Порівняємо з інтегралом $\huge \int_0^{\frac{1}{2}} x^{\alpha - 1} \,dx$ -- збіжний для $\alpha > 0$. Маємо\\
+$\huge \lim_{x \to 0} \dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{x^{\alpha-1}} = 1$. Отже, обидва збіжні, тому перший доданок -- збіжний.\\
 Розглянемо другий інтеграл. Проводимо заміну $1-x=t$, тоді маємо:\\
-$-\huge \int_{0}^{\frac{1}{2}} (1-t)^{\alpha-1} t^{\beta - 1}\,dt$ - це той самий перший доданок. І він вже буде збіжним, якщо $\beta > 0$.\\
-Остаточно, $B(\alpha, \beta)$ - збіжний при $\alpha > 0,\beta > 0$.
+$-\huge \int_{0}^{\frac{1}{2}} (1-t)^{\alpha-1} t^{\beta - 1}\,dt$ -- це той самий перший доданок. І він вже буде збіжним, якщо $\beta > 0$.\\
+Остаточно, $B(\alpha, \beta)$ -- збіжний при $\alpha > 0,\beta > 0$.
 \end{proof}
 
 \begin{proposition}
-$B(\alpha, \beta) = \huge \int_0^{+\infty} \dfrac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}\,dy$\\
+$B(\alpha, \beta) = \huge \int_0^{+\infty} \dfrac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}\,dy$.\\
 \textit{Вказівка: зробити заміну} $x = \dfrac{y}{1+y}$.
 \end{proposition}
 
@@ -6209,17 +6288,16 @@ $B(\alpha,\beta) = B(\beta,\alpha)$.\\
 
 \begin{proposition}
 $B(\alpha,\beta) = \dfrac{\alpha-1}{\beta+\alpha-1} B(\alpha-1,\beta)$ при $\alpha > 1$.\\
-\textit{Вказівка: $u = x^{\alpha-1}$}.
+\textit{Вказівка: інтегруємо частинами, де $u = x^{\alpha-1}$ та решта $dv$}.
 \end{proposition}
 
 Зауважимо, що $B(\alpha,\beta) = B(\beta,\alpha) = \dfrac{\beta-1}{\alpha+\beta-1} B(\beta-1,\alpha) = \dfrac{\beta-1}{\alpha+\beta-1} B(\alpha,\beta-1)$ при $\beta > 1$.\\
-Ще зауважимо, що $B(\alpha,1) = \dfrac{1}{\alpha}$, якщо порахувати $B$-функцію.\\
+Ще зауважимо, що $B(\alpha,1) = \dfrac{1}{\alpha}$, якщо порахувати бета-функцію.\\
 Використовуючи два зауваження, можемо отримати ось це:\\
-$B(\alpha,n) = \dfrac{n-1}{\alpha+n-1} B(\alpha,n-1) = \dfrac{n-1}{\alpha+n-1} \dfrac{n-2}{\alpha+n-2} \dots \dfrac{2}{\alpha + 2} \dfrac{1}{\alpha + 1} \dfrac{1}{\alpha} = \dfrac{(n-1)!}{\alpha (\alpha+1) \dots (\alpha+n-1)}$\\
-Зокрема при $\alpha = m$ ми отримаємо:\\
-$B(m,n) = \dfrac{(n-1)!(m-1)!}{(m+n-1)!}$
+$B(\alpha,n) = \dfrac{n-1}{\alpha+n-1} B(\alpha,n-1) = \dfrac{n-1}{\alpha+n-1} \dfrac{n-2}{\alpha+n-2} \dots \dfrac{2}{\alpha + 2} \dfrac{1}{\alpha + 1} \dfrac{1}{\alpha} = \dfrac{(n-1)!}{\alpha (\alpha+1) \dots (\alpha+n-1)}$.\\
+Зокрема при $\alpha = m$ ми отримаємо $B(m,n) = \dfrac{(n-1)!(m-1)!}{(m+n-1)!}$.
 
-\subsection{Зв'язок між $\Gamma$ та $B$ функціями}
+\subsection{Зв'язок між гамма- та бета-функціями. Основна теорема гамма-функції}
 \begin{proposition}
 $\Gamma(\alpha) = \huge\lim_{n \to \infty} n^{\alpha} B(\alpha,n)$.
 \end{proposition}
@@ -6246,19 +6324,19 @@ $\boxed{=} \huge\lim_{n \to \infty} n^{\alpha} \int_0^1 v^{n-1} (1-v)^{\alpha-1}
 \end{proof}
 \fi
 
-\begin{theorem}[Функціональне рівняння Ейлера]
+\begin{theorem}[Функціональне рівняння Ойлера]
 $\Gamma(\alpha) \cdot \Gamma(1-\alpha) = \dfrac{\pi}{\sin \pi \alpha}$ при $0 < \alpha < 1$.\\
 $\Gamma \left(\dfrac{1}{2} + \alpha \right) \cdot \Gamma \left(\dfrac{1}{2}-\alpha \right) = \dfrac{\pi}{\cos \pi \alpha}$ при $-\dfrac{1}{2} < \alpha < \dfrac{1}{2}$.\\
 \end{theorem}
 
 \begin{proof}
-Використовучи \textbf{Prp 3.8.1.}, отримаємо:\\
+Використовучи \textbf{Prp 3.8.1.} (TODO: лінкування) отримаємо:\\
 $\Gamma(\alpha) \Gamma(1-\alpha) = \huge \lim_{n \to \infty} n^{\alpha} \dfrac{(n-1)!}{\alpha(\alpha+1)\dots (\alpha+n-1)} \lim_{n \to \infty} n^{1-\alpha} \dfrac{(n-1)!}{(1-\alpha)(2-\alpha)\dots (n-\alpha)} = \\
 = \lim_{n \to \infty} \dfrac{n}{n-\alpha} \dfrac{1}{\alpha \left( 1 + \dfrac{\alpha}{1} \right) \left( 1 + \dfrac{\alpha}{2} \right) \dots \left( 1 + \dfrac{\alpha}{n-1} \right)} \dfrac{1}{\left( 1 - \dfrac{\alpha}{1} \right) \left( 1 - \dfrac{\alpha}{2} \right) \dots \left( 1 - \dfrac{\alpha}{n-1} \right)} = \\
 = \dfrac{1}{\alpha} \lim_{n \to \infty} \dfrac{1}{\left( 1 - \dfrac{\alpha^2}{1^2} \right)\left( 1 - \dfrac{\alpha^2}{2^2} \right) \dots \left( 1 - \dfrac{\alpha^2}{(n-1)^2} \right)}$\\
 В теорії рядів Фур'є (колись згодом) ми одержимо формулу:\\
 $\sin (\pi \alpha) = \pi \alpha \huge\lim_{n \to \infty} \left( 1 - \dfrac{\alpha^2}{1^2} \right)\left( 1 - \dfrac{\alpha^2}{2^2} \right) \dots \left( 1 - \dfrac{\alpha^2}{(n-1)^2} \right) \overset{\text{або}}{=} \pi \alpha \prod_{n=1}^\infty \left( 1 - \dfrac{\alpha^2}{n^2} \right)$.\\
-Власне звідси отримуємо $\Gamma(\alpha)\Gamma(1-\alpha) = \dfrac{\pi}{\sin \pi \alpha}$.
+Власне звідси отримаємо $\Gamma(\alpha)\Gamma(1-\alpha) = \dfrac{\pi}{\sin \pi \alpha}$.
 \bigskip \\
 Друга формула вказівка: заміна $\beta = \alpha + \dfrac{1}{2}$.
 \end{proof}
@@ -6282,8 +6360,8 @@ $\Gamma(\alpha+\beta) B(\alpha, \beta) = \Gamma(\alpha) \Gamma(\beta)$.
 Розглянемо функцію $f(t,y) = y^{\alpha+\beta-1} t^{\alpha-1}e^{-y(t+1)}$. Ми обмежимось лише випадком $\alpha >1, \beta > 1$.\\
 Зрозуміло, що $f \geq 0$, а також $f \in C([0,+\infty) \times [0,+\infty))$. В т. $(t,0),(0,y)$ все ок, тому що при наших $\alpha,\beta$ ми маємо $y^{\alpha+\beta-1} \to 0, t^{\alpha-1} \to 0$ при $y \to 0, t \to 0$.\\
 $I(y) \huge\int_0^{+\infty} f(t,y)\,dt = \Gamma(\alpha) y^{\beta-1}e^{-y}$ - це ми рахували вище. $F \in C([0,+\infty))$.\\
-$J(t) = \huge\int_0^{+\infty} f(t,y)\,dy = \Gamma(\alpha+\beta) \dfrac{t^{\alpha-1}}{(t+1)^{\alpha+\beta}}$ - теж вище було. $J \in C([0,+\infty))$.\\
-Також $\huge\int_0^{+\infty} \huge\int_0^{+\infty} f(t,y)\,dt\,ds = \Gamma(\alpha) \Gamma(\beta)$, тобто це - збіжний інтеграл.\\
+$J(t) = \huge\int_0^{+\infty} f(t,y)\,dy = \Gamma(\alpha+\beta) \dfrac{t^{\alpha-1}}{(t+1)^{\alpha+\beta}}$ -- теж вище було. $J \in C([0,+\infty))$.\\
+Також $\huge\int_0^{+\infty} \huge\int_0^{+\infty} f(t,y)\,dt\,ds = \Gamma(\alpha) \Gamma(\beta)$, тобто це -- збіжний інтеграл.\\
 Отже, зміна порядку інтегралів є справедливою лише для $\alpha >1, \beta > 1$, тобто\\
 $B(\alpha,\beta) = \dfrac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)}$ справедлива для $\alpha, \beta > 1$.
 \bigskip \\
@@ -6292,6 +6370,43 @@ $B(\alpha-1,\beta-1) = \dfrac{\alpha+\beta-2}{\alpha-1} \dfrac{\alpha+\beta-1}{\
 = \dfrac{\alpha+\beta-2}{\alpha-1} \dfrac{\alpha+\beta-1}{\beta-1} \dfrac{(\alpha-1)\Gamma(\alpha-1) (\beta-1) \Gamma(\beta-1)}{(\alpha+\beta-1)(\alpha+\beta-2) \Gamma(\alpha+\beta-2)} = \dfrac{\Gamma(\alpha-1) \Gamma(\beta-1)}{\Gamma(\alpha-1+\beta-1)}$.\\
 Отже, ми довели нашу формулу зв'язка для всіх $\alpha>0,\beta>0$.
 \end{proof}
+
+\begin{theorem}[Теорема Бора-Молерупа]
+Припустимо, що задана функція $f \colon (0,+\infty) \to \mathbb{R}$, що задовольняє умовам:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $f(1) = 1$;
+\item $f(\alpha+1) = \alpha f(\alpha)$ при $\alpha > 0$;
+\item $f$ -- логарифмично опукла вниз функція на $(0,+\infty)$.
+\end{enumerate}
+Тоді функція $f \equiv \Gamma$, тобто є гамма-функцією.\\
+Тобто гамма-функція -- єдина можлива функція, яка задовольняє трьом властивостям вище.
+\end{theorem}
+
+\begin{proof}
+Із умов 1), 2) випливає, що $f(n) = (n-1)!$ при $n \in \mathbb{N}$. Отже, нам достатньо показати рівність $f(\alpha) = \Gamma(\alpha)$ лише при $\alpha \in (0,1]$.\\
+Умова 3) каже, що $\ln f$ опукла вниз на $(0,+\infty)$. Це означає, що на інтервалі $[n-1,n+1]$ та точці $n+\alpha, \alpha \in (0,1], n \geq 2$ маємо наступну нерівність:\\
+$\dfrac{\ln f(n-1) - \ln f(n)}{n-1-n} \leq \dfrac{\ln f(n+\alpha) - \ln f(n)}{n+\alpha - n} \leq \dfrac{\ln f(n+1) - \ln f(n)}{n+1-n}$.\\
+Зауважимо, що $\ln f(n-1) - \ln f(n) = \ln \dfrac{1}{n-1} = -\ln (n-1)$, а також $\ln f(n+1) - \ln f(n) = \ln n$. Зважаючи на знаменники, отримаємо такі нерівності:\\
+$\ln (n-1) \leq \dfrac{\ln f(n+\alpha) - \ln (n-1)!}{\alpha} \leq \ln n$.\\
+$\ln (n-1)^\alpha = \alpha \ln (n-1) \leq \ln f(n+\alpha) - \ln (n-1)! \leq \alpha \ln n = \ln n^\alpha$.\\
+Далі проекспоненціюємо нерівності з обох сторін:\\
+$(n-1)^\alpha \leq \dfrac{f(n+\alpha)}{(n-1)!} \leq n^\alpha$;\\
+$(n-1)^\alpha (n-1)! \leq f(n+\alpha) \leq n^\alpha (n-1)!$.\\
+За пунктом 2), отримаємо $f(n+\alpha) = (\alpha + n-1) \dots (\alpha+1)\alpha f(\alpha)$. Звідси вилпиває:\\
+$\dfrac{(n-1)^\alpha (n-1)!}{\alpha (\alpha+1) \dots (\alpha+n-1)} \leq f(\alpha) \leq \dfrac{n^\alpha (n-1)!}{\alpha (\alpha+1) \dots (\alpha+n-1)}$\\
+$\dfrac{(n-1)^\alpha (n-1)!}{\alpha (\alpha+1) \dots (\alpha+n-1)} \leq \color{red}f(\alpha) \leq \dfrac{n^\alpha n!}{\alpha (\alpha+1) \dots (\alpha+n)} \dfrac{\alpha + n}{n}$\\
+Дана нерівність виконана для всіх $n \geq 2$ та $\alpha \in (0,1]$. Зокрема ми взяли фіксоване $n$, тому щойно отримана нерівність працюватиме й для $n+1$. Коротше, буде\\
+$\color{red}\dfrac{n^\alpha n!}{\alpha (\alpha+1) \dots (\alpha+n)} \leq f(\alpha) \color{black}\leq \dfrac{(n+1)^\alpha (n+1)!}{\alpha (\alpha+1) \dots (\alpha+n+1)} \dfrac{\alpha + n+1}{n+1}$.\\
+Нас з цих двох нерівностей цікавитиме ланцюг з червоних нерівностей:\\
+$f(\alpha) \leq \dfrac{n^\alpha n!}{\alpha (\alpha+1)\dots (\alpha+n)} \dfrac{\alpha+n}{n} \leq \dfrac{\alpha+n}{n}f(\alpha)$.\\
+$\dfrac{n}{\alpha+n} f(\alpha) \leq \dfrac{n^\alpha n!}{\alpha (\alpha+1) \dots (\alpha+n)} \leq f(\alpha)$.\\
+$\dfrac{n}{\alpha+n} f(\alpha) \leq n^\alpha B(\alpha,n) \dfrac{n}{\alpha+n} \leq f(\alpha)$.\\
+Спрямуємо $n \to \infty$. Звідси отримаємо $f(\alpha) = \displaystyle\lim_{n \to \infty} n^\alpha B(\alpha,n) \dfrac{n}{\alpha+n}$. Проте якщо продовжити рівність, то можна зауважити, що $\displaystyle\lim_{n \to \infty} n^\alpha B(\alpha,n) \dfrac{n}{\alpha+n} = \Gamma(\alpha)$.
+\end{proof}
+
+\begin{remark}
+Можна було закінчити доведення інакше. Представимо собі, що ми не знаємо, що $\Gamma(\alpha) = \displaystyle\lim_{n \to \infty} n^\alpha B(\alpha,n)$. Ми в кінці для кожного $\alpha \in (0,1]$ отримали $f(\alpha) = \displaystyle\lim_{n \to \infty} n^\alpha B(\alpha,n)$, а границя приймає єдине значення. Оскільки нам вже відомо, що $\Gamma$ задовольняє 1),2),3), то ми би такими сами міркуваннями отримали $\Gamma(\alpha) = \displaystyle\lim_{n \to \infty} n^\alpha B(\alpha,n)$ (інший спосіб доведення цієї формули). Оскільки границя єдина, то $\Gamma(\alpha) = f(\alpha)$.
+\end{remark}
 %\fi
 \newpage
 
