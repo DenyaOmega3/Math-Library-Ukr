@@ -11,6 +11,8 @@
 \usepackage{changepage}
 
 \usepackage{nccmath}
+\usepackage{gnuplottex}
+
 
 \usepackage{enumitem}
 \usepgfplotslibrary{fillbetween}
@@ -24,6 +26,7 @@
 \usepackage{tikz-3dplot}
 \usepackage{bbm}
 \usepackage{tikz-cd}
+
 \usetikzlibrary{spy,angles,quotes}
 
 \fancyhead{}
@@ -6148,9 +6151,9 @@ $\huge\int_0^{+\infty} ae^{-a^2(t^2+1)}\,da = \dfrac{1}{2} \dfrac{1}{t^2+1} \in 
 \begin{proof}
 $\huge \int_0^{+\infty} x^{\alpha-1}e^{-x}\,dx = \int_0^1 x^{\alpha-1}e^{-x}\,dx + \int_1^{+\infty} x^{\alpha-1}e^{-x}\,dx$.\\
 Розглянемо перший інтеграл. Особлива точка -- це точка $x = 0$. Порівняємо з інтегралом $\huge \int_0^1 x^{\alpha-1}\,dx$ -- збіжний при $\alpha > 0$. Маємо:\\
-$\huge \lim_{x \to 0} \dfrac{x^{\alpha-1} e^{-x}}{x^{\alpha -1}} = 1$. Отже, обидва збіжні, тому перший доданок -- збіжний.\\
-Розглянемо другий інтеграл. Особлива точка -- це $x = \infty$. Порівняємо з інтегралом $\huge \int_1^{+\infty} e^{-\frac{x}{2}} \,dx$ -- збіжний при $\alpha > 0$. Маємо:\\
-$\huge \lim_{x \to \infty} \dfrac{x^{\alpha -1} e^{-x}}{ e^{-\frac{x}{2}}} = \left[ \begin{gathered} 0 \textrm{ за Лопіталем, } \alpha \geq 1 \\ \huge \lim_{x \to \infty} \dfrac{1}{x^{1-\alpha} e^{\frac{x}{2}}} = 0, \alpha < 1 \end{gathered} \right.$. Отже, обидва збіжні, тому другий доданок -- збіжний.\\
+$\huge \lim_{x \to 0} \dfrac{x^{\alpha-1} e^{-x}}{x^{\alpha -1}} = 1$. Отже, обидва збіжні, тому перший доданок -- збіжний при $\alpha > 0$.\\
+Розглянемо другий інтеграл. Особлива точка -- це $x = \infty$. Порівняємо з інтегралом $\huge \int_1^{+\infty} e^{-\frac{x}{2}} \,dx$ -- збіжний. Маємо:\\
+$\huge \lim_{x \to \infty} \dfrac{x^{\alpha -1} e^{-x}}{ e^{-\frac{x}{2}}} = \left[ \begin{gathered} 0 \textrm{ за Лопіталем, } \alpha \geq 1 \\ \huge \lim_{x \to \infty} \dfrac{1}{x^{1-\alpha} e^{\frac{x}{2}}} = 0, \alpha < 1 \end{gathered} \right.$. Отже, обидва збіжні, тому другий доданок -- збіжний при всіх $\alpha \in \mathbb{R}$ (у тому числі при $\alpha > 0$).\\
 Остаточно, $\Gamma(\alpha)$ -- збіжний при $\alpha > 0$.
 \end{proof}
 
@@ -6184,7 +6187,7 @@ $\Gamma(n+1) = n!$ при $n \in \mathbb{N}$.
 
 \begin{proof}
 Дійсно, за попередньою теоремою, маємо таку рівність:\\
-$\Gamma(n+1) = n \Gamma (n) = n(n-1) \Gamma (n-1) = \dots = n(n-1)(n-2)\dots \cdot 2 \cdot 1 \Gamma (1)$.\\
+$\Gamma(n+1) = n \Gamma (n) = n(n-1) \Gamma (n-1) = \dots = n(n-1)(n-2)\dots 2 \cdot 1 \Gamma (1)$.\\
 Нарешті, обчислимо $\Gamma(1) = \huge \int_0^{+\infty} e^{-x}\,dx = -e^{-x} \Big|_{0}^{+\infty} = 1$.
 \end{proof}
 
@@ -6200,8 +6203,8 @@ $\Gamma\left( \dfrac{1}{2}+n\right) = \Gamma\left( n - \dfrac{1}{2} + 1 \right) 
 \end{proof}
 
 \begin{remark}
-До речі кажучи, завдяки функціональному рівнянню $\Gamma(\alpha+1) = \alpha \Gamma(\alpha)$, ми можемо продовжити нашу функцію на $\mathbb{R} \setminus \mathbb{Z}$.\\
-Якщо я хочу порахувати $\Gamma(-0.5)$, то для цього я просто визначаю його як $\Gamma(-0.5) = \dfrac{\Gamma(0.5)}{-0.5}$. Для цілих чисел я продовження не можу зробити, бо $\Gamma(-1) = \dfrac{\Gamma(0)}{-1}$, проте $\Gamma(0)$ тупо не визначена.
+До речі кажучи, завдяки функціональному рівнянню $\Gamma(\alpha+1) = \alpha \Gamma(\alpha)$, ми можемо продовжити нашу функцію на $\mathbb{R} \setminus \mathbb{Z}_{\leq 0}$.\\
+Якщо я хочу порахувати $\Gamma(-0.5)$, то для цього я просто визначаю його як $\Gamma(-0.5) = \dfrac{\Gamma(0.5)}{-0.5}$. Для цілих чисел я продовження не можу зробити, бо $\Gamma(-1) = \dfrac{\Gamma(0)}{-1}$, проте $\Gamma(0)$ тупо не визначена. Якби $\Gamma(0)$ була визначена, то $\Gamma(1) = 0 \cdot \Gamma(0) = 0$, але ми знаємо, що $\Gamma(1) =1$ -- тому визначити не можна.
 \end{remark}
 
 \subsubsection*{Графік гамма-функції}
@@ -6213,6 +6216,14 @@ $\displaystyle\lim_{\alpha \to +\infty} \Gamma(\alpha) = +\infty$.
 Маємо $\Gamma(\alpha+1) = \alpha \Gamma(\alpha)$ для великих $\alpha > 0$. Оцінимо $\Gamma(\alpha)$.\\
 $\displaystyle\Gamma(\alpha) > \int_1^{+\infty} x^{\alpha-1}e^{-x}\,dx > \int_1^{+\infty} e^{-x}\,dx = \dfrac{1}{e}$.\\
 Таким чином, $\Gamma(\alpha+1) > \dfrac{\alpha}{e} \to +\infty$ при $\alpha \to +\infty$.
+\end{proof}
+
+\begin{proposition}
+$\displaystyle\lim_{\alpha \to 0+0} \Gamma(\alpha) = +\infty$.
+\end{proposition}
+
+\begin{proof}
+Дійсно, маємо $\Gamma(\alpha) > \displaystyle\int_0^1 x^{\alpha-1}e^{-x}\,dx \geq \dfrac{1}{e} \int_0^1 x^{\alpha-1}\,dx = \dfrac{x^\alpha}{\alpha e} \Big|_0^1 = \dfrac{1}{\alpha e} \to +\infty$.
 \end{proof}
 
 \begin{proposition}
@@ -6240,6 +6251,45 @@ $\boxed{=} \displaystyle\lim_{n \to \infty} \left( \ln n - \left( 1 + \dfrac{1}{
 $\displaystyle\int_0^{1-\varepsilon} \ln(-\ln u)\,du = \lim_{n \to \infty}\int_0^{1-\varepsilon} \ln n + \ln(1-\sqrt[n]{u})\,du$ для кожного $\varepsilon > 0$ виконується, оскільки функціональна послідовність $f_n(u) = \ln n + \ln(1-\sqrt[n]{u})$ прямує рівномірним чином до $f(u) = \ln(-\ln u))$ на $[0,1-\varepsilon]$ за ознакою Діні. Тепер розглянемо функціональну послідовність $g_n(\varepsilon) = \displaystyle\int_0^{1-\varepsilon} \ln n + \ln(1-\sqrt[n]{u})\,du$. Вона вже прямує до $g(\varepsilon) = \displaystyle\int_0^{1-\varepsilon} \ln(-\ln u)\,du$
 \fi
 \end{proof}
+
+\begin{proposition}
+$\Gamma'(2) = 1-\gamma$.
+\end{proposition}
+
+\begin{proof}
+Маємо рівняння $\Gamma(\alpha+1) = \alpha \Gamma(\alpha)$, яке ми продиференціюємо.\\
+$\Gamma'(\alpha+1) = \Gamma(\alpha) + \alpha \Gamma'(\alpha)$.\\
+Власне, звідси отримаємо $\Gamma'(2) = \Gamma(1) + \Gamma'(1) = 1 - \gamma$.
+\end{proof}
+
+\begin{remark}
+Таким чином, буде простіше дослідити похідну. По-перше, оскільки $\Gamma'' \geq 0$, то тоді звідси $\Gamma'$ має бути неспадною на $(0,+\infty)$. По-друге, між $(1,2)$ існує точка $\alpha_0$, яка буде точкою локального мінімуму. В силу неспадності похідної отримаємо, що на $(1,\alpha_0)$ гамма-функція спадатиме та на $(\alpha_0,+\infty)$ гамма-функція зростатиме.
+\end{remark}
+
+%TODO: uncomment
+\iffalse
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[]
+\begin{axis}[
+xmin =0, xmax = 5.1, 
+%ymin = -3.5, ymax = 3.5,  
+restrict y to domain=-6:6,
+axis lines = middle,
+xlabel={$\alpha$}, 
+ylabel={$\Gamma(\alpha)$},
+enlarge x limits=0.05,
+enlarge y limits=0.1,
+x label style={at={(ticklabel* cs:1.00)}, inner sep=5pt, anchor=north},
+y label style={at={(ticklabel* cs:1.00)}, inner sep=2pt, anchor=south east},
+]
+\addplot[color=blue, samples=222, smooth, 
+domain = 0:5] {sqrt(2*pi)*x^(x-0.5)*exp(-x)*exp(1/(12*x))};
+\end{axis}
+\end{tikzpicture}
+\caption*{Графік гамма-функції при $\alpha > 0$.}
+\end{figure}
+\fi
 
 \begin{proposition}
 Гамма-функція логарифмічно опукла вниз на проміжку $(0,+\infty)$.
@@ -6323,6 +6373,19 @@ $\boxed{=} \huge\lim_{n \to \infty} n^{\alpha} \int_0^1 v^{n-1} (1-v)^{\alpha-1}
 Рівність ? виконана в силу неперервності $\Gamma$-функції.
 \end{proof}
 \fi
+
+\begin{theorem}[Формула подвоєння Лежандра]
+$2^{\alpha-1} \Gamma\left( \dfrac{\alpha}{2} \right) \Gamma\left( \dfrac{\alpha+1}{2} \right) = \sqrt{\pi} \Gamma(\alpha)$.
+\end{theorem}
+
+\begin{proof}
+Позначимо функцію $f(\alpha) = \dfrac{1}{\sqrt{\pi}} \Gamma\left( \dfrac{\alpha}{2} \right) \Gamma\left( \dfrac{\alpha+1}{2} \right) 2^{\alpha-1}$ при $\alpha > 0$. Вона задовольняє умові теореми Бора-Молерупа. Перевіримо три пункти:\\
+1) $f(1) = \dfrac{1}{\sqrt{\pi}} \Gamma\left( \dfrac{1}{2}\right) \Gamma(1) 2^{1-1} = 1$;\\
+2) $f(\alpha+1) = \dfrac{1}{\sqrt{\pi}} \Gamma\left( \dfrac{\alpha+1}{2} \right) \Gamma\left( \dfrac{\alpha}{2}+1 \right)2^\alpha = \alpha f(\alpha)$;\\
+3) $\ln f(\alpha) = -\ln \sqrt{\pi} + \ln \Gamma\left( \dfrac{\alpha}{2} \right) + \ln \Gamma\left( \dfrac{\alpha+1}{2} \right) + (\alpha-1)\ln 2$. \\
+Кожна з функцій (у тому числі константи) опуклі вниз, тому $\ln f(\alpha)$ також опукла вниз як сума.\\
+Значить задана функція $f(\alpha) = \Gamma(\alpha)$, що дає формулу Лежандра.
+\end{proof}
 
 \begin{theorem}[Функціональне рівняння Ойлера]
 $\Gamma(\alpha) \cdot \Gamma(1-\alpha) = \dfrac{\pi}{\sin \pi \alpha}$ при $0 < \alpha < 1$.\\
