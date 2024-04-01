@@ -125,7 +125,7 @@
 	За теоремою Піфагора, ми вже знаємо, що
 	$x^2 = 1^2 + 1^2 \implies x^2 = 2$. І от тут виникли проблеми:
 	\begin{proposition}
-	$\not\exists  x \in \mathbb{Q}: \ x^2 = 2$. Або, інакше кажучи, $\sqrt{2} \not\in \mathbb{Q}$.
+	$\not\exists  x \in \mathbb{Q}: \ x^2 = 2$. Або, інакше кажучи, $\sqrt{2} \notin \mathbb{Q}$.
 	\end{proposition}
 	
 	\begin{proof}
@@ -3004,6 +3004,24 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	$\displaystyle \lim_{n \to \infty} \left( 1 + \dfrac{1}{1!} + \dfrac{1}{2!} + \dots + \dfrac{1}{n!} \right) = e$.
 	\end{proof}
 	\fi
+	
+	\subsection{Стала Ойлера-Маскероні}
+	Розглянемо послідовність $\left\{ a_n = 1 + \dfrac{1}{2} + \dots + \dfrac{1}{n} - \ln n,\ n \geq 1 \right\}$. Спробуємо знайти границю.
+	\bigskip \\
+	I. \textit{$\{a_n, n \geq 1\}$ -- монотонно спадає.}\\
+	Дійсно, розпишемо різницю $a_{n+1} - a_n$. Отримаємо наступне:\\
+	$a_{n+1} - a_{n} = \left( 1 + \dfrac{1}{2} + \dots + \dfrac{1}{n} + \dfrac{1}{n+1} - \ln (n+1) \right) - \left( 1 + \dfrac{1}{2} + \dots + \dfrac{1}{n} - \ln n \right) = \dfrac{1}{n+1} + \ln \dfrac{n}{n+1} < \ln\left( 1 + \dfrac{1}{n} \right) + \ln \dfrac{n}{n+1} = \ln 1 = 0$.\\
+	Таким чином, ми довели, що $a_{n+1} < a_n$.
+	\bigskip \\
+	II. \textit{$\{a_n,n \geq 1\}$ -- обмежена знизу.}\\
+	Нам достатньо буде довести, що $a_n > 0$. Дійсно,\\
+	$a_n = 1 + \dfrac{1}{2} + \dots + \dfrac{1}{n} - \ln (n+1) > \ln \left( 1 + 1\right) + \ln\left( 1 + \dfrac{1}{2}\right) + \dots + \ln\left( 1 + \dfrac{1}{n}\right) - \ln(n+1) =\\ = \ln 2 + \ln \dfrac{3}{2} + \ln \dfrac{4}{3} + \dots + \ln \dfrac{n+1}{n} - \ln (n+1) = \ln \left( 2 \dfrac{3}{2} \dfrac{4}{3} \dots \dfrac{n+1}{n} \right) - \ln (n+1) = 0$.\\
+	Отже, за теоремою Ваєрштраса, існує границя
+	\begin{align*}
+	\lim_{n \to \infty} \left( 1 + \dfrac{1}{2} + \dots + \dfrac{1}{n} - \ln n \right) \overset{\text{позн.}}{=} \gamma
+	\end{align*}
+	Число $\gamma \approx 0.57$ називається \textbf{сталою Ойлера-Маскероні}.\\
+	Чому на початку ми віднімали логарифм, просто тому що розмістити точки $\left(n, \dfrac{1}{n}\right)$ на площині, це буде схожий на графік логарифма. Про цю константу ще буде неодноразова розмова.
 	
 	\subsection{Підпослідовності}
 	\begin{definition}
