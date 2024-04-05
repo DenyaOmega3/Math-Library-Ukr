@@ -2629,6 +2629,45 @@ $e_Ga = a$\\
 $(g_1*g_2)a = g_1(g_2a)$.
 \end{remark}
 
+\begin{example}
+Візьмемо дієдральну групу $D_4$ та множину $\mathbb{R}^2$. Ми встановимо дію таким чином:\\
+$r \begin{pmatrix}
+x \\ y
+\end{pmatrix} = \begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix} \begin{pmatrix}
+x \\ y
+\end{pmatrix}$, де дана матриця описує матрицю повороту на $90^\circ$ проти годинникової стрілки відносно початку координат.\\
+$s \begin{pmatrix}
+x \\ y
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix} \begin{pmatrix}
+x \\ y
+\end{pmatrix}$, де дана матриця описує відбиття площини по $OY$.\\
+$e \begin{pmatrix}
+x \\ y
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix} \begin{pmatrix}
+x \\ y
+\end{pmatrix}$, де дана матриця нічого не змінює.\\
+Решта дій буде композицією, яка описується множення матриць. Наприклад, $r^2 \begin{pmatrix}
+x \\ y
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix} \begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix} \begin{pmatrix}
+x \\ y
+\end{pmatrix}$.
+\end{example}
+
 \begin{proposition}
 Задано $\left< G,*\right>$ -- групу та множину $A \neq \emptyset$. Кожна дія $\rho$ групи $G$ на множину $A$ задає гомоморфізм $\sigma \colon G \to S_A$ формулою $\sigma (g)(a) = \rho(g,a), \forall a \in A$.\\
 Навпаки теж працює: кожний гомоморфізм $\sigma \colon G \to S_A$ задає дію групи $G$ на множину $A$.
@@ -2668,7 +2707,7 @@ $e \mapsto \begin{cases} 1 \mapsto 1 \\ 2 \mapsto 2 \\ 3 \mapsto 3 \end{cases},\
 \end{definition}
 
 \begin{remark}
-Зрозуміло, що $a \in \Orb_G(a)$, просто тому що $e_G a = a$.
+Зрозуміло, що $a \in \Orb_G(a)$, просто тому що $e_G a = a$. Тобто $\Orb_G(a) \neq \emptyset$.
 \end{remark}
 
 \begin{definition}
@@ -2695,12 +2734,16 @@ $a = \rho(e_G, a) = \rho(g_1^{-1}*g_1, a) = \rho(g_1^{-1}, \rho(g_1,a)) = \rho(g
 \end{proof}
 
 \begin{definition}
-Дія групи $\left< G,*\right>$ на множині $A$ називається \textbf{транзитивною}, якщо
+Дія групи $\left< G,*\right>$ на множину $A$ називається \textbf{транзитивною}, якщо
 \begin{align*}
-\Orb_G(a) = A
+\forall a,b \in A: \exists g \in G: b = ga
 \end{align*}
-Тобто така дія матимк єдину орбіту (в силу щойно доведеного).
+Тобто між будь-якими двома елементами можна законектитися, завдяки елементу, який діє.
 \end{definition}
+
+\begin{remark}
+Дія групи $\left< G,*\right>$ на множину $A$ транзитивна $\iff$ тобто має єдину орбіту.
+\end{remark}
 
 \begin{example}
 Узявши першу дію з минулого прикладу, там $\Orb_{[r]}(1) = A$ -- і це єдина орбіта в принципі. Тобто дія $[r]$ на $A$ транзитивна.

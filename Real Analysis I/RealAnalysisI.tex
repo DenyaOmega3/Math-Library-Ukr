@@ -101,10 +101,9 @@
 \tableofcontents
 \newpage
 
-%\iffalse %IMPORTANT COMMENT
-	\section*{Необхідні тулзи для розвитку матана}
-	\subsection*{Шкільні речі та трошки про те, як розвивати множину дійсних чисел}
-	
+%\iffalse
+    %Axiomatic approach
+	\section{Вступ до $\mathbb{R}$}
 	Уже з такими числами було більш-менш ознайомлено в школі. Починалось все з натуральних чисел:	
 	$$ \mathbb{N} = \{1, \ 2, \ 3, \ \dots\} $$
 	Далі пішли цілі  числа: \\
@@ -113,7 +112,7 @@
 	$$ \mathbb{Q} = \left\{ \dfrac{m}{n} \biggm| m \in \mathbb{Z},\ n \in \mathbb{N} \right\} $$
 	А тут вже ми змогли визначити операцію $\cdot$, і цього теж мало. Насправді, всі ці множини та операції $+,\ \cdot$ можна спробувати дуже строго формалізувати, проте цього робити не планую. Це не сильно вплине на якість вивчення матана.
 	
-	Настав саме час дослідити поле дійсних чисел -- $\mathbb{R}$. Одна з головних мотивацій зробити -- це прямокутний трикутник зі сторонами $1$.
+	Настав саме час дослідити поле дійсних чисел -- $\mathbb{R}$. Одна з головних мотивацій зробити -- це задача про прямокутний трикутник зі сторонами $1$.
 	\begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
@@ -131,8 +130,7 @@
 	\begin{proof}
 	!Припустімо, що все ж таки $\exists x \in \mathbb{Q}$, тобто $x= \dfrac{m}{n}, m \in \mathbb{Z}, n \in \mathbb{N}$, нескоротимий дріб, для якого\\
 	$x^2 = 2 \implies \dfrac{m^2}{n^2} = 2 \implies m^2 = 2n^2$.\\
-	Оскільки $2n^2$ -- це парне число, то $m^2$ -- також парне, а тому $m$ -- парне, тоді таке число представимо у вигляді $m = 2k, k \in \mathbb{Z}$.\\
-	$4k^2 = 2n^2 \implies 2k^2 = n^2$\\
+	Оскільки $2n^2$ -- це парне число, то $m^2$ -- також парне, а тому $m$ -- парне, тоді таке число представимо у вигляді $m = 2k, k \in \mathbb{Z}$. Звідси отримаємо $4k^2 = 2n^2 \implies 2k^2 = n^2$.
 	Оскільки $2k^2$ -- це парне число, то $n^2$ -- також парне, а тому $n$ -- парне, тоді таке число представимо у вигляді $n = 2l, l \in \mathbb{Z}$.\\
 	Проте $m,n$ одночасно не можуть бути парними, оскільки ми отримаємо скоротимий дріб, а, за умовою, ми не брали таких. Суперечність!\\
 	Отже, наше припущення було невірним.
@@ -188,1502 +186,17 @@
 	\fi
 	
 	Саме це твердження є головною мотивацією розвивати нову множину. У грубому сенсі, це все означає, що множина $\mathbb{Q}$ -- неповна множина, тобто на числовій прямій є \lq\lq дірки\rq\rq. І саме $\mathbb{R}$ прибирає ці самі  \lq\lq дірки\rq\rq . \\
-	Множину $\mathbb{R}$ можна конструювати як набір нескінченних десяткових дробів. Наприклад, число $\sqrt{2} = 1.41421356237\dots$ Там же можна визначити всі операції. Конструкцією $\mathbb{R}$ займемося згодом.
+	Множину $\mathbb{R}$ можна конструювати по-різному:
+	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+	\item як набір нескінченних десяткових дробів (наприклад, $\sqrt{2} = 1.41421356237\dots$;
+	\item через послідовності Коші (наприклад, $\sqrt{2} = \{1, 1.4, 1.41, 1.414, \dots\}$;
+	\item через переріз Дедекінда.
+	\end{enumerate}
+	Конструкцією $\mathbb{R}$ займатися не хочу на самому початку, просто тому що це нудно та затратно. Ми підемо іншим шляхом.
 	
-	\subsection*{Принцип математичної індукції}
-	\begin{definition}
-	Числова множина $E$ називається \textbf{індуктивною}, якщо
-	\begin{align*}
-		\forall x \in E: x+1 \in E
-	\end{align*}
-	\end{definition}
-	
-	\begin{theorem}
-	Множина натуральних чисел $\mathbb{N}$ -- мінімальна індуктивна множина, що містить $1$.
-	\end{theorem}
-	
-	\begin{remark}
-	Переформулюю математичною мовою дану теорему:\\
-	$\forall E$ -- індуктивна: $1 \in E \implies \mathbb{N} \subset E$.
-	\end{remark}
-	
-	\begin{proof}
-	1) Те, що $\mathbb{N}$ індуктивна, зрозуміло, тому що $\forall k \in \mathbb{N}: k+1 \in \mathbb{N}$.\\
-	2) Оскільки $1 \in E$ і, більш того, вона є індуктивною, то $2 \in E, 3 \in E, \dots, k \in E$.\\
-	А тому $\forall k \in \mathbb{N} \Rightarrow k \in E$. Таким чином, $\mathbb{N} \subset E$.
-	\end{proof}
-	
-	\begin{corollary}[Принцип математичної індукції]
-	Розглянемо числову множину $E = \{n \in \mathbb{N}: P(n)\}$. Тут $P(n)$ -- це деяка умова.\\
-	Тоді якщо $1 \in E$ та індуктивна, то $E = \mathbb{N}$.\\
-	Авторське скорочення: МІ -- математична індукція.
-	\end{corollary}
-	
-	\begin{proof}
-	За умовою наслідка, маємо, що $E \subset \mathbb{N}$. Оскільки $1 \in E$ та індуктивна, то за попередньою теоремою, $\mathbb{N} \subset E$. Отже, $E = \mathbb{N}$.
-	\end{proof}
-	
-	\textit{Про що цей наслідок}: ми хочемо стверджитись, що $P(n)$ виконується при будь-яких $n \in \mathbb{N}$. Для цього треба зробити три кроки:\\
-	\textbf{1. База індукції}\\
-	Перевіряємо, що $P(1)$ виконується.
-	\bigskip \\
-	\textbf{2. Крок індукції}\\
-	Вважаємо, що $P(n)$ -- виконано. Показуємо, що $P(n+1)$ виконується.
-	\bigskip \\
-	Двома кроками доводимо, що наша множина $E$ -- індуктивна, що містить одиницю. Отже, МІ доведено, а тому $P(n)$ виконується завжди.
-	
-	\begin{example}
-	Довести, що $1 + 2 + \dots + n = \dfrac{n(n+1)}{2}$.\\
-	Тут множина $E = \left\{n \in \mathbb{N}: 1 + 2 + \dots + n = \dfrac{n(n+1)}{2} \right\}$.\\
-	1. База індукції\\
-	$1 \in E \Rightarrow 1 = \dfrac{1(1+1)}{2} = 1$
-	\bigskip \\
-	2. Крок індукції\\
-	Нехай $k \in E$, тобто 
-	$1 + 2 + \dots + k = \dfrac{k(k+1)}{2}$\\
-	Доведемо, що $k+1 \in E$\\
-	$1+ 2 + \dots + k + (k+1) = \dfrac{k(k+1)}{2} + k = \dfrac{k(k+1)+2k}{2} = \dfrac{(k+1)(k+2)}{2}$\\
-	Отже, $k+1 \in E$.
-	А значить, $E = \mathbb{N}$, тобто наша формула виконується $\forall n \in \mathbb{N}$. МІ доведено.
-	\end{example}
-	
-	\begin{example}
-	Довести, що $\forall n \in \mathbb{N} \setminus \{1\}: 2^n \geq n$.\\
-	Тут множина $E = \{n \in \mathbb{N} \setminus \{1\}: 2^n \geq n \}$.\\
-	1. База індукції\\
-	$2 \in E \Rightarrow 2^2 \geq 2$
-	\bigskip \\
-	2. Крок індукції\\
-	Нехай $k \in E$, тобто $2^k \geq k$.\\
-	Доведемо, що $k+1 \in E$. Маємо\\
-	$2^{k+1} = 2 \cdot 2^k \geq 2k = k + k > k+1$\\
-	Отже, $k+1 \in E$, тобто $E = \mathbb{N} \setminus \{1\}$, тобто наше твердження виконується $\forall n \neq 1$. МІ доведено.
-	\end{example}
-	
-	\subsection*{Основні нерівності}
-	\begin{theorem}[Нерівність Бернуллі]
-	Для всіх $x > -1$ виконано $(1+x)^n \geq 1+nx, \quad \forall n \geq 1$.
-	\end{theorem}
-	
-	\begin{proof}
-	Доведення за МІ по $n$.\\
-	1. База індукції: при $n=1$: $(1+x)^1 \geq 1+1\cdot x$. Нерівність виконується.\\
-	2. Крок індукції: нехай для фіксованого $n$ нерівність виконується. Доведемо для значення $n+1$.\\
-	$(1+x)^{n+1}=(1+x)(1+x)^n \geq (1+x)(1+nx)=1+(n+1)x+nx^2 \geq 1+(n+1)x$\\
-	Отже, така нерівність справедлива $\forall n \geq 1$. \\
-	МІ доведено.
-	\end{proof}
-	
-	\begin{theorem}[Нерівність Коші]
-	Для всіх $a_1,\dots,a_n > 0$ виконано
-	$\dfrac{a_1+\cdots+a_n}{n} \geq \sqrt[n]{a_1 \cdots a_n}, \hspace{0.2cm} \forall n \geq 1$.
-	\end{theorem}
-	
-	\begin{proof}
-	Тимчасове перепозначення: $A_n = \dfrac{a_1+\cdots+a_n}{n}, \quad G_n = \sqrt[n]{a_1 \cdots a_n}$.\\
-	Зрозуміло, що $\dfrac{A_n}{A_{n-1}} > 0 \implies \dfrac{A_n}{A_{n-1}}-1>-1$. Тоді за нерівністю Бернуллі,\\
-	$\displaystyle \left(1+ \left(\frac{A_n}{A_{n-1}} -1 \right) \right)^n \geq 1 + n \cdot \left(\frac{A_n}{A_{n-1}} -1 \right)$
-	$\implies \displaystyle \frac{(A_n)^n}{(A_{n-1})^n} \geq \frac{a_n}{A_{n-1}} \implies \displaystyle (A_n)^n \geq a_n (A_{n-1})^{n-1}, \forall n \geq 1$. \\ Тоді $(A_n)^n \geq a_n (A_{n-1})^{n-1} \geq \cdots \geq a_n a_{n-1} \cdots a_1$. \\ Отже, $A_n \geq G_n$, що й хотіли довести.
-	\end{proof}
-	
-	\subsection*{Біноміальні коефіцієнти, біном Ньютона}
-	\begin{definition}
-	\textbf{Факторіалом натурального числа} називають таке число:
-	\begin{align*}
-	n! = n \cdot (n-1) \dots 2 \cdot 1
-	\end{align*}
-	Домовленість: $0! = 1$.
-	\end{definition}
-	
-	\begin{corollary} 
-	$(n+1)! = (n+1)n!$
-	\end{corollary}
-	
-	\begin{definition}
-	\textbf{Біноміальним коефіцієнтом} назвемо ось таке число:
-	\begin{align*}
-	C_n^k = \dfrac{n!}{k!(n-k)!}
-	\end{align*}
-	Інтерпретація того числа: серед $n$ студентів обрати $k$ студентів, що будуть відраховані. При цьому неважливо, у якому порядку $k$ студентів стануть в ряд.
-	\end{definition}
-
-	\begin{proposition}
-	$C_n^k + C_n^{k+1} = C_{n+1}^{k+1}$
-	\end{proposition}
-	
-	\begin{proof}
-	$C_n^k + C_n^{k+1} = \dfrac{n!}{k!(n-k)!} + \dfrac{n!}{(k+1)!(n-(k+1))!} \boxed{=}$\\
-	За властивістю факторіала, $(n-k)! = (n-k-1)!(n-k)$, а також $(k+1)! = (k+1)k!$\\
-	$\boxed{=} \dfrac{n!}{k!(n-k)(n-k-1)!} + \dfrac{n!}{k!(k+1)(n-k-1)!} = \dfrac{n!}{k!(n-k-1)!} \left(\dfrac{1}{n-k} + \dfrac{1}{k+1} \right) = \\ = \dfrac{n!}{k!(n-k-1)!} \dfrac{n+1}{(n-k)(k+1)} \boxed{=}$\\
-	Знову за властивістю факторіала, $(n+1)n! = (n+1)!$, а також \\ $(n-k)(n-k-1)! = (n-k)!$, $(k+1)k! = (k+1)!$ \\
-	$\boxed{=} \dfrac{(n+1)!}{(k+1)!(n-k)!} = \dfrac{(n+1)!}{(k+1)!((n+1)-(k+1))!} = C_{n+1}^{k+1}$
-	\end{proof}
-	
-	\subsubsection*{Трикутник Паскаля}
-	В школі були такі формули:\\
-	$(a+b) = a + b$\\
-	$(a+b)^2 = a^2+2ab + b^2$\\
-	$(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$\\
-	$(a+b)^4 = ?$\\
-	Приберімо зараз літери $a,b$ та отримаємо такий малюнок:
-\begin{figure}[H]
-\centering
-	\begin{tikzpicture}
-	\node at (1,1) {$1$};
-	\node at (2,1) {$1$};
-	\node at (0.5,0) {$1$};
-	\node at (1.5,0) {$2$};
-	\draw[->] (0.6,-0.2)--(0.9,-0.8);
-	\draw[->] (1.4,-0.2)--(1.1,-0.8);
-	\node at (2.5,0) {$1$};
-	\node at (0,-1) {$1$};
-	\node[red] at (1,-1) {$3$};
-	\node at (2,-1) {$3$};
-	\node at (3,-1) {$1$};
-	\end{tikzpicture}
-\end{figure}
-	По краях трикутника ми будемо завжди з одиницями. Червоне число $3$ взялося шляхом додавання двох чисел зверху: $1 + 2$. Якщо дотримуватись аналогічних міркувань, то ми зможемо розширити трикутник Паскаля:
-\begin{figure}[H]
-\centering
-	\begin{tikzpicture}
-	\node at (1,1) {$1$};
-	\node at (2,1) {$1$};
-	\node at (0.5,0) {$1$};
-	\node at (1.5,0) {$2$};
-	\node at (2.5,0) {$1$};
-	\node at (0,-1) {$1$};
-	\node at (1,-1) {$3$};
-	\node at (2,-1) {$3$};
-	\node at (3,-1) {$1$};
-	
-	\node[blue] at (-0.5,-2) {$1$};
-	\node[blue] at (0.5,-2) {$4$};
-	\node[blue] at (1.5,-2) {$6$};
-	\node[blue] at (2.5,-2) {$4$};
-	\node[blue] at (3.5,-2) {$1$};
-	
-	\node at (-1,-3) {$1$};
-	\node at (0,-3) {$5$};
-	\node at (1,-3) {$10$};
-	\node at (2,-3) {$10$};
-	\node at (3,-3) {$5$};
-	\node at (4,-3) {$1$};
-	\node at (1.5,-4) {$\dots$};
-	\end{tikzpicture}
-	\caption*{Трикутник Паскаля}
-\end{figure}
-	Із цього трикутника ми тепер можем знайти $(a+b)^4$, якщо знати, як повернути літери:\\
-	$(a+b)^4 = \textcolor{blue}{1} a^4 + \textcolor{blue}{4}a^3 b + \textcolor{blue}{6} a^2  b^2 + \textcolor{blue}{4}a b^3 + \textcolor{blue}{1} b^4$\\
-	Формула починається з $a^4$ та $b^0$. А далі степінь $a$ зменшуємо на одиницю, а степінь $b$, навпаки, збільшуємо на одиницю. А тепер узагальнімо це:
-	
-	\begin{theorem}[Біном Ньютона]
-	$(a+b)^n = C_n^0 a^n b^0 + C_n^1 a^{n-1}b + C_n^2 a^{n-2}b^2 + \dots + C_n^{n-1} a b^{n-1} + C_n^n a^0 b^n$.\\
-	Якщо коротко, можна записати як $(a+b)^n = \displaystyle \sum_{k=0}^n C_n^k a^{n-k} b^k$.
-	\end{theorem}
-	
-	\begin{proof}
-	Дану формулу доведемо за МІ по числу $n \in \mathbb{N}$.\\
-	1. База індукції. $n = 1 \implies (a+b)^1 = C_1^0 a^1 b^0 + C_1^1 a^0 b^1 = a + b$\\
-	2. Крок індукції. Припустимо, що для фіксованого $n$ формула виконана, тобто $(a+b)^n = \displaystyle\sum_{k=0}^n C_n^k a^{n-k} b^k$. Перевіримо цю формулу для $n+1$.\\
-	$(a+b)^{n+1} = (a+b)(a+b)^n \overset{\textrm{припущення МІ}}{=} (a+b) \displaystyle \sum_{k=0}^n C_n^k a^{n-k} b^k = \sum_{k=0}^n C_n^k a^{n-k+1} b^k + \sum_{k=0}^n C_n^k a^{n-k} b^{k+1} = \textcolor{red}{a^{n+1}} + \sum_{\textcolor{red}{k=1}}^n C_n^k a^{n-k+1} b^k + \sum_{k=0}^{\textcolor{red}{n-1}} C_n^k a^{n-k} b^{k+1} + \textcolor{red}{b^{n+1}} \boxed{=}$\\
-	В другій сумі ми замінимо лічильник: $m = k+1$\\
-	Було: $0,1,2,\dots, n-1$\\
-	Стало: $1,2,3,\dots,n$\\
-	$\boxed{=} a^{n+1} + \displaystyle \sum_{k=1}^n C_n^k a^{n-k+1}b^k + \sum_{m=1}^n C_n^{m-1} a^{n-(m-1)}b^{(m-1)+1} + b^{n+1} \boxed{=}$ \\
-	Замінимо літеру $m = k$, сума від цього не зміниться\\
-	$\boxed{=} a^{n+1} + \displaystyle \sum_{k=1}^n C_n^k a^{n-k+1}b^k + \sum_{k=1}^n C_n^{k-1} a^{n-k+1}b^{k} + b^{n+1}
-	= a^{n+1} + \sum_{k=1}^n a^{n-k+1}b^k \left(C_n^k + C_n^{k-1} \right) + b^{n+1}  = a^{n+1} + \sum_{k=1}^n a^{n-k+1}b^k C_{n+1}^k + b^{n+1}
-	= C_{n+1}^0 a^{n+1} b^0 + \sum_{k=1}^n a^{n-k+1}b^k C_{n+1}^k + C_{n+1}^{n+1} a^0 b^{n+1} = \sum_{k=0}^{n+1} C_{n+1}^k a^{n-k+1}b^k  = (a+b)^{n+1}$\\
-	МІ доведено.
-	\end{proof}
-	\newpage
-	%\fi %IMPORTANT COMMENT
-    \iffalse %IMPORTANT COMMENT
-    
-	\section{Множина дійсних чисел}
-	\iffalse
-	Мабуть, трошки треба зробити вступ до множини $\mathbb{Q}$, щоб стало ясніше. Про те, як їх додавати, віднімати, множити, ділити, уже відомо зі школи. Але суттєвим є ось таке твердження:
-	\begin{theorem}
-	$x \in \mathbb{Q} \iff x$ має період в розкладі десяткового дробу.
-	\end{theorem}
-	
-	\begin{proof}
-	\rightproof Дано: $x \in \mathbb{Q}$, тобто $x = \dfrac{a}{b}$ - нескоротимий правильний дріб (якщо це просто ціле число, то тут нема що робити). Запишемо в вигляді десяткового дробу.\\
-	Ми маємо наразі $a < b$, але можна знайти такий $n \in \mathbb{N}$, для якого $10^n a > b$. Далі ділимо $10^n a$ на $b$ за алгоритм Евкліда, отримаємо $10^n a = q b + r_1$, причому $0 \leq r_1 < b$.\\
-	Далі розглянемо аналогічно $\dfrac{r_1}{b}$, маємо $r_1 < b$, але можна знайти такий $n_1 \in \mathbb{N}$, для якого $10^{n_1} r_1 > b$. Далі ділимо $10^{n_1} r_1$ на $b$ за алгоритм Евкліда, отримаємо $10^{n_1} r_1 = q_1 b + r_2$, причому $0 \leq r_2 < b$.\\
-	Далі розглянемо аналогічно $\dfrac{r_2}{b}$ та робимо все аналогічно...\\
-	Призупинимось на $r_k$ тимчасово та розпишемо $\dfrac{a}{b}$ як десятковий дріб:\\
-	$\dfrac{a}{b} = \dfrac{q}{10^n} + \dfrac{r_1}{b 10^n} = \dfrac{q}{10^n} + \dfrac{q_1}{10^{n+n_1}} + \dfrac{r_2}{b 10^{n+n_1}} = \dots = \\ = \dfrac{q}{10^n} + \dfrac{q_1}{10^{n+n_1}} + \dfrac{q_2}{10^{n+n_1+n_2}} + \dots + \dfrac{q_{k-1}}{ 10^{n+n_1+n_2+\dots + n_{k-1}}} + \dfrac{r_k}{b 10^{n+n_1+n_2+\dots + n_{k-1}}} = \\
-	= \underbrace{0.0\dots 0}_{n\text{ разів}} q + \underbrace{0.0\dots 0}_{n+n_1\text{ разів}} q_1 + \dots + \underbrace{0.0\dots 0}_{n+n_1+\dots+n_{k-1}\text{ разів}}q_{k-1} + \dfrac{r_k}{b 10^{n+n_1+\dots+n_{k-1}}}$.\\
-	У результаті рано чи пізно у нас виникне така картина, що отримаємо $r_k$, а після повторної ітерації можемо отримати $r_i$ при $i < k$. Це можливо, тому що всі $0 \leq r < b$, відповідно вибір в нас скінченний. А коли ми отримаємо $r_i$, то далі відбувається зациклення: буде $r_{i+1},r_{i+2}, \dots, r_k, r_{i+1}, r_{i+2}, \dots$\\
-	Тоді отримаємо $\dfrac{r_k}{b} = \dfrac{q_k}{10^{n_k}} + \dfrac{r_i}{b 10^k}$, але ми ВЖЕ знаємо, чому це дорівнює за попередніми ітераціями:\\
-	$\dfrac{r_i}{b} = \dfrac{q_i}{10^{n_i}} + \dfrac{q_{i+1}}{10^{n_i+n_{i+1}}} + \dots + \dfrac{q_k}{10^{n_i + n_{i+1} + \dots + n_k}} + \dfrac{r_i}{b 10^{n_i + n_{i+1} + \dots + n_k}}$.\\
-	У результаті, ми будемо рекурсивно постійно підставляти значення $\dfrac{r_k}{b}$ -- отримаємо таким чином нескінченний десятковий дріб, що є періодичним:\\
-	$x = 0.0\dots 0 q_1 0 \dots q_2 0 \dots 0 \overline{q_i 0 \dots 0 q_{i+1} 0 \dots 0 q_k}$ (перевірити ще раз)
-	\bigskip \\
-	\leftproof Дано: $x$ десятковий дріб з періодом, тобто наразі $x = a_0.a_1 \dots a_k \overline{b_1 \dots b_p}$. Тоді\\
-	$10^k x = 10^k a_0 + a_1 \dots a_k.\overline{b_1 \dots b_p}$.\\
-	$10^{k+p} x = 10^{k+p} a_0 + a_1 \dots a_k b_1 \dots b_k. \overline{b_1 \dots b_p}$.\\
-	Друге рівняння віднімемо від першого та отримаємо:\\
-	$(10^{k+p} - 10^k)x = (10^{k+p} - 10^k)a_0 + (a_1 \dots a_k b_1 \dots b_p - a_1 \dots a_k)$.\\
-	$x = \dfrac{a_1 \dots a_k b_1 \dots b_k - a_1 \dots a_k}{10^{k+p} - 10^k} \in \mathbb{Q}$.
-	\end{proof}
-	
-	Висновок: числа, які ми будемо розглядати далі, вони не матимуть період.
-	\fi
-	
-	\subsection{Числова вісь}
-	\begin{definition}
-	\textbf{Числовою віссю} ми будемо називати вісь, де задається точка, що є початком координат, а також масштаб виміру.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-5,0)--(5,0);
-	\fill (0,0) circle (1pt) node[anchor = north] {$O$};
-	\fill (1,0) circle (1pt) node[anchor = north] {$I$};
-	\end{tikzpicture}
-	\caption*{Тут стоїть початок координат $O$. Йому будемо ставити в відповідність число $0$. Ми задали одиничний масштаб, тому точці $I$ відповідатиме число $1$.}
-	\end{figure}
-	\end{definition}
-
-Ми далі цей відрізок $OI$ будемо відкладати праворуч -- отримаємо точки, що відповідають натуральним числам.\\
-Після цього симетрично відносно початку відкладаємо всі отримані точки -- отримаємо вже цілі числа. Загалом числова вісь виглядатиме так:
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-5,0)--(5,0);
-	\foreach \i in {-4,-3,...,4}
-		\fill (\i,0) circle(1pt) node[anchor = north] {$\i$};
-	\end{tikzpicture}
-	\end{figure}
-	Тепер з'ясуємо, як можна розташувати додатне раціональне число $\dfrac{m}{n}$ (це буде правильний дріб із взаємно простими числами). Для початку відрізок $OI$ необхідно розбити на $n$ рівних частин. Це можна зробити ось так: проводимо довільну пряму через т. $O$, позначаємо якусь точку на неї, відкладаємо $n$ разів; останню точку сполучаємо з т. $I$, а далі просто паралельним чином проводимо інші прямі. На основі фактів з планиметрії, ми змогли розділити.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick] (0,0)--(2,0);
-	\fill (0,0) circle (1pt) node[anchor = north] {$O$};
-	\fill (2,0) circle (1pt) node[anchor = north] {$I$};
-	
-	\foreach \i in {1,2,3,4} {
-		\fill[blue] ({0.75*\i},{0.5*\i}) circle (1pt);
-		\draw ({0.75*\i},{0.5*\i})--({\i/2.0},0);
-	}
-		
-	\draw[blue] (-1,{-2/3}) -- (4,{2+2/3});
-	\end{tikzpicture}
-	\end{figure}
-	Отримали відрізок довжиною $\dfrac{1}{n}$. А далі відкладаємо праворуч $m$ разів.\\
-	Тепер постає питання, що робити з ірраціональними числами. Ми вже знаємо, що будь-яке раціональне число можна записати як нескінченний десятковий дріб з періодом (ті числа, що скінченні, все одно можна записати в нескінченному вигляді: $0.5 = 0.5(0)$). Тобто на числовій вісі лежать всі десяткові дроби з періодом. Тепер ми хочемо додати десяткові дроби, що НЕ мають період взагалі. Один з прикладів -- це як раз таки $\sqrt{2} = 1.41421356237 \dots$\\
-	Отже, ми хочемо в будь-якій точці $x$ на числовій прямій поставити в відповідність деякий десятковий дріб.
-	
-	\subsection{Основні визначення}
-	\begin{definition}
-	\textbf{Дійсним числом} назвемо такий об'єкт:
-	\begin{align*}
-	x = \pm \alpha_0.\alpha_1 \alpha_2 \dots \alpha_n \dots,
-	\end{align*}
-	де $\alpha_0 \in \mathbb{N} \cup \{0\}$, а решта $\alpha_i$ -- це цифри, тобто $\alpha_i \in \{0,1,2,3,4,5,6,7,8,9\}$.\\
-	Позначення: $\mathbb{R}$ -- множина всіх дійсних чисел. Тобто тут $x \in \mathbb{R}$.
-	\end{definition}
-	
-	\begin{example}
-	Зокрема $\sqrt{2} = +1.41421356237 \dots$ -- один з прикладів дійсних чисел.
-	\end{example}
-	
-	Тепер виникає питання, як дійсне число можна розташувати на числову вісь.\\
-	Розглянемо число $x = \alpha_0.\alpha_1\alpha_2 \dots$
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-5,0)--(5,0);
-	\foreach \i in {-4,-3,...,4}
-		\fill (\i,0) circle(1pt) node[anchor = north] {$\i$};
-	\fill (3.56431,0) circle(1pt) node[anchor = north] {$x$};
-	\end{tikzpicture}
-	\end{figure}
-	У нас задано одиницю $1$, що відповідає відрізку $OI$. Ми цей відрізок будемо накладати $\alpha_0 + 1$ разів. У нас буде залишок $L_1$, довжина якої менша за $1$.\\
-	Далі розглядаємо відрізок $OI_1$, що відповідає довжині $\dfrac{1}{10}$. Накладаємо $OI_1$ на залишок $L_1$ разів $\alpha_1 + 1$. У нас буде залишок $L_2$, довжина якої менша за $0.1$.\\
-	\vdots \\
-	Далі цей процес продовжується або скінченне число разів, або буде необмежене число разів (зокрема для числа $\dfrac{4}{3}$ цей процес нескінченний).
-	
-	\begin{remark}
-	$0 \in \mathbb{R}$, ми можемо розписати $0 = +0.000 \dots$ або $0 = -0.000 \dots$
-	\end{remark}
-	
-	\begin{remark}
-	Будь-яке раціональне число $q \in \mathbb{Q}$ автоматично $q \in \mathbb{R}$, тому що відомо зі школи, що $q$ можна записати або як скінченний десятковий дріб (це можна інтерпретувати як десятковий дріб з нескінченною кількістю нулів), або нескінченний десятковий дріб з періодом.\\
-	Таким чином, $\mathbb{Q} \subset \mathbb{R}$.
-	\end{remark}
-	
-	\begin{definition}
-	Число $x \in \mathbb{R}$ називається \textbf{додатним}, якщо $\alpha_0$ має знак $+$, а також
-	\begin{align*}
-	\exists n \geq 0: \alpha_n > 0
-	\end{align*}
-	Позначення: $x > 0$.\\
-	У протилежному випадку $x$ називається \textbf{недодатним}. Позначення: $x \leq 0$.
-	\end{definition}
-	
-	\begin{remark}
-	Зазвичай для додатних чисел знак $+$ писати необов'язково.
-	\end{remark}
-
-	\begin{definition}
-	Число $x \in \mathbb{R}$ називається \textbf{від'ємним}, якщо $\alpha_0$ має знак $-$, а також
-	\begin{align*}
-	\exists n \geq 0: \alpha_n > 0
-	\end{align*}
-	Позначення: $x < 0$.\\
-	У протилежному випадку $x$ називається \textbf{невід'ємним}. Позначення: $x \geq 0$.
-	\end{definition}
-	
-	\begin{remark}
-	Можна зауважити, що $0 \in \mathbb{R}$ буде недодатним та невід'ємним одночасно. Тому коли будемо розписувати $0 = 0.000 \dots$, знак $\pm$ опускатимемо.
-	\end{remark}
-	
-	\begin{definition}
-	Задані $x,y \in \mathbb{R}$ тобто $x = \pm \alpha_0.\alpha_1 \alpha_2 \dots$ та $y = \pm \beta_0.\beta_1 \beta_2 \dots$\\
-	Числа $x,y$ називатимуться \textbf{рівними}, якщо або
-	\begin{align*}
-	\forall n \in \mathbb{N} \cup \{0\}: \alpha_n = \beta_n
-	\end{align*}
-	або
-	\begin{align*}
-	\exists n \in \mathbb{N} \cup \{0\}: \alpha_k = \beta_k \text{ при } 0 \leq k < n, \\ \alpha_n = \beta_n + 1, \\\alpha_m = 0, \beta_m = 9 \text{ при } m > n
-	\end{align*}
-	І при цьому їхні знаки збігатимуться.\\
-	Позначення: $x = y$.\\
-	У протилежному випадку вони будуть \textbf{нерівними}. Позначення: $x \neq y$.
-	\end{definition}
-	
-	Друга умова може трошки спантеличити, але на прикладі буде простіше.
-	
-	\begin{example}
-	Зокрема $0.25$ та $0.24999 \dots$ будуть вважатись однаковими. Із інтуїтивної точки зору, коли ми збільшуємо кількість цифр $9$, то ми наближаємось до $0.25$ все ближче й ближче.
-	\end{example}
-	
-	\begin{example}
-	Більш вагома мотивація, чому ми домовляємось про такі записи:\\
-	$\dfrac{1}{3} = 0.333 \dots$.\\
-	Якщо припустити, що ми навчились множити нескінченні десяткові дроби, то після множення на $3$ обидві частини, отримаємо:\\
-	$1 = 0.999 \dots$
-	\end{example}
-	
-	\begin{definition}
-	Задані $x = \pm\alpha_0.\alpha_1 \alpha_2 \dots$ та $y = \pm\beta_0.\beta_1 \beta_2 \dots$.\\
-	Якщо $x > 0, y > 0$, то будемо казати, що $x$ \textbf{менший за} $y$ (або $y$ \textbf{більший за} $x$), якщо
-	\begin{align*}
-	\exists n \in \mathbb{N} \cup \{0\}: \alpha_k = \beta_k \text{ при } 0 \leq k < n \\
-	\alpha_n < \beta_n
-	\end{align*}
-	Позначення: $x < y$ (або $y > x$).\\
-	Якщо $x < 0, y > 0$, то будемо завжди казати, що $x < y$.\\
-	Якщо $x < 0, y < 0$, у нас тоді $x = -\alpha_0.\alpha_1 \alpha_2 \dots$ та $y = -\beta_0.\beta_1 \beta_2 \dots$ Ми будемо казати, що $x < y$, якщо, взявши числа $x' = +\alpha_0.\alpha_1 \alpha_2 \dots, y' = +\beta_0.\beta_1 \beta_2 \dots$, ми отримаємо $x' > y'$.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-4,0)--(4,0);
-	\fill (0,0) circle(1pt) node[anchor = north] {$0$};
-	\fill (2,0) circle(1pt) node[anchor = north] {$x$};
-	\fill (3,0) circle(1pt) node[anchor = north] {$y$};
-	\end{tikzpicture}
-	\caption*{Випадок $x > 0, y > 0$.}
-	\end{figure}
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-4,0)--(4,0);
-	\fill (0,0) circle(1pt) node[anchor = north] {$0$};
-	\fill (-2,0) circle(1pt) node[anchor = north] {$x$};
-	\fill (1,0) circle(1pt) node[anchor = north] {$y$};
-	\end{tikzpicture}
-	\caption*{Випадок $x < 0, y > 0$.}
-	\end{figure}
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-4,0)--(4,0);
-	\fill (0,0) circle(1pt) node[anchor = north] {$0$};
-	\fill (-3,0) circle(1pt) node[anchor = north] {$x$};
-	\fill (-2,0) circle(1pt) node[anchor = north] {$y$};
-	\fill[red] (3,0) circle(1pt) node[anchor = north] {$x'$};
-	\fill[red] (2,0) circle(1pt) node[anchor = north] {$y'$};
-	\end{tikzpicture}
-	\caption*{Випадок $x < 0, y < 0$.}
-	\end{figure}
-	\end{definition}
-	
-	\begin{lemma}[Коректність нерівності]
-	Задано $a = \alpha_0.\alpha_1 \alpha_2 \dots$ -- невід'ємне число та $b \in \mathbb{Q}$, вона має дві репрезентації: $b' = \beta_0.\beta_1\dots \beta_n 00\dots$ та $b'' = \beta_0.\beta_1\dots (\beta_n-1) 99 \dots$.\\
-	$a < b' \iff a < b''$ \quad $a > b' \iff a > b''$.
-	\end{lemma}
-	
-	\begin{remark}
-	Після даної леми ми можемо надалі не розглядати числа, що містять $(9)$.
-	\end{remark}
-	
-	\begin{proof}
-	\rightproof Дано: $a < b'$, тобто існує $k \in \mathbb{N} \cup \{0\}$, для якого $\alpha_0 = \beta_0, \dots \alpha_{k-1} = \beta_{k-1}, \alpha_k < b_k$.\\
-	Якщо $k > n$, то $\beta = 0$ за умовою, тобто $\alpha_k < 0$, що взагалі неможливо для цифри $\alpha_k$. Тобто маємо тоді випадок $k \leq n$.\\
-	При $k = n$ маємо $\alpha_n < \beta_n$, а це еквівалентно $\alpha_n \leq \beta_n-1$.\\
-	Якщо $\alpha_n < \beta_n - 1$, тоді за означенням, $a < b''$.\\
-	Якщо $\alpha_n = \beta_n - 1$, то тоді серед $\alpha_{n+p}, p \geq 1$ має знайтись цифра, що не є дев'яткою. Бо якби всі $\alpha_{n+p} = 9$, то отримали би рівність $a = b'' = b'$, що неможливо, за умовою. Отже, тоді за означенням, $a < b''$.\\
-	При $k < n$ теж зрозуміло автоматично, що $a < b''$.
-	\bigskip \\
-	\leftproof Дано: $a < b''$, тобто існує $k \in \mathbb{N} \cup \{0\}$, для якого $\alpha_0 = \beta_0, \dots, \alpha_{k-1} = \beta_{k-1}, \alpha_k < \beta_k$.\\
-	Якщо $k > n$, то буде $\alpha_n = \beta_n - 1 < \beta_n$, а тому звідси $a < b'$.\\
-	Якщо $k = n$, то буде $\alpha_n < \beta_n - 1 < \beta_n$, а тому звідси $a < b'$.\\
-	Якщо $k < n$, то зрозуміло, що $a < b'$.
-	\end{proof}
-	
-	\begin{remark}
-	Якщо взяти довільні числа $a,b \in \mathbb{R}$, то в нас є лише одна з трьох опцій: \\ або $a = b$, або $a > b$, або $a < b$.
-	\end{remark}
-	
-	\begin{remark}
-	$a \leq b \iff \left[ \begin{gathered} a < b \\ a = b \end{gathered} \right.$
-	\end{remark}
-	
-	\subsection{Важливі твердження}
-	\begin{theorem}[Аксіома Архімеда]
-	Для кожного числа $a \in \mathbb{R}$ існує число $m \in \mathbb{N}$, для якого $m > a$.
-	\end{theorem}
-	
-	\begin{proof}
-	Маємо додатне $a \in \mathbb{R}$, тобто $a = \alpha_0.\alpha_1 \alpha_2 \dots > 0$. Покладемо $m = \alpha_0 + 1$. Тоді зрозуміло, що $m > a$ та $m \in \mathbb{N}$. При $a \leq 0$ можна взяти число $m = 1$.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-0.5,0)--(4,0);
-	\fill (0,0) circle(1pt) node[anchor = north] {$0$};
-	\fill (2,0) circle(1pt) node[anchor = north] {$3$};
-	\fill (2.563,0) circle(1pt) node[anchor = north] {$a$};
-	\fill[red] (3,0) circle(1pt) node[anchor = north west] {$m = 4$};
-	\end{tikzpicture}
-	\qquad
-	\begin{tikzpicture}
-	\draw[thick, ->] (-3.5,0)--(1.2,0);
-	\fill (0,0) circle(1pt) node[anchor = north] {$0$};
-	\fill (-2.563,0) circle(1pt) node[anchor = north] {$a$};
-	\fill[red] (1,0) circle(1pt) node[anchor = north] {$m = 1$};
-	\end{tikzpicture}
-	\end{figure}
-	\end{proof}
-	
-	\begin{theorem}
-	Нехай $a,b \in \mathbb{R}$, причому $a < b$. Тоді на інтервалі $(a,b)$ знайдеться раціональне число $q \in \mathbb{Q}$. 
-	\end{theorem}
-	
-	\begin{proof}
-	Нехай $a,b \in \mathbb{R}$ -- невід'ємні, $a = \alpha_0.\alpha_1 \alpha_2 \dots$ та $b = \beta_0.\beta_1 \beta_2 \dots$\\
-	Оскільки $a < b$, то звідси $\alpha_0 = \beta_0, \dots, \alpha_{m-1} = \beta_{m-1}$, але $\alpha_m < \beta_m$.\\
-	Нехай $k$ -- найменший номер, де $k > m$ та при цьому $\alpha_k < 9$. \\
-	Покладемо $q = \alpha_0.\alpha_1 \dots \alpha_m \alpha_{m+1} \dots \alpha_{k-1}(\alpha_k+1)$. Зауважимо, що $q \in \mathbb{Q}$, а також $a < q < b$.\\
-	Тепер нехай $a < 0$, тоді при $b > 0$ маємо раціональне число $0$. \\
-	При $b \leq 0$ ми розглядаємо числа $a',b'$, що були сконструйовані як $a,b$ з протилежним знаком. Тоді матимемо інтервал $(b',a')$, там раціональне число $q \in \mathbb{Q}$ вже існує. Але тоді число $-q \in (a,b)$.
-	\end{proof}
-
-%Not correct proof, because we don't know how to multiply both sides
-\iffalse
-	\begin{corollary}
-	Задано такі два числа $a,b \in \mathbb{R}$, що $a < b$. Тоді на інтервалі $(a,b)$ знайдеться принаймні одне ірраціональне число $x \in \mathbb{R} \setminus \mathbb{Q}$.
-	\end{corollary}
-	
-	\begin{proof}
-	Оскільки $a < b$, то звідси $\dfrac{a}{\sqrt{2}} < \dfrac{b}{\sqrt{2}}$. За попереднім наслідком, $\exists q \in \mathbb{Q}: \dfrac{a}{\sqrt{2}} < q < \dfrac{b}{\sqrt{2}}$.\\
-	Тоді якщо $x = q \sqrt{2}$, то звідси $a < x < b$. А число $x \in \mathbb{R} \setminus \mathbb{Q}$, бо квадратний корінь є ірраціональним.
-	\end{proof}
-\fi
-	
-	\begin{theorem}
-	Для кожного числа $a \in \mathbb{R}$ та для кожного $n \in \mathbb{N}$ знайдуться числа $q_1, q_2 \in \mathbb{Q}$, для яких $q_1 \leq a \leq q_2$, а також $q_2 - q_2 \leq \dfrac{1}{10^n}$.
-	\end{theorem}
-	
-	\begin{proof}
-	Випадок $a \in \mathbb{Q}$, можна взагалі покласти $q_1 = q_2 = 0$. Все працює.\\
-	Випадок $a \geq 0, a \in \mathbb{R} \setminus \mathbb{Q}$. Маємо число $a = \alpha_0.\alpha_1 \alpha_2 \dots$ Тоді можна покласти\\
-	$q_1 = \alpha_0.\alpha_1 \dots \alpha_n$ \quad $q_2 = q_1 + \dfrac{1}{10^n}$.\\
-	Нерівність $q_1 \leq a \leq q_2$ зрозуміло, що виконується, а також $q_2 - q_1 = \dfrac{1}{10^n}$.\\
-	Випадок $a < 0, a \in \mathbb{R} \setminus \mathbb{Q}$. Візьмемо число $b = -\alpha_0.\alpha_1 \alpha_2 \dots$. Тепер тут $b > 0$, а для нього вже довели, що існують $q_1,q_2 \in \mathbb{Q}$, для яких $q_1 \leq b \leq q_2$, а також $q_1 - q_2 \leq \dfrac{1}{10^n}$. Тоді з цього випливає, що $-q_2 \leq a \leq -q_1$.
-	\end{proof}
-	
-	\subsection{Точкові межі}
-\begin{definition}
-Задано множини $A,B \subset \mathbb{R}$.\\
-	Множина $A$ називається \textbf{обмеженою зверху}, якщо
-	\begin{align*}
-	\exists c \in \mathbb{R}: \forall a \in A: a \leq c
-	\end{align*}
-	Множина $B$ називається \textbf{обмеженою знизу}, якщо
-	\begin{align*}
-	\exists d \in \mathbb{R}: \forall b \in B: b \geq d
-	\end{align*}
-\end{definition}
-	Множину всіх чисел, що обмежують множину зверху, позначу за $\text{Up}A$, тобто
-	\begin{align*}
-	\text{Up}A = \{c \in \mathbb{R}: \forall a \in A: a \leq c \}
-	\end{align*}
-	Множину всіх чисел, що обмежують множину зверху, позначу за $\text{Down}B$, тобто
-	\begin{align*}
-	\text{Down}B = \{d \in \mathbb{R}: \forall b \in B: b \geq d \}
-	\end{align*}
-	
-	\begin{definition}
-	Задано множини $A,B \subset \mathbb{R}$.\\
-	Елемент $a \in A$ називається \textbf{найбільшим елементом} множини $A$, якщо
-	\begin{align*}
-	\forall \tilde{a} \in A: a \geq \tilde{a}
-	\end{align*}
-	Позначення: $a = \max A$.\\
-	Елемент $b \in B$ називається \textbf{найменшим елементом} множини $B$, якщо
-	\begin{align*}
-	\forall \tilde{b} \in B: b \leq \tilde{b}
-	\end{align*}
-	Позначення: $b = \min B$.
-	\end{definition}
-	
-	\begin{remark}
-	Якщо $A \subset \mathbb{R}$ -- скінченна множина, то гарантовано існують найбільший та найменший елементи. Якщо $A \subset \mathbb{R}$ -- нескінченна множина, то там не гарантується існування.
-	\end{remark}
-	
-	\begin{example}
-	Задано множину $A = \{1-2^{-n} | n \in \mathbb{N}\} = \left\{\dfrac{1}{2}, \dfrac{3}{4}, \dfrac{7}{8}, \dots \right\}$. Вона є:\\
-	обмеженою зверху числом $2 \in \mathbb{R}$, тобто $\forall a \in A: a < 2$;\\
-	обмеженою знизу числом $0 \in \mathbb{R}$, тобто $\forall a \in A: a > 0$.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}[scale = 4]
-	\draw[thick,->] (-0.1,0)--(2.1,0);
-	%\draw[red] (1,-1pt)--(1,1pt) node at (1,-0.1) {$1$};
-	\draw[red] ({1/2},-1pt)--({1/2},1pt) node at ({1/2},-0.12) {$\dfrac{1}{2}$};;
-	\draw[red] ({3/4},-1pt)--({3/4},1pt) node at ({3/4}, -0.12) {$\dfrac{3}{4}$};
-	\draw[red] ({7/8},-0.75pt)--({7/8},0.75pt) node at ({7/8}, -0.12) {$\dfrac{7}{8}$};
-	\draw[red] ({15/16},-0.75pt)--({15/16},0.75pt);
-	\draw[red] ({31/32},-0.5pt)--({31/32},0.5pt) node[black, anchor = south, scale=0.8]{$\dots$};
-	\draw[red] ({63/64},-0.5pt)--({63/64},0.5pt);
-	\draw[red] ({127/128},-0.25pt)--({127/128},0.25pt);
-	\draw[red] ({255/256},-0.25pt)--({255/256},0.25pt);
-	
-	\draw[blue] (2,-1.5pt)--(2,1.5pt) node at (2,-0.1) {$2$};
-	\draw[blue] (0,-1.5pt)--(0,1.5pt) node at (0,-0.1) {$0$};
-	\end{tikzpicture}
-	\end{figure}
-	На цій множині $\min A = \dfrac{1}{2}$, оскільки $\dfrac{1}{2} = 1 - \dfrac{1}{2} \leq 1 - \dfrac{1}{2^n}$, для будь-якого $n \in \mathbb{N}$.\\
-	Але ось $\max A$ не існує. Якщо припустити, що він є, тобто $\max A = 1 - \dfrac{1}{2^m}$ при $m \in \mathbb{N}$, то звідси отримаємо, що $1 - \dfrac{1}{2^m} \geq 1 - \dfrac{1}{2^n}$ для всіх $n \in \mathbb{N}$. Утім при $n \geq m$ ми отримаємо суперечність в нерівності.
-	\end{example}
-	
-	Судячи з малюнку, ми розуміємо, що ми сильно грубо обмежили множину зверху та знизу. Ми хочемо більш точну межу. Для цього допоможуть нам пару фактів.
-	
-	\begin{proposition}
-	Якщо $c \in \text{Up}A$ та $c_1 > c$, то $c_1 \in \text{Up}A$.
-	Аналогічно якщо $d \in \text{Down}B$ та $d_1 < d$, то $d_1 \in \text{Down}B$.\\
-	\textit{Обидва твердження випливають з визначення множин.}
-	\end{proposition}
-	
-	\begin{remark}
-	Множина $\text{Up}A$ обмежена знизу, а множина $\text{Down}B$ обмежена зверху.\\
-	\textit{Випливає з означень обмеженості.}
-	\end{remark}
-	
-	\begin{proposition}
-	Для множини $\text{Up}A$ існує мінімальний елемент, а для множини $\text{Down}B$ існує максимальний елемент. Причому, вони єдині.
-	\end{proposition}
-	
-	\begin{proof}
-	Достатньо розглянути випадок, коли $A \subset [0,+\infty)$.\\
-	Оскільки $A$ обмежена зверху, то $\exists c \in \mathbb{R}: \forall a \in A: a \leq c$. Але ми можемо перебрати число $c \in \mathbb{N}$ в силу аксіоми Архімеда.\\
-	Позначимо $B_0 = \{ \alpha_0 \in \mathbb{N} \cup \{0\} \mid \exists a \in A: a = \alpha_0.\alpha_1\alpha_2 \dots \}$. Вона непорожня, тому що $A \subset [0,+\infty)$. Множина обмежена зверху, тому що $\forall \alpha_0 \in B_0: \alpha_0 \leq c$, в силу того, що $\forall a \in A: a \leq c$. Також слід зазначити, що $B_0 \subset \mathbb{N} \cup \{0\}$. Із всього цього випливає, що $B_0$ скінченна множина, а тому знайдеться $\max B_0 \overset{\text{позн.}}{=} \omega_0$.\\
-	Покладемо $A_0 = \{a \in A: a = \omega_0.\alpha_1 \alpha_2 \dots\}$, де $A_0 \subset A$ та непорожня.\\
-	Позначимо $B_1 = \{ \alpha_1 \text{ -- цифра} \mid \exists a \in A_0: a = \omega_0.\alpha_1 \alpha_2 \dots \}$. Вона непорожня, бо непорожньою є $B_0$. Множина обмежена зверхну числом $9$, а також сама множина $B_1 \subset \{0,1,2,3,4,5,6,7,8,9\}$. з всього цього випливає, що $B_1$ скінченна, а тому знайдеться $\max B_1 \overset{\text{позн.}}{=} \omega_1$.\\
-	Покладемо $A_1 = \{a \in A_0: a = \omega_0.\omega_1 \alpha_2 \dots\}$, де $A_1 \subset A_0$ та непорожня.\\
-	Позначимо $B_2 = \{ \alpha_2 \text{ -- цифра} \mid \exists a \in A_1: a = \omega_0.\omega_1\alpha_2 \dots \}$.\\
-	$\vdots$\\
-	Повторюючи це, ми отримаємо $\omega_0.\omega_1\omega_2\dots \overset{\text{позн.}}{=} z$. Доведемо, що саме цей елемент $z = \min \text{Up} A$.\\
-	Спочатку покажемо, що $z$ обмежує множину $A$ зверху. Справді,\\
-	$\forall a = \alpha_0.\alpha_1\alpha_2\dots \in A: \alpha_0 \leq \omega_0$. Якщо $\alpha_0 < \omega_0$, то автоматично $a < z$, інашке розглянемо $\alpha_0 = \omega_0$.\\
-	Маємо $\alpha_1 \leq \omega_1$. Якщо $\alpha_1 < \omega_1$, то автоматично $a < z$, інашке розглянемо $\alpha_1 = \omega_1$.\\
-	$\vdots$\\
-	В результаті або $\exists n > 0: \alpha_0 = \omega_0 , \dots, \alpha_{n-1} = \omega_{n-1}$ та $\alpha_n < \omega_n$, що гарантує в результаті $a < z$; або $\forall n \geq 0: \alpha_n = \omega_n$, що дає $a = z$. Отже, $a \leq z \implies z \in \text{Up}A$.\\
-	Нехай $d \in \text{Up}A$, але при цьому $d = \delta_0.\delta_1\delta_2 < z$. Тим самим ми припускаємо, що є ще менший елемент. Тоді $\exists n \geq 0: \delta_0 = \omega_0, \dots, \delta_{n-1} = \omega_{n-1}$ та $\delta_n < \omega_n$. Тоді звідси випливає, що $\exists x \in A_n \subset A: x > d$, але при цьому ми дововлялись $\forall x \in A: x \leq d$. Отже, $d \not\in \text{Up}A$, а тому $z = \displaystyle\min \text{Up}A$.
-	\bigskip \\
-	Якщо $A \subset \mathbb{R}$, то можна відокремити $A' \subset A$, де $A' \subset [0,+\infty)$, тобто звідси максимум уже існує. При цьому $\min \text{Up} A = \min \text{Up} A'$ - показати цю рівність цілком неважко.
-	\bigskip \\
-	Якщо $A' = \emptyset$, тобто $A$ має лише від'ємні числа, то тоді розглянемо множину $A_{pos} = \{-a | a \in A\}$, для якої треба буде знайти $\max \text{Down} A$ (зрозуміло, що ця множина обмежена знизу). Процедура знаходженню аналогічна, що було вище, тільки там ми тепер шукаємо найменше число та найменшу цифру. Отримаємо елемент $z = \displaystyle\max \text{Down} A_{pos}$ - ця рівність показується аналогічно. Далі варто зауважити, що $\max \text{Down} A_{pos} = \min \text{Up} A = z$ - те, що хотіли знайти.
-	\end{proof}
-	
-	Абсолютно аналогічні міркування відбуваються на доведення існування $\max \text{Down} B$.
-	
-	\begin{definition} Задано множини $A,B \subset \mathbb{R}$.\\
-	\textbf{Точковою верхньою межею} називають таке число:
-	\begin{align*}
-	\sup A = \min\text{Up}A
-	\end{align*}
-	\textbf{Точковою нижньою межею} називають таке число:
-	\begin{align*}
-	\inf B = \max\text{Down}B
-	\end{align*}
-	\end{definition}
-	
-	\begin{theorem}[Критерій супремуму або інфімуму]
-		$c' = \sup A \iff \begin{cases}
-	 \forall a \in A: a \leq c' \\
-	 \forall c < c': \exists a \in A: a > c
-	\end{cases}$ \hspace{0.1cm} або \hspace{0.1cm}
-	$d' = \inf B \iff \begin{cases} 
-	 \forall b \in B: b \geq d'\\
-	 \forall d > d': \exists b \in B: b < d
-	\end{cases}$
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (0,0)--(5,0) node at (1,0.5) {$A$};
-	\draw[thick] (4,-3pt)--(4,3pt) node at (4.8,0.5) {$c' = \sup A$};
-	\draw node at (3.5,0) {$|$};
-	\draw node at (3.5, -0.5) {$c$};
-	
-	\node[red] at (3.7,0.2) {$a$};
-	\draw[thick, red] (3.5,0)--(4,0);
-	\end{tikzpicture}
-	\qquad
-	\begin{tikzpicture}
-	\draw[thick, ->] (0,0)--(5,0) node at (3.5,0.5) {$B$};
-	\draw[thick] (2,-3pt)--(2,3pt) node at (1.5,0.5) {$d' = \inf B$};
-	\draw node at (2.5,0) {$|$};
-	\draw node at (2.8, -0.5) {$d$};
-	\node[red] at (2.4,-0.2) {$b$};
-	\draw[thick, red] (2,0)--(2.5,0);
-	\end{tikzpicture}
-	\end{figure}
-	\end{theorem}
-	
-	\begin{proof}
-	\rightproof Дано: $c' = \sup A$\\
-	Тоді автоматично $c' \in \text{Up}A$, тобто $\forall a \in A: a \leq c'$.\\
-	Оскільки $c' = \min \text{Up} A$, то звідси $\forall c < c': c \not\in \text{Up}A$, тоді $\exists a \in A: a > x$.\\
-	Остання умова - це заперечення того, що $c$ обмежує множину $A$ зверху.
-	\bigskip \\
-	\leftproof Дано: система з двох умов.\\
-	Із першої умови, $c' \in \text{Up}A$. Із другої умови, $c' = \min \text{Up} A$. Отже, $c' = \sup A$
-	\end{proof}
-	
-	\begin{corollary}[Інший вигляд критерію]
-	$c' = \sup A \iff \begin{cases} 
-	 \forall a \in A: a \leq c' \\
-	 \forall \varepsilon > 0: \exists a_{\varepsilon} \in A: a_{\varepsilon} > c' - \varepsilon
-	\end{cases}$ \hspace{0.1cm} або \hspace{0.1cm}
-	$d' = \inf B \iff \begin{cases} 
-	 \forall b \in B: b \geq d'\\
-	 \forall \varepsilon > 0: \exists b_{\varepsilon} \in B: b_{\varepsilon} < d' + \varepsilon
-	\end{cases}$\\
-	\textit{Вказівка: $c = c'-\varepsilon$}.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (0,0)--(5,0) node at (1,0.5) {$A$};
-	\draw[thick] (4,-3pt)--(4,3pt) node at (4.8,0.5) {$c' = \sup A$};
-	\draw node at (3.5,0) {$($};
-	\draw node at (3.5, -0.5) {$c' - \varepsilon$};
-	\draw[thick, red] (3.5,0)--(4,0);
-	\end{tikzpicture}
-	\qquad
-	\begin{tikzpicture}
-	\draw[thick, ->] (0,0)--(5,0) node at (3.5,0.5) {$B$};
-	\draw[thick] (2,-3pt)--(2,3pt) node at (1.5,0.5) {$d' = \inf B$};
-	\draw node at (2.5,0) {$)$};
-	\draw node at (2.8, -0.5) {$d' + \varepsilon$};
-	\draw[thick, red] (2,0)--(2.5,0);
-	\end{tikzpicture}
-	\caption*{Другий пункт критерію звучить так. Якщо я цей супрему зменшу на певну величину, то це не буде супремумом, а значить, знайдеться певний елемент, що буде його перевищувати. Аналогічно з інфімумом.}
-	\end{figure}
-	\end{corollary}
-	
-	\begin{example}
-	Повернімось до множини $A = \{1-2^{-n} | n \in \mathbb{N}\} = \left\{\dfrac{1}{2}, \dfrac{3}{4}, \dfrac{7}{8}, \dots \right\}$.\\
-	Доведемо, що $\sup A = 1$.\\
-	Дійсно, $\forall a \in A: a = 1 - \dfrac{1}{2^n} < 1$.\\
-	Нехай $c < 1$. Знайдемо таке число $a \in A$, щоб $a > c$.\\
-	$1 - \dfrac{1}{2^n} > 1 - \dfrac{1}{2n} > c \iff \dfrac{1}{2n} < 1-c \iff n > \dfrac{1}{2-2c}$\\
-	Ця нерівність каже, що існує такий номер $n \in \mathbb{N}$, щоб взяти елемент $a \in A$, для якого, $a > c$. Можна номер $n$ знайти за принципом Архімеда. \iffalse Але якщо точніше, ми можемо взяти $n = \left[ \dfrac{1}{2-2c} \right] + 1$, проте про цілу частину треба ще згодом поговорити.\fi
-	\bigskip \\
-	Зрозуміло, до речі, що $\inf A = \dfrac{1}{2}$, бо ми вже з'ясували, що $\min A = \dfrac{1}{2}$.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}[scale = 4]
-	\draw[thick,->] (0.1,0)--(1.1,0);
-	%\draw[red] (1,-1pt)--(1,1pt) node at (1,-0.1) {$1$};
-	\draw[red] ({1/2},-1pt)--({1/2},1pt) node at ({1/2},-0.2) {$\dfrac{1}{2}$};;
-	\draw[blue] ({1/2},-2.5pt)--({1/2},-1pt);
-	\draw[blue] ({1/2},1pt)--({1/2},2.5pt);
-	\draw[red] ({3/4},-1pt)--({3/4},1pt) node at ({3/4}, -0.12) {$\dfrac{3}{4}$};
-	\draw[red] ({7/8},-0.75pt)--({7/8},0.75pt) node at ({7/8}, -0.12) {$\dfrac{7}{8}$};
-	\draw[red] ({15/16},-0.75pt)--({15/16},0.75pt);
-	\draw[red] ({31/32},-0.5pt)--({31/32},0.5pt) node[black, anchor = south, scale=0.8]{$\dots$};
-	\draw[red] ({63/64},-0.5pt)--({63/64},0.5pt);
-	\draw[red] ({127/128},-0.25pt)--({127/128},0.25pt);
-	\draw[red] ({255/256},-0.25pt)--({255/256},0.25pt);
-	
-	\draw[blue] (1,-2.5pt)--(1,2.5pt) node at (1,-0.2) {$1$};
-	\end{tikzpicture}
-	\end{figure}
-	\end{example}
-	
-	\begin{remark}
-	У цьому прикладі $\inf A = \min A$, оскільки сам інфімум міститься на множині $A$. Водночас $\sup A \neq \max A$, тому що цей елемент не знаходиться на множині $A$.
-	\end{remark}
-	
-	\begin{definition}
-	Множина $F \subset \mathbb{R}$ називається \textbf{обмеженою}, якщо або вона є обмеженою зверху та знизу одночасно.
-	\end{definition}
-	
-	\begin{remark}
-	Означення того, що $F$ - \textbf{обмежена}, можна переписати в більш зручному вигляді:
-	\begin{align*}
-	\exists p>0: \forall f \in F: |f| \leq p
-	\end{align*}
-	\end{remark}
-	
-	\begin{remark}
-	Більшість авторів роблять ось таку домовленість:\\
-	якщо $A$ не є обмеженою зверху, то вважаємо $\sup A = +\infty$;\\
-	якщо $B$ не є обмеженою знизу, то вважаємо $\inf B = -\infty$.
-	\end{remark}
-	
-	\subsection{Дії над дійсними числами}
-	Нехай $a,b \in \mathbb{R}$, оберемо $n \in \mathbb{N}$. Нам вже відомо, що $\exists q_1,q_2,r_1,r_2 \in \mathbb{Q}$, для яких виконуються $\begin{cases} q_1 \leq a \leq q_2 \\ r_1 \leq b \leq r_2 \end{cases} \quad (I)$.
-	\begin{definition}
-	\textbf{Сумою} чисел $a,b \in \mathbb{R}$ назвемо число $c \in \mathbb{R}$ таке, що
-	\begin{align*}
-	\forall r_1, q_1, r_2, q_2, \text{ що задовольняють умові } (I): q_1 + r_1 \leq a + b \leq r_2 + q_2
-	\end{align*}
-	Позначення: $c = a+b$.
-	\end{definition}
-	
-	\begin{lemma}
-	Для довільних $a,b \in \mathbb{R}$ сума $a+b$ існує, причому єдиним чином.
-	\end{lemma}
-	
-	\begin{proof}
-	Зауважимо, що $q_1 + r_1 \leq q_2 + r_2$, згідно з умовою $(I)$. Зафіксуємо якусь суму $q_2, r_2$, тобто сума $q_2 + r_2$ не змінюватиметься. Тоді множина $\{q_1 + r_1 \mid q_1,r_1 \in \mathbb{Q}\} \subset \mathbb{R}$ буде обмеженою зверху. А тому існує $\displaystyle\sup_{q_1,r_1 \in \mathbb{Q}} \{ q_1 + r_1 \} = c$.\\
-	За критерієм супремума, $q_1 + r_1 \leq c$, але також $c$ найменша верхня межа серед меж $q_2 + r_2$. Тобто $c \leq q_2 + r_2$. Отже, число $c = a + b$.
-	\bigskip \\
-	!Припустимо, що в нас є дві суми $c_1, c_2$. Скажімо, $c_1 < c_2$. Тоді $q_1 + r_1 \leq c_1 < c_2 \leq q_2 + r_2$. Але ми знаємо, що між $(c_1, c_2)$ ми можемо знайти раціональне число (навіть не одне) $s_1,s_2 \in \mathbb{Q}$, для яких\\
-	$q_1 + r_1 \leq c_1 < s_1 < s_2 < c_2 \leq q_2 + r_2$.\\
-	Маємо число $s_2 - s_1 = d > 0$. Також маємо\\
-	$(q_2 + r_2) - (q_1 + r_1) > s_2 - s_1 = d$\\
-	Однак $(q_2 + r_2) - (q_1 + r_1) = (q_2 - q_1) + (r_2 - r_1) < \dfrac{d}{3} + \dfrac{d}{3} < d$. Ми же відстані між числами $q_1,q_2,r_1,r_2$ можемо робити як завгодно малими в силу нерівності. Суперечність!
-	\end{proof}
-	
-	\begin{definition}
-	\textbf{Добутком} чисел $0 < a, 0 < b$ при $a,b \in \mathbb{R}$ назвемо число $c \in \mathbb{R}$ таке, що
-	\begin{align*}
-	\forall r_1, q_1, r_2, q_2, \text{ що задовольняють умові } (I): q_1 \cdot r_1 \leq c \leq r_2 \cdot q_2
-	\end{align*}
-	Позначення: $c = a \cdot b$.\\
-	Розглянемо інші випадки, ми візьмемо $a'$ - протилежне зі знаком $a$ при $a < 0$; $b'$ - протилежне зі знаком $b$ при $b < 0$.\\
-	У випадку $a < 0, b < 0$ ми покладемо $a \cdot b = - (a' \cdot b)$.\\
-	У випадку $a < 0, b < 0$ ми покладемо $a \cdot b = a' \cdot b'$.
-	\end{definition}
-	
-	\begin{lemma}
-	Для довільних $a,b \in \mathbb{R}$ сума $a \cdot b$ існує, причому єдиним чином.
-	\end{lemma}
-	
-	\begin{proof}
-	Нехай $a > 0, b > 0$. А далі, насправді, існування доводиться аналогічно, тому розписувати не буду. Єдине, що можна зауважити, що ми можемо обмежитись $q_1,q_2,r_1,r_2 > 0$.
-	\bigskip \\
-	!Припустимо, що в нас є два добутка $c_1, c_2$. Скажімо, $c_1 < c_2$. Тоді $q_1 \cdot r_1 \leq c_1 < c_2 \leq q_2 \cdot r_2$. Але ми знаємо, що між $(c_1, c_2)$ ми можемо знайти раціональне число (навіть не одне) $s_1,s_2 \in \mathbb{Q}$, для яких\\
-	$q_1 \cdot r_1 \leq c_1 < s_1 < s_2 < c_2 \leq q_2 \cdot r_2$.\\
-	Маємо число $s_2 - s_1 = d > 0$. Також маємо\\
-	$q_2 \cdot r_2 - q_1 \cdot r_1 > s_2 - s_1 = d$\\
-	Однак $q_2 \cdot r_2 - q_1 \cdot r_1 = q_2 (r_2 - r_1) + r_1 (q_2 - q_1) \leq M(r_2 - r_1) + M(q_2 - q_1) < M \dfrac{d}{3M} + M \dfrac{d}{3M} < d$. Ми же відстані між числами $q_1,q_2,r_1,r_2$ можемо робити як завгодно малими в силу нерівності. А тепер постає питання, що це нафіг за $M$.\\
-	А це раціональне число $M \in \mathbb{Q}$ таке, що $a \leq M, b \leq M$. Таке число існує, зокрема можна покласти $M = \max \{ \alpha_0, \beta_0 \} + 1$, тут $\alpha_0, \beta_0$ - ціла частина двох чисел $a,b$. При цьому ми можемо розглянути $q_2,r_2$ так, що $q_2 \leq M, r_2 \leq M$. При цих інсталяціях буде суперечність!
-	\end{proof}
-	
-	\begin{definition}
-	\textbf{Оберненим} до числа $a > 0$ при $a \in \mathbb{R}$ називається число $c \in \mathbb{R}$, для якого
-	\begin{align*}
-	\forall r_1,r_2, \text{ що задовольняють умові } (I): \dfrac{1}{r_2} \leq c \leq \dfrac{1}{r_1}
-	\end{align*}
-	У випадку $a < 0$ беремо число $a'$, що зі знаком протилежний, шукаємо оборотний $c'$. Тоді протилежний $c$ назвемо оборотним до $a$.\\
-	Позначення: $c = a^{-1}$.
-	\end{definition}
-	
-	\begin{lemma}
-	Для довільних $a \in \mathbb{R}$ обернений $a^{-1}$ існує, причому єдиним чином.
-	\end{lemma}
-	
-	\begin{proof}
-	Зауважимо, що коли $r_1 \leq r_2$, то звідси $\dfrac{1}{r_2} \leq \dfrac{1}{r_1}$, а далі аналогічно доводиться існування.
-	\bigskip \\
-	!Припустимо, що в нас $c_1,c_2$ - два обернених. Тоді $\dfrac{1}{r_2} \leq c_1 < c_2 \leq \dfrac{1}{r_1}$.\\
-	Ми можемо знайти раціональні $r_1,r_2 \in \mathbb{Q}$, для яких $\dfrac{1}{r_2} \leq c_1 < r_1 < r_2 < c_2 \leq \dfrac{1}{r_1}$.\\
-	Нехай $r_2 - r_1 = d > 0$, тоді звідси $\dfrac{1}{r_1} - \dfrac{1}{r_2} > d$.\\
-	Можна обрати число $T$, щоб $T \leq r_1 \leq r_2$.\\
-	$\dfrac{1}{r_1} - \dfrac{1}{r_2} = \dfrac{r_2-r_1}{r_1r_2} \leq \dfrac{r_2-r_1}{T^2}$.\\
-	Узявши $r_2 - r_1 < \dfrac{cT^2}{2}$, отримаємо суперечність!
-	\end{proof}
-	
-	\begin{remark}
-	Задані операції $+, \cdot$ будуть коректними по відношення до раціональних чисел.
-	\end{remark}
-	
-	\begin{theorem}
-	Операції $+, \cdot, \leq$ задовольняють таким властивостям:
-	\begin{center}
-	\begin{tabular}{lll}
-	властивості для $+$ & властивості для $\cdot$ & властивості для $\leq$ \\
-	1. $x+y = y+x$ & 5. $x \cdot y = y \cdot x$ & 9. $x \leq x$ \\
-	2. $x +(y+z) = (x+y) + z$ & 6. $x \cdot (y \cdot z) = (x \cdot y) \cdot z$ & 10. $x \leq y, \quad y \leq x \implies x = y$ \\
-	3. $x + 0 = x$ & 7. $x \cdot 1 = x$ & 11. $x \leq y, \quad y \leq z \implies x \leq z$ \\
-	4. $x + (-x) = 0$ & 8. $x \cdot \dfrac{1}{x} = 1$ & \\
-	\end{tabular}
-	\end{center}
-	12. $x \cdot (y+z) = x \cdot y + x \cdot z$\\
-	13. $x \leq y \implies x + z \leq y + z$\\
-	14. $0 \leq x, \quad 0 \leq y \implies 0 \leq xy$.
-	\end{theorem}
-	
-	\begin{proof}
-	1. Для числа $x+y$ маємо, що $\forall q_1, r_1, q_2, r_2$, що задовольняють умові $(I)$, $q_1 + r_1 \leq x + y \leq q_2 + r_2$.\\
-	Для числа $y+x$ маємо, що $\forall q_1, r_1, q_2, r_2$, що задовольняють умові $(I)$, $r_1 + q_1 \leq x + y \leq r_2 + q_2$.\\
-	Але зауважимо, що $r_2 + q_2 = q_2 + r_2$ та $r_1 + q_1 = q_1 + r_1$ (для раціональних чисел це можна). Тобто обмеженість зверху та знизу однакова. У силу єдиності, маємо $x + y = y + x$.
-	\bigskip \\
-	2. Доводиться аналогічно, як 1.
-	\bigskip \\
-	3. Для числа $0 \in \mathbb{R}$ існують раціональні числа $0 \in \mathbb{Q}$, для яких $0 \leq 0 \leq 0$, як би це дивно не звучало. Тож для таких чисел маємо $q_1 + 0 \leq x + 0 \leq q_2 + 0$. Але водночас $q_1 + 0 = q_1, q_2 + 0 = q_2$, отримаємо звідси $q_1 \leq x + 0 \leq q_2$ - таке ж обмеження, що й $x$. Отже, $x + 0 = x$.
-	\bigskip \\
-	4. Для числа $x$ маємо $\forall q_1,q_2 \in \mathbb{Q}: q_1 \leq x \leq q_2$. Водночас зафіксуємо число $x'$ - це буде число $x$, але з протилежним знаком. Тоді $-q_2 \leq x' \leq -q_1$. Таким чином,\\
-	$q_1 - q_2 \leq x \leq q_2 - q_1$.\\
-	Ліворуч завжди буде недодатне, а ліворуч буде невід'ємним. Лише число $0$ може задовольняти такій нерівності. Тож в силу єдиності, $x + x' = x + (-x) = 0$.
-	\bigskip \\
-	Абсолютно аналогічними міркуваннями: 5 доводиться як 1, 6 доводиться як 2, 7 доводиться як 3, 8 доводиться як 4.
-	\bigskip \\
-	9. $x \leq x \iff \left[ \begin{gathered} x < x \\ x = x \end{gathered} \right.$. Зрозуміло, що друга умова автоматично виконується, а тому виконується відповідна нерівність.
-	\bigskip \\
-	10. !Припустимо, що $x \neq y$. Скажімо, $x > y$. Ми одночасно маємо дві умови: $x \leq y, x > y$. Оскільки $x \neq y$, то тоді маємо дві умови: $x < y, x > y$. Суперечність!
-	\bigskip \\
-	11. Якщо $x = y$, то тоді виконується. Якщо $y = z$, то тоді виконується. \\
-	Якщо $x < y$ та $y < z$, то тоді $\exists n \in \mathbb{N} \cup \{0\}: \alpha_0 = \beta_0, \dots, \alpha_{n-1} = \beta_{n-1}, \alpha_n < \beta_n$. Також $\exists m \in \mathbb{N} \cup \{0\}: \beta_0 = \gamma_0, \dots, \beta_{m-1} = \gamma_{m-1}, \beta_m < \gamma_m$.\\
-	Оберемо $k = \min \{m,n\}$, тоді $\alpha_0 = \beta_0 = \gamma_0, \dots, \alpha_{k-1} = \beta_{k-1} = \gamma_{k-1}$, а далі при $k$ маємо $\alpha_k < \gamma_k$ в будь-якому випадку. Отже, $x < z$.
-	\bigskip \\
-	12. Доводиться аналогічно, як 1.
-	\bigskip \\
-	13. При $x = y$ маємо $x + z = y + z$.\\
-	При $x < y$ знайдуться раціональні $\gamma_1, \gamma_2$, щоб $x < \gamma_1 < \gamma_2 < y$.\\
-	Ми оберемо $q_1,q_2,r_1,r_2$ із умови $(I)$ так, щоб виконувалось\\
-	$q_1 \leq x \leq q_2 \leq \gamma_1 < \gamma_2 \leq r_1 \leq y \leq r_2$.\\
-	Тепер нехай $z \in \mathbb{R}$ задано, де $s_1,s_2 \in$ задовольняють умові $(I)$. Тоді за означенням додавання,\\
-	$q_1 + s_1 \leq x + z \leq q_2 + s_2$ \quad $r_1 + s_1 \leq y + z \leq r_2 + s_2$.\\
-	Ми хочемо довести, що $q_2 + s_2 < r_1 + s_1 \iff s_2 - s_1 < r_1 - q_2$.\\
-	Ми вже обрали так $q_2, r_1$, щоб $q_2 < r_1$. Тоді $r_1 - q_2 = d > 0$.\\
-	Достатньо взяти $s_1,s_2$ так, щоб $s_2 - s_1 < d$. Тоді бажана нерівність виконана.\\
-	Отже, $x + z \leq q_2 + s_2 < r_1 + s_1 \leq y + z \implies x + z < y + z$.
-	\bigskip \\
-	14. При $x = 0$ або $y = 0$ виконується $xy = 0$.\\
-	Нехай $x > 0, y > 0$. Тоді аналогічними міркуваннями, через $(I)$, а також через означення множення, ми зможемо підібрати так раціональні числа, щоб $xy > 0$.
-	\end{proof}
-	
-	\begin{theorem}[Повнота дійсних чисел]
-	Нехай $A,B \subset \mathbb{R}$ - непорожні множини так, що $\forall a \in A, \forall b \in B: a \leq b$.\\
-	Тоді $\exists c \in \mathbb{R}: \forall a \in A: \forall b \in B: a \leq c \leq b$.\\
-	\textit{Вказівка: покласти $c = \sup A$.}
-	\end{theorem}
-	
-	\begin{theorem}
-	Задано такі два числа $a,b \in \mathbb{R}$, що $a < b$. Тоді на інтервалі $(a,b)$ знайдеться ірраціональне число $x \in \mathbb{R} \setminus \mathbb{Q}$.
-	\end{theorem}
-	
-	\begin{proof}
-	Оскільки $a < b$, то звідси $\dfrac{a}{\sqrt{2}} < \dfrac{b}{\sqrt{2}}$. За попереднім наслідком, $\exists q \in \mathbb{Q}: \dfrac{a}{\sqrt{2}} < q < \dfrac{b}{\sqrt{2}}$.\\
-	Тоді якщо $x = q \sqrt{2}$, то звідси $a < x < b$. А число $x \in \mathbb{R} \setminus \mathbb{Q}$, бо квадратний корінь є ірраціональним.
-	\end{proof}
-
-	\subsection{Деякі важливі твердження з принципа Архімеда}
-	\begin{corollary}
-	Множина натуральних чисел $\mathbb{N}$ не є обмеженою зверху.\\
-	\textit{Випливає з принципа Архімеда. Там записано заперечення до множини, що є обмеженою зверху.}
-	\end{corollary}
-	
-	\begin{corollary}
-	Множина цілих чисел $\mathbb{Z}$ взагалі не обмежена.
-	\end{corollary}
-	
-	\begin{proof}
-	Зафіксуємо два числа $a,-a \in \mathbb{R}$. Тоді за попереднім наслідком,\\
-	$\exists n \in \mathbb{N} \Rightarrow n \in \mathbb{Z}: n > a$.\\
-	$\exists m \in \mathbb{N}: m > (-a) \Rightarrow -m < a$, тут вже $-m \in \mathbb{Z}$.
-	\end{proof}
-	
-	\begin{theorem} $\forall x \in \mathbb{R}: \forall y > 0: \exists ! k \in \mathbb{Z}: (k-1)y \leq x < ky$
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick] (0,0)--(4.5,0) node[anchor = south] {$x = 4.5$};
-	\draw[thick,red] (0,-0.6)--(1,-0.6) node[anchor = south] {$y = 1$};
-	\draw[thick,red] (0,-0.6-0.05)--(0,-0.6+0.05);
-	\draw[thick,red] (1,-0.6-0.05)--(1,-0.6+0.05);
-	\end{tikzpicture}
-	\qquad
-	\begin{tikzpicture}
-	\draw[thick] (0,0)--(4.5,0);
-	\foreach \i in {0,1,2,3,4} {
-		\draw[thick, red] (\i,0.2)--(\i+1,0.2);
-		\draw[thick, red] (\i,0.15)--(\i,0.25);
-		}
-	\draw[thick, red] (5,0.15)--(5,0.25);
-	\end{tikzpicture}
-	\caption*{Теорема каже, що знійдеться така кількість червоних відрізків, яку можна відкласти на чорну лінію, щоб довжина була менше лінії, а при додаванні наступного відрізка довжина буде більше лінії. Якщо число від'ємне, то можна вважати, що ми йдемо в інший напрямок.}
-	\end{figure}
-	\end{theorem}
-	
-	\begin{proof}
-	Нехай маємо якийсь $x \in \mathbb{R}$, а також $y > 0$.\\
-	Задамо множину $S = \left\{l \in \mathbb{Z} :  x < ly \right\}$ - множина всіх цілих чисел, щоб чорна лінія $x$ була менше за довжиною ніж сума червоних відрізків $y$ з кількістю $l$.\\
-	Перепишемо інакше: $S = \left\{l \in \mathbb{Z} :  l > \dfrac{x}{y} \right\}$.\\
-	Множина $S$ - обмежена знизу; не порожня, тому що зверху не є обмеженою. Отже, можемо мати $\inf S = m$ (поки не знаємо, що це якесь ціле число). \\
-	За критерієм, $\exists k \in S \implies k \in \mathbb{Z}: m \leq k < m+1$. А тому $k = \min S$.\\
-	Таким чином, $k \in S$, отримали, що $k > \dfrac{x}{y} \implies x < ky$\\
-	Також тоді маємо, що $k-1 \not \in S$, тоді $k-1 \leq \dfrac{x}{y} \implies x \geq (k-1)y$.\\
-	Остаточно: $(k-1)y \leq x < ky$.
-	\end{proof}
-	
-	\begin{definition}
-	\textbf{Цілою частиною числа} $x$ називають найближче менше ціле число.\\
-	Позначення: $[x]$.
-	\end{definition}
-	
-	\begin{example}
-	$[2.5] = 2$, $[-\pi] = -4$, $[2022] = 2022$.
-	\end{example}
-	
-	\begin{remark}
-	Саме завдяки щойно отриманої теореми, ми можемо гарантувати коректність визначення цілої частини числа.\\
-	Якщо $x \in \mathbb{R}$ та встановимо $y = 1$, то тоді $\forall x \in \mathbb{R}: \exists !k \in \mathbb{Z}: k \leq x < k+1$. І тоді $k = [x]$.
-	\end{remark}
-	
-	\begin{corollary}
-	$\forall \varepsilon > 0: \exists n \in \mathbb{N}: \dfrac{1}{n} < \varepsilon$
-	\end{corollary}
-	
-	\begin{proof}
-	Встановимо $x = 1$, $y = \varepsilon$. Тоді за щойно доведеною теоремою, $(n-1)\varepsilon \leq 1 < n\varepsilon \implies \dfrac{1}{n} < \varepsilon$.
-	\end{proof}
-	
-	\begin{corollary}
-	Задано таке число $a \geq 0$, для якого $\forall \varepsilon > 0: a < \varepsilon$. Тоді $a = 0$.
-	\end{corollary}
-	
-	\begin{proof}
-	!Припустимо, що $a \neq 0$, тобто $a > 0$. Тоді звідси $\dfrac{1}{a} > 0$\\
-	Тоді за щойно отриманим наслідком, $\exists n: \dfrac{1}{n} < a$.\\
-	Проте ми також маємо, що для $a < \dfrac{1}{n} = \varepsilon$. Суперечність!
-	\end{proof}
-	
-	\iffalse
-	\subsection{Дії над дійсними числами}
-	Вважаються відомими дії над раціональними числами та над скінченними десятковими дробами.\\
-	Нехай $a,b > 0$. Покладемо операцію додавання:
-	$$ a + b \overset{\text{def.}}{=} \sup_{n \geq 0} (a_n' + b_n') $$
-	$$ a - b \overset{\text{def.}}{=} \sup_{n \geq 0} (a_n' - b_n') $$
-	$$ a \cdot b \overset{\text{def.}}{=} \sup_{n \geq 0} (a_n' \cdot b_n') $$
-	$$ \frac{a}{b} \overset{\text{def.}}{=} \sup_{n \geq 0} \frac{a_n'}{b_n'} $$
-	Остання рівність виконана при $b \neq 0$.\\
-	Можна продовжити арифметичні дії на довільні дійсні числа. Якщо $a,b > 0$, то тоді
-	\begin{center}
-	\begin{tabular}{cc}
-	$(-a) + b = b - a$ & $(-a) + (-b) = -(a+b)$ \\
-	$(-a) - b = -(a+b)$ & $(-a) - (-b) = b-a$ \\
-	$(-a) \cdot b = - (a \cdot b)$ & $(-a) \cdot (-b) = a \cdot b$ \\
-	$\dfrac{-a}{b} = - \dfrac{a}{b}$ & $\dfrac{-a}{-b} = \dfrac{a}{b}$
-	\end{tabular}
-	\end{center}
-	
-	\begin{theorem}
-	Операції $+, \cdot, \leq$ задовольняють таким властивостям:
-	\begin{center}
-	\begin{tabular}{ccc}
-	властивості для $+$ & властивості для $\cdot$ & властивості для $\leq$ \\
-	$x+y = y+x$ & $x \cdot y = y \cdot x$ & $x \leq x$ \\
-	$x +(y+z) = (x+y) + z$ & $x \cdot (y \cdot z) = (x \cdot y) \cdot z$ & $x \leq y, \quad y \leq x \implies x = y$ \\
-	$z + 0 = x$ & $x \cdot 1 = x$ & $x \leq y, \quad y \leq z \implies x \leq z$ \\
-	$x + (-x) = 0$ & $x \cdot \dfrac{1}{x} = 1$ & \\
-	\end{tabular}
-	\end{center}
-	$x \cdot (y+z) = x \cdot y + x \cdot z$\\
-	$x \leq y \implies x + z \leq y + z$\\
-	$0 \leq x, \quad 0 \leq y \implies 0 \leq xy$.
-	\end{theorem}
-	
-	Я залишаю всі ці теореми та інші дрібниці про операції без доведення. Для більш детального огляду можна взяти якийсь радянський підручник.
-	
-	\begin{theorem}[Повнота дійсних чисел]
-	Нехай $A,B \subset \mathbb{R}$ - непорожні множини так, що $\forall a \in A, \forall b \in B: a \leq b$.\\
-	Тоді $\exists c \in \mathbb{R}: \forall a \in A: \forall b \in B: a \leq c \leq b$.\\
-	\textit{Вказівка: $c = \sup A$.}
-	\end{theorem}
-	\fi
-	
-	
-\subsection{Топологія множини дійсних чисел}
-	\begin{definition}
-	\textbf{Модулем числа} $a$ називають таку функцію:
-	\begin{align*}
-	|a| = \begin{cases} a, & a \geq 0 \\ -a, & a < 0 \end{cases}
-	\end{align*}
-	Число $|a|$ описує відстань між т. $0$ та числом $a$ на числовій прямій.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, ->] (-3,0)--(1,0);
-	\fill (0,0) circle(1pt) node[anchor = north] {$0$};
-	\fill (-2,0) circle(1pt) node[anchor = north] {$-x$};
-	\node[red] at (-1,0.5) {$|x|$};
-	\draw[red] (-2,0)--(0,0);
-	\end{tikzpicture}
-	\end{figure}
-	\end{definition}
-	
-	\begin{proposition}
-	Справедливі такі властивості:\\
-	1. $|ab| = |a| \ |b|$;\\
-	2. $|a|^2 = a^2$;\\
-	3. Нехай $c \geq 0$. Тоді $|a| \leq c \iff -c \leq a \leq c$;\\
-	4. $-|a| \leq a \leq |a|$.\\
-	\textit{Доведення зрозуміле. Та й, власне, це було вже в школі.}
-	\end{proposition}
-
-	\begin{theorem}[Нерівність трикутника]
-	Для будь-яких чисел $x,y \in \mathbb{R}$ виконано $|x+y| \leq |x| + |y|$.
-	\end{theorem}
-	
-	\begin{proof}
-	Із властивостей модуля, маємо, що\\
-	$-|x| \leq x \leq x \hspace{1cm} -|y| \leq y \leq |y|$.\\
-	Складемо ці нерівності - отримаємо:\\
-	$-(|x|+|y|) \leq x+y \leq |x|+|y| \implies |x+y| \leq |x| + |y|$.
-	\end{proof}
-	
-	\begin{corollary}
-	$|x-y| \leq |x| + |y|$.\\
-	\textit{Вказівка: $|x-y| = |x+(-y)|$.}
-	\end{corollary}
-	
-	\begin{corollary}
-	$||x|-|y|| \leq |x-y|$.\\
-	\textit{Вказівка: $|x| = |x-y+y|$, так само $|y| = |y-x+x|$.}
-	\end{corollary}
-	
-	\begin{definition}
-	$\varepsilon$\textbf{-околом} точки $x$ будемо називати таку множину:
-	\begin{align*}
-	U_{\varepsilon}(x) = \{a \in \mathbb{R}: |x-a| < \varepsilon \} \overset{\text{або}}{=} (x-\varepsilon,x+\varepsilon)
-	\end{align*}
-	\begin{figure}[H]
-	\centering
-		\begin{tikzpicture}
-		\draw[thick] (0,0)--(1,0);
-		\draw[red] (1,0)--(4,0);
-		\draw[thick,->] (4,0)--(5,0);
-		\fill[black] (2.5,0) circle (1pt) node [anchor = north] {$x$};
-		\node[black] at (1,0) {$($};
-		\node[black] at (4,0) {$)$};
-		\node at (1,0) [anchor = north] {$x-\varepsilon$};
-		\node at (4,0) [anchor = north] {$x+\varepsilon$};
-		\end{tikzpicture}
-	\end{figure}
-\textbf{Проколеним} $\varepsilon$\textbf{-околом} точки $x$ будемо називати таку множину:
-	\begin{align*}
-	\mathring{U}_{\varepsilon}(x) = U_{\varepsilon}(x) \setminus \{x\}
-	\end{align*}
-	\end{definition}
-	
-	\begin{definition}
-	Задамо множину $A \subset \mathbb{R}$ та елемент $a \in A$.\\
-	Точку $a$ називають \textbf{внутрішньою}, якщо
-	\begin{align*}
-	\exists \varepsilon > 0: U_{\varepsilon}(a) \subset A
-	\end{align*}
-	А множина $A$ називається \textbf{відкритою}, якщо кожна її точка - внутрішня.
-	\end{definition}
-
-\begin{example}
-Розглянемо множини: $(a,b), \ [a,b], \ (a,b], \ [a,b), \ (a,+\infty), \ [a,+\infty), \ \emptyset, \ \mathbb{R}$.\\
-$(a,b)$ - відкрита, оскільки $\forall x \in (a,b): \exists \varepsilon = \min\{|x-a|,|x-b|\}:  U_{\varepsilon}(x) \subset (a,b)$. Тобто звідси кожна точка $x$ - внутрішня точка.
-\bigskip \\
-$[a,b]$ - НЕ відкрита.\\
-!Припустімо, що $a$ - внутрішня точка, тоді $\exists \varepsilon > 0: (a-\varepsilon, a+\varepsilon) \subset [a,b]$, проте $a-\dfrac{\varepsilon}{2} \in (a - \varepsilon, a + \varepsilon)$ і водночас $a-\dfrac{\varepsilon}{2} \not \in [a,b]$, тому т. $a$ не може бути внутрішньою. Суперечність! \\
-Аналогічні міркування для $b$. Решта - внутрішні, задавши той самий $\varepsilon$, як попередього разу.
-\bigskip \\
-Автоматично доводимо, що $(a,b], \ [a,b)$ - НЕ відкриті множини.
-\bigskip \\
-$(a,+\infty)$ - відкрита, тому що $\forall x: \exists \varepsilon = |x-a|$.
-\bigskip \\
-$[a,+\infty)$ - НЕ відкрита через т. $a$: не є внутрішньою. Міркування аналогічні. Решта - внутрішні з тим самим $\varepsilon$.
-\bigskip \\
-$\emptyset$ - відкрита. Оскільки порожня множина не містить точок, ми не зможемо знайти точку в порожній множині, яка НЕ Є внутрішньою, щоб зруйнувати означення.
-\bigskip \\
-$\mathbb{R}$ - відкрита.
-\end{example}
-
-\begin{proposition}
-Якщо $\{A_{\lambda} \mid \lambda \in I\}$ - сім'я зліченних відкритих підмножин, де $I$ - деяка множина індексів, то $\displaystyle \bigcup_{\lambda \in I} A_{\lambda}$ - відкрита.
-\end{proposition}
-
-\begin{proof}
-Візьмімо довільну точку $a \in \displaystyle \bigcup_{\lambda \in I} A_{\lambda} \implies$ принаймні одному з сімей множин $a \in A_{\lambda}$. Така множина є відкритою, а тому $a$ - внутрішня точка.\\
-Із нашого ланцюга отримаємо: $\forall a \in \displaystyle \bigcup_{\lambda \in I} A_{\lambda} \implies a - $ внутрішня. Тобто $\displaystyle \bigcup_{\lambda \in I} A_{\lambda}$ - відкрита.
-\end{proof}
-
-\begin{example}
-Маємо $A = (1,2) \cup (4,16) \cup (32, 64)$. Попередньо ми знаємо, що будь-який інтервал є відкритою множиною. Тому їхнє об'єднання, тобто $A$, буде відкритою множиною.
-\end{example}
-
-\begin{definition}
-Задамо множину $A \subset \mathbb{R}$ та елемент $a \in \mathbb{R}$.\\
-Точку $a$ називають \textbf{граничною} множини $A$, якщо
-\begin{align*}
-\forall \varepsilon > 0: \exists x \in A: x \in \mathring{U}_{\varepsilon}(a)
-\end{align*}
-А множина $A$ називається \textbf{замкненою}, якщо вона містить всі граничні точки.
-\end{definition}
-Поки приклад наводити не буду, оскільки таким означенням не завжди зручно перевіряти на замкненість певну множину. Тож потрібне інший критерій.
-\begin{proposition}
-$a$ - гранична точка $A \iff$ $\forall \varepsilon > 0: A \cap U_{\varepsilon}(a)$ - нескінченна множина.
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $a$ - гранична точка $A$.\\
-!Припустімо, що $\exists \varepsilon^* > 0: A \cap (a-\varepsilon^*,a+\varepsilon^*)$ - скінченна, тобто\\
-$x_1,\dots,x_n \in A \cap (a-\varepsilon^*,a+\varepsilon^*) \implies \begin{cases} |x_1-a| < \varepsilon^* \\ \vdots \\ |x_n-a| < \varepsilon^* \end{cases}$.\\
-Оскільки $a$ - гранична т. $A$, то задамо $\varepsilon = \displaystyle\min_{i = \overline{1,n}} |x_i-a|$. Тоді $\exists x \in A: x \neq a: x \in (a-\varepsilon,a+\varepsilon)$.\\
-Проте це - неправда, оскільки ми отримали окіл ще менше, а при перетині ми не знайдемо жодної точки $x \neq a$. Суперечність!
-\bigskip \\
-\leftproof Дано: $\forall \varepsilon > 0: A \cap U_{\varepsilon}(a)$ - нескінченна множина.\\
-Тоді $\forall \varepsilon > 0: \exists x \in A \cap U_{\varepsilon}(a)$. Зокрема $\exists x = a - \dfrac{\varepsilon}{2} \in A: x \neq a: |x-a| < \varepsilon$.\\
-Отже, $a$ - гранична т. $A$.
-\end{proof}
-
-\begin{example}
-Розглянемо множини: $(a,b), \ [a,b], \ (a,b], \ [a,b), \ (a,+\infty), \ [a,+\infty), \ \emptyset, \ \mathbb{R}$.\\
-$(a,b)$ - НЕ замкнена.\\
-Розглянемо т. $a$. Вона є граничною для множини $(a,b)$, оскільки $\forall \varepsilon > 0: \exists x \in (a,b): x = a - \dfrac{\varepsilon}{2}: |x-a| < \varepsilon$. Для точки $b$ аналогічні міркування. Але множина $(a,b)$ не містить граничну т. $a,b$.
-\bigskip \\
-
-$[a,b]$ - замкнена, тому що $\forall x \in [a,b]: \forall \varepsilon > 0: [a,b] \cap (x-\varepsilon,x+\varepsilon) = \left[
-\begin{array}{l}
-\left[a,x+\varepsilon \right) \\
-\left(x-\varepsilon, x + \varepsilon \right) \\
-\left(x - \varepsilon, b\right] \\
-\left[a,b\right]
-\end{array}
- \right.$ - всі вони нескінченні множини.
-\bigskip \\
-Автоматично доводимо, що $(a,b], \ [a,b)$ - НЕ замкнені множини.
-\bigskip \\
-$(a,+\infty)$ - НЕ замкнена, тому що точка $a$ - гранична для $(a,+\infty)$, але множині не належить.
-\bigskip \\
-$[a,+\infty)$ - замкнена (аналогічно).
-\bigskip \\
-$\emptyset$ - замкнена: вона містить всі свої граничні точки, яких просто нема.
-\bigskip \\
-$\mathbb{R}$ - замкнена.
-\end{example}
-
-\begin{example}
-Розглянемо множину $A = \left\{ \dfrac{1}{n} \biggm| n \in \mathbb{N} \right\}$. Знайдемо всі можливі граничні точки.
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[scale=1.5]
-\draw[thick, ->] (-1,0)--(4.5,0);
-\foreach \i in {1,2,...,10}
-	\fill[red] ({4/\i},0) circle (1pt);
-\end{tikzpicture}
-\end{figure}
-1. $x = 0$\\
-Нехай $\varepsilon > 0$. Тоді за \textbf{Crl. 1.3.5.}, $\exists n \in \mathbb{N}: \dfrac{1}{n} < \varepsilon$, або інакше: $\abs{\dfrac{1}{n}-0} < \varepsilon$\\
-Отже, за означенням, $x = 0$ - гранична точка для $A$
-\bigskip \\
-2. $x < 0$\\
-Існує $\varepsilon = -x$, такий, що $(x-\varepsilon,x+\varepsilon) \cap A = \emptyset$, тож жодна точка не буде граничною.
-\bigskip \\
-3. $x > 1$\\
-Існує $\varepsilon = x-1$, такий, що $(x-\varepsilon,x+\varepsilon) \cap A = \emptyset$, тож жодна точка не буде граничною.
-\bigskip \\
-4. $x \in [0,1)$\\
-За принципом Архімеда, $\exists n \in \mathbb{N}: \dfrac{1}{n+1} < x \leq \dfrac{1}{n}$.\\
-Існує $\varepsilon = \min \left\{ x - \dfrac{1}{n+1}, \dfrac{1}{n} - x \right\}$, такий, що $(x-\varepsilon, x+\varepsilon) \cap A = \emptyset$ або $\dfrac{1}{n}$ - скінченна, тож жодна точка не буде граничною.
-\bigskip \\
-Остаточно, $x = 0$ - єдина гранична точка для $A$.
-
-\end{example}
-
-\begin{proposition}
-$A$ - відкрита множина $\iff \overline{A}$ - замкнена множина
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $A$ - відкрита множина.\\
-!Припустімо, що $\overline{A}$ - НЕ замкнена множина, тобто вона містить НЕ всі свої граничні точки, тобто $\exists a' \in A$, яка буде граничною для $\overline{A}$\\
-Оскільки $a' \in A$, то вона є внутрішньою, тобто $\exists \varepsilon > 0: (a'-\varepsilon,a'+\varepsilon) \subset A \Rightarrow (a'-\varepsilon,a'+\varepsilon) \cap \overline{A} = \emptyset$. Суперечність! Бо тут, навпаки, не має виконуватись рівність.
-\bigskip \\
-\leftproof Дано: $\overline{A}$ - замкнена множина.\\
-!Припустімо, що $A$ - НЕ відкрита множина, тобто $\exists a \in A$, яка НЕ є внутрішньою, тобто\\
-$\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varepsilon}(a) \cap \overline{A} \neq \emptyset$, тобто $a$ - гранична точка $\overline{A}$.\\
-Оскільки $\overline{A}$ - замкнена, то вона містить всі свої граничні точки, проте $a \not\in \overline{A}$. Суперечність!
-\end{proof}
-
-\begin{remark}
-Факт: єдині множини, які є одночасно відкритими та замкненими, - це $\emptyset, \mathbb{R}$.
-\end{remark}
-
-\begin{proposition}
-Якщо $\{A_{\lambda} \mid \lambda \in I\}$ - сім'я замкнених підмножин, де $I$ - деяка множина індексів, то $\displaystyle \bigcap_{\lambda \in I} A_{\lambda}$ - замкнена.\\
-\textit{Випливає із} \textbf{Prp. 1.4.4.}, \textbf{Prp. 1.4.9.} \textit{та правила де Моргана.}
-\end{proposition}
-
-\begin{definition}
-Задано множину $A \subset \mathbb{R}$ та т. $x \in A$.\\
-Точка $x$ називається \textbf{ізольованою}, якщо
-\begin{align*}
-\exists \varepsilon > 0: U_{\varepsilon}(x) \cap A = \{x\}
-\end{align*}
-\end{definition}
-
-\begin{example}
-Маємо множину $A = [0,2] \cup \{4\}$. Тут т. $x = 4 \in A$ - ізольована.
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\draw[thick, black!30, ->] (-1,0)--(4.5,0);
-\draw[thick] (0,0)--(2,0);
-\node at (0,0) {$[$}; \node at (2,0) {$]$};
-\node at (0,-0.4) {$0$}; \node at (2,-0.4) {$2$};
-\fill (4,0) circle (1pt); \node at (4,-0.2) {$4$};
-\end{tikzpicture}
-
-\end{figure}
-\end{example}
-
-Якщо придивитись уважно на означення, то тут записано заперечення того, що $x$ - гранична точка. Отже, маємо наслідок:
-\begin{corollary}
-Точка $x \in A$ - ізольована $\iff x$ - не гранична для $A$.
-\end{corollary}
-
-%R bar
-\iffalse
-Повернімось тепер до множини $\bar{\mathbb{R}}$. Самий час визначити, що таке $\varepsilon$-окіл для точок $+\infty$,$-\infty$,$\infty$ Хоча їх я буду називати $E$-околом для цих точок.\\
-Розглянемо таку картину - коло Рімана. Нижній дотик кола буде відповідати точці $0$, а верхня точка - точці $\infty$.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw (0,2) circle (2) node at (0,4.5) {$\infty$};
-	\filldraw (0,4) circle (1pt);
-	\filldraw (0,0) circle (1pt);
-	\draw[thick, ->] (-6,0)--(6,0);
-	\draw node at (0,-0.5) {$0$};
-	\draw[shorten >= -1cm, shorten <= -0cm] (0,4)--(2-0.4,0);
-	\draw[shorten >= -1cm, shorten <= -0cm] (0,4)--(2+0.4,0);
-	\draw[red] (2-0.4,0)--(2+0.4,0);
-	\filldraw (1.6,0.8) circle (1pt) node[anchor = north] {$x$};
-	\node[red] at (2-0.4,0) {$($};
-	\node[red] at (2+0.4,0) {$)$};
-	\node[red, scale = 0.7] at (2-0.5,-0.5) {$x-\varepsilon$};
-	\node[red, scale = 0.7] at (2+0.5,-0.5) {$x+\varepsilon$};
-	\end{tikzpicture}
-	\end{figure}
-	Проведемо промінь так, щоб вона перетнула вісь. Кожна точка кола ставить у відповідність точку на вісі - отже, й окіл теж. На цьому малюнку окіл т. $x$ кола ставить у відповідність звичний окіл т. $x$, тобто $$U_{\varepsilon}(x) = (x-\varepsilon,x+\varepsilon)$$
-	Візьмемо тепер окіл в нескінченності. Я розглядатиму праву частину півкола, де $+\infty$, для іншої аналогічно. Відступимо від $+\infty$ трошки праворуч. Нарешті, проведемо між двома точками пряму\\
-	\begin{figure}[H]
-	\centering
-	\resizebox{1.1\textwidth}{!} {
-	\begin{tikzpicture}
-	\pgfmathsetmacro{\a}{0.8}
-	\draw (0,2) circle (2) node at (0,4.5) {$\infty$};
-	\filldraw (0,4) circle (1pt);
-	\filldraw (0,0) circle (1pt);
-	\draw[thick, ->] (-3,0)--(20,0);
-	\draw node at (0,-0.5) {$0$};
-	\filldraw (\a, {2+sqrt(4-\a*\a)}) circle(1pt);
-	\draw [shorten >= -20cm, shorten <= -0cm] (0,4)--(\a, {2+sqrt(4-\a*\a)});
-	\node[red] at (19.1651, 0) {$($};
-	\node[red] at (19.1651, -0.5) {$E$};
-	\draw[red] (19.1651, 0)--(20,0);
-	\end{tikzpicture}
-	}
-	\end{figure}
-	Тоді якщо подивитись на малюнок, околом т. $+\infty$ визначається так $$U_{E}(+\infty) = \{x \in \mathbb{R}: x > E\} \overset{\text{або}}{=} (E,+\infty)$$\\
-	Аналогічними міркуваннями $$U_{E}(-\infty) = \{x \in \mathbb{R}: x < -E\} \overset{\text{або}}{=} (-\infty, E)$$\\
-	І нарешті, якщо провести промені, відступивши від $+\infty$ праворуч та $-\infty$ ліворуч, отримаємо
-	$$U_{E}(\infty) = \{x \in \mathbb{R}: |x| > E\} \overset{\text{або}}{=} U_{E}(-\infty) \cup U_E(+\infty) $$
-	
-	Додатково $+\infty, -\infty, \infty$ можуть бути внутрішніми, граничними точками певної множини, ніхто не забороняв. Просто ми на дослідження беремо окіл, який ми щойно отримали з геометричних міркувань.
-\fi
-	
-	\subsection{Основні твердження аналізу}
-	\begin{theorem}[Лема Кантора про вкладені відрізки]
-	Задано відрізки таким чином: $\forall n \geq 1: [a_n, b_n] \supset [a_{n+1}, b_{n+1}]$. Тоді:\\
-	1) $\exists c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$\\
-	2) Якщо додатково $\forall \varepsilon > 0: \exists N \in \mathbb{N}: b_N - a_N < \varepsilon$, то тоді така точка - єдина.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick, black, ->] (0,0)--(6,0);
-	\draw[thick, blue!40] (0.5,0)--(5.5,0);
-	\draw[thick, blue!60] (1.2,0)--(4.5,0);
-	\draw[thick, blue!80] (2.8,0)--(3.5,0);
-	\draw node at (0.5,0) {$[$}; \draw node at (5.5,0) {$]$};
-	\draw node at (1.2,0) {$[$}; \draw node at (4.5,0) {$]$};
-	\draw node at (2.8,0) {$[$}; \draw node at (3.5,0) {$]$};
-	
-	\draw node at (0.5,-0.5) {$a_1$}; \draw node at (5.5,-0.5) {$b_1$};
-	\draw node at (1.2,-0.5) {$a_2$}; \draw node at (4.5,-0.5) {$b_2$};
-	\draw node at (2.8,-0.5) {$a_3$}; \draw node at (3.5,-0.5) {$b_3$};
-	
-	\node at (3.2,0.25) {$\dots$};
-	\node[blue] at (3.2,-1) {$c$};
-	\draw[blue, ->] (3.2,-0.8)--(3.2,-0.3);
-	\end{tikzpicture}
-	\end{figure}
-	\end{theorem}
-	
-	\begin{proof}
-	1) Із умови випливає, що $\forall n,m \in \mathbb{N}:$\\
-	$a_1 \leq a_2 \leq \dots \leq a_n \leq \dots < \dots \leq b_n \leq \dots \leq b_2 \leq b_1$\\
-	Отже, $\forall n,m \in \mathbb{N}: a_n \leq b_m$.\\
-	Розглянемо множини $A = \{a_1,\dots,a_n\}, B = \{b_1, \dots, b_m\}$.
-	Тоді за принципом повноти, $\exists c \in \mathbb{R}: \forall n,m \in \mathbb{N}: a_n \leq c \leq b_m$.
-	Таким чином, $\forall n \geq 1: c \in [a_n,b_n]$.
-	\bigskip \\
-	2) Розглянемо окремо, коли $\forall \varepsilon > 0: \exists N: b_N - a_N < \varepsilon$.\\
-	!Припустимо, що $\exists c' \in \mathbb{R}: \forall n \geq 1: c' \in [a_n,b_n]$, але $c \neq c'$\\
-	Задамо $\varepsilon = |c' - c| > 0$.
-	Тоді $\exists N: b_N - a_N < \varepsilon$\\
-	Але $c,c' \in [a_N,b_N]$, тому $\varepsilon = |c'-c| < a_n-b_n < \varepsilon$. Суперечність!\\
-	Отже, така точка - єдина.
-	\end{proof}
-	
-	\begin{theorem}[Лема Больцано-Ваєрштраса]
-	Задано множину $A$ - обмежена множина з нескінченною кількістю елементів. Тоді вона містить принаймні одну граничну точку.
-	\end{theorem}
-	
-	\begin{proof}
-	Оскільки $A$ - обмежена, то
-	$\begin{cases} \exists a \in \mathbb{R}: \forall x \in A: x \geq a \\
-	  \exists b \in \mathbb{R}: \forall x \in A: x \leq b \end{cases}$\\
-	Тобто маємо множину $[a,b] \supset A$.\\
-	Розіб'ємо множину $[a,b]$ навпіл: $\left[a, \dfrac{a+b}{2}\right]$ та $\left[\dfrac{a+b}{2},b \right]$.\\
-	Оскільки $A$ має нескінченну кількість чисел, то принаймні одна з множин $\left[a, \dfrac{a+b}{2}\right] \cap A$ або $\left[\dfrac{a+b}{2}, b\right] \cap A$ - нескінченна множина. Ту половину позначимо за множину $[a_1,b_1]$ (якщо обидва нескінченні, то вибір довільний). Тоді $A \cap [a_1,b_1]$ - нескінченна множина.\\
-	Розіб'ємо множину $[a_1,b_1]$ навпіл: $\left[a_1, \dfrac{a_1+b_1}{2}\right]$ та $\left[\dfrac{a_1+b_1}{2},b_1 \right]$.\\
-	І за аналогічними міркуваннями одна з множин нескінченна, позначу за $[a_2,b_2]$. Тоді $A \cap [a_2,b_2]$ - нескінченна множина.\\
-	Розіб'ємо множину $[a_2,b_2]$ навпіл: $\left[a_2, \dfrac{a_2+b_2}{2}\right]$ та $\left[\dfrac{a_2+b_2}{2},b_2 \right]$.\\
-	$\vdots$\\
-	В результаті матимемо вкладені відрізки: $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$\\
-Причому, $\forall n \geq 1: b_n - a_n = \dfrac{b-a}{2^n}$.\\
-	Зафіксуємо $\varepsilon > 0$ та перевіримо, чи існує $N$, що $b_N - a_N < \varepsilon$.\\
-	Маємо: $b_N - a_N = \dfrac{b-a}{2^N} < \dfrac{b-a}{N} < \varepsilon \implies N > \dfrac{b-a}{\varepsilon}$\\
-	Отже, маємо $N = \left[ \dfrac{b-a}{\varepsilon} \right]+1$, для якого нерівність $b_N-a_N < \varepsilon$ виконано. Тоді за лемою Кантора, $\exists! c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$.
-	\bigskip \\
-	А далі покажемо, що $c$ - дійсно гранична точка множини $A$.\\
-	Зафіксуємо $\varepsilon > 0$. Знайдемо, чи існує $N$, щоб $b_N - a_N = \dfrac{b-a}{2^N} < \dfrac{\varepsilon}{2} \implies \dots \implies N > \dfrac{2(b-a)}{\varepsilon}$\\
-	Тоді $[a_N,b_N] \subset (c-\varepsilon, c+\varepsilon)$, оскільки $c-a_N \leq \dfrac{\varepsilon}{2}$ та $b_N -c \leq \dfrac{\varepsilon}{2}$. І це все виконується $\forall \varepsilon > 0$.\\
-	Таким чином, $A \cap (c-\varepsilon, c+\varepsilon) \supset A \cap [a_n,b_n]$ - нескінченна множина. Отже, $c$ - гранична точка $A$.
-	\end{proof}
-	
-	\begin{definition}
-	Задано множину $A \subset \mathbb{R}$.\\
-	Система множин $\{U_{\alpha}\}$ називається \textbf{покриттям} множини $A$, якщо
-	\begin{align*}
-	A \subset \bigcup_{\alpha} U_{\alpha}
-	\end{align*}
-	\end{definition}
-	
-	\begin{example}
-	Відрізок $[2,3]$ може мати покриття $\{\textcolor{red}{(1,2.5)}, \textcolor{blue}{[2.1,2.8)}, \textcolor{green}{[2.5,3]}\}$.
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick,->] (0,0)--(4,0);
-	\node at (2,0) {$[$};
-	\node at (3,0) {$]$};
-	\node at (2,-0.5) {$2$};
-	\node at (3,-0.5) {$3$};
-	
-	\draw[red] (1,0.1)--(2.5,0.1);
-	\draw[blue] (2.1,0.1)--(2.8,0.1);
-	\draw[green] (2.5,0.1)--(3,0.1);
-	\end{tikzpicture}
-	\end{figure}
-	\end{example}
-	
-	\begin{theorem}[Лема Гейне-Бореля]
-	Будь-який відрізок можна покрити скінченною кількістю інтервалів.
-	\end{theorem}
-	
-	\begin{proof}
-	Задано відрізок $[a,b]$. Треба довести, що є такий набір інтервалів $U_k, k = \overline{1,n}$, де їхня кількість - скінченна.\\
-	!Припустимо, що $[a,b]$ покривається лише нескінченною кількістю інтервалів. \\ 
-	Ідея доведення є майже аналогічним з лемою Больцано-Ваєрштраса. Ми ділимо відрізок навпіл. Після ділення ми обираємо той відрізок, який покривається нескінченною кількістю інтервалів. Із обраним відрізком робимо те саме.\\
-	Матимемо знову вкладені відрізки $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$. Причому, $b_n - a_n = \dfrac{b-a}{2^n}$. Ми вже доводили, що $\exists! c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$.\\
-	Оскільки $c \in [a_1,b_1]$, то тоді знайдеться інтервал $U = (\alpha,\beta) \ni c$ - один із інтервалів покриття.\\
-	Нехай задамо $\varepsilon = \min \{ c-\alpha, \beta-c \}$. Тоді ми можемо завжди знайти номер $N$, щоб $b_N - a_N = \dfrac{b-a}{2^N} < \varepsilon$ (аналогічна процедура).
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick] (0,0)--(4.5,0);
-	\node at (1,0) {$($}; \node at (1,-0.5) {$\alpha$};
-	\node at (4,0) {$)$}; \node at (4,-0.5) {$\beta$};
-	\fill (2,0) circle (1pt) node [anchor = south] {$c$};
-	\node[scale = 0.8] at (1.85,0) {$[$}; \node[scale = 0.8] at (1.85,-0.25) {$a_N$};
-	\node[scale = 0.8] at (2.3,0) {$]$}; \node[scale = 0.8] at (2.3,-0.25) {$b_N$};
-	\end{tikzpicture}
-	\end{figure}
-	Звідси випливає, що $[a_N,b_N] \subset (\alpha, \beta)$. Тобто відрізок покривається одним інтервалом. Проте ми казали, що це неможливо. Суперечність!
-	\end{proof}
-		
-	\begin{theorem}
-	Множина дійсних чисел $\mathbb{R}$ - незліченна.
-	\end{theorem}
-	
-	\begin{proof}
-	Для початку перевіримо, що відрізок $I = [0,1]$ - незліченна множина.\\
-	!Припустимо, що $I = \{x_1,x_2,x_3,\dots\}$, тобто зліченна множина.\\ Розіб'ємо $I$ на три (не обов'язково рівні) частини. Тоді принаймні в одному з розбитті не потрапить число $x_1$. Саме число $x_1$ може бути або в одному з трьох відрізків, або навіть одночасно в двох. Саме тому ми ділимо на три частини. Тому позначимо той відрізок, що не має $x_1$ як відрізок $I_1$\\
-	Розіб'ємо $I_1$ на три частини. Аналогічно, знайдеться відрізок, де не буде числа $x_2$. Позначимо цей відрізок $I_2$.\\
-	Розіб'ємо $I_2$ на три частини. І знову, є відрізок $I_3$, куди не потрапило число $x_3$.\\
-	$\vdots$\\
-	Отримали систему вкладених відрізков $I \subset I_1 \subset I_2 \subset I_3 \subset \cdots$
-	\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}[scale = 4]
-	\draw[thick, ->] (-0.5,0)--(1.5,0);
-	\node at (0,0) {$[$}; \node at (0,-0.1) {$0$};
-	\node at (1,0) {$]$}; \node at (1,-0.1) {$1$};
-	\draw ({1/3},-1pt)--({1/3},1pt);
-	\draw ({2/3},-1pt)--({2/3},1pt);
-	\fill (0.7,0) circle (0.25pt) node at (0.75,-0.1) {$x_1$};
-	\fill (0.85,0) circle (0.25pt) node at (0.9,-0.1) {$x_2$};
-	\draw ({1/9},-0.75pt)--({1/9},0.75pt);
-	\draw ({2/9},-0.75pt)--({2/9},0.75pt);
-	\draw ({7/27},-0.5pt)--({7/27},0.5pt);
-	\draw ({8/27},-0.5pt)--({8/27},0.5pt);
-	\fill ({85/270},0) circle (0.25pt) node at ({1/3},-0.1) {$x_3$};
-	\draw ({22/81},-0.25pt)--({22/81},0.25pt);
-	\draw ({23/81},-0.25pt)--({23/81},0.25pt);
-	\end{tikzpicture}
-	\end{figure}
-	Тоді за лемою Кантора, знайдемо якусь т. $c$, яка належить будь-якому відрізку.\\
-	$c \in I_1 \implies c \neq x_1$, $c \in I_2 \implies c \neq x_2$, $c \in I_3 \implies c \neq x_3$, $\dots$\\
-	Можна зробити висновок, що $\forall n \geq 1: c \neq x_n$, а тому точка $c$ не має нумерації. Суперечність!\\
-	Отже, $[0,1]$ - незліченна множина, а тому тим паче $[0,1] \subset \mathbb{R}$ - незліченна множина.
-	\end{proof}
-	\newpage
-\fi
-    
-%\iffalse
-    %Axiomatic approach
-	\section{Множина дійсних чисел}
 	\subsection{Аксіоматика множини дійсних чисел}
 	\begin{definition}
-	\textbf{Множину дійсних чисел} позначають за $\mathbb{R}$. Визначимо її так, щоб ми малі ті самі операції додавання, множення та відношення порядку як раніше:\\
+	\textbf{Множину дійсних чисел} позначають за $\mathbb{R}$. Визначимо її так, щоб ми малі ті самі операції додавання, множення та відношення порядку як в раціональних числах:\\
 	I. Додавання $+$.
 	\begin{figure}[H]
 	\centering
@@ -1691,7 +204,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	$a+b=b+a$ & -- комутативність;\\
 	$a+(b+c)=(a+b)+c$ & -- асоціативність;\\
 	$\exists 0 \in\mathbb{R}: a+0=a$ & -- існування нейтрального елементу;\\
-	$\exists (-a) \in\mathbb{R}: a+(-a)=0$ & -- існування оберненого елементу.
+	$\exists (-a) \in\mathbb{R}: a+(-a)=0$ & -- існування протилежного елементу.
 	\end{tabular}
 	\end{figure}
 	II. Множення $\cdot$.
@@ -1721,18 +234,21 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{align*}
 	\end{definition}
 	
-	На відміну від раціональних чисел $\mathbb{Q}$, в дійсних числах $\mathbb{R}$ виникая нова аксіома неперервності. Завдяки ньому, ми прибираємо \lq\lq дірки\rq\rq \text{} з числової прямої. Зокрема $\sqrt{2}$ буде вже на числовій прямій.
-
-\iffalse
-	\begin{remark}
-	Множина раціональних чисел як раз не має аксіоми неперервності. Зокрема розглянемо множини $A = \{x \in \mathbb{Q}: x^2 < 2 \text{ або } x < 0\}$ та $B = \{x \in \mathbb{Q}: x^2 \geq 2 \text{ та } x > 0\}$. Цілком зрозуміло, що $\forall a \in A, \forall b \in B: a < b$. Однак не існує числа $c \in \mathbb{Q}$, щоб $a \leq c \leq b$.\\
-	!Припустимо, що таке $c \in \mathbb{Q}$ все ж таки існує. Тоді $\forall a \in A: a \leq c$, зокрема для всіх $a \in A$, для яких $0 < a^2 < 2$. Водночас $a^2 \leq c^2$. Із цих двох нерівностей випливає, що $c^2 \geq 2$. Неможливо, щоб $c^2 < 2$, бо можна розглянути число $d = 2 - c^2 > 0$, а згодом розглянути $a+rd,r \in \mathbb{Q}$; тоді $(a+rd)^2 = a^2 + 2ard + r^2d^2$
-	\end{remark}
-\fi
+	На відміну від раціональних чисел $\mathbb{Q}$, в дійсних числах $\mathbb{R}$ виникає нова аксіома неперервності. Завдяки ньому, ми прибираємо \lq\lq дірки\rq\rq \text{} з числової прямої. Зокрема $\sqrt{2}$ буде вже на числовій прямій. Продемонструємо приклад застосування даної аксіоми.
 	
-	\begin{remark}
-	Існують точно три варіанти, як строго побудувати множину дійсних чисел: через представлення числа в нескінченний десятковий дріб; через послідовності Коші; через переріз Дедекінда. Можливо, існують ще якісь. Займатися побудовою ми не стали, оскільки це абсолютно нудна робота.
-	\end{remark}
+	\begin{proposition}
+	$\exists x \in \mathbb{R}: x^2 = 2$ (ми навіть знаємо, що в цьому випадку $x = \pm \sqrt{2}$, але правильніше про корені поговорити пізніше).
+	\end{proposition}
+	
+	\begin{proof}
+	Зокрема розглянемо множини $A = \{x \in \mathbb{Q}: x^2 < 2 \text{ або } x < 0\}$ та $B = \{x \in \mathbb{Q}: x^2 \geq 2 \text{ та } x > 0\}$. Цілком зрозуміло, що $\forall a \in A, \forall b \in B: a < b$. Тоді за аксіомою неперервності, існує число $c \in \mathbb{R}$, для якого $a \leq c \leq b$, причому $\forall a \in A, \forall b \in B$. Ствердую, що саме $c$ -- шукане дійсне число, що задовольняє рівнянню $x^2 = 2$.\\
+	!Припустимо, що $c^2 < 2$. Оберемо число $c' = \dfrac{3c+4}{2c+3}$. Доведемо, що $c < c'$, а також $(c')^2 < 2$.\\
+	$c^2 < 2 \iff 2c^2 + 3c < 3c + 4 \iff c < \dfrac{3c+4}{2c+3}$. (число $c > 0$, насправді, тому тут все легітимно).\\
+	$(c')^2 < 2 \iff \left( \dfrac{3c+4}{2c+3} \right)^2 < 2 \iff (3c+4)^2 < 2(2c+3)^2 \iff c^2 < 2$.\\
+	Із того, що $(c')^2 < 2$, випливає, що $c' \in A$. Тоді звідси $c' \leq c$, але при цьому ми ще довели, що $c' > c$ -- суперечність!\\
+	!Припустимо, що $c^2 > 2$. Ми знову оберемо число $c' = \dfrac{3c+4}{2c+3}$. Аналогічним чином ми доведемо, що $c' < c$ та $(c')^2 > 2$. Із нерівності $(c')^2 > 2$ випливає, що $c' \in B$. Тоді звідси $c' \geq c$, але при цьому в нас $c' < c$ -- суперечність!\\
+	Залишилася єдина опція -- це коли $c^2 = 2$.
+	\end{proof}
 	
 	Надалі також ми будемо іноді користуватись множиною дійсних чисел, до якої ми додамо \lq\lq точки\rq\rq \text{} $-\infty$ та $+\infty$. Якщо нас не цікавить знак, то будемо просто позначати $\infty$.
 	\begin{align*}
@@ -1828,7 +344,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\begin{align*}
 	\sup A = \min \Up A
 	\end{align*}
-	Тобто супремум -- це найменше число, що обмежує множину $A$ зверху.
+	Тобто супремум -- це найменше число, що обмежує множину $A$ зверху.\\
 	\textbf{Точною нижньою межею} (або \textbf{інфімумом}) називають таке число:
 	\begin{align*}
 	\inf B = \max \Low B
@@ -1960,7 +476,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	якщо $A$ не є обмеженою зверху, то вважаємо $\sup A = +\infty$;\\
 	якщо $B$ не є обмеженою знизу, то вважаємо $\inf B = -\infty$.\\
 	
-	\subsection{Принцип Архімеда та її наслідки}
+	\subsection{Принцип Архімеда та його наслідки}
 	\begin{theorem}
 	Множина натуральних чисел $\mathbb{N}$ не є обмеженою зверху.\\
 	Математично кажучи, $\forall a \in \mathbb{R}: \exists n \in \mathbb{N}: n > a$.
@@ -1983,7 +499,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	\end{proof}
 	
 	\begin{theorem}[Принцип Архімеда]
-	$\forall x \in \mathbb{R}: \forall y > 0: \exists ! k \in \mathbb{Z}: (k-1)y \leq x < ky$
+	$\forall x \in \mathbb{R}: \forall y > 0: \exists ! k \in \mathbb{Z}: (k-1)y \leq x < ky$.
 	\begin{figure}[H]
 	\begin{tikzpicture}
 	\draw[thick] (0,0)--(4.5,0) node[anchor = south] {$x = 4.5$};
@@ -2066,6 +582,8 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 	Оскільки $a < b$, то звідси $\dfrac{a}{\sqrt{2}} < \dfrac{b}{\sqrt{2}}$. За попереднім наслідком, $\exists q \in \mathbb{Q}: \dfrac{a}{\sqrt{2}} < q < \dfrac{b}{\sqrt{2}}$. Тоді якщо покласти $x = q \sqrt{2}$, то $a < x < b$. А число $x \in \mathbb{R} \setminus \mathbb{Q}$, бо квадратний корінь є ірраціональним.
 	\end{proof}
 	
+	Ці два наслідки трактують таким чином: множина раціональних чисел $\mathbb{Q}$ щільна на множині $\mathbb{R}$ (чому саме щільна, бо як би ми не зменшували інтервал $(a,b)$, раціональне число ми завжди можемо дістати). Точно так само множина ірраціональних чисел $\mathbb{R} \setminus \mathbb{Q}$ щільна на множині $\mathbb{R}$.
+	
 	\subsection{Топологія множини дійсних чисел}
 	\begin{definition}
 	$\varepsilon$\textbf{-околом} точки $x$ будемо називати таку множину:
@@ -2103,7 +621,7 @@ $\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varep
 \begin{example}
 Розглянемо множини: $(a,b), [a,b], (a,b], [a,b), (a,+\infty), [a,+\infty), \emptyset, \mathbb{R}$.\\
 $(a,b)$ -- відкрита.\\
-Справді, оскільки $\forall x \in (a,b): \exists \varepsilon = \min\{|x-a|,|x-b|\}:  U_{\varepsilon}(x) \subset (a,b)$. Тобто звідси кожна точка $x$ - внутрішня точка.
+Справді, оскільки $\forall x \in (a,b): \exists \varepsilon = \min\{|x-a|,|x-b|\}:  U_{\varepsilon}(x) \subset (a,b)$. Тобто звідси кожна точка $x$ -- внутрішня точка.
 \bigskip \\
 $[a,b]$ -- не відкрита.\\
 !Припустимо, що $a$ -- внутрішня точка, тоді $\exists \varepsilon > 0: (a-\varepsilon, a+\varepsilon) \subset [a,b]$, проте $a-\dfrac{\varepsilon}{2} \in (a - \varepsilon, a + \varepsilon)$ і водночас $a-\dfrac{\varepsilon}{2} \not \in [a,b]$, тому точка $a$ не може бути внутрішньою. Суперечність! \\
@@ -2228,17 +746,17 @@ $\mathbb{R}$ -- замкнена.\\
 
 \begin{proposition}
 \label{open_iff_complement_closed}
-$A$ -- відкрита множина $\iff \overline{A}$ -- замкнена множина.
+$A$ -- відкрита множина $\iff A^\mathsf{c}$ -- замкнена множина.
 \end{proposition}
 
 \begin{proof}
 \rightproof Дано: $A$ -- відкрита множина.\\
-!Припустімо, що $\overline{A}$ -- не замкнена множина, тобто вона містить не всі свої граничні точки, тобто $\exists a' \in A$, яка буде граничною для $\overline{A}$. Оскільки $a' \in A$, то вона є внутрішньою, тобто $\exists \varepsilon > 0: (a'-\varepsilon,a'+\varepsilon) \subset A \Rightarrow (a'-\varepsilon,a'+\varepsilon) \cap \overline{A} = \emptyset$. Суперечність! Бо тут, навпаки, не має виконуватись рівність.
+!Припустімо, що $A^\mathsf{c}$ -- не замкнена множина, тобто вона містить не всі свої граничні точки, тобто $\exists a' \in A$, яка буде граничною для $A^\mathsf{c}$. Оскільки $a' \in A$, то вона є внутрішньою, тобто $\exists \varepsilon > 0: (a'-\varepsilon,a'+\varepsilon) \subset A \Rightarrow (a'-\varepsilon,a'+\varepsilon) \cap A^\mathsf{c} = \emptyset$. Суперечність! Бо тут, навпаки, не має виконуватись рівність.
 \bigskip \\
-\leftproof Дано: $\overline{A}$ -- замкнена множина.\\
+\leftproof Дано: $A^\mathsf{c}$ -- замкнена множина.\\
 !Припустімо, що $A$ -- не відкрита множина, тобто $\exists a \in A$, яка не є внутрішньою, тобто\\
-$\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varepsilon}(a) \cap \overline{A} \neq \emptyset$, тобто $a$ -- гранична точка $\overline{A}$.\\
-Оскільки $\overline{A}$ - замкнена, то вона містить всі свої граничні точки, проте $a \notin \overline{A}$. Суперечність!
+$\forall \varepsilon > 0: U_{\varepsilon}(a) \not\subset A \Rightarrow U_{\varepsilon}(a) \cap A^\mathsf{c} \neq \emptyset$, тобто $a$ -- гранична точка $A^\mathsf{c}$.\\
+Оскільки $A^\mathsf{c}$ - замкнена, то вона містить всі свої граничні точки, проте $a \notin A^\mathsf{c}$. Суперечність!
 \end{proof}
 
 \begin{proposition}
@@ -2357,10 +875,10 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	
 	\subsection{Основні твердження аналізу}
 	\begin{theorem}[Лема Кантора про вкладені відрізки]
-	Задано відрізки таким чином: $\forall n \geq 1: [a_n, b_n] \supset [a_{n+1}, b_{n+1}]$. Тоді справедливе наступне:
+	Задано відрізки $[a_n,b_n], n \geq 1$ так, що $[a_1,b_1] \supset [a_2,b_2] \supset [a_3,b_3] \supset \dots$ Тоді справедливе наступне:
 	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-	\item $\exists c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$;
-	\item Якщо додатково $\forall \varepsilon > 0: \exists N \in \mathbb{N}: b_N - a_N < \varepsilon$, то тоді така точка -- єдина.
+	\item $\exists c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$. Іншими словами, множина $\displaystyle\bigcap_{n=1}^\infty [a_n,b_n] \neq \emptyset$;
+	\item Якщо додатково $\forall \varepsilon > 0: \exists N \in \mathbb{N}: b_N - a_N < \varepsilon$, то тоді така точка $c \in \mathbb{R}$ -- єдина.
 	\end{enumerate}
 	\begin{figure}[H]
 	\centering
@@ -2399,7 +917,7 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	Лема Кантора доведена.
 	\end{proof}
 	
-	\begin{theorem}[Лема Больцано-Ваєрштраса]
+	\begin{theorem}[Лема Бользано-Ваєрштраса]
 	Задано множину $A$ -- обмежена множина з нескінченною кількістю елементів. Тоді вона містить принаймні одну граничну точку.
 	\end{theorem}
 	
@@ -2420,8 +938,8 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	\bigskip \\
 	А далі покажемо, що $c$ -- дійсно гранична точка множини $A$.\\
 	Зафіксуємо $\varepsilon > 0$. Знайдемо, чи існує $N$, щоб $b_N - a_N = \dfrac{b-a}{2^N} < \dfrac{\varepsilon}{2} \implies \dots \implies N > \dfrac{2(b-a)}{\varepsilon}$\\
-	Тоді $[a_N,b_N] \subset (c-\varepsilon, c+\varepsilon)$, оскільки $c-a_N \leq \dfrac{\varepsilon}{2}$ та $b_N -c \leq \dfrac{\varepsilon}{2}$. І це все виконується $\forall \varepsilon > 0$.\\
-	Таким чином, $A \cap (c-\varepsilon, c+\varepsilon) \supset A \cap [a_n,b_n]$ - нескінченна множина. Отже, $c$ -- гранична точка $A$.
+	Тоді із цього випливає, що $[a_N,b_N] \subset (c-\varepsilon, c+\varepsilon)$. І це все виконується $\forall \varepsilon > 0$.\\
+	Таким чином, $A \cap (c-\varepsilon, c+\varepsilon) \supset A \cap [a_n,b_n]$ -- нескінченна множина. Отже, $c$ -- гранична точка $A$.
 	\end{proof}
 	
 	\begin{definition}
@@ -2451,28 +969,29 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	\end{example}
 	
 	\begin{theorem}[Лема Гайне-Бореля]
-	Будь-який відрізок можна покрити скінченною кількістю відкритих інтервалів.
+	Будь-який відрізок $[a,b]$ можна покрити скінченною кількістю відкритих інтервалів.
+	\iffalse Така множина, що має властивість 'із відкритого покриття взяти скінченне підпокриття', називається компактом. Тобто $[a,b]$ -- це компакт. \fi
 	\end{theorem}
 	
 	\begin{proof}
 	Задано відрізок $[a,b]$. Треба довести, що є набір $U_k, k = \overline{1,n}$, що покриває $[a,b]$.\\
-	!Припустимо, що $[a,b]$ покривається лише нескінченною кількістю інтервалів. \\ 
-	Ідея доведення є майже аналогічним з лемою Больцано-Ваєрштраса. Ми ділимо відрізок навпіл. Після ділення ми обираємо той відрізок, який покривається нескінченною кількістю інтервалів. Із обраним відрізком робимо те саме.\\
+	!Припустимо, що $[a,b]$ покривається лише нескінченною кількістю інтервалів $\{U_\alpha\}$. \\ 
+	Ідея доведення є майже аналогічним з лемою Бользано-Ваєрштраса. Ми ділимо відрізок навпіл. Після ділення ми обираємо той відрізок, який покривається нескінченною кількістю інтервалів. Із обраним відрізком робимо те саме.\\
 	Матимемо знову вкладені відрізки $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \dots$. Причому, $b_n - a_n = \dfrac{b-a}{2^n}$. Ми вже доводили, що $\exists! c \in \mathbb{R}: \forall n \geq 1: c \in [a_n,b_n]$.\\
-	Оскільки $c \in [a_1,b_1]$, то тоді знайдеться інтервал $U = (\alpha,\beta) \ni c$ -- один із інтервалів покриття.\\
-	Нехай задамо $\varepsilon = \min \{ c-\alpha, \beta-c \}$. Тоді ми можемо завжди знайти номер $N$, щоб $b_N - a_N = \dfrac{b-a}{2^N} < \varepsilon$ (аналогічна процедура).
+	Оскільки $c \in [a_1,b_1]$, то тоді знайдеться інтервал $U_{\alpha_0} = (\delta,\beta) \ni c$ -- один із інтервалів покриття.\\
+	Нехай задамо $\varepsilon = \min \{ c-\delta, \beta-c \}$. Тоді ми можемо завжди знайти номер $N$, щоб $b_N - a_N = \dfrac{b-a}{2^N} < \varepsilon$ (аналогічна процедура).
 	\begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
 	\draw[thick] (0,0)--(4.5,0);
-	\node at (1,0) {$($}; \node at (1,-0.5) {$\alpha$};
+	\node at (1,0) {$($}; \node at (1,-0.5) {$\delta$};
 	\node at (4,0) {$)$}; \node at (4,-0.5) {$\beta$};
 	\fill (2,0) circle (1pt) node [anchor = south] {$c$};
 	\node[scale = 0.8] at (1.85,0) {$[$}; \node[scale = 0.8] at (1.85,-0.25) {$a_N$};
 	\node[scale = 0.8] at (2.3,0) {$]$}; \node[scale = 0.8] at (2.3,-0.25) {$b_N$};
 	\end{tikzpicture}
 	\end{figure}
-	Звідси випливає, що $[a_N,b_N] \subset (\alpha, \beta)$. Тобто відрізок покривається одним інтервалом. Проте ми казали, що це неможливо. Суперечність!
+	Звідси випливає, що $[a_N,b_N] \subset (\delta, \beta)$. Тобто відрізок покривається одним інтервалом. Проте ми казали, що це неможливо. Суперечність!
 	\end{proof}
 		
 	\begin{theorem}
@@ -2510,10 +1029,224 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	Можна зробити висновок, що $\forall n \geq 1: c \neq x_n$, а тому точка $c$ не має нумерації. Суперечність!\\
 	Отже, $[0,1]$ -- незліченна множина, а тому тим паче $\mathbb{R} \supset [0,1] \subset \mathbb{R}$ -- незліченна множина.
 	\end{proof}
+	
+	\setcounter{section}{0}
+	\setcounter{subsection}{0}
+	\section*{Необіхдний інструментарії перед тим, як продовжимо}
+	\subsection*{Принцип математичної індукції}
+	\begin{definition}
+	Числова множина $E$ називається \textbf{індуктивною}, якщо
+	\begin{align*}
+		\forall x \in E: x+1 \in E
+	\end{align*}
+	\end{definition}
+	
+	\begin{theorem}
+	Множина натуральних чисел $\mathbb{N}$ -- мінімальна індуктивна множина, що містить $1$.
+	\end{theorem}
+	
+	\begin{remark}
+	Переформулюю математичною мовою дану теорему:\\
+	$\forall E$ -- індуктивна: $1 \in E \implies \mathbb{N} \subset E$.
+	\end{remark}
+	
+	\begin{proof}
+	1) Те, що $\mathbb{N}$ індуктивна, зрозуміло, тому що $\forall k \in \mathbb{N}: k+1 \in \mathbb{N}$.\\
+	2) Оскільки $1 \in E$ і, більш того, вона є індуктивною, то $2 \in E, 3 \in E, \dots, k \in E$.\\
+	А тому $\forall k \in \mathbb{N} \Rightarrow k \in E$. Таким чином, $\mathbb{N} \subset E$.
+	\end{proof}
+	
+	\begin{corollary}[Принцип математичної індукції]
+	Розглянемо числову множину $E = \{n \in \mathbb{N}: P(n)\}$. Тут $P(n)$ -- це деяка умова. Тоді якщо $1 \in E$ та індуктивна, то $E = \mathbb{N}$.\\
+	Авторське скорочення: МІ -- математична індукція.
+	\end{corollary}
+	
+	\begin{proof}
+	За умовою наслідка, маємо, що $E \subset \mathbb{N}$. Оскільки $1 \in E$ та індуктивна, то за попередньою теоремою, $\mathbb{N} \subset E$. Отже, $E = \mathbb{N}$.
+	\end{proof}
+	
+	\textit{Про що цей наслідок}: ми хочемо стверджитись, що $P(n)$ виконується при будь-яких $n \in \mathbb{N}$. Для цього треба зробити три кроки:\\
+	I. \textit{База індукції}. Перевіряємо, що $P(1)$ виконується.\\
+	II. \textit{Припущення індукції}. Припускаємо, що $P(n)$ виконано при деякому фіксованому $n \in \mathbb{N}$.\\
+	III. \textit{Крок індукції}. Доводимо, що $P(n+1)$ виконується.
+	\bigskip \\
+	Двома кроками доводимо, що наша множина $E$ -- індуктивна, що містить одиницю. Отже, МІ доведено, а тому $P(n)$ виконується завжди.
+	
+	\begin{example}
+	Довести, що $1 + 2 + \dots + n = \dfrac{n(n+1)}{2}$.\\
+	Тут множина $E = \left\{n \in \mathbb{N}: 1 + 2 + \dots + n = \dfrac{n(n+1)}{2} \right\}$. Користуємося вищеописаною стратегією.\\
+	I. \textit{База індукції}. $1 = \dfrac{1(1+1)}{2} = 1 \implies 1 \in E$.\\
+	II. \textit{Припущення індукції}. Нехай $k \in E$, тобто  $1 + 2 + \dots + k = \dfrac{k(k+1)}{2}$.\\
+	III. \textit{Крок індукції}. Доведемо, що $k+1 \in E$.\\
+	$1+ 2 + \dots + k + (k+1) = \dfrac{k(k+1)}{2} + k = \dfrac{k(k+1)+2k}{2} = \dfrac{(k+1)(k+2)}{2}$.\\
+	Отже, $k+1 \in E$.
+	А значить, $E = \mathbb{N}$, тобто наша формула виконується $\forall n \in \mathbb{N}$. МІ доведено.
+	\end{example}
+	
+	\begin{example}
+	Довести, що $\forall n \in \mathbb{N} \setminus \{1\}: 2^n \geq n$.\\
+	Тут множина $E = \{n \in \mathbb{N} \setminus \{1\}: 2^n \geq n \}$. Аналогічно проводимо процедуру.\\
+	I. \textit{База індукції}. $2^2 \geq 2 \implies  2 \in E$.\\
+	II. \textit{Припущення індукції}. Нехай $k \in E$, тобто $2^k \geq k$.\\
+	III. \textit{Крок індукції}. Доведемо, що $k+1 \in E$. Маємо\\
+	$2^{k+1} = 2 \cdot 2^k \geq 2k = k + k > k+1$.\\
+	Отже, $k+1 \in E$, тобто $E = \mathbb{N} \setminus \{1\}$, тобто наше твердження виконується $\forall n \neq 1$. МІ доведено.
+	\end{example}
+	
+	\subsection*{Основні нерівності}
+	\begin{theorem}[Нерівність Бернуллі]
+	Для всіх $x > -1$ виконано $(1+x)^n \geq 1+nx, \quad \forall n \geq 1$.
+	\end{theorem}
+	
+	\begin{proof}
+	Доведення за МІ по $n$.\\
+	I. \textit{База індукції}. При $n=1$: $(1+x)^1 \geq 1+1\cdot x$. Нерівність виконується.\\
+	II. \textit{Припущення індукції}. Нехай для фіксованого $n$ нерівність виконується.\\
+	III. \textit{Крок індукції}. Доведемо для значення $n+1$.\\
+	$(1+x)^{n+1}=(1+x)(1+x)^n \geq (1+x)(1+nx)=1+(n+1)x+nx^2 \geq 1+(n+1)x$\\
+	Отже, така нерівність справедлива $\forall n \geq 1$. \\
+	МІ доведено.
+	\end{proof}
+	
+	\begin{theorem}[Нерівність Коші]
+	Для всіх $a_1,\dots,a_n > 0$ виконано
+	$\dfrac{a_1+\cdots+a_n}{n} \geq \sqrt[n]{a_1 \cdots a_n}, \hspace{0.2cm} \forall n \geq 1$.
+	\end{theorem}
+	
+	\begin{proof}
+	Тимчасове перепозначення: $A_n = \dfrac{a_1+\cdots+a_n}{n}, \quad G_n = \sqrt[n]{a_1 \cdots a_n}$.\\
+	Зрозуміло, що $\dfrac{A_n}{A_{n-1}} > 0 \implies \dfrac{A_n}{A_{n-1}}-1>-1$. Тоді за нерівністю Бернуллі,\\
+	$\displaystyle \left(1+ \left(\frac{A_n}{A_{n-1}} -1 \right) \right)^n \geq 1 + n \cdot \left(\frac{A_n}{A_{n-1}} -1 \right)$
+	$\implies \displaystyle \frac{(A_n)^n}{(A_{n-1})^n} \geq \frac{a_n}{A_{n-1}} \implies \displaystyle (A_n)^n \geq a_n (A_{n-1})^{n-1}, \forall n \geq 1$. \\ Тоді $(A_n)^n \geq a_n (A_{n-1})^{n-1} \geq \cdots \geq a_n a_{n-1} \cdots a_1$. \\ Отже, $A_n \geq G_n$, що й хотіли довести.
+	\end{proof}
+	
+	\begin{theorem}[Нерівність Коші-Буняковського]
+	Для всіх $a_1,\dots,a_n \in \mathbb{R}$ та для всіх $b_1,\dots,b_n \in \mathbb{R}$ виконано\\
+	$(a_1 b_1 + \dots + a_n b_n)^2 \leq (a_1^2 + \dots + a_n^2) (b_1^2 + \dots + b_n^2)$.\\
+	\textit{У зарубіжній літературі це часто називають нерівністю Коші-Шварца.}
+	\end{theorem}
+	
+	\begin{proof}
+	Розглянемо вираз $(a_1+tb_1)^2 + \dots + (a_n + tb_n)^2 \geq 0$, нерівність виконана для всіх $t \in \mathbb{R}$. Перетворюючи алгебраїчним чином, отримаємо таку нерівніть:\\
+	$(a_1^2 + \dots + a_n^2) + 2t(a_1b_1 + \dots + a_n b_n) + t^2 (b_1^2 + \dots + b_n^2) \geq 0$.\\
+	Відносно змінної $t$ тут записана квадратна нерівність. Оскільки така нерівність виконана для всіх $t \in \mathbb{R}$, то тоді дискримінант $D < 0$, але сам дискримінант\\ $D = 4(a_1b_1 + \dots + a_n b_n)^2 - 4  (a_1^2 + \dots + a_n^2)(b_1^2 + \dots + b_n^2) < 0$.\\
+	Звідси отримаємо $(a_1b_1 + \dots + a_n b_n)^2 \leq (a_1^2 + \dots + a_n^2) (b_1^2 + \dots + b_n^2)$.
+	\end{proof}
+	
+	\subsection*{Біноміальні коефіцієнти, біном Ньютона}
+	\begin{definition}
+	\textbf{Факторіалом натурального числа} називають таке число:
+	\begin{align*}
+	n! = n \cdot (n-1) \dots 2 \cdot 1
+	\end{align*}
+	Особлива домовленість: $0! = 1$.
+	\end{definition}
+	
+	\begin{corollary} 
+	$(n+1)! = (n+1)n!$
+	\end{corollary}
+	
+	\begin{definition}
+	\textbf{Біноміальним коефіцієнтом} назвемо ось таке число:
+	\begin{align*}
+	C_n^k = \dfrac{n!}{k!(n-k)!}
+	\end{align*}
+	Інтерпретація того числа на прикладі: серед $n$ студентів обрати $k$ студентів, що будуть відраховані. При цьому неважливо, у якому порядку $k$ студентів стануть в ряд.
+	\end{definition}
+
+	\begin{proposition}
+	$C_n^k + C_n^{k+1} = C_{n+1}^{k+1}$.
+	\end{proposition}
+	
+	\begin{proof}
+	$C_n^k + C_n^{k+1} = \dfrac{n!}{k!(n-k)!} + \dfrac{n!}{(k+1)!(n-(k+1))!} \boxed{=}$\\
+	За властивістю факторіала, $(n-k)! = (n-k-1)!(n-k)$, а також $(k+1)! = (k+1)k!$\\
+	$\boxed{=} \dfrac{n!}{k!(n-k)(n-k-1)!} + \dfrac{n!}{k!(k+1)(n-k-1)!} = \dfrac{n!}{k!(n-k-1)!} \left(\dfrac{1}{n-k} + \dfrac{1}{k+1} \right) = \\ = \dfrac{n!}{k!(n-k-1)!} \dfrac{n+1}{(n-k)(k+1)} \boxed{=}$\\
+	Знову за властивістю факторіала, $(n+1)n! = (n+1)!$, а також \\ $(n-k)(n-k-1)! = (n-k)!$, $(k+1)k! = (k+1)!$ \\
+	$\boxed{=} \dfrac{(n+1)!}{(k+1)!(n-k)!} = \dfrac{(n+1)!}{(k+1)!((n+1)-(k+1))!} = C_{n+1}^{k+1}$
+	\end{proof}
+	
+	\subsubsection*{Трикутник Паскаля}
+	В школі були такі формули:\\
+	$(a+b) = a + b$\\
+	$(a+b)^2 = a^2+2ab + b^2$\\
+	$(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$\\
+	$(a+b)^4 = ?$\\
+	Приберімо зараз літери $a,b$ та отримаємо такий малюнок:
+\begin{figure}[H]
+\centering
+	\begin{tikzpicture}
+	\node at (1,1) {$1$};
+	\node at (2,1) {$1$};
+	\node at (0.5,0) {$1$};
+	\node at (1.5,0) {$2$};
+	\draw[->] (0.6,-0.2)--(0.9,-0.8);
+	\draw[->] (1.4,-0.2)--(1.1,-0.8);
+	\node at (2.5,0) {$1$};
+	\node at (0,-1) {$1$};
+	\node[red] at (1,-1) {$3$};
+	\node at (2,-1) {$3$};
+	\node at (3,-1) {$1$};
+	\end{tikzpicture}
+\end{figure}
+	По краях трикутника ми будемо завжди з одиницями. Червоне число $3$ взялося шляхом додавання двох чисел зверху: $1 + 2$. Якщо дотримуватись аналогічних міркувань, то ми зможемо розширити трикутник, який називається трикутником Паскаля:
+\begin{figure}[H]
+\centering
+	\begin{tikzpicture}
+	\node at (1,1) {$1$};
+	\node at (2,1) {$1$};
+	\node at (0.5,0) {$1$};
+	\node at (1.5,0) {$2$};
+	\node at (2.5,0) {$1$};
+	\node at (0,-1) {$1$};
+	\node at (1,-1) {$3$};
+	\node at (2,-1) {$3$};
+	\node at (3,-1) {$1$};
+	
+	\node[blue] at (-0.5,-2) {$1$};
+	\node[blue] at (0.5,-2) {$4$};
+	\node[blue] at (1.5,-2) {$6$};
+	\node[blue] at (2.5,-2) {$4$};
+	\node[blue] at (3.5,-2) {$1$};
+	
+	\node at (-1,-3) {$1$};
+	\node at (0,-3) {$5$};
+	\node at (1,-3) {$10$};
+	\node at (2,-3) {$10$};
+	\node at (3,-3) {$5$};
+	\node at (4,-3) {$1$};
+	\node at (1.5,-4) {$\dots$};
+	\end{tikzpicture}
+	\caption*{Трикутник Паскаля}
+\end{figure}
+	Із цього трикутника ми тепер можем знайти $(a+b)^4$, якщо знати, як повернути літери:\\
+	$(a+b)^4 = \textcolor{blue}{1} a^4 + \textcolor{blue}{4}a^3 b + \textcolor{blue}{6} a^2  b^2 + \textcolor{blue}{4}a b^3 + \textcolor{blue}{1} b^4$.\\
+	Формула починається з $a^4$ та $b^0$. А далі степінь $a$ зменшуємо на одиницю, а степінь $b$, навпаки, збільшуємо на одиницю. А тепер узагальнімо це:
+	
+	\begin{theorem}[Біном Ньютона]
+	$(a+b)^n = C_n^0 a^n b^0 + C_n^1 a^{n-1}b + C_n^2 a^{n-2}b^2 + \dots + C_n^{n-1} a b^{n-1} + C_n^n a^0 b^n$.\\
+	Якщо коротко, можна записати як $(a+b)^n = \displaystyle \sum_{k=0}^n C_n^k a^{n-k} b^k$.
+	\end{theorem}
+	
+	\begin{proof}
+	Дану формулу доведемо за МІ по числу $n \in \mathbb{N}$.\\
+	I. \textit{База індукції}. При $n = 1$ маємо $(a+b)^1 = C_1^0 a^1 b^0 + C_1^1 a^0 b^1 = a + b$.\\
+	II. \textit{Припущення індукції}. Нехай для фіксованого $n$ формула виконана, тобто $(a+b)^n = \displaystyle\sum_{k=0}^n C_n^k a^{n-k} b^k$. \\
+	III. \textit{Крок індукції}. Перевіримо цю формулу для $n+1$.\\
+	$(a+b)^{n+1} = (a+b)(a+b)^n \overset{\textrm{припущення МІ}}{=} (a+b) \displaystyle \sum_{k=0}^n C_n^k a^{n-k} b^k = \sum_{k=0}^n C_n^k a^{n-k+1} b^k + \sum_{k=0}^n C_n^k a^{n-k} b^{k+1} = \textcolor{red}{a^{n+1}} + \sum_{\textcolor{red}{k=1}}^n C_n^k a^{n-k+1} b^k + \sum_{k=0}^{\textcolor{red}{n-1}} C_n^k a^{n-k} b^{k+1} + \textcolor{red}{b^{n+1}} \boxed{=}$\\
+	В другій сумі ми замінимо лічильник: $m = k+1$\\
+	Було: $0,1,2,\dots, n-1$\\
+	Стало: $1,2,3,\dots,n$\\
+	$\boxed{=} a^{n+1} + \displaystyle \sum_{k=1}^n C_n^k a^{n-k+1}b^k + \sum_{m=1}^n C_n^{m-1} a^{n-(m-1)}b^{(m-1)+1} + b^{n+1} \boxed{=}$ \\
+	Замінимо літеру $m = k$, сума від цього не зміниться\\
+	$\boxed{=} a^{n+1} + \displaystyle \sum_{k=1}^n C_n^k a^{n-k+1}b^k + \sum_{k=1}^n C_n^{k-1} a^{n-k+1}b^{k} + b^{n+1}
+	= a^{n+1} + \sum_{k=1}^n a^{n-k+1}b^k \left(C_n^k + C_n^{k-1} \right) + b^{n+1}  = a^{n+1} + \sum_{k=1}^n a^{n-k+1}b^k C_{n+1}^k + b^{n+1}
+	= C_{n+1}^0 a^{n+1} b^0 + \sum_{k=1}^n a^{n-k+1}b^k C_{n+1}^k + C_{n+1}^{n+1} a^0 b^{n+1} = \sum_{k=0}^{n+1} C_{n+1}^k a^{n-k+1}b^k  = (a+b)^{n+1}$\\
+	МІ доведено.
+	\end{proof}
 	\newpage
 	
-	\setcounter{section}{0}	
-	\section*{Корень $n$-го степеня}
+	\section*{Корінь $n$-го степеня}
 	Зараз строго варто пояснити, що таке $\sqrt[n]{a}$. Перед цим хочу залишити корисну нерівність:
 	
 	\begin{lemma}
@@ -2561,6 +1294,8 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	\begin{remark}
 	Насправді, коли степінь $n$ -- непарний, то ми можемо також допускати випадок $a < 0$. Якщо в нас $a < 0$ та $n$ -- непарний, то все одно існує єдиний $x < 0$, для якого $x^n = a$ (це можна легко показати через щойно доведену теорему).
 	\end{remark}
+	
+	Всі властивості про корені ви вже знаєте зі школи, тому я не буду сильно на них загострюватися.
 	\newpage
 %\fi
 	%\fi %IMPORTANT COMMENT
@@ -3147,7 +1882,7 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	Отримали підпослідовність $\{a_{n_k}, k \geq 1\}$, де $|a_{n_k} - a| < \dfrac{1}{k}$. Спрямуємо $k \to \infty \implies a_{n_k} \to a$.
 	\end{proof}
 	
-	\begin{theorem}[Теорема Больцано-Ваєрштраса]
+	\begin{theorem}[Теорема Бользано-Ваєрштраса]
 	Для будь-якої обмеженої послідовності існує збіжна підпослідовність.
 	\end{theorem}
 	
@@ -3158,7 +1893,7 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	Тоді одне із значень послідовності буде прийматись нескінченну кількість разів. Отримаємо стаціонарну підпослідовність, яка є збіжною.
 	\bigskip \\
 	\textit{II. Послідовність - нескінченна} (як в \textbf{Ex. 2.6.8.}). \\
-	Нехай $A$ -- множина всіх можливих значень послідовності. Оскільки вона є обмеженою, то за лемою Больцано-Ваєрштраса, у неї існує гранична точка $b_* \iff \forall \varepsilon > 0:A \cap (b_*-\varepsilon, b_*+\varepsilon)$ -- нескінченна множина. Розглянемо $\varepsilon = \displaystyle \frac{1}{k}$ при $k \in \mathbb{N}$.\\
+	Нехай $A$ -- множина всіх можливих значень послідовності. Оскільки вона є обмеженою, то за лемою Бользано-Ваєрштраса, у неї існує гранична точка $b_* \iff \forall \varepsilon > 0:A \cap (b_*-\varepsilon, b_*+\varepsilon)$ -- нескінченна множина. Розглянемо $\varepsilon = \displaystyle \frac{1}{k}$ при $k \in \mathbb{N}$.\\
 	$\displaystyle k = 1: A \cap(b_*-1, b_*+1) \rotatebox[origin=c]{180}{$\in$}a_{n_1}$\\
 	$\displaystyle k = 2: A \cap(b_*-\frac{1}{2}, b_*+\frac{1}{2}) \rotatebox[origin=c]{180}{$\in$}a_{n_2}$, вимагаємо $n_2>n_1$. Це можна робити, бо всього $n_1$ членів, індекс яких не більший за $n_1$. А у нас нескінченна множина.\\
 	$\vdots$\\
@@ -3184,6 +1919,7 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	Для необмеженої знизу послідовності теж існуватиме н.в. підпослідовність (аналогічно).
 	\end{proof}
 	
+	\subsection{Верхні та нижні границі}
 	\begin{definition} Задано послідовність $\{a_n, n \geq 1\}$.\\
 	\textbf{Верхньою границею} називають число:
 	\begin{align*}
@@ -3276,7 +2012,7 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	$\boxed{1) \Rightarrow 2)}$ Дано: умова 1).\\
 	Тоді $L^* = \displaystyle \sup X$. За попередньою теоремою, $L^* \in X$, тож існує $\{a_{n_k}, k \geq 1\}$, для якої \\ $\displaystyle \lim_{k \to \infty} a_{n_k} = L^* \implies \forall \varepsilon > 0: \exists K: \forall k \geq K: L^*-\varepsilon < a_{n_k} < L^*+\varepsilon$.\\
 	Звідси ми вже маємо, що на проміжку $(L^*-\varepsilon, +\infty)$ маємо нескінченну кількість елементів.\\
-	!А далі припустимо, що $\exists \varepsilon^* > 0:$ проміжок $(L^*+\varepsilon^*, + \infty)$ має НЕскінченну кількість елементів. Тобто знайдеться підпослідовність $\{a_{n_m}, m \geq 1\}$, для яких $a_{n_m} > L^*+\varepsilon$. Ця послідовність досі обмежена, тому за теоремою Больцано-Ваєрштраса, маємо збіжну підпідпослідовність \\ $\{a_{n_{m_l}}, l \geq 1\}$, для якої $\displaystyle\lim_{l \to \infty} a_{n_{m_l}} = L^{**}$. Для підпідпослідовності досі $a_{n_{m_l}} > L^* + \varepsilon$. Тоді звідси, за граничним переходом нерівності, $L^{**} \geq L^* + \varepsilon^*$. Тобто $L^{**} > L^*$, але $L^*$ - верхня границя. Суперечність!\\
+	!А далі припустимо, що $\exists \varepsilon^* > 0:$ проміжок $(L^*+\varepsilon^*, + \infty)$ має НЕскінченну кількість елементів. Тобто знайдеться підпослідовність $\{a_{n_m}, m \geq 1\}$, для яких $a_{n_m} > L^*+\varepsilon$. Ця послідовність досі обмежена, тому за теоремою Бользано-Ваєрштраса, маємо збіжну підпідпослідовність \\ $\{a_{n_{m_l}}, l \geq 1\}$, для якої $\displaystyle\lim_{l \to \infty} a_{n_{m_l}} = L^{**}$. Для підпідпослідовності досі $a_{n_{m_l}} > L^* + \varepsilon$. Тоді звідси, за граничним переходом нерівності, $L^{**} \geq L^* + \varepsilon^*$. Тобто $L^{**} > L^*$, але $L^*$ - верхня границя. Суперечність!\\
 	Висновок: $\forall \varepsilon > 0:$ проміжок $(L^*+\varepsilon, + \infty)$ має скінченну кількість елементів.
 	\bigskip \\
 	
@@ -3340,6 +2076,70 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	\textit{Доведення є аналогічним.}
 	\end{theorem}
 	
+	\begin{proposition}
+	Для кожних обмежених послідовностей $\{a_n, n \geq 1 \}$ та $\{b_n, n \geq 1 \}$ виконано наступне:\\
+	$\displaystyle\varliminf_{n \to \infty} a_n + \varliminf_{n \to \infty} b_n \leq \varliminf_{n \to \infty} (a_n + b_n) \leq \varliminf_{n \to \infty} a_n + \varlimsup_{n \to \infty} b_n$.\\
+	Аналогічним чином справедлива нерівність (доводиться теж аналогічно):\\
+	$\displaystyle\varliminf_{n \to \infty} a_n + \varlimsup_{n \to \infty} b_n \leq \varlimsup_{n \to \infty} (a_n + b_n) \leq \varlimsup_{n \to \infty} a_n + \varlimsup_{n \to \infty} b_n$.
+	\end{proposition}
+	
+	\begin{proof}
+	$\displaystyle\varliminf_{n \to \infty} a_n + \varliminf_{n \to \infty} b_n \leq \varliminf_{n \to \infty} (a_n + b_n)$.\\
+	Зафіксуємо часткову границю послідовності $\{a_n+b_n, n \geq 1\}$, тобто існує підпослідовність $\{a_{n_k} + b_{n_k}, k \geq 1\}$, для якої $\displaystyle\lim_{k \to \infty} (a_{n_k} + b_{n_k}) = u$. У нас є кілька випадків:\\
+	I. $\{a_{n_k}\}, \{b_{n_k}\}$ обидва збіжні. Тоді $u = \displaystyle\lim_{k \to \infty} (a_{n_k} + b_{n_k}) = \lim_{k \to \infty} a_{n_k} + \lim_{k \to \infty} b_{n_k} \geq \varliminf_{n \to \infty} a_n + \varliminf_{n \to \infty} b_n$.\\
+	Оскільки це виконується для всіх часткових границь $\{a_n+b_n\}$, то зокрема й для найменшої часткової границі, тож отримаємо нерівність  $\displaystyle\varliminf_{n \to \infty} a_n + \varliminf_{n \to \infty} b_n \leq \varliminf_{n \to \infty} (a_n + b_n)$.\\
+	II. Одна з послідовностей $\{a_{n_k}\}, \{b_{n_k}\}$ розбіжна. Та розбіжна послідовність буде обмеженою, тож можна буде відокремити збіжну підпідпослідовність. Якщо друга підпослідовність збіжна, то його підпідпослідовність теж. Також підпідпослідовність $\{a_n + b_n\}$ залишається збіжною, а далі отримаємо ту саму нерівність.\\
+	III. Обидва $\{a_{n_k}\}, \{b_{n_k}\}$ розбіжні. Тоді з першої беремо збіжну підпослідовність. Із другої беремо ту саму підпослідовність. Якщо вона стала збіжною, то все добре. Інакше знову беремо підпослідовність, яка вже буде збіжною. А далі аналогічно.
+	\bigskip \\
+	$\displaystyle\varliminf_{n \to \infty} (a_n + b_n) \leq \varliminf_{n \to \infty} a_n + \varlimsup_{n \to \infty} b_n$.\\
+	Насправді, ми доведемо, що $\displaystyle\varliminf_{n \to \infty} a_n \geq \varliminf_{n \to \infty} (a_n + b_n) - \varlimsup_{n \to \infty} b_n$.\\
+	Зафіксуємо часткову границю послідовності $\{a_n, n \geq 1\}$, тобто існує підпослідовність $\{a_{n_k}, k \geq 1\}$, для якої $\displaystyle\lim_{k \to \infty} a_{n_k} = u$. Знову кілька випадків:\\
+	I. $\{a_{n_k} + b_{n_k}\}, \{b_{n_k}\}$ обидва збіжні. Тоді $u = \displaystyle\lim_{k \to \infty} a_{n_k} = \lim_{k \to \infty} (a_{n_k} + b_{n_k}) - \lim_{k \to \infty} b_{n_k} \geq \varliminf_{n \to \infty} (a_n + b_n) - \varlimsup_{n \to \infty} b_n$.\\
+	Оскільки це виконується для всіх часткових границь $\{a_n\}$, то зокрема й для найменшої часткової границі, тож отримаємо нерівність $\displaystyle\varliminf_{n \to \infty} (a_n + b_n) \leq \varliminf_{n \to \infty} a_n + \varlimsup_{n \to \infty} b_n$.\\
+	II. та III. описуються аналогічним чином.
+	\end{proof}
+	
+	\begin{remark}
+	Нерівність $\displaystyle\varliminf_{n \to \infty} a_n + \varliminf_{n \to \infty} b_n \leq \varliminf_{n \to \infty} (a_n + b_n)$ виконується, коли хоча б одна послідовність $\{a_n\}$ чи $\{b_n\}$ необмежена знизу. Аналогічно нерівність $\displaystyle\varlimsup_{n \to \infty} (a_n + b_n) \leq \varlimsup_{n \to \infty} a_n + \varlimsup_{n \to \infty} b_n$ виконується, коли хоча б одна послідовність $\{a_n\}$ чи $\{b_n\}$ необмежена зверху.
+	\end{remark}
+	
+	\begin{example}
+	Приклад, який показує, що там мають бути саме нерівності. Розглянемо послідовності $\{a_n, n \geq 1\} = \{0,1,0,1,\dots \},\ \{b_n, n \geq 1\} = \{2,0,2,0,\dots \}$. Маємо:\\
+	$\displaystyle\varliminf_{n \to \infty} a_n = 0,\ \varliminf_{n \to \infty} b_n = 0,\ \varlimsup_{n \to \infty} b_n = 2$.\\
+	При цьому в послідовності $\{a_n+b_n, n \geq 1\} = \{1,2,1,2,\dots\}$ маємо $\displaystyle\varliminf_{n \to \infty} (a_n+b_n) = 1$. Отже,\\
+	$\displaystyle \varliminf_{n \to \infty} a_n + \varliminf_{n \to \infty} b_n < \varliminf_{n \to \infty} (a_n+b_n) < \varliminf_{n \to \infty} a_n + \varlimsup_{n \to \infty} b_n$.
+	\end{example}
+	
+	\begin{proposition}
+	Для кожних обмежених послідовностей $\{a_n, n \geq 1 \}$ та $\{b_n, n \geq 1 \}$ при $a_n \geq 0,\ b_n \geq 0$ виконано наступне:\\
+	$\displaystyle\varliminf_{n \to \infty} a_n \cdot \varliminf_{n \to \infty} b_n \leq \varliminf_{n \to \infty} (a_n \cdot b_n) \leq \varliminf_{n \to \infty} a_n \cdot \varlimsup_{n \to \infty} b_n$.\\
+	Аналогічним чином справедлива нерівність (доводиться теж аналогічно):\\
+	$\displaystyle\varliminf_{n \to \infty} a_n \cdot \varlimsup_{n \to \infty} b_n \leq \varlimsup_{n \to \infty} (a_n \cdot b_n) \leq \varlimsup_{n \to \infty} a_n \cdot \varlimsup_{n \to \infty} b_n$.
+	\end{proposition}
+	
+\begin{proof}
+	$\displaystyle\varliminf_{n \to \infty} a_n \cdot \varliminf_{n \to \infty} b_n \leq \varliminf_{n \to \infty} (a_n \cdot b_n)$.\\
+	Зафіксуємо часткову границю послідовності $\{a_n \cdot b_n, n \geq 1\}$, тобто існує підпослідовність $\{a_{n_k} \cdot b_{n_k}, k \geq 1\}$, для якої $\displaystyle\lim_{k \to \infty} (a_{n_k} \cdot b_{n_k}) = u$. У нас є кілька випадків:\\
+	I. $\{a_{n_k}\}, \{b_{n_k}\}$ обидва збіжні. Тоді $u = \displaystyle\lim_{k \to \infty} (a_{n_k} \cdot b_{n_k}) = \lim_{k \to \infty} a_{n_k} \cdot \lim_{k \to \infty} b_{n_k} \geq \varliminf_{n \to \infty} a_n \cdot \varliminf_{n \to \infty} b_n$. Остання нерівність допустима (!) за рахунок умов $a_n \geq 0,\ b_n \geq 0$.\\
+	Оскільки це виконується для всіх часткових границь $\{a_n \cdot b_n\}$, то зокрема й для найменшої часткової границі, тож отримаємо нерівність  $\displaystyle\varliminf_{n \to \infty} a_n \cdot \varliminf_{n \to \infty} b_n \leq \varliminf_{n \to \infty} (a_n \cdot b_n)$.\\
+	II. Одна з послідовностей $\{a_{n_k}\}, \{b_{n_k}\}$ розбіжна. Та розбіжна послідовність буде обмеженою, тож можна буде відокремити збіжну підпідпослідовність. Якщо друга підпослідовність збіжна, то його підпідпослідовність теж. Також підпідпослідовність $\{a_n \cdot b_n\}$ залишається збіжною, а далі отримаємо ту саму нерівність.\\
+	III. Обидва $\{a_{n_k}\}, \{b_{n_k}\}$ розбіжні. Тоді з першої беремо збіжну підпослідовність. Із другої беремо ту саму підпослідовність. Якщо вона стала збіжною, то все добре. Інакше знову беремо підпослідовність, яка вже буде збіжною. А далі аналогічно.
+	\bigskip \\
+	$\displaystyle\varliminf_{n \to \infty} (a_n \cdot b_n) \leq \varliminf_{n \to \infty} a_n \cdot \varlimsup_{n \to \infty} b_n$.\\
+	Для початку окремо випадок, коли $\displaystyle\varliminf_{n \to \infty} b_n = 0$. Тоді існує підпослідовність $\{b_{n_k}\}$, яка є н.м. Тоді $\{a_{n_k} \cdot b_{n_k}\}$ -- н.м., причому $0 = \displaystyle\lim_{k \to \infty} (a_{n_k} \cdot b_{n_k}) \geq \varliminf_{n \to \infty} (a_{n} \cdot b_n)$. Нерівність виконується автоматично.\\
+	Далі окремо випадок, коли $\displaystyle\varlimsup_{n \to \infty} b_n = 0$. Оскільки $b_n \geq 0$, то це єдина існуюча часткова границя, тому послідовність $\{b_n\}$ збіжна, причому н.м. Оскільки $\{a_n\}$ обмежена, то $\{a_n \cdot b_n\}$ збіжна та н.м. Звідси $\displaystyle\varliminf_{n \to \infty} (a_n \cdot b_n) = 0$ -- нерівність виконана.\\
+	Тепер хочемо довести, що $\displaystyle\varliminf_{n \to \infty} a_n \geq \dfrac{\varliminf_{n \to \infty} (a_n \cdot b_n)}{\varlimsup_{n \to \infty} b_n}$ в іншому випадку.\\
+	Зафіксуємо часткову границю послідовності $\{a_n, n \geq 1\}$, тобто існує підпослідовність $\{a_{n_k}, k \geq 1\}$, для якої $\displaystyle\lim_{k \to \infty} a_{n_k} = u$. Знову кілька випадків:\\
+	I. $\{a_{n_k} \cdot b_{n_k}\}, \{b_{n_k}\}$ обидва збіжні. Тоді $u = \displaystyle\lim_{k \to \infty} a_{n_k} = \lim_{k \to \infty} (a_{n_k} \cdot b_{n_k}) \lim_{k \to \infty} \dfrac{1}{b_{n_k}} \geq \dfrac{\varliminf_{n \to \infty} (a_n \cdot b_n)}{\varliminf_{n \to \infty} b_n}$. Ланцюг рівностей коректний, просто тому що зараз розглядаються суто випадки, коли часткові границі ненулеві, а тому, починаючи з деякого номера, всі $b_{n_k} \neq 0$.\\
+	Оскільки це виконується для всіх часткових границь $\{a_n\}$, то зокрема й для найменшої часткової границі, тож отримаємо нерівність $\displaystyle\varliminf_{n \to \infty} (a_n \cdot b_n) \leq \varliminf_{n \to \infty} a_n \cdot \varlimsup_{n \to \infty} b_n$.\\
+	II. та III. описуються аналогічним чином.
+	\end{proof}
+	
+	\begin{example}
+	Якщо розглянути послідовності $\{a_n, n \geq 1\} = \left\{ \dfrac{1}{2}, 2, \dfrac{1}{2}, 2, \dots \right\},\ \{b_n, n \geq 1\} = \left\{ 2,\dfrac{1}{4},2,\dfrac{1}{4},\dots \right\}$, то аналогічно отримаємо строгі нерівності:\\
+	$\displaystyle\varliminf_{n \to \infty} a_n \cdot \varliminf_{n \to \infty} b_n < \varliminf_{n \to \infty} (a_n \cdot b_n) < \varliminf_{n \to \infty} a_n \cdot \varlimsup_{n \to \infty} b_n$.
+	\end{example}
+		
 	\subsection{Фундаментальна послідовність}
 	\begin{definition}
 	Послідовність $\{a_n, n \geq 1\}$ називається \textbf{фундаментальною}, якщо
@@ -3400,7 +2200,7 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	\begin{theorem}[Теорема Штольца]
 	Задано дві послідовності $\{a_n, n \geq 1\}, \{b_n, n \geq 1\}$, які мають ось такі властивості:
 	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-	\item $\{b_n\}$ - н.в. та монотонно строго зростає (можливо, з якогось номера);
+	\item $\{b_n\}$ -- н.в. та монотонно строго зростає (можливо, з якогось номера);
 	\item $\exists \displaystyle \lim_{n \to \infty} \dfrac{a_{n+1} - a_n}{b_{n+1} - b_n} = L$.
 	\end{enumerate}
 	Тоді $\exists \displaystyle \lim_{n \to \infty} \dfrac{a_n}{b_n} = L$.
@@ -3439,7 +2239,7 @@ $\emptyset, \mathbb{R}$ -- єдині множини, що є відкритим
 	\begin{theorem}[Теорема Штольца 2]
 	Задано дві послідовності $\{a_n, n \geq 1\}, \{b_n, n \geq 1\}$, які мають ось такі властивості:
 	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-	\item $\{a_n\}, \{b_n\}$ - н.м. та монотонно строго зростає (можливо, з якогось номера);
+	\item $\{a_n\}, \{b_n\}$ -- н.м. та монотонно строго зростає (можливо, з якогось номера);
 	\item $\exists \displaystyle \lim_{n \to \infty} \dfrac{a_{n+1} - a_n}{b_{n+1} - b_n} = L$.\\
 	Тоді $\exists \displaystyle \lim_{n \to \infty} \dfrac{a_n}{b_n} = L$.
 	\end{enumerate}
@@ -3501,8 +2301,7 @@ $$a^n = \underbrace{a \cdot a \cdot \dots \cdot a}_{n\text{ разів}}, \quad 
 $$a^{-n} = \dfrac{1}{a^n}, \quad n \in \mathbb{Z}$$
 А далі в школі мали розглядати раціональний степінь:
 $$a^{\frac{m}{n}} = \sqrt[n]{a^m}, \quad \dfrac{m}{n} = q \in \mathbb{Q}$$
-Причому не має значення, яким чином я представлю раціональний дріб.\\
-Дійсно, нехай $\dfrac{m}{n}$ - нескоротимий, тоді $\dfrac{m}{n} = \dfrac{mk}{nk}, k \in \mathbb{N}$, звідси\\
+Причому не має значення, яким чином я представлю раціональний дріб. Дійсно, нехай $\dfrac{m}{n}$ -- нескоротимий, тоді $\dfrac{m}{n} = \dfrac{mk}{nk}, k \in \mathbb{N}$, звідси\\
 $a^{\frac{m}{n}} = \sqrt[n]{a^m} = \sqrt[nk]{a^{mk}} = a^{\frac{mk}{nk}}$.\\
 А якщо ми маємо два дроби $\dfrac{m_1}{n_1} = \dfrac{m_2}{n_2}$, які є скоротимими до $\dfrac{m}{n}$, то тоді\\
 $\begin{cases}
@@ -3621,7 +2420,7 @@ $|a^{q_m}-a^{q_n}| = a^{q_m}|a^{q_m-q_n}-1| \leq a^{q_m} 2 |q_m-q_n|(a-1) \boxed
 Таким чином, ми довели, що границя не залежить від послідовності раціональних чисел.
 
 \subsubsection*{Що буде, коли степінь -- раціональний}
-Ми тоді беремо стаціонарну послідовність $\{q_n = q, q \geq 1\}$ - все.
+Ми тоді беремо стаціонарну послідовність $\{q_n = q, q \geq 1\}$ -- все.
 
 \begin{example}
 Хочемо порахувати $3^{\sqrt{2}}$. \\ Беремо якусь послідовність, наприклад, $\{1,1.4,1.41,1.414,1.4142,\dots\}$, яка прямує до $\sqrt{2}$.\\
@@ -4019,7 +2818,7 @@ $\log_{10} a \overset{\text{позн}}{=} \lg a$ \hspace{0.5cm} $\log_e a \overs
 	\begin{proposition}[Властивості повних прообразів]
 	1) $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$;\\
 	2) $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$;\\
-	3) $f^{-1}(\overline{A}) = \overline{f^{-1}(A)}$.\\
+	3) $f^{-1}(A^\mathsf{c}) = {f^{-1}(A)}^\mathsf{c}$.\\
 	\textit{Випливає з теорії множин.}
 	\end{proposition}
 	
@@ -5037,7 +3836,7 @@ $\forall \varepsilon > 0: \exists x_{\varepsilon} \in [a,b]: f(x_{\varepsilon}) 
 Але водночас $\exists x_{n_k} \in [a,b]: c \leq f(x_{n_k}) < c + \dfrac{1}{n_k}$. Коли $k \to \infty$, то за теоремою про поліцаїв, $\exists \displaystyle \lim_{k \to \infty} f(x_{n_k}) = c$. Таким чином, отримали, що $c = f(x_*) = \displaystyle \inf_{x \in [a,b]} f(x) = \min_{x \in [a,b]} f(x)$.
 \end{proof}
 
-\begin{theorem}[Теорема Больцано-Коші про нульове значення]
+\begin{theorem}[Теорема Бользано-Коші про нульове значення]
 Задано функцію $f \in C([a,b])$, причому $f(a) \cdot f(b) < 0$. Тоді $\exists x_0 \in (a,b): f(x_0) = 0$.
 \\ \iffalse %uncomment picture
 \begin{figure}[H]
@@ -5114,7 +3913,7 @@ $\displaystyle\lim_{n \to \infty} b_n = x_0 \implies \displaystyle\lim_{n \to \i
 Отже, $f(x_0) = 0$.
 \end{proof}
 
-\begin{corollary}[Теорема Больцано-Коші про проміжкове значення]
+\begin{corollary}[Теорема Бользано-Коші про проміжкове значення]
 Задано функцію $f \in C([a,b])$.
 Тоді $\forall L \in \left[ \begin{gathered}  \left[f(a),f(b) \right] \\ \left[f(b),f(a) \right] \end{gathered} \right.: \exists x_L \in [a,b]: f(x_L) = L$.\\
 \textit{Вказівка: розглянути функцію $g(x) = f(x) - L$.}
@@ -5166,7 +3965,7 @@ $\exists \delta^* > 0: \forall N: \exists n \geq N: |g(y_n)-g(y_0)| \geq \delta^
 Тут $g(y_n) = x_n$ та $g(y_0) = x_0$, тоді $|x_n-x_0| \geq \delta^*$\\
 Зокрема для $N = 1: \exists n_1 \geq N$, для $N = n_1+1: \exists n_2 > n_1$, $\dots$\\
 Коротше, є підпослідовність $\{x_{n_k}, k \geq 1\}$, для якої $|x_{n_k} -x_0| \geq \delta^*$\\
-Оскільки $\{y_n\} \subset [c,d]$, то тоді $\{x_n \} \subset [a,b]$, ну й $\{x_{n_k}\} \subset [a,b]$ - обмежена. Тоді за Больцано-Ваєрштрасом, $\exists \{x_{n_{k_m}}, m \geq 1\}$ така, що $\displaystyle\lim_{m \to \infty} x_{n_{k_m}} = x_{00}$. За граничним переходом, маємо, що $|x_{00}-x_0| \geq \delta^*$.\\
+Оскільки $\{y_n\} \subset [c,d]$, то тоді $\{x_n \} \subset [a,b]$, ну й $\{x_{n_k}\} \subset [a,b]$ - обмежена. Тоді за Бользано-Ваєрштрасом, $\exists \{x_{n_{k_m}}, m \geq 1\}$ така, що $\displaystyle\lim_{m \to \infty} x_{n_{k_m}} = x_{00}$. За граничним переходом, маємо, що $|x_{00}-x_0| \geq \delta^*$.\\
 Оскільки $f \in C([a,b])$, то звідси, $\displaystyle\lim_{m \to \infty} f(x_{n_{k_m}}) \lim_{m \to \infty} f(g(y_{n_{k_m}})) = \lim_{m \to \infty} y_{n_{k_m}} = y_0 = f(x_0) = f(x_{00})$.\\
 Виходить, що $x_{00} \neq x_0$, але $f(x_{00}) = f(x_0)$. Але ж $f$ -- бієкція. Суперечність!
 \end{proof}
@@ -6775,5 +5574,6 @@ $\sin \dfrac{\pi}{180} \approx \dfrac{\pi}{180} - \dfrac{\pi^3}{180^3 3!} = a$.\
 \item \href{https://www.youtube.com/watch?v=SNq-NgYcqbY&list=PL4_hYwCyhAvZcIIZvqdQyyWx6naPeuj2W}{Лекторий ФПМИ: Лукашов А.Л.}
 \item Дороговцев А.Я. "Математический анализ"
 \item \href{https://www.youtube.com/watch?v=uOeZbCy6-xc&list=PLx5jwZiVE4CV0zwaZNJeL-m994o7eFbT2&index=1}{Бойцев А.А.}
+\item \href{https://www3.nd.edu/~dgalvin1/10860/10860_S20/book/Sec3.pdf}{Тут детально про аксіоматику дійсних чисел}
 \end{enumerate}
 \end{document}

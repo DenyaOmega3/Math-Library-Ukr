@@ -622,6 +622,18 @@ $(X,\rho)$ -- повний $\iff (Y,\tilde{\rho})$ -- повний.
 \end{proof}
 
 \begin{definition}
+Задані $(X,\| \cdot \|_1)$ та $(X,\| \cdot \|_2)$ -- два нормовані простори.
+Ці два простори називаються \textbf{ізометричними}, якщо
+\begin{align*}
+\exists L \colon X \to Y \text{ -- ізоморфізм між просторами}: \|Lx\|_2 = \|x\|_1
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Ізоморфізм $L$ -- автоматично ізометрія, це випливає зі збереження норми. Саме тому слово 'ізометричні' в означенні вище виправдане.
+\end{remark}
+
+\begin{definition}
 Задано $Y$ -- повний метричний простір.\\
 Він буде називатися \textbf{поповненням (completion)} метричного простору $X$, якщо
 \begin{align*}
@@ -960,7 +972,7 @@ $\max\{a,b\} = \dfrac{1}{2}\left(a+b+|a-b|\right) \qquad \min\{a,b\} = \dfrac{1}
 \end{definition}
 
 \begin{remark}
-Маємо обмежений оператор $A$. Зауважимо, що множина всіх констант, які обмежують оператор, тобто множина $\{C > 0 \mid \forall x \in X: \| Ax\| \leq C \|x\|\}$, буде непорожньою (можна взяти $C = \dfrac{\|Ax\|}{\|x\|} > 0$) та обмеженою знизу числом $0$. Значить, існує $\displaystyle\inf\{C > 0 \mid \forall x \in X: \| Ax\| \leq C \|x\|\}$.
+Маємо обмежений оператор $A$. Зауважимо, що множина всіх констант, які обмежують оператор, тобто множина $\{C > 0 \mid \forall x \in X: \| Ax\| \leq C \|x\|\}$, буде непорожньою (бо оператор обмежений) та обмеженою знизу числом $0$. Значить, існує $\displaystyle\inf\{C > 0 \mid \forall x \in X: \| Ax\| \leq C \|x\|\}$.
 \end{remark}
 
 \begin{definition}
@@ -1290,58 +1302,140 @@ $\forall x \in B[r;0]: l(x) \leq |l(x)| \leq \|x\| \leq r$, тобто весь 
 \end{align*}
 \end{definition}
 
-\begin{remark}
-Якщо в просторі $E$ існує базис Шаудера, то $E$ -- сепарабельний.\\
-Дійсно, оберемо $A = \left\{ \displaystyle\sum_{k=1}^\infty x_k e_k \mid x_k \in \mathbb{Q} \right\}$ у випадку дійсного нормованого простору або $A = \left\{ \displaystyle\sum_{k=1}^\infty x_k e_k \mid x_k = \alpha_k + i \beta_k, \alpha_k, \beta_k \in \mathbb{Q} \right\}$ у випадку комплексного нормованого простору. Для такої множини $\bar{A} = E$.
-\end{remark}
+\begin{proposition}
+Нехай $E$ -- банахів простір, що містить базис Шаудера. Тоді $E$ -- сепарабельний.
+\end{proposition}
+
+\begin{proof}
+\textit{Випадок дійсного нормованого простору}.\\
+Оберемо множину $A = \left\{ \displaystyle\sum_{k=1}^\infty x_k e_k \mid x_k \in \mathbb{Q} \right\}$.\\
+Нехай $x \in E$, тоді за умовою, $x = \displaystyle\sum_{k=1}^\infty x_k e_k$ єдиним чином. Нехай задане $\varepsilon > 0$. Тоді на кожному з $\left(x_k-\dfrac{\varepsilon}{\|e_k\| 2^k},x_k + \dfrac{\varepsilon}{\|e_k\| 2^k} \right)$ існує раціональне число $y_k \in \mathbb{Q}$. Оберемо $y \in A$ так, що $y = \displaystyle\sum_{k=1}^\infty y_k e_k$. Позначимо $x^{(n)},y^{(n)}$ за часткову суму ряда (перші $n$ додаються). Тоді\\
+$\|x^{(n)} - y^{(n)}\| = \displaystyle\left\| \sum_{k=1}^n (x_k-y_k) e_k \right\| \leq \sum_{k=1}^n \| (x_k-y_k) e_k \| = \sum_{k=1}^n |x_k-y_k| \|e_k\| \leq \sum_{k=1}^n \dfrac{\varepsilon}{2^k}$.\\
+Далі спрямовуємо $n \to \infty$. Тоді $x^{(n)} \to x, y^{(n)} \to y$. Після чого отримаємо $\|x-y\| \displaystyle \leq \sum_{k=1}^\infty \dfrac{\varepsilon}{2^k} = \varepsilon$. Отже, $A$ скрізь щільна множина, ну тобто $\bar{A} = E$.
+\bigskip \\
+\textit{Випадок комплексного нормованого простору}.\\
+Оберемо множину $A = \left\{ \displaystyle\sum_{k=1}^\infty x_k e_k \mid x_k = \alpha_k + i \beta_k, \alpha_k, \beta_k \in \mathbb{Q} \right\}$. Далі плюс-мінус аналогічно.
+\end{proof}
 
 \begin{remark}
-Можна загуглити приклад сепарабельного банахового простору, який не містить базис Шаудера. Доведено П.\ Енфло.
+Якщо зробити \textcolor{red}{\href{https://projecteuclid.org/download/pdf_1/euclid.acta/1485889774}{*клік*}} сюди, то тут буде стаття про приклад сепарабельного банахового простору, який не містить базис Шаудера. Доведено П.\ Енфло. Власне, це означає, що зворотне твердження не працює.
 \end{remark}
 
 \begin{theorem}
-Простір $l_p$ містить базис Шаудера. Причому цей базис матиме вигляд $\{e_1,e_2,e_3,\dots\}$, де $e_i$ містить нулі та одиницю на $i$-ій позиції.
+Простір $l_p$ містить базис Шаудера. Причому цей базис матиме вигляд $\{e_1,e_2,e_3,\dots\}$, де кожний $e_i = (0,\dots,0,\underbrace{1}_{\text{на $i$-ій позиції}},0,\dots)$.
 \end{theorem}
 
 \begin{proof}
-Фіксуємо елемент $x \in l_p$ , де $x = (x_1,x_2,\dots)$ та $\displaystyle\sum_{k=1}^\infty |x_k|^p < +\infty$. Покладемо елемент $s_n = x_1 e_1 + \dots + x_n e_n$ та доведемо, що послідовність $\{s_n, n \geq 1\}$ -- фундаментальна. При $n > m$\\
-$\|s_n - s_m \|_p = \left\| (0,\dots,0,x_{m+1},\dots,x_n,0,\dots \right\|_p = \displaystyle \left( \sum_{k=m+1}^n |x_k|^p \right)^{\frac{1}{p}}$.\\
+І. \textit{Існування}.\\
+Фіксуємо елемент $x \in l_p$, де $x = (x_1,x_2,\dots)$ та $\displaystyle\sum_{k=1}^\infty |x_k|^p < +\infty$. Покладемо елемент (що є частковою сумою) $s_n = x_1 e_1 + \dots + x_n e_n$ та доведемо, що послідовність $\{s_n, n \geq 1\}$ -- фундаментальна. При $n > m$\\
+$\|s_n - s_m \|_p = \left\| (0,\dots,0,x_{m+1},\dots,x_n,0,\dots ) \right\|_p = \displaystyle \left( \sum_{k=m+1}^n |x_k|^p \right)^{\frac{1}{p}}$.\\
 Фундаментальність $\{s_n\}$ випливає зі збіжності числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$. Оскільки $l_p$ -- повний простір, то $\{s_n\}$ -- збіжний, тобто $\displaystyle\sum_{k=1}^\infty x_k e_k$ збігається до деякого елемента. Зокрема доведемо, що $\displaystyle\sum_{k=1}^\infty x_k e_k = x$. Дійсно,\\
-$\|x-s_n\|_p = \displaystyle \left\| x - \sum_{k=1}^n x_k e_k \right\|_p = \| (0,\dots,0,x_{n+1},x_{n+2},\dots \|_p = \left( \sum_{k=n+1}^\infty |x_k| \right)^{\frac{1}{p}}$\\
-Знову в силу збіжноті числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$ випливає бажане.
+$\|x-s_n\|_p = \displaystyle \left\| x - \sum_{k=1}^n x_k e_k \right\|_p = \| (0,\dots,0,x_{n+1},x_{n+2},\dots)\|_p = \left( \sum_{k=n+1}^\infty |x_k| \right)^{\frac{1}{p}}$.\\
+Знову зі збіжності числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$ випливає бажане.
+\bigskip \\
+II. \textit{Єдиність}.\\
+!Припустимо, що $x = \displaystyle\sum_{k=1}^\infty y_k e_k$ -- друге представлення. Тоді отримаємо $\displaystyle\lim_{n \to \infty} \sum_{k=1}^n (x_k-y_k)e_k = 0$. Звідси отримаємо $\displaystyle\lim_{n \to \infty}\left\| \sum_{k=1}^n (x_k-y_k) e_k \right\| = \lim_{n \to \infty} \left(\sum_{k=1}^n |x_k-y_k|^p\right)^{\frac{1}{p}} = 0$. Єдина можливість тут -- це $x_k = y_k$ при всіх $k \in \mathbb{N}$ -- суперечність!
 \end{proof}
 
 \subsubsection{Простір, що спряжений до $l_p$}
 \begin{theorem}
-Нехай $p,p' > 1$ таким чином, що $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Тоді для будь-якого лінійного неперервного функціонала на $l_p$ існує елемент $(f_k)_{k=1}^\infty \in l_{p'}$, такий, що $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ для всіх $x \in l_p$.
+Нехай $p,p' > 1$ таким чином, що $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Тоді для будь-якого лінійного неперервного функціонала $f$ на $l_p$ існує елемент $(f_k)_{k=1}^\infty \in l_{p'}$, такий, що $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ для всіх $x \in l_p$.
 \end{theorem}
 
 \begin{proof}
 Нехай $f \in (l_p)'$ (тобто лінійний неперервний функціонал). Тоді звідси отримаємо:\\
 $f(x) = \displaystyle f\left( \sum_{k=1}^\infty x_k e_k \right) = f\left( \lim_{n \to \infty} \sum_{k=1}^n x_k e_k \right) = \lim_{n \to \infty} \sum_{k=1}^n x_k f(e_k) = \sum_{k=1}^\infty x_k f(e_k) \overset{f(e_k) \overset{\text{покл.}}{=} f_k}{=} \sum_{k=1}^\infty f_k x_k$.\\
-Доведемо, що $(f_k)_{k=1}^\infty \in l_p$. Для цього розглянемо елемент $y \in l_p$ ось такий:\\
-$y = \left( |f_1|^{p'-1}e^{-i \arg f_1}, \dots, |f_n|^{p'-1}e^{-i \arg f_n}, 0, 0, \dots \right)$\\
-$f(y) = \displaystyle\sum_{k=1}^n f_k |f_k|^{p'-1} e^{-i \arg f_k} = \sum_{k=1}^n |f_k|^{p'}$.\\
-Оскільки $f$ обмежений, то звідси\\
-$\displaystyle |f(y)| \leq \|f\| \|y\| = \|f\| \left( \sum_{k=1}^n  ||f_k|^{p'-1} \cdot e^{-i \arg f_k}|^p \right)^{\frac{1}{p}} = \|f\| \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p}}$.\\
-Маючи нерівність та рівність вище, отримаємо\\
-$\displaystyle\sum_{k=1}^n |f_k|^{p'} \leq \| f\| \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p}}$\\
-$\displaystyle \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p'}} \leq \|f\|, \forall n \in \mathbb{N}$.\\
-Остання оцінка стверджує, що $(f_k)_{k=1}^{\infty} \in l_{p'}$.
+Доведемо, що $(f_k)_{k=1}^\infty \in l_{p'}$. Для цього підберемо елемент $y \in l_p$ ось таким чином, щоб\\
+$f(y) = \displaystyle\sum_{k=1}^\infty y_k f_k \overset{\text{був рівний}}{=} \sum_{k=1}^n |f_k|^{p'}$.\\
+Можна для цього взяти елемент $y = \left( |f_1|^{p'-1}e^{-i \arg f_1}, \dots, |f_n|^{p'-1}e^{-i \arg f_n}, 0, 0, \dots \right)$. Оскільки $f$ обмежений, то звідси $\displaystyle |f(y)| \leq \|f\| \|y\| = \|f\| \left( \sum_{k=1}^n  ||f_k|^{p'-1} \cdot e^{-i \arg f_k}|^p \right)^{\frac{1}{p}} = \|f\| \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p}}$.\\
+Маючи щойно отриману нерівність та рівність трошки вище, отримаємо\\
+$\displaystyle\sum_{k=1}^n |f_k|^{p'} \leq \| f\| \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p}} \implies \left( \sum_{k=1}^n |f_k|^{p'} \right)^{\frac{1}{p'}} \leq \|f\|, \forall n \in \mathbb{N}$.\\
+Остання оцінка стверджує, що ряд збіжний, внаслідок чого $(f_k)_{k=1}^{\infty} \in l_{p'}$.
 \end{proof}
 
 \begin{theorem}
-І навпаки: для кожного $(f_k)_{k=1}^\infty \in l_{p'}$ рівність $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ визначає функціонал $f \in (l_p)'$.
+І навпаки: для кожного $(f_k)_{k=1}^\infty \in l_{p'}$ рівність $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ визначає лінійний та неперервний функціонал на $l_p$.
 \end{theorem}
 
 \begin{proof}
 Нехай $(f_k)_{k=1}^\infty \in l_{p'}$. Завдяки нерівності Гьольдера, отримаємо:\\
 $\displaystyle |f(x)| \leq \left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}} \left( \sum_{k=1}^\infty |x_k|^p \right)^{\frac{1}{p}} = c \| x \|_p < +\infty$.\\
-Отже, $f$ -- обмежений та $\|f\| \leq c$. Лінійність зрозуміла.
+Отже, $f$ -- обмежений та $\|f\| \leq c$. Як доводиться лінійність, цілком зрозуміло.
 \bigskip \\
-До речі, під час минулого доведення ми довели нерівність $c \leq \|f\|$. Звідси випливає, що $\|f\| = c$, тобто\\
-$\|f\| =  \displaystyle\left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}}$
+До речі, під час минулого доведення ми довели нерівність $c \leq \|f\|$. Маючи ще тут нерівність $c \leq \|f\|$, звідси випливатиме, що $\|f\| = c$, тобто $\|f\| =  \displaystyle\left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}}$.
 \end{proof}
+
+Множину всіх лінійних та обмежених функціоналів на $l_p$ позначатимемо за $(l_p)'$. Ці дві теореми стверджують, що $(l_p)' \cong l_{p'}$ ізометричним чином. Адже ми маємо $f(x) = \displaystyle\sum_{k=1}^\infty f_kx_k$, який задає ізоморфізм. (TODO: додумати).
+
+\subsubsection{Простір, що спряжений до $l_1$}
+\begin{theorem}
+Простір $(l_1)' \cong l_\infty$ ізометричним чином. Ізоморфізм між ними встановлюється формулою $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$.
+\end{theorem}
+
+\begin{proof}
+Нехай $(f_k)^{\infty}_{k=1} \in l_{\infty}$. Визначимо функціонал $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$, який вже ясно, що лінійний. Залишилося довести обмеженість.\\
+$|f(x)| = \displaystyle \left| \sum_{k=1}^\infty f_k x_k \right| \leq \sup_{k \in \mathbb{N}} |f_k| \sum_{k=1}^\infty |x_k| = \|f\|_\infty \|x\|_1$.\\
+Із цього всього ми встановили $l_\infty \subset (l_1)'$.\\
+Нехай $f \in (l_1)'$, тобто лінійний та обмежений функціонал. Аналогічним чином отримаємо, що $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$, де $f_k = f(e_k)$. Тепер хочемо $(f_k)^{\infty}_{k=1} \in l_\infty$. Дійсно це спрацює, бо\\
+$\|f\|_\infty = \displaystyle\sup_{k \in \mathbb{N}} |f_k| = \sup_{k \in \mathbb{N}} |f(e_k)| \leq \sup_{k \in \mathbb{N}} \|f\| \|e_k\|_1 = \|f\| \sup \{1,1,\dots\} = \|f\| < \infty$.\\
+Причому ми також довели, що $\|f\| = \|f\|_\infty$.
+\end{proof}
+
+\subsubsection{Простори, що спряжені до $l_\infty$}
+\begin{remark}
+$(l_\infty)' \supsetneq l_1$.\\
+Дійсно, нехай $(f_k)_{k=1}^\infty \in l_1$, тоді функціонал $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k,\ x \in l_\infty$ все одно лінійний, а обмеженість доводиться, завдяки оцінки\\
+$|f(x)| \leq \displaystyle\sum_{k=1}^\infty |f_k x_k| \leq \sup_{k \in \mathbb{N}} |x_k| \sum_{k=1}^\infty |f_k| = \|x\|_\infty \sum_{k=1}^\infty |f_k|$.\\
+Отже, довели вкладення, при цьому ми ще довели $\|f\| \leq \displaystyle\sum_{k=1}^\infty |f_k|$.\\
+Якщо покласти такий $x \in l_\infty$, де $x_k = e^{-i \arg f_k}$, то взагалі отримаємо $f(x) = \displaystyle\sum_{k=1}^\infty |f_k| = \|f\|_1$.
+\end{remark}
+
+\begin{remark}
+Тепер чому це вкладення лише в одну сторону.\\
+Розглянемо лінійну множину $C \subset l_\infty$, яка містить збіжні послідовності комплексних чисел. Визначимо $f(x) = \displaystyle\lim_{k \to \infty} x_k$ для кожного $x = (x_1,x_2,\dots) \in C$. Цілком ясно, що це лінійний функціонал. Обмеженість вилпиває з оцінки $|f(x)| = \displaystyle \left| \lim_{k \to \infty} x_k \right| \leq \sup_{k \in \mathbb{N}} |x_k| = \|x\|$.\\
+Отже, $f \in C'$ (лінійний та неперервний функціонал), причому $\|f\| \leq 1$. Ми можемо продовжити функціонал $f$ до функціонала $F \in (l_\infty)'$ зі збереженням норми, за теоремою Гана-Банаха. Функціонал $F$ не можна записати як $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$. Представимо, що можна. Маємо послідовність $x \in C$, ліміт не зміниться при зміннні скінченного числа членів, тобто $F(x) = f(x)$ залишиться таким самим. Проте із іншого боку, зміниться $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$.
+\end{remark}
+
+\subsection{Простір, що спряжений до $L_p, 1 < p < \infty$.}
+\begin{theorem}
+Нехайй $1 < p < \infty$ та $p' > 1$, причому $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Також задано $(X,\lambda,\mathcal{F})$ -- вимірний простір, де $\lambda$ -- $\sigma$-скінченна міра. Простір $(L_p)' \cong L_{p'}$ ізометричним чином. Ізоморфізм $l \colon (L_p)' \to L_{p'}$ задається наступним чином:\\
+$l(x) = \displaystyle\int_X h(q) x(q)\,d\lambda(q)$.
+\end{theorem}
+
+\begin{proof}
+$L_{p'} \subset (L_p)'$.\\
+Нехай $h \in L_{p'}$. Визначимо функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$. Цілком зрозуміло, що це лінійний. Щодо обмеженості\\
+$|l(x)| = \displaystyle\left| \int_X h(q)x(q)\,d\lambda(q) \right| \overset{\text{нер-ть Гьольдера}}{\leq} \|h\|_{p'} \|x\|_p$.\\
+Довели обмеженість, при цьому $\|l\| \leq \|h\|_{p'}$.
+\bigskip \\
+$(L_p)' \subset L_{p'}$.\\
+\textit{Спочатку розглянемо випадок, коли міра $\lambda$ є скінченною.}\\
+Нехай $l \in (L_p)'$, тобто лінійний та обмежений функціонал. Якщо $A$ -- вимірна множина, то $\mathbbm{1}_A \in L_p$, а тому звідси $l(\mathbbm{1}_A)$ буде визначеним. Таким чином, ми можемо задати функцію множин $\omega \colon \mathcal{F} \to \mathbb{R}$ таким чином: $\omega(A) = l(\mathbbm{1}_A)$. Покажемо, що $\omega$ -- заряд.\\
+Нехай $A_k \in \mathcal{F}, k \geq 1$, всі неперетинні. По-перше, $\mathbbm{1}_{\bigsqcup_{k=1}^\infty A_k} = \displaystyle\sum_{k=1}^\infty \mathbbm{1}_{A_k}$; по-друге, даний ряд збіжний в нормі $L_p$. Отже, можна отрмиати наступний ланцюг:\\
+$\displaystyle \omega\left(\bigsqcup_{k=1}^\infty A_k\right) = l(\mathbbm{1}_{\bigsqcup_{k=1}^\infty A_k}) = \displaystyle l\left( \sum_{k=1}^\infty \mathbbm{1}_{A_k} \right) = \sum_{k=1}^\infty l(\mathbbm{1}_{A_k}) = \sum_{k=1}^\infty \omega(A_k)$.\\
+$\omega(\emptyset) = l(\mathbbm{1}_\emptyset) = l(0) = 0$.\\
+Також $\omega \ll \lambda$. Дійсно, нехай $\lambda(A) = 0$, тоді звідси $\mathbbm{1}_A = 0 \pmod \lambda$, а це означає, що $\mathbbm{1}_A$ -- нульовий елемент в $L_p$, тож звідси $\omega(A) = 0$.\\
+Отже, за теоремою Радона-Нікодими, існує $h \in L_1$, для якої $\omega(A) = \displaystyle\int_A h(q)\,d\lambda(q)$.\\
+Ми хочемо довести, що $h \in L_{p'}$, при цьому $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$.\\
+І. \textit{Випадок індикатора}.\\
+$l(\mathbbm{1}_A) = \displaystyle\int_A h(q)\,d\lambda(q) = \int_X h(q) \mathbbm{1}_A(q)\,d\lambda(q)$.\\
+II. \textit{Випадок простих функцій}.\\
+Автоматично виконується, оскільки це -- лінійна комбінація індикаторів.\\
+III. \textit{Випадок обмежених вимірних функцій}.\\
+Для цього існує послідовність простих вимірних функцій $(x_n(q))_{n=1}^\infty$, яка збігається до $x(q)$. За теоремою Лебега про обмежену збіжність, в рівності $l(x_n) = \displaystyle\int_X h(q) x_n(q)\,d\lambda(q)$ можна перейти до ліміту.\
+Покладемо тепер функцію $h_n(q) = \begin{cases} h(q), & |h(q)| \leq n \\ 0, & |h(q)| > n \end{cases}$ для кожного $n \in \mathbb{N}$ та розглянемо функції $y_n(q) = |h_n(q)|^{p'-1} e^{-i \arg h(q)}$. Кожна з цих обмежена, вимірна, а також\\
+$\|y_n\|_p = \displaystyle\left(  \int_X |h_n(q)|^{(p'-1)p}\,d\lambda(q) \right)^{\frac{1}{p}} = \left( \int_X |h_n(q)|^{p'}\,d\lambda(q)\right)^{\frac{1}{p}}$.\\
+Далі маємо:\\
+$l(y_n) = \displaystyle\int_X h(q) y_n(q)\,d\lambda(q) = \int_X h(q) |h_n(q)|^{p'-1} e^{-i \arg h(q)}\,d\lambda(q) = \int_X |h_n(q)|^{p'}\,d\lambda(q)$.\\
+Оскільки $|l(y_n)| \leq \|l\| \|y_n\|_p$ в силу обмеженості, то ці дві рівності разом дають\\
+$\displaystyle\int_X |h_n(q)|^{p'}\,d\lambda(q) \leq \|l\| \left( \int_X |h_n(q)|^{p'}\,d\lambda(q) \right)^{\frac{1}{p}}$.\\
+$\displaystyle\left( \int_X |h_n(q)|^{p'}\,d\mu(q) \right)^{\frac{1}{p'}} \leq \|l\|$.\\
+Оскільки в кожній точці $|h_n(q)|^{p'}$ збігається до $|h(q)|^{p'}$, то за лемою Фату, отримаємо\\
+$\displaystyle\int_X |h(q)|^{p'}\,d\lambda(q) \leq \|l\|^{p'}$.\\
+Отже, $h \in L_{p'}$.\\
+Отже, лінійний неперервний функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$ лише на щільном підмножині $L_p$ обмежених функцій. Ми можемо функціонал продовжити неперервно на всю $L_p$.
+\end{proof}
+
 \newpage
 
 \section*{Твердження, які потім вставлю в необхідне місце}
