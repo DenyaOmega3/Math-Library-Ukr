@@ -63,6 +63,8 @@
 \newtheorem{corollary}[theorem]{Corollary}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\toweak}{\overset{w}{\to}}
+\newcommand{\toweakstar}{\overset{w^*}{\to}}
 
 \makeatletter
 \renewenvironment{proof}[1][Proof.\\]{\par
@@ -1396,45 +1398,214 @@ $|f(x)| \leq \displaystyle\sum_{k=1}^\infty |f_k x_k| \leq \sup_{k \in \mathbb{N
 Отже, $f \in C'$ (лінійний та неперервний функціонал), причому $\|f\| \leq 1$. Ми можемо продовжити функціонал $f$ до функціонала $F \in (l_\infty)'$ зі збереженням норми, за теоремою Гана-Банаха. Функціонал $F$ не можна записати як $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$. Представимо, що можна. Маємо послідовність $x \in C$, ліміт не зміниться при зміннні скінченного числа членів, тобто $F(x) = f(x)$ залишиться таким самим. Проте із іншого боку, зміниться $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$.
 \end{remark}
 
-\subsection{Простір, що спряжений до $L_p, 1 < p < \infty$.}
+\subsubsection{Простір, що спряжений до $L_p, 1 < p < \infty$.}
 \begin{theorem}
 Нехайй $1 < p < \infty$ та $p' > 1$, причому $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Також задано $(X,\lambda,\mathcal{F})$ -- вимірний простір, де $\lambda$ -- $\sigma$-скінченна міра. Простір $(L_p)' \cong L_{p'}$ ізометричним чином. Ізоморфізм $l \colon (L_p)' \to L_{p'}$ задається наступним чином:\\
-$l(x) = \displaystyle\int_X h(q) x(q)\,d\lambda(q)$.
+$l(x) = \displaystyle\int_X h(q) x(q)\,d\lambda(q)$.\\
+\textit{Доведення див.\ в pdf теорії міри.}
+\end{theorem}
+
+\subsubsection{Простір, що спряжений до $C(K)$}
+Припустимо, що $K$ -- метричний компакт та $\mathfrak{B}(K)$ -- борельова $\sigma$-алгебра.
+
+\begin{definition}
+Заряд $\omega$ на вимірній множині $(K, \mathfrak{B}(K))$ назвемо \textbf{регулярним}, якщо
+\begin{align*}
+\omega_+, \omega_- \text{ -- обидва регулярні}
+\end{align*}
+Позначення: $W(K)$ -- множина регулярних зарядів.
+\end{definition}
+
+\begin{remark}
+$W(K)$ буде векторним простором. Також якщо покласти $\|\omega\| = |\omega|(K)$, де $|\omega|$ -- повна варіація заряда, то тоді ми отримаємо нормований простір. Причому $W(K)$ -- банахів додатково.
+\end{remark}
+
+\begin{theorem}[Теорема Маркова]
+$(C(K))' \cong W(K)$ ізометричним чином. Ізоморфізм $l \colon (C(K))' \to W(K)$ задається таким чином:\\
+$l(x) = \displaystyle\int_K x(q)\,d\omega(q)$.\\
+\textit{Без доведення. Наведу частинний випадок даної теореми.}
+\end{theorem}
+
+\begin{theorem}[Теорема Ріса]
+Для кожного функціонала $l \in (C([0,1]))'$ існує фукнція $g$ обмеженої варіації, для якої $l$ можна представити через інтеграл Рімана-Стілт'єса таким чином:\\
+$l(X) = \displaystyle\int_0^1 x(t)\,dg(t)$, причому $V(g;[0,1]) = \|l\|$.\\
+\textit{Без доведення}.
+\end{theorem}
+
+\subsection{Вкладення нормованих просторів}
+\begin{theorem}
+Нехай $E$ -- лінійний нормований простір. Тоді $E \subset E''$, під другою множиною мається на увазі друге спряження, тобто $E'' = (E')'$. При цьому $\|x\|_E = \|x\|_{E''}$.
 \end{theorem}
 
 \begin{proof}
-$L_{p'} \subset (L_p)'$.\\
-Нехай $h \in L_{p'}$. Визначимо функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$. Цілком зрозуміло, що це лінійний. Щодо обмеженості\\
-$|l(x)| = \displaystyle\left| \int_X h(q)x(q)\,d\lambda(q) \right| \overset{\text{нер-ть Гьольдера}}{\leq} \|h\|_{p'} \|x\|_p$.\\
-Довели обмеженість, при цьому $\|l\| \leq \|h\|_{p'}$.
-\bigskip \\
-$(L_p)' \subset L_{p'}$.\\
-\textit{Спочатку розглянемо випадок, коли міра $\lambda$ є скінченною.}\\
-Нехай $l \in (L_p)'$, тобто лінійний та обмежений функціонал. Якщо $A$ -- вимірна множина, то $\mathbbm{1}_A \in L_p$, а тому звідси $l(\mathbbm{1}_A)$ буде визначеним. Таким чином, ми можемо задати функцію множин $\omega \colon \mathcal{F} \to \mathbb{R}$ таким чином: $\omega(A) = l(\mathbbm{1}_A)$. Покажемо, що $\omega$ -- заряд.\\
-Нехай $A_k \in \mathcal{F}, k \geq 1$, всі неперетинні. По-перше, $\mathbbm{1}_{\bigsqcup_{k=1}^\infty A_k} = \displaystyle\sum_{k=1}^\infty \mathbbm{1}_{A_k}$; по-друге, даний ряд збіжний в нормі $L_p$. Отже, можна отрмиати наступний ланцюг:\\
-$\displaystyle \omega\left(\bigsqcup_{k=1}^\infty A_k\right) = l(\mathbbm{1}_{\bigsqcup_{k=1}^\infty A_k}) = \displaystyle l\left( \sum_{k=1}^\infty \mathbbm{1}_{A_k} \right) = \sum_{k=1}^\infty l(\mathbbm{1}_{A_k}) = \sum_{k=1}^\infty \omega(A_k)$.\\
-$\omega(\emptyset) = l(\mathbbm{1}_\emptyset) = l(0) = 0$.\\
-Також $\omega \ll \lambda$. Дійсно, нехай $\lambda(A) = 0$, тоді звідси $\mathbbm{1}_A = 0 \pmod \lambda$, а це означає, що $\mathbbm{1}_A$ -- нульовий елемент в $L_p$, тож звідси $\omega(A) = 0$.\\
-Отже, за теоремою Радона-Нікодими, існує $h \in L_1$, для якої $\omega(A) = \displaystyle\int_A h(q)\,d\lambda(q)$.\\
-Ми хочемо довести, що $h \in L_{p'}$, при цьому $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$.\\
-І. \textit{Випадок індикатора}.\\
-$l(\mathbbm{1}_A) = \displaystyle\int_A h(q)\,d\lambda(q) = \int_X h(q) \mathbbm{1}_A(q)\,d\lambda(q)$.\\
-II. \textit{Випадок простих функцій}.\\
-Автоматично виконується, оскільки це -- лінійна комбінація індикаторів.\\
-III. \textit{Випадок обмежених вимірних функцій}.\\
-Для цього існує послідовність простих вимірних функцій $(x_n(q))_{n=1}^\infty$, яка збігається до $x(q)$. За теоремою Лебега про обмежену збіжність, в рівності $l(x_n) = \displaystyle\int_X h(q) x_n(q)\,d\lambda(q)$ можна перейти до ліміту.\
-Покладемо тепер функцію $h_n(q) = \begin{cases} h(q), & |h(q)| \leq n \\ 0, & |h(q)| > n \end{cases}$ для кожного $n \in \mathbb{N}$ та розглянемо функції $y_n(q) = |h_n(q)|^{p'-1} e^{-i \arg h(q)}$. Кожна з цих обмежена, вимірна, а також\\
-$\|y_n\|_p = \displaystyle\left(  \int_X |h_n(q)|^{(p'-1)p}\,d\lambda(q) \right)^{\frac{1}{p}} = \left( \int_X |h_n(q)|^{p'}\,d\lambda(q)\right)^{\frac{1}{p}}$.\\
-Далі маємо:\\
-$l(y_n) = \displaystyle\int_X h(q) y_n(q)\,d\lambda(q) = \int_X h(q) |h_n(q)|^{p'-1} e^{-i \arg h(q)}\,d\lambda(q) = \int_X |h_n(q)|^{p'}\,d\lambda(q)$.\\
-Оскільки $|l(y_n)| \leq \|l\| \|y_n\|_p$ в силу обмеженості, то ці дві рівності разом дають\\
-$\displaystyle\int_X |h_n(q)|^{p'}\,d\lambda(q) \leq \|l\| \left( \int_X |h_n(q)|^{p'}\,d\lambda(q) \right)^{\frac{1}{p}}$.\\
-$\displaystyle\left( \int_X |h_n(q)|^{p'}\,d\mu(q) \right)^{\frac{1}{p'}} \leq \|l\|$.\\
-Оскільки в кожній точці $|h_n(q)|^{p'}$ збігається до $|h(q)|^{p'}$, то за лемою Фату, отримаємо\\
-$\displaystyle\int_X |h(q)|^{p'}\,d\lambda(q) \leq \|l\|^{p'}$.\\
-Отже, $h \in L_{p'}$.\\
-Отже, лінійний неперервний функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$ лише на щільном підмножині $L_p$ обмежених функцій. Ми можемо функціонал продовжити неперервно на всю $L_p$.
+Для зручності елементи простору $E$ позначимо через $x,y,\dots$; елементи простору $E'$ -- через $l,m,\dots$; елементри простору $E''$ -- через $L,M,\dots$\\
+Визначимо відображення $\varphi$ ось так: кожному $x \in E$ поставимо в відповідність $\varphi(x) = L_x \in E''$. При цьому ми покладемо $L_x(l) = l(x)$ при всіх $l \in E'$. \\
+Доведемо, що $L_x$ -- лінійний та неперервний функціонал. Нехай $l,m \in E', \lambda,\mu \in \mathbb{K}$, тоді звідси $L_x(\lambda l + \mu m) = (\lambda l + \mu m)(x) = \lambda l(x) + \mu m(x) = \lambda L_x(l) + \mu L_x(m)$. Далі маємо\\
+$|L_x(l)| = |l(x)| \leq \|l\| \cdot \|x\|$.\\
+Отже, довели бажане, причому ми отримали оцінку $\|L_x\| \leq \|x\|$.\\
+Тепер доведемо, що саме $\varphi$ -- лінійне відображення. Нехай $x,y \in E, \lambda, \mu \in \mathbb{K}$, тоді ми хочемо довести рівність $\varphi(\lambda x + \mu y) = \lambda \varphi(x) + \mu \varphi(y)$, або що теж саме $L_{\lambda x + \mu y} = \lambda L_x + \mu L_y$. Така рівність має виконуватися для кожного функціонала $l \in E'$. Дійсно,\\
+$L_{\lambda x + \mu y}(l) = l(\lambda x + \mu y) = \lambda l(x) + \mu l(y) = \lambda L_x(l) + \mu L_y(l) = (\lambda L_x + \mu L_y)(l)$.\\
+Доведемо, що $\varphi$ -- ін'єктивне відображення. !Припустимо, що $x \in \ker \varphi$ та $x \neq 0$. Тоді за наслідком теореми Гана-Банаха, існує функціонал $l \in E'$, для якого $\|l\| = 1,\ l(x) = \|x\|$. Звідси $L_x(l) = l(x) = \|x\| \neq 0$, тобто $L_x \neq 0$. Це означає лише, що $x \notin \ker \varphi$ -- суперечність!\\
+Залишилося довести, що $\|x\| = \|L_x\|$. Точніше, залишилося $\|x\| \leq \|L_x\|$. При $x = 0$ все ясно. При $x \neq 0$, знову за наслідком Гана-Банаха, існує функціонал $l \in E'$, для якого $\|l\| = 1,\ l(x) = \|x\|$. Тоді\\
+$\|x\| = l(x) = L_x(l) \leq \|L_x\| \|l\| = \|L_x\|$.\\
+Отже, $\varphi \colon E \to E''$ -- лінійне та ін'єктивне відображення, що зберігає норму. Значить, $E$ ізометрично ізоморфний $\Im E \subset E''$. Отже, кожний елемент $x \in E$ можемо ототожнити з його елементом $L_x \in E''$. Звідси отримаємо вкладення $E \subset E''$ та рівність $\|x\|_E = \|x\|_{E''}$.
 \end{proof}
+
+\begin{definition}
+Задано $E$ -- банахів простір.\\
+Простір $E$ називають \textbf{рефлексивним}, якщо
+\begin{align*}
+E'' = \varphi(E),
+\end{align*}
+де $\varphi \colon E \to E''$, який задавали під час доведення теореми.
+\end{definition}
+
+\begin{example}
+Зокрема рефлексивними будуть такі простори: $l_p$ та $L_p$ при $1 < p < \infty$.\\
+Також скінченновимірний простір $E$ буде рефлексивним.
+\end{example}
+
+\begin{example}
+Водночас нерефлексивними будуть такі простори: $l_1,\ l_\infty,\ L_1,\ L_\infty$ (останні два нерефлексивні при $\dim L_1 = \infty$, $\dim L_\infty = \infty$; $C(K)$ (буде нерефелексивним, якщо $K$ нескінченна множина).
+\end{example}
+
+\begin{theorem}[Теорема Банаха-Штайнгауза]
+Задано $E$ -- банахів простір та $(l_n)_{n=1}^\infty$ -- послідовність функціоналів з $E'$. Припустимо, що $\forall x \in E: (l_n(x))_{n=1}^\infty$ -- обмежена послідовність. Тоді $(\|l_n\|)_{n=1}^\infty$ (послідовність норм) -- обмежена.\\
+\textit{Дана теорема носить назву 'принцип рівномірної обмеженості'.}
+\end{theorem}
+
+\begin{proof}
+Нехай $\forall x \in E: (l_n(x))_{n=1}^\infty$ -- обмежена послідовність. Доведемо, що існує замкнений шар $B[a;r]$, де множина $\{l_n(x), x \in B[a;r]\}_{n=1}^\infty$ обмежена.\\ 
+!Припустимо навпаки, що множина $\{l_n(x)\}_{n=1}^\infty$ не обмежена в жодному замкненому кулі (як наслідок, в жодному відкритому кулі). \\
+Візьмемо довільну відкриту кулю $B(x_0;r_0)$, де ось ця множина $\{l_n(x), x \in B(x_0;r_0)\}_{n=1}^\infty$ не обмежена. Це, що знайдуться $x_1 \in B(x_0;r_0)$ та $n_1 \in \mathbb{N}$, для яких $|l_{n_1}(x_1)| > 1$. Оскільки $l_{n_1}$ неперервний, то нерівність $|l_{n_1}(x)| > 1$ виконується в деякому околі $B(x_1;r_1)$ (?). За необхідністю, зменшимо радіус $r_1$ таким чином, щоб $B[x_1;r_1] \subset B(x_0;r_0)$, причому сам радіус $r_1 \overset{\text{зобов'язаний}}{\leq} \dfrac{r_0}{2}$ (дійсно, можна підібрати $r_1 = \dfrac{r_0 - \rho(x_0,x_1)}{2}$). \\
+Ця множина $\{l_n(x), x \in B(x_1;x_1)\}$ теж не обмежена. Тоді знайдуться $x_2 \in B(x_1;x_1)$ та $n_2 > n_1$, для яких $|l_{n_2}(x_2)| > 2$. Аналогічно нерівність $|l_{n_2}(x)| > 2$ виконуватиметься в деякому замкненому шарі $B[x_2;r_2] \subset B(x_1;r_1)$, причому $r_2 \overset{\text{зобов'язаний}}{\leq} \dfrac{r_0}{2^2}$.\\
+\vdots \\
+Продовжуючи процес, отримаємо послідовність замкнених шарів $B[x_0;r_0] \supset B[x_1;r_1] \supset \dots$, причому $r_k \to 0$, числа $n_1 < n_2 < \dots$ такі, що $|l_{n_k}(x)| > k$ при $x \in B[x_k;r_k]$. За теоремою Кантора, існує точка $x^* = \displaystyle\lim_{k \to \infty} x_k$. Звідси випливає, що $|l_{n_k}(x^*)| > k$ при всіх $k$ -- суперечність! Бо послідовність $(l_{n_k}(x^*))_{k=1}^\infty$ мала б бути обмеженою за початковими умовами.\\
+Висновок: існує шар $B[a;r]$, де множина $\{l_n(x), x \in B[a;r]\}$ обмежена. Тобто $\exists c' > 0: \forall x \in B[a;r], \forall n \in \mathbb{N}: |l_n(x)| \leq c'$. Досить буде довести, що множина $\{l_n(x), x \in B[0;1]\}$ обмежена. Для кожного $x \in B[0;1]$ покладемо $x' = rx + a$, тоді $x = \dfrac{1}{r}(x'-a)$. Оскільки $x' \in B[a;r]$, то $|l_n(x')| < c'$. Звідси\\
+$|l_n(x)| = \left| l_n \left( \dfrac{1}{r}(x'-a) \right) \right| = \dfrac{1}{r} |l_n(x') - l_n(a)| \leq \dfrac{1}{r} (|l_n(x')| + |l_n(a)|) \leq \dfrac{c'+c_a}{r} = c$.\\
+Висновок: $\exists c > 0: \forall x \in B[0;1], \forall n \geq 1: |l_n(x)| \leq c$. Проте умова $x \in B[0;1]$ означає, що $\|x\| \leq 1$. Тобто нерівність $|l_n(x)| \leq c$ для всіх $\|x\| \leq 1$. Зокрема звідси $\displaystyle\sup_{\|x\| \leq 1} |l_n(x)| = \|l_n\| \leq c$.
+\end{proof}
+
+\begin{remark}
+Пояснення (?). Якби для кожного околу $B(x_1,r)$ (зокрема при $r = \dfrac{1}{n}$) існувала точка, де нерівність порушується, то ми би побудували послідовність, що прямує до $x_1$, при цьому ми би отримали $|l_{n_1}(x)| \leq 1$.
+\end{remark}
+
+\begin{remark}
+У теоремі Банаха-Штайнгауза умова того, що $E$ -- банахів, -- суттєва.\\
+Зокрема розглянемо простір $c_0$ -- послідовності, що збігаються до нуля. Далі розглянемо підпростір $c_{00} \subset c_0$ -- послідовності, де всі члени нулі, починаючи з деякого номера.
+\end{remark}
+
+\subsection{Про види збіжностей}
+Ми вже знаємо один тип збіжностей. Переформулюю ще раз означення, але доповню це одним словом в дужках.
+\begin{definition}
+Задано $E$ -- лінійний нормований простір.\\
+Послідовність $(x_n)_{n=1}^\infty$ називається \textbf{(сильно) збіжною} до $x \in E$, якщо
+\begin{align*}
+\lim_{n \to \infty} \|x - x_n\| = 0
+\end{align*}
+Позначення: $x_n \to x$.\\
+Тобто сильна збіжність -- це збіжність за нормою.
+\end{definition}
+
+\begin{definition}
+Нехай $E$ -- лінійний нормований простір.\\
+Послідовність $(x_n)_{n=1}^\infty$ називається \textbf{слабко збіжною} до $x \in E$, якщо
+\begin{align*}
+\forall l \in E': l(x_n) \to l(x)
+\end{align*}
+Позначення: $x_n \toweak x$.
+\end{definition}
+
+\begin{proposition}
+Задано $E$ -- лінійний нормований простір та послідовність $(x_n)_{n=1}^\infty$. Тоді:\\
+$x_n \to x \implies x_n \toweak x$.
+\end{proposition}
+
+\begin{proof}
+Дійсно, нехай $x_n \to x$, тобто звідси $\|x-x_n\| \to 0$ при $n \to \infty$. Маючи це, отримаємо $\forall l \in E'$:\\
+$|l(x_n)-l(x)| = |l(x_n-x)| \leq \|l\| \|x_n - x\| \to 0$. Таким чином, $x_n \toweak x$.
+\end{proof}
+
+Якщо розглядати спряжений простір $E'$, то крім сильної та слабкої збіжності існує ще один тип.
+
+\begin{definition}
+Нехай $E$ -- лінійний нормований простір.\\
+Послідовність функціоналів $(l_n)_{n=1}^\infty \subset E'$ називається \textbf{слабко* збіжною} до $l \in E'$, якщо
+\begin{align*}
+\forall x \in E: l_n(x) \to l(x)
+\end{align*}
+Позначення: $l_n \toweakstar l$.
+\end{definition}
+
+\begin{proposition}
+Задано $E$ -- лінійний нормований простір та послідовність $(l_n)_{n=1}^\infty \subset E'$. Тоді:\\
+$l_n \to l \implies l_n \toweak l \implies l_n \toweakstar l$.
+\end{proposition}
+
+\begin{proof}
+Імплікація $l_n \to l \implies l_n \toweak l$ була доведена вище. Залишилося $l_n \toweak l \implies l_n \toweakstar l$.\\
+Нехай $l_n \toweak l$, тобто $\forall L \in E'': L(l_n) \to L(l)$. Зафіксуємо елемент $x \in E$. Ми вже доводили, що $E \subset E''$, тобто $x \in E''$, де в цьому випадку $x = L_x$ такий, що $L_x(l) = l(x)$. Звідси\\
+$l_n(x) = L_x(l_n) \to L_x(l) = l(x)$. Звідси випливає, що $l_n \toweakstar l$.
+\end{proof}
+
+\begin{example}
+Зараз покажемо, чому в зворотний бік не працює.
+\bigskip \\
+$x_n \toweak x \centernot\implies x_n \to x$.\\
+Розглянемо простір $l_p$ та зафіксуємо послідовність $(e_n)_{n=1}^\infty$, де кожний $e_j$ -- елемент базиса Шаудера. Спочатку покажемо, що $(e_n)_{n=1}^\infty$ слабко збігається. Зафіксуємо довільний функціонал $l \in (l_p)' = l_{p'}$, тобто $l = (l_1,l_2,\dots)$. Це означає, що $\displaystyle\sum_{j=1}^\infty |l_j|^{p'} < + \infty$, а тому за необіхдною умовою, $|l_j|^{p'} \to 0 \implies l_j \to 0$. Із іншого боку, ми вже знаємо, що $l_j = l(e_j) \to 0 = l(0)$ при $j \to \infty$. Це як раз свідчить про те, що $e_j \toweak 0$.\\
+Проте зауважимо, що $\|e_j - 0 \| = \|e_j\| = 1 \centernot\to 0$. Це як раз означає, що $e_j \centernot\to 0$.
+\bigskip \\
+$f_n \toweakstar f \centernot\implies f_n \toweak f$.\\
+Розглянемо простір $l_1$ та зафіксуємо послідовність $(f_n)_{n=1}^\infty$, $f_n = ?$. Спочатку покажемо, що $(f_n)_{n=1}^\infty$ слабко* збігається. Зафіксуємо довільний елемент $x \in c_0$. Значить, $x_j \to 0$ при $j \to \infty$. Оберемо $f_n = (-1)^n$. Тоді звідси $f_n(x) = \displaystyle\sum_{k=1}^\infty x_k f_n^k(e_k)$. (TODO: не можу добити)
+\end{example}
+
+\begin{proposition}
+Утім якщо $E$ -- рефлексивний лінійний нормований простір та $(l_n)_{n=1}^\infty \subset E'$, тоді\\
+$l_n \toweak l \iff l_n \toweakstar l$.
+\end{proposition}
+
+\begin{remark}
+Границя єдина за слабкою* збіжністю, слабкою збіжністю та сильною збіжністю.
+\end{remark}
+
+\begin{proposition}
+Задано $E$ -- банахів та послідовність $(l_n)_{n=1}^\infty$, яка слабко* збігається. Тоді $(l_n)_{n=1}^\infty$ -- обмежена.
+\end{proposition}
+
+\begin{proof}
+Дійсно, маємо $\forall x \in E: l_n(x) \to l(x)$, тобто числова послідовність $(l_n(x))_{n=1}^\infty$ збігається, тоді обмежена. Значить, за теоремою Банаха-Штайнгауза, послідовність $(\|l_n\|)_{n=1}^\infty$ обмежена.
+\end{proof}
+
+
+\begin{theorem}
+Задано $E$ -- банахів простір та $(l_n)_{n=1}^\infty \subset E'$ -- така послідовність, що $\forall x \in E: (l_n(x))_{n=1}^\infty$ -- фундаментальна. Тоді $\exists l \in E': l_n \toweakstar l$.
+\end{theorem}
+
+\begin{proof}
+Оскільки $\forall x \in E: (l_n(x))_{n=1}^\infty$ фундаментальна, то (як числова послідовність) вона збіжна. Визначимо функціонал $l(x) = \displaystyle\lim_{n \to \infty} l_n(x)$. Зважаючи на той факт, що $l_n$ -- лінійний, то $l$ -- лінійний в силу граничного переходу. Залишилося довести обмеженість.\\
+При кожному $x \in E$ послідовність $(l_n(x))_{n=1}^\infty$ (вже з'ясували) збіжна, тож обмежена. Але за теоремою Банаха-Штайнгауза, $\exists c > 0: \forall n \geq 1: \|l_n\| \leq c$. Значить, $\forall n \geq 1, \forall x \in E: |l_n(x)| \leq \|l\| \|x\| \leq c \|x\|$. Знову переходячи до границі, отримаємо $|l(x)| \leq c \|x\|$.\\
+Отже, $\forall x \in E: l_n(x) \to l(x) \implies l_n \toweakstar l$. 
+\end{proof}
+
+\begin{theorem}[Критерій слабкої* збіжності]
+Задано $E$ -- банахів та множина $M$ -- скрізь щільна в $E$. Нехай $(l_n)_{n=1}^\infty \subset E'$.\\
+$l_n \toweakstar l \iff \begin{cases} \forall x \in M: l_n(x) \to l(x) \\ \exists c > 0: \forall n \geq 1: \|l_n\| \leq c \end{cases}$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $l_n \toweakstar l$. Тобто $\forall x \in E: l_n(x) \to l(x)$, зокрема $\forall x \in M$. Обмеженість норм $\|l_n\|$ автоматично виконується.
+\bigskip \\
+\leftproof Дано: ці дві умови. Ми хочемо $\forall y \in E: l_n(y) \to l(y)$.\\
+При $x \in M$ маємо наступне:\\
+$|l_n(y) - l(y)| \leq |l_n(y) - l_n(x)| + |l_n(x) - l(x)| + |l(x) - l(y)| \leq \| l_n \| \| y - x \| + |l_n(x) - l(x)| + \|l\| \|x-y\| \leq \\
+\leq (c + \|l\|) \|x-y\| + |l_n(x) - l(x)|$.\\
+Проте $\Cl(M) = E$, тож звідси $\forall y \in E: \forall \varepsilon > 0: \exists x \in M: \|x-y\| < \dfrac{\varepsilon}{2(c+ \|l\|)}$. В силу першої умови, $\exists N: \forall n > N: |l_n(x) - l(x)| < \dfrac{\varepsilon}{2}$.\\
+Значить, $|l_n(y) - l(y)| < \varepsilon$.
+\end{proof}
+
+\begin{remark}
+Судячи з доведення, в \leftproof не обов'язково вимагати бути $E$ повним. Також в формулюванні теореми досить вимагати, щоб $M$ була тотальною в $E$.
+\end{remark}
 
 \newpage
 
@@ -1463,4 +1634,5 @@ $\displaystyle\left\| \sum_{i=1}^d x_i \vec{e}_i
 Водночас такий оператор $A$ називають \textbf{ізоморфізмом}.\\
 Позначення: $X \cong Y$
 \end{definition}
+
 \end{document}

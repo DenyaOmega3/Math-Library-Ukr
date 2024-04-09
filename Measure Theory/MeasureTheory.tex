@@ -455,7 +455,7 @@ $U = \displaystyle\bigcup_{\substack{\prod_{i=1}^d (p_i,q_i] \subset U \\ p_i,q_
 \end{definition}
 
 \begin{definition}
-Задано функцію множин $f$ на $\mathcal{H}$.\\
+Задано функцію множин $f$ на $\mathcal{H} \subset 2^X$.\\
 Функція множин $f$ називається \textbf{невід'ємною}, якщо
 \begin{align*}
 \forall A \in \mathcal{H}: f(A) \geq 0
@@ -482,7 +482,7 @@ $U = \displaystyle\bigcup_{\substack{\prod_{i=1}^d (p_i,q_i] \subset U \\ p_i,q_
 \end{align*}
 Функція множин $f$ називається \textbf{$\sigma$-скінченною}, якщо
 \begin{align*}
-\exists A_1,A_2, \dots \in \mathcal{H}: \bigcup_{n=1}^\infty A_n = A,\ f(A_n) < +\infty
+\exists A_1,A_2, \dots \in \mathcal{H}: \bigcup_{n=1}^\infty A_n = X,\ f(A_n) < +\infty
 \end{align*}
 Функція множин $f$ називається \textbf{монотонною}, якщо
 \begin{align*}
@@ -1128,6 +1128,12 @@ $|f(x)| = f_+(x) + f_-(x)$.
 Розглянемо послідовність $\{p_n(x) - q_n(x), n \geq 1\}$. Тоді $p_n - q_n \to f_+ - f_- = f$.\\
 Нарешті, $|p_n - q_n| \leq |p_n| + |q_n| \leq f_+ + f_- = |f|$.
 \end{proof}
+
+\begin{remark}
+Якщо функція $f \colon X \to \mathbb{R}$ буде додатково обмеженою, то тоді вищеутворена послідовність функції $\{p_n, n \geq 1\}$ буде рівномірно прямувати до $f$ при $n \to \infty$.\\
+Спочатку покажемо при $f \geq 0$. Оскільки $f$ -- обмежена, то тоді $\exists M \in \mathbb{R}: 0 \leq f(x) \leq M$. Тоді для всіх $n > M$ матимемо $0 \leq f(x) < n$, тож звідси $\forall x \in X: p_n(x) \leq f(x) \leq p_n(x) - \dfrac{1}{2^n}$. Внаслідок чого отримаємо наступне: $\displaystyle\sup_{x \in X} |f(x) - p_n(x)| \leq \dfrac{1}{2^n} \to 0$ при $n \to \infty$. Висновок: $p_n \substack{\rightarrow \\ \rightarrow} f$ на множині $X$ при $n \to \infty$.\\
+Для довільної функції $f$ ми маємо, що $\forall x \in X: |f(x)| \leq M$, а тому звідси $0 \leq f_+(x) + f_-(x) \leq M$, тобто звідси $0 \leq f_+ \leq M$ та $0 \leq f_- \leq M$ -- обидва обмежені. Далі кожнна буде рівномірною границею. Сума рівномірної границі -- все одно рівномірна.
+\end{remark}
 
 \subsection{Еквівалентні функції}
 \begin{definition}
@@ -2606,6 +2612,78 @@ $L_\infty \subset L_p$.\\
 Нехай $f \in L_\infty$, тобто це істотно обмежена функція, тобто $\exists c > 0: \forall x \in X \setminus N: |f(x)| \leq c$ при $\lambda(N) = 0$. Отже, звідси $\displaystyle\int_X |f|^p\,d\lambda = \int_{X \setminus N} |f|^p\,d\lambda \leq \int_{X \setminus N} c^p \,d\lambda = c^p \lambda(X \setminus N) < \infty$. Значить, $f \in L_p$.
 \bigskip \\
 $\|f\|_\infty = \displaystyle\lim_{p \to \infty} \|f\|_p$.\\
+(TODO: доробити)
+\end{proof}
+
+\subsection{Простір, що спряжений до $L_p, 1 < p < \infty$.}
+\begin{theorem}
+Нехай $1 < p < \infty$ та $p' > 1$, причому $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Також задано $(X,\lambda,\mathcal{F})$ -- вимірний простір, де $\lambda$ -- $\sigma$-скінченна міра. Простір $(L_p)' \cong L_{p'}$ ізометричним чином. Ізоморфізм $l \colon (L_p)' \to L_{p'}$ задається наступним чином:\\
+$l(x) = \displaystyle\int_X h(q) x(q)\,d\lambda(q)$.
+\end{theorem}
+
+\begin{proof}
+$L_{p'} \subset (L_p)'$.\\
+Нехай $h \in L_{p'}$. Визначимо функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$. Цілком зрозуміло, що це лінійний.\\
+$|l(x)| = \displaystyle\left| \int_X h(q)x(q)\,d\lambda(q) \right| \overset{\text{нер-ть Гьольдера}}{\leq} \|h\|_{p'} \|x\|_p$ -- довели обмеженість, при цьому $\|l\| \leq \|h\|_{p'}$.
+\bigskip \\
+$(L_p)' \subset L_{p'}$.\\
+I. \textit{Випадок, коли міра $\lambda$ є скінченною.}\\
+Нехай $l \in (L_p)'$, тобто лінійний та обмежений функціонал. Якщо $A$ -- вимірна множина, то $\mathbbm{1}_A \in L_p$, а тому звідси $l(\mathbbm{1}_A)$ буде визначеним. Таким чином, ми можемо задати функцію множин $\omega \colon \mathcal{F} \to \mathbb{R}$ ось так: $\omega(A) = l(\mathbbm{1}_A)$. \\
+Покажемо, що $\omega$ -- заряд. Нехай $A_k \in \mathcal{F}, k \geq 1$, всі неперетинні. По-перше, $\mathbbm{1}_{\bigsqcup_{k=1}^\infty A_k} = \displaystyle\sum_{k=1}^\infty \mathbbm{1}_{A_k}$; по-друге, даний ряд збіжний в нормі $L_p$. Отже, можна отрмиати наступний ланцюг:\\
+$\displaystyle \omega\left(\bigsqcup_{k=1}^\infty A_k\right) = l(\mathbbm{1}_{\bigsqcup_{k=1}^\infty A_k}) = \displaystyle l\left( \sum_{k=1}^\infty \mathbbm{1}_{A_k} \right) = \sum_{k=1}^\infty l(\mathbbm{1}_{A_k}) = \sum_{k=1}^\infty \omega(A_k)$.\\
+$\omega(\emptyset) = l(\mathbbm{1}_\emptyset) = l(0) = 0$.\\
+Також $\omega \ll \lambda$. Дійсно, нехай $\lambda(A) = 0$, тоді звідси $\mathbbm{1}_A = 0 \pmod \lambda$, а це означає, що $\mathbbm{1}_A$ -- нульовий елемент в $L_p$, тож звідси $\omega(A) = 0$.\\
+Отже, за теоремою Радона-Нікодими, існує $h \in L_1$, для якої $\omega(A) = \displaystyle\int_A h(q)\,d\lambda(q)$.\\
+Ми хочемо довести, що $h \in L_{p'}$. Але для початку доведемо, що рівність $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$ виконується для всіх функції із $L_p$, які є обмеженими.\\
+І. \textit{Випадок індикатора}.\\
+$l(\mathbbm{1}_A) = \displaystyle\int_A h(q)\,d\lambda(q) = \int_X h(q) \mathbbm{1}_A(q)\,d\lambda(q)$.\\
+II. \textit{Випадок простих функцій}.\\
+Автоматично виконується, оскільки це -- лінійна комбінація індикаторів.\\
+III. \textit{Випадок довільних (обмежених) вимірних функцій}.\\
+Для цього існує послідовність простих вимірних функцій $(p_n(q))_{n=1}^\infty$, яка збігається до $x(q)$. За теоремою Лебега про інтегрування за мажорантою, в рівності $l(x_n) = \displaystyle\int_X h(q) x_n(q)\,d\lambda(q)$ можна перейти до ліміту. Із рівністю закінчили.\\
+Покладемо тепер функцію $h_n(q) = \begin{cases} h(q), & |h(q)| \leq n \\ 0, & |h(q)| > n \end{cases}$ для кожного $n \in \mathbb{N}$ та розглянемо функції $y_n(q) = |h_n(q)|^{p'-1} e^{-i \arg h(q)}$. Кожна з цих обмежена, вимірна, а також\\
+$\|y_n\|_p = \displaystyle\left(  \int_X |h_n(q)|^{(p'-1)p}\,d\lambda(q) \right)^{\frac{1}{p}} = \left( \int_X |h_n(q)|^{p'}\,d\lambda(q)\right)^{\frac{1}{p}}$.\\
+Далі маємо:\\
+$l(y_n) = \displaystyle\int_X h(q) y_n(q)\,d\lambda(q) = \int_X h(q) |h_n(q)|^{p'-1} e^{-i \arg h(q)}\,d\lambda(q) = \int_X |h_n(q)|^{p'}\,d\lambda(q)$.\\
+Оскільки $|l(y_n)| \leq \|l\| \|y_n\|_p$ в силу обмеженості, то ці дві рівності разом дають\\
+$\displaystyle\int_X |h_n(q)|^{p'}\,d\lambda(q) \leq \|l\| \left( \int_X |h_n(q)|^{p'}\,d\lambda(q) \right)^{\frac{1}{p}}$.\\
+$\displaystyle\left( \int_X |h_n(q)|^{p'}\,d\mu(q) \right)^{\frac{1}{p'}} \leq \|l\|$.\\
+Оскільки в кожній точці $|h_n(q)|^{p'}$ збігається до $|h(q)|^{p'}$, то за лемою Фату, отримаємо\\
+$\displaystyle\int_X |h(q)|^{p'}\,d\lambda(q) \leq \|l\|^{p'}$.\\
+Отже, $h \in L_{p'}$.\\
+Отже, лінійний неперервний функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$ лише на щільном підмножині $L_p$ обмежених функцій. Ми можемо функціонал продовжити неперервно на всю $L_p$.
+\bigskip \\
+II. \textit{Випадок, коли $\lambda$ є $\sigma$-скінченною}.\\
+Отже, маємо $\exists X_n \in \mathcal{F}: \displaystyle \bigcup_{n=1}^\infty X_n = X$, а також $\lambda(X_n) < +\infty$. Вчерговий раз перейдемо до системи неперетинних множин $Y_n = X_n \setminus (X_1 \cup \dots \cup X_{n-1})$, де мається $\displaystyle\bigsqcup_{n=1}^\infty Y_n = X$, а також $\lambda(Y_n) < +\infty$.\\
+Нехай тепер $l \in (L_p(X))'$, тоді цілком зрозмуіло, що $\forall n \geq 1: l \in (L_p(Y_n))'$. Тоді за щойно доведеним, існує функція $h_n \in L_{p'}(Y_n), \forall n \geq 1$, а також функціонал $l(x) = \displaystyle\int_{Y_n} h_n(q) x(q)\,d\lambda(q)$, така рівність виконується при всіх $x \in L_p(Y_n)$.\\
+Покладемо функцію $h(q) = h_n(q) \mathbbm{1}_{Y_n}(q)$ та доведемо, що $h \in L_{p'}(X)$. Справді,\\
+$\displaystyle\int_X |h(q)|^{p'}\,d\lambda(q) = \int_X |h_n(q)|^{p'} \mathbbm{1}_{Y_n}(q)\,d\lambda(q) = \int_{Y_n} |h_n(q)|^{p'}\,d\lambda(q) < +\infty$.\\
+Також функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$ уже для всіх $x \in L_p(X)$. Нарешті, завдяки ланцюгу рівностей вище, ми можемо зауважити, що $\|h\|_{p'}^{X} = \|h\|_{p'}^{Y_n} \leq \|l\|$.
+\end{proof}
+
+\subsection{Простір, що спряжений до $L_1$ та $L_\infty$}
+\begin{theorem}
+Задано $(X,\lambda,\mathcal{F})$ -- вимірний простір, де $\lambda$ -- $\sigma$-скінченна міра. Простір $(L_1)' \cong L_\infty$ ізометричним чином. Ізоморфізм $l \colon (L_1)' \to L_\infty$ задається наступним чином:\\
+$l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$.
+\end{theorem}
+
+\begin{proof}
+$L_\infty \subset (L_1)'$.\\
+Нехай $h \in L_\infty$. Функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$ (який теж лінійний) визначений коректно. Справді, якщо взяти довільну функцію $x \in L_1$, то тоді отримаємо наступне:\\
+$\displaystyle\int_X |h(q) x(q)|\,d\lambda(q) \leq \esssup_X |h| \int_X |x(q)|\,d\lambda(q) = \|h\|_\infty \|x\|_1 < +\infty$.\\
+Тобто інтеграл повертає дійсне число -- функціонал нормальний. Більш того, $l$ -- обмежений, бо\\
+$|l(x)| = \displaystyle\left| \int_X h(q) x(q)\,d\lambda(q) \right| \leq \int_X |h(q)| |x(q)|\,d\lambda(q) \leq \|h\|_\infty \|x\|_1$.\\
+Отже, отримали $l \in (L_1)'$. Більш того, $\|l\| \leq \|h\|_\infty$.
+\bigskip \\
+$(L_1)' \subset L_\infty$.\\
+I. \textit{Випадок, коли міра $\lambda$ є скінченною}.\\
+Неха $l \in (L_1)'$, але тоді абсолютно (!) аналогічними міркуваннями можемо отримати, що функціонал $l(x) = \displaystyle\int_X h(q)x(q)\,d\lambda(q)$ для вимірних та обмежених функцій $x$. У нас зараз $h \in L_1$. Хочемо довести, що $h \in L_\infty$.\\
+Навіть більше, ми доведемо, що $\|h\|_\infty =\displaystyle  \esssup_{X} |h| \leq \|l\|$. Для цього треба довести, що $\|l\|$ -- константа, що обмежує функцію $h$ істотним чином.\\
+Позначимо множину $A = \{q \in X: |h(q)| > \|l\|\}$ та припустимо, що $\lambda(A) = \varepsilon > 0$. Оскільки функціонал $l$ обмежений, то звідси для функції $\mathbbm{1}_A \cdot \overline{\sgn (h)}$ маємо \\
+$|l(\mathbbm{1}_A \overline{\sgn(h)})| \leq \|l\| \| \mathbbm{1}_A \overline{\sgn(h)})\|_1 = \|l\| \lambda(A)$.\\
+Із іншого боку, розглянемо, чому дорівнює модуль даного функціонала.\\
+$|l(\mathbbm{1}_A \overline{\sgn(h)})| = \displaystyle\int_X h(q) \mathbbm{1}_A(q) \overline{\sgn(h)}(q)\,d\lambda(q) = \int_A |h(q)|\,d\lambda(q) > \int_A \|l\|\,d\lambda(q) = \|l\| \lambda(A)$.\\
+Дві нерівності суперечать один одному, якщо $\lambda(A) = \varepsilon > 0$. Отже, звідси необхідно $\lambda(A) = 0$.
 \end{proof}
 \newpage
 
