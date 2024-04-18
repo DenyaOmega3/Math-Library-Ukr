@@ -1924,7 +1924,7 @@ $H \triangleleft G \iff \forall g \in G, \forall h \in H: g*h*g^{-1} \in H$.
 \end{theorem}
 
 \begin{remark}
-Праву частину компактно можна записати таким чином: $\forall g \in G: H \subset g*H*g^{-1}$.
+Праву частину компактно можна записати таким чином: $\forall g \in G: g*H*g^{-1} \subset H$.
 \end{remark}
 
 \begin{proof}
@@ -2825,7 +2825,8 @@ $h = x*g*x^{-1}, k = y*h*y^{-1} \implies k = y*x*g*x^{-1}*y^{-1} = (y*x)*g*(y*x)
 
 \begin{proof}
 $\rho(e,a) = a^e = e*a*e^{-1} = a$.\\
-$\rho(g_1*g_2,a) = a^{g_1*g_2} = (g_1*g_2)*a*(g_1*g_2)^{-1} = g_1*(g_2*a*g_2^{-1})*g_1^{-1} = \rho(g_1,g_2*a*g_2^{-1}) = \rho(g_1,\rho(g_2,a))$.
+$\rho(g_1*g_2,a) = a^{g_1*g_2} = (g_1*g_2)*a*(g_1*g_2)^{-1} = g_1*(g_2*a*g_2^{-1})*g_1^{-1} = \rho(g_1,g_2*a*g_2^{-1}) = \rho(g_1,\rho(g_2,a))$.\\
+Значить, $\rho(g,a) = a^g$ справді задає дію.
 \end{proof}
 
 \begin{proposition}[Властивості спряженості]
@@ -2838,7 +2839,7 @@ $\rho(g_1*g_2,a) = a^{g_1*g_2} = (g_1*g_2)*a*(g_1*g_2)^{-1} = g_1*(g_2*a*g_2^{-1
 \textit{1) доводили під час доведення транзитивності. 2) та 3) неважко.}
 \end{proposition}
 
-Позначення: $a^G = \{ x*a*x^{-1} \mid x \in G\}$ -- клас спряжених елементів з $a$. Можна зауважити, що, насправді, $a^G = \Orb_G(a)$.
+Позначення: $a^G = \{ x*a*x^{-1} \mid x \in G\}$ -- клас спряжених елементів з $a$.\\ Можна зауважити, що, насправді, $a^G = \Orb_G(a)$.
 
 \begin{example}
 Розглянемо кілька прикладів:
@@ -2861,8 +2862,12 @@ Z(G) = \{ a \in G: \forall x \in G: a*x = x*a\}
 \end{definition}
 
 \begin{remark}
-Зауважимо, що дія спряженості -- не точна.\\
-Можна зауважити, що спряженість не точна $\iff \exists g \in G: \forall a \in A: g*a*g^{-1} = a \iff g*a = a*g$. Інакше кажучи, спряженість не точна $\iff Z(G) \neq \emptyset$ (а центр точно не порожня).
+Спряженість не точна дія -- це теж саме, що сказати, що $\exists g \in G \setminus \{e\}: \forall a \in A: g*a*g^{-1} = a \iff g*a=a*g$. Це теж саме, що сказати, що $g \in Z(G)$.\\
+Отже, спряженість не точна дія $\iff Z(G) \neq \emptyset$.
+\end{remark}
+
+\begin{remark}
+Оскільки $e \in Z(G)$, то вже автоматично $Z(G) \neq \emptyset$, тому звідси спряженість автоматично не точна дія (внаслідок чого не вільна дія).
 \end{remark}
 
 \begin{remark}
@@ -2911,7 +2916,7 @@ $H \triangleleft G \iff H = \displaystyle\bigcup_{h \in H} h^G$.
 \begin{proof}
 Позначимо $\tilde{H}$ -- об'єднання класів спряженості елементів групи $H$. Тобто $\tilde{H} = \displaystyle\bigcup_{h \in H} h^G$. Звідси отримаємо $\tilde{H} = \displaystyle\bigcup_{g \in G} g*H*g^{-1}$.\\
 \rightproof Дано: $H$ -- нормальна, тобто $g*H*g^{-1} = H$, але тоді звідси $\tilde{H} = H$.\\
-\leftproof Дано: $\tilde{H} = H$, тоді $\forall g \in G: g*H*g^{-1} \subset \tilde{H} = H \implies H \subset g^{-1}*H*g$, тобто $H \triangleleft G$.
+\leftproof Дано: $\tilde{H} = H$, тоді $\forall g \in G: g*H*g^{-1} \subset \tilde{H} = H$, тобто $H \triangleleft G$.
 \end{proof}
 
 \subsection{Стабілізатори}
@@ -2940,7 +2945,7 @@ $a = ea = (u^{-1}*u)a = u^{-1}(ua) = u^{-1}a \implies u^{-1} \in \Stab_G(a)$.
 \end{lemma}
 
 \begin{remark}
-Хоча $\Stab_G(a) \centernot\triangleleft G$ загалом, але множина $G/_{\Stab_G(a)}$ все одно визначається як просто клас всіх суміжних класів (тут будуть ліві).
+Хоча $\Stab_G(a) \centernot\triangleleft G$ загалом, але множина $G/_{\Stab_G(a)}$ все одно визначається як просто клас всіх суміжних класів (тут будуть ліві суміжні).
 \end{remark}
 
 \begin{proof}
@@ -2951,7 +2956,7 @@ $a = ea = (u^{-1}*u)a = u^{-1}(ua) = u^{-1}a \implies u^{-1} \in \Stab_G(a)$.
 Довели, що $\alpha$ -- бієктивне відображення.
 \end{proof}
 
-Завдяки даної леми, випливає миттєвво теорема:
+Із даної леми випливає миттєвво теорема:
 
 \begin{theorem}
 Задано $\left<G,*\right>$ -- скінченна група та $A$ -- множина. Маємо дію групи $G$ на $A$. Тоді $\card(\Orb_G(a)) = [G:\Stab_G(a)]$.
@@ -2975,8 +2980,14 @@ $a = ea = (u^{-1}*u)a = u^{-1}(ua) = u^{-1}a \implies u^{-1} \in \Stab_G(a)$.
 \begin{corollary}
 \label{amount_of_fixed_points}
 Задано $\left< G,* \right>$ -- $p$-група та $A$ -- множина. Нехай є дія групи $G$ на множині $A$. Позначимо $F$ за множину всіх нерухомих точок цієї дії. Тоді $\card(F) \equiv \card(A) \pmod {p}$.
-\textit{TODO: розібрати}
 \end{corollary}
+
+\begin{proof}
+Ми вже знаємо, що $|G| = [G:\Stab_G(a)] |\Stab_G(a)|$ за теоремою Лагранжа, а також ми знаємо, що $[G:\Stab_G(a)] = |\Orb_G(a)|$. Маючи той факт, що $G$ є $p$-групою (тобто $|G| = p^r$), то отримаємо $|\Orb_G(a)| \mid p^r$. В силу того, що $p$ -- просте, то звідси $|\Orb_G(a)| \in \{1,p,p^2,\dots,p^r\}$.\\
+За умовою, $F$ -- множина нерухомих точок, тобто $F = \{a \in A : |\Orb_G(a)| = 1\}$. Із цього випливатиме, що $\forall a \in A \setminus F: |\Orb_G(a)| \mid p$. Ми вже знаємо, що множина $A$ розбивається орбітами. Доведемо, що множина $A \setminus F$ теж розбивається орбітами тільки елементами з $A \setminus F$.\\
+Якщо $x \in A \setminus F$, то $x \in \Orb_G(a)$, причому обов'язково $a \in A \setminus F$ (у протилежному випадку $x$ сама стане нерухомою точкою, чого ми не вимагали). Якщо $x \in \Orb_G(a)$, де $a$ не є нерухомою, то тоді $x \in A \setminus F$; бо якби $x$ була нерухомою, то, маючи $x = ga$ та $x = gx$, отримали би $x = a$, а це означало б нерухомість точки $a$, чого ми не вимагали.\\
+Отже, $A \setminus F = \displaystyle\bigsqcup_{a \in A \setminus F} \Orb_G(a) \implies p \mid |A \setminus F| \implies |A| = |A \setminus F| + |F| \equiv |F| \pmod p$.
+\end{proof}
 
 \begin{corollary}
 Задано $\left< G,*\right>$ -- скінченна група та $a \in G$. Тоді $\card(a^G) \mid \card(G)$.
