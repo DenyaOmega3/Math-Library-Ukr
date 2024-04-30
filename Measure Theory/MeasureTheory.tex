@@ -2102,12 +2102,34 @@ $\nu(A) = \nu(A \cap X_+) + \nu(A \cap X_-) = \displaystyle\int_{A \cap X_+} f_+
 Зрозуміло, що $f$ єдина з точністю до еквівалетності, бо $f_+,f_-$ у себе єдині. 
 \end{proof}
 
-\begin{remark}
+\begin{definition}
 Функція $f$ із теореми Радона-Нікодими називається \textbf{щільністю} або \textbf{похідною заряду $\nu$ за мірою $\lambda$}.\\
 Позначення: $f = \dfrac{d\nu}{d\lambda}$.
-\end{remark}
+\end{definition}
 
-\textit{TODO: доповнити якісь там ще теми}
+\begin{theorem}
+Задані $\mu,\lambda$ -- міри, причому $\mu$ -- скінченна та $\mu \ll \lambda$. За теоремою Радона-Нікодими, маємо тоді щільність $f = \dfrac{d\mu}{d\lambda}$. Нехай $g \colon X \to \mathbb{R}$ -- $\mathcal{F}$-вимірна функція, причому $gf \in L(X,\lambda)$. Тоді $\displaystyle\int_A g\,d\mu = \int_A gf\,d\lambda,\ A \in \mathcal{F}$.
+\end{theorem}
+
+\begin{proof}
+Як завжди, ми розглянемо кілька випадків:\\
+I. Випадок функції $\mathbbm{1}_B$, де множина $B \in \mathcal{F}$.\\
+Із одного боку, маємо $\displaystyle\int_A \mathbbm{1}_B\,d\mu = \mu(A \cap B)$.\\
+Із іншого боку, $\displaystyle\int_A \mathbbm{1}_B f\,d\lambda = \int_{A \cap B} f\,d\lambda = \int_{A \cap B} f\,d\lambda = \mu(A \cap B)$ за теоремою Радона-Нікодими.
+\bigskip \\
+II. Випадок функції $g$ -- невід'ємна проста та $\mathcal{F}$-вимірна.\\
+Тобто маємо функцію $g(x) = \displaystyle\sum_{i=1}^n b_i \mathbbm{1}_{B_i}$. Ми вже знаємо, що для кожної $\mathbbm{1}_{B_i}$ рівність вище виконана, а далі просто лінійність інтеграла Лебега.
+\bigskip \\
+III. Випадок функції $g$ -- невід'ємна та $\mathcal{F}$-вимірна.\\
+Тобто існує послідовність $\{p_n\}$ невід'ємних простих та вимірних функцій, для яких $p_n \to g$ монотонним чином. Тоді\\
+$\displaystyle\int_A g\,d\mu = \lim_{n \to \infty} \int_A p_n\,d\mu = \lim_{n \to \infty}\int_A p_n \cdot f\,d\lambda = \int_A g \cdot f\,d\lambda$.\\
+Останню рівність можна обґрунтувати на основі теореми Бепо Леві.
+\bigskip \\
+IV. Випадок функції $g$ -- довільна $\mathcal{F}$-вимірна.\\
+Маємо $g = g_+ - g_-$, кожна з цих доданків -- невід'ємна функція. Тоді, користуючись ІІІ та лінійністю інтеграла, отримаємо бажане.
+\end{proof}
+
+\textit{TODO: доповнити теми про похідні Радона-Нікодими.}
 \newpage
 
 \section{Добуток просторів}
@@ -2491,6 +2513,22 @@ $\displaystyle\int_X |f_{n_k} -f|\,d\lambda = \int_X \lim_{l \to \infty} |f_{n_k
 Ми довели, що $(L_p, \| \cdot \|_p)$ -- справді банахів.
 \end{proof}
 
+\begin{proposition}
+Банахів простір $L_2$ буде гілбертовим. Скалярний добуток задається таким чином:\\
+$(f,g) = \displaystyle\int_X f \cdot g\,d\lambda$.
+\end{proposition}
+
+\begin{proof}
+Для доведення гілбертовості треба просто довести, що $(f,g) = \displaystyle\int_X f \cdot g\,d\lambda$ дійсно скалярний добуток.\\
+Треба акуратно пересвідчитися, чи буде $f \cdot g \in L(X,\lambda)$. Буде, адже $|f \cdot g| \leq \dfrac{1}{2}(f^2 + g^2)$ за нерівністю Єнсена. Тому тут визначено все нормально.\\
+Далі зауважимо, що цей функціонал -- білінійний в силу лінійності інтеграла Лебега.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $(f,f) = \displaystyle\int_X f^2\,d\lambda \geq 0$;
+\item $(f,f) = 0 \implies \displaystyle\int_X f^2\,d\lambda = 0 \implies f^2 = 0 \pmod \lambda \implies f = 0 \pmod \lambda \implies f = 0$;
+\item $(f,g) = \displaystyle\int_X f \cdot g\,d\lambda = \int_X g \cdot f\,d\lambda = (g,f)$.
+\end{enumerate}
+\end{proof}
+
 \subsection{Щільні підмножини $L_p$}
 \begin{theorem}
 Множина простих функцій -- щільна підмножина простору $L_p$.
@@ -2796,6 +2834,11 @@ $\|f_n - f\|_p^{\mathbb{C}} = \| |f_n - f| \|_p^{\mathbb{R}} \leq \| |u_n - u| +
 \begin{proof}
 Дійсно, нехай $\{f_n\} \subset L_p^{\mathbb{C}}$ -- фундаментальна, маємо $f_n = u_n + i v_n$. Аналогічно можна довести, що $\| u_n - u_m \|_p \to 0$ та $\| v_n - v_m \|_p \to 0$ при $m,n \to \infty$. Звідси випливає, що $\{u_n\}, \{v_n\} \subset L_p^{\mathbb{R}}$ -- фундаментальні. Проте оскільки $L_p^{\mathbb{R}}$ -- банахів, то звідси $\{u_n\}, \{v_n\}$ -- збіжні, внаслідок чого $\{f_n\}$ буде також збіжним.
 \end{proof}
+
+\begin{proposition*}
+Банахів простір $L_2$ буде гілбертовим. Скалярний добуток задається таким чином:\\
+$(f,g) = \displaystyle\int_X f \cdot \bar{g}\,d\lambda$.
+\end{proposition*}
 
 \begin{proposition*}
 Якщо $L_p^{\mathbb{R}}$ -- сепарабельний, то тоді $L_p^{\mathbb{C}}$ -- сепарабельний.\\

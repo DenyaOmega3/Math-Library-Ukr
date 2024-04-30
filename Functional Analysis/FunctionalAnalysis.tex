@@ -73,6 +73,8 @@
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \newcommand{\toweak}{\overset{w}{\to}}
 \newcommand{\toweakstar}{\overset{w^*}{\to}}
+\DeclareMathOperator{\ort}{ort}
+\DeclareMathOperator{\pr}{pr}
 
 \makeatletter
 \renewenvironment{proof}[1][Proof.\\]{\par
@@ -1138,7 +1140,7 @@ $(L,\|\cdot \|)$ -- банахів $\iff$ виконується умова Ка
 \end{remark}
 
 \begin{definition}
-Задано $X,Y$ -- нормовані простори.\\operators
+Задано $X,Y$ -- нормовані простори.\\
 \textbf{Нормою} лінійного оператора $A$ називається величина
 \begin{align*}
  \| A\| = \inf \{C > 0 \mid \forall x \in X: \| Ax \| \leq C \|x\|\}
@@ -1189,6 +1191,12 @@ $\displaystyle\|Ax\| = \max_{t \in [0,1]} \left| \int_0^t \tau x(\tau)\,d\tau \r
 Отже, $A$ -- обмежений оператор. Залишилося знайти норму.\\
 Оскільки $\|Ax\| \leq \dfrac{1}{2} \|x\|$, то звідси випливає $\|A\| = \displaystyle\sup_{\|x\| = 1} \|Ax\| \leq \dfrac{1}{2}$. Із іншого боку, оберемо функцію $x(t) = 1$, для якої $\|x\| = 1$. Тоді отримаємо, що $\|Ax\| = \displaystyle\max_{t \in [0,1]} \left|\int_0^\tau \tau\,d\tau\right| = \max_{t \in [0,1]} \dfrac{t^2}{2} = \dfrac{1}{2}$.\\
 Таким чином, отримаємо $\|A\| = \dfrac{1}{2}$.
+\end{example}
+
+\begin{example}
+Покажемо, що оператор $A \colon C^1([0,1]) \to C^1([0,1])$, що заданий як $(Af)(t) = f'(t)$, буде необмеженим.\\
+Оберемо послідовність $f_n = \sin (2\pi n t)$, причому $\|f_n\| = \displaystyle\max_{t \in [0,1]} |\sin (2\pi n t)| = 1$. Тоді звідси\\
+$\|Af_n\| = \displaystyle \| 2\pi n t \cos (2\pi n t)\| = 2 \pi n \| \cos (2\pi n t)\| = 2 \pi n \max_{t \in [0,1]} |\cos (2\pi n t)| = 2 \pi n \to +\infty$.
 \end{example}
 
 \begin{proposition}
@@ -1419,6 +1427,7 @@ $M$ -- тотально в $E \iff \forall x \in M: l(x) = 0 \implies \forall x 
 \end{proof}
 
 \begin{proposition}
+\label{kernel_as_subspace}
 Нехай $E$ -- нормований простір та $l$ -- лінійний неперервний функціонал з $E$. Тоді $\ker l$ -- підпростір $E$. Більш того, $\ker l$ буде гіперпідпростором, тобто це означає, що $E = \linspan\{\ker l \cup \{y\}\}$ при $y \notin \ker l$.
 \end{proposition}
 
@@ -1766,6 +1775,306 @@ $|l_n(y) - l(y)| \leq |l_n(y) - l_n(x)| + |l_n(x) - l(x)| + |l(x) - l(y)| \leq \
 \begin{remark}
 Судячи з доведення, в \leftproof не обов'язково вимагати бути $E$ повним. Також в формулюванні теореми досить вимагати, щоб $M$ була тотальною в $E$.
 \end{remark}
+\newpage
+
+\section{Гілбертові простори}
+\subsection{Основні означення}
+\begin{definition}
+\textbf{Передгілбертовим простором} називають лінійний простір $H$ над $\mathbb{C}$, на якому задано білінійний функціонал $(\cdot, \cdot) \colon H \times H \to \mathbb{C}$, для якого виконуються такі властивості:
+\begin{align*}
+\begin{tabular}{cl}
+1) & $\forall x \in H: (x, x) \geq 0$\\
+2) & $(x, x) = 0 \iff x = 0$\\
+3) & $\forall x,y \in H: (x, y) = \overline{(y, x)}$
+\end{tabular}
+\end{align*}
+Такий функціонал називають \textbf{скалярним добутком}. Якщо прибрати умову $(x,x) = 0 \iff x = 0$, то тоді такий функціонал ще називають \textbf{квазіскалярним добутком}.
+\end{definition}
+
+\begin{theorem}[Нерівність Коші-Буняковського]
+Задано $H$ -- передгілбертів простір. Тоді $\forall x,y \in E: |(x,y)|^2 \leq (x,x)(y,y)$.\\
+\textit{Було доведено, див.\ pdf з лінійної алгебри. Щоправда, там в умові теореми вимагалася скінченність векторного простору, але під час доведення це ми не використовували.}
+\end{theorem}
+
+\begin{remark}
+Нерівність Коші-Буняковсього справедлива й для квазіскалярного добутку.
+\end{remark}
+
+\begin{remark}
+$\|(x,y)\|^2 = (x,x)(y,y) \iff y = \alpha x$ при $\alpha \in \mathbb{C}$.
+\end{remark}
+
+\begin{proposition}
+Задано $H$ -- передгілбертів простір. Тоді $H$ --  лінійний нормований простір, причому норма задається як $\|x\| = \sqrt{(x,x)}$.
+\end{proposition}
+
+\begin{remark}
+Якби був квазіскалярний добуток, то ми би задали вже лише напівнорму.
+\end{remark}
+
+\begin{proof}
+1) $\|x\| = \sqrt{(x,x)} \geq 0$ -- зрозуміло. Також  $\|x\| = \sqrt{(x,x)} = 0 \iff (x,x) = 0 \iff x = 0$.\\
+2) $\| \lambda x \| = \sqrt{(\lambda x, \lambda x)} = \sqrt{\lambda \bar{\lambda} (x,x)} = \sqrt{\lambda^2 (x,x)} = |\lambda| \|x\|$.\\
+3) $\|x+y\|^2 = (x+y,x+y) = (x,x) + (x,y) + (y,x) + (y,y) = \|x\|^2 + 2 \Re (x,y) + \|y\|^2 \leq \\ \leq \|x\|^2 + 2 |(x,y)| + \|y\|^2 \overset{\text{нер-ть К-Б}}{\leq} \|x\|^2 + 2 \sqrt{(x,x)} \sqrt{(y,y)} + \|y\|^2 = \|x\|^2 + 2 \|x\| \|y\| + \|y\|^2 = (\|x\| + \|y\|)^2$.\\
+$\implies \|x+y\| \leq \|x\| + \|y\|$.
+\end{proof}
+
+\begin{definition}
+Нехай $H$ -- банахів передгілбертів простір. \\
+Тоді даний простір $H$ ще називають \textbf{гілбертовим}.
+\end{definition}
+
+\begin{proposition}
+Задано $H$ -- передгілбертів простір. Тоді $(\cdot, \cdot) \colon H \times H \to \mathbb{R}$ -- неперервне.
+\end{proposition}
+
+\begin{proof}
+Дійсно, нехай $x_n \to x_0$ та $y_n \to y_0$. Вони будуть збігатися за нормою (у нас $H$ -- нормований), тобто $(\|x_n\|), (\|y_n\|)$ -- збіжні послідовності, тому обмежені. Тоді\\
+$|(x_n,y_n) - (x_0,y_0)| \leq |(x_n,y_n) - (x_0,y_n)| + |(x_0,y_n) - (x_0,y_0)| = |(x_n-x_0,y_n)| + |(x_0,y_n-y_0)| \leq \\
+\leq \|x_n-x_0\| \|y_n\| + \|x_0\| \|y_n-y_0\| \leq \|x_n - x_0\| M + \|x_0\| \|y_n-y_0\| \to 0$ (число $M$ обмежує $(\|y_n\|)$).\\
+Отже, $(x,y) \to (x_0,y_0)$ при $x \to x_0, y \to y_0$.
+\end{proof}
+
+\subsection{Факторизація квазіскалярного добутку}
+Задано $H$ -- векторний простір зі квазіскалярним добутком $(\cdot,\cdot)$. Позначимо $L = \{x \in E: (x,x) = 0\}$.
+
+\begin{lemma}
+$\forall x \in L, \forall y \in E: (x,y) = 0$.\\
+\textit{Випливає з нерівності Коші-Буняковсього}.
+\end{lemma}
+
+\begin{lemma}
+$L$ -- підпростір векторного простору $E$.
+\end{lemma}
+\noindent
+Як було в лінійній алгебрі, встановимо відношення еквівалентності $x \sim y \iff x - y \in L$ на векторному просторі $E$. Ми вже знаємо, що $E/_L$ буде векторним простором, де задаються операції так:\\
+$(x_1+L) + (x_2+L) = (x_1+x_2) + L$;\\
+$\lambda(x+L) = \lambda x + L$.\\
+Тепер уведемо білінійний функціонал ось таким чином: $(x_1+L,x_2+L)_{E/_L} \overset{\text{def.}}{=} (x_1,x_2)_E$. Доведемо, що це буде задавати скалярний добуток на $E/_L$.\\
+Спочатку доведемо коректність означення. Дійсно, нехай $x_1+L = y_1+L$ та $x_2+L = y_2+L$. Тоді звідси $x_1-y_1 \in L$ та $x_2-y_2 \in L$. Зауважимо, що\\
+$(x_1,x_2)_E - (y_1,y_2)_E = (x_1,x_2)_E - (y_1,x_2)_E + (y_1,x_2)_E - (y_1,y_2)_E = (x_1-y_1,x_2)_E + (y_1,x_2-y_2)_E = 0$.\\
+Отже, $(x_1,x_2)_E = (y_1,y_2)_E \implies (x_1+L,x_2+L)_{E/_L} = (y_1+L,y_2+L)_{E/_L}$.\\
+Щодо властивостей скалярного добутку. Це вже точно квазіскалярний. Тобто залишилося довести, що $(x+L,x+L)_{E/_L} = 0 \iff x+L = L$.\\
+$(x+L,x+L)_{E/_L} = 0 \implies (x,x)_E = 0 \implies x \in L \implies x+L = L$. 
+\subsection{Ортогональне доповнення}
+\begin{definition}
+Задано $H$ -- гілбертів простір.\\
+Вектори $x,y \in H$ будуть називатися \textbf{ортогональними}, якщо
+\begin{align*}
+(x,y) = 0
+\end{align*}
+Позначення: $x \perp y$.
+\end{definition}
+
+\begin{definition}
+Задано $H$ -- гілбертів простір та $G \subset H$.\\
+\textbf{Ортогональним доповненням} підмножини $G$ називають таку множину:
+\begin{align*}
+G^\perp = \{x \in H \mid \forall y \in G: (x,y) = 0\}
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+Задано $H$ -- гілбертів простір та $G \subset H$. Тоді $G^\perp$ -- підпростір.
+\end{proposition}
+
+\begin{proof}
+Нехай $x_1,x_2 \in G^\perp$, тобто звідси $\forall y \in G: (x_1,y) = 0,\ (x_2,y) = 0$. Звідси випливає, що\\
+$(\lambda_1 x_1 + \lambda_2 x_2, y) = \lambda_1 (x_1, y) + \lambda_2 (x_2,y) = 0$, а тому отримали $\lambda_1 x_1 + \lambda x_2 \in G^\perp$.
+\end{proof}
+
+\iffalse %TODO обробити властивості
+\begin{proposition}
+Задано $H$ -- гілбертів простір та $G \subset H$. Тоді $(G^\perp)^\perp = \overline{\linspan(G)}$.
+\end{proposition}
+
+\begin{remark}
+Якщо $G \subset H$ та підпростір, то $(G^\perp)^\perp = G$. Якщо брати довільну $G \subset H$, то тоді $(G^\perp)^\perp = \overline{\linspan(G)}$.
+\end{remark}
+\fi
+\noindent
+Уже якось доводилося, що в унітарних просторах $E$ та підпросторі $L \subset E$ кожний вектор розбивається на суму проєктивного та ортогонального вектора. Спробуємо показати, що це можливо також в гілбертових просторах. Це робиться окремо, бо там ми доводили для скінченновимірного випадку.
+
+\begin{theorem}
+Нехай $H$ -- гілбертів простір та $G \subset H$. Тоді для кожного $x \in H$ існує єдиний $y \in G$ такий, що $x-y \in G^{\perp}$.
+\end{theorem}
+
+\begin{proof}
+I. \textit{Існування}.\\
+Якщо $x \in G$, то кладемо вектор $y = x$.\\
+Нехай $x \in H \setminus G$. Визначимо відстань $\displaystyle d = \rho(x,G) \overset{\text{def.}}{=} \inf_{y \in G} \|x-y\|$. Оскільки $x \notin G$, то звідси $d > 0$. Відокремимо послідовність $(y_n)_{n=1}^\infty$ таку, що $d_n \overset{\text{позн}}{=} \|x-y_n\| \to d$.\\
+Для кожного вектора $h \in G$ та скаляра $\lambda \in \mathbb{C}$ ми розглянемо вектор $y_n + \lambda h \in G$. Зрозуміло, що $\|x - (y_n + \lambda h)\| \geq d$, але спробуємо ще оцінити дану норму.\\
+$\|x - (y_n + \lambda h)\|^2 = (x-y_n-\lambda h, x-y_n-\lambda h) = (x-y_n,x-y_n) + (x-y_n, -\lambda h) + (-\lambda h, x-y_n) + (-\lambda h, -\lambda h) = \|x-y_n\|^2 + |\lambda|^2 \|h\|^2 - \lambda(h,x-y_n) - \bar{\lambda}(x-y_n,h)$.\\
+Ми оберемо $\lambda = \dfrac{(x-y_n,h)}{\|h\|^2}$. Тоді отримаємо:\\
+$\|x-(y_n+\lambda h)\|^2 = \dfrac{ (x-y_n,h)^2 }{\|h\|^2} - \dfrac{(h,x-y_n)(x-y_n,h)}{\|h\|^2} - \dfrac{(h,x-y_n)(x-y_n,h)}{\|h\|^2} + \|x-y_n\|^2 = \\
+= d_n^2 - \dfrac{|(x-y_n,h)|^2}{\|h\|^2}$.\\
+Таким чином, отримали $d_n^2 - \dfrac{|(x-y_n,h)|^2}{\|h\|^2} \geq d^2$. Внаслідок чого $|(x-y_n,h)|^2 \leq \|h\|^2 (d_n^2-d^2)$.\\
+Далі, $|(y_m-y_n,h)| = |(x-y_n,h) - (x-y_m,h)| \leq |(x-y_n,h)| + |(x-y_m,h)| \leq \|h\| \sqrt{d_n^2-d^2} \sqrt{d_m^2 - d^2}$.\\
+Оберемо вектор $h = y_m - y_n$, тоді отримаємо наступне:\\
+$\|y_m-y_n\|^2 \leq \|y_m-y_n\| \sqrt{d_n^2-d^2} \sqrt{d_m^2 -d^2}$.\\
+$\|y_m-y_n\| \leq \sqrt{d_n^2-d^2} \sqrt{d_m^2 -d^2} \to 0$.\\
+Таким чином, послідовність $(y_n)_{n=1}^\infty$ фундаментальна, а в силу повноти збіжна. Тобто $y_n \to y \in G$. Маючи нерівність $|(x-y_n,h)|^2 \leq \|h\|^2 (d_n^2-d^2)$, при $n \to \infty$ отримаємо $(x-y,h) = 0$ для всіх $h \in G$. Це означає, що $x-y \in G^\perp$.
+\bigskip \\
+II. \textit{Єдиність}.\\
+!Припустимо, що існує ще один вектор $y' \in G$ так, щоб $x - y' \in G^\perp$. Тоді\\
+$(y-y',h) = (x-y',h) - (x-y,h) = 0, \forall h \in H \implies y = y'$ -- суперечність!
+\end{proof}
+\noindent
+Отже, нехай $x \in H$. За щойно доведеною теоремою, $\exists ! x_1 \in H$ такий, що $x_2 \overset{\text{позн.}}{=} x - x_1 \in G^\perp$. Власне, ми отримали однозначний розклад $x = x_1 + x_2$, де вектори $x_1 \in G, x_2 \in G^\perp$.\\
+Перший вектор називається \textbf{ортогональною проєкцією}, позначають $x_1 = \pr_G x$.\\
+Другий вектор називається \textbf{ортогональним складником}, позначають $x_2 = \ort_G x$.\\
+Отже, кожний вектор $x \in H$ має єдиний розклад в $x = \pr_G x + \ort_G x$.
+
+\subsection{Простір, спряжений до гілбертого}
+\begin{theorem}[Теорема Ріса]
+Нехай $H$ -- гілбертів. Тоді для будь-якого $l \in H'$ існує єдиний вектор $u \in H$ такий, що $\forall x \in H: l(x) = (x,u)$.
+\end{theorem}
+
+\begin{proof}
+I. \textit{Існування.}\\
+Якщо $l \equiv 0$, то існує вектор $u = 0$ -- все ясно.\\
+Нехай $l \in H'$, де функціонал ненулевий. Розглянемо $G = \ker l$. Існує елемент $y \notin G$ такий, що $\forall x \in H: x = g + \lambda y$ (це виконано за \prpref{kernel_as_subspace}). Можна переписати елемент $x = g' + \lambda(y- \pr_G y)$.\\
+Візьмемо вектор $e = y - \pr_Gy$. Звідси $e \in G^\perp$. Отже, маємо $x = g' + \lambda e$, де можна вважати $\|e\| = 1$. Тоді розпишемо функціонал та скалярний добуток:\\
+$l(x) = l(g'+\lambda e) = 0 + \lambda l(e)$ (у нас дійсно $g' \in G = \ker l$, бо $g' = g + \lambda \pr_G y$).\\
+$(x,e) = (g'+\lambda e,e) = \lambda \|e\|^2 = \lambda$.\\
+$l(x) = l(e)(x,e) = (x,\overline{l(e)}e) \implies u = \overline{l(e)}e$.\\
+Отриманий елемент $u = \overline{l(e)}e$ -- шуканий вектор, що задовольняє рівності $l(x) = (x,u)$.
+\bigskip \\
+II. \textit{Єдиність.}\\
+!Припустимо, що існує ще один вектор $u' \in H$, для якого $l(x) = (x,u')$. Звідси випливає, що $\forall x \in H: (x,u-u') = 0 \implies u = u'$ -- суперечність!
+\end{proof}
+
+\begin{corollary}
+$H' = H$.\\
+При цьому коли $H \ni u \leftrightarrow l \in H'$ ми маємо $\|u\| = \|l\|$.
+\end{corollary}
+
+\begin{proof}
+Якщо $l \in H'$, то за теоремою Ріса йому ставиться в відповідність єдиний $u \in H$, де $l(x) = (x,u)$.\\
+Для кожного $u \in H$ розглянемо $l(x) = (x,u)$. Зрозуміло, що це лінійний функціонал, а обмеженість випливає з нерівності Коші-Буняковського $|l(x)| = |(x,u)| \leq \|x\| \|u\|$. У силу обмеженості ми маємо $\|l\| \leq \|u\|$. При $x = u$ маємо $l(u) = (u,u) = \|u\|^2$, тобто $\|l\| = \|u\|$.
+\end{proof}
+
+\begin{corollary}
+Нехай $H$ -- гілбертів простір та $G \subset H$.\\
+$G$ -- тотальна в $H \iff \forall h \in H: h \perp G \implies h = 0$.
+\end{corollary}
+
+\begin{proof}
+\rightproof Дано: $G$ -- тотально в $H$. Нехай $h \in H$ такий, що $h \perp G$. Звідси випливає, що $\forall y \in G: (h,y) = 0$. Зафіксуємо функціонал $l(y) = \overline{(h,y)}$. Тоді маємо $\forall y \in G: l(y) = 0 \implies \forall y \in H: l(y) = 0$, тобто звідси $\forall y \in H: (h,y) = 0$. Значить, обов'язково $h = 0$.
+\bigskip \\
+\leftproof Дано: $\forall h \in H: h \perp G \implies h = 0$.\\
+Нехай $l$ -- лінійний та неперервний функціонал такий, що $\forall y \in G: l(y) = 0$. За теоремою Ріса, даний функціонал $l(y) = (y,u)$ при деякому $u \in H$. Але $\forall y \in G: (y,u) = 0$, тобто звідси $u \perp G \implies u = 0$. Значить, $\forall y \in H: l(y) = (y,0) = 0$. Отже, $G$ -- тотальна в $H$.
+\end{proof}
+
+\begin{proposition}
+Задано $H$ -- гілбертів простір та $G \subset H$. Тоді $(G^\perp)^\perp = \overline{\linspan(G)}$.\\
+Зокрема якщо $G$ -- підпростір $H$, то $(G^\perp)^\perp = G$.
+\end{proposition}
+
+\begin{proof}
+Спочатку треба довести, що $G \subset (G^\perp)^{\perp}$, але тут (в принципі) ясно.\\
+Нехай $h \in (G^\perp)^\perp$ такий, що $h \perp G$. Тобто $h \in G^\perp$. Але тоді звідси $(h,h) = 0 \implies h = 0$. Отже, $G$ -- тотальна в $(G^\perp)^\perp$.
+\end{proof}
+
+\subsection{Ортонормовані системи та базиси}
+\begin{definition}
+Система $\{e_\alpha\}_{\alpha \in I}$ називається \textbf{ортонормованою}, якщо
+\begin{align*}
+(e_\alpha,e_\beta) = \delta_{\alpha \beta},
+\end{align*}
+де $\delta$ -- дельта-символ Кронекера.
+\end{definition}
+
+\begin{example}
+У просторі $l_2$ система, що є базисом Шаудера, -- ортонормована.
+\end{example}
+
+\begin{lemma}
+Нехай $(e_j)_{j=1}^\infty$ -- ортонормована система.\\
+$\displaystyle\sum_{i=1}^\infty c_i e_i$ -- збіжний ряд $\iff \displaystyle\sum_{i=1}^\infty |c_i|^2 < \infty$.
+\end{lemma}
+
+\begin{proof}
+$\displaystyle\left\| \sum_{i=1}^n c_i e_i - \sum_{i=1}^m c_i e_i \right\| = \left\| \sum_{i=m+1}^n c_i e_i \right\| = \left( \sum_{i=m+1}^n c_i e_i, \sum_{k=m+1}^n c_k e_k \right) = \sum_{i=m+1}^n \sum_{k=m+1}^n c_i \overline{c_k} (e_i,e_k) = \sum_{i=m+1}^n |c_i|^2$.\\
+Це ми припускали всюди, що $n > m$.
+\end{proof}
+
+\begin{theorem}[Нерівність Бесселя]
+Нехай $(e_j)_{j=1}^\infty$ -- ортонормована система. Тоді $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i$ збігається, причому $\|x\|^2 \geq \displaystyle\sum_{i=1}^\infty |(x,e_i)|^2$.
+\end{theorem}
+
+\begin{remark}
+До речі, коефіцієнти $(x,e_i)$ називаються \textbf{коефіцієнтами Фур'є}. По сути, ми зробили розклад Фур'є в загального випадку та отримали додатково нерівність Бесселя.
+\end{remark}
+
+\begin{proof}
+$0 \leq \displaystyle\left\| x - \sum_{i=1}^n (x,e_i)e_i \right\|^2 = \left(x - \sum_{i=1}^n (x,e_i)e_i,\ x - \sum_{i=1}^n (x,e_i)e_i \right) = \\ = (x,x) - \left(x, \sum_{i=1}^n (x,e_i)e_i \right)- \left(\sum_{i=1}^n (x,e_i)e_i ,x\right) + \left(\sum_{i=1}^n (x,e_i)e_i ,\sum_{i=1}^n (x,e_i)e_i \right) = \\
+= \|x\|^2 - \sum_{i=1}^n \overline{(x,e_i)}(x,e_i) - \sum_{i=1}^n (x,e_i)(e_i,x) + \sum_{i=1}^n |(x,e_i)|^2 = \|x\|^2 - \sum_{i=1}^n |(x,e_i)|^2$.\\
+Отже, $\|x\|^2 \geq \displaystyle\sum_{i=1}^\infty |(x,e_i)|^2$. До того, ж за лемою, оскільки цей ряд збіжний за цією нерівністю, то ряд $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i$ збіжний при всіх $x \in H$.
+\end{proof}
+
+\subsection{Ортнормовані базиси}
+\begin{lemma}
+Нехай $(e_i)_{i=1}^\infty$ -- ортонормована система та $G = \overline{\linspan\{e_i,i = 1,2,\dots\}} \subset H$. Тоді $\forall x \in H: \pr_G x = \displaystyle\sum_{i=1}^\infty (x,e_i)e_i$.
+\end{lemma}
+
+\begin{proof}
+Ми хочемо довести, що $\forall x \in H: x - \displaystyle\sum_{i=1}^\infty (x,e_i)e_i \in G^\perp$. Таким чином, у силу єдиності, $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i \in G^\perp = \pr_G x$. Але за тим, чому дорівнює простір $G$, нам буде досить довести це лише для всіх $e_i$ (TODO: ?).\\
+$\displaystyle\left(x, \sum_{i=1}^\infty (x,e_i)e_i,\ e_k\right) = (x,e_k) - \sum_{i=1}^\infty (x,x_i)(e_i,e_k) = (x,e_k) - (x,e_k) = 0$.
+\end{proof}
+
+\begin{definition}
+Система $(e_i)_{i=1}^\infty$ називається \textbf{ортонормованим базисом}, якщо
+\begin{align*}
+(e_i)_{i=1}^\infty - \text{ортонормована система} \\
+\overline{\linspan\{e_i,i = 1,2,\dots\}} = H
+\end{align*}
+\end{definition}
+\noindent
+Оскільки $\pr_H x = x$, то звідси $\forall x \in H$ маємо розклад $x = \displaystyle\sum_{i=1}^\infty (x,e_i)x_i$.\\
+Також для будь-якого $y = \displaystyle\sum_{i=1}^\infty (y,e_i)e_i$ скалярний добуток $(x,y) = \displaystyle\sum_{i=1}^\infty (x,e_i)\overline{(y,e_i)}$.\\
+Ба більше, $\|x\|^2 = \displaystyle\sum_{i=1}^\infty \|(x,e_i\|^2$ -- так звана \textbf{рівність Парсеваля}.
+
+\begin{theorem}
+Нехай $(e_i)_{i=1}^\infty$ -- ортонормована система.\\
+$(e_i)_{i=1}^\infty$ -- ортонормований базис $\iff \forall x \in H$ спраедлива рівність Парсеваля.
+\end{theorem}
+
+\begin{proof}
+\rightproof \textit{Щойно довели}.
+\bigskip \\
+\leftproof Дано: $\forall x \in H: \|x\|^2 = \displaystyle\sum_{i=1}^\infty \|(x,e_i)\|^2$. При доведенні нерівності Бесселя ми отримали рівність $\displaystyle\left\| x - \sum_{i=1}^n (x,e_i)e_i \right\|^2 = \|x\|^2 - \sum_{j=1}^n \|(x,e_i)\|^2$. Отже, при $n \to \infty$ отримаємо $\displaystyle\sum_{i=1}^n (x,e_i)e_i \to x$. Отже, $(e_i)_{i=1}^\infty$ -- ортонормований базис.
+\end{proof}
+
+\subsection{Ортогоналізація системи векторів}
+\begin{theorem}
+Нехай $(f_j)_{j=1}^\infty$ -- деяка система векторів та $G = \overline{\linspan\{f_j\}}$. Тоді існує ортонормована система $(e_j)_{j=1}^{n (\infty)}$ (яка може бути скінченною чи зліченною) така, що $\overline{\linspan\{e_j\}} = G$.
+\end{theorem}
+
+\begin{proof}
+Візьмемо $e_1 = \dfrac{f_1}{\|f_1\|}$. Він породжує $G_1 = \overline{\linspan\{e_1\}} = \linspan\{e_1\}$. Якщо $G_1 = G$, то теорема доведена.\\
+Інакше виберемо перший вектор із послідовності $(f_j)$ (оберемо $f_{j_2}$ такий, що $f_{j_2} \notin G_1$. Візьмемо $e_2 = \dfrac{\ort_{G_1} f_{j_2}}{\| \ort_{G_1} f_{j_2}\|}$, при цьому $e_2 \perp e_1$. (TODO: тверезо обдумати). Беремо $G_2 = \overline{\linspan\{e_1,e_2\}} = \linspan\{e_1,e_2\}$. Якщо $G_2 = G_1$, то теорема доведена.\\
+Інакше виберемо перший вектор із послідовності $(f_j)$ (оберемо $f_{j_3}$ такий, що $f_{j_3} \notin G_2$.\\
+\vdots
+\end{proof}
+
+\begin{corollary}
+Нехай $H$ -- сепарабельний. Тоді існує скінченний (або зліченний) ортонормований базис.
+\end{corollary}
+
+\begin{proof}
+\rightproof Дано: $H$ -- сепарабельний. Нехай $(f_j)$ -- щільна множина в $H$. Застосуємо ортогоналізацію. Тоді існує ортонормований базис $(e_j)$.
+\bigskip \\
+\leftproof Дано: існує скінченний чи зліченний ортонормований базис. Тоді $H$ автоматично сепарабельний. Треба розглянути сукупність векторів $\displaystyle\sum_{i=1}^n e_i e_i,\ e_i \in \mathbb{Q}$.
+\end{proof}
+
+\begin{theorem}
+Нехай $H$ -- сепарабельний, нескінченновимірний гілбертовий простір. Тоді $H \cong l_2$. (ну якщо скінченний, то $H \cong \mathbb{C}^n)$)
+\end{theorem}
+
+\begin{proof}
+Маємо $H$ -- сепарабельний, тобто існує зліченний ортонормований базис $(e_j)$. Задамо ізоморфізм $H \ni x = \displaystyle\sum_{i=1}^\infty x_i e_i \mapsto (x_1,x_2,\dots) \in l_2$. Остання послідовність справді лежить в $l_2$, завдяки рівності Парсеваля. При цьому $(x,y)_H = \displaystyle\sum_{i=1}^\infty x_i \overline{y_i} = (x,y)_{l_2}$. (TODO: деталізувати).
+\end{proof}
 
 \newpage
 

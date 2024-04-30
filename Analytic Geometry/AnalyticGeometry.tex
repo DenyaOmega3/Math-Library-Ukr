@@ -10,10 +10,12 @@
 \usepackage{bm}
 \usepackage{float}
 \usepackage{physics}
+\usepackage{enumitem}
 \usepackage[unicode]{hyperref}
 \usepackage{scalerel,stackengine}
 \usepackage{amsthm}
 \usepackage{tikz-cd}
+\usepackage{centernot}
 \usetikzlibrary{calc,patterns,angles,quotes, matrix}
 
 \usepackage{tikz-3dplot}
@@ -37,6 +39,15 @@
 \def\dim#1{\textrm{dim} {#1}}
 \def\ker#1{\textrm{Ker} {#1}}
 \def\contra{\textbf{!}}
+
+\newcommand\thref[1]{\textbf{Th.~\ref{#1}}}
+\newcommand\defref[1]{\textbf{Def.~\ref{#1}}}
+\newcommand\exref[1]{\textbf{Ex.~\ref{#1}}}
+\newcommand\prpref[1]{\textbf{Prp.~\ref{#1}}}
+\newcommand\rmref[1]{\textbf{Rm.~\ref{#1}}}
+\newcommand\lmref[1]{\textbf{Lm.~\ref{#1}}}
+\newcommand\crlref[1]{\textbf{Crl.~\ref{#1}}}
+
 
 \def\qed{$\blacksquare$}
 
@@ -96,7 +107,7 @@
 \newenvironment{pfNoTh}{\textbf{Proof. \\}}{$\blacksquare$}
 
 \DeclareMathOperator{\lcm}{lcm}
-
+\DeclareMathOperator{\pr}{pr}
 
 
 \begin{document}
@@ -120,23 +131,24 @@
 Два вектора, що лежать на паралельних прямих (або на одній прямій), називають \textbf{колінеарними}.\\
 Позначення: $\vec{a} \parallel \vec{b}$.\\
 Інші позначення для колінеарних векторів: \\ 
-$\vec{a} \uparrow \uparrow \vec{b}$ - співнапрямлені вектори\\
-$\vec{a} \uparrow \downarrow \vec{b}$ - протилежно напрямлені вектори
+$\vec{a} \uparrow \uparrow \vec{b}$ -- колінеарні вектори в одному напрямку, вони ще називаються \textbf{співнапрямленими};\\
+$\vec{a} \uparrow \downarrow \vec{b}$ -- колінеарні вектори в протилежних напрямках, вони ще називаються \textbf{протилежнонапрямленими}.
 \bigskip \\
-$|\vec{a}|$ - довжина вектора
+Позначення: $|\vec{a}|$ -- довжина вектора.
 \end{definition}
 
 \begin{definition}
 Вектори $\vec{a}$ та $\vec{b}$ називають \textbf{рівними}, якщо:
 	\begin{align*}
-	\vec{a} \uparrow \uparrow \vec{b} \\
-	|\vec{a}| = |\vec{b}|
+	\vec{a} \uparrow \uparrow \vec{b};\\
+	|\vec{a}| = |\vec{b}|.
 	\end{align*}
+	Тобто вони співнапрямлені та мають одинакову довжину.
 \end{definition}
 
 \begin{definition}
-Задані операції над векторами:\\
-	- \textbf{додавання};
+Задамо ілюстративним чином операції над векторами:\\
+	- \textbf{додавання} (є два способи, яка додавати);
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -164,19 +176,20 @@ $|\vec{a}|$ - довжина вектора
 	\draw[thick, red, ->] (0,0)--(4,2) node at (3,1) {$\lambda \vec{a}$};
 	\draw[thick, ->] (0,0)--(2,1) node at (1,1) {$\vec{a}$};
 	\draw[white] (0,-1)--(2,-1);
-	\node at (2,-2) {$\lambda > 0$};
+	\node at (2,-2) {$\text{при } \lambda > 0$};
 	\end{tikzpicture}
 	\qquad
 	\begin{tikzpicture}
 	\draw[thick, red, ->] (0,0)--(-4,-2) node at (-3,-1) {$\lambda \vec{a}$};
 	\draw[thick, ->] (0,0)--(2,1) node at (1,1) {$\vec{a}$};
 	\draw[white] (0,-1)--(2,-1);
-	\node at (-1,-2) {$\lambda < 0$};
+	\node at (-1,-2) {$\text{при } \lambda < 0$};
 	\end{tikzpicture}
 \end{figure}
 \end{definition}
-	Зокрема виконуються ось такі властивості $\forall \vec{a}, \vec{b}, \vec{c}: \forall \lambda, \mu \in \mathbb{R}:$\\
-	1) $\vec{a} + \vec{b} = \vec{b} + \vec{a}$
+
+	Завдяки геометричній інтерпретації, ми можемо довести кілька властивостей, які виконані для всіх векторів $\vec{a}, \vec{b}, \vec{c}$ та для всіх чисел $\forall \lambda, \mu \in \mathbb{R}$:\\
+	1) $\vec{a} + \vec{b} = \vec{b} + \vec{a}$;
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -191,7 +204,7 @@ $|\vec{a}|$ - довжина вектора
 	\draw[thick, red, ->] (0,0)--(4,2) node at (2,1.6) {$\vec{b}+\vec{a}$};
 	\end{tikzpicture}
 \end{figure}
-	2) $(\vec{a} + \vec{b}) + \vec{c} = \vec{a} + (\vec{b} + \vec{c})$
+	2) $(\vec{a} + \vec{b}) + \vec{c} = \vec{a} + (\vec{b} + \vec{c})$;
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -210,11 +223,11 @@ $|\vec{a}|$ - довжина вектора
 	\draw[thick, blue, ->] (0,0)--(6,1) node at (3,-0.1) {$\vec{a} + (\vec{b} + \vec{c})$};
 	\end{tikzpicture}
 \end{figure}
-	3) $\exists \vec{0}: \vec{a} + \vec{0} = \vec{a}$\\
-	4) $\exists (-\vec{a}): \vec{a} + (-\vec{a}) = \vec{0}$\\
-	\textit{Тут малюнок навряд чи знадобиться}
+	3) $\text{існує $\vec{0}$, так званий нульовий вектор, для якого } \vec{a} + \vec{0} = \vec{a}$; цей нульовий вектор має нульову довжину, тобто $|\vec{0}| = 0$, а геометричним чином представляє собою точку;\\
+	4) $\text{існує $\tilde{\vec{a}}$, так званий протилежнй вектор, для якого } \vec{a} + \tilde{\vec{a}} = \vec{0}$; насправді, цей $\tilde{\vec{a}} = -\vec{a}$, тобто це той же самий вектор тільки в протилежному напрямку;\\
+	\textit{(для 3), 4), малюнок навряд знадобиться)}
 	\bigskip \\
-	5) $\lambda(\vec{a}+\vec{b}) = \lambda \vec{a} + \lambda \vec{b}$
+	5) $\lambda(\vec{a}+\vec{b}) = \lambda \vec{a} + \lambda \vec{b}$ \textit{(випливає з подібності двох трикутників)};
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}[scale = 0.8]
@@ -235,20 +248,20 @@ $|\vec{a}|$ - довжина вектора
 	\draw[thick, red, ->] (0,0)--(8,4) node at (5,2) {$\lambda \vec{a}+ \lambda \vec{b}$};
 	\end{tikzpicture}
 \end{figure}
-	\textit{Випливає із подібності трикутників}\\
-	6) $\vec{a} (\lambda + \mu) = \lambda \vec{a} + \mu \vec{a}$\\
-	7) $(\lambda \mu) \vec{a} = (\lambda \mu) \vec{a}$\\
-	8) $1 \cdot \vec{a} = \vec{a}$\\
-	\textit{Тут малюнок навряд чи знадобиться}
+	6) $\vec{a} (\lambda + \mu) = \lambda \vec{a} + \mu \vec{a}$;\\
+	7) $(\lambda \mu) \vec{a} = (\lambda \mu) \vec{a}$;\\
+	8) $1 \cdot \vec{a} = \vec{a}$.\\
+	\textit{(для 6), 7), 8), малюнок навряд знадобиться)}
 
 \begin{definition}
 	Два вектори, що лежать на перпендикулярних прямих, називають \textbf{ортогональними}.\\
 Позначення: $\vec{a} \perp \vec{b}$.
 \end{definition}
 
-\subsection{Поняття базис}
+\subsection{Поняття базиса}
 \begin{proposition}
-$\vec{a} \parallel \vec{b} \iff \exists \lambda \in \mathbb{R}: \vec{a} = \lambda \vec{b}$.
+\label{collinear_vectors}
+$\vec{a} \parallel \vec{b} \iff \exists \lambda \in \mathbb{R}: \vec{a} = \lambda \vec{b}$.\\
 \end{proposition}
 
 \begin{proof}
@@ -262,8 +275,9 @@ $\vec{0} \parallel \vec{b}$ для будь-якого $\vec{b}$.
 
 \subsubsection{Випадок на площині}
 \begin{theorem}
-Задані два вектори $\vec{a}$, $\vec{b}$, що не колінеарні. Тоді $\forall \vec{c}$ на площині: $\exists! \alpha, \beta \in \mathbb{R}:$\\
-$\vec{c} = \alpha \vec{a} + \beta \vec{b}$.
+\label{basis_on_plane}
+Задані два вектори $\vec{a}$, $\vec{b}$, що не колінеарні. Тоді для кожного вектора $\vec{c}$ на площині існують єдині числа $\alpha, \beta \in \mathbb{R}$, для яких $\vec{c} = \alpha \vec{a} + \beta \vec{b}$.\\
+Тобто третій вектор на площині завжди єдиним чином виражається через два неколінеарні вектори.
 \end{theorem}
 
 \begin{proof}
@@ -280,23 +294,22 @@ $\vec{c} = \alpha \vec{a} + \beta \vec{b}$.
 	\draw[thick, dashed] (4,2)--(2,2) node [anchor = south] {$B$};
 	\end{tikzpicture}
 \end{figure}
-	Вздовж векторів $\vec{a}$, $\vec{b}$ ми також провели заштриховані лінії для зручності.\\
-\textit{Існування.}\\
+	Уздовж векторів $\vec{a}$, $\vec{b}$ ми також провели заштриховані лінії для зручності.\\
+І. \textit{Існування.}\\
 	Із малюнку видно, що $\vec{c} = \overrightarrow{AC} = \overrightarrow{AB} + \overrightarrow{AD}$.\\
-	Також з малюнку зауважимо, що $\left. \begin{gathered} \overrightarrow{AD} \parallel \vec{b} \\ \overrightarrow{AB} \parallel \vec{a} \end{gathered} \right. \overset{\textrm{\textbf{Prp. 1.2.1.}}}{\Rightarrow} \exists \alpha, \beta: \left. \begin{gathered} \overrightarrow{AD} = \beta \vec{b} \\ \overrightarrow{AB} = \alpha \vec{a} \end{gathered} \right.$.\\
+	Також з малюнку зауважимо, що $\left. \begin{gathered} \overrightarrow{AD} \parallel \vec{b} \\ \overrightarrow{AB} \parallel \vec{a} \end{gathered} \right. \overset{\textrm{\prpref{collinear_vectors}}}{\implies} \exists \alpha, \beta: \left. \begin{gathered} \overrightarrow{AD} = \beta \vec{b} \\ \overrightarrow{AB} = \alpha \vec{a} \end{gathered} \right.$.\\
 	Отже, $\vec{c} = \alpha \vec{a} + \beta \vec{b}$.
 \bigskip \\
-\textit{Єдиність.}\\
+II. \textit{Єдиність.}\\
 !Припустимо, що розклад не є єдиним, тобто $\exists \alpha', \beta': \vec{c} = \alpha' \vec{a} + \beta' \vec{b}$.\\
 	Тоді $\vec{0} = \vec{c} - \vec{c} = (\alpha-\alpha') \vec{a} + (\beta - \beta') \vec{b}$.\\
-	$\implies (\alpha-\alpha')\vec{a} = (\beta' - \beta)\vec{b} \overset{\textrm{\textbf{Prp. 1.2.1.}}}{\Rightarrow} \vec{a} \parallel \vec{b}$.\\
-	Але за умовою теореми, $\vec{a} \not\parallel \vec{b}$. Суперечність!\\ Тому та рівність виконується лише при $\alpha = \alpha'$, $\beta = \beta'$, що й доводить єдиність.
+	$\implies (\alpha-\alpha')\vec{a} = (\beta' - \beta)\vec{b} \overset{\textrm{\prpref{collinear_vectors}}}{\implies} \vec{a} \parallel \vec{b}$.\\
+	Але за умовою теореми, $\vec{a} \centernot\parallel \vec{b}$. Суперечність!\\ Тому та рівність виконується лише при $\alpha = \alpha'$, $\beta = \beta'$, що й доводить єдиність.
 \end{proof}
 
 \begin{definition}
-\textbf{Базисом на площині} будемо називати фіксовану пару неколінеарних векторів $\vec{a},\vec{b}$.\\
-Уже довели, що кожний вектор $\vec{c}$ виражається через базисні вектори як $\vec{c} = \alpha \vec{a} + \beta \vec{b}$ - це \textbf{розклад за базисом}.\\
-А коефіцієнти $\alpha$, $\beta$ задають \textbf{координати}.
+\textbf{Базисом на площині} будемо називати пару неколінеарних векторів $\vec{a},\vec{b}$.\\
+Уже довели, що кожний вектор $\vec{c}$ виражається через базисні вектори як $\vec{c} = \alpha \vec{a} + \beta \vec{b}$ -- це \textbf{розклад за базисом}. Коефіцієнти $\alpha, \beta$ задають \textbf{координати} вектора $\vec{c}$ в базисі $\vec{a},\vec{b}$.
 \end{definition}
 	
 \subsubsection{Випадок в просторі}
@@ -305,22 +318,22 @@ $\vec{c} = \alpha \vec{a} + \beta \vec{b}$.
 \end{definition}
 
 \begin{proposition}
-$\vec{a}$, $\vec{b}$, $\vec{c}$ - компланарні $\iff \exists \alpha, \beta, \gamma \in \mathbb{R}: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0}$.
+$\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні $\iff \exists \alpha, \beta, \gamma \in \mathbb{R}: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0}$.
 \end{proposition}
 
 \begin{proof}
-	\rightproof Дано: $\vec{a}$, $\vec{b}$, $\vec{c}$ - компланарні. Тоді перемістимо ці вектори так, щоб лежали на одній площині. Тоді один з векторів розкладається за базисом при $\vec{a} \not\parallel \vec{b} \implies \vec{c} = \alpha \vec{a} + \beta \vec{b}$.\\
+	\rightproof Дано: $\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні. Тоді перемістимо ці вектори так, щоб лежали на одній площині. Тоді один з векторів розкладається за базисом при $\vec{a} \centernot\parallel \vec{b} \implies \vec{c} = \alpha \vec{a} + \beta \vec{b}$.\\
 	$\implies \exists \alpha, \beta, \gamma = -1: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0}$.\\
 	Якщо ж $\vec{a} \parallel \vec{b}$, то $\vec{a} = \lambda \vec{b}\implies \exists \alpha = 1, \beta = -\lambda, \gamma = 0: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0}$.
 	\bigskip \\
 	\leftproof Дано: $\exists \alpha, \beta, \gamma \in \mathbb{R}: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0}$.\\
 	Не втрачаючи загальності, нехай $\gamma \neq 0$. Тоді звідси отримаємо:\\
-	$\vec{c} = \left( -\dfrac{\alpha}{\gamma} \right) \vec{a} + \left( -\dfrac{\beta}{\gamma} \right) \vec{b}$ - розклад за базисом на площині. Отже, $\vec{c}$ на одній площині з $\vec{a},\vec{b}$, тому вони є компланарними.
+	$\vec{c} = \left( -\dfrac{\alpha}{\gamma} \right) \vec{a} + \left( -\dfrac{\beta}{\gamma} \right) \vec{b}$ -- розклад за базисом на площині. Отже, $\vec{c}$ на одній площині з $\vec{a},\vec{b}$, тому вони є компланарними.
 \end{proof}
 
 \begin{theorem}
-Задані вектори $\vec{a}$, $\vec{b}$, $\vec{c}$, що не компланарні. Тоді $\forall \vec{d}$ в просторі: $\exists! \alpha, \beta, \gamma \in \mathbb{R}:$\\
-	$\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$.
+Задані вектори $\vec{a}$, $\vec{b}$, $\vec{c}$, що не компланарні. Тоді для кожного вектора $\vec{d}$ в просторі існують єдині числа $\alpha, \beta, \gamma \in \mathbb{R}$, для яких $\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$.\\
+Тобто четвертий вектор в просторі завжди єдиним чином виражається через три некомпланарні вектори.
 \end{theorem}
 
 \begin{proof}
@@ -353,34 +366,37 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ - компланарні $\iff \exists \alpha, \
 	\end{tikzpicture}
 \end{figure}
 	Вздовж векторів $\vec{a}$, $\vec{b}$, $\vec{c}$ ми також провели заштриховані лінії для зручності.\\
-	\textit{Існування.}\\
+	I. \textit{Існування.}\\
 	Із малюнку видно, що $\vec{d} = \overrightarrow{C_1D_1} = \overrightarrow{C_1B_1} + \overrightarrow{C_1C_2}$.\\
 	А тепер за порядком, що видно ще на малюнку:\\
-	$\overrightarrow{C_1D_1},$ $\vec{a}$ - колінеарні, тому $\overrightarrow{C_1D_1} = \alpha \vec{a}$;\\
-	$\overrightarrow{C_1B_1},$ $\vec{b}$ - колінеарні, тому $\overrightarrow{C_1B_1} = \beta \vec{b}$;\\
-	$\overrightarrow{C_1C_2},$ $\vec{c}$ - колінеарні, тому $\overrightarrow{C_1C_2} = \gamma \vec{c}$.\\
+	$\overrightarrow{C_1D_1},$ $\vec{a}$ -- колінеарні, тому $\overrightarrow{C_1D_1} = \alpha \vec{a}$;\\
+	$\overrightarrow{C_1B_1},$ $\vec{b}$ -- колінеарні, тому $\overrightarrow{C_1B_1} = \beta \vec{b}$;\\
+	$\overrightarrow{C_1C_2},$ $\vec{c}$ -- колінеарні, тому $\overrightarrow{C_1C_2} = \gamma \vec{c}$.\\
 	Тому $\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$.\\
-	А доведення на єдиність є аналогічним до \textbf{Th. 1.2.3.} Тільки ми до суперечності прийдемо від того, що ці вектори стануть компланарними після припущення.
+	II. \textit{Єдиність.} \\
+	Доводиться аналогічно, як в \thref{basis_on_plane}. Тільки ми до суперечності прийдемо від того, що ці вектори стануть компланарними після припущення.
 \end{proof}
 
 \begin{definition}
-\textbf{Базисом в просторі} будемо називати фіксовану пару некомпланарних векторів $\vec{a}$, $\vec{b}$, $\vec{c}$\\
-Уже довели, що кожний вектор $\vec{d}$ виражається через базисні вектори як $\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$ - це \textbf{розклад за базисом}.\\
-А коефіцієнти $\alpha$, $\beta$, $\gamma$ задають \textbf{координати}.
+\textbf{Базисом в просторі} будемо називати  пару некомпланарних векторів $\vec{a}$, $\vec{b}$, $\vec{c}$.\\
+Уже довели, що кожний вектор $\vec{d}$ виражається через базисні вектори як $\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$ -- це \textbf{розклад за базисом}. Коефіцієнти $\alpha,\beta,\gamma$ задають \textbf{координати} вектора $\vec{d}$ в базисі $\vec{a},\vec{b},\vec{c}$.
 \bigskip \\
-Ще також в означенні можна позначати $\vec{d} = (\alpha, \beta, \gamma)$ - як набір координат в заданому базисі.
+Можна також позначати вектор $\vec{d}$ таким чином: $\vec{d} = (\alpha, \beta, \gamma)$ -- як набір координат в заданому базисі.
 \end{definition}
 
-В обох підпунктах виконується наступне твердження (надалі в основному буду розглядати випадок простору):
-\begin{theorem}
-Задано базис векторів $\vec{a}$, $\vec{b}$, $\vec{c}$ і вектори $\vec{d_1} = (\alpha_1, \beta_1, \gamma_1)$, $\vec{d_2} = (\alpha_2, \beta_2, \gamma_2)$. Тоді:\\
-	1) $\vec{d_1} + \vec{d_2} = (\alpha_1+\alpha_2, \beta_1+\beta_2, \gamma_1+\gamma_2)$;\\
-	2) $\lambda \vec{d_1} = (\lambda \alpha_1, \lambda \beta_1, \lambda \gamma_1)$.\\
-	\textit{Вказівка: підставити задані вектори та винести за дужки базисні вектори.}
-\end{theorem}
+\begin{proposition} 
+Задано базис векторів $\vec{a}$, $\vec{b}$, $\vec{c}$ і вектори $\vec{d}_1 = (\alpha_1, \beta_1, \gamma_1)$, $\vec{d}_2 = (\alpha_2, \beta_2, \gamma_2)$. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\vec{d}_1 + \vec{d}_2 = (\alpha_1+\alpha_2, \beta_1+\beta_2, \gamma_1+\gamma_2)$;
+\item $\lambda \vec{d}_1 = (\lambda \alpha_1, \lambda \beta_1, \lambda \gamma_1)$.
+\end{enumerate}
+\textit{Вказівка: підставити задані вектори та винести за дужки базисні вектори.}
+\bigskip \\
+Це твердження працює для випадку векторів на площині.
+\end{proposition}
 
 \begin{example}
-Нехай т. $O$ - точка перетину медіан трикутника $ABC$. Відомо, що $\overrightarrow{AO} = \vec{a}, \overrightarrow{AC} = \vec{b}$. Розкласти вектор $\overrightarrow{AB}$ за базисом $\vec{a}, \vec{b}$.
+Нехай $O$ -- точка перетину медіан трикутника $ABC$. Відомо, що $\overrightarrow{AO} = \vec{a}, \overrightarrow{AC} = \vec{b}$. Розкласти вектор $\overrightarrow{AB}$ за базисом $\vec{a}, \vec{b}$.
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}[scale = 3]
@@ -405,8 +421,8 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ - компланарні $\iff \exists \alpha, \
 	
 \subsection{Декартова система координат}
 \begin{definition}
-Нехай в просторі задано базис $\vec{a}$, $\vec{b}$, $\vec{c}$. Встановимо фіксовану т. $O$ - початок координат, туди й прикладемо всі вектори.\\
-Така сукупність називається \textbf{декартовою системою координат.}
+Нехай в просторі заданий базис $\vec{a}$, $\vec{b}$, $\vec{c}$. Встановимо фіксовану точку $O$ -- початок координат, туди й прикладемо всі вектори.\\
+Початок координат та базисні вектори в сукупності називається \textbf{декартовою системою координат.}
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -417,12 +433,11 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ - компланарні $\iff \exists \alpha, \
 	\end{tikzpicture}
 \end{figure}
 \end{definition}
-Будь-якій т. $M$ в просторі однозначно відповідає вектор $\overrightarrow{OM}$ - \textbf{радіус-вектор}.\\
-	Розкладемо за нашим базисом:\\
+Будь-якій точці $M$ в просторі однозначно відповідає вектор $\overrightarrow{OM}$ -- так званий \textbf{радіус-вектор}. Розкладемо цей вектор за базисом:\\
 	$\overrightarrow{OM} = \alpha_M \vec{a} + \beta_M \vec{b} + \gamma_M \vec{c} = (\alpha_M, \beta_M, \gamma_M)$.\\
-	Через однозначність ми назвемо $M(\alpha_M, \beta_M, \gamma_M)$ \textbf{координатами} т. $M$.
+	Через однозначність ми назвемо $(\alpha_M, \beta_M, \gamma_M)$ \textbf{координатами} точки $M$.
 	\bigskip \\
-	А тепер нехай задані т. $M(\alpha_M, \beta_M, \gamma_M)$, $N(\alpha_N, \beta_N, \gamma_N)$. Знайдемо координати вектора $\overrightarrow{MN}$.\\
+	А тепер нехай задані точки $M(\alpha_M, \beta_M, \gamma_M)$, $N(\alpha_N, \beta_N, \gamma_N)$. Знайдемо координати вектора $\overrightarrow{MN}$.\\
 	Враховуючи існування початку координат, отримаємо:\\
 	$\overrightarrow{MN} = \overrightarrow{ON} - \overrightarrow{OM} = (\alpha_N - \alpha_M, \beta_N - \beta_M, \gamma_N - \gamma_M)$.
 	
@@ -439,17 +454,17 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ - компланарні $\iff \exists \alpha, \
 \end{definition}
 
 \begin{proposition}
-$\{\vec{a}$, $\vec{b}\}$ - лінійно залежна $\iff \vec{a} \parallel \vec{b}$.
+$\{\vec{a}$, $\vec{b}\}$ -- лінійно залежна $\iff \vec{a} \parallel \vec{b}$.
 \end{proposition}
 
 \begin{proof}
-	$\{\vec{a},\vec{b}\}$ - лінійно залежна $\iff$ $\exists \alpha, \beta: |\alpha| + |\beta| \neq 0: \alpha \vec{a} + \beta \vec{b} = \vec{0} \boxed{\iff}$\\
+	$\{\vec{a},\vec{b}\}$ -- лінійно залежна $\iff$ $\exists \alpha, \beta: |\alpha| + |\beta| \neq 0: \alpha \vec{a} + \beta \vec{b} = \vec{0} \boxed{\iff}$\\
 	Не втрачаючи загальності, ми вважатимемо, що $\alpha \neq 0$.\\
 	$\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} \overset{\text{позн.} \lambda = -\frac{\beta}{\alpha}}{=} \lambda \vec{b} \iff \vec{a} \parallel \vec{b}$.
 \end{proof}
 
 \begin{corollary}
-$\{\vec{a}, \vec{b}\}$ - лінійно незалежні $\iff \vec{a} \not\parallel \vec{b}$.
+$\{\vec{a}, \vec{b}\}$ -- лінійно незалежні $\iff \vec{a} \centernot\parallel \vec{b}$.
 \end{corollary}
 
 \begin{proposition}
@@ -459,25 +474,26 @@ $\{\vec{a}, \vec{b}\}$ - лінійно незалежні $\iff \vec{a} \not\pa
 \begin{proof}
 	Розглянемо вектори $\{\vec{a},\vec{b},\vec{c}\}$. І знову, не втрачаючи загальності, візьмемо перші два вектори та розглянемо два підпункти:\\
 	I. $\vec{a} \parallel \vec{b}$.\\
-	Тоді $\vec{a} = \lambda \vec{b} \implies 1 \cdot \vec{a} + (-\lambda) \vec{b} + 0 \cdot \vec{c} = \vec{0}$, причому тут $|1|+|-\lambda|+|0| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}\}$ - лінійно залежна.
+	Тоді $\vec{a} = \lambda \vec{b} \implies 1 \cdot \vec{a} + (-\lambda) \vec{b} + 0 \cdot \vec{c} = \vec{0}$, причому тут $|1|+|-\lambda|+|0| \neq 0$. \\
+	Отже, $\{\vec{a}, \vec{b}, \vec{c}\}$ -- лінійно залежна.
 	\bigskip \\
 	II. $\vec{a} \not\parallel \vec{b}$.\\
-	Тоді $\exists \alpha, \beta: \vec{c} = \alpha \vec{a} + \beta \vec{b} \implies \alpha \vec{a} + \beta \vec{b} + (-1) \vec{c} = \vec{0}$, причому тут $|\alpha| + |\beta| + |-1| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}\}$ - лінійно залежна.\\
-	Остаточно маємо, що 3 вектори на площині - лінійно залежні.
+	Тоді $\exists \alpha, \beta: \vec{c} = \alpha \vec{a} + \beta \vec{b} \implies \alpha \vec{a} + \beta \vec{b} + (-1) \vec{c} = \vec{0}$, причому тут $|\alpha| + |\beta| + |-1| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}\}$ -- лінійно залежна.\\
+	Остаточно маємо, що 3 вектори на площині -- лінійно залежні.
 \end{proof}
 
 \begin{proposition}
-$\{\vec{a},\vec{b},\vec{c} \}$ - лінійно залежні $\iff$ $\vec{a},\vec{b},\vec{c}$ - компланарні.
+$\{\vec{a},\vec{b},\vec{c} \}$ -- лінійно залежні $\iff$ $\vec{a},\vec{b},\vec{c}$ -- компланарні.
 \end{proposition}
 
 \begin{proof}
-	$\{\vec{a},\vec{b},\vec{c}\}$ - лінійно залежні $\iff \exists \alpha, \beta, \gamma: |\alpha| + |\beta| + |\gamma| \neq 0: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0} \boxed{\iff}$\\
+	$\{\vec{a},\vec{b},\vec{c}\}$ -- лінійно залежні $\iff \exists \alpha, \beta, \gamma: |\alpha| + |\beta| + |\gamma| \neq 0: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0} \boxed{\iff}$\\
 	Не обмежуючи загальності, нехай $\alpha \neq 0$.\\
-$\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} \vec{c} \overset{\textrm{позн.} \lambda = -\frac{\beta}{\alpha}, \mu = -\frac{\gamma}{\alpha}}{=} \lambda \vec{b} + \mu \vec{c} \iff$ $\vec{a},\vec{b},\vec{c}$ - компланарні.
+$\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} \vec{c} \overset{\textrm{позн.} \lambda = -\frac{\beta}{\alpha}, \mu = -\frac{\gamma}{\alpha}}{=} \lambda \vec{b} + \mu \vec{c} \iff$ $\vec{a},\vec{b},\vec{c}$ -- компланарні.
 \end{proof}
 
 \begin{corollary}
-	$\{\vec{a},\vec{b},vec{c}\}$ - лінійно незалежні $\iff$ $\vec{a},\vec{b},\vec{c}$ - не компланарні.
+	$\{\vec{a},\vec{b},\vec{c}\}$ -- лінійно незалежні $\iff$ $\vec{a},\vec{b},\vec{c}$ -- не компланарні.
 \end{corollary}
 
 \begin{proposition}
@@ -486,12 +502,12 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 
 \begin{proof}
 	Розглянемо вектори $\{\vec{a},\vec{b},vec{c},\vec{d}\}$. І знову не втрачаючи загальності, візьмемо перші три вектори та розглянемо два підпункти:\\
-	I. $\vec{a}$, $\vec{b}$, $\vec{c}$ - компланарні.\\
-	Тоді $\exists \alpha, \beta: \vec{c} = \alpha \vec{a} + \beta \vec{b} \implies \alpha \vec{a} + \beta \vec{b} + (-1)\vec{c} + 0 \cdot \vec{d} = \vec{0}$, причому тут $|\alpha| + |\beta| + |-1| + |0| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}, \vec{d}\}$ - лінійно залежна.
+	I. $\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні.\\
+	Тоді $\exists \alpha, \beta: \vec{c} = \alpha \vec{a} + \beta \vec{b} \implies \alpha \vec{a} + \beta \vec{b} + (-1)\vec{c} + 0 \cdot \vec{d} = \vec{0}$, причому тут $|\alpha| + |\beta| + |-1| + |0| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}, \vec{d}\}$ -- лінійно залежна.
 	\bigskip \\
-	II. $\vec{a}$, $\vec{b}$, $\vec{c}$ - не компланарні.\\
-	Тоді $\exists \alpha, \beta, \gamma: \vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} \implies \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} + (-1)\vec{d} = \vec{0}$, причому тут $|\alpha| + |\beta| + |\gamma| + |-1| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}, \vec{d}\}$ - лінійно залежні.\\
-	Остаточно маємо, що 4 вектори в просторі - лінійно залежні.
+	II. $\vec{a}$, $\vec{b}$, $\vec{c}$ -- не компланарні.\\
+	Тоді $\exists \alpha, \beta, \gamma: \vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} \implies \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} + (-1)\vec{d} = \vec{0}$, причому тут $|\alpha| + |\beta| + |\gamma| + |-1| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}, \vec{d}\}$ -- лінійно залежні.\\
+	Остаточно маємо, що 4 вектори в просторі -- лінійно залежні.
 \end{proof}
 
 \begin{corollary}
@@ -502,10 +518,10 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \begin{definition}
 	\textbf{Проєкцією вектора $\vec{a}$ на вісь $l$} називають вираз:
 	\begin{align*}
-	pr_l \vec{a} = \pm |AB|
+	\pr_l \vec{a} = \pm |AB|
 	\end{align*}
-	Якщо $\vec{a}$ утворює гострий кут з віссю $l$, то беремо знак +.\\
-	Якщо $\vec{a}$ утворює тупий кут з віссю $l$, то беремо знак -.
+	Якщо $\vec{a}$ утворює гострий кут з віссю $l$, то беремо знак $+$.\\
+	Якщо $\vec{a}$ утворює тупий кут з віссю $l$, то беремо знак $-$.
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -521,17 +537,20 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \end{figure}
 \end{definition}
 
-	Якщо перемістити паралельно $\vec{a}$ так, щоб початок був в т. $A$, то маємо з малюнку:\\
+	Якщо перемістити паралельно $\vec{a}$ так, щоб початок був в точці $A$, то маємо з малюнку:\\
 	$|AB| = |\vec{a}| \cos \alpha$.\\
 	Ця формула буде також справедливою при розгляданні тупого кута.\\
 	Отримали інакшу формулу проєкції:
 	\begin{align*}
-	pr_l \vec{a} = |\vec{a}| \cos \alpha
+	\pr_l \vec{a} = |\vec{a}| \cos \alpha
 	\end{align*}
 	
 \begin{proposition}[Властивості]
-	1) $pr_l (\vec{a} + \vec{b}) = pr_l \vec{a} + pr_l \vec{b}$\\
-	2) $pr_l (\lambda \vec{a}) = \lambda \cdot pr_l \vec{a}$\\
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+	\item $\pr_l (\vec{a} + \vec{b}) = \pr_l \vec{a} + \pr_l \vec{b}$;
+	\item $\pr_l (\lambda \vec{a}) = \lambda \cdot \pr_l \vec{a}$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
@@ -606,7 +625,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 	\draw (1,-1pt)--(1,1pt) node [anchor = north] {$B$};
 	\end{tikzpicture}
 \end{figure}
-	1.1) $pr_l (\vec{a} +\vec{b}) = |AB|  = |AC| + |CB| = pr_l \vec{a} + pr_l \vec{b}$.\\
+	1.1) $\pr_l (\vec{a} +\vec{b}) = |AB|  = |AC| + |CB| = \pr_l \vec{a} + \pr_l \vec{b}$.\\
 	1.2), 1.3), 1.4) аналогічно.
 	\bigline
 	2) Тут теж чотири випадки, знову ілюстративно.
@@ -675,7 +694,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 	\draw (4,-1pt)--(4,1pt) node [anchor = north] {$B$};
 	\end{tikzpicture}
 \end{figure}
-	2.1) $pr_l (\lambda \vec{a}) = |AB| = \dfrac{|AB|}{|AC|} |AC| = \lambda pr_l \vec{a}$.\\
+	2.1) $\pr_l (\lambda \vec{a}) = |AB| = \dfrac{|AB|}{|AC|} |AC| = \lambda \pr_l \vec{a}$.\\
 	Дріб дорівнює нашому скаляру, використовуючи подібності трикутників (якщо вісь $l$ перемістити до початку $\vec{a}$).\\
 	2.2), 2.3), 2.4) аналогічно.
 \end{proof}
@@ -690,7 +709,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 	\begin{align*}
 	(\vec{a}, \vec{b}) = |\vec{a}| \cdot |\vec{b}| \cdot \cos \alpha,
 	\end{align*}
-	де $\alpha$ - кут між векторами $\vec{a}$ та $\vec{b}$.
+	де $\alpha$ -- кут між векторами $\vec{a}$ та $\vec{b}$.
 \end{definition}
 
 \begin{proposition}[Критерій ортогональності]
@@ -703,31 +722,37 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \end{proof}
 
 \begin{proposition}[Властивості]
-	1) $(\vec{a}, \vec{b}) = (\vec{b}, \vec{a})$\\
-	2) $(\vec{a}, \vec{b}) = pr_{\vec{b}} \vec{a} \cdot |\vec{b}| = pr_{\vec{a}} \vec{b} \cdot |\vec{a}|$\\
-	3) $(\vec{a_1}+\vec{a_2}, \vec{b}) = (\vec{a_1}, \vec{b}) + (\vec{a_2}, \vec{b})$\\
-	4) $(\lambda \vec{a}, \vec{b}) = \lambda (\vec{a}, \vec{b})$\\
-	5) $(\vec{a}, \vec{a}) = |\vec{a}|^2$\\
-	6) $\forall \vec{b}: (\vec{a}, \vec{b}) = 0 \implies \vec{a} = \vec{0}$\\
-	7) $\forall \vec{d}: (\vec{a}, \vec{d}) = (\vec{b}, \vec{d}) \implies \vec{a} = \vec{b}$
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+	\item $(\vec{a}, \vec{b}) = (\vec{b}, \vec{a})$;
+	\item $(\vec{a}, \vec{b}) = \pr_{\vec{b}} \vec{a} \cdot |\vec{b}| = \pr_{\vec{a}} \vec{b} \cdot |\vec{a}|$;
+	\item $(\vec{a_1}+\vec{a_2}, \vec{b}) = (\vec{a_1}, \vec{b}) + (\vec{a_2}, \vec{b})$;
+	\item $(\lambda \vec{a}, \vec{b}) = \lambda (\vec{a}, \vec{b})$;
+	\item $(\vec{a}, \vec{a}) = |\vec{a}|^2$;
+	\item $\forall \vec{b}: (\vec{a}, \vec{b}) = 0 \implies \vec{a} = \vec{0}$;
+	\item $\forall \vec{d}: (\vec{a}, \vec{d}) = (\vec{b}, \vec{d}) \implies \vec{a} = \vec{b}$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-	1) $(\vec{a}, \vec{b}) = |\vec{a}| |\vec{b}| \cos \alpha = |\vec{b}| |\vec{a}| \cos \alpha = (\vec{b}, \vec{a})$ \bigskip \\
-	2) $(\vec{a}, \vec{b}) = |\vec{a}| |\vec{b}| \cos \alpha = pr_{\vec{b}} \vec{a} \cdot |\vec{b}| = pr_{\vec{a}} \vec{b} \cdot |\vec{a}|$ \bigskip \\
-	3) $(\vec{a_1}+\vec{a_2}, \vec{b}) = pr_{\vec{b}} (\vec{a_1} + \vec{a_2}) |\vec{b}| = pr_{\vec{b}} \vec{a_1} |\vec{b}| + pr_{\vec{b}} \vec{a} |\vec{b}| = (\vec{a_1}, \vec{b}) + (\vec{a_2}, \vec{b})$ \bigskip \\
-	4) $(\lambda \vec{a}, \vec{b}) = pr_{\vec{b}} (\lambda \vec{a}) |\vec{b}| = \lambda pr_{\vec{b}} (\vec{a}) |\vec{b}| = \lambda (\vec{a}, \vec{b})$ \bigskip \\
-	5) $(\vec{a}, \vec{a}) = |\vec{a}| |\vec{a}| \cos 0 = |\vec{a}|^2$\bigskip \\
-	6) $\forall \vec{b}: (\vec{a}, \vec{b}) = 0 \overset{\vec{b} = \vec{a}}{\implies} (\vec{a}, \vec{a}) = 0 \implies \vec{a} = \vec{0}$ \bigskip \\
-	7) $\forall \vec{d}: (\vec{a}, \vec{d}) = (\vec{b}, \vec{d}) \implies (\vec{a}-\vec{b}, \vec{d}) = (\vec{a}, \vec{d}) - (\vec{b}, \vec{d}) = 0 \implies \vec{a} - \vec{b} = 0 \implies \vec{a} = \vec{b}$
+Доведемо кожну властивість:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+	\item $(\vec{a}, \vec{b}) = |\vec{a}| |\vec{b}| \cos \alpha = |\vec{b}| |\vec{a}| \cos \alpha = (\vec{b}, \vec{a})$;
+	\item $(\vec{a}, \vec{b}) = |\vec{a}| |\vec{b}| \cos \alpha = \pr_{\vec{b}} \vec{a} \cdot |\vec{b}| = \pr_{\vec{a}} \vec{b} \cdot |\vec{a}|$;
+	\item $(\vec{a_1}+\vec{a_2}, \vec{b}) = \pr_{\vec{b}} (\vec{a_1} + \vec{a_2}) |\vec{b}| = \pr_{\vec{b}} \vec{a_1} |\vec{b}| + \pr_{\vec{b}} \vec{a} |\vec{b}| = (\vec{a_1}, \vec{b}) + (\vec{a_2}, \vec{b})$;
+	\item $(\lambda \vec{a}, \vec{b}) = \pr_{\vec{b}} (\lambda \vec{a}) |\vec{b}| = \lambda \pr_{\vec{b}} (\vec{a}) |\vec{b}| = \lambda (\vec{a}, \vec{b})$;
+	\item $(\vec{a}, \vec{a}) = |\vec{a}| |\vec{a}| \cos 0 = |\vec{a}|^2$;
+	\item $\forall \vec{b}: (\vec{a}, \vec{b}) = 0 \overset{\vec{b} = \vec{a}}{\implies} (\vec{a}, \vec{a}) = 0 \implies \vec{a} = \vec{0}$;
+	\item $\forall \vec{d}: (\vec{a}, \vec{d}) = (\vec{b}, \vec{d}) \implies (\vec{a}-\vec{b}, \vec{d}) = (\vec{a}, \vec{d}) - (\vec{b}, \vec{d}) = 0 \implies \vec{a} - \vec{b} = 0 \implies \vec{a} = \vec{b}$.
+\end{enumerate}
 \end{proof}
 
 \begin{example}
-	Нехай задані такі вектори $\vec{a}, \vec{b}$, що $|\vec{a}| = 3, |\vec{b}| = 2$, а також кут між ними становить $\dfrac{2 \pi}{3}$. З'ясувати, чи будуть вектори $\vec{a}+2 \vec{b}$ та $3 \vec{a} - \vec{b}$ ортогональними.
+	Нехай задані вектори $\vec{a}, \vec{b}$, що $|\vec{a}| = 3, |\vec{b}| = 2$, а також кут між ними становить $\dfrac{2 \pi}{3}$. З'ясувати, чи будуть вектори $\vec{a}+2 \vec{b}$ та $3 \vec{a} - \vec{b}$ ортогональними.
 	Для цього знайдемо їхній скалярний добуток.
 	За властивістю скалярного добутку, маємо:\\
-	$(\vec{a} + 2 \vec{b}, 3 \vec{a} - \vec{b}) = 3 (\vec{a}, \vec{a}) - (\vec{a}, \vec{b}) + 6 (\vec{b}, \vec{a}) - 2 (\vec{b}, \vec{b}) = 3 |\vec{a}|^2 + 5 (\vec{a}, \vec{b}) - 2 |\vec{b}|^2 = 27 + 5 |\vec{a}| |\vec{b}| \cos \dfrac{2 \pi}{3} - 8 = 4$\\
-	$(\vec{a} + 2 \vec{b}, 3 \vec{a} - \vec{b}) \neq 0 \Rightarrow \vec{a} + 2 \vec{b} \not\perp 3 \vec{a} - \vec{b}$
+	$(\vec{a} + 2 \vec{b}, 3 \vec{a} - \vec{b}) = 3 (\vec{a}, \vec{a}) - (\vec{a}, \vec{b}) + 6 (\vec{b}, \vec{a}) - 2 (\vec{b}, \vec{b}) = 3 |\vec{a}|^2 + 5 (\vec{a}, \vec{b}) - 2 |\vec{b}|^2 = 27 + 5 |\vec{a}| |\vec{b}| \cos \dfrac{2 \pi}{3} - 8 = 4$.\\
+	$(\vec{a} + 2 \vec{b}, 3 \vec{a} - \vec{b}) \neq 0 \Rightarrow \vec{a} + 2 \vec{b} \not\perp 3 \vec{a} - \vec{b}$.
 \end{example}
 
 	Розглянемо вектори $\vec{a} = (a_1, a_2, a_3), \vec{b} = (b_1, b_2, b_3)$, які розкладені за деяким базисом $\{\vec{p}, \vec{q}, \vec{r}\}$. Знайдемо скалярний добуток цих векторів $\vec{a},\vec{b}$:\\
@@ -748,7 +773,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 	
 \begin{definition}
 	Ортогональний базис, в якому довжина векторів одинична, називається \textbf{ортонормальним}.\\
-	Позначення: $\{\vec{i}, \vec{j}, \vec{k}\}$.
+	Для такого базису вектори по-особливому позначені: $\{\vec{i}, \vec{j}, \vec{k}\}$.
 \end{definition}
 
 \begin{remark}
@@ -757,18 +782,16 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 
 	Остаточно отримаємо:
 \begin{proposition}
-	Для векторів $\vec{a} = (a_1, a_2, a_3), \vec{b} = (b_1, b_2, b_3)$ в ортонормованому базисі скалярний добуток рахується таким чином:\\
-	$(\vec{a}, \vec{b}) = a_1 b_1 + a_2 b_2 + a_3 b_3$.
+	Для векторів $\vec{a} = (a_1, a_2, a_3), \vec{b} = (b_1, b_2, b_3)$ в ортонормованому базисі скалярний добуток рахується таким чином: $(\vec{a}, \vec{b}) = a_1 b_1 + a_2 b_2 + a_3 b_3$.
 \end{proposition}
 
 \begin{corollary}
-	Для векторів $\vec{a} = (a_1, a_2, a_3)$ в ортонормованому базисі\\
-	$|\vec{a}| = \sqrt{a_1^2 + a_2^2 + a_3^2}$.
+	Для векторів $\vec{a} = (a_1, a_2, a_3)$ в ортонормованому базисі $|\vec{a}| = \sqrt{a_1^2 + a_2^2 + a_3^2}$.
 \end{corollary}
 
 \subsection{Векторний добуток векторів}
 \begin{definition}
-	Упорядковану трійку некомпланарних векторів $\vec{a}, \vec{b}, \vec{c}$ ми будемо називати \textbf{правою}, якщо сісти на кінець вектора $\vec{c}$, взяти менший з кутів між $\vec{a}$ та $\vec{b}$ та спостерігати поворот від $\vec{a}$ до $\vec{b}$ \textit{проти годинникової} стрілки
+	Упорядковану трійку некомпланарних векторів $\vec{a}, \vec{b}, \vec{c}$ ми будемо називати \textbf{правою}, якщо сісти на кінець вектора $\vec{c}$, взяти менший з кутів між $\vec{a}$ та $\vec{b}$ та спостерігати поворот від $\vec{a}$ до $\vec{b}$ \textit{проти годинникової} стрілки.
 
 \begin{figure}[H]
 \centering
@@ -797,18 +820,22 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \end{definition}
 
 \begin{proposition}[Властивості]
-	Задано праву трійку $\{\vec{a}, \vec{b}, \vec{c}\}$. Тоді:\\
-	1) $\{\vec{b}, \vec{c}, \vec{a}\}, \{\vec{c}, \vec{a}, \vec{b}\}$ - права трійка;\\
-	2) $\{\vec{a}, \vec{b}, -\vec{c}\}, \{-\vec{a}, \vec{b}, -\vec{c}\}, \{\vec{a}, -\vec{b}, -\vec{c}\}$ - ліва трійка;\\
-	3) $\{\vec{b}, \vec{a}, \vec{c}\}, \{\vec{a}, \vec{c}, \vec{b}\}, \{\vec{c}, \vec{b}, \vec{a}\}$ - ліва трійка.\\
+	Задано праву трійку $\{\vec{a}, \vec{b}, \vec{c}\}$. Тоді:
+	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+	\item $\{\vec{b}, \vec{c}, \vec{a}\}, \{\vec{c}, \vec{a}, \vec{b}\}$ -- права трійка;
+	\item $\{\vec{a}, \vec{b}, -\vec{c}\}, \{-\vec{a}, \vec{b}, -\vec{c}\}, \{\vec{a}, -\vec{b}, -\vec{c}\}$ -- ліва трійка;
+	\item $\{\vec{b}, \vec{a}, \vec{c}\}, \{\vec{a}, \vec{c}, \vec{b}\}, \{\vec{c}, \vec{b}, \vec{a}\}$ -- ліва трійка.
+	\end{enumerate}
 	\textit{Випливає з геометричних міркувань.}
 \end{proposition}
 
 \begin{definition}
-	\textbf{Векторним добутком векторів $\vec{a}, \vec{b}$} називають вектор $\vec{c}$, який:\\
-	1) $|\vec{c}| = |\vec{a}| |\vec{b}| \sin \alpha$, $\alpha$ - кут між вектором $\vec{a}$ та $\vec{b}$;\\
-	2) $\vec{c} \perp \vec{a}, \vec{c} \perp \vec{b}$;\\
-	3) $\{\vec{a}, \vec{b}, \vec{c}\}$ - права трійка.
+	\textbf{Векторним добутком векторів $\vec{a}, \vec{b}$} називають вектор $\vec{c}$, для якого
+	\begin{align*}
+	\text{1) } |\vec{c}| = |\vec{a}| |\vec{b}| \sin \alpha \text{, де $\alpha$ -- кут між векторами $\vec{a},\vec{b}$}; \\
+	\text{2) }  \vec{c} \perp \vec{a}, \vec{c} \perp \vec{b}; \\
+	\text{3) } \{\vec{a}, \vec{b}, \vec{c}\} \text{ -- права трійка}.
+	\end{align*}
 \begin{figure}[H]
 \centering
 \tdplotsetmaincoords{60}{120}
