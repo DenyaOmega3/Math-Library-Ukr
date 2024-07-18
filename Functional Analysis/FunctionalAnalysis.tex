@@ -14,7 +14,7 @@
 \usepackage{physics}
 \usepackage[unicode]{hyperref}
 \usepgfplotslibrary{polar}
-\usepackage{ifthen}
+\usepackage{xifthen}
 \usepackage{enumitem}
 \usetikzlibrary{spy}
 \usepackage{bbm}
@@ -72,7 +72,12 @@
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \newcommand{\toweak}{\overset{w}{\to}}
+\newcommand{\tostrong}{\overset{s}{\to}}
 \newcommand{\toweakstar}{\overset{w^*}{\to}}
+\newcommand{\sequence}[2][]{\left({#2}\right)_{n=\ifthenelse{\isempty{#1}}{1}{#1}}^{\infty}}
+%first argument is optional: where to start sequence
+%second argument is mandatory: which sequence
+
 \DeclareMathOperator{\ort}{ort}
 \DeclareMathOperator{\pr}{pr}
 
@@ -95,6 +100,8 @@
 
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\linspan}{span}
+\DeclareMathOperator{\sign}{sgn}
+\DeclareMathOperator{\diag}{diag}
 
 %delete
 
@@ -794,6 +801,7 @@ $f$ -- неперервне $\iff \forall U$ -- відкрита в $Y: f^{-1}(U
 \end{proposition}
 
 \begin{proposition}
+\label{continuity_of_metric_function_of_one_argument}
 Задано $(X,\rho)$ -- метричний простір та зафіксуємо $x_0 \in X$. Тоді функція $f(x) = \rho(x,x_0)$, де $f \colon X \to \mathbb{R}$, -- неперервна на $X$.
 \end{proposition}
 
@@ -801,20 +809,6 @@ $f$ -- неперервне $\iff \forall U$ -- відкрита в $Y: f^{-1}(U
 Дійсно, нехай $y_0 \in X$. Припустимо, що $\{y_n\}$ така, що  $y_n \to y_0$. Хочемо $f(y_n) \to f(y_0)$. Справді,\\
 $|f(y_n) - f(y_0)| = |\rho(y_n,x_0) - \rho(y_0,x_0)| \leq |\rho(y_n,y_0)| \to 0$.\\
 \textit{Для $\mathbb{R}$ береться стандартна метрика, якщо нічого іншого не вказується зазвичай.}
-\end{proof}
-
-\begin{corollary}
-Задано $(L, \|\cdot \|)$ -- нормований простір. Тоді норма $\| \cdot \| \colon L \to \mathbb{R}$ -- неперервна.\\
-\textit{Вказівка: оскільки $\rho(x,y) = \|x-y\|$, то звідси $\|x\| = \rho(x,0)$.}
-\end{corollary}
-
-\begin{corollary}
-Задано $(E, (\cdot,\cdot))$ -- евклідів простір. Тоді при фіксованому $x_0 \in E$ маємо $(x,x_0)$ -- неперервне відображення.
-\end{corollary}
-
-\begin{proof}
-Нехай $\{y_n\}$ задана так, що $y_n \to y_0$. Хочемо довести, що $(y_n,x_0) \to (y_0,x_0)$.\\
-$|(y_n,x_0) - (y_0,x_0)| = |(y-y_0,x_0)| \leq \sqrt{\|y-y_0\|} \sqrt{\|x_0\|} \to 0$, оскільки $\| \cdot \|$ -- неперервне.
 \end{proof}
 
 \begin{definition}
@@ -849,7 +843,7 @@ $0 < \rho(a,b) = \rho(f(a),f(b)) \leq q \cdot \rho(a,b) < \rho(a,b)$.
 \end{proof}
 
 \begin{remark}
-Насправді, в теоремі Банаха достатньо вимагати, щоб саме $f^n \overset{\text{def.}}{=} \underset{n\text{ разів}}{f \circ \dots \circ f}$ було стиском, а не відображення $f$.\\
+Насправді, в теоремі Банаха досить вимагати, щоб саме $f^n \overset{\text{def.}}{=} \underset{n\text{ разів}}{f \circ \dots \circ f}$ було стиском, а не відображення $f$.\\
 Дійсно, за теоремою Банаха, $f^n$ матиме єдину нерухому точку $a$, тобто $f^n(a) = a$. Тоді точка $f(a)$ буде теж нерухомою для $f^n$, оскільки $f^n(f(a)) = f(f^n(a)) = f(a)$. Але за єдиністю, $f(a) = a$ -- дві нерухомі мають збігатися. Єдиність нерухомої точки для $f$ доводиться неважко.
 \end{remark}
 
@@ -1036,6 +1030,39 @@ $\max\{a,b\} = \dfrac{1}{2}\left(a+b+|a-b|\right) \qquad \min\{a,b\} = \dfrac{1}
 Оскільки $g_x - f \in C(X)$, то за означенням, $\exists \delta_x > 0: \forall y \in B(x,\delta_x): g_x(y) - f(y) > - \varepsilon$. Сім'я множин $\{B(x,\delta_x) \mid x \in X \}$ -- відкрите покриття компактної множини $X$. Отже ми можемо взяти скінченне підпокриття $\{B(x_k,\delta_{x_k} \mid k = \overline{1,m}\}$.\\
 Визначимо функцію $h(y) = \displaystyle\max_{1 \leq k \leq m} g_{x_k}(y), y \in X$. Тоді $h \in \bar{A}$, причому також $\forall y \in X: \\ f(y) - \varepsilon \leq h(y) \leq f(y) + \varepsilon$. Для будь-якої функції $f \in C(X)$ ми знайшли $h \in A$, для якої $\|h - f\| < \varepsilon$. Отже, $\bar{A} = C(X)$.
 \end{proof}
+
+\subsection{Теорема Арцела-Асколі}
+\begin{definition}
+Сім'я функції $\mathcal{F} \subset C(X)$ називається \textbf{рівномірно обмеженою}, якщо
+\begin{align*}
+\exists M > 0: \forall x \in X, \forall f \in \mathcal{F}: |f(x)| \leq M
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Сім'я функції $\mathcal{F} \subset C(X)$ називається \textbf{одностайно неперервними}, якщо
+\begin{align*}
+\forall \varepsilon > 0: \exists \delta > 0: \forall f \in \mathcal{F}, \forall x,y \in X: \rho(x,y) < \delta \implies |f(x) - f(y)| < \varepsilon
+\end{align*}
+\end{definition}
+
+\begin{theorem}[Теорема Арцела-Асколі]
+Задано $X$ -- компактний метричний простір. Нехай послідовність $\sequence{f_n} \subset C(X)$ рівномірно обмежена та одностайно неперервна. Тоді $\exists \sequence{f_{n_k}}$ -- рівномірно збіжна підпослідовність.
+\end{theorem}
+
+\begin{proof}
+Оскільки $X$ -- компакт, то $X$ -- сепарабельний автоматично (TODO: подивитися, чи є таке твердження). Цю скрізь щільну зліченну множину позначу за $S = \{x_1,x_2,\dots\}$.\\
+Розглянемо послідовність $\sequence{f_n(x_1)}$, яка обмежена. Тоді за теоремою Бользано-Ваєрштраса, існує збіжна підпослідовність $\sequence{f_{1,n}(x_1)}$.\\
+Розглянемо послідовність $\sequence{f_{1,n}(x_2)}$, яка обмежена. Аналогічно існує збіжна підпослідовність $\sequence{f_{2,n}(x_2)}$.\\
+\vdots \\
+Тепер розглянемо діагональну послідовність $\sequence{f_{n,n}}$. Зауважимо, що вона збігається в кожній точці $x \in S$. Дійсно, $\sequence{f_{n,n}} \subset \sequence{f_{k,n}}$, а остання послідовність збігається в точці $x_k$.
+\bigskip \\
+Для зручності цю послідовність перезпозначу за $\sequence{f_n}$. Доведемо, що вона рівномірно фундаментальна, внаслідок чого буде рівномірно збіжною. За одностайною неперервністю, $\exists \delta > 0: \forall x,y, \forall n: \rho(x,y) < \delta \implies |g_n(x) - g_n(y)| < \dfrac{\varepsilon}{3}$.\\
+Нехай $x \in X$ та $M > \dfrac{1}{\delta}$. Розглянемо $n,m > M$, тоді\\
+$|g_n(x) - g_m(x)| \leq |g_n(x) - g_n(s)| + |g_n(s) - g_m(s)| + |g_m(s) - g_m(x)| < 3 \cdot \dfrac{\varepsilon}{3} = \varepsilon$.\\
+У цьому випадку $s \in S$ така точка, що $\rho(x,s) < \delta$. Ми можемо це знайти в силу скрізь щільності.
+(TODO: добити).
+\end{proof}
 \newpage
 
 \section{Початок функціонального аналізу}
@@ -1049,7 +1076,7 @@ $\max\{a,b\} = \dfrac{1}{2}\left(a+b+|a-b|\right) \qquad \min\{a,b\} = \dfrac{1}
 \text{3) } \forall x,y \in L: \|x+y\| \leq \|x\| + \|y\|
 \end{align*}
 Тоді пару $(L, \|\cdot \|)$ назвемо \textbf{нормованим простором}.\\
-Функцію $\| \cdot \| \colon L \to \mathbb{R}$ ще називають \textbf{переднормою}, якщо не виконується умова $\|x\| = 0 \iff x = 0$.
+Функцію $\| \cdot \| \colon L \to \mathbb{R}$ ще називають \textbf{переднормою}, якщо всі умови виконуються, окрім умови $\|x\| = 0 \iff x = 0$.
 \end{definition}
 
 \begin{proposition}
@@ -1071,13 +1098,13 @@ $\max\{a,b\} = \dfrac{1}{2}\left(a+b+|a-b|\right) \qquad \min\{a,b\} = \dfrac{1}
 \end{corollary}
 
 \begin{example}
-Зокрема дані простори будуть нормованими:
-\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $\mathbb{R}$, \qquad $\| x\| = |x|$;
-\item $\mathbb{R}^n$, \qquad $\| \vec{x} \| = \sqrt{x_1^2 + \dots + x_n^2}$ або навіть $\| \vec{x} \| = |x_1| + \dots + |x_n|$;
-\item $\mathbb{C}([a,b])$, \qquad $\displaystyle \| f\| = \max_{t \in [a,b]} |f(t)|$;
-\item $L_p(X,\lambda)$, \qquad $\|f\|_p = \displaystyle\left(\int_X |f|^p\,d\lambda\right)^{\frac{1}{p}}$.
-\end{enumerate}
+Зокрема дані простори будуть нормованими:\\
+\begin{tabular}{rll}
+1) & $\mathbb{R}$, & $\| x\| = |x|$;\\
+2) & $\mathbb{R}^n$, & $\| \vec{x} \| = \sqrt{x_1^2 + \dots + x_n^2}$ або навіть $\| \vec{x} \| = |x_1| + \dots + |x_n|$;\\
+3) & $C([a,b])$ & $\displaystyle \| f\| = \max_{t \in [a,b]} |f(t)|$;\\
+4) & $L_p(X,\lambda)$, & $\|f\|_p = \displaystyle\left(\int_X |f|^p\,d\lambda\right)^{\frac{1}{p}}$.
+\end{tabular}\\
 Тому всі вони будуть автоматично метричними просторами із метрикою, що вище задана.
 \end{example}
 
@@ -1107,6 +1134,11 @@ $\|x_n - x\|_2^2 = \displaystyle\int_{[0,1]} |x_n-x|^2\,d\lambda_1 = \int_0^1 |x
 Отже, $\{x_n\}$ в просторі $C([0,1])$ із нормою $L_2$ збігається до точки $x \notin C([0,1])$, але при цьому буде граничною для $C([0,1])$. Тобто $C([0,1])$ не буде замкненим, тож $C([0,1])$ -- не повний, або не банахів.
 \end{example}
 
+\begin{proposition}
+Задано $(L, \|\cdot \|)$ -- нормований простір. Тоді норма $\| \cdot \| \colon L \to \mathbb{R}$ -- неперервна.\\
+\textit{Вказівка: оскільки $\rho(x,y) = \|x-y\|$, то звідси $\|x\| = \rho(x,0)$. Далі \prpref{continuity_of_metric_function_of_one_argument}.}
+\end{proposition}
+
 \begin{definition}
 Задані $(X,\|\cdot\|_1)$ та $(X,\|\cdot\|_2)$ -- два нормовані простори.\\
 Ці два нормовані простори називаються \textbf{ізометричними}, якщо
@@ -1124,6 +1156,62 @@ $\|x_n - x\|_2^2 = \displaystyle\int_{[0,1]} |x_n-x|^2\,d\lambda_1 = \int_0^1 |x
 $(L,\|\cdot \|)$ -- банахів $\iff$ виконується умова Кантора (тобто будь-яка послідовність замкнених куль, що стягується, має непорожній перетин).\\
 Так ось, в нормованому просторі не обов'язково вимагати умову $r_n \to 0$.
 \end{remark}
+
+\begin{definition}
+Задано $(L, \|\cdot\|)$ -- нормований простір та $\sequence{x_n} \subset L$.\\
+Вираз $S_k = \displaystyle\sum_{n=1}^k x_n$ називають \textbf{частковою сумою}. Припустимо, що послідовність часткових сум збігається -- тоді границю позначають за ряд $\displaystyle\sum_{n=1}^\infty x_n$, а сам ряд називають \textbf{збіжним}.
+\end{definition}
+
+\subsection{Коротко про топологічні векторні простори}
+\begin{definition}
+Векторний простір $E$ називається \textbf{топологічним}, якщо існує на ній така топологія, що
+\begin{align*}
++ \colon E \times E \to E \text{ -- неперервна операція}; \\
+\cdot \lambda \colon \mathbb{R} (\mathbb{C}) \times E \to E \text{ -- неперервна операція.}
+\end{align*}
+\noindent
+На множині $\mathbb{R}, \mathbb{C}$ розглядається стандартна топологія.
+\end{definition}
+\noindent
+Тимчасово позначу два відображення по-нормальному, маємо $\text{add} \colon E \times E \to E$ та $\text{scalar} \colon \mathbb{R} \times E \to E$.
+
+\begin{theorem}
+Задано $L$ -- нормований простір. Тоді $L$ -- топологічний векторний простір.
+\end{theorem}
+
+\begin{proof}
+Оскільки $L$ -- нормований простір, то він метричний, а кожний метричний простір індукує топологію. Оберемо самю ту топологію $\tau_{\| \cdot \|}$ та доведемо, що на ній лінійні операції -- неперервні.\\
+Оберемо будь-яку точку $(x,y) \in L \times L$ та покажемо неперервність операції $+$ на неї.\\
+Нехай $B(x+y;r)$ -- окіл $x+y$. Хочемо довести, що існує окіл $U$ точки $(x,y)$, щоб виконувалось $+(U) \subset B(x+y;r)$. Маємо $z_1+z_2 \in +(U)$, тоді хочемо $z_1+z_2 \in B(x+y;r)$. Тобто потрібно $\|z_1 + z_2 - x - y\| \leq \|z_1 - x\| + \|z_2 - y\| < r$. Якщо розглядати точки $z_1 \in B\left(x; \dfrac{r}{2}\right)$ та $z_2 \in B\left(y; \dfrac{r}{2}\right)$, то отримаємо бажане. Можемо покласти $U = B\left(x; \dfrac{r}{2}\right) \times B\left(y; \dfrac{r}{2}\right)$.\\
+Якщо взяти інший окіл $V$ точки $x+y$, то ми можемо охопити кулею $B(x+y;r) \supset V$.\\
+Отже, $+$ -- неперервна операція.
+\bigskip \\
+Оберемо будь-яку точку $(\lambda,x) \in \mathbb{R} \times L$ та покажемо неперервність операції $\cdot \lambda$ на неї.\\
+Нехай $B(\lambda x;r)$ -- окіл точки $\lambda x$. Хочемо довести, що існує окіл $U$ точки $(\lambda,x)$, щоб виконувалось $\cdot \lambda(U) \subset B(\lambda x;r)$. Маємо $\mu z \in \cdot \lambda(U)$, тоді хочемо $\mu z \in B(\lambda x;r)$. Тобто потрібно\\
+$\| \lambda x - \mu z \| \leq |\lambda - \mu| \|x\| + |\mu| \|x-z\|$\\
+(TODO: додумати)
+\end{proof}
+
+\subsection{Факторизація напівнорми}
+Задано $L$ -- простір із напівнормою $\| \cdot \|$. Позначимо $M = \{x \in L: \|x\| = 0\}$.
+
+\begin{lemma}
+$M$ -- підпростір векторного простору $L$.
+\end{lemma}
+
+\noindent
+Як було в лінійній алгебрі, встановимо відношення еквівалентності $x \sim y \iff x - y \in M$ на векторному просторі $L$. Ми вже знаємо, що $L/_M$ буде векторним простором, де задаються операції так:\\
+$(x_1+M) + (x_2+M) = (x_1+x_2) + M$;\\
+$\lambda(x+M) = \lambda x + M$.\\
+Тепер уведемо функцію $\| \cdot\|_{L/_M}$ ось таким чином: $\| x+M \|_{L/_M} \overset{\text{def.}}{=} \|x\|_L$. Доведемо, що це буде задавати норму на $L/_M$.\\
+Спочатку доведемо коректність означення. Дійсно, нехай $x+M = y+M$. Тоді звідси $x-y \in M$. Зауважимо, що\\
+$| \|x \|_L - \|y\|_L | \leq \|x - y \|_L = 0 \implies \|x\|_L = \|y\|_L \implies \|x+M\|_{L/_M} = \|y+M\|_{L/_M}$.\\
+Щодо властивостей номри. Це вже точно напівнома. Тобто залишилося довести, що $\|x+M\|_{L/_M} = 0 \iff x+M = M$.\\
+$\|x+M\|_{L/_M} = 0 \implies \|x\| = 0 \implies x \in M \implies x+M=M$.
+
+\begin{example}
+Маємо простір $C^1([a,b])$ із напівнормою $\|x\| = \displaystyle\max_{t \in [a,b]} |x'(t)|$. Зауважимо, що лише функції $x(t) = const$ задовольняють умові $\|x\| = 0$. Тобто в нашому випадку підпростір $M = \{x \in C^1([a,b]) : \|x\| = 0\} = \{c \mid c \in \mathbb{R}\} = \mathbb{R}$. Тоді звідси маємо факторпростір $C^1([a,b])/_{\mathbb{R}}$ -- функції, що рівні з точністю до константи. 
+\end{example}
 
 \subsection{Обмежені та неперервні лінійні оператори}
 \begin{definition}
@@ -1243,38 +1331,49 @@ $\|A\| \geq 0$ -- зрозуміло. Також якщо $\|A\| = 0$, то зв
 \end{proof}
 
 \begin{theorem}
-Простір $\mathcal{B}(X,Y)$ буде повним, якщо $Y$ -- повний.
+Простір $\mathcal{B}(X,Y)$ буде банаховим, якщо $Y$ -- банахів.
 \end{theorem}
 
 \begin{proof}
-Нехай $\{A_n, n \geq 1\} \subset \mathcal{B}(X,Y)$ -- фундаментальна послідовність. Зауважимо, що $\{A_nx, n \geq 1\} \subset Y$ -- фундаментальна також при всіх $x \in X$. Із фундаментальності $\{A_n\}$ маємо, що $\forall \varepsilon > 0: \exists N: \forall n,m \geq N: \|A_n-A_m\| < \varepsilon$, але тоді $\forall x \in X: \|(A_n-A_m)x\| \leq \|A_n-A_m\| \|x\| < \varepsilon \|x\|$, звідси й випливає фундаментальність.\\
-Тоді при кожному $x \in X$ існує $\displaystyle\lim_{n \to \infty} A_n x = z_x$. Ми можемо визначити як раз новий оператор $A \colon X \to Y$, де $x \mapsto z_x$ (границя єдина, тому визначення адекватне). Залишилися три етапи доведення.\\
+Нехай $\sequence{A_n} \subset \mathcal{B}(X,Y)$ -- фундаментальна послідовність.\\ Зауважимо, що $\sequence{A_n x} \subset Y$ -- фундаментальна також при всіх $x \in X$. Дійсно, із фундаментальності $\sequence{A_n}$ маємо, що $\forall \varepsilon > 0: \exists N: \forall n,m \geq N: \|A_n-A_m\| < \varepsilon$, але тоді $\forall x \in X: \|(A_n-A_m)x\| \leq \|A_n-A_m\| \|x\| < \varepsilon \|x\|$, звідси й випливає фундаментальність.\\
+Тоді при кожному $x \in X$ існує $\displaystyle\lim_{n \to \infty} A_n x = z_x$. Ми можемо визначити як раз новий оператор $A \colon X \to Y$, де $Ax = z_x$ (границя єдина, тому визначення адекватне). Залишилися три етапи.\\
 I. \textit{Лінійність}. \quad Дійсно, нехай $x,y \in X$ та $\alpha,\beta \in \mathbb{R}$, тоді маємо\\
 $A(\alpha x + \beta y) = \displaystyle\lim_{n \to \infty} A_n(\alpha x + \beta y) = \lim_{n \to \infty} (\alpha A_nx + \beta A_n y) = \alpha \lim_{n \to \infty} A_n x + \beta \lim_{n \to \infty} A_n y = \alpha Ax + \beta Ay$.\\
-II. \textit{Обмеженість}. \quad Оскільки $\{A_n\}$ -- фундаментальна, то $\{A_n\}$ -- обмежена: $\exists C > 0: \forall n \geq 1: \|A_n\| \leq C$. Тоді в силу неперервності норми матимемо $\|Ax\| = \displaystyle\lim_{n \to \infty} \|A_nx\| \leq C \|x\|$.\\
+II. \textit{Обмеженість}. \quad Оскільки $\sequence{A_n}$ -- фундаментальна, то $\sequence{A_n}$ -- обмежена, тобто $\exists C > 0: \forall n \geq 1: \|A_n\| \leq C$. Тоді в силу неперервності норми матимемо $\|Ax\| = \displaystyle\lim_{n \to \infty} \|A_nx\| \leq C \|x\|$.\\
 III. \textit{$A_n \to A$}. \quad Згадаємо нерівність $\|(A_n-A_m)x\| < \varepsilon \|x\|$ при всіх $x \in X$, при всіх $\varepsilon > 0$ та $n,m \geq N$. Спрямуємо $m \to \infty$, тоді отримаємо $\|(A_n-A)x\| \leq \varepsilon \|x\|$, тому й $\|A_n-A\| \leq \varepsilon < 2\varepsilon$.
 \end{proof}
 
+\begin{proposition}
+Нехай $A,B \in \mathcal{B}(X,Y)$. Тоді композиція $AB \in \mathcal{B}(X,Y)$.
+\end{proposition}
+
+\begin{proof}
+Можна, звісно, було опиратися на композицію неперервних відображень. Але доведемо неперервність інакше.\\
+$\|BA x\| \leq \|B\| \|Ax\| \leq \|B\| \|A\| \|x\|$.\\
+Звідси, окрім обмеженості, ми довели оцінку $\|BA\| \leq \|B\| \cdot \|A\|$.
+\end{proof}
+
 \subsection{Продовження неперервних операторів}
-Задані $X,Y$ -- нормовані простори, $X_0 \subset X$ та $A \colon X_0 \to Y$ -- обмежений оператор. Питання полягає в тому, чи існує розширення $\tilde{A} \colon X \to Y$ таким чином, що $\tilde{A}|_{X_0} = A$. Причому нас буде цікавити таке розширення, що $\|\tilde{A}\| = \|A\|$.
+Задані $X,Y$ -- нормовані простори, $X_0 \subset X$ та $A \in \mathcal{B}(X_0,Y)$. Питання полягає в тому, чи існує розширення $\tilde{A} \in \mathcal{B}(X,Y)$ оператора $A$, тобто $\tilde{A}|_{X_0} = A$. Причому нас буде цікавити таке розширення, що $\|\tilde{A}\| = \|A\|$.
 
 \begin{remark}
-Просто якщо таке розширення допустиме, то звідси $\|\tilde{A}\| \geq \|A\|$. Дійсно,\\
+Якщо таке розширення допустиме, то вже звідси $\|\tilde{A}\| \geq \|A\|$. Дійсно,\\
 $\|\tilde{A}\| = \displaystyle\sup_{x \in X \setminus \{0\}} \dfrac{\|\tilde{A}x\|}{\|x\|} \geq \sup_{x \in X_0 \setminus \{0\}} \dfrac{\|\tilde{A}x\|}{\|x\|} = \sup_{x \in X_0 \setminus \{0\}} \dfrac{\|Ax\|}{\|x\|} = \|A\|$.
 \end{remark}
 
 \begin{proposition}
-Задані $X,Y$ -- відповідно нормований та банахів простори та $X_0 \subset X$ -- щільний підпростір. Тоді для кожного обмеженого оператору $A \colon X_0 \to Y$ існує єдиний розширений обмежений оператор $\tilde{A} \colon X \to Y$, для якого $\tilde{A}|_{X_0} = A$ та при цьому $\|\tilde{A}\| = \|A\|$.
+Задані $X,Y$ -- відповідно нормований та банахів простори та $X_0 \subset X$ -- щільний підпростір. Тоді для кожного $A \in \mathcal{B}(X_0,Y)$ існує єдиний розширений оператор $\tilde{A} \in \mathcal{B}(X,Y)$, тобто $\tilde{A}|_{X_0} = A$ та при цьому $\|\tilde{A}\| = \|A\|$.\\
+\textit{Це твердежння описує так зване неперервне продовження оператора.}
 \end{proposition}
 
 \begin{proof}
-Нехай є послідовність $\{x_n\} \subset X_0$, де $x_n \to x \in X$. Зауважимо, що тоді в цьому випадку $\{Ax_n\}$ -- фундаментальна. У силу банаховості $\{Ax_n\}$ буде збіжним. Тож визначимо оператор $\tilde{A}x = \displaystyle\lim_{n \to \infty} Ax_n$.\\
+Нехай є послідовність $\sequence{x_n} \subset X_0$, де $x_n \to x \in X$. Зауважимо, що тоді в цьому випадку $\sequence{Ax_n}$ -- фундаментальна. У силу банаховості $\sequence{Ax_n}$ буде збіжним. Тож визначимо оператор $\tilde{A}x = \displaystyle\lim_{n \to \infty} Ax_n$.\\
 I. \textit{$\tilde{A}$ визначений коректно}.\\
-Нехай є дві послідовності $\{x_n\},\{y_n\}$, для яких $x_n \to x,\ y_n \to x$. Значить, тоді\\
+Нехай є дві послідовності $\sequence{x_n},\sequence{y_n}$, для яких $x_n \to x,\ y_n \to x$. Значить, тоді\\
 $\|Ax_n - Ay_n\| = \|A(x_n-y_n)\| \leq \|A\| \|x_n-y_n\| \to 0 \implies \displaystyle\lim_{n \to \infty} Ax_n = \lim_{n \to \infty} Ay_n$.
 \bigskip \\
 II. \textit{$\tilde{A}$ розширює оператор $A$}.\\
-Справді, нехай $x \in X_0$. Оберемо стаціонарну послідовність $\{x\} \subset X_0$, де $x \to x$. Тоді $\tilde{A}x = \displaystyle\lim_{n \to \infty} Ax = Ax$. Отже, звідси $\tilde{A}|_{X_0} = A$.
+Справді, нехай $x \in X_0$. Оберемо стаціонарну послідовність $\sequence{x} \subset X_0$, де $x \to x$. Тоді $\tilde{A}x = \displaystyle\lim_{n \to \infty} Ax = Ax$. Отже, звідси $\tilde{A}|_{X_0} = A$.
 \bigskip \\
 III. \textit{$\tilde{A}$ лінійний оператор}.\\
 Нехай $x,y \in E$ та $\alpha,\beta \in \mathbb{R}$. Тоді звідси\\
@@ -1282,7 +1381,7 @@ $A(\alpha x + \beta y) = \displaystyle\lim_{n \to \infty} A(\alpha x_n + \beta y
 \bigskip \\
 \iffalse
 IV. \textit{$\tilde{A}$ -- обмежений оператор}.\\
-Оберемо послідовність $\{x_n\} \subset X$ так, що $x_n \to 0$. Тоді\\
+Оберемо послідовність $\sequence{x_n} \subset X$ так, що $x_n \to 0$. Тоді\\
 $\|\tilde{A}x_n\| = \displaystyle \| \lim_{m \to \infty} A x_n^{(m)} \| = \lim_{m \to \infty} \|A x_n^{(m)}\| \leq \lim_{m \to \infty} \|A\| \|x_n^{(m)}\| = \|A\| \| \lim_{m \to \infty} x_n^{(m)} \| = \|A\| \|x_n\| \to 0$ при $n \to \infty \implies \tilde{A}x_n \to A0$.
 \bigskip \\
 \fi
@@ -1290,13 +1389,13 @@ IV. $\|\tilde{A}\| = \|A\|$.\\
 Оберемо $X_0 \ni x_n \to x \in X$. Оскільки $A$ -- обмежений, то $\|Ax_n\| \leq \|A\| \|x_n\|$. Спрямовуючи $n \to \infty$, ми отримаємо $\|\tilde{A}x\| \le \|A\| \|x\|$. Автоматично довели, що $\tilde{A}$ -- обмежений оператор. Раз це виконується для всіх $x \in E$, то отримаємо $\|\tilde{A}\|= \displaystyle\sup_{\|x\| = 1} \|\tilde{A}x\| \leq \sup_{\|x\| = 1} \|A\| \|x\| = \|A\|$. Тобто звідси $\|\tilde{A}\| \leq \|A\|$. Зважаючи на зауваження вище, маємо $\|\tilde{A}\| = \|A\|$.
 \bigskip \\
 V. \textit{$\tilde{A}$ -- єдине розширення}.\\
-!Припустимо, що існує інший оператор $\tilde{\tilde{A}}$, яке також є розширенням $A$ з усіма умовами, що задані в твердженні. Маємо $x \in X$, тож існує послідовність $\{x_n\} \subset X_0, x_n \to x$. Тоді\\
+!Припустимо, що існує інший оператор $\tilde{\tilde{A}}$, яке також є розширенням $A$ з усіма умовами, що задані в твердженні. Маємо $x \in X$, тож існує послідовність $\sequence{x_n} \subset X_0, x_n \to x$. Тоді\\
 $\tilde{\tilde{A}}x \overset{\tilde{\tilde{A}} \text{ -- обмежений}}{=} \displaystyle\lim_{n \to \infty} \tilde{\tilde{A}}x_n = \lim_{n \to \infty} Ax_n \overset{\text{def. } \tilde{A}}{=} \tilde{A}x$. Суперечність!
 \end{proof}
 
 %спочатку запишу теорему для окремого випадку
 \begin{theorem}[Теорема Гана-Банаха]
-Задано $E$ -- нормований простір та $G \subset E$ -- підпростір. Тоді для кожного обмеженого функціонала $l \colon G \to \mathbb{R}$ існує продовження $\tilde{l} \colon E \to \mathbb{R}$ так, що $\tilde{l}|_G = l,\ \| \tilde{l} \| = \|l\|$.
+Задано $E$ -- нормований простір та $G \subset E$ -- підпростір. Тоді для кожного функціонала $l \in G'$ існує продовження $\tilde{l} \in E'$, тобто $\tilde{l}|_G = l$, причому $\| \tilde{l} \| = \|l\|$.
 \end{theorem}
 
 \begin{proof}
@@ -1383,9 +1482,10 @@ $|L(x)| = e^{-i \varphi} L(x) = L(e^{-i \varphi} x) = M(e^{-i \varphi} x) = |M(e
 
 
 \subsection{Деякі наслідки з теореми Гана-Банаха}
-\begin{theorem}
-Нехай $E$ -- лінійний нормований простір та $G \subset E$ -- підпростір. Тоді для будь-якого вектора $y \notin G$ існує функціонал $l$ на $E$, для якого $\|l\| = 1,\ l(y) = \rho(y,G),\ l|_G = 0$.
-\end{theorem}
+\begin{corollary}
+Нехай $E$ -- лінійний нормований простір та $G \subset E$ -- підпростір. Тоді для будь-якого вектора $y \notin G$ існує функціонал $l \in E'$, для якого $\|l\| = 1,\ l(y) = \rho(y,G),\ l|_G = 0$.\\
+\textit{Цей наслідок про існування функціоналу, що поводиться як обчислення відстані від елемента $y$ до підпростору $G$. Ми можемо підібрати такий, щоб норма була 'нормальною'.}
+\end{corollary}
 
 \begin{proof}
 На підпросторі $F = \linspan\{G \cup \{y\}\}$ визначимо функціонал $l_0$ таким чином:\\
@@ -1396,13 +1496,14 @@ $\|l_0\| = \displaystyle\sup \left\{ \dfrac{|l(g+\lambda y)|}{\|g+\lambda y\|} \
 \end{proof}
 
 \begin{corollary}
-Для кожного $y \in E \setminus \{0\}$ існує функціонал на $E$, що $\|l\| = 1,\ l(y) = \|y\|$.\\
-\textit{Вказівка: $G = \{0\}$}.
+Для кожного $y \in E \setminus \{0\}$ існує функціонал $l \in E'$, що $\|l\| = 1,\ l(y) = \|y\|$.\\
+\textit{Цей наслідок про існування функціоналу, що поводиться як знаходження норми.}\\
+\textit{Вказівка: $G = \{0\}$ до попереднього наслідку}.
 \end{corollary}
 
 \begin{corollary}
 Лінійні непреревні функціонали розділяють точки нормованого простора $E$.\\
-Іншими словами, $\forall x_1,y_2 \in E: x_1 \neq x_2: \exists l$ -- функціонал на $E: l(x_1) \neq l(x_2)$.\\
+Іншими словами, $\forall x_1,x_2 \in E: x_1 \neq x_2: \exists l \in E': l(x_1) \neq l(x_2)$.\\
 \textit{Вказівка: попередній наслідок, $y = x_1 - x_2 \neq 0$.}
 \end{corollary}
 
@@ -1412,30 +1513,32 @@ $\|l_0\| = \displaystyle\sup \left\{ \dfrac{|l(g+\lambda y)|}{\|g+\lambda y\|} \
 \begin{align*}
 \overline{\linspan{M}} = E
 \end{align*}
+Іншими словами, лінійна оболонка $\linspan M$ скрізь щільна.
 \end{definition}
 
 \begin{theorem}
 Нехай $E$ -- нормований простір та $M \subset E$.\\
-$M$ -- тотально в $E \iff \forall x \in M: l(x) = 0 \implies \forall x \in E: l(x) = 0$.
+$M$ -- тотальна в $E \iff \forall l \in E': l|_M \equiv 0 \implies l|_E \equiv 0$.
 \end{theorem}
 
 \begin{proof}
-\rightproof Дано: $M$ -- тотальна множина. Нехай $l$ -- неперервний лінійний функціонал такий, що $\forall x \in M: l(x) = 0$. Оскільки функціонал лінійний, то $\forall x \in \linspan{M}: l(x) = 0$. Оскільки $\overline{\linspan{M}} = E$, то ми можемо неперервно продовжити $l$ до $E$. Отримаємо $l(x) = 0, \forall x \in E$.
+\rightproof Дано: $M$ -- тотальна множина. Нехай $l \in E'$ такий, що $l|_M \equiv 0$. Оскільки функціонал лінійний, то $l|_{\linspan M} \equiv 0$. Оскільки $M$ -- тотальна, то $\linspan M \subset E$ буде щільною підмножиною, тож ми можемо неперервно продовжити $l$ до $E$. Отримаємо $l|_E \equiv 0$.
 \bigskip \\
-\leftproof Дано: будь-який лінійно неперервний функціонал $l $ на $E$ такий, що $l(x) = 0, x \in M$ випливає $l(x) = 0, x \in E$.\\
-!Припустимо, що $M$ не є тотальною. Тобто $\overline{\linspan{M}} = G \neq E$, тобто існує вектор $y \in E \setminus G$. Внаслідок першої теореми даного підрозділу, існує функціонал $l$ на $E$ такий, що $\|l\| = 1,\ l|_G = 0$. Але з того, що $l|_G = 0$ випливає $l = 0$. Суперечність!
+\leftproof Дано: $\forall l \in E': l|_M \equiv 0 \implies l|_E \equiv 0$.\\
+!Припустимо, що $M$ не є тотальною. Тобто $\overline{\linspan{M}} \overset{\text{позн.}}{=} G \subsetneq E$, тобто існує вектор $y \in E \setminus G$. За першим наслідком, можна взяти функціонал $l \in E'$, що тіпа описує відстань, тобто $\|l\| = 1,\ l|_G = 0$. Але з того, що $l|_G \equiv 0 \implies l|_M \equiv 0$ випливає $l|_E \equiv 0$. Суперечність!
 \end{proof}
 
 \begin{proposition}
 \label{kernel_as_subspace}
-Нехай $E$ -- нормований простір та $l$ -- лінійний неперервний функціонал з $E$. Тоді $\ker l$ -- підпростір $E$. Більш того, $\ker l$ буде гіперпідпростором, тобто це означає, що $E = \linspan\{\ker l \cup \{y\}\}$ при $y \notin \ker l$.
+Нехай $E$ -- нормований простір та $l$ -- лінійний неперервний функціонал з $E$. Тоді $\ker l$ -- замкнений підпростір $E$. Навіть більше: $\ker l$ буде гіперпідпростором, тобто це означає, що $E = \linspan\{\ker l, y\}$ при $y \notin \ker l$.
 \end{proposition}
 
 \begin{proof}
-Те, що $\ker l$ підпростір, тут все зрозуміло.\\
-Нехай $y \notin \ker l$. Тоді доведемо, що кожний елемент $x \in E$ записується як $x = g + \lambda y$, де $g \in \ker l, \lambda \in \mathbb{K}$. Покладемо $\lambda = \dfrac{l(x)}{l(y)}$ та розглянемо вектор $g = x - \lambda y$. Оскільки $l(g) = l(x) - \lambda l(y) = 0$, то звідси $g \in \ker l$. Отже, $x = g + \lambda y$ -- шукане представлення.
+Те, що $\ker l$ підпростір, тут все зрозуміло. Якщо взяти $\sequence{x_n} \subset \ker l$ таку, що $x_n \to x$, тоді маємо послідовність $\sequence{l(x_n) = 0}$ -- стаціонарна послідовність, при цьому $0 =l(x_n) \to l(x)$, тому $x \in \ker l$.\\
+Нехай $y \notin \ker l$. Тоді доведемо, що кожний елемент $x \in E$ записується як $x = g + \lambda y$, де $g \in \ker l, \lambda \in \mathbb{R} (\mathbb{C})$. Покладемо $\lambda = \dfrac{l(x)}{l(y)}$ та розглянемо вектор $g = x - \lambda y$. Оскільки $l(g) = l(x) - \lambda l(y) = 0$, то звідси $g \in \ker l$. Отже, $x = g + \lambda y$ -- шукане представлення.
 \end{proof}
 
+\iffalse %don't need this
 \begin{proposition}
 Зафіксуємо лінійний функціонал $l$ на $E$. Покладемо множину $\Gamma_c = \{x \in E \mid l(x) = c\}$, що називається \textbf{гіперплощиною}. Позначимо $\Gamma_0 = \ker l$. Тоді існує такий вектор $z \in E$, що $\Gamma_c = \Gamma_0 + z \equiv \{g + z \mid g \in \Gamma_0 \}$.
 \end{proposition}
@@ -1462,6 +1565,7 @@ A \text{ лежить по одну сторону від гіперплощин
 Для кожної точки $x_0 \in S_r(0)$ існує лінійний неперервний функціонал $l$ на $E$, де $\|l\| = 1,\ l(x_0) = \|x_0\| = r$. Тоді гіперплощина $\Gamma_r$ -- наша шукана. Дійсно, $x_0 \in \Gamma_r$, бо $l(x_0) = r$.\\
 $\forall x \in B[r;0]: l(x) \leq |l(x)| \leq \|x\| \leq r$, тобто весь шар лежить по одну сторону від $\Gamma_r$.
 \end{proof}
+\fi
 
 \subsection{Загальний вигляд лінійних неперервних функціоналів у деяких банахових просторах}
 \subsubsection{Базис Шаудера}
@@ -1469,7 +1573,7 @@ $\forall x \in B[r;0]: l(x) \leq |l(x)| \leq \|x\| \leq r$, тобто весь 
 Нехай $E$ -- банахів простір.\\
 Послідовність $\{e_1,e_2,\dots\} \subset E$ називається \textbf{базисом Шаудера} простора $E$, якщо
 \begin{align*}
-\forall x \in E: \exists ! x_k \in \mathbb{K}: x = \displaystyle\sum_{k=1}^\infty x_k e_k
+\forall x \in E: \exists ! x_k \in \mathbb{R} (\mathbb{C}): x = \displaystyle\sum_{k=1}^\infty x_k e_k
 \end{align*}
 \end{definition}
 
@@ -1498,20 +1602,24 @@ $\|x^{(n)} - y^{(n)}\| = \displaystyle\left\| \sum_{k=1}^n (x_k-y_k) e_k \right\
 
 \begin{proof}
 І. \textit{Існування}.\\
-Фіксуємо елемент $x \in l_p$, де $x = (x_1,x_2,\dots)$ та $\displaystyle\sum_{k=1}^\infty |x_k|^p < +\infty$. Покладемо елемент (що є частковою сумою) $s_n = x_1 e_1 + \dots + x_n e_n$ та доведемо, що послідовність $\{s_n, n \geq 1\}$ -- фундаментальна. При $n > m$\\
+Фіксуємо елемент $x \in l_p$, де $x = (x_1,x_2,\dots)$ та $\displaystyle\sum_{k=1}^\infty |x_k|^p < +\infty$. Покладемо елемент (що є частковою сумою) $s_n = x_1 e_1 + \dots + x_n e_n$ та доведемо, що послідовність $\sequence{s_n}$ -- фундаментальна. При $n > m$\\
 $\|s_n - s_m \|_p = \left\| (0,\dots,0,x_{m+1},\dots,x_n,0,\dots ) \right\|_p = \displaystyle \left( \sum_{k=m+1}^n |x_k|^p \right)^{\frac{1}{p}}$.\\
-Фундаментальність $\{s_n\}$ випливає зі збіжності числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$. Оскільки $l_p$ -- повний простір, то $\{s_n\}$ -- збіжний, тобто $\displaystyle\sum_{k=1}^\infty x_k e_k$ збігається до деякого елемента. Зокрема доведемо, що $\displaystyle\sum_{k=1}^\infty x_k e_k = x$. Дійсно,\\
-$\|x-s_n\|_p = \displaystyle \left\| x - \sum_{k=1}^n x_k e_k \right\|_p = \| (0,\dots,0,x_{n+1},x_{n+2},\dots)\|_p = \left( \sum_{k=n+1}^\infty |x_k| \right)^{\frac{1}{p}}$.\\
+Фундаментальність $\sequence{s_n}$ випливає зі збіжності числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$. Оскільки $l_p$ -- банахів, то $\sequence{l_p}$ -- збіжний, тобто $\displaystyle\sum_{k=1}^\infty x_k e_k$ збігається до деякого елемента. Зокрема доведемо, що $\displaystyle\sum_{k=1}^\infty x_k e_k = x$.\\
+$\|x-s_n\|_p = \displaystyle \left\| x - \sum_{k=1}^n x_k e_k \right\|_p = \| (0,\dots,0,x_{n+1},x_{n+2},\dots)\|_p = \left( \sum_{k=n+1}^\infty |x_k|^p \right)^{\frac{1}{p}}$.\\
 Знову зі збіжності числового ряда $\displaystyle\sum_{k=1}^\infty |x_k|^p$ випливає бажане.
 \bigskip \\
 II. \textit{Єдиність}.\\
 !Припустимо, що $x = \displaystyle\sum_{k=1}^\infty y_k e_k$ -- друге представлення. Тоді отримаємо $\displaystyle\lim_{n \to \infty} \sum_{k=1}^n (x_k-y_k)e_k = 0$. Звідси отримаємо $\displaystyle\lim_{n \to \infty}\left\| \sum_{k=1}^n (x_k-y_k) e_k \right\| = \lim_{n \to \infty} \left(\sum_{k=1}^n |x_k-y_k|^p\right)^{\frac{1}{p}} = 0$. Єдина можливість тут -- це $x_k = y_k$ при всіх $k \in \mathbb{N}$ -- суперечність!
 \end{proof}
 
-\subsubsection{Простір, що спряжений до $l_p$}
+\subsubsection{Простір, що спряжений до $l_p, 1 < p < \infty$}
 \begin{theorem}
-Нехай $p,p' > 1$ таким чином, що $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Тоді для будь-якого лінійного неперервного функціонала $f$ на $l_p$ існує елемент $(f_k)_{k=1}^\infty \in l_{p'}$, такий, що $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ для всіх $x \in l_p$.
+Нехай $p,p' > 1$ таким чином, що $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Тоді $(l_p)' \cong l_{p'}$ ізометричним чином. Часто пишуть просто $(l_p)' = l_{p'}$.
 \end{theorem}
+
+\begin{lemma}
+Для будь-якого $f \in (l_p)'$ існує елемент $(f_k)_{k=1}^\infty \in l_{p'}$, такий, що $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ для всіх $x \in l_p$.
+\end{lemma}
 
 \begin{proof}
 Нехай $f \in (l_p)'$ (тобто лінійний неперервний функціонал). Тоді звідси отримаємо:\\
@@ -1524,23 +1632,23 @@ $\displaystyle\sum_{k=1}^n |f_k|^{p'} \leq \| f\| \left( \sum_{k=1}^n |f_k|^{p'}
 Остання оцінка стверджує, що ряд збіжний, внаслідок чого $(f_k)_{k=1}^{\infty} \in l_{p'}$.
 \end{proof}
 
-\begin{theorem}
-І навпаки: для кожного $(f_k)_{k=1}^\infty \in l_{p'}$ рівність $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ визначає лінійний та неперервний функціонал на $l_p$.
-\end{theorem}
+\begin{lemma}
+Для кожного $(f_k)_{k=1}^\infty \in l_{p'}$ рівність $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$ визначає лінійний та неперервний функціонал на $l_p$.
+\end{lemma}
 
 \begin{proof}
 Нехай $(f_k)_{k=1}^\infty \in l_{p'}$. Завдяки нерівності Гьольдера, отримаємо:\\
 $\displaystyle |f(x)| \leq \left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}} \left( \sum_{k=1}^\infty |x_k|^p \right)^{\frac{1}{p}} = c \| x \|_p < +\infty$.\\
 Отже, $f$ -- обмежений та $\|f\| \leq c$. Як доводиться лінійність, цілком зрозуміло.
-\bigskip \\
-До речі, під час минулого доведення ми довели нерівність $c \leq \|f\|$. Маючи ще тут нерівність $c \leq \|f\|$, звідси випливатиме, що $\|f\| = c$, тобто $\|f\| =  \displaystyle\left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}}$.
 \end{proof}
-
-Множину всіх лінійних та обмежених функціоналів на $l_p$ позначатимемо за $(l_p)'$. Ці дві теореми стверджують, що $(l_p)' \cong l_{p'}$ ізометричним чином. Адже ми маємо $f(x) = \displaystyle\sum_{k=1}^\infty f_kx_k$, який задає ізоморфізм. (TODO: додумати).
+\noindent
+Під час доведення першої леми ми отримали нерівність $c \leq \|f\|$. Маючи ще нерівність $c \geq \|f\|$ з другої леми, ми отримаємо $\|f\| = c$, тобто $\|f\| =  \displaystyle\left( \sum_{k=1}^\infty |f_k|^{p'} \right)^{\frac{1}{p'}}$. Ліворуч мається на увазі норма від $f \in (l_p)'$, а праворуч норма $(f_k) \in l_{p'}$.
+\bigskip \\
+Короче, маємо $A \colon l_{p'} \to (l_p)'$, який задається таким чином: $A (f_k)_{k=1}^\infty \color{red}(x) \color{black} = \displaystyle\sum_{k=1}^\infty x_k f_k$ (оператор $A$ повертає функціонал, тому я тут написав аргумент $\color{red}(x)$). Може, красивіше було б написати $A (f_k)_{k=1}^\infty = \displaystyle\sum_{k=1}^\infty \_ \cdot f_k$, ще не знаю. Він є ізоморфізмом, оскільки існує $A^{-1} \colon (l_p)' \to l_{p'}$, що задається як $A^{-1}l = (l(e_1),l(e_2),\dots)$. Усі два оператори коректно визначені за теоремами вище. Також ми довели, що $\|l\| = \| Af \| = \| f \|$.
 
 \subsubsection{Простір, що спряжений до $l_1$}
 \begin{theorem}
-Простір $(l_1)' \cong l_\infty$ ізометричним чином. Ізоморфізм між ними встановлюється формулою $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k$.
+$(l_1)' \cong l_\infty$ ізометричним чином. Часто пишуть просто $(l_1)' = l_\infty$.
 \end{theorem}
 
 \begin{proof}
@@ -1553,23 +1661,21 @@ $\|f\|_\infty = \displaystyle\sup_{k \in \mathbb{N}} |f_k| = \sup_{k \in \mathbb
 \end{proof}
 
 \subsubsection{Простори, що спряжені до $l_\infty$}
-\begin{remark}
-$(l_\infty)' \supsetneq l_1$.\\
-Дійсно, нехай $(f_k)_{k=1}^\infty \in l_1$, тоді функціонал $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k,\ x \in l_\infty$ все одно лінійний, а обмеженість доводиться, завдяки оцінки\\
+\begin{proposition}
+$(l_\infty)' \supsetneq l_1$.
+\end{proposition}
+\noindent
+Спочатку доведемо вкладення. Дійсно, нехай $(f_k)_{k=1}^\infty \in l_1$, тоді функціонал $f(x) = \displaystyle\sum_{k=1}^\infty f_k x_k,\ x \in l_\infty$ все одно лінійний, а обмеженість доводиться, завдяки оцінки\\
 $|f(x)| \leq \displaystyle\sum_{k=1}^\infty |f_k x_k| \leq \sup_{k \in \mathbb{N}} |x_k| \sum_{k=1}^\infty |f_k| = \|x\|_\infty \sum_{k=1}^\infty |f_k|$.\\
 Отже, довели вкладення, при цьому ми ще довели $\|f\| \leq \displaystyle\sum_{k=1}^\infty |f_k|$.\\
 Якщо покласти такий $x \in l_\infty$, де $x_k = e^{-i \arg f_k}$, то взагалі отримаємо $f(x) = \displaystyle\sum_{k=1}^\infty |f_k| = \|f\|_1$.
-\end{remark}
-
-\begin{remark}
-Тепер чому це вкладення лише в одну сторону.\\
-Розглянемо лінійну множину $C \subset l_\infty$, яка містить збіжні послідовності комплексних чисел. Визначимо $f(x) = \displaystyle\lim_{k \to \infty} x_k$ для кожного $x = (x_1,x_2,\dots) \in C$. Цілком ясно, що це лінійний функціонал. Обмеженість вилпиває з оцінки $|f(x)| = \displaystyle \left| \lim_{k \to \infty} x_k \right| \leq \sup_{k \in \mathbb{N}} |x_k| = \|x\|$.\\
-Отже, $f \in C'$ (лінійний та неперервний функціонал), причому $\|f\| \leq 1$. Ми можемо продовжити функціонал $f$ до функціонала $F \in (l_\infty)'$ зі збереженням норми, за теоремою Гана-Банаха. Функціонал $F$ не можна записати як $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$. Представимо, що можна. Маємо послідовність $x \in C$, ліміт не зміниться при зміннні скінченного числа членів, тобто $F(x) = f(x)$ залишиться таким самим. Проте із іншого боку, зміниться $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$.
-\end{remark}
+\bigskip \\
+Час з'ясувати, чому не допускається рівність. Розглянемо лінійну множину $C \subset l_\infty$, яка містить збіжні послідовності комплексних чисел. Визначимо $f(x) = \displaystyle\lim_{k \to \infty} x_k$ для кожного $x = (x_1,x_2,\dots) \in C$. Цілком ясно, що це лінійний функціонал. Обмеженість вилпиває з оцінки $|f(x)| = \displaystyle \left| \lim_{k \to \infty} x_k \right| \leq \sup_{k \in \mathbb{N}} |x_k| = \|x\|$.\\
+Отже, $f \in C'$ (лінійний та неперервний функціонал), причому $\|f\| \leq 1$. Ми можемо продовжити функціонал $f$ до функціонала $F \in (l_\infty)'$ зі збереженням норми, за теоремою Гана-Банаха. Функціонал $F$ не можна записати як $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$. Представимо, що можна. Маємо послідовність $x \in C$, ліміт не зміниться при зміні скінченного числа членів, тобто $F(x) = f(x)$ залишиться таким самим. Проте із іншого боку, зміниться $F(x) = \displaystyle\sum_{k=1}^\infty x_k f_k$.
 
 \subsubsection{Простір, що спряжений до $L_p, 1 < p < \infty$.}
 \begin{theorem}
-Нехайй $1 < p < \infty$ та $p' > 1$, причому $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Також задано $(X,\lambda,\mathcal{F})$ -- вимірний простір, де $\lambda$ -- $\sigma$-скінченна міра. Простір $(L_p)' \cong L_{p'}$ ізометричним чином. Ізоморфізм $l \colon (L_p)' \to L_{p'}$ задається наступним чином:\\
+Нехай $1 < p < \infty$ та $p' > 1$, причому $\dfrac{1}{p} + \dfrac{1}{p'} = 1$. Також задано $(X,\lambda,\mathcal{F})$ -- вимірний простір, де $\lambda$ -- $\sigma$-скінченна міра. Простір $(L_p)' \cong L_{p'}$ ізометричним чином. Ізоморфізм $l \colon (L_p)' \to L_{p'}$ задається наступним чином:\\
 $l(x) = \displaystyle\int_X h(q) x(q)\,d\lambda(q)$.\\
 \textit{Доведення див.\ в pdf теорії міри.}
 \end{theorem}
@@ -1597,9 +1703,31 @@ $l(x) = \displaystyle\int_K x(q)\,d\omega(q)$.\\
 
 \begin{theorem}[Теорема Ріса]
 Для кожного функціонала $l \in (C([0,1]))'$ існує фукнція $g$ обмеженої варіації, для якої $l$ можна представити через інтеграл Рімана-Стілт'єса таким чином:\\
-$l(X) = \displaystyle\int_0^1 x(t)\,dg(t)$, причому $V(g;[0,1]) = \|l\|$.\\
-\textit{Без доведення}.
+$l(x) = \displaystyle\int_0^1 x(t)\,dg(t)$, причому $V(g;[0,1]) = \|l\|$.
 \end{theorem}
+
+\begin{proof}
+Нехай $l \in (C([0,1]))'$, визначений на підпросторі $M([0,1])$ -- простір обмежених функцій. За теоремою Гана-Банаха, продовжимо до функціонала $L \in (M([0,1])'$.\\
+Нехай $t \in [0,1]$, позначимо $u_t = \mathbbm{1}_{[0,t]}$. Сама функція $u_t \in M([0,1])$, тому можна покласти $g(t) = L(u_t)$. Покажемо, що сама $g \in BV([0,1])$.\\
+Оберемо розбиття $\pi$ відрізкі $[0,1]$ та позначимо $\varepsilon_i = \sign(g(t_{i}) - g(t_{i-1}))$. Тоді маємо:\\
+$V_\pi(g,[0,1]) = \displaystyle\sum_{i=1}^{n} |g(t_i) - g(t_{i-1})| = \sum_{i=1}^n \varepsilon (Lu_{t_{i}} - Lu_{t_{i-1}}) = L \left(\sum_{i=1}^n \varepsilon_i (u_{t_i} - u_{t_{i-1}})\right) = L \left( \sum_{i=1}^n \varepsilon_i \mathbbm{1}_{(t_i,t_{i+1}]} \right)$.\\
+Позначимо тимчасово за $\displaystyle z = \left( \sum_{i=1}^n \varepsilon_i \mathbbm{1}_{(t_i,t_{i+1}]} \right)$. Вона може приймати значення $0,1,-1$, тому звідси $\|z\| = 1$. Оскільки $L$ -- обмежений, то\\
+$|V_\pi(g,[0,1])| = |Lz| \leq \|L\| \|z\| = \|l\|$.\\
+Ця нерівність свідчить про те, що $g \in BV([0,1])$, причому автоматично $V(g,[0,1]) \leq \|l\|$.
+\bigskip \\
+Тепер доведемо рівність. Нехай $x \in C([0,1])$. Покладемо такі прості функції:\\
+$x_n(t) = \displaystyle\sum_{k=1}^n x\left(\dfrac{k-1}{n}\right) \left( u_{\frac{k}{n}}(t) - u_{\frac{k-1}{n}}(t) \right) = \sum_{k=1}^n x\left( \dfrac{k-1}{n} \right) \mathbbm{1}_{\left(\frac{k-1}{n},\frac{k}{n}\right]}(t)$.\\
+$L(x_n) = \displaystyle\sum_{k=1}^n x\left(\dfrac{k-1}{n}\right) \left( g\left(\dfrac{k}{n}\right) - g\left(\dfrac{k-1}{n}\right) \right)$.\\
+Оскільки $x \in C([0,1])$, то $x \in \mathcal{RS}([0,1],g)$. Більш того, $(x_n)_{n=1}^\infty$ -- послідовність простих функцій, що збігається рівномірно до $x$. Отже, маючи це все, можна написати рівність:\\
+$L(x) = \displaystyle\lim_{n \to \infty} L(x_n) = \int_0^1 x(t)\,dg(t)$.\\
+Проте $x \in C([0,1])$, тож звідси $L(x) = l(x) = \displaystyle\int_0^1 x(t)\,dg(t)$.\\
+Нарешті, $|l(x)| = \displaystyle \left| \int_0^1 x(t)\,dg(t) \right| \leq \left| \int_0^1 |x(t)|\,dg(t) \right| \leq \|x\| V(g,[0,1])$. Таким чином, $\|l\| \leq V(g,[0,1])$.\\
+Знайшли варіацію $V(g,[0,1]) = \|l\|$.
+\end{proof}
+
+\begin{remark}
+Теорема працює, якщо розглянути довільний відрізок $[a,b]$.
+\end{remark}
 
 \subsection{Вкладення нормованих просторів}
 \begin{theorem}
@@ -1664,6 +1792,11 @@ $|l_n(x)| = \left| l_n \left( \dfrac{1}{r}(x'-a) \right) \right| = \dfrac{1}{r} 
 Зокрема розглянемо простір $c_0$ -- послідовності, що збігаються до нуля. Далі розглянемо підпростір $c_{00} \subset c_0$ -- послідовності, де всі члени нулі, починаючи з деякого номера.
 \end{remark}
 
+\begin{theorem}[Теорема Банаха-Штайнгауза (для операторів)]
+Задано $X,Y$ -- банахів та просто лінійній нормований простір, а також $(A_n)_{n=1}^\infty \in \mathcal{B}(X,Y)$. Припустимо, що $\forall x \in X: (A_n x)_{n=1}^\infty$ -- обмежена послідовність. Тоді $(\|A_n\|)_{n=1}^\infty$ (послідовність норм) -- обмежена.\\
+\textit{Доведеня теореми повністю повторюється.}
+\end{theorem}
+
 \subsection{Про види збіжностей}
 Ми вже знаємо один тип збіжностей. Переформулюю ще раз означення, але доповню це одним словом в дужках.
 \begin{definition}
@@ -1684,6 +1817,18 @@ $|l_n(x)| = \left| l_n \left( \dfrac{1}{r}(x'-a) \right) \right| = \dfrac{1}{r} 
 \end{align*}
 Позначення: $x_n \toweak x$.
 \end{definition}
+\noindent
+
+Якщо розглянути спряжений простір $E'$, то крім сильної та слабкої збіжності існує ще один тип.
+
+\begin{definition}
+Нехай $E$ -- лінійний нормований простір.\\
+Послідовність функціоналів $(l_n)_{n=1}^\infty \subset E'$ називається \textbf{слабко* збіжною} до $l \in E'$, якщо
+\begin{align*}
+\forall x \in E: l_n(x) \to l(x)
+\end{align*}
+Позначення: $l_n \toweakstar l$.
+\end{definition}
 
 \begin{proposition}
 Задано $E$ -- лінійний нормований простір та послідовність $(x_n)_{n=1}^\infty$. Тоді:\\
@@ -1694,17 +1839,6 @@ $x_n \to x \implies x_n \toweak x$.
 Дійсно, нехай $x_n \to x$, тобто звідси $\|x-x_n\| \to 0$ при $n \to \infty$. Маючи це, отримаємо $\forall l \in E'$:\\
 $|l(x_n)-l(x)| = |l(x_n-x)| \leq \|l\| \|x_n - x\| \to 0$. Таким чином, $x_n \toweak x$.
 \end{proof}
-
-Якщо розглядати спряжений простір $E'$, то крім сильної та слабкої збіжності існує ще один тип.
-
-\begin{definition}
-Нехай $E$ -- лінійний нормований простір.\\
-Послідовність функціоналів $(l_n)_{n=1}^\infty \subset E'$ називається \textbf{слабко* збіжною} до $l \in E'$, якщо
-\begin{align*}
-\forall x \in E: l_n(x) \to l(x)
-\end{align*}
-Позначення: $l_n \toweakstar l$.
-\end{definition}
 
 \begin{proposition}
 Задано $E$ -- лінійний нормований простір та послідовність $(l_n)_{n=1}^\infty \subset E'$. Тоді:\\
@@ -1745,7 +1879,6 @@ $l_n \toweak l \iff l_n \toweakstar l$.
 Дійсно, маємо $\forall x \in E: l_n(x) \to l(x)$, тобто числова послідовність $(l_n(x))_{n=1}^\infty$ збігається, тоді обмежена. Значить, за теоремою Банаха-Штайнгауза, послідовність $(\|l_n\|)_{n=1}^\infty$ обмежена.
 \end{proof}
 
-
 \begin{theorem}
 Задано $E$ -- банахів простір та $(l_n)_{n=1}^\infty \subset E'$ -- така послідовність, що $\forall x \in E: (l_n(x))_{n=1}^\infty$ -- фундаментальна. Тоді $\exists l \in E': l_n \toweakstar l$.
 \end{theorem}
@@ -1775,12 +1908,213 @@ $|l_n(y) - l(y)| \leq |l_n(y) - l_n(x)| + |l_n(x) - l(x)| + |l(x) - l(y)| \leq \
 \begin{remark}
 Судячи з доведення, в \leftproof не обов'язково вимагати бути $E$ повним. Також в формулюванні теореми досить вимагати, щоб $M$ була тотальною в $E$.
 \end{remark}
+
+\iffalse
+\begin{example}
+На просторі $L_2([-1,1])$ визначимо послідовність $l_n(x) = \displaystyle\int_{-1}^1 x(t) \cos (\pi n t)\,dt$. Це справді лінійні та обмежені функціонали, але обмеженість покажу окремо, бо нам ще знадобиться.\\
+$|l_n(x)| = \displaystyle\left| \int_{-1}^1 x(t)\,\cos(\pi n t)\,dt \right| \leq \int_{-1}^1 |x(t)| |\cos (\pi n t)|\,dt \leq \left( \int_{-1}^1 |x(t)|^2\,dt \right)^{\frac{1}{2}} \left( \int_{-1}^1 \cos^2 (\pi n t)\,dt \right)^{\frac{1}{2}} \overset{\substack{\text{другий інтеграл} \\ \text{самостійно}}}{=} \\
+= \|x\|_2 \left( 1 + \dfrac{\sin 2\pi n}{2\pi n} \right)^{\frac{1}{2}}$.
+\bigskip \\
+Доведемо зараз, що $l_n \toweakstar 0$. Для цього ми скористаємося критерієм слабкої* збіжності. Ми знаємо, що простір простих функцій вигляду $\displaystyle\sum_{i=1}^k a_i \mathbbm{1}_{(\alpha_i,\beta_i] \cap [-1,1]}$ -- щільна. Візьмемо таку довільну просту функцію. Звідси\\
+$l_n(x) = \displaystyle\int_{-1}^1 x(t)\cos(\pi nt)\,dt = \int_{-1}^1 \sum_{i=1}^k a_i \mathbbm{1}_{(\alpha_i,\beta_i] \cap [-1,1]}(t) \cos (\pi nt)\,dt = \sum_{i=1}^k a_i \int_{\alpha_i}^{\beta_i} \cos (\pi nt)\,dt = \\
+= \sum_{i=1}^k a_i \dfrac{\sin (\pi n t)}{\pi n} \Big|_{\alpha_i}^{\beta_i} \to 0$ при $n \to \infty$.\\
+Ба більше, ми маємо $\|l_n\| \leq \left( 1 + \dfrac{\sin 2 \pi n}{2\pi n} \right)^{\frac{1}{2}} \leq C$, оскільки центральна штука збіжна, тому обмежена. Внаслідок критерію, ми доведемо, що $l_n \toweakstar 0$.
+\bigskip \\
+Щоправда, $l_n \not\to 0$ (в сенсі норми), оскільки $\|$
+\end{example}
+\fi
+
+\begin{example}
+На просторі $C([0,1])$ визначимо послідовність $l_n(x) = n \displaystyle\int_0^{\frac{1}{n}} x(t)\,dt$. Доведемо, що $l_n$ слабо* збіжний.\\
+Розглянемо спочатку простір многочленів на $[0,1]$ -- щільна підмножина $C([0,1])$. Оберемо $x(t) = a_n t^n + \dots + a_1 t + a_0$. Тоді\\
+$l_n(x) = n\displaystyle\int_0^{\frac{1}{n}} a_n t^n + \dots + a_1 t + a_0\,dt = n \left( \dfrac{a_n}{n+1}t^{n+1} + \dfrac{a_{n-1}}{n}t^n + \dots + a_0 t \right)\Big|_{0}^{\frac{1}{n}} \to a_0 = x(0)$.\\
+Позначимо новий функціонал $l(x) = x(0)$, який справді лінійний та обмежений. Тоді $l_n(x) \to l(x)$.\\
+При цьому самі норми будуть обмеженими. Справді,\\
+$|l_n(x)| = n \displaystyle\left|\int_0^{\frac{1}{n}} x(t)\,dt\right| \leq n \int_0^{\frac{1}{n}} |x(t)|\,dt \leq \|x\| \implies \|l_n\| \leq 1$.\\
+Отже, за критерієм, $l_n \toweakstar l$.
+\end{example}
+
+\subsection{Про види збіжностей в операторах}
+\begin{definition}
+Задані $X,Y$ -- лінійні нормовані простори.\\
+Послідовність операторів $(A_n)_{n=1}^\infty$ називається \textbf{рівномірно збіжною} до $A$, якщо
+\begin{align*}
+\lim_{n \to \infty}\|A_n - A\| = 0
+\end{align*}
+Позначення: $A_n \substack{\to \\ \to} A$ при $n \to \infty$.
+\end{definition}
+
+\begin{definition}
+Задані $X,Y$ -- лінійні нормовані простори.\\
+Послідовність операторів $(A_n)_{n=1}^\infty$ називається \textbf{сильно збіжною} до $A$, якщо
+\begin{align*}
+\forall x \in X: \lim_{n \to \infty} A_n x = A x
+\end{align*}
+Позначення: $A_n \tostrong A$ при $n \to \infty$.
+\end{definition}
+
+\begin{definition}
+Задані $X,Y$ -- лінійні нормовані простори.\\
+Послідовність операторів $(A_n)_{n=1}^\infty$ називається \textbf{слабко збіжною} до $A$, якщо
+\begin{align*}
+\forall x \in X: A_n x \toweak A x
+\end{align*}
+Позначення: $A_n \toweak A$ при $n \to \infty$.
+\end{definition}
+
+\begin{proposition}
+Задані $X,Y$ -- лінійні нормовані простори та послідовність $(A_n)_{n=1}^\infty \subset \mathcal{B}(X,Y)$. Тоді $A_n \substack{\to \\ \to} A \implies A_n \tostrong A \implies A_n \toweak A$.
+\end{proposition}
+
+\begin{proof}
+Нехай $A_n \substack{\to \\ \to} A$. Зафіксуємо $x \in X$. Тоді\\
+$\| A_n x - Ax \| = \| (A_n-A) x\| \leq \|A_n - A\| \|x\| \to 0$ при $n \to \infty$.\\
+Значить, ми отримали $A_n \tostrong A$. Ще раз зафіксуємо $x \in X$. Тоді $(A_n x)_{n=1}^\infty$ збігається сильно до $Ax \in Y$. Із сильної збіжності випливає слабка збіжність (минулий розділ), тож $A_n x\toweak A x$. Отже, $A_n \toweak A$.
+\end{proof}
+
+\begin{example}
+Зараз покажемо, чому в зворотні боки не працюють.
+\bigskip \\
+$A_n \toweak A \centernot\implies A_n \tostrong A$.\\
+Перш за все ознайомимось з оператором $s \colon l_2 \to l_2$ -- оператор зсуву, який працює таким чином: $(x_1,x_2,x_3,\dots) \overset{s}{\mapsto} (0,x_1,x_2,\dots)$. Оператор $s \in \mathcal{B}(l_2,l_2)$ (детально це доводити не буду, бо в цілому ясно). Тепер розглянемо послідовність операторів $(A_n)_{n=1}^\infty$, що задані як $A_n = s^n$, тобто певна кількість зсуву. Зауважимо, що $A_n \toweak O$. \\
+Дійсно, нехай $l \in (l_2)'$. Тоді звідси $l(x) = \displaystyle\sum_{k=1}^\infty l_k x_k$ для деякого елементу $(l_k)_{k=1}^\infty \in l_2$. Тоді зауважимо: \\
+$\displaystyle |l(A_n x)| = \left| \sum_{k=1}^\infty l_{n+k} x_k \right| \leq \sum_{k=1}^\infty |l_{n+k} x_k| \leq \left( \sum_{k=1}^\infty |l_{n+k}|^2 \right)^{\frac{1}{2}} \left( \sum_{k=1}^\infty |x_k|^2 \right)^{\frac{1}{2}} = \left( \sum_{m=n+1}^\infty |l_m| \right)^{\frac{1}{2}} \left( \sum_{k=1}^\infty |x_k|^2 \right)^{\frac{1}{2}}$.\\
+Тоді звідси $l(A_n x) \to 0 = l(0) = l(O x)$ через хвіст ряду. Отже, звідси $A_n \toweak O$.\\
+При цьому зауважимо, що $A_n \centernot\tostrong O$. Дійсно,\\
+$\|A_n x\| = \|(\underbrace{0,\dots,0}_{\text{$n$ штук}},x_1,x_2,\dots)\| = \displaystyle\sum_{k=1}^\infty |x_k|^2$, якщо взяти $x = e_{p}, p > n$, то отримаємо $\|A_n x\| = 1$.
+\bigskip \\
+$A_n \tostrong A \centernot\implies A_n \substack{\to \\ \to} A$.\\
+Розглянемо послідовність операторів $(A_n)_{n=1}^\infty \subset \mathcal{B}(l_2,l_2)$, де кожний $A_n x = (x_1,\dots,x_n,0,0,\dots)$. Зауважимо, що $A_n \tostrong I$ (тут $I$ -- одиничний оператор).\\
+Дійсно, $\|A_n x - I x\| = \|(0,\dots,0,x_{n+1},x_{n+2},\dots)\| = \displaystyle\sum_{k=1}^\infty |x_{n+k}|^2 \to 0$.\\
+При цьому зауважимо, що $A_n \not\substack{\to \\ \to} I$. Дійсно, ми маємо наступне:\\
+$\|A_n-I\| = \displaystyle\sup_{\|x\|=1} \|(A_n-I)x\| \geq \|(A_n-I)e_j\| = \|e_j\| = 1$ (при $j > n$).
+\end{example}
+
+\begin{theorem}
+Задані $X,Y$ -- банахові простори та $(A_n)_{n=1}^\infty \subset \mathcal{B}(X,Y)$ -- така послідовність, що $\forall x \in X: (A_n x)_{n=1}^\infty$ -- фундаментальна. Тоді $\exists A \in \mathcal{B}(X,Y): A_n \tostrong A$.\\
+\textit{Було шось схоже раніше. Доведення повторюється.}
+\end{theorem}
+
+%TODO розібратися
+\iffalse
+\begin{theorem}
+Розглянемо простір $C([0,1])$.\\
+$f_n \toweak f \iff \begin{cases} \forall t \in [0,1]: f_n(t) \to f(t) \\ \|f_n\| \leq M,\ M > 0 \end{cases}$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $f_n \toweak f$. Розглянемо будь-яку точку $t_0 \in [0,1]$, а згодом оберемо функцію $g(t) = \begin{cases} 0, & x \leq t_0 \\ 1, & x > t_0 \end{cases}$. Тоді зауважимо, що $\displaystyle\int_0^1 f_n(t) - f(t)\,dg(t) = f_n(t) - f(t_0)$ (обчислення інтеграла Стілтьєса). Такому інтегралу відповідає функціонал $l \in (C([0,1]))'$. За умовою, $l(f_n) \to l(f)$, тобто $|l(f_n) - l(f)| = \displaystyle\left| \int_0^1 f_n(t) - f(t)\,dg(t)  \right| = |f_n(t_0) - f(t_0)| \to 0 \implies f_n(t_0) \to f(t_0)$.ґґ
+Оскільки $($
+\end{proof}
+\fi
+
+\subsection{Обернені оператори}
+\begin{definition}
+Бієктивний оператор $A \in \mathcal{B}(X,Y)$ називається \textbf{оборотним}, якщо
+\begin{align*}
+\exists A^{-1} \in \mathcal{B}(Y,X)
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+$A \in \mathcal{B}(X,Y)$, що бієктивний -- оборотний $\iff \exists m > 0: \forall x \in X: \|Ax\| \geq m\|x\|$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $A^{-1} \in \mathcal{B}(X,Y)$, тобто $\forall y \in Y: \|A^{-1}y\| \leq \|A^{-1}\| \|y\|$. Оскільки $A$ -- бієкція, то $\exists! x \in X: y = Ax$. Значить, підставивши в нерівність, отримаємо $\|A^{-1} Ax\| = \|x\| \leq \|A^{-1}\| \|Ax\|$. Якщо покласти $m = \|A^{-1}\|^{-1} > 0$, то отримаємо бажану нерівність $\|Ax\| \geq m\|x\|$.
+\bigskip \\
+\leftproof Дано: $\exists m > 0: \forall x \in X: \|Ax\| \geq m\|x\|$. Якщо взяти елемент $x \in \ker A$, то звідси $\|Ax\| = 0 \geq m \|x\|$, тож автоматично $x = 0$. Отже, існує оборотний оператор $A^{-1} \colon Y \to X$. Залишилося переконатися, що $A^{-1} \in \mathcal{B}(Y,X)$. Ми маємо $x = A^{-1}y$, тоді звідси $\|AA^{-1}y\| = \|y\| \geq m \|A^{-1}y\|$, вналслідок чого $\|A^{-1}y\| \leq m^{-1} \|y\|$.
+\end{proof}
+
+\begin{theorem}
+\label{invertible_and_geometric_progression}
+Задано $X$ -- банахів простір та $A \in \mathcal{B}(X,X)$, причому $\|A\| = q < 1$. Тоді оператор $I-A$ буде оборотним, а також $(I-A)^{-1} = I + A + A^2 + \dots$ -- тут збіжність рівномірна.
+\end{theorem}
+
+\begin{proof}
+Розглянемо послідовність $(S_n)_{n=1}^\infty$, що задана як $S_n = I + A + \dots + A^n$. Доведемо, що вона фундаментальна в $\mathcal{B}(X,X)$.\\
+$\|S_{n+p} - S_n\| = \| A^{n+1} + \dots + A^{n+p}\| \leq \|A^{n+1}\| + \dots + \|A^{n+p}\| \leq \|A\|^{n+1} + \dots + \|A\|^{n+p} < q^{n+1} + \dots + q^{n+p} \\ \leq \dfrac{q^{n+1}}{1-q} \to 0$. Оскільки $q < 1$, то фундаментальність доводиться миттєво.\\
+Оскільки простір $X$ банахів, то звідси $\mathcal{B}(X,X)$ теж банахів, тому $S_n \substack{\to \\ \to} S \in \mathcal{B}(X,X)$. Залишилося довести, що $I-A$ -- обернений оператор до $S$, тобто $(I-A)S = S(I-A) = I$. Спочатку зауважимо, що справедлива нерівність:\\
+$\|(I-A)S_n - (I-A)S\| \leq \|I-A\| \|S-S_n\| \to 0$.\\
+Тому нам буде досить довести, що $(I-A)S_n \substack{\to \\ \to} I$.\\
+$\| (I-A)S_n - I\| = \|I - A^{n+1} - I\| = \|A^{n+1}\| \leq q^{n+1} \to 0$.
+\end{proof}
+
+\begin{remark}
+В умовах теореми, справедлива оцінка $\|(I-A)^{-1}\| \leq (1 - \|A\|)^{-1}$.
+\end{remark}
+
+\begin{theorem}
+\label{sum_of_operators_and_inverse}
+Задані $X,Y$ -- банахові простори та оператори $A,B \in \mathcal{B}(X,Y)$, причому оператор $A$ -- оборотний та $B$ заданий так, що $\|B\| \leq \|A^{-1}\|^{-1}$. Тоді оператор $A+B$ -- оборотний.
+\end{theorem}
+
+\begin{proof}
+Розглянемо оператор $I + A^{-1}B \colon X \to X$. Зауважимо, що $\|A^{-1}B\| \leq \|A^{-1}\| \|B\| < 1$, тому $I + A^{-1}B$ оборотний за попередньою теоремою.\\
+Зауважимо, що $A+B = A (I + A^{-1}B)$ -- добуток двох оборотних операторів, тому сам оператор $A+B$ буде теж оборотним.
+\end{proof}
+
+\begin{theorem}
+Нехай $X,Y$ -- банахові та $A \in \mathcal{B}(X,Y)$ -- бієктивний. Тоді $A$ -- оборотний.\\
+\textit{Тобто коли із банахового в увесь банахів простір йде оператор, то обернений уже точно існує.}\\
+\textit{Без доведення поки що.}
+\end{theorem}
+
+\subsection{Спряжені оператори}
+\begin{definition}
+Задані $X,Y$ -- нормовані простори та $A \in \mathcal{B}(X,Y)$.\\
+\textbf{Спряженим до} $A$ називають оператор $A^* \colon Y' \to X'$, що визначений так:
+\begin{align*}
+(A^*l)(x) = l(Ax),\ l \in Y',\ x \in X
+\end{align*}
+(насправді, можна трохи послабити умови та попросити $A \in \mathcal{L}(X,Y)$, але таке рідко буває.)
+\end{definition}
+
+\begin{remark}
+Дане означення оператора є коректним.\\
+!Дійсно, припустимо, що існує $l \in Y'$, якому ставиться в відповідність два різні функціонали $m_1,m_2 \in X'$. Отже, має існувати $x \in X$, щоб $m_1(x) \neq m_2(x)$. Проте за визначенням, $(A^*l)(x) = m_1(x) = m_2(x)$ -- суперечність!
+\end{remark}
+
+\begin{theorem}
+Задано $A \in \mathcal{B}(X,Y)$. Тоді $A^* \in \mathcal{B}(Y',X')$, при цьому маємо $\|A^*\| = \|A\|$.
+\end{theorem}
+
+\begin{proof}
+\textit{$A^*$ -- лінійний}.\\
+Нехай $\lambda_1,\lambda_2 \in \mathbb{C}$ та $l_1,l_2 \in E'_2$. Тоді для кожного $x \in E_1$ маємо\\
+$(A^*(\lambda_1 l_1 + \lambda_2 l_2))(x) = (\lambda_1 l_1 + \lambda_2 l_2)(Ax) = \lambda_1 l_1 (Ax) + \lambda_2 l_2 (Ax) = \lambda_1 (A^*l_1)(x) + \lambda_2 (A^*l_2)(x)$.\\
+$A^*(\lambda_1 l_1 + \lambda_2 l_2) = \lambda_1 A^* l_1 + \lambda_2 A^* l_2$.\\
+(ми довели, що якщо $A \in \mathcal{L}(X,Y)$, то тоді й $A^* \in \mathcal{L}(Y',X')$, але знову ж таки.)
+\bigskip \\
+\textit{$A^*$ -- обмежений}.\\
+$|(A^*l)(x)| = |l(Ax)| \leq \|l\| \|Ax\| \leq \|l\| \|A\| \|x\|$. Звідси й випливає нерівність $\|A^*l\| \leq \|A\| \|l\|$.
+\bigskip \\
+\textit{$\|A^*\| = \|A\|$}.\\
+Щойно ми довели, що $\|A^*\| \leq \|A\|$. Для зворотної нерівності зробимо наступне. Оберемо будь-який $x \in E_1$, позначимо $y = Ax$. Тоді за наслідком теореми Гана-Банаха, знайдеться $l \in E_2'$, для якого $\|l\| = 1$ та $l(y) = \|y\|$. Звідси $l(Ax) = \|Ax\|$, а тому $\|Ax\| = |l(Ax)| = |(A^*l)(x)| \leq \|A^*\| \|l\| \|x\| = \|A^*\| \|x\|$. Отже, для всіх $x \in E_1$ справедлива нерівність $\|Ax\| \leq \|A^*\| \|x\|$, зокрема $\|A\| \leq \|A^*\|$.
+\end{proof}
+
+\begin{theorem}
+Нехай $A \in \mathcal{B}(X,Y)$ та $B \in \mathcal{B}(Y,Z)$. Тоді $(BA)^* = A^*B^*$.
+\end{theorem}
+
+\begin{proof}
+Для кожного $l \in Z',x \in X$ маємо рівність $((BA)^*l)(x) = l(BAx) = l(B(Ax)) = (B^*l)(Ax)$. Функціонал $B^*l \in Y'$ позначимо за $m$. Тоді отримаємо $m(Ax) = (A^*m)(x)$. Отже, \\ $((BA)^*l)(x) = (A^*B^*l)(x)$.
+\end{proof}
+
+\begin{theorem}
+Нехай $A \in \mathcal{B}(X,Y)$. Тоді $(A^*)^* = A$ за умоовю, що $X,Y$ -- рефлексивні.
+\end{theorem}
+
+\begin{proof}
+Маємо $A^* \colon Y' \to X'$, беремо до нього спряжений $(A^*)^* \colon X'' \to Y''$, але в силу рефлексивності отримаємо $(A^*)^* \in \mathcal{B}(X,Y)$. У нас вже була відповідність між $E,E''$, що задається таким чином: $E \ni x \mapsto L_x \in E''$. Тоді для кожного $l \in Y'$ та $x \in X$ маємо\\
+$((A^*)^*L_x)(l) = L_x(A^*l) = (A^*l)(x) = l(Ax) = (AL_x)(l)$.
+\end{proof}
 \newpage
 
 \section{Гілбертові простори}
 \subsection{Основні означення}
 \begin{definition}
-\textbf{Передгілбертовим простором} називають лінійний простір $H$ над $\mathbb{C}$, на якому задано білінійний функціонал $(\cdot, \cdot) \colon H \times H \to \mathbb{C}$, для якого виконуються такі властивості:
+\textbf{Передгілбертовим простором} називають лінійний простір $H$ над $\mathbb{C}$, на якому задано півторалінійний функціонал $(\cdot, \cdot) \colon H \times H \to \mathbb{C}$, для якого виконуються такі властивості:
 \begin{align*}
 \begin{tabular}{cl}
 1) & $\forall x \in H: (x, x) \geq 0$\\
@@ -1791,8 +2125,12 @@ $|l_n(y) - l(y)| \leq |l_n(y) - l_n(x)| + |l_n(x) - l(x)| + |l(x) - l(y)| \leq \
 Такий функціонал називають \textbf{скалярним добутком}. Якщо прибрати умову $(x,x) = 0 \iff x = 0$, то тоді такий функціонал ще називають \textbf{квазіскалярним добутком}.
 \end{definition}
 
+\begin{remark}
+Насправді, можна не вимагати, що це півторалінійний функціонал. Ми можемо просто додати четверту умову, що цей функціонал лінійний лише за першим аргументом, тоді випливатиме антилінійність за другим аргументом -- значить, буде півторалінійним.
+\end{remark}
+
 \begin{theorem}[Нерівність Коші-Буняковського]
-Задано $H$ -- передгілбертів простір. Тоді $\forall x,y \in E: |(x,y)|^2 \leq (x,x)(y,y)$.\\
+Задано $H$ -- передгілбертів простір. Тоді $\forall x,y \in H: |(x,y)|^2 \leq (x,x)(y,y)$.\\
 \textit{Було доведено, див.\ pdf з лінійної алгебри. Щоправда, там в умові теореми вимагалася скінченність векторного простору, але під час доведення це ми не використовували.}
 \end{theorem}
 
@@ -1855,7 +2193,8 @@ $\lambda(x+L) = \lambda x + L$.\\
 $(x_1,x_2)_E - (y_1,y_2)_E = (x_1,x_2)_E - (y_1,x_2)_E + (y_1,x_2)_E - (y_1,y_2)_E = (x_1-y_1,x_2)_E + (y_1,x_2-y_2)_E = 0$.\\
 Отже, $(x_1,x_2)_E = (y_1,y_2)_E \implies (x_1+L,x_2+L)_{E/_L} = (y_1+L,y_2+L)_{E/_L}$.\\
 Щодо властивостей скалярного добутку. Це вже точно квазіскалярний. Тобто залишилося довести, що $(x+L,x+L)_{E/_L} = 0 \iff x+L = L$.\\
-$(x+L,x+L)_{E/_L} = 0 \implies (x,x)_E = 0 \implies x \in L \implies x+L = L$. 
+$(x+L,x+L)_{E/_L} = 0 \implies (x,x)_E = 0 \implies x \in L \implies x+L = L$.
+ 
 \subsection{Ортогональне доповнення}
 \begin{definition}
 Задано $H$ -- гілбертів простір.\\
@@ -1866,6 +2205,25 @@ $(x+L,x+L)_{E/_L} = 0 \implies (x,x)_E = 0 \implies x \in L \implies x+L = L$.
 Позначення: $x \perp y$.
 \end{definition}
 
+\noindent Я залишу еквівалентне означення, яке менж розповсюджене, проте корисне буде для деяких локальних міркувань. Одне з локальних міркувань -- це майбутня лема (не теорема) Ріса.
+
+\begin{theorem}
+Задано $H$ -- гілбертів простір.\\
+$x \perp y \iff \forall \lambda \in \mathbb{C}: \|x\| \leq \|x + \lambda y\|$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $x \perp y$, тоді $(x,y) = 0$, а звідси отримаємо\\
+$\|x + \lambda y\|^2 = (x+\lambda y, x+\lambda y) = \|x\|^2 + \lambda (y,x) + \overline{\lambda}(x,y) + \lambda^2 \|y\|^2 = \|x\|^2 + \lambda^2 \|y\|^2 \geq \|x\|^2$.
+\bigskip \\
+\leftproof Дано: $\forall \lambda \in \mathbb{C}: \|x\| \leq \|x + \lambda y\|$. Розпишемо ще раз нерівність:\\
+$\|x\|^2 \leq \|x\|^2 + \lambda (y,x) + \overline{\lambda}(x,y) + \lambda^2 \|y\|^2$.\\
+$2 \Re \lambda (y,x) + |\lambda|^2 \|y\|^2 \geq 0$.\\
+Оскільки це виконується для кожного $\lambda \in \mathbb{C}$, то зокрема й для $\lambda = \dfrac{-(x,y)}{\|y\|^2}$ при $y \neq 0$. Отримаємо:\\
+$2 \Re \left( \dfrac{-(x,y)}{\|y\|^2} (y,x) \right) + \dfrac{|(x,y)|^2}{\|y\|^2}  \geq 0$\\
+$-3 |(x,y)|^2 \geq 0 \implies (x,y) = 0$.
+\end{proof}
+
 \begin{definition}
 Задано $H$ -- гілбертів простір та $G \subset H$.\\
 \textbf{Ортогональним доповненням} підмножини $G$ називають таку множину:
@@ -1874,13 +2232,21 @@ G^\perp = \{x \in H \mid \forall y \in G: (x,y) = 0\}
 \end{align*}
 \end{definition}
 
+\begin{remark}
+Маючи вище теорему, ми можемо переписати ортогональне доповнення інакше:
+\begin{align*}
+G^\perp = \{x \in H \mid \forall y \in G: \|x+y\| \geq \|x\|\}
+\end{align*}
+\end{remark}
+
 \begin{proposition}
-Задано $H$ -- гілбертів простір та $G \subset H$. Тоді $G^\perp$ -- підпростір.
+Задано $H$ -- гілбертів простір та $G \subset H$. Тоді $G^\perp$ -- замкнений підпростір.
 \end{proposition}
 
 \begin{proof}
 Нехай $x_1,x_2 \in G^\perp$, тобто звідси $\forall y \in G: (x_1,y) = 0,\ (x_2,y) = 0$. Звідси випливає, що\\
-$(\lambda_1 x_1 + \lambda_2 x_2, y) = \lambda_1 (x_1, y) + \lambda_2 (x_2,y) = 0$, а тому отримали $\lambda_1 x_1 + \lambda x_2 \in G^\perp$.
+$(\lambda_1 x_1 + \lambda_2 x_2, y) = \lambda_1 (x_1, y) + \lambda_2 (x_2,y) = 0$, а тому отримали $\lambda_1 x_1 + \lambda x_2 \in G^\perp$.\\
+Тепер нехай $\sequence{x_n} \subset G^\perp$, де $x_n \to x$. Тепер маємо $(x_n,y) = 0$, але через неперервність, то при $n \to \infty$ отримаємо $(x,y) = 0$, тому $x \in G^\perp$.
 \end{proof}
 
 \iffalse %TODO обробити властивості
@@ -1893,39 +2259,52 @@ $(\lambda_1 x_1 + \lambda_2 x_2, y) = \lambda_1 (x_1, y) + \lambda_2 (x_2,y) = 0
 \end{remark}
 \fi
 \noindent
-Уже якось доводилося, що в унітарних просторах $E$ та підпросторі $L \subset E$ кожний вектор розбивається на суму проєктивного та ортогонального вектора. Спробуємо показати, що це можливо також в гілбертових просторах. Це робиться окремо, бо там ми доводили для скінченновимірного випадку.
+Уже якось доводилося, що в унітарних просторах $E$ та підпросторі $L \subset E$ кожний вектор розбивається на суму проєктивного та ортогонального вектора. Спробуємо показати, що це можливо також в довільних гілбертових просторах. Це робиться окремо, бо там ми доводили для скінченно вимірного випадку.
 
-\begin{theorem}
-Нехай $H$ -- гілбертів простір та $G \subset H$. Тоді для кожного $x \in H$ існує єдиний $y \in G$ такий, що $x-y \in G^{\perp}$.
+\begin{theorem}[Про існування проєкції на підпростір]
+Нехай $H$ -- гілбертів простір та $G \subset H$ -- підпростір. Тоді для кожного $x \in H$ існує єдиний $y \in G$ такий, що $x-y \in G^{\perp}$.\\
+\textit{По суті, ця теорема каже, що $G^\perp$ точно містить ненульовий вектор, коли $H \neq \{0\}$.}
 \end{theorem}
 
 \begin{proof}
 I. \textit{Існування}.\\
 Якщо $x \in G$, то кладемо вектор $y = x$.\\
-Нехай $x \in H \setminus G$. Визначимо відстань $\displaystyle d = \rho(x,G) \overset{\text{def.}}{=} \inf_{y \in G} \|x-y\|$. Оскільки $x \notin G$, то звідси $d > 0$. Відокремимо послідовність $(y_n)_{n=1}^\infty$ таку, що $d_n \overset{\text{позн}}{=} \|x-y_n\| \to d$.\\
+Нехай $x \in H \setminus G$. Визначимо відстань $\displaystyle d = \rho(x,G) \overset{\text{def.}}{=} \inf_{y \in G} \|x-y\|$. Оскільки $x \notin G$, то звідси $d > 0$. Відокремимо послідовність $(y_n)_{n=1}^\infty$ таку, що $d_n \overset{\text{позн}}{=} \|x-y_n\| \to d$. Доведемо, що $\sequence{y_n}$ буде збіжною до деякого елемента $y$, який буде нашим шуканим. Для цього треба довести фундаментальність, зокрема довести $\|y_m - y_n\|^2 = (y_m - y_n, y_m - y_n) \to 0$. Натомість будемо оцінювати $|(y_m - y_n, h)|,\ h \in G$.\\
 Для кожного вектора $h \in G$ та скаляра $\lambda \in \mathbb{C}$ ми розглянемо вектор $y_n + \lambda h \in G$. Зрозуміло, що $\|x - (y_n + \lambda h)\| \geq d$, але спробуємо ще оцінити дану норму.\\
 $\|x - (y_n + \lambda h)\|^2 = (x-y_n-\lambda h, x-y_n-\lambda h) = (x-y_n,x-y_n) + (x-y_n, -\lambda h) + (-\lambda h, x-y_n) + (-\lambda h, -\lambda h) = \|x-y_n\|^2 + |\lambda|^2 \|h\|^2 - \lambda(h,x-y_n) - \bar{\lambda}(x-y_n,h)$.\\
 Ми оберемо $\lambda = \dfrac{(x-y_n,h)}{\|h\|^2}$. Тоді отримаємо:\\
 $\|x-(y_n+\lambda h)\|^2 = \dfrac{ (x-y_n,h)^2 }{\|h\|^2} - \dfrac{(h,x-y_n)(x-y_n,h)}{\|h\|^2} - \dfrac{(h,x-y_n)(x-y_n,h)}{\|h\|^2} + \|x-y_n\|^2 = \\
 = d_n^2 - \dfrac{|(x-y_n,h)|^2}{\|h\|^2}$.\\
 Таким чином, отримали $d_n^2 - \dfrac{|(x-y_n,h)|^2}{\|h\|^2} \geq d^2$. Внаслідок чого $|(x-y_n,h)|^2 \leq \|h\|^2 (d_n^2-d^2)$.\\
-Далі, $|(y_m-y_n,h)| = |(x-y_n,h) - (x-y_m,h)| \leq |(x-y_n,h)| + |(x-y_m,h)| \leq \|h\| \sqrt{d_n^2-d^2} \sqrt{d_m^2 - d^2}$.\\
+Далі, $|(y_m-y_n,h)| = |(x-y_n,h) - (x-y_m,h)| \leq |(x-y_n,h)| + |(x-y_m,h)| \leq \|h\| \left(\sqrt{d_n^2-d^2} + \sqrt{d_m^2 - d^2}\right)$.\\
 Оберемо вектор $h = y_m - y_n$, тоді отримаємо наступне:\\
-$\|y_m-y_n\|^2 \leq \|y_m-y_n\| \sqrt{d_n^2-d^2} \sqrt{d_m^2 -d^2}$.\\
-$\|y_m-y_n\| \leq \sqrt{d_n^2-d^2} \sqrt{d_m^2 -d^2} \to 0$.\\
+$\|y_m-y_n\|^2 \leq \|y_m-y_n\| \left(\sqrt{d_n^2-d^2} + \sqrt{d_m^2 -d^2}\right)$.\\
+$\|y_m-y_n\| \leq \sqrt{d_n^2-d^2} + \sqrt{d_m^2 -d^2} \to 0$.\\
 Таким чином, послідовність $(y_n)_{n=1}^\infty$ фундаментальна, а в силу повноти збіжна. Тобто $y_n \to y \in G$. Маючи нерівність $|(x-y_n,h)|^2 \leq \|h\|^2 (d_n^2-d^2)$, при $n \to \infty$ отримаємо $(x-y,h) = 0$ для всіх $h \in G$. Це означає, що $x-y \in G^\perp$.
 \bigskip \\
 II. \textit{Єдиність}.\\
 !Припустимо, що існує ще один вектор $y' \in G$ так, щоб $x - y' \in G^\perp$. Тоді\\
-$(y-y',h) = (x-y',h) - (x-y,h) = 0, \forall h \in H \implies y = y'$ -- суперечність!
+$(y-y',h) = (x-y',h) - (x-y,h) = 0, \forall h \in G$. Зокрема якщо обрати $h = y - y'$, то тоді швидко отримаємо $y = y'$ -- суперечність!
 \end{proof}
 \noindent
 Отже, нехай $x \in H$. За щойно доведеною теоремою, $\exists ! x_1 \in H$ такий, що $x_2 \overset{\text{позн.}}{=} x - x_1 \in G^\perp$. Власне, ми отримали однозначний розклад $x = x_1 + x_2$, де вектори $x_1 \in G, x_2 \in G^\perp$.\\
 Перший вектор називається \textbf{ортогональною проєкцією}, позначають $x_1 = \pr_G x$.\\
 Другий вектор називається \textbf{ортогональним складником}, позначають $x_2 = \ort_G x$.\\
 Отже, кожний вектор $x \in H$ має єдиний розклад в $x = \pr_G x + \ort_G x$.
+\bigskip \\
+Власне, якщо $H$ -- гілбертів простір та $G \subset H$ -- підпростір, то $H = G \oplus G^\perp$.
 
-\subsection{Простір, спряжений до гілбертого}
+\begin{proposition}[Теорема Піфагора]
+$\|x\|^2 = \|\pr_G x\|^2 + \|\ort_G x\|^2$.\\
+\textit{Вказівка: розписати $\|x\|^2$ та зауважити, що $(\pr_G x, \ort_G x) = 0$.}
+\end{proposition}
+
+\begin{remark}
+\label{equivalent_existence_of_orthogonal_unit_vector}
+Буде корисним залишити таке зауваження. Якщо $H$ -- гілбертів простір та $G \subset H$ -- замкнений підпростір, то тоді існує $G^\perp \neq \{0\}$. Внаслідок чого ми знайдемо вектор $y \notin G$, причому $\|y\|=  1$, для якого $\forall x \in G: \|x+y\| \geq 1$.
+\end{remark}
+
+\subsection{Простір, спряжений до гілбертового}
 \begin{theorem}[Теорема Ріса]
 Нехай $H$ -- гілбертів. Тоді для будь-якого $l \in H'$ існує єдиний вектор $u \in H$ такий, що $\forall x \in H: l(x) = (x,u)$.
 \end{theorem}
@@ -1978,33 +2357,34 @@ $G$ -- тотальна в $H \iff \forall h \in H: h \perp G \implies h = 0$.
 
 \subsection{Ортонормовані системи та базиси}
 \begin{definition}
-Система $\{e_\alpha\}_{\alpha \in I}$ називається \textbf{ортонормованою}, якщо
+Система векторів $\{e_i\}_{i=1}^\infty$ (поки не більш, ніж зліченні системи розглядатимемо) називається \textbf{ортонормованою}, якщо
 \begin{align*}
-(e_\alpha,e_\beta) = \delta_{\alpha \beta},
+(e_i,e_j) = \delta_{ij} = \begin{cases} 1,& i = j \\ 0, & i \neq j \end{cases},
 \end{align*}
 де $\delta$ -- дельта-символ Кронекера.
 \end{definition}
 
 \begin{example}
-У просторі $l_2$ система, що є базисом Шаудера, -- ортонормована.
+У просторі $l_2$ система, яка є базисом Шаудера, -- ортонормована.
 \end{example}
 
 \begin{lemma}
-Нехай $(e_j)_{j=1}^\infty$ -- ортонормована система.\\
+Нехай $\{e_j\}_{j=1}^\infty$ -- ортонормована система векторів.\\
 $\displaystyle\sum_{i=1}^\infty c_i e_i$ -- збіжний ряд $\iff \displaystyle\sum_{i=1}^\infty |c_i|^2 < \infty$.
 \end{lemma}
 
 \begin{proof}
+Щоб довести в обидві сторони, треба зауважити, що справедлива рівність:\\
 $\displaystyle\left\| \sum_{i=1}^n c_i e_i - \sum_{i=1}^m c_i e_i \right\| = \left\| \sum_{i=m+1}^n c_i e_i \right\| = \left( \sum_{i=m+1}^n c_i e_i, \sum_{k=m+1}^n c_k e_k \right) = \sum_{i=m+1}^n \sum_{k=m+1}^n c_i \overline{c_k} (e_i,e_k) = \sum_{i=m+1}^n |c_i|^2$.\\
 Це ми припускали всюди, що $n > m$.
 \end{proof}
 
 \begin{theorem}[Нерівність Бесселя]
-Нехай $(e_j)_{j=1}^\infty$ -- ортонормована система. Тоді $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i$ збігається, причому $\|x\|^2 \geq \displaystyle\sum_{i=1}^\infty |(x,e_i)|^2$.
+Нехай $\{e_j\}_{j=1}^\infty$ -- ортонормована система. Тоді $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i$ збігається, причому $\|x\|^2 \geq \displaystyle\sum_{i=1}^\infty |(x,e_i)|^2$.
 \end{theorem}
 
 \begin{remark}
-До речі, коефіцієнти $(x,e_i)$ називаються \textbf{коефіцієнтами Фур'є}. По сути, ми зробили розклад Фур'є в загального випадку та отримали додатково нерівність Бесселя.
+До речі, коефіцієнти $(x,e_i)$ називаються \textbf{коефіцієнтами Фур'є}, а сам ряд -- \textbf{рядом Фур'є}. По суті, ми зробили розклад Фур'є в загального випадку та отримали додатково нерівність Бесселя.
 \end{remark}
 
 \begin{proof}
@@ -2013,42 +2393,80 @@ $0 \leq \displaystyle\left\| x - \sum_{i=1}^n (x,e_i)e_i \right\|^2 = \left(x - 
 Отже, $\|x\|^2 \geq \displaystyle\sum_{i=1}^\infty |(x,e_i)|^2$. До того, ж за лемою, оскільки цей ряд збіжний за цією нерівністю, то ряд $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i$ збіжний при всіх $x \in H$.
 \end{proof}
 
-\subsection{Ортнормовані базиси}
+\begin{remark}
+Нехай $\{e_i\}_{i=1}^\infty$ -- ортонормована система. Тоді вже відомо, що $\displaystyle\sum_{i=1}^\infty |(x,e_k)|^2$ -- збіжний ряд, тому звідси за необхідною ознакою збіжності $(x,e_k) \to 0$ при $k \to \infty$, причому для всіх $x \in H$. Внаслідок чого ми отримаємо, що $e_n \toweak 0$. При цьому $\|e_n - e_m\| = \sqrt{2}$, тому $e_n \not\to 0$ (не сильно збіжна).
+\end{remark}
+
 \begin{lemma}
-Нехай $(e_i)_{i=1}^\infty$ -- ортонормована система та $G = \overline{\linspan\{e_i,i = 1,2,\dots\}} \subset H$. Тоді $\forall x \in H: \pr_G x = \displaystyle\sum_{i=1}^\infty (x,e_i)e_i$.
+Нехай $\{e_i\}_{i=1}^\infty$ -- ортонормована система та $G = \overline{\linspan\{e_i\}_{i=1}^\infty}\subset H$. Тоді $\forall x \in H: \pr_G x = \displaystyle\sum_{i=1}^\infty (x,e_i)e_i$.
 \end{lemma}
 
 \begin{proof}
-Ми хочемо довести, що $\forall x \in H: x - \displaystyle\sum_{i=1}^\infty (x,e_i)e_i \in G^\perp$. Таким чином, у силу єдиності, $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i \in G^\perp = \pr_G x$. Але за тим, чому дорівнює простір $G$, нам буде досить довести це лише для всіх $e_i$ (TODO: ?).\\
-$\displaystyle\left(x, \sum_{i=1}^\infty (x,e_i)e_i,\ e_k\right) = (x,e_k) - \sum_{i=1}^\infty (x,x_i)(e_i,e_k) = (x,e_k) - (x,e_k) = 0$.
+Ми хочемо довести, що $\forall x \in H: x - \displaystyle\sum_{i=1}^\infty (x,e_i)e_i \in G^\perp$. Таким чином, у силу єдиності, $\displaystyle\sum_{i=1}^\infty (x,e_i)e_i = \pr_G x$. Але за тим, чому дорівнює простір $G$, нам буде досить довести це лише для всіх $e_k$.\\
+$\displaystyle\left(x - \sum_{i=1}^\infty (x,e_i)e_i,\ e_k\right) = (x,e_k) - \sum_{i=1}^\infty (x,e_i)(e_i,e_k) = (x,e_k) - (x,e_k) = 0$.
 \end{proof}
 
 \begin{definition}
-Система $(e_i)_{i=1}^\infty$ називається \textbf{ортонормованим базисом}, якщо
+Задано $H$ -- гілбертів простір.\\
+Система $\{e_i\}_{i =1}^\infty$ називається \textbf{ортонормованим базисом}, якщо
 \begin{align*}
-(e_i)_{i=1}^\infty - \text{ортонормована система} \\
-\overline{\linspan\{e_i,i = 1,2,\dots\}} = H
+\{e_i\}_{i =1}^\infty \text{ -- тотальна в $H$ ортонормована система}.
 \end{align*}
 \end{definition}
 \noindent
-Оскільки $\pr_H x = x$, то звідси $\forall x \in H$ маємо розклад $x = \displaystyle\sum_{i=1}^\infty (x,e_i)x_i$.\\
-Також для будь-якого $y = \displaystyle\sum_{i=1}^\infty (y,e_i)e_i$ скалярний добуток $(x,y) = \displaystyle\sum_{i=1}^\infty (x,e_i)\overline{(y,e_i)}$.\\
-Ба більше, $\|x\|^2 = \displaystyle\sum_{i=1}^\infty \|(x,e_i\|^2$ -- так звана \textbf{рівність Парсеваля}.
+Оскільки $\pr_H x = x$, то звідси $\forall x \in H$ маємо однозначний розклад $x = \displaystyle\sum_{i=1}^\infty (x,e_i)x_i$. Також для будь-якого $y = \displaystyle\sum_{i=1}^\infty (y,e_i)e_i$ скалярний добуток $(x,y) = \displaystyle\sum_{i=1}^\infty (x,e_i)\overline{(y,e_i)}$. Зокрема окремо запишу це:
+
+\begin{theorem}[Рівність Парсеваля]
+Нехай $H$ -- гілбертів простір та $\{e_i\}_{i=1}^\infty$ -- ортонормований базис. Тоді $\|x\|^2 = \displaystyle\sum_{i=1}^\infty |(x,e_i)|^2$.
+\end{theorem}
 
 \begin{theorem}
-Нехай $(e_i)_{i=1}^\infty$ -- ортонормована система.\\
-$(e_i)_{i=1}^\infty$ -- ортонормований базис $\iff \forall x \in H$ спраедлива рівність Парсеваля.
+Нехай $\{e_i\}_{i=1}^\infty$ -- ортонормована система.\\
+$\{e_i\}_{i=1}^\infty$ -- ортонормований базис $\iff \forall x \in H$ спраедлива рівність Парсеваля.
 \end{theorem}
 
 \begin{proof}
 \rightproof \textit{Щойно довели}.
 \bigskip \\
-\leftproof Дано: $\forall x \in H: \|x\|^2 = \displaystyle\sum_{i=1}^\infty \|(x,e_i)\|^2$. При доведенні нерівності Бесселя ми отримали рівність $\displaystyle\left\| x - \sum_{i=1}^n (x,e_i)e_i \right\|^2 = \|x\|^2 - \sum_{j=1}^n \|(x,e_i)\|^2$. Отже, при $n \to \infty$ отримаємо $\displaystyle\sum_{i=1}^n (x,e_i)e_i \to x$. Отже, $(e_i)_{i=1}^\infty$ -- ортонормований базис.
+\leftproof Дано: $\forall x \in H: \|x\|^2 = \displaystyle\sum_{i=1}^\infty |(x,e_i)|^2$. При доведенні нерівності Бесселя ми отримали рівність $\displaystyle\left\| x - \sum_{i=1}^n (x,e_i)e_i \right\|^2 = \|x\|^2 - \sum_{j=1}^n |(x,e_i)|^2$. Отже, при $n \to \infty$ отримаємо $\displaystyle\sum_{i=1}^n (x,e_i)e_i \to x$. Отже, $\{e_i\}_{i=1}^\infty$ -- ортонормований базис.
 \end{proof}
 
 \subsection{Ортогоналізація системи векторів}
+Задано $H$ -- гілбертів простір та $\{u_n\}_{n=1}^\infty$ -- якась зліченна система ненулевих векторів. Ми хочемо цю систему ортогоналізувати. Тобто ми побудується ортонормовану систему $\{e_n\}_{n=1}^\infty$ так, щоб $\linspan\{e_n\} = \linspan\{u_n\}$.\\
+Перед стартом відкинемо з даної системи кожний вектор, що линейно залежний від попередніх. У нас тоді буде система $\{v_n\}_{n=1}^\infty$, причому все одно $\linspan\{v_n\} = \linspan\{u_n\}$, а сама система може бути як і скінченною, так і зліченною.\\
+Маємо вектор $e_1' = v_1$. Його одразу нормалізуємо, тобто $e_1 = \dfrac{e_1}{\|e_1\|}$.\\
+Маємо вектор $e_2' = v_2 - \lambda_{11} e_1$, де число $\lambda_{11}$ можна знайти з умови $e'_2 \perp e_1$. Ми вже таке робили в ліналі, тому, можливо, не повторятиму. Далі нормалізовуємо, буде $e_2 = \dfrac{e_2'}{\|e'_2\|}$\\
+Маємо вектор $e_3 = v_3 - \lambda_{21}e_1 - \lambda_{22}e_2$, де числа $\lambda_{21},\ \lambda_{22}$ можна знайти з умов $e'_3 \perp e_1,\ e'_3 \perp e_2$. Робимо аналогічно, а далі нормалізовуємо, буде $e_3 = \dfrac{e_3'}{\|e'_3\|}$.
+\vdots \\
+Отримаємо не більш ніж зліченну систему $\{e_n\}_{n=1}^\infty$. Зауважимо, що за побудовою $\linspan\{e_n\} = \linspan\{v_n\}$. Також кожний вектор із системи $\{v_n\}_{n=1}^\infty$ записується в вигляді $v_{n+1} = e_{n+1}' + \lambda_{n1}e_1 + \dots + \lambda_{nn}e_n$, тобто звідси $v_{n+1} \in \linspan\{e_1,\dots,e_{n+1}\}$, внаслідок чого $\linspan\{v_n\} \subset \linspan\{e_n\}$.\\
+Остаточно, $\linspan\{u_n\} = \linspan\{e_n\}$ -- ортогоналізували.
+
+\begin{corollary}
+Задано $H$ -- сепарабельний гілбертів простір. Тоді існує ортонормований базис.
+\end{corollary}
+
+\begin{proof}
+Оскільки $H$ -- сепарабельний, оберемо скрізь щільну підмножину $G = \{u_n\}_{n=1}^\infty$. Застосуємо вище описаний процес ортогоналізації -- отримаємо ортонормовану систему $\{e_n\}_{n=1}^\infty$, причому $\overline{\linspan\{e_n\}_{n=1}^\infty} = H$. За означенням, $\{e_n\}_{n=1}^\infty$ -- ортонормований базис.
+\end{proof}
+
 \begin{theorem}
-Нехай $(f_j)_{j=1}^\infty$ -- деяка система векторів та $G = \overline{\linspan\{f_j\}}$. Тоді існує ортонормована система $(e_j)_{j=1}^{n (\infty)}$ (яка може бути скінченною чи зліченною) така, що $\overline{\linspan\{e_j\}} = G$.
+Задано $H$ -- сепарабельний нескінченний гілбертів простір. Тоді $H \cong l_2$ ізоморфним чином. (якщо $H$ скінченний, то там $H \cong \mathbb{C}^n$).
+\end{theorem}
+
+\begin{proof}
+Саме тому я спочатку навів наслідок вище, щоб можна було грамотно розписати цю теорему. У нас $H$ -- сепарабельний, тому є ортонормований базис $\{e_n\}_{n=1}^\infty$, звідси $\forall x \in H: x = \displaystyle\sum_{k=1}^\infty x_k e_k$.\\
+Побудуємо оператор $A \colon H \to l_2$ ось таким чином: $Ax = (x_1,x_2,\dots)$, це числа $x_i$ були взяті з розкладу елемента $x \in H$. Зауважимо, що $(x_1,x_2,\dots) \overset{\text{справді}}{\in} l_2$ (умовно можна пояснити це через рівність Парсеваля). Оператор $A$ -- лінійний, це ясно. Також $A$ -- бієкція, тому що кожному $(x_1,x_2,\dots) \in l_2$ існуватиме (при тому єдиний) елемент $\displaystyle\sum_{k=1}^\infty x_k e_k \in H$, а він буде потрапляти в $H$ (за теоремою про нерівність Бесселя). Нарешті,\\
+$(x,y)_H = \displaystyle\sum_{i=1}^\infty (x,e_i) \overline{(y,e_i)} = \sum_{i=1}^\infty x_k \overline{y_k} = (\{x_k\},\{y_k\})_{l_2}$.\\
+$\|x\|_H = \displaystyle\sum_{k=1}^\infty |(x,e_k)|^2 = \sum_{k=1}^\infty |x_k|^2 = \| \{x_k\}|_{l_2}$.
+\end{proof}
+
+\begin{corollary}
+Усі сепарабельні нескінченні гілбертвоі простори між собою ізометричним чином ізоморфні.
+\end{corollary}
+
+\iffalse
+\begin{theorem}
+Задано $H$ -- гілбертів простір. Нехай $\{f_j\}_{j=1}^\infty$ -- деяка система векторів та $G = \overline{\linspan\{f_j\}_{j=1}^\infty}$. Тоді існує ортонормована система $\{e_j\}_{j=1}^{n (\infty)}$ (яка може бути скінченною чи зліченною) така, що $\overline{\linspan\{e_j\}_{j=1}^\infty} = G$.
 \end{theorem}
 
 \begin{proof}
@@ -2075,10 +2493,904 @@ $(e_i)_{i=1}^\infty$ -- ортонормований базис $\iff \forall x 
 \begin{proof}
 Маємо $H$ -- сепарабельний, тобто існує зліченний ортонормований базис $(e_j)$. Задамо ізоморфізм $H \ni x = \displaystyle\sum_{i=1}^\infty x_i e_i \mapsto (x_1,x_2,\dots) \in l_2$. Остання послідовність справді лежить в $l_2$, завдяки рівності Парсеваля. При цьому $(x,y)_H = \displaystyle\sum_{i=1}^\infty x_i \overline{y_i} = (x,y)_{l_2}$. (TODO: деталізувати).
 \end{proof}
+\fi
+
+\subsection{Коротко про ортонормовану систему векторів довільної потужності}
+\begin{definition}
+Система векторів $\{e_\alpha\}_{\alpha \in I}$ називається \textbf{ортонормованою}, якщо
+\begin{align*}
+(e_\alpha,e_\beta) = \delta_{\alpha \beta} = \begin{cases} 1,& \alpha = \beta \\ 0, & \alpha \neq \beta \end{cases},
+\end{align*}
+де $\delta$ -- дельта-символ Кронекера.
+\end{definition}
+
+\begin{remark}
+Зрозуміло, що якщо в гілбертовому просторі існує незліченна ортонормована система, то тоді гілбертів простір не буде більше сепарабельним.
+\end{remark}
+
+\begin{lemma}
+Задано $H$ -- гілбертів простір та $\{e_\alpha\}_{\alpha \in I}$ -- незліченна ортонормована система. Розглянемо коефіцієнти Фур'є $(x,e_\alpha)$, тоді кількість ненулевих коефіцієнтів -- не більш, ніж зліченна.
+\end{lemma}
+
+\begin{proof}
+Розглянемо множину $I_n = \left\{ \alpha \in I \mid (x,e_\alpha) > \dfrac{1}{n} \right\}$. Такі множини будуть скінченними.\\
+!Припустимо, що ні. Тоді можна взяти зліченну кількість $(\alpha_k)_{k=1}^\infty$, для яких $(x,e_{\alpha_k}) > \dfrac{1}{n}$. Тоді з одного боку, $\displaystyle\sum_{k=1}^\infty |(x,e_{\alpha_k})|^2 = \infty$, проте за нерівністю Бесселя, $\displaystyle\sum_{k=1}^\infty |(x,e_{\alpha_k})|^2 \leq \|x\|^2 < \infty$. Суперечність!\\
+Тепер зауважимо, що $\{\alpha \in I \mid (x,e_\alpha) \neq 0\} = \displaystyle\bigcup_{n=1}^\infty I_n$, така множина не більш, ніж зліченна.
+\end{proof}
+
+\begin{lemma}
+Нехай $\{e_\alpha\}_{\alpha \in I}$ -- ортонормована система та $G = \overline{\linspan\{e_\alpha\}_{\alpha \in I}} \subset H$. Тоді $\forall x \in H: \pr_G x = \displaystyle\sum_{\alpha \in J}(x,e_\alpha) e_\alpha$. Сумуємо по множині $J$, де ненулеві коефіцієнти Фур'є.\\
+\textit{Міркування аналогічні.}
+\end{lemma}
+
+\begin{definition}
+Задано $H$ -- гілбертів простір.\\
+Система $\{e_\alpha\}_{\alpha \in I}$ називається \textbf{ортонормованим базисом}, якщо
+\begin{align*}
+\{e_\alpha\}_{\alpha \in I} \text{ -- тотальна в $H$ ортонормована система}.
+\end{align*}
+\end{definition}
+Аналогічним чином тоді $x = \displaystyle\sum_{\alpha \in J} (x,e_\alpha) e_\alpha$. Сумуємо по множині $J$, де ненулеві коефіцієнти Фур'є. Аналогічно працює рівність Парсеваля та скалярний добуток.
+
+\subsection{Про форми в гілбертових просторах}
+Із курсу лінійної алгебри вже знаємо, що така півторалінійна форма $b$. Також ввордили таке поняття, як ермітові форми та квадратичні форми. У гілбертововму просторі поляризаційна тотожність все одно працює.
+
+\begin{definition}
+Півторалінійна форма $b \colon H \times H \to \mathbb{C}$ називається \textbf{обмеженою}, якщо
+\begin{align*}
+\exists C > 0: \forall x,y \in H: |b(x,y)| \leq C \cdot \|x\| \cdot \|y\|
+\end{align*}
+Аналогічним чином ми визначимо \textbf{норму} форми таким чином:
+\begin{align*}
+\|b\| = \inf\{C > 0 \mid \forall x, y \in H: |b(x,y)| \leq C\|x\| \|y\|\}
+\end{align*}
+\end{definition}
+
+\begin{example}
+Зокрема, по-перше, скалярний добуток $b(x,y) = (x,y)$ сам по собі є півторалінійною ермітовою формою. По-друге, він -- обмежений. Дійсно, це випливає з нерівності Коші-Буняковського:\\
+$|b(x,y)| = |(x,y)| \leq \sqrt{(x,x)} \sqrt{(y,y)} = 1 \cdot \|x\| \cdot \|y\|$.
+\end{example}
+
+\begin{proposition}
+Задано $A \in \mathcal{B}(H)$. Тоді $b_A(x,y) = (Ax,y)$ задаватиме обмежену півторалінійну ермітову форму.\\
+\textit{Вправа: довести.}
+\end{proposition}
+
+\begin{theorem}
+Нехай заданий $b$ -- обмежений півторалінійний функціонал. Тоді існує єдиний оператор $A \in \mathcal{B}(H)$, для якого $b(x,y) = (Ax,y)$.\\
+\textit{Щось таке подібне було в лінійній алгебрі, проте я передоведу.}
+\end{theorem}
+
+\begin{proof}
+Зафіксуємо $x \in H$, тоді зауважимо, що $f(y) = \overline{b(x,y)}$ буде обмеженим лінійним функціоналом на $H$. За теоремою Ріса, ми можемо знайти єдиний вектор $a_x \in H$, для якого $\overline{b(x,y)} = (y,a_x)$, або $b(x,y) = (a_x,y)$.\\
+Таким чином, побудували відображення $A \colon H \to H$, що діє як $Ax = a_x$. Доведемо, що це той самий $A \in \mathcal{B}(H)$.\\
+Нехай $x_1,x_2 \in H$ та $\alpha_1,\alpha_2 \in \mathbb{C}$. Маємо наступне:\\
+$(A(\alpha_1 x_1 + \alpha_2 x_2), y) = b(\alpha_1 x_1 + \alpha_2 x_2,y) = \alpha_1 b(x_1,y) + \alpha_2 b(x_2,y) = \alpha_1 (Ax_1,y) + \alpha_2 (Ax_2,y) = (Ax_1 + Ax_2, y)$.\\
+Оскільки ця рівність виконується для всіх $y \in H$, то звідси $A(\alpha_1 x_1 + \alpha_2 x_2) = \alpha_1 Ax_1 + \alpha_2 Ax_2$.\\
+Ми вже знаємо, що $|(Ax,y)| = |(a_x,y)| = |b(x,y)| \leq c \|x\| \|y\|$. Якщо підставити $y = Ax$, то звідси випливатиме оцінка $\|Ax\| \leq c \|x\|$. Довели обмеженість.\\
+Єдиність цілком зрозуміло.
+\end{proof}
+
+\begin{theorem}
+Нехай заданий $b$ -- обмежений півторалінійний функціонал. Уже відомо, що йому асоціюється єдиний оператор $A \in \mathcal{B}(H)$, де $b(x,y) = (Ax,y)$. Тоді $\|b\| = \|A\|$.
+\end{theorem}
+
+\begin{proof}
+Маємо $|b(x,y)| = |(Ax,y)| \leq \|Ax\| \|y\| \leq \|A\| \|x\| \|y\|$. Тобто $\|A\|$ -- константа, що обмежує форму, тому за означенням норми форми, $\|b\| \leq \|A\|$.\\
+Із іншого боку, $\|Ax\|^2 = |b(x,Ax)| \leq \|b\| \|x\| \|Ax\|$, внаслідок чого $\|Ax\| \leq \|b\| \|x\|$. Тобто  $\|b\|$ -- константа, що обмежує оператор, тому за означення норми оператора, $\|A\| \leq \|b\|$.\\
+Отже, ці два міркування дають сказати нам $\|b\| = \|A\|$.
+\end{proof}
+
+\subsection{Про деякі типи операторів}
+\subsubsection{Спряжений оператор (ще раз)}
+У гілбертовому просторі $H'$ можна ототожнити з множиною $H$ за теоремою Ріса. Також $l(x) = (x,l)$ звідти ж. Тепер розглянемо оператор $A \in \mathcal{B}(H_1,H_2)$. Ми вже визначали спряжений оператор $A^* \in \mathcal{B}(H_2',H_1') = \mathcal{B}(H_2,H_1)$, що задається як $(A^*l)(x) = l(Ax)$.\\
+Відомо, що $(A^*l)(x) = l(Ax) = (Ax,l)$. Із іншого боку, $(A^*l)(x) = (x,A^*l)$.\\
+Таким чином, ми маємо еквівалентне означення в гілбертовому просторі:
+
+\begin{theorem}
+Оператор $A^* \in \mathcal{B}(H_1,H_2)$ -- спряжений в $A \iff (Ax,l) = (x,A^*l), \forall x \in H_1, \forall l \in H_2$.
+\end{theorem}
+
+\subsubsection{Самоспряжений оператор}
+\begin{definition}
+Оператор $A \in \mathcal{B}(H)$ називається \textbf{самоспряженим}, якщо
+\begin{align*}
+A = A^*
+\end{align*}
+\end{definition}
+\noindent
+За отриманим результатом вище маємо чергове означення:
+
+\begin{theorem}
+Оператор $A \in \mathcal{B}(H)$ -- самоспряжений $\iff \forall (Ax,l) = (x,Al), \forall x,l \in H$.
+\end{theorem}
+
+\begin{theorem}
+Будь-який оператор $A \in \mathcal{B}(H)$ єдиним чином можна подати в вигляді $A = \Re A + i \Im A$, де $\Re A, \Im A$ -- самоспряжені оператори.\\
+\textit{Уже в курсі ліналу доводили.}
+\end{theorem}
+
+\begin{theorem}
+$A \in \mathcal{B}(H)$ -- самоспряжений $\iff b_A$ -- ермітова форма $\iff q_A(x) = b_A(x,x) \in \mathbb{R}$.
+\end{theorem}
+
+\begin{proof}
+Почну з першої еквівалетності.\\
+\rightproof Дано: $A \in \mathcal{B}(H)$ -- самоспряжений. Тоді $b_A(x,y) = (Ax,y) = (x,Ay) = \overline{(Ay,x)} = \overline{b_A(y,x)}$.\\
+\leftproof Дано: $b_A$ -- ермітова форма. Тоді $(Ax,y) = b_A(x,y) = \overline{b_A(y,x)} = \overline{(Ay,x)} = (x,Ay)$.
+\bigskip \\
+Тепер доведемо другу еквівалентність.\\
+\rightproof Дано: $b_A$ -- ермітова форма. Тоді $b_A(x,x) = \overline{b_A(x,x)} \implies b_A(x,x) = q_A(x) \in \mathbb{R}$.\\
+\leftproof Дано: $q_A \in \mathbb{R}$. Використаємо поляризаційну тотожність:\\
+$4b_A(x,y) = q_A(x+y) - q_A(x-y) + i[q_A(x+iy) - q_A(x-iy)]$.\\
+$\overline{4b_A(y,x)} = \overline{q_A(y+x) - q_A(y-x) + i[q_A(y+ix) - q_A(y-ix)]} = \\ = \overline{q_A(y+x)} - \overline{q_A(y-x)} + \overline{i q_A(y+ix)} - \overline{i q_A(y-ix)} = q_A(y+x) - q_A(y-x) + \dfrac{1}{i} q_A(y+ix) - \dfrac{1}{i} q_A(y-ix) \\
+= q_A(x+y) - q_A(x-y) + i[q_A(x+iy) - q_A(x-iy)]$.\\
+Таким чином, $b_A(x,y) = \overline{b_A(y,x)}$, тобто $b_A$ -- ермітова.
+\end{proof}
+
+\subsubsection{Невід'ємні та напівобмежені оператори}
+\begin{definition}
+Оператор $A \in \mathcal{B}(H)$ називається \textbf{невід'ємним}, якщо
+\begin{align*}
+\forall x \in H: b_A(x,x) \geq 0
+\end{align*}
+Позначення: $A \geq 0$.\\
+Будемо казати, що $A \geq B$, якщо $A-B \geq 0$. Це задає відношення часткового порядку на $\mathcal{B}(H)$.
+\end{definition}
+
+\begin{definition}
+Оператор $A \in \mathcal{B}(H)$ називається \textbf{напівобмеженим знизу} числом, якщо
+\begin{align*}
+\exists c \in \mathbb{R}: \forall x \in H: b_A(x,x) \geq c \|x\|^2
+\end{align*}
+Оператор $A \in \mathcal{B}(H)$ називається \textbf{напівобмеженим зверху} числом, якщо
+\begin{align*}
+\exists d \in \mathbb{R}: \forall x \in H: b_A(x,x) \leq d \|x\|^2
+\end{align*}
+\end{definition}
+\noindent
+Якщо переписати нерівність по-інакшому, то ми отримаємо, що\\
+$A$ -- напівобмежений знизу числом $c \in \mathbb{R} \iff A \geq c I$;\\
+$A$ -- напівобмежений зверху числом $d \in \mathbb{R} \iff A \leq d I$.
+
+\begin{remark}
+Нехай $A \in \mathcal{B}(H)$ -- напівобмежений. Тоді $A$ -- самоспряжений.\\
+Це випливає безпосередньо з означення напівобмежених операторів.
+\end{remark}
+
+\begin{remark}
+Нехай $A \in \mathcal{B}(H)$ -- самоспряжений. Тоді $A$ напівобмежений зверху числом $\|A\|$ та знизу числом $-\|A\|$. Просто тому що справедлива нерівність $|(Ax,x)| \leq \|A\| \|x\|^2$.
+\end{remark}
+
+\begin{proposition}
+Задано $A \in \mathcal{B}(H)$ -- напівобмежений. Тоді $A$ -- оборотний.\\
+\textit{TODO: доробити.}
+\end{proposition}
+
+\subsubsection{Проєктор}
+\begin{definition}
+Задано $H$ -- гілбертів простір та $G \subset H$ -- замкнений підпростір.\\
+\textbf{Проєктором в $H$ на $G$} назвемо оператор $P_G$, який діє таким чином:
+\begin{align*}
+P_g x = \pr_g x
+\end{align*}
+Якщо $\{e_i\}_{i=1}^\infty$ -- ортнормований базис, то $P_G x = \displaystyle\sum_{i=1}^\infty (x,e_i)e_i$.
+\end{definition}
+
+\begin{theorem}
+Проєктор на $G$ має такі властивості:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $P_G \in \mathcal{B}(H)$, причому $\|P_G\| = 1$ за умовою, що $G \neq \{0\}$;
+\item $P_G$ -- ідемпотентний оператор;
+\item $P_G$ -- самоспряжений оператор;
+\item $P_G$ -- невід'ємний оператор.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Доведемо кожну властивість окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Маємо $x,y \in G$, треба довести $P_G(x+y) = P_Gx + P_Gy$, або теж саме $\pr_G(x+y) = \pr_G x + \pr_G y$.\\
+Оскільки $x,y \in H$, то для них існують єдині $\pr_G x,\pr_G y \in G$. Ми доведемо, що $(x+y) - (\pr_G x + \pr_G y) \in G^\perp$, тим самим за єдиністю проєкції отримаємо бажану рівність.\\
+$(x+y - \pr_G x - \pr_G y, g) = (x - \pr_G x, g) + (y - \pr_G y, g) = 0 + 0 = 0$.\\
+Отже, ми довели $P_G(x+y) = P_G(x) + P_G(y)$.\\
+Десь аналогічним чином доводиться, що $P_G(\lambda x) = \lambda P_G(x)$.\\
+Далі зауважимо, що $\|P_G x\|^2 = \| \pr_G x\|^2 = \|x\|^2 - \|\ort_G x\|^2 \leq 1 \cdot \|x\|^2$. Останнє повністю доводить той факт, що $P_G \in \mathcal{B}(H)$, причому тут $\|P_G\| \leq 1$. Якби був $G = \{0\}$, то ми би отримали $P_G = 0$. Інакше $\forall g \in G: P_G g = g$, внаслідок чого $\|P_G\| = 1$.
+
+\item Треба довести, що $P_G^2 = P_G$. Маємо $x \in H$, тоді звідси \\
+$P_G^2 x = P_G (P_G x) = P_G ( \pr_G x) = \pr_G x = P_G x$.
+
+\item $(P_Gx, y) = (\pr_G x, \pr_G y  + \ort_G y) = (\pr_G x, \pr_G y) = (\pr_G x, \ort_G y) = (\pr_G x, \pr_G y) = (\pr_G x, \pr_G y) = (\ort_G x, \pr_G y) = (\pr_G x + \pr_G x, \pr_G y) = (x, P_G y)$.
+
+\item $(P_G x, x) = (\pr_G x, \pr_G x + \ort_G x) = \|P_Gx\|^2 \geq 0$.
+\end{enumerate}
+Всі властивості довели.
+\end{proof}
+
+\begin{theorem}
+Задано $A \in \mathcal{B}(H)$ -- самоспряжений, ідемпотентний оператор. Тоді існує замкнений підпростір $G \subset H$, в якому оператор $A$ поводить себе як проєктор на $G$, тобто $A = P_G$.
+\end{theorem}
+
+\begin{proof}
+Розглянемо множину $G = \{g \in H \mid Ag = g\}$, іншими словами множина $G = \ker (A - I)$. Оскільки $A$ -- ідемпотентний, то $\forall x \in H: Ax \in G$. Також зазначимо, що $P_G x \in G$. Тому нам досить довести, що $(Ax,g) = (P_Gx,g), \forall g \in G$, а це гарантуватиме $Ax = P_Gx$.\\
+$(Ax,g) = (x,Ag) = (x,g) = (x, P_G g) = (P_G x,g)$.
+\end{proof}
+
+\subsubsection{Нормальні оператори}
+\begin{definition}
+Оператор $A \in \mathcal{B}(H)$ називається \textbf{нормальним}, якщо
+\begin{align*}
+A^* A = AA^*
+\end{align*}
+Існує таке поняття як комутатор, в цьому випадку $[A,B] = AB - BA$. Значить, означення нормального оператора можна переписати ось так:
+\begin{align*}
+[A,A^*] = O
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+$A \in \mathcal{B}(H)$ -- нормальний $\iff [\Re A, \Im A] = O$.
+\end{theorem}
+
+\begin{proof}
+Нам досить буде розписати комутатор $[A,A^*]$, а там стане зрозуміло.\\
+$[A,A^*] = AA^* - A^*A = (\Re A + i \Im A)(\Re A - i \Im A) - (\Re A - i \Im A) (\Re A + i \Im A) = \\
+= \Re^2 A - i \Re A \Im A + i \Im A \Re A + \Im^2 A - \Re^2 A - i \Re A \Im A + i \Im A \Re A - \Im^2 A = \\
+= -2i \Re A \Im A + 2i \Im A \Re A = -2i [\Re A, \Im A]$.\\
+Отже, ми автоматично довели, що $A$ -- нормований $\iff [\Re A, \Im A] = O$. 
+\end{proof}
+
+\subsection{Унітарні та ізометричні оператори}
+\begin{definition}
+Лінійний оператор $U \colon H \to H$ називають \textbf{унітарним}, якщо
+\begin{align*}
+\forall x,y \in H: (Ux, Uy) = (x,y); \\
+\Im U = H
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Із означення випливає, що $\|Ux\| = \|x\|, \forall x \in H$, а тому звідси $U \in \mathcal{B}(H),\ \|U\| = 1$.
+\end{remark}
+
+\begin{proposition}
+Якщо лінійний оператор зберігає норму, то він же зберігає скалярний добуток.\\
+\textit{Випливає з поляризаційної тотожності.}
+\end{proposition}
+
+%proved once again
+\iffalse
+\begin{proof}
+Маємо оператор $A$ такий, що $\|Ax\| = \|x\|$. Покажемо, що $(Ax,Ay) = (x,y)$.\\
+Із одного боку, маємо таку рівність:\\
+$(A(x+y),A(x+y)) = (Ax + Ay, Ax + Ay) = (Ax,Ax) + (Ax,Ay) + (Ay,Ax) + (Ay,Ay) = \\ = (x,x) + (Ax,Ay) + (Ay,Ax) + (y,y)$.\\
+Із іншого боку, маємо\\
+$(A(x+y),A(x,y)) = (x+y,x+y) = (x,x) + (x,y) + (y,x) + (y,y)$.\\
+$\implies (Ax,Ay) + (Ay,Ax) = (x,y) + (y,x)$, тобто $2 \Re (Ax,Ay) = 2 \Re (x,y) \implies \Re (Ax,Ay) = \Re (x,y)$.\\
+Якщо розписати $(A(x+iy), A(x+iy))$ з двох боків, то так само доведемо, що $\Im (Ax,Ay) = \Im (x,y)$.\\
+Таким чином, як комплексні числа, $(Ax,Ay) = (x,y)$.
+\end{proof}
+\fi
+
+\begin{remark}
+Якщо $\dim H < \infty$, то тоді в означенні унітарного оператора досить вимагати збереження скалярного добутку (як це було в ліналі).\\
+Дійсно, маємо $\{e_1,\dots,e_n\}$ -- ортонормований базис $H$. Тоді $(Ue_j,Ue_k) = (e_j,e_k) = \delta_{jk}$. Отже, $\{Ue_1,\dots,Ue_n\}$ -- ортонормований базис $H$, причому\\
+$x = \displaystyle\sum_{j=1}^n x_j Ue_j = U\left( \sum_{j=1}^n x_j e_j\right)$.\\
+Внаслідок чого $\Im U = H$.
+\end{remark}
+
+\begin{example}
+Розглянемо $T(x_1,x_2,\dots) = (0,x_1,x_2,\dots)$ -- оператор в просторі $l_2$. Зауважимо, що $(Tx,Ty) = (x,y)$. Проте $\Im T \neq H$, оскільки вектор $(1,0,0,\dots) \perp \Im T$.
+\end{example}
+
+\begin{theorem}
+Задано $U$ -- унітарний оператор. Тоді $U$ -- оборотний, причому $U^{-1} = U^*$, який теж є унітарним.
+\end{theorem}
+
+\begin{proof}
+Оскільки $\Im U = H$ та $\|Ux\| = \|x\|$, то ми доводимо оборотність. Доведемо, що $U^{-1}$ -- унітарний. Покладемо $y = Ux$, тоді\\
+$\|y\| = \|Ux\| = \|x\| = \|U^{-1}y\|$.\\
+Тобто $U^{-1}$ зберігає норму, а тому й скалярний добуток. Також зрозуміло, що $\Im U^{-1} = H$.\\
+Рівінсть $U^{-1} = U^*$ випливає з такого ланцюга: $(x, U^*y) = (Ux,y) = (Ux, UU^{-1}y) = (x,U^{-1}y)$.
+\end{proof}
+
+\begin{proposition}
+Задано $U$ -- унітарний оператор. Тоді $U$ -- нормальний.
+\end{proposition}
+
+\begin{proof}
+$[U,U^*] = UU^* - U^*U = UU^{-1} - U^{-1}U = I - I = O$.
+\end{proof}
+
+\begin{definition}
+Лінійний оператор $V \colon H_1 \to H_2$ називається \textbf{ізометричним}, якщо
+\begin{align*}
+\forall x,y \in H: (Vx,Vy)_2 = (x,y)_1
+\end{align*}
+Ця умова, як вже відомо, рівносильна умові $\|Vx\|_2 = \|x\|_1$.
+\end{definition}
+
+\subsection{Матричне представлення операторів у гілбертовому просторі}
+\subsubsection{Лінійний оператор в сепарабельному просторі}
+Нехай $H$ -- нескінченний сепарабельний простір, тому є $\{e_n\}_{n=1}^\infty$ -- ортонормований базис. Розглянемо оператор $A \in \mathcal{B}(H)$, який можна розкласти за базисом. Отримаємо наступне:\\
+$(Ax, e_j) = \displaystyle\sum_{k=1}^\infty x_k (Ae_k, e_j) = \sum_{k=1}^\infty a_{jk} x_k$.\\
+Ми тут позначили $a_{jk} = (Ae_k, e_j)$. Визначені числа $a_{jk}$ утворюють нескінченну матрицю $(a_{jk})_{j,k=1}^\infty$, елементами $k$-го стовпчика якого будуть координати вектора $Ae_k$.
+
+\begin{theorem}
+Будь-який оператор $A \in \mathcal{B}(H)$ допускає матрице представлення в будь-якому ортонормованому базисі $H$.
+\end{theorem}
+
+\begin{remark}
+Не кожній нескінченній матриці відповідає лінійний обмежений оператор в гілбертовому просторі (на відміну від скінченновимірних просторах).
+\end{remark}
+
+\begin{theorem}
+Нехай матриця $(a_{jk})_{j,k=1}^\infty$ задовольняє умові $\displaystyle\sum_{j,k=1}^\infty |a_{jk}|^2 < \infty$. Тоді матриця $(a_{jk})_{j,k=1}^\infty$ визначає оператор $A \in \mathcal{B}(H)$.
+\end{theorem}
+
+\begin{proof}
+За нерівністю Коші-Буняковського, отримаємо\\
+$|(Ax,e_j)|^2 = \displaystyle\left| \sum_{k=1}^\infty a_{jk} x_k \right|^2 \leq \sum_{k=1}^\infty |a_{jk}|^2 \|x\|^2, \qquad j \in \mathbb{N}$.\\
+Просумовуючи це все за $j$, отримаємо\\
+$\|Ax\|^2 = \displaystyle\sum_{j=1}^\infty |(Ax,e_j)|^2 \leq \sum_{j,k=1}^\infty |a_{jk}|^2 \|x\|^2$.\\
+Таким чином, $A \in \mathcal{B}(H)$, причому $\|A\| \leq \displaystyle \left( \sum_{j,k=1}^\infty |a_{jk}|^2 \right)^{\frac{1}{2}}$.
+\end{proof}
+
+\begin{remark}
+Зауважимо, що одинична матриця $(a_{jk})_{j,k=1}^\infty$, де $a_{jk} = \delta_{jk}$, задає лінійний обмежений оператор $A = I \in \mathcal{B}(H)$. При цьому ця матриця не задовольняє умові теореми вище.\\
+Тому дана достатня умова є доволі строгою, треба послабити.
+\end{remark}
+
+\begin{theorem}
+Матриця $(a_{jk})_{j,k=1}^\infty$ задає оператор $A \in \mathcal{B}(H) \iff$ справедливі такі умови:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\displaystyle\sum_{k=1}^\infty a_{jk} x_k$ збіжний для всіх $j \in \mathbb{N}$; де числа $x_k$ беруться з розкладу $x = \displaystyle\sum_{k=1}^\infty x_k e_k$;
+\item $\displaystyle\sum_{j=1}^\infty \left| \sum_{k=1}^\infty a_{jk} x_k \right|^2 < \infty$;
+\item $\exists c > 0: \forall x \in H: \displaystyle\sum_{j=1}^\infty \left| \sum_{k=1}^\infty a_{jk} x_k \right|^2  \leq c \|x\|^2$.
+\end{enumerate}
+\textit{(TODO: добити)}.
+\end{theorem}
+
+\subsection{Оператори Гілберта-Шмідта}
+Нехай $H$ -- сепарабельний гілбертів простір та $\{e_n\},\ \{f_n\}$ -- два ортонормовані базиси в $H$. Припустимо, що $A \in \mathcal{B}(H)$ задовольняє умові $\displaystyle\sum_{j,k=1}^\infty |(Af_k,e_j)|^2 < \infty$.\\
+Дана величина ніяк не залежить від вибору пари базису. Дійсно, зауважимо, що $\|Ae_j\|^2 = \displaystyle\sum_{j=1}^\infty |(Ae_j,f_k)|$, а тому ця величина вище $\displaystyle\sum_{j,k=1}^\infty |(Af_k,e_j)|^2 = \sum_{j=1}^\infty \|Ae_j\|^2$. Тому неважливо, який базис буде другим.\\
+Більш того, знаючи, що $(Ae_j,f_k) = (e_j,A^*f_k)$ можна аналогічно довести, що неважливо, який базис буде першим.\\
+Отже, коректним буде ось таке означення:
+
+\begin{definition}
+Оператор $A \in \mathcal{B}(H)$ називається \textbf{оператором Гілберта-Шмідта}, якщо для деякого (а тому й для кожного) ортонормованого базиса $\{e_n\}$ збігається ряд:
+\begin{align*}
+\displaystyle\sum_{j=1}^\infty \|Ae_j\|^2 = \sum_{j,k=1}^\infty |a_{jk}|^2 < \infty
+\end{align*}
+Позначення: $S_2(H)$ -- набір всіх операторів Гілберта-Шмідта.\\
+\textbf{Абсолютною нормою} (чи \textbf{нормою Гілберта-Шмідта}) оператора $A$ називають величину
+\begin{align*}
+|A| = \left(\sum_{j=1}^\infty \|Ae_j\|^2 \right)^{\frac{1}{2}}
+\end{align*}
+\end{definition}
+
+\begin{remark}
+$\emptyset \subsetneq S_2(H) \subsetneq \mathcal{B}(H)$.\\
+Дійсно, розглянемо оператор $A \in \mathcal{B}(H)$, у якого лише скінченне число матричних елементів $a_{jk}$, для яких $a_{jk} \neq 0$. Тоді цілком зрозуміло, що такий $A \in S_2(H)$. Тобто $S_2(H) \neq \emptyset$.\\
+Далі, $I \notin S_2(H)$, просто тому що $\displaystyle\sum_{j=1}^\infty \|Ie_j\|^2 = \sum_{j=1}^\infty \|e_j\|^2 = \infty$.
+\end{remark}
+
+\begin{proposition}
+$S_2(H)$ -- нормований простір із нормою $|A|$ -- нормою Гілберта-Шмідта. Причому про саму норму Гілберта-Шмідта відомо, що $\forall A \in S_2(H): \|A\| \leq |A|$.
+\end{proposition}
+
+\begin{proof}
+Спочатку доведемо, що $S_2(H)$ буде підпростором. Дійсно, нехай $A,B \in S_2(H)$, тоді\\
+$\displaystyle\sum_{j=1}^\infty \|(\lambda A + \mu B)\| e_j \|^2 = \sum_{j=1}^\infty \| \lambda A e_j + \mu B e_j \|^2 \leq |\lambda|^2\sum_{j=1}^\infty \|Ae_j\|^2 + |\mu|^2 \sum_{j=1}^\infty \|Be_j\|^2 < \infty$.\\
+Отже, ми довели $\lambda A + \mu B \in S_2(H)$.\\
+Тепер покажемо, що $|A| = \displaystyle\left(\sum_{j=1}^\infty \|Ae_j\|^2 \right)^{\frac{1}{2}}$ задаватиме норму. Дійсно,
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $|A| \geq 0$ -- все ясно. Тепер $|A| = 0 \iff \|Ae_j\|^2 = 0, \forall j \geq 1 \iff Ae_j = 0, \forall j \geq 1 \iff A = O$.
+\item $|\lambda A| = \displaystyle\left(\sum_{j=1}^\infty \|(\lambda A)e_j\|^2 \right)^{\frac{1}{2}} = \left( |\lambda|^2 \sum_{j=1}^\infty \|Ae_j\|^2 \right)^{\frac{1}{2}} = |\lambda| |A|$.
+\item $|A+B| = \displaystyle\left(\sum_{j=1}^\infty \|(A+B)e_j\|^2 \right)^{\frac{1}{2}} \leq \left(\sum_{j=1}^\infty \|Ae_j\|^2 + \sum_{j=1}^\infty \|Be_j\|^2 \right)^{\frac{1}{2}} \leq \left(\sum_{j=1}^\infty \|Ae_j\|^2 \right)^{\frac{1}{2}} + \left(\sum_{j=1}^\infty \|(Be_j\|^2 \right)^{\frac{1}{2}} = |A| + |B|$.
+\end{enumerate}
+Всі властивості норми доведені.\\
+Нехай $A \in S_2(H)$, тоді оцінимо даний оператор:\\
+$\|Ax\| = \displaystyle\| A \sum_{k=1}^\infty (x,e_k) e_k \| = \| \sum_{k=1}^\infty (x,e_k) Ae_k \| \leq \sum_{k=1}^\infty |(x,e_k)| \|Ae_k\| \overset{\text{н-ть Гьольдера}}{\leq} \left( \sum_{k=1}^\infty |(x,e_k)|^2 \right)^{\frac{1}{2}} \left( \sum_{k=1}^\infty \|Ae_k\|^2 \right)^{\frac{1}{2}} = \\ \overset{\text{р-ть Парсеваля}}{=} \|x\| |A|$.\\
+Отже, ми довели, що $\|A\| \leq |A|$. До речі, рівність виконується $\iff \rank A = 1$ (TODO: довести)
+\end{proof}
+
+\begin{proposition}
+$A \in S_2(H) \iff A^* \in S_2(H)$.\\
+При цьому $|A| = |A^*|$.\\
+\textit{Вправа: довести.}
+\end{proposition}
+
+Все це можна повторити в випадку операторів $A \in \mathcal{B}(H_1,H_2)$, мені зараз лінь.
+\newpage
+
+\section{Компактні оператори}
+\subsection{Спектр та резольвента оператора}
+Цей розділ про узагальнення поняття власних чисел та власних векторів операторів на нескінченний простір. На жаль, ці означення нам не підійдуть.
+
+\begin{example}
+Зокрема розглянемо оператор $A \colon L_2([0,1],\lambda) \to L_2([0,1],\lambda)$ таким чином: $(Af)(t) = t \cdot f(t)$. Якщо припустити, що $\mu$ -- власне число, тоді існує ненульова функція $f \in L_2([0,1],\lambda)$, для якої $Af = \lambda f$, тобто звідси $t f(t) = \mu f(t) \pmod \lambda$. Але тоді ми можемо отримати в результаті $f = 0 \pmod \lambda$, що суперечить.\\
+Отже, такий оператор не містить власні числа.
+\end{example}
+
+\begin{definition}
+Нехай $E$ -- нормований простір та $A \in \mathcal{B}(E)$.\\
+Число $\lambda \in \mathbb{C}$ називатимемо \textbf{регулярною точкою} оператор $A$, якщо
+\begin{align*}
+\exists (A-\lambda I)^{-1} \overset{\text{позн.}}{=} R_\lambda(A)
+\end{align*}
+Існуючий оператор називають \textbf{резольвентою оператора $A$ в точці $\lambda$}.\\ 
+Позначення: $\rho(A)$ -- множина всіх регулярних точок оператора $A$.
+\end{definition}
+
+\begin{definition}
+Нехай $E$ -- нормований простір та $A \in \mathcal{B}(E)$.\\
+\textbf{Спектром} оператора $A$ називають множину
+\begin{align*}
+\sigma(A) = \mathbb{C} \setminus \rho(A)
+\end{align*}
+По суті, спектр -- це просто доповнення до множини всіх регулярних точок.
+\end{definition}
+
+\begin{example}
+Повертаючись до $A \colon L_2([0,1],\lambda) \to L_2([0,1],\lambda)$, що заданий як $(Af)(t) = t \cdot f(t)$, ми можемо довести, що $\sigma(A) = [0,1]$.
+\end{example}
+
+\begin{remark}
+Можна трошки детально про це говорити. От нехай $A \colon E \to E$ -- лінійний оператор (не обов'язково навіть обмежений), оберемо $\lambda \in \mathbb{C}$. Будемо розглядати оператор $A - \lambda I$, який розбиває на кілька випадків:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $\ker (A-\lambda I) \neq \{0\}$, тоді існує ненульовий розв'язок $x$, для якого $(A-\lambda I)x = 0$. У цьому випадку справді $\lambda$ називають власним числом. Множину всіх власних чисел позначають за $\sigma_{\text{т}}(A)$ -- так званий \textbf{точковий спектр}.
+\bigskip \\
+Далі йде $\ker(A-\lambda I) = \{0\}$, який розбиває на ще три випадки:
+\item $\Im(A-\lambda I) \neq X$, але при цьому $\overline{\Im(A-\lambda I)} = X$. Тоді число $\lambda$ потрапляє в сукупність $\sigma_{\text{н}}(A)$ -- так званий \textbf{неперервний спектр}.
+\item $\overline{\Im(A-\lambda I)} \neq X$. Тоді число $\lambda$ потрапляє в сукупність $\sigma_{\text{з}}(A)$ -- так званий \textbf{залишковий спектр}.
+\item $\Im(A-\lambda I) = X$. Тоді оскільки одночасно $\ker(A-\lambda I) = \{0\}$, то в нас буде існувати $(A-\lambda I)^{-1}$ -- та сама резольвента оператора $A$ в точці $\lambda$. Саме число $\lambda$ потрапляє в сукупність $\rho(A)$ -- множина \textbf{регулярних точок}.
+\end{enumerate}
+Таким чином, ми розбили $\mathbb{C} = \sigma_{\text{т}}(A) \sqcup \sigma_{\text{н}}(A) \sqcup \sigma_{\text{з}}(A) \sqcup \rho(A)$. Якщо об'єднати перші три, то ми отримаємо \textbf{спектр} оператора $A$, тобто $\sigma(A) = \sigma_{\text{т}}(A) \sqcup \sigma_{\text{н}}(A) \sqcup \sigma_{\text{з}}(A)$. Таким чином, $\mathbb{C} = \sigma(A) \sqcup \rho(A)$.
+\end{remark}
+
+\begin{example}
+Зокрема маємо $A \colon l_2 \to l_2$, що задається як $A(x_1,x_2,x_3,\dots) = (0,x_1,x_2,\dots)$.\\
+Нехай $(A-\lambda I)x = 0$, тобто $(-\lambda x_1, x_1 - \lambda x_2, x_2 - \lambda x_3, \dots) = (0,0,0,\dots)$. Звідси випливатиме $\lambda x_1 = 0$. Якщо $\lambda = 0$, то отримаємо $x_1 = x_2 = \dots = 0$. Якщо $x_1 = 0$, то звідси $\lambda x_2 = 0$, тут аналогічно не можемо брати $\lambda \neq 0$, тож $x_2 = 0$, \dots\\
+Коротше, не існує власних чисел, тобто маємо $\sigma_{\text{т}}(A) = \emptyset$.\\
+Тепер розглянемо спряжений оператор $A^* \colon l_2 \to l_2$, що задається як $A^*(y_1,y_2,\dots) = (y_2,y_3,\dots)$. Ми знаємо, що в гілбертовому просторі $l_2 = \ker (A-\lambda I) \oplus \Im(A-\lambda I)^*$.
+\end{example}
+
+\begin{theorem}
+Нехай $E$ -- нормований простір та $A \in \mathcal{B}(E)$. Тоді $\sigma(A)$ -- замкнена множина та при цьому $\sigma(A) \subset B[0, \|A\|]$.
+\end{theorem}
+
+\begin{proof}
+Припустимо, що $\lambda \notin B[0, \|A\|]$, тобто це означає, що $|\lambda| < \|A\|$. Тоді звідси маємо:\\
+$(A-\lambda I) = -\dfrac{1}{\lambda}\left(I - \dfrac{A}{\lambda}\right)$.\\
+Оскільки $\left\| \dfrac{A}{\lambda} \right\| < 1$, то тоді існує $\left(I - \dfrac{A}{\lambda}\right)^{-1}$, внаслідок чого існуватиме $(A-\lambda I)^{-1}$. Тобто звідси $\lambda \in \rho(A) \implies \lambda \notin \sigma(A)$. Отже, довели щойно $\sigma(A) \subset B[0, \|A\|]$.\\
+Для доведення замкненості $\sigma(A)$ досить довести відкритість $\rho(A)$. Нехай $\lambda_0 \in \rho(A)$, тоді існує резольвента $(A-\lambda_0 I)^{-1}$. Ми хочемо довести, що $\lambda_0$ буде внутрішньою точкою. Для цього розглянемо оператор $A-\lambda I = (A-\lambda_0 I) - (\lambda - \lambda_0)I$. Оператор $(A-\lambda_0 I)$ оборотний, а на другий оператор хочемо оцінку $\| (\lambda - \lambda_0) I\| \leq \| (A-\lambda_0 I)^{-1} \|^{-1}$. Якщо покласти $r = \|(A-\lambda_0 I)^{-1}\|^{-1}$, то тоді $|\lambda-\lambda_0| < r$. За \thref{sum_of_operators_and_inverse}, оператор $A-\lambda I$ -- оборотний, тобто $\lambda \in \rho(A)$. Довели $B(\lambda_0,r) \subset \rho(A)$.
+\end{proof}
+
+\begin{remark}
+При $\lambda \in B(\lambda_0,r)$ матимемо рівномірну обмеженість $\|(A-\lambda I)^{-1}\|$.
+\end{remark}
+
+\begin{proof}
+Дійсно, трошечки розпишемо необхідне:\\
+$A -\lambda I = (A - \lambda_0 I) - (\lambda - \lambda_0) I = (A-\lambda_0 I) \left(I - (\lambda - \lambda_0)(A -\lambda_0 I)^{-1}\right)$.\\
+Візьмемо оборотність з двох боків:\\
+$(A - \lambda I)^{-1} = \left[ I - (\lambda - \lambda_0)(A-\lambda_0 I)^{-1}\right]^{-1} (A-\lambda_0 I)^{-1}$.\\
+$\|(A-\lambda I)^{-1}\| \leq \| (A-\lambda_0 I)^{-1} \| \| (I- (\lambda - \lambda_0)(A-\lambda_0 I)^{-1})^{-1}\| \boxed{\leq}$\\
+Тимчасово для зручності позначу $(\lambda-\lambda_0)(A - \lambda_0 I)^{-1} = T$. Ми заздалегідь зауважимо, що $\|T\| = |\lambda-\lambda_0| \|(A-\lambda_0I)^{-1}\| < r \|(A-\lambda_0 I)^{-1}\|$. Тепер зробимо оцінку\\
+$\|(I-T)^{-1}\| = \| I + T + T^2 + \dots \| \leq \|I\| + \|T\| + \|T\|^2 + \dots = \dfrac{1}{1- \|T\|} < \dfrac{1}{1 - r \|(A-\lambda_0 I)^{-1} \|}$.\\
+$\boxed{\leq} \dfrac{\|(A-\lambda_0 I)^{-1}\|}{1 - r \|(A-\lambda_0 I)^{-1}\|}$.
+\end{proof}
+
+\begin{theorem}[Тотожність Гілберта]
+Нехай $E$ -- нормований простір та $A \in \mathcal{B}(E)$. Також нехай $z_1,z_2 \in \rho(A)$. Тоді \\ $R_{z_1}(A) - R_{z_2}(A) = (z_1-z_2) R_{z_1}(A) R_{z_2}(A)$.
+\end{theorem}
+
+\begin{remark}
+Щоб легше було запам'ятати. Резольвенту $R_{\lambda}(A) = (A-\lambda I)^{-1}$ можна асоціювати з числом $\dfrac{1}{A-\lambda}$ (тут $A,\lambda$ теж числа). Тоді якщо розписати різницю, то\\
+$\dfrac{1}{A - z_1} - \dfrac{1}{A - z_2} = \dfrac{z_1-z_2}{(A-z_1)(A-z_2)} = (z_1-z_2) \dfrac{1}{A-z_1} \dfrac{1}{A-z_2}$.
+\end{remark}
+
+\begin{proof}
+Розглянемо ось таку різницю:\\
+$(A - z_2 I) - (A - z_1I) = (z_1 - z_2)I$.\\
+Домножимо ліворуч на $R_{z_1}(A)$ та праворуч на $R_{z_2}(A)$ -- отримаємо:\\
+$R_{z_1}(A) (A- z_2I) R_{z_2}(A) - R_{z_1}(A) (A - z_1I) R_{z_2}(A) = (z_1-z_2) R_{z_1}(A) R_{z_2}(A)$.\\
+Згадавши, що з себе представляє резольвента, отримаємо відповідну рівність:\\
+$R_{z_1}(A) - R_{z_2}(A) = (z_1-z_2) R_{z_1}(A) R_{z_2}(A)$.
+\end{proof}
+
+\begin{corollary}
+Резольвенти оператора $A$ комутують між собою. Тобто $R_{z_1}(A) R_{z_2}(A) = R_{z_2}(A) R_{z_1}(A)$.
+\end{corollary}
+
+\begin{theorem}
+Відображення $z \mapsto R_z(A)$ буде неперервним на $\rho(A)$.
+\end{theorem}
+
+\begin{proof}
+Дійсно, маємо $z_0 \in \rho(A)$. При $z \to z_0$ хочемо довести, що $R_{z}(A) \to R_{z_0}(A)$.\\
+$\| R_z(A) - R_{z_0}(A) \| = |z - z_0| \| R_z(A) R_{z_0}(A) \| \leq |z-z_0| C^2 \to 0$.\\
+Остання оцінка отрималася в результаті того, що в околі регулярної точки резольвенти рівномірно обмежені за першим зауваження.
+\end{proof}
+
+\begin{theorem}
+Нехай $E$ -- нормований простір та $A \in \mathcal{B}(E)$. Також нехай $z \in \rho(A)$. Тоді\\
+$\exists \displaystyle\lim_{n \to 0} \dfrac{R_{z+h}(A) - R_z(A)}{h} = R_z^2(A)$.\\
+Тобто ця теорема каже про диференційованість резольвенти в регулярних точках.
+\end{theorem}
+
+\begin{proof}
+$\dfrac{R_{z+h}(A) - R_z(A)}{h} = \dfrac{1}{h} (z+h-z) R_{z+h}(A) R_z(A) \overset{R_z \text{ -- неперервна}}{\to} R_z(A) R_z(A) = R_z^2(A)$.
+\end{proof}
+
+\begin{corollary}
+Нехай $E$ -- нормований простір. Зафіксуємо будь-яку точку $x \in E$ та функціонал $l \in E'$. Розглянемо комплекснозначну функцію $f_{x,l}(z) = l(R_z(A)x)$ на $\rho(A)$. Тоді така функція -- аналітична на $\rho(A)$.
+\end{corollary}
+
+\begin{theorem}
+Нехай $E$ -- нормований простір та $A \in \mathcal{B}(E)$. Тоді $\sigma(A) \neq \emptyset$.
+\end{theorem}
+
+\begin{proof}
+!Припустимо, що $\sigma(A) = \emptyset$, тобто звідси $\rho(A) = \mathbb{C}$, а тому функція $l(R_z(A)x)$ -- аналітична на всій комплексній площині. Виникає бажання застосувати теорему Луівілля, але спочатку треба показати обмеженість.\\
+Для цього треба рівномірна обмеженість $\|R_z(A)\|$. Маємо два випадки:\\
+1) $z \in B[0, 2\|A\|]$.\\
+У цьому випадку $\|R_z(A)\|$ -- неперервна функція на $B[0, 2\|A\|]$, тому звідси $\exists c_1: \forall z \in B[0,2\|A\|]: \|R_z(A)\| \leq c_1$.
+\bigskip \\
+2) $z \notin B[0, 2\|A\|]$.\\
+$\|R_z(A)\| = \|(A-zI)^{-1}\| = \dfrac{1}{|z|} \left\|  \left(I - \dfrac{A}{z}\right)^{-1} \right\| \overset{\left\| \frac{A}{z}\right\| < \frac{1}{2}}{=} \left\| I + \dfrac{A}{z} + \dfrac{A^2}{z^2} + \dots \right\| \leq \dfrac{1}{|z|} \dfrac{1}{1 - \dfrac{1}{|z|} \|A\|} \leq \dfrac{2}{|z|} \leq \dfrac{1}{\|A\|}$.\\
+Отже, дійсно на $\mathbb{C}$ маємо рівномірну обмеженість $\|R_z(A)\|$. При цьому із того ланцюге нерівностей ми отримали $\|R_z(A)\| \to 0$ при $z \to \infty$.\\
+Тепер покажемо обмеженість комплекснозначної функції:\\
+$|f_{x,l}(z)| = |l(R_z(A)x)| \leq \|l\| \| R_z(A)x\| \leq \|l\| \|R_z(A) \| \|x\| \leq C \|l\| \|x\|$.\\
+Отже, за теоремою Луівілля, $f_{x,l}(z) = C_{x,l}$ -- стала функція. Тільки оскільки $|f_{x,l}(z)| \to 0$ при $z \to \infty$, то звідси $f_{x,l}(z) = 0$. Зокрема звідси отримаємо $R_z(A) = 0$. Тобто ми отримали оборотний оператор, який нульовий -- суперечність!
+\end{proof}
+
+\subsection{Компактні оператори}
+\begin{definition}
+Задано $E_1,E_2$ -- нормовані простори та $A \colon E_1 \to E_2$ -- лінійний оператор (не обов'язково обмежений).\\
+Оператор $A$ називається \textbf{компактним} (інколи називають \textbf{цілком неперервним}), якщо
+\begin{align*}
+\forall M \subset E_1 \text{ -- обмежена}: A(M) \text{ -- передкомпакт.}
+\end{align*}
+Коротше кажучи, якщо образ довільної обмеженої мноижин $E_1$ -- передкомпакт.\\
+Позначення: $\mathcal{K}(E_1,E_2)$ -- множина всіх компактних операторів.
+\end{definition}
+
+\begin{proposition}
+Задано $E_1,E_2$ -- нормовані простори.\\
+$A \in \mathcal{K}(E_1,E_2) \iff A(B[0;1])$ -- передкомпакт.
+\end{proposition}
+
+\begin{proof}
+\rightproof \textit{Миттєво з означення.}
+\bigskip \\
+\leftproof Дано: $A(B[0;1])$ -- передкомпакт. Нехай $M \subset E_1$ -- деяка обмежена множина. Тоді існує відкрита куля $B(x;R) \supset M$. Доведемо, що $A(M)$ буде передкомпактом.\\
+Нехай $\sequence{y_n} \subset A(M)$ -- обмежена, кожний $y_n = Ax_n,\ x_n \in M$. Розглянемо послідовність $\sequence{\dfrac{y_n - Ax}{R}} \subset A(B[0;1])$, яка буде також обмеженою. Тоді можна виділити збіжну підпослідовність $\left( \dfrac{y_{n_k} - Ax}{R}\right)_{k=1}^\infty$, зокрема збіжною буде підпослідовність $(y_{n_k})_{k=1}^\infty$.
+\end{proof}
+
+\begin{proposition}
+$\mathcal{K}(E_1,E_2) \subset \mathcal{B}(E_1,E_2)$.\\
+Іншими словами, всі компактні оператори -- обмежені автоматично.
+\end{proposition}
+
+\begin{proof}
+Дійсно, нехай $A \in \mathcal{K}(E_1,E_2)$, тоді $A(B[0;1])$ буде передкомпактом, яка автоматично обмежена. Нехай $x \in E_1$. Тоді зауважимо, що елемент $\dfrac{x}{\|x\|} \in B[0;1]$. Звідси випливає, що $\left| A\left( \dfrac{x}{\|x\|} \right)\right| \leq C \implies \|Ax\| \leq C\|x\|$. Таким чином, $A \in \mathcal{B}(E_1,E_2)$.
+\end{proof}
+
+\begin{example}
+У зворотному це не працює.\\
+Дійсно, розглянемо одиничний оператор $I \in \mathcal{B}(E)$. Стверджується наступне:\\
+$I \in \mathcal{K}(E) \iff \dim E < \infty$.
+\end{example}
+\noindent
+Але щоб мені це довести, треба відволіктися трошки та довести кілька тверджень.
+
+\begin{theorem}[Лема Ріса]
+Задано $E$ -- нормований простір та $G \subsetneq E$ -- замкнений підпростір. Тоді $\forall \varepsilon > 0: \exists y_\varepsilon \notin G, \|y_\varepsilon\| = 1: \forall x \in G: \|y_\varepsilon - x\| > 1-\varepsilon$.
+\end{theorem}
+
+\begin{remark}
+Цю теорему ще наизвають теорему про існування майже ортогонального вектора.\\
+Ми обговорили цю ситуацію в частинному випадку нормованого простору, саме в гілбертовому просторі $H$ та замкненому підпросторі $G \subset H$ (див. \rmref{equivalent_existence_of_orthogonal_unit_vector}).\\
+У загальному нормованому просторі $E$ можуть не існувати такі вектори $y \notin G$, щоб $\|y - x\| \geq 1$, тобто можуть не існувати ортогональні вектори, так би мовити. Однак ми можемо скільки завгодно наблизитися до одиниці, тобто $\exists y_\varepsilon \notin G: \|y_\varepsilon\| = 1: \|y_\varepsilon - x\| > 1-\varepsilon$. Це й пояснює альтернативну назву "майже ортогональний".
+\end{remark}
+
+\begin{proof}
+Оберемо елемент $z \notin G$. Позначимо $\delta = \rho(z,G)$, який в свою чергу $\delta > 0$. Якби $\delta = 0$, то за критерієм інфімуму ми би знайшли послідовність $\sequence{y_n}$, для якої $\|y_n - z \| < \dfrac{1}{n} \to 0$ -- ми би отримали, що $z$ -- гранична $G$, де водночас $z \notin G$ -- суперечить за рахунок замкненості $G$.\\
+Звідси $\forall \eta > 0: \exists x_\eta \in G: \delta \leq \|z - x_\eta\| < \delta + \eta$ за критерієм інфімуму.\\
+Нехай $\varepsilon > 0$. Ми підкрутимо таке значення $\eta$, щоб $\dfrac{\eta}{\delta + \eta} = \varepsilon$. Доведемо, що $y_\varepsilon = \dfrac{z-x_\eta}{\|z - x_\eta \|}$ буде шуканим вектором. Цілком зрозуміло, що $y_\varepsilon \notin G,\ \|y_\varepsilon\| = 1$. Доведемо нерівність.\\
+$\|y_\varepsilon - x\| = \left\| \dfrac{z-x_\eta}{\|z - x_\eta \|} - x \right\| = \dfrac{1}{\|z- x_\eta\|} \| z - (x_\eta + x \|z-x_\eta\|) \|$.\\
+Зазначимо, що вектор $x_\eta + x \|z-x_\eta\| \in G$, тому звідси $\|z - (x_\eta + x \|z-x_\eta\|) \| \geq \rho(z,G) = \delta$. Повертаючись до ланцюга рівностей, отримаємо:\\
+$\|y_\varepsilon - x\| \geq \dfrac{\delta}{\|z - x_\eta\|} > \dfrac{\delta}{\delta + \eta} = 1 - \dfrac{\eta}{\delta + \eta} = 1- \varepsilon$.
+\end{proof}
+
+\begin{theorem}
+Задано $E$ -- нормований простір.\\
+$\dim E < \infty \iff$ кожна підмножина $E$ -- передкомпактна.
+\end{theorem}
+
+\begin{proof}
+\leftproof Дано: $\dim E = \infty$. Ми хочемо довести, що замкнена куля $B[0;1]$ не буде компактом.\\
+У якості $x_1$ оберемо будь-який вектор одиничної сфери та покладемо $G_1 = \linspan\{x_1\}$. За лемою Ріса, знайдеться вектор $x_2 = y_{\frac{1}{2}} \notin G_1$ такий, що $\|x_2\| = 1$ та $\forall x \in G_1: \|x_2-x\| > \dfrac{1}{2}$, зокрема звідси $\|x_2 - x_1\| > \dfrac{1}{2}$.\\
+Покладемо $G_2 = \linspan\{x_1,x_2\}$. Тоді знову за лемою Ріса, знайдеться вектор $x_3 = y_{\frac{1}{2}}$ такий, що $\|x_3\| = 1$ та $\forall x \in G_2: \|x_3-x\| > \dfrac{1}{2}$. Зокрема $\|x_3 - x_1\| > \dfrac{1}{2},\ \|x_3 - x_2\| > \dfrac{1}{2}$.\\
+\vdots \\
+У силу того, що $\dim E = \infty$, то цей процес буде продовжуватися. Побудуємо послідовність $\sequence{x_n} \subset B[1;0]$ таку, що $\forall m,n \geq 1: \| x_m - x_n \| > \dfrac{1}{2}$. Така обмежена послідовність не містить збіжної підпослідовності.
+\bigskip \\
+\rightproof Дано: $\dim E < \infty$, тоді відомо, що $E \cong \mathbb{C}^n$. Будь-яка обмежена підмножина $\mathbb{R}^n$ -- передкомпактна за Больцано-Ваєрштраса.
+\end{proof}
+\noindent
+Повертаємося назад до розмов про компактні простори.
+
+\begin{proposition}
+Припустимо, що $\dim E_2 < \infty$. Тоді $\mathcal{K}(E_1,E_2) = \mathcal{B}(E_1,E_2)$.\\
+Інакше кажучи, за додатковими умовами обмежений оператор може бути компактним.
+\end{proposition}
+
+\begin{proof}
+Вкладення $\mathcal{K}(E_1,E_2) \subset \mathcal{B}(E_1,E_2)$ в нас уже є. Треба тепер тільки зворотний бік.\\
+Припустимо, що $A \in \mathcal{B}(E_1,E_2)$. Оберемо довільну обмежену множину $M \subset E_1$. Тоді оскільки $\dim E_2 < \infty$, то $A(M) \subset E_2$ буде передкомпактною автоматично. Отже, $A \in \mathcal{K}(E_1,E_2)$.
+\end{proof}
+
+\begin{example}
+Розглянемо оператор $A \colon C([0,1]) \to C([0,1])$, що задається як $(Af)(t) = \displaystyle\int_0^1 k(t,s) f(x)\,ds$, де функція $k(t,s) = a(t)b(s),\ a,t \in C([0,1])$. Покажемо, що це -- компактний оператор.\\
+Дійсно, $(Af)(t) = a(t) \displaystyle\int_0^1 b(s)f(s)\,ds = C \cdot a(t)$. Тобто звідси $\dim \Im A = 1$, що підтвердує компактність оператора.
+\end{example}
+
+\subsection{Властивості компактного оператора}
+\begin{theorem}
+\label{convergence_to_compact}
+Задано $E$ -- банахів простір. Розглянемо послідовність $\sequence{A_n} \subset \mathcal{K}(E)$, яка збігається за нормою (із $\mathcal{B}(E)$) до оператора $A$. Тоді $A \in \mathcal{K}(E)$.
+\end{theorem}
+
+\begin{proof}
+Фіксуємо обмежену послідовність $\sequence{x_n}$ із $E$. Ми хочемо зі послідовності $\sequence{A x_n}$ відокремити збіжну підпослідовність. Будемо діагональним методом доводити.\\
+$A_1 \in \mathcal{K}(E)$, тому зі послідовності $\sequence{A_1x_n}$ відокремимо збіжну підпослідовність $\sequence{A_1 x_{n_1}}$.\\
+$A_2 \in \mathcal{K}(E)$, тому зі послідовності $\sequence{A_2x_{n_1}}$ відокремимо збіжну підпослідовність $\sequence{A_2 x_{n_2}}$.\\
+\vdots \\
+Розглянемо діагональну послідовність $\sequence{x_{nn}}$. Нам треба довести, що саме підпослідовність $\sequence{A x_{nn}}$ буде фундаментальною, а внаслідок банаховості $E$ -- збіжною. Почнемо потроху оцінювати норму.\\
+Перед цим треба зауважити, що $\sequence{A_k x_{nn}}$ при всіх $k \in \mathbb{N}$ буде збіжною, просто тому що $\sequence{x_{nn}} \subset \sequence{x_{n_k}}$ та $\sequence{A_k x_{n_k}}$ збіжна.\\
+$\| A x_{mm} - A x_{nn} \| \leq \|A x_{mm} - A_k x_{mm} \| + \| A_k x_{mm} - A_k x_{nn} \| + \|A_k x_{nn} - A_k x_{mm} \| \overset{\mathcal{K}(E) \subset \mathcal{B}(E)}{\leq} \\
+\leq \|A - A_k\| (\|x_{mm}\| + \|x_{nn}\|) + \| A_k x_{nn} - A_k x_{mm} \| \boxed{<}$\\
+Оскільки $\sequence{x_n}$ обмежена, то обмеженою буде $\sequence{x_{nn}}$, а там звідси $\|x_{nn}\| \leq c, \forall n \geq 1$.\\
+Далі оскільки $\sequence{\|A_k\|}$ -- збіжна, то існує такий номер $k_0$, для якого $\|A - A_{k_0}\| < \dfrac{\varepsilon}{3c}$. Також в силу збіжності $\sequence{A_{k_0} x_{nn}}$ ми отримаємо, що $\exists N: \forall n,m \geq N: \|A_{k_0} x_{nn} - A_{k_0} x_{mm} \| < \dfrac{\varepsilon}{3}$.\\
+$\boxed{<} \dfrac{\varepsilon}{3c} \cdot 2c + \dfrac{\varepsilon}{2} = \varepsilon$.
+\end{proof}
+
+\begin{theorem}
+$\mathcal{K}(E)$ -- підпростір $\mathcal{B}(E)$ за умовою, що $E$ -- банахів.\\
+(TODO: провести доведення)
+\end{theorem}
+
+\begin{remark}
+Ці дві теореми працюють для операторів з $\mathcal{K}(E_1,E_2)$, тільки тут $E_2$ має бути банаховим.
+\end{remark}
+
+\begin{theorem}
+Нехай $A \in \mathcal{K}(E)$. Тоді $A^* \in \mathcal{K}(E')$.
+\end{theorem}
+
+\begin{proof}
+Нехай $\sequence{l_n} \subset E'$ -- обмежена послідовність. Хочемо із $\sequence{A^*l_n}$ відокремити збіжну підпослідовність. Зауважимо наступне:\\
+$\displaystyle \| A^*l_n \| = \sup_{ \|y\| = 1} |(A^*l_n)(y)| = \sup_{y \in \mathcal{S}(1;0)} |l_n(Ay)| = \sup_{z \in A(S(1;0))} |l_n(z)|$.\\
+Для доведення теореми нам досить буде встановити передкомпактність множини $\{l_n\}_{n=1}^\infty \subset C(\overline{AS(1;0)})$. Перевіримо умови виконання теореми Арцела-Асколі.\\
+$\forall n \ge 1: |l_n(z)| \leq \|l_n\| \|z\| \leq c \cdot c_1$ -- виконується рівномірна обмеженість.\\
+$\forall n \geq 1: |l_n(z_1) - l_n(z_2)| \leq c\|z_1 - z_2\|$ -- виконується умова одностайної неперервності.\\
+Отже, існує збіжна підпослідовність $\sequence{l_{n_k}}$, причому $\| l_{n_k} - l_{n_m} \| = \displaystyle\max_{z \in \overline{AS(1;0)}} |l_{n_k}(z) - l_{n_m}(z)| \to 0$. Внаслідок чого $\|A^* l_{n_k} - A^* l_{n_m}\| \to 0$.
+\end{proof}
+
+\subsection{Компактні оператори в сепарабельному гілбертовому просторі}
+Розглянемо $H$ -- сепарабельний гілбертів простір, оберемо базис $\{e_j\}_{j=1}^\infty$. Розглянемо оператор $A \in S_2(H)$, тобто $\displaystyle\sum_{j,k=1}^\infty |a_{jk}|^2 < \infty$. Позначимо $\mathbb{A}$ за матрицю оператора $A$.
+
+\begin{theorem}
+$S_2(H) \subsetneq K(H)$.
+\end{theorem}
+
+\begin{proof}
+Розглянемо оператор $P_j$ -- проєктор на підпростір, породжений базисом $\{e_1,\dots,e_j\}$. Розглянемо послідовність операторів $A_j = P_j A$, їм відповідають матриці $\mathbb{A}_j$ -- та сама матрица $\mathbb{A}$, тільки, починаючи з $j+1$ рядка, будуть одні нулі. Зауважимо також, що образ $A_j$ буде скінченним, причому $A_j = P_j A \in \mathcal{B}(H)$ (як добуток обмежених), тому $A_j \in \mathcal{K}(H)$. Доведемо, що $\|A - A_j\| \to 0$ при $j \to \infty$.\\
+Спочатку доведемо, що $|A-A_j| \to 0$ при $j \to \infty$ за нормою Гілберта-Шмідта.\\
+$|A-A_j|^2 = \displaystyle\sum_{k=j+1}^\infty \left( \sum_{l=1}^\infty |a_{kj}|^2 \right) \to 0$ при $j \to \infty$ як залишковий ряд. При цьому ми маємо $\|A\| \leq |A|$ (TODO: чому?), тоді звідси випливає, що $\|A-A_j\| \to 0$. Отже, за \thref{convergence_to_compact}, оператор $A \in \mathcal{K}(H)$.
+\bigskip \\
+Тепер розглянемо оператор $A$, яка має матрицю $\mathbb{A} = \diag\left(\lambda_1,\lambda_2,\dots\right)$. Зауважимо, що $A \in S_2(H) \iff \displaystyle\sum_{j=1}^\infty |\lambda_j|^2 <\infty$. Також маємо $A \in \mathcal{K}(H) \iff \lambda_j \to 0$.
+\end{proof}
+
+\begin{theorem}
+Нехай $A \in \mathcal{K}(H)$. Тоді існує послідовність операторів $\sequence{A_n}$, для яких $A_n \to A$, причому $\dim \Im A_n < \infty$.
+\end{theorem}
+
+\begin{proof}
+Аналогічно розглянемо оператор $P_j$, як було вище, а також оператор $A_j = P_j A$. Доведемо, що $A_j \to A$, тобто ми хочемо $\|A - A_j\| = \|(I-P_j) A\| \to 0$.\\
+!Припустимо, що $\|(I-P_j)A \| \not\to 0$, тобто існує $c > 0$, для якої $\|(I - P_j) A\| \geq c$, тобто іншими словами $\displaystyle\sup_{\|x\| = 1} \|(I-P_j)A x \| \geq c$. Тоді можна відокремити послідовність $(x_j)_{j=1}^\infty$ з $\|x_j\| = 1$, для яких $\|(I-P_j) Ax_j\| \geq \dfrac{c}{2}$. Для зручності позначимо $y_j = Ax_j$. Оскільки $A \in \mathcal{K}(H)$, то можна відокремити збіжну підпослідовність $(y_{j_k})_{k=1}^\infty$, де $y_{j_k} \to y$. Власне, звідси $\|(I-P_j) y\| \geq \dfrac{c}{2}$. Проте раніше доводили (TODO: ?), що $I-P_j \tostrong O$ при $j \to \infty$, тобто $(I-P_j)y \to 0$ -- суперечність!
+\end{proof}
+
+\subsection{Спектри в компактних операторах}
+\begin{theorem}[Альтернатива Фредгольма]
+Задано $E$ -- банахів простір, оператор $A \in \mathcal{K}(E)$ та $\lambda \in \mathbb{C} \setminus \{0\}$. Тоді виконується рівно одна з умов:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\lambda$ -- власне число $A$;
+\item $\lambda$ -- регулярна точка $A$.
+\end{enumerate}
+\end{theorem}
+
+Перед доведення теореми треба навести корисну лему.
+\begin{lemma}
+Нехай $A \in \mathcal{K}(E)$ та $\lambda$ -- не власне число. Тоді існує $c > 0$ такий, що $\forall x \in E: \|(A-\lambda I)x\| \geq c\|x\|$.
+\end{lemma}
+
+\begin{proof}
+!Припустимо, що не виконується нерівність. Тоді для $\dfrac{1}{n} \in \mathbb{N}$ існують точки $z_n \in E$, для яких $\| (A-\lambda I)z_n \| < \dfrac{1}{n}\|z_n\|$. Ми будемо розглядати точки $x_n = \dfrac{z_n}{\|z_n\|}$, тобто з одиничною нормою (там, де раптом $z_n = 0$, можна просто пропустити), звідси $\|(A-\lambda I)x_n\| < \dfrac{1}{n} \to 0$.\\
+Позначимо точку $y_n = Ax_n$. Зауважимо, що оскільки $\sequence{x_n}$ обмежена та $A \in \mathcal{K}(E)$, то тоді існує збіжна підпослідовність $y_{n_k} \to y$. Також справедлива така оцінка:\\
+$|\lambda| \overset{\text{з одного боку}}{=} \| \lambda x_n\| = \overset{\text{з іншого боку}}{=} \| (\lambda I-A)x_n + Ax_n \| \leq \|y_n\| + \|(A-\lambda I)x_n\|$.\\
+$\implies \|y_n\| \geq |\lambda| - \|(A-\lambda I)x_n\|$.\\
+Оскільки це виконано $\forall n \in \mathbb{N}$, то зокрема й для $n_k$, а далі при $k \to \infty$ отримаємо $\|y\| \geq |\lambda|$.\\
+Утім із іншого боку, зараз доведемо, що $y = 0$. Дійсно, маємо\\
+$0 \leq \|(A-\lambda I)y_{n_k} \| = \|(A-\lambda I) A x_{n_k}\| = \|A(A-\lambda I)x_{n_k}\|$.\\
+Якщо спрямувати $k \to \infty$, то ми отримаємо $0 \leq \|(A-\lambda I)y\| \leq 0$, що свідчить про $(A-\lambda I)y = 0$. Отже, $y$ -- власне число оператора $A$ -- суперечність!
+\end{proof}
+
+Повернімося до доведення альтернативи Фредгольма.
+\begin{proof}
+Якщо $\lambda$ -- власне число, то закінчили доведення.\\
+Тому нехай $\lambda$ таким не є. За щойно доведеною лемою, $\|(A-\lambda I)x\| \geq c \|x\|$ при всіх $x \in E$ для деякого $c > 0$. Тоді звідси (TODO: ?) існує $(A-\lambda I)^{-1} \colon \Im(A-\lambda I) \to E$. За теоремою про замкнений графік, $\Im(A-\lambda I)$ буде замкненою множиною. Нам залишилося показати, що $\Im(A-\lambda I) = E$.\\
+!Позначимо $\Im(A-\lambda I) = E_1$ та припустимо, що $E_1 \neq E$.\\
+Розглянемо образ $(A-\lambda I)E_1 \overset{\text{позн.}}{=} E_2$. Слід зазначити, що $E_2 \neq E_1$ (адже якби $E_2 = E_1$, то оскільки $(A-\lambda I)^{-1} \colon E \to E_1$ -- бієкція, то $E_1 = (A - \lambda I)E_1 = E$, що не наш випадок).\\
+Розглянемо образ $(A-\lambda I)E_2 \overset{\text{позн.}}{=} E_3$. Слід зазначити, що $E_3 \neq E_2$ (аналогічно).\\
+\vdots \\
+Отримаємо ланцюг вкладень $E \supset E_1 \supset E_2 \supset E_3 \supset \dots$ На кожному з цих вкладень застосуємо лему Ріса. Для $\varepsilon = \dfrac{1}{2}$ будуть існувати точки $x_j \in E_j \setminus E_{j+1}$, причому $\|x_j\| = 1$, для яких $\forall y \in E_{j+1}: \|x_j + y\| > 1 - \dfrac{1}{2}$. Саме ці точки нам дадуть сказати, що $\sequence{A x_n}$ не містить збіжної підпослідовності. Справді, при $m > n$ маємо\\
+$\| Ax_n - Ax_m \| = \| \lambda x_n + Ax_n - \lambda x_n - \lambda x_m - Ax_m + \lambda x_m \| = \| \lambda x_n + (A-\lambda I)x_n - \lambda x_m - (A-\lambda I)x_m\| \geq \lambda \cdot \dfrac{1}{2}$.\\
+Пояснення до нерівності: $(A-\lambda I)x_n \in E_{n+1}$, далі $\lambda x_m \in E_m \subset E_{n+1}$ та $(A-\lambda I) x_m \in E_{m+1} \subset E_n$. Тобто останні три доданки -- це елемент з $E_{n+1}$, а далі нерівність з леми Ріса.\\
+Проте $A \in \mathcal{K}(E)$, тому $\sequence{A x_n}$ зобов'язана мати збіжну підпослідовність -- суперечність!
+\end{proof}
+
+\begin{theorem}
+Задано $E$ -- банахів та $A \in \mathcal{K}(E)$. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\sigma(A)$ -- не більш, ніж зліченна множина;
+\item Якщо $\lambda \in \sigma(A) \setminus \{0\}$, то $\dim L_\lambda < \infty$ (тобто $\lambda$ -- власне число скінченної кратності);
+\item Якщо $\dim E = \infty$, то $0 \in \sigma(A)$ -- єдина гранична точка $\sigma(A)$.
+\end{enumerate} 
+\end{theorem}
+
+\begin{proof}
+Нехай $\lambda \in \sigma(A) \setminus \{0\}$, тоді за альтернативою Фредгольма, $\lambda$ -- власне число $A$. Звузимо оператор $A|_{L_\lambda} \overset{\text{насправді}}{=} \lambda I$. Оскільки $A$ компактний, то тоді обо'язково має бути $\dim L_\lambda < \infty$.
+\bigskip \\
+Оберемо $r > 0$ та покажемо, що існує скінченна кількість точок $\lambda_j \in \sigma(A)$, які лежать поза межами кола $B(0;r)$.\\
+!Припустимо, що там нескінченна кількість точок. Ми можемо взяти різний набір $\lambda_j \in \sigma(A), j \geq 1$, для яких $|\lambda_j| \geq r$. Оскільки це власні числа, то $Ax_j = \lambda_j x_j$ для деяких $(x_j)_{j=1}^\infty$. Зауважимо, що будь-який скінченний набір $\{x_1,\dots,x_n\}$ буде лінійно незалежною. Адже, припустивши, що наступна $\{x_1,\dots,x_n,x_{n+1}\}$ лінійно залежна, тобто $x_{n+1} = \displaystyle\sum_{j=1}^n c_j x_j$, то після дії оператора $A$ отримаємо:\\
+$\displaystyle \sum_{j=1}^n c_j \lambda_{n+1} x_j = \lambda_{n+1} x_{n+1} \overset{\text{із одного боку}}{=} Ax_{n+1} \overset{\text{із іншого боку}}{=} \sum_{j=1}^n c_j \lambda_j x_j$.\\
+$\displaystyle\sum_{j=1}^n (c_j \lambda_{n+1} - c_j \lambda_j) x_j = 0 \implies c_j \lambda_{n+1} - c_j \lambda_j = 0 \implies c_j = 0 \implies x_{n+1} = 0$ (не наш випадок).\\
+Позначимо $E_n = \linspan\{x_1,\dots,x_n\}, n \geq 1$, тоді маємо вкладення $E_1 \subset E_2 \subset E_3 \subset \dots$ За лемою Ріса, існують вектори $y_j \in E_j \setminus E_{j-1}$, причому $\|y_j\|= 1$ та $\forall y \in E_{j-1}: \|y_j + y\| \geq \dfrac{1}{2}$. Аналогічними міркуваннями (як у альтернтиві Фредгольма), отримаємо $\|Ax_n - Ax_m\| \geq \dfrac{r}{2}$, тоді не можна відокремити від $\sequence{Ax_n}$ збіжну підпослідовність -- суперечність, бо $A \in \mathcal{K}(E)$!\\
+Отже, 1) довели (TODO: додумати). Якщо $\dim E = \infty$, 
+\end{proof}
+
+\subsection{Спектральний радіус оператора}
+\subsubsection{Степеневі ряди з операторними коефіцієнтами}
+\begin{definition}
+Маємо $E$ -- банахів та $\sequence{A_n} \subset \mathcal{B}(E)$,  далі розглянемо \textbf{степеневий ряд з операторними коефіцієнтами}
+\begin{align*}
+\sum_{k=0}^\infty z^k A_k,\ z \in \mathbb{C}
+\end{align*}
+Цей ряд буде \textbf{збіжним в точці $z_0 \in \mathbb{C}$}, якщо послідовність часткових сум збігається за нормою в $\mathcal{B}(E)$.
+\end{definition}
+
+\begin{lemma}
+Нехай для деякого $z_0 \neq 0$ послідовність $\sequence{z_0^n A_n}$ -- обмежена. Тоді при $|z| < |z_0|$ ряд $\displaystyle\sum_{k=0}^\infty z^k A_k$ -- збіжний.
+\end{lemma}
+
+\begin{proof}
+Маємо нерівність $\displaystyle \left\| \sum_{k=n+1}^{n+p} z^k A_k \right\| \leq \sum_{k=n+1}^{n+p} |z|^k \|A_k\|$. Значить, нам досить буде дослідити збіжність ряда $\displaystyle\sum_{n=0}^\infty |z|^n \|A_n\|$. Ми маємо $|z|^n \|A_n\| = \dfrac{|z|^n}{|z_0|^n} |z_0|^n \|A_n\| = q^n |z_0|^n \|A_n\| \leq c q^n$. Ряд $\displaystyle\sum_{n=0}^\infty cq^n$ збіжний як геометрична прогресія, бо $q < 1$, звідси за ознакою порівняння збіжним буде $\displaystyle\sum_{n=0}^\infty \|z^n A_n\|$.
+\end{proof}
+
+\begin{lemma}
+Заданий степеневий ряд $\displaystyle\sum_{k=0}^\infty z^k A_k$. Тоді радіус збіжності повністю збігається з радіусом збіжності числового степененвого ряда $\displaystyle\sum_{k=0}^\infty z^n \|A_n\|$.
+\end{lemma}
+
+\begin{proof}
+Дійсно, розглянемо степеневий ряд $\displaystyle\sum_{k=0}^\infty z^n \|A_n\|$. Його радіус збіжності $r$ можна визначити за ознакою Коші-Адамара.\\ Припустимо, що $0 < r < +\infty$. Тоді ми вже отримували нерівність $\displaystyle\left\|\sum_{k=n+1}^{n+p} z^k A_k\right\| \leq \sum_{k=n+1}^{n+p} |z|^k \|A_k\|$. Тоді якщо $|z| < r$, то отримаємо збіжність $\displaystyle\sum_{k=0}^\infty z^k A_k$.\\
+!Тепер припустимо, що $z_0 \in \mathbb{C}$ існує таке, що $|z_0| > r$ та при цьому в даній точці $\displaystyle\sum_{k=0}^\infty z_0^k A_k$ збіжний. Тоді звідси випливатиме обмеженість $\sequence{z_0^n A_n}$, тому за попередньою лемою, збіжним буде  ряд $\displaystyle\sum_{n=0}^\infty \|z^n A_n\|$ при $r < |z| < |z_0|$. При цьому $r$ -- радіус збіжності числового степеневого ряда -- суперечність!
+\bigskip \\
+Якщо $r = 0$ чи $r = +\infty$, то все цілком зрозуміло з нерівності.
+\end{proof}
+
+\begin{lemma}
+Нехай $\sequence{\alpha_n}$ -- послідовність невід'ємних чисел, що задовольняє умові $\alpha_{n+m} \leq \alpha_n \alpha_m$ для всіх $n,m \in \mathbb{N}$. Тоді $\exists \displaystyle\lim_{n \to \infty} \sqrt[n]{\alpha_n} < \infty$.
+\end{lemma}
+
+\begin{proof}
+Спершу зауважимо, що $\sequence{\alpha_n^{\frac{1}{n}}}$ -- обмежена. Дійсно, це випливатиме безпосередньо з ланцюга\\
+$\alpha_n \leq \alpha_1 \alpha_{n-1} \leq \alpha_1^2 \alpha_{n-2} \leq \dots \leq \alpha_1^n$.\\
+Зафіксуємо тепер $k \in \mathbb{N}$. Поділимо кожне $n$ на $k$ -- отримаємо представлення $n = m_n k + l_n$ при остачі $0 \leq l_n < k$. Звідси випливатиме, що $\alpha_n \leq \alpha_k^{m_n} \alpha_{l_n}$ (при $l_n = 0$ може виникнути $\alpha_0$, але покладемо $\alpha_0 = 1$). Отже, звідси $\alpha_n^{\frac{1}{n}} \leq \alpha_k^{\frac{m_n}{n}} \alpha_{l_n}^{\frac{1}{n}} = \beta_n$.\\
+Оскільки $\sequence{\alpha_n^{\frac{1}{n}}}$ обмежена, то існує $\displaystyle\varlimsup_{n \to \infty} \alpha_n^{\frac{1}{n}} = \alpha$. Тобто можна відокремити підпослідовність $\left(\alpha_{n_j}^{\frac{1}{n_j}}\right)_{j=1}^\infty$, для якої $\displaystyle\lim_{j \to \infty} \alpha_{n_j}^{\frac{1}{n_j}} = \alpha$. Дослідімо послідовність $\sequence{\beta_n}$.\\
+$\dfrac{m_{n_j}}{n_j} = \dfrac{m_{n_j}}{m_{n_j}k + l_{n_j}} = \dfrac{1}{k + \dfrac{l_{n_j}}{m_{n_j}}} \to \dfrac{1}{k}$ при $j \to \infty$;\\
+$\alpha_{l_{n_j}}^{\frac{1}{n_j}} \to 1$ (тут $\alpha_{l_{n_j}} \in \{\alpha_0,\alpha_1,\dots,\alpha_{k-1}\}$).\\
+Отже, оскільки $\alpha_{n_j}^{\frac{1}{n_j}} \leq \beta_{n_j}$, то при $j \to \infty$ маємо $\alpha \leq \alpha_k^{\frac{1}{k}}, \forall k \in \mathbb{N}$, а тому відповідно $\alpha \leq \displaystyle\lim_{k \to \infty} \alpha_k^{\frac{1}{k}}$, коротше $\displaystyle\varlimsup_{n \to \infty} \alpha_n^{\frac{1}{n}} \leq \lim_{n \to \infty} \alpha_n^{\frac{1}{n}}$. Єдина така можливість набуття нерівності -- це коли послідовність $\sequence{\alpha_n^{\frac{1}{n}}}$ збігається.
+\end{proof}
+
+\subsubsection{Спектральни радіус лінійного неперервного оператора}
+\begin{definition}
+Маємо $A \in \mathcal{B}(E)$ та $\sigma(A)$ -- спектр.\\
+\textbf{Спектральним радіусом} оператора $A$ назвемо число
+\begin{align*}
+\rho_A = \max_{z \in \sigma(A)} |z|
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+Задано $A \in \mathcal{B}(E)$. Тоді $\rho_A = \displaystyle\lim_{n \to \infty} \sqrt[n]{\|A^n\|}$.
+\end{theorem}
+
+\begin{proof}
+Розглянемо послідовність $\sequence{\alpha_n}$, де кожний $\alpha_n = \|A^n\|$. Зауважимо, що $\alpha_{n+m} = \|A^{n+m}\| \leq \|A^n\| \|A^m\| = \alpha_n \alpha_m$, а тому за лемою вище існує границя $\displaystyle\lim_{n \to \infty} \sqrt[n]{\|A^n\|}$. Залишилося довести, що саме ця границя буде спектральним радіусом оператора $A$.\\
+Розглянемо резольвенту $R_z(A) = (A-zI)^{-1}$. Зауважимо, що $\sigma(A) \subset \overline{B(\rho_A,0)}$ (TODO: ?), тож звідси $R_z$ -- аналітична поза межами $\overline{B(\rho_A,0)}$. Але тоді функція $f(\zeta) = R_{\frac{1}{\zeta}}$ буде аналітичною всередині шара $B\left(\dfrac{1}{\rho_A},0\right)$ (на межах є точки, де аналітичність порушується).\\
+Представимо функцію $f$ у вигляді степеневого ряду з операторними коефіцієнтами. При $|\zeta| \leq \|A^{-1}\|$ матимемо $f(\zeta) = (A - \zeta^{-1}I)^{-1} = -\zeta(I - \zeta A)^{-1} = -\zeta \displaystyle\sum_{n=0}^\infty \zeta^n A^n$ -- це було все зроблено за рахунок \thref{invertible_and_geometric_progression}. За другою лемою, радіусом збіжності в правій частині буде $\dfrac{1}{\varlimsup_{n \to \infty} \|A^n\|^{\frac{1}{n}}} = \dfrac{1}{\lim_{n \to \infty} \|A^n\|^{\frac{1}{n}}}$. Ба більше, функція $f(\zeta)$ аналітична всередині кола $B(\rho_A^{-1},0)$, тобто звідси $\rho_A^{-1} = \dfrac{1}{\lim_{n \to \infty} \|A^n\|^{\frac{1}{n}}}$.
+\end{proof}
+
+\subsection{Спектральний розклад для компактних самоспряжених операторів}
+\begin{lemma}
+Нехай $A$ -- самоспряжений оператор. Тоді $\|A^n\| = \|A\|^n$.
+\end{lemma}
+
+\begin{proof}
+Спочатку доведемо рівність при $n = 2$. У одну сторону все ясно, тобто $\|A^2\| \leq \|A\|^2$. Для іншої сторони матимемо наступне:\\
+$\|Ax\|^2 = (Ax,Ax) = (A^2x,x) \overset{\text{н-ть К-Б}}{\leq} \|A^2x\| \|x\|$.\\
+Взявши $\sup$ за векторами $x$, для яких $\|x\| = 1$, отримаємо $\|A\|^2 \leq \|A^2\|$.\\
+Отже, отримали $\|A^2\| = \|A\|^2$, а внаслідок чого $\left\|A^{2^n}\right\| = \|A\|^{2^n}$ для всіх $n \in \mathbb{N}$.\\
+Для кожного числа $m \in \mathbb{N}$ буде $m \leq 2^m$. Якщо припустити, що $\|A^m\| < \|A\|^m$, то отримаємо\\
+$\|A\|^{2^m} = \left\|A^{2^m}\right\| \leq \|A^m\| \left\| A^{2^m -m} \right\| < \|A\|^m \|A\|^{2^m - m}$.\\
+Така нерівність трошки суперечить, тому автоматично $\|A^m\| = \|A\|^m, \forall m \in \mathbb{N}$.
+\end{proof}
+
+\begin{remark}
+Зауважимо, що якщо $A \in \mathcal{K}(H)$ -- самоспряжений, то $\rho_A = \|A\|$ (цілком ясно).
+\end{remark}
+
+\begin{theorem}
+Нехай $A \in \mathcal{K}(H)$ -- самоспряжений. Тоді існує власне число $\lambda$, для якого $|\lambda| = \|A\|$.
+\end{theorem}
+
+\begin{proof}
+Дійсно, оскільки $A$ -- самоспряжений, то звідси $\|A^n\| = \|A\|^n$, але тоді звідси $\rho_A = \displaystyle\lim_{n \to \infty} \sqrt[n]{\|A^n\|} = \|A\|$.
+\end{proof}
+
+Нагадаю твердження, яке було в ліналі, яке копіюється в нашому випадку.
+\begin{lemma}
+Нехай $A$ -- самоспряжений, тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Всі власні числа оператора -- дійсні;
+\item Власні вектори, що відповідають різним власним числам, ортогональні між собою.
+\end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+Нехай $G$ -- інваріантний для $A \in \mathcal{B}(H)$. Тоді $G^\perp$ -- інваріантний для $A^*$.
+\end{lemma}
+
+\begin{proof}
+Дійсно, нехай $y \in G^\perp$, для кожного $x \in G$ маємо $Ax \in G$, внаслідок чого $(Ax,y) = 0$. Із іншого боку, $0 = (Ax,y) = (x, A^*y) \implies A^*y \perp x, \forall x$. Це означатиме, що $A^*y \in G^\perp$.
+\end{proof}
+
+\begin{theorem}
+Нехай $A \in \mathcal{K}(H)$ -- самоспряжений. Тоді $H = \displaystyle\bigoplus_{\substack{\lambda_k \in \sigma(A) \\ \lambda_k \ne 0 }} H_{\lambda_k} \oplus H_0$.\\
+У цьому випадку $H_{\lambda_k}$ -- власний підпростір та $H_0$ -- ядро оператора $A$.
+\end{theorem}
+
+\begin{proof}
+Уже знаємо, що існує $\lambda_1$ таке, що $|\lambda_1| = \|A\|$. Уже відомо ще давно, що власний підпростір $H_{\lambda_1}$ -- інваріантний відносно $A$, звідси $H_{\lambda_1}^\perp \overset{\text{позн.}}{=} H_1$ -- інваріантний відносно $A$.\\
+Розглянемо оператор $A_1 = A|_{H_1}$. Якщо раптом $A_1 = O$, то закінчили доведення. У протилежному випадку існує $\lambda_2$ таке, що $|\lambda_2| = \|A_1\|$. Причому зауважимо, що $|\lambda_2| = \|A_1\| \leq \|A\| = |\lambda_1|$, а також $\lambda_2 \neq \lambda_1$. Останнє якби було правдою, $\lambda_2 = \lambda_1$, то ми би мали вектор $x \in H_1$, для якого $Ax = \lambda_2 x = \lambda_1 x$, але тоді $x \in H_{\lambda_1}$, що неможливо. За лемою вище, власні підпростори $H_{\lambda_1}, H_{\lambda_2}$ ортогональні, тому покладемо $H_2 \overset{\text{позн.}}{=} \left(H_{\lambda_1} \oplus H_{\lambda_2}\right)^T$, який досі залишається інваріантним.\\
+Розглянемо оператор $A_2 = A|_{H_2}$. Якщо раптом $A_2 = O$, то закінчили доведення. Інакше\\
+\vdots \\
+Покладемо $H' = \displaystyle\bigoplus_{\substack{\lambda_k \in \sigma(A) \\ \lambda_k \ne 0 }} H_{\lambda_k}$, який інваріантний. Покладемо $H_0 = (H')^\perp$ -- теж інваріантний. Тоді звідси $H_0 = \ker A$.\\
+!Якби це не так, то існував би вектор $x \in H_0: Ax \neq 0$, тому $\|A|_{H_0}\| > 0$, внаслідок чого існувало би власне число $\lambda_0 \neq 0$, що суперечить! (бо ми всі перебрали вже).
+\end{proof}
 
 \newpage
 
-\section*{Твердження, які потім вставлю в необхідне місце}
+\section*{Back to лінійна алгебра}
+У рамках цього розділу будемо розглядати скінченновимірні простори $L$, тобто $\dim L < \infty$. Нам уже відомо, що $L \cong \mathbb{R}^n$, а в даному просторі задається норма $\|\vec{x}\| = \sqrt{|x_1|^2 + \dots + |x_n|^2}$.
+
+\begin{theorem}
+У кожному скінченновимірному просторі всі норми еквівалентні.
+\end{theorem}
+
 \begin{proof}
 Достатньо довести, що всі норми еквівалентні до $\| \cdot \|_2$.\\
 Нехай $\{\vec{e}_1,\dots,\vec{e}_d\}$ -- стандартний базис $\mathbb{R}^d$, тоді звідси $\vec{x} = \displaystyle\sum_{i=1}^d x_i \vec{e}_i$.\\
@@ -2103,5 +3415,4 @@ $\displaystyle\left\| \sum_{i=1}^d x_i \vec{e}_i
 Водночас такий оператор $A$ називають \textbf{ізоморфізмом}.\\
 Позначення: $X \cong Y$
 \end{definition}
-
 \end{document}

@@ -158,70 +158,70 @@ A_i \cap A_j = \emptyset,\ i \neq j
 
 \begin{definition}
 Задано $(\Omega,\mathcal{F})$ -- імовірнісний простір.\\
-\textbf{Імовірністю} назвемо міру $P \colon \mathcal{F} \to [0,+\infty)$, яка додатково має властивість:
+\textbf{Імовірністю} назвемо міру $\mathbb{P} \colon \mathcal{F} \to [0,+\infty)$, яка додатково має властивість:
 \begin{align*}
-P(\Omega) = 1
+\mathbb{P}(\Omega) = 1
 \end{align*}
-Трійка $(\Omega,\mathcal{F},P)$ називається \textbf{ймовірнісним простром}.
+Трійка $(\Omega,\mathcal{F},\mathbb{P})$ називається \textbf{ймовірнісним простром}.
 \end{definition}
 
 \begin{proposition}[Властивості ймовірності]
 Справедливе наступне:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $P(A^c) = 1 - P(A)$;
-\item $P(\emptyset) = 0$;
-\item $A \subset B \implies P(A) \leq P(B)$;
-\item $P(A) \leq 1$;
-\item $P(B \setminus A) = P(B) - P(A)$;
-\item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ (цю формулу можна узагальнити на довільне скінченне число множин, як це було з потужностями);
-\item $P$ неперервна зверху та знизу одночасно.
+\item $\mathbb{P}(A^c) = 1 - \mathbb{P}(A)$;
+\item $\mathbb{P}(\emptyset) = 0$;
+\item $A \subset B \implies \mathbb{P}(A) \leq \mathbb{P}(B)$;
+\item $\mathbb{P}(A) \leq 1$;
+\item $\mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A)$;
+\item $\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)$ (цю формулу можна узагальнити на довільне скінченне число множин, як це було з потужностями);
+\item $\mathbb{P}$ неперервна зверху та знизу одночасно.
 \end{enumerate}
 \textit{Всі ці властивості -- це випливає з теорії міри.}
 \end{proposition}
 
 \subsection{Класична модель імовірності}
-Припустимо, що $\Omega$ -- зліченний простір елементарних подій. Маємо $P$ -- ймовірність, що задана на $\sigma$-алгебрі $\mathcal{F}$. У силу зліченності маємо наступне:\\
-$P(\Omega) = \displaystyle P\left( \bigcup_{n=1}^\infty \{\omega_i\} \right) = \sum_{n=1}^\infty P(\{\omega_i\})$.\\
-Кожному $\omega_i \in \Omega$ поставимо число $P(\{\omega_i\}) = p_i \geq 0$.\\
-Тоді кожна подія $A$ має ймовірність $P(A) = \displaystyle\sum_{\omega_i \in A} p_i$.
+Припустимо, що $\Omega$ -- зліченний простір елементарних подій. Маємо $\mathbb{P}$ -- ймовірність, що задана на $\sigma$-алгебрі $\mathcal{F}$. У силу зліченності маємо наступне:\\
+$\mathbb{P}(\Omega) = \displaystyle \mathbb{P}\left( \bigcup_{n=1}^\infty \{\omega_i\} \right) = \sum_{n=1}^\infty \mathbb{P}(\{\omega_i\})$.\\
+Кожному $\omega_i \in \Omega$ поставимо число $\mathbb{P}(\{\omega_i\}) = p_i \geq 0$.\\
+Тоді кожна подія $A$ має ймовірність $\mathbb{P}(A) = \displaystyle\sum_{\omega_i \in A} p_i$.
 \bigskip \\
 Всі ці процедури можна аналогічно повторити, якщо $\Omega$ -- скінченний простір.\\
 Якщо $|\Omega| = k$ -- скінченний, то прийнято вважати, що всі елементарні події $\omega_i$ рівноможливі, тобто всі $p_1 = p_2 = \dots = p_k \overset{\text{позн.}}{=} p$ рівні. Це означатиме, що $\displaystyle\sum_{n=1}^k p_i = p_1 + \dots + p_k = k p = 1$. Отже, кожна ймовірність $p = \dfrac{1}{k}$.\\
-Тоді кожна подія $A$ має ймовірність $P(A) = \displaystyle\sum_{\omega_i \in A} p_i = \dfrac{m}{k}$, де $m$ -- кількість елементарних подій в $A$.\\
+Тоді кожна подія $A$ має ймовірність $\mathbb{P}(A) = \displaystyle\sum_{\omega_i \in A} p_i = \dfrac{m}{k}$, де $m$ -- кількість елементарних подій в $A$.\\
 Отже, в класичній моделі ймовірності при $\Omega$ -- скінченна, ймовірність події обчислюється так:
 \begin{align*}
-P(A) = \dfrac{|A|}{|\Omega|}
+\mathbb{P}(A) = \dfrac{|A|}{|\Omega|}
 \end{align*}
 
 \begin{example}
-Кидаємо один раз монету, $\Omega = \{H,T\}$. Тоді в класичному сенсі $P(\{H\}) = P(\{T\}) \dfrac{1}{2}$. Тобто ймовірність випадіння орла чи решки -- рівноможлива.
+Кидаємо один раз монету, $\Omega = \{H,T\}$. Тоді в класичному сенсі $\mathbb{P}(\{H\}) = \mathbb{P}(\{T\}) \dfrac{1}{2}$. Тобто ймовірність випадіння орла чи решки -- рівноможлива.
 \end{example}
 
 \begin{example}
 Кидаємо двічі монету. Знайти ймовірність того, що хоча б один орел випаде.\\
-Маємо $\Omega = \{HH,HT,TH,TT\}$, описана подія $A = \{HH,HT,TH\}$. Тоді звідси $P(A) = \dfrac{3}{4}$.
+Маємо $\Omega = \{HH,HT,TH,TT\}$, описана подія $A = \{HH,HT,TH\}$. Тоді звідси $\mathbb{P}(A) = \dfrac{3}{4}$.
 \end{example}
 
 \begin{example}[Задача про буху секретарку]
 Секретарка поклала $n$ листів в $n$ чистих конвертів, заклеїла ці конверти та посля цього написала адреси. Знайти ймовірність того, що хоча б один з листів дійде за призначенням.\\
-Позначимо $A_i$ -- подія, де $i$-ий лист дійшов за призначенням. Тоді маємо, що $P(A_j) = \dfrac{1}{n}$.\\
+Позначимо $A_i$ -- подія, де $i$-ий лист дійшов за призначенням. Тоді маємо, що $\mathbb{P}(A_j) = \dfrac{1}{n}$.\\
 Маємо подію $A$ -- подія, де хоча б один з листів дійде за призначенням. Тобто $A = \displaystyle\bigcup_{i=1}^n A_i$.\\
-$P(A_i) = \dfrac{1}{n}$;\\
-$P(A_i \cap A_j) = \dfrac{1}{n(n-1)}$;\\
-$P(A_i \cap A_j \cap A_k) = \dfrac{1}{n(n-1)(n-2)}$;\\
+$\mathbb{P}(A_i) = \dfrac{1}{n}$;\\
+$\mathbb{P}(A_i \cap A_j) = \dfrac{1}{n(n-1)}$;\\
+$\mathbb{P}(A_i \cap A_j \cap A_k) = \dfrac{1}{n(n-1)(n-2)}$;\\
 $\vdots$\\
-$P(A_1 \cap \dots \cap A_n) = \dfrac{1}{n!}$.\\
+$\mathbb{P}(A_1 \cap \dots \cap A_n) = \dfrac{1}{n!}$.\\
 Звідси випливає, що за формулою включення-виключення,\\
-$P(A) = n \cdot \dfrac{1}{n} - C_n^2 \dfrac{1}{n(n-1)} + \dots + (-1)^{n-1} \dfrac{1}{n!} = 1 - \dfrac{1}{2!} + \dfrac{1}{3!} - \dots + (-1)^{n-1} \dfrac{1}{n!}$.\\
-Спрямуємо $n \to \infty$, зауважимо, що $e^{-1} = 1 - \dfrac{1}{1!} + \dfrac{1}{2!} - \dfrac{1}{3!} + \dots$ Тоді звідси $\displaystyle\lim_{n \to \infty} P(A) = 1 - \dfrac{1}{e} \approx 0.63$.
+$\mathbb{P}(A) = n \cdot \dfrac{1}{n} - C_n^2 \dfrac{1}{n(n-1)} + \dots + (-1)^{n-1} \dfrac{1}{n!} = 1 - \dfrac{1}{2!} + \dfrac{1}{3!} - \dots + (-1)^{n-1} \dfrac{1}{n!}$.\\
+Спрямуємо $n \to \infty$, зауважимо, що $e^{-1} = 1 - \dfrac{1}{1!} + \dfrac{1}{2!} - \dfrac{1}{3!} + \dots$ Тоді звідси $\displaystyle\lim_{n \to \infty} \mathbb{P}(A) = 1 - \dfrac{1}{e} \approx 0.63$.
 \end{example}
 
 \subsection{Умовна ймовірність}
 \begin{definition}
-Маємо $(\Omega, \mathcal{F}, P)$ -- ймовірнісний простір. Припустимо, що подія $B$ має ймовірність $P(B) > 0$ -- деяка умова.\\
+Маємо $(\Omega, \mathcal{F}, \mathbb{P})$ -- ймовірнісний простір. Припустимо, що подія $B$ має ймовірність $\mathbb{P}(B) > 0$ -- деяка умова.\\
 Імовірність події $A$ за умовою, що спрацювала подія $B$, називається \textbf{умовною ймовірністю $A$ за умовою $B$}. Обчислюється за такою формулою:
 \begin{align*}
-P(A|B) = \dfrac{P(A \cap B)}{P(B)}
+\mathbb{P}(A|B) = \dfrac{\mathbb{P}(A \cap B)}{P(B)}
 \end{align*}
 \end{definition}
 
@@ -230,44 +230,44 @@ P(A|B) = \dfrac{P(A \cap B)}{P(B)}
 Маємо простір $\Omega = \{ \omega: \omega = (a,b): 1 \leq a \leq 6, 1 \leq b \leq 6\}$.\\
 $A$ -- подія, яка описує, що ми отримали більше шести очок (наприклад, $(4,6) \in A$);\\
 $B$ -- подія, яка описує, що перша кістка дає три очки (наприклад, $(3,5) \in B$).\\
-Тоді $P(A|B) = \dfrac{P(A \cap B)}{P(B)}$.\\
-Зауважимо, що $P(A \cap B) = \dfrac{|A \cap B|}{|\Omega|} = \dfrac{3}{36}$. У нас всього три події можливі: $(3,4),(3,5),(4,6)$.\\
-Також маємо $P(B) = \dfrac{|B|}{|\Omega|} = \dfrac{6}{36}$. Тут можливі шість подій: $(3,1), (3,2), \dots, (3,6)$.\\
-Остаточно отримаємо ймовірність $P(A|B) = \dfrac{3}{6} = \dfrac{1}{2}$.\\
-Для порівняння, ймовірність того, що випаде більше шести очок (без жодних інших умов) $P(A) = \dfrac{21}{36} = \dfrac{7}{12}$ -- вийшла більша ймовірність.
+Тоді $\mathbb{P}(A|B) = \dfrac{\mathbb{P}(A \cap B)}{P(B)}$.\\
+Зауважимо, що $\mathbb{P}(A \cap B) = \dfrac{|A \cap B|}{|\Omega|} = \dfrac{3}{36}$. У нас всього три події можливі: $(3,4),(3,5),(4,6)$.\\
+Також маємо $\mathbb{P}(B) = \dfrac{|B|}{|\Omega|} = \dfrac{6}{36}$. Тут можливі шість подій: $(3,1), (3,2), \dots, (3,6)$.\\
+Остаточно отримаємо ймовірність $\mathbb{P}(A|B) = \dfrac{3}{6} = \dfrac{1}{2}$.\\
+Для порівняння, ймовірність того, що випаде більше шести очок (без жодних інших умов) $\mathbb{P}(A) = \dfrac{21}{36} = \dfrac{7}{12}$ -- вийшла більша ймовірність.
 \end{example}
 
 \begin{remark}
-Зауважимо, що в класичному моделі $P(A|B) = \dfrac{|A \cap B|}{|B|}$, якщо розписати кожну ймовірність.
+Зауважимо, що в класичному моделі $\mathbb{P}(A|B) = \dfrac{|A \cap B|}{|B|}$, якщо розписати кожну ймовірність.
 \end{remark}
 
 \begin{proposition}[Властивості умовної ймовірності]
 Справедливе наступне:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $P(A|A) = 1$;
-\item $P(\emptyset|A) = 0$;
-\item $P(A|B) = 1$, якщо $A \supset B$;
-\item $\displaystyle P\left(\bigsqcup_{n=1}^\infty A_n | B\right) = \sum_{n=1}^\infty P(A_n | B)$.
+\item $\mathbb{P}(A|A) = 1$;
+\item $\mathbb{P}(\emptyset|A) = 0$;
+\item $\mathbb{P}(A|B) = 1$, якщо $A \supset B$;
+\item $\displaystyle \mathbb{P}\left(\bigsqcup_{n=1}^\infty A_n | B\right) = \sum_{n=1}^\infty \mathbb{P}(A_n | B)$.
 \end{enumerate}
 \textit{Вправа: довести.}
 \end{proposition}
 
 \begin{corollary}
-Трійка $(\Omega \cap B, \mathcal{F} \cap B, P(\cdot | B))$ задає ймовірнісний простір.
+Трійка $(\Omega \cap B, \mathcal{F} \cap B, \mathbb{P}(\cdot | B))$ задає ймовірнісний простір.
 \end{corollary}
 
 \subsection{Незалежність подій}
 \begin{definition}
 Події $A,B$ називаються \textbf{незалежними}, якщо
 \begin{align*}
-P(A \cap B) = P(A) \cdot P(B)
+\mathbb{P}(A \cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)
 \end{align*}
 \end{definition}
 
 \begin{proposition}[Властивості незалежних подій]
 Нехай $A,B$ -- незалежні події. Справедливе наступне:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $P(A|B) = P(A)$ \qquad $P(B|A) = P(B)$;
+\item $\mathbb{P}(A|B) = \mathbb{P}(A)$ \qquad $\mathbb{P}(B|A) = \mathbb{P}(B)$;
 \item $A,B^c$ або $A^c,B$ або $A^c,B^c$ -- також незалежні події;
 \item Нехай $A,B$ та $A,C$ між собою незалежні та $B,C$ несумісні. Тоді $A, B \sqcup C$ -- незалежні.
 \end{enumerate}
@@ -277,14 +277,14 @@ P(A \cap B) = P(A) \cdot P(B)
 \begin{definition}
 Події $A_1,\dots,A_n$ називаються \textbf{незалежними} (у сукупності), якщо
 \begin{align*}
-\forall i_1,\dots,i_r \in \{1,\dots,n\}: P\left( \bigcap_{k=1}^r A_{i_k} \right) = \prod_{k=1}^r P(A_{i_k})
+\forall i_1,\dots,i_r \in \{1,\dots,n\}: \mathbb{P}\left( \bigcap_{k=1}^r A_{i_k} \right) = \prod_{k=1}^r \mathbb{P}(A_{i_k})
 \end{align*}
 \end{definition}
 
 \begin{definition}
 Події $A_1,\dots,A_n$ називаються \textbf{попарно незалежними}, якщо
 \begin{align*}
-\forall i,j: i \neq j: P(A_i \cap A_j) = P(A_i) \cap P(A_j)
+\forall i,j: i \neq j: \mathbb{P}(A_i \cap A_j) = \mathbb{P}(A_i) \cap \mathbb{P}(A_j)
 \end{align*}
 \end{definition}
 
@@ -298,18 +298,18 @@ P(A \cap B) = P(A) \cdot P(B)
 $R$ -- подія, коли тетраедр показує червоний колір після підкидання;\\
 $G$ -- подія, коли тетраедр показує зелений колір після підкидання;\\
 $B$ -- подія, коли тетраедр показує синій колір після підкидання.\\
-Зауважимо спочатку, що $P(R) = P(G) = P(B) = \dfrac{1}{2}$.\\
-Події $R,G,B$ попарно незалежні. Дійсно, $P(R \cap G) = P(G \cap B) = P(B \cap G) = \dfrac{1}{4}$.\\
-Події $R,G,B$ не є незалежними у сукупності. Дійсно, $P(R \cap G \cap B) = \dfrac{1}{4} \neq \dfrac{1}{8}$.
+Зауважимо спочатку, що $\mathbb{P}(R) = \mathbb{P}(G) = \mathbb{P}(B) = \dfrac{1}{2}$.\\
+Події $R,G,B$ попарно незалежні. Дійсно, $\mathbb{P}(R \cap G) = \mathbb{P}(G \cap B) = \mathbb{P}(B \cap G) = \dfrac{1}{4}$.\\
+Події $R,G,B$ не є незалежними у сукупності. Дійсно, $\mathbb{P}(R \cap G \cap B) = \dfrac{1}{4} \neq \dfrac{1}{8}$.
 \end{example}
 
 \subsection{Формула повної ймовірності}
 Маємо $\Omega$ -- простір елементарних подій. Припустимо, що $H_1,H_2,\dots,H_n$ утворюють повну групу подій, у такому разі такі події називають \textbf{припущеннями}.\\
 Нехай подія $A$ відбувається разом з якимось припущенням. Тоді\\
-$\displaystyle P(A) = P\left(A \cap \Omega\right) = P( A \cap (H_1 \sqcup \dots \sqcup H_n) = P((A \cap H_1) \sqcup \dots \sqcup (A \cap H_n)) = \sum_{k=1}^n P(A \cap H_k) = \sum_{k=1}^n P(H_k) P(A|H_k)$.\\
+$\displaystyle \mathbb{P}(A) = \mathbb{P}\left(A \cap \Omega\right) = \mathbb{P}( A \cap (H_1 \sqcup \dots \sqcup H_n) = \mathbb{P}((A \cap H_1) \sqcup \dots \sqcup (A \cap H_n)) = \sum_{k=1}^n \mathbb{P}(A \cap H_k) = \sum_{k=1}^n \mathbb{P}(H_k) \mathbb{P}(A|H_k)$.\\
 Таким чином, ми отримали формулу повної ймовірності:
 \begin{align*}
-P(A) = \sum_{k=1}^n P(H_k) P(A|H_k)
+\mathbb{P}(A) = \sum_{k=1}^n \mathbb{P}(H_k) \mathbb{P}(A|H_k)
 \end{align*}
 
 \begin{example}
@@ -318,34 +318,34 @@ $H_1$ -- подія, де телефон із Китаю;\\
 $H_2$ -- подія, де телефон із В'єтнаму;\\
 $H_3$ -- подія, де телефон із Південної Кореї.\\
 Позначимо $A$ -- подія, де куплений телефон бракований (тут не зазначається, із якої країни ми купляємо телефон). Оскільки $H_1,H_2,H_3$ утворюють повну групу подій, то звідси\\
-$P(A) = P(H_1) P(A|H_1) + P(H_2) P(A|H_2) + P(H_3) P(A|H_3)$.\\
-Зауважимо, що $P(H_1) = 0.8,\ P(H_2) = 0.15,\ P(H_3) = 0.05$ (за умовою).\\
-Також зазначимо, що $P(A|H_1) = 0.01,\ P(A|H_2) = 0.001,\ P(A|H_3) = 0.0001$.\\
-Отже, підставивши всі значення, отримамо $P(A) = 0.008155$.
+$\mathbb{P}(A) = \mathbb{P}(H_1) \mathbb{P}(A|H_1) + \mathbb{P}(H_2) \mathbb{P}(A|H_2) + \mathbb{P}(H_3) \mathbb{P}(A|H_3)$.\\
+Зауважимо, що $\mathbb{P}(H_1) = 0.8,\ \mathbb{P}(H_2) = 0.15,\ \mathbb{P}(H_3) = 0.05$ (за умовою).\\
+Також зазначимо, що $\mathbb{P}(A|H_1) = 0.01,\ \mathbb{P}(A|H_2) = 0.001,\ \mathbb{P}(A|H_3) = 0.0001$.\\
+Отже, підставивши всі значення, отримамо $\mathbb{P}(A) = 0.008155$.
 \end{example}
 
 \subsection{Формула Баєса}
 Маємо $\Omega$ -- простір елементарних подій. Припустимо, що $H_1,H_2,\dots,H_n$ утворюють повну групу подій, у такому разі такі події називають \textbf{припущеннями}.\\
-У результаті проведення експерименту відбулася подія $A$. Виникає питання: чому дорівнює $P(H_1|A),\dots,P(H_n|A)$?\\
-$P(H_i|A) = \dfrac{P(H_i \cap A)}{P(A)} = \dfrac{P(H_1) P(A|H_i)}{\sum_{k=1}^n P(H_k) P(A|H_k)}$.\\
+У результаті проведення експерименту відбулася подія $A$. Виникає питання: чому дорівнює $\mathbb{P}(H_1|A),\dots,\mathbb{P}(H_n|A)$?\\
+$\mathbb{P}(H_i|A) = \dfrac{\mathbb{P}(H_i \cap A)}{\mathbb{P}(A)} = \dfrac{\mathbb{P}(H_1) \mathbb{P}(A|H_i)}{\sum_{k=1}^n \mathbb{P}(H_k) \mathbb{P}(A|H_k)}$.\\
 Таким чином, отримали формулу Баєса:
 \begin{align*}
-P(H_i|A) = \dfrac{P(H_1) P(A|H_i)}{\displaystyle\sum_{k=1}^n P(H_k)P(A|H_k)}
+\mathbb{P}(H_i|A) = \dfrac{\mathbb{P}(H_1) \mathbb{P}(A|H_i)}{\displaystyle\sum_{k=1}^n \mathbb{P}(H_k)\mathbb{P}(A|H_k)}
 \end{align*}
 Така формула дає відповідь на питання, чому дорівнює ймовірність того, що мала місце кожна з гіпотез $H_i$, якщо вже подія $A$ сталася.
 
 \subsection{Поліноміальна схема}
-Нехай $A_1,\dots,A_k$ утворюють повну групу подій, позначимо їхні ймовірності $P(A_i) = p_i$.\\
+Нехай $A_1,\dots,A_k$ утворюють повну групу подій, позначимо їхні ймовірності $\mathbb{P}(A_i) = p_i$.\\
 Проводимо експеримент $n$ разів, в кожному з яких відбувається одна з подій $A_i$. Задача: знайти ймовірність того, що:\\
 подія $A_1$ виникне $m_1$ разів;\\
 подія $A_2$ виникне $m_2$ разів;\\
 $\vdots$\\
 подія $A_k$ виникне $m_k$ разів.\\
 Зрозуміло, що тут $m_1 + m_2 + \dots + m_k = n$. Також допускається, що одна з подій може не відбутися.\\
-Таку ймовірність позначу за $P_n(m_1,m_2,\dots,m_k)$.\\
+Таку ймовірність позначу за $\mathbb{P}_n(m_1,m_2,\dots,m_k)$.\\
 Якщо згадати комбінаторику, то ми отримаємо таку формулу:
 \begin{align*}
-P_n(m_1,\dots,m_k) = \dfrac{n!}{m_1! m_2! \dots m_k!} p_1^{m_1} p_2^{m_2} \dots p_k^{m_k}
+\mathbb{P}_n(m_1,\dots,m_k) = \dfrac{n!}{m_1! m_2! \dots m_k!} p_1^{m_1} p_2^{m_2} \dots p_k^{m_k}
 \end{align*}
 Така ймовірність називається поліноміальною.
 \newpage

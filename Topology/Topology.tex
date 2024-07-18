@@ -60,6 +60,7 @@
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\pr}{pr}
 
 
@@ -106,7 +107,7 @@ X \setminus V \in \tau
 \end{definition}
 
 \begin{example}
-Зокрема будь-який метричний простір $(X,\rho)$ задає топологію \\$\tau_\rho = \{ \text{всі відкриті множини в } (X,\rho)\}$. Тому що там виконуються твердження: $X, \emptyset$ -- відркиті, будь-яке об'єднання сім'ї відкритих -- відкрита, будь-який перетин двох відкритих -- відкрита.
+Зокрема будь-який метричний простір $(X,\rho)$ задає топологію \\ $\tau_\rho = \{ \text{всі відкриті множини в } (X,\rho)\}$. Тому що там виконуються твердження: $X, \emptyset$ -- відркиті, будь-яке об'єднання сім'ї відкритих -- відкрита, будь-який перетин двох відкритих -- відкрита.
 \end{example}
 
 \begin{example}
@@ -139,7 +140,7 @@ $\tau'$ називається \textbf{слабшою за} $\tau$, якщо
 \end{definition}
 
 \begin{example}
-Якщо є множина $X$, то дискретна топологія є найсильнішою серед всіх інших топології; а недискретна топологія є найслабшою серед всіх інших топології.
+Якщо є множина $X$, то дискретна топологія є найсильнішою серед всіх інших топології; а недискретна топологія є найслабшою серед всіх інших топологій.
 \end{example}
 
 \begin{definition}
@@ -148,7 +149,7 @@ $\tau'$ називається \textbf{слабшою за} $\tau$, якщо
 \begin{align*}
 U \ni x
 \end{align*}
-\textbf{Околом точки $x$} назвемо таку множину $V$, що містить відкритий окіл т. $x$, тобто
+\textbf{Околом точки $x$} назвемо таку множину $V$, що містить відкритий окіл точки $x$, тобто
 \begin{align*}
 \exists U \text{ -- відкритий окіл точки } x: V \supset U
 \end{align*}
@@ -263,6 +264,215 @@ $y \in B_{\rho'}(x,cr) \implies \rho'(x,y) \leq cr \implies \rho(x,y) \leq \dfra
 При цьому ми маємо $d \overset{\text{Lipsch}}{\not\sim} \rho$. Дійсно, нехай $C > 0$. Можна підібрати $x = 2 [C] + 1,y = [C]$, причому тут $x,y \in \mathbb{Z}$, для яких $\rho(x,y) > C d(x,y)$.
 \end{example}
 
+\subsection{Конструкція топології за базою}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Клас $\mathcal{B}$ підмножин $X$ назвемо \textbf{базою топології $\tau$}, якщо
+\begin{align*}
+\forall U \in \tau: U = \bigcup_{V \in \mathcal{\tilde{B}}} V,\ \mathcal{\tilde{B}} \subset \mathcal{B}
+\end{align*}
+Тобто $\mathcal{B}$ -- база, якщо кожна відкрита множина записується як об'єднання множин з класу $\mathcal{B}$.
+\end{definition}
+
+\begin{remark}
+Всі множини з класу $\mathcal{B}$ -- відкриті автоматично, тобто $\mathcal{B} \subset \tau$, просто тому що їх можна сприймати як об'єднання з одного елементу.
+\end{remark}
+
+\begin{example}
+Зокрема маємо метричний простір $(X,\rho)$, де індукується топологія $\tau_\rho$. Тоді для неї база $\mathcal{B} = \{ B(x;r) \mid x \in X, r > 0 \}$ -- набір всіх відкритих куль. Дійсно, нехай $U$ -- відкрита множина, тоді $\forall x \in U: x$ -- внутрішня, а тому $\exists B(x;r_x) \subset U$. Тоді звідси $U = \displaystyle\bigcup_{x \in X} B(x;r_x)$. 
+\end{example}
+
+\begin{example}
+Якщо $(X,\tau_{\text{discr}})$ -- дискретна топологія, то тоді $\mathcal{B} = \{\{x\} \mid x \in X\}$ -- база. Дійсно, кожна підмножина $U = \displaystyle\bigcup_{x \in U} \{x\}$, ну й $U$ уже апріорі відкрита.
+\end{example}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $\mathcal{B}$ -- база топології. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$ -- тобто $X$ записуємо як об'єданання всіх множин із бази;
+\item $\forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{\tilde{B}}} U$, де $\mathcal{\tilde{B}} \subset \mathcal{B}$ -- тобто перетин елементів з бази записуються як об'єднання з цієї самої бази.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Дійсно, оскільки $\mathcal{B}$ -- база топології, то кожна відкрита множина -- це об'єдання множин із бази.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Зокрема $X$ -- відкрита, тому $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
+\item Нехай $B_1,B_2 \in \mathcal{B}$. Вони вдвох -- відкриті (див.\@ зауваження). Значить, $B_1 \cap B_2$ є відкритою множиною, а тому $B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
+\end{enumerate}
+Довели.
+\end{proof}
+
+\begin{definition}
+Нехай задано множину $X$ (просто множина без топології).\\
+Клас $\mathcal{B}$ підмножин $X$ назвемо \textbf{базою множини $X$}, якщо
+\begin{align*}
+\text{1) } X = \bigcup_{U \in \mathcal{B}} U \\
+\text{2) } \forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \bigcup_{U \in \mathcal{\tilde{B}}} U, \text{ де } \mathcal{\tilde{B}} \subset \mathcal{B}
+\end{align*} 
+\end{definition}
+\noindent
+Якщо $(X,\tau)$ -- топологія та $\mathcal{B}$ -- база топології, то $\mathcal{B}$ -- база множини (щойно вище довели).\\
+Виявляється, що якщо в нас є множина $X$, для якої ми хочемо згенерувати топологію, то нам потрібно створити базу $\mathcal{B}$ множини $X$.
+
+\begin{proposition}[Конструкція топології за базою]
+Задано $X$ -- множину та $\mathcal{B}$ -- база цієї множини. Створимо $\tau_{\mathcal{B}} = \left\{ \displaystyle\bigcup_{U \in \mathcal{\mathcal{\tilde{B}}}} U \mid \mathcal{\tilde{B}} \subset \mathcal{B} \right\}$ -- тобто клас, що складається з усіх можливих об'єднань елементів з бази. Тоді $(X,\tau_{\mathcal{B}})$ утворює топологічний простір. Ми $\tau_{\mathcal{B}}$ називаємо \textbf{топологією, що породжена базою $\mathcal{B}$}. Причому це єдина така топологія, де $\mathcal{B}$ -- база топології.
+\end{proposition}
+
+\begin{proof}
+Маємо $\tau_{\mathcal{B}} = \left\{ \displaystyle\bigcup_{U \in \mathcal{\mathcal{\tilde{B}}}} U \mid \mathcal{\tilde{B}} \subset \mathcal{B} \right\}$, перевіримо всі пункти для топології.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\emptyset \in \tau_{\mathcal{B}}$, тому що можна записати $\emptyset = \displaystyle\bigcup_{U \in \emptyset} U$, де $\emptyset \subset \mathcal{B}$. Також $X \in \tau_{\mathcal{B}}$, тому що $\mathcal{B}$ -- база множини $X$, а значить, $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$;
+\item Нехай $\{U_\alpha \mid U_\alpha \in \tau_{\mathcal{B}}\}$ -- сім'я відкритих множин. Тобто $U_\alpha = \displaystyle\bigcup_{\mathcal{B}_\alpha} U$, де $\mathcal{B}_\alpha \subset \mathcal{B}$. Тоді звідси $\displaystyle\bigcup_\alpha U_\alpha = \bigcup_{\bigcup_\alpha B_\alpha} U$, причому $\displaystyle\bigcup_\alpha \mathcal{B}_\alpha \subset \mathcal{B}$. Отже, $\displaystyle\bigcup_\alpha U_\alpha \in \tau_\mathcal{B}$;
+\item Нехай $U_1,U_2 \in \tau_\mathcal{B}$. Тобто звідси $U_1 = \displaystyle\bigcup_{U \in \mathcal{B}_1} U$ та $U_2 = \displaystyle\bigcup_{U \in \mathcal{B}_2} U$, де $\mathcal{B}_1,\mathcal{B}_2 \subset \mathcal{B}$. Значить, звідси $U_1 \cap U_2 = \displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} (U \cap V)$. Оскільки $U,V \in \mathcal{B}$, то в силу того, що $\mathcal{B}$ -- база множини $X$, звідси $U \cap V = \displaystyle\bigcup_{W \in \mathcal{\tilde{B}}_{U,V}} W$. Тоді $U_1 \cap U_2 = \displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} \bigcup_{W \in \mathcal{\tilde{B}}_{U,V}} W = \displaystyle\bigcup_{W \in \mathcal{\tilde{\tilde{B}}}} W$. Детально треба уточнити, що кожний $\mathcal{\tilde{B}}_{U,V} \subset \mathcal{B}$, тоді $\displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} \mathcal{\tilde{B}}_{U,V} \overset{\text{позн.}}{=} \mathcal{\tilde{\tilde{B}}} \subset \mathcal{B}$. Висновок: $U_1 \cap U_2$ записали як об'єднання множин з бази $\mathcal{B}$, тож $U_1 \cap U_2 \in \tau_{\mathcal{B}}$.
+\end{enumerate}
+Із цих пунктів випливає, що $\tau_\mathcal{B}$ -- дійсно топологія.
+\bigskip \\
+Також з цього випливає, що $\mathcal{B}$ -- не просто база множини $X$, а ще й база топології $\tau_{\mathcal{B}}$.\\
+Припустимо, що існує $\tau'$ -- якась інша топологія на $X$, яка має базу топології $\mathcal{B}$. Нам треба довести, що $\tau' = \tau_{\mathcal{B}}$.\\
+Нехай $U \in \tau'$, тоді звідси за означенням бази топології, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, де $\mathcal{\tilde{B}} \subset \mathcal{B}$. Але в силу того, як ми визначали $\tau_{\mathcal{B}}$, випливає, що $U \in \tau_{\mathcal{B}}$.\\
+Нехай $U \in \tau_{\mathcal{B}}$, тоді звідси за побудовою, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, але тоді $V \in \tau'$ -- відкрита множина як об'єднання однієї множини з бази. За означенням топології, $U \in \tau'$.\\
+Власне, з цього випливає, що $\tau_{\mathcal{B}} = \tau'$.
+\end{proof}
+
+\begin{remark}
+Не хочеться це вставляти як окреме твердження, але є ось така еквівалентність:\\
+$\forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{\tilde{B}}} U$, де $\mathcal{\tilde{B}} \subset \mathcal{B} \iff \forall B_1,B_2 \in \mathcal{B}: \forall x \in B_1 \cap B_2: \exists W \in \mathcal{B}: x \in W \subset B_1 \cap B_2$.\\
+Зазвичай саме праву частину використовують в якості другої умови бази множини та в твердженні про конструкцію топології за базою. Тим не менш, цю еквівалетність доведу.
+\end{remark}
+
+\begin{proof}
+\rightproof Дано: ліва частина. Нехай $B_1,B_2 \in \mathcal{B}$, тоді звідси $B_1 \cap B_2 = \displaystyle\bigcup_{W \in \mathcal{\tilde{B}}} W$. Оберемо точку $x \in B_1 \cap B_2$, тоді звідси $x \in W_0$, де $W_0 \in \mathcal{B}$. Отже, ми знашли $W_0 \in \mathcal{B}$, для якої $x \in W_0 \subset B_1 \cap B_2$.
+\bigskip \\
+\leftproof Дано: права частина. Нехай $B_1,B_2 \in \mathcal{B}$, тоді $\forall x \in B_1 \cap B_2: \exists W_x \in \mathcal{B}: x \in W_x \subset B_1 \cap B_2$. Зауважимо, що звідси $B_1 \cap B_2 = \displaystyle\bigcup_{x \in B_1 \cap B_2} W_x$, причому ми об'єднуємо елементи з $\mathcal{B}$. 
+\end{proof}
+
+\begin{proposition}
+Задані $(X,\tau), (Y,\tilde{\tau})$ -- топологічні простіри та $\tilde{\mathcal{B}}$ -- база топології $\tilde{\tau}$. Відомо, що $\forall U \in \tilde{\mathcal{B}}: f^{-1}(U) \in \tau$. Тоді $f \colon X \to Y$ -- неперервне. (TODO: move to other subsection)
+\end{proposition}
+
+\begin{remark}
+Тобто коли топологія побудована за базою, то для неперервності достатньо перевірити умову для елементів з бази, а не з усїєї топології.
+\end{remark}
+
+\begin{proof}
+Нехай $U$ -- відкрита множина в $Y$, тобто звідси $U = \displaystyle\bigcup_{V \in \mathcal{B}'} V$, де $\mathcal{B}' \subset \tilde{\mathcal{B}}$ за визначенням бази. Тоді звідси $f^{-1}(U) = \displaystyle\bigcup_{V \in \mathcal{B}'} f^{-1}(V)$, де всі $f^{-1}(V)$ відкриті за умовою. Отже, $f^{-1}(U)$ -- відкрита як об'єднання. Отже, $f \colon X \to Y$ -- неперервне.
+\end{proof}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $\mathcal{B}$ -- його база.\\
+Простір задовольняє \textbf{другу аксіому зліченності} (англ.\@ \textbf{second-countable}), якщо
+\begin{align*}
+\mathcal{B} \text{ має зліченне число множин.}
+\end{align*}
+\end{definition}
+
+\begin{example}
+Зокрема $(\mathbb{R},\tau)$ з евклідовою топологією буде second-countable.\\
+Розглянемо $\mathcal{B} = \{ (a,b) \mid a,b \in \mathbb{Q} \}$. Варто спочатку довести, що вона утворює базу стандартної топології. Дійсно, нехай $U \in \tau$. Її можемо в стандартній топології записати як $U = \displaystyle\bigcup_{x \in U} (x-r,x+r)$.\\
+Надалі вся увага на $(x-r,x+r) \overset{\text{позн.}}{=} (u,v)$. Слід зауважити, що тут $u,v \in \mathbb{R}$. Але відомо, що для $u$ існує послідовність раціональних чисел $\{q_n, n \geq 1\}$ так, щоб $v \geq q_n \geq u$, а також $q_n \to u$. Аналогічно існує послідовність раціональних чисел $\{r_n, n \geq 1\}$ так, щоб $u \leq r_n \leq v$, а також $r_n \to v$. Тоді запишемо $(u,v) = \displaystyle\bigcup_{\substack{q_n,r_n \in \mathbb{Q} \\ q_n < r_n}} (q_n,r_n)$. Таким чином, отримали $(u,v)$ як об'єднання множин з бази, тобто $U$ записується як об'єднання множин з бази.\\
+Висновок: $\mathcal{B}$ -- база стандартної топології. Оскільки $\mathbb{Q}$ -- зліченна множина, то кількість інтервалів $(a,b)$ також буде зліченною, тому second-countable.
+%Wrong
+\iffalse
+Дійсно,\\
+$\mathbb{R} = \displaystyle\bigcup_{n \in \mathbb{N}} (-n,n)$.\\
+Нехай $B_1,B_2 \in \mathcal{B}$, тобто $B_1 = (a,b)$ та $B_2 = (c,d)$. Розглянемо $B_1 \cap B_2 = (a,b) \cap (c,d)$. Іллюстративно наведу кілька випадків:
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[->] (0,0)--(5,0);
+\node at (0.5,0) {$($};
+\node at (0.5,-0.5) {$a$};
+\node at (1.5,0) {$)$};
+\node at (1.5,-0.5) {$b$};
+\node at (2.5,0) {$($};
+\node at (2.5,-0.5) {$c$};
+\node at (4,0) {$)$};
+\node at (4,-0.5) {$d$};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw[->] (0,0)--(5,0);
+\node at (0.5,0) {$($};
+\node at (0.5,-0.5) {$a$};
+\node at (2.5,0) {$)$};
+\node at (2.5,-0.5) {$b$};
+\node at (1.5,0) {$($};
+\node at (1.5,-0.5) {$c$};
+\node at (4,0) {$)$};
+\node at (4,-0.5) {$d$};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw[->] (0,0)--(5,0);
+\node at (0.5,0) {$($};
+\node at (0.5,-0.5) {$c$};
+\node at (2.5,0) {$)$};
+\node at (2.5,-0.5) {$b$};
+\node at (1.5,0) {$($};
+\node at (1.5,-0.5) {$a$};
+\node at (4,0) {$)$};
+\node at (4,-0.5) {$d$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+1. $(a,b) \cap (c,d) = \emptyset$, але $\emptyset \in \mathcal{B}$, тому що $\emptyset = (q,q), q \in \mathbb{Q}$.\\
+2. $(a,b) \cap (c,d) = (c,b) \in \mathcal{B}$. Може бути інша перестановка літер, але суть ясна.\\
+3. $(a,b) \cap (c,d) = (a,b) \in \mathcal{B}$.\\
+Отже, $\mathcal{B}$ утворює базу $\mathbb{R}$, а тому звідси породжує топологію
+\fi
+\end{example}
+
+\subsection{Конструкція топології за передбазою}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Клас $\mathcal{S}$ підмножин $X$ назвемо \textbf{передбазою топології $\tau$}, якщо
+\begin{align*}
+\mathcal{B} \overset{\text{def.}}{=} \left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\} \text{ утворює базу топології } \tau.
+\end{align*}
+\iffalse
+Тобто з цього випливає, що
+\begin{align*}
+\forall U \in \tau: U = \displaystyle\bigcup_{\bigcap_{i=1}^n S_i \in \mathcal{\tilde{B}}} \bigcap_{i=1}^n S_i, \text{ де } \mathcal{\tilde{B}} \subset \mathcal{B}
+\end{align*}
+\fi
+Тобто звідси випливає, що кожна відкрита множина записується як об'єднання скінченних перетинів множин з $\mathcal{S}$.
+\end{definition}
+
+\noindent Ми вже знаємо, що якщо є база $\mathcal{B}$, то тоді можна побудувати топологію. Тобто якщо ми хочемо, щоб $\mathcal{S}$ була передбазою, то треба спочатку утворити базу $\mathcal{B}$, а із бази вже утворити топологію.
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+$\mathcal{S}$ -- передбаза $X \iff \displaystyle\bigcup_{U \in \mathcal{S}} U = X$ (тут об'єднання всіх множин із класа $\mathcal{S}$).
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $\mathcal{S}$ -- передбаза $X$, тоді $\mathcal{B} = \displaystyle\left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}$ утвроює базу топології, тому й базу $X$. Значить, $\displaystyle\bigcup_{V \in \mathcal{B}} V = X$. У цьому об'єднанні беруть участь множини $U \in \mathcal{S}$, а всі решта з об'єдання будуть перетинами з двох чи більше елементів $\mathcal{S}$. Таким чином, достатньо об'єднати $\displaystyle\bigcup_{U \in \mathcal{S}} U = X$.
+\bigskip \\
+\leftproof Дано: $\displaystyle\bigcup_{U \in \mathcal{S}} U = X$. Нам треба показати, що $\mathcal{B} = \displaystyle\left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}$ -- база $X$. Дійсно,\\
+$X = \displaystyle\bigcup_{U \in \mathcal{S}} U = \bigcup_{V \in \mathcal{B}} V = X$ (пояснення вище).\\
+Нехай $B_1,B_2 \in \mathcal{B}$, тобто $\displaystyle B_1 = \bigcap_{i=1}^{n_1} S_i$ та $\displaystyle B_2 = \bigcap_{j=1}^{n_2} S_j$. Тоді звідси $B_1 \cap B_2 = \displaystyle\bigcap_{i=1}^{n_1} S_i \cap \bigcap_{j=1}^{n_2} S_j = \bigcap_{k=1}^{m} S_k$.\\
+Отже, $\mathcal{B}$ -- база множини $X$, а тому $\mathcal{S}$ -- передбаза $X$.
+\end{proof}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $\mathcal{S}$ -- передбаза топології. Тоді $\tau$ -- найслабша топологія, що містить $\mathcal{S}$.
+\end{proposition}
+
+\begin{proof}
+Дано: $\mathcal{S}$ -- передбаза топології. Для зручності позначу початкову топологію за $\tau_{\mathcal{S}}$.\\
+Припустимо, що $\tau$ -- слабша топологія, що містить $\mathcal{S}$, тобто $\tau \subset \tau_{\mathcal{S}}$. Залишилося довести, що $\tau_{\mathcal{S}} \subset \tau$.\\
+Беремо $U \in \tau_{\mathcal{S}}$, тоді звідси $U = \displaystyle\bigcup \bigcap_{\text{скінченний}} W$, де $W \in \mathcal{S}$. Зауважимо, що $W \in \tau$ також, бо $\tau$ містить $\mathcal{S}$. Таким чином, $\displaystyle\bigcap_{\text{скінченний}} W \in \tau \implies U \in \tau$.
+\end{proof}
+
+\iffalse
+\begin{example}
+Зокрема $\mathcal{S} = \{(-\infty,b), (a,+\infty) \mid a,b \in \mathbb{R}\}$ буде передбазою $\mathbb{R}$, причому породжена топологія повністю збігатиметься зі стандартною.\\
+Те, що це передбаза, -- цілком зрозуміло, якщо об'єднати всі інтервали. Залишилося довести, що $\tau_{\mathcal{S}} = \tau_{\text{stand}}$.\\
+Цілком зрозуміло, що $\tau_{\mathcal{S}} \subset \tau_{\text{stand}}$. Тепер нехай $U \in \tau_{\text{stand}}$. Ми знаємо, що $\tau_{\text{stand}} = \tau_{\mathcal{B}}$, причому $\mathcal{B} = \{(a,b) \mid a,b \in \mathbb{Q}\}$
+\end{example}
+\fi
+
 \subsection{Збіжність в топологічному просторі}
 \begin{definition}
 Задані $(X,\tau)$ -- топологічний простір та послідовність $\{x_n \in X, n \geq 1\}$.\\
@@ -294,30 +504,30 @@ $y \in B_{\rho'}(x,cr) \implies \rho'(x,y) \leq cr \implies \rho(x,y) \leq \dfra
 \begin{align*}
 \forall U \in \tilde{\tau} : f^{-1}(U) \in \tau
 \end{align*}
-Або простіше кажучи казати так:
+Простіше кажучи, ми маємо ось це:
 \begin{align*}
 \forall U \text{ -- відкрита в } Y: f^{-1}(U) \text{ -- відкрита в } X
 \end{align*}
 \end{definition}
 
 \begin{example}
-Задано відображення $f \colon X \to Y$, де $(X,\rho), (Y,\rho')$ -- два метричних простори. Тоді звідси $f$ -- неперервне (в топологічному сенсі).
+Задано неперервне відображення $f \colon X \to Y$, де $(X,\rho), (Y,\rho')$ -- два метричних простори. Тоді звідси $f$ -- неперервне (в топологічному сенсі).
 \end{example}
 
 \begin{example}
-Задано відображення $f \colon X \to Y$, де $(X,\tau_{\text{discr}})$ -- дискретний топологічний простір. Тоді $f$ -- неперервне.\\
+Задано відображення $f \colon X \to Y$, де $(X,\tau_{\text{discr}})$ -- дискретний топологічний простір, а на $Y$ стоїть довільна топологія. Тоді $f$ -- неперервне.\\
 Справді, беремо $U$ -- відкриту множину в $Y$. Тоді прообраз $f^{-1}(U)$ буде відкритим в $X$, бо в дискретній топології всі множини -- відкриті.
 \end{example}
 
 \begin{example}
-Задано відображення $f \colon X \to Y$, де $(Y,\tau_{\text{indiscr}})$ -- недискретний топологічний простір. Тоді $f$ -- неперервне.\\
+Задано відображення $f \colon X \to Y$, де $(Y,\tau_{\text{indiscr}})$ -- недискретний топологічний простір, а на $X$ стоїть довільна топологія. Тоді $f$ -- неперервне.\\
 Справді, оберемо $\emptyset,Y$ -- єдині відкриті множини в $Y$. Тоді $f^{-1}(\emptyset) = \emptyset$ та $f^{-1}(Y) = X$ -- обидва відкриті в $X$.
 \end{example}
 
 \begin{example}
-Задано відображення $\id \colon X \to X$, тут відображення між $(X,\tau)$ та $(X,\tau')$. Тоді $\id$ -- неперервне $\iff \tau$ сильніша за $\tau'$.\\
-\rightproof Дано: $\id$ -- неперервне. Тобто $\forall U \in \tau': \id^{-1}(U) = U \in \tau$. А це в точності $\tau' \subset \tau$.
-\bigskip \\
+Задано відображення $\id \colon X \to X$, тут відображення між $(X,\tau)$ та $(X,\tau')$. Тоді \\
+$\id$ -- неперервне $\iff \tau$ сильніша за $\tau'$.\\
+\rightproof Дано: $\id$ -- неперервне. Тобто $\forall U \in \tau': \id^{-1}(U) = U \in \tau$. А це в точності $\tau' \subset \tau$.\\
 \leftproof Дано: $\tau' \subset \tau$. Тобто $\forall U \in \tau': U \in \tau$, але при цьому $U = \id^{-1}(U) \in \tau$. Отже, $\id$ -- неперервне.
 \end{example}
 
@@ -356,9 +566,9 @@ $y \in B_{\rho'}(x,cr) \implies \rho'(x,y) \leq cr \implies \rho(x,y) \leq \dfra
 Таким чином, $f$ -- неперервне відображення.
 \end{proof}
 
-\begin{proposition}[''Означення Гейне'']
-Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори та відображення $f \colon X \to Y$ -- неперервне. Тоді виконується ''означення Гейне'', тобто\\
-нехай $\{x_n \in X, n \geq 1\}$ збігається до точки $x \in X$. Тоді $\{f(x_n) \in Y, n \geq 1\}$ збігається до точки $f(x) \in Y$.
+\begin{proposition}[''Означення Гайне'']
+Задані $(X,\tau)$ та $(Y,\tilde{\tau})$ -- два топологічних простори та відображення $f \colon X \to Y$ -- неперервне. Тоді виконується ''означення Гейне'', тобто:
+Нехай $\{x_n \in X, n \geq 1\}$ збігається до точки $x \in X$. Тоді $\{f(x_n) \in Y, n \geq 1\}$ збігається до точки $f(x) \in Y$.
 \end{proposition}
 
 \begin{proof}
@@ -366,7 +576,7 @@ $y \in B_{\rho'}(x,cr) \implies \rho'(x,y) \leq cr \implies \rho(x,y) \leq \dfra
 \end{proof}
 
 \begin{remark}
-Якщо виконано означення Гейне, то з цього в загальному випадку неперервність НЕ випливає.
+Якщо виконано означення Гайне, то з цього в загальному випадку неперервність НЕ випливає.
 \end{remark}
 
 \begin{proposition}[Інші властивості]
@@ -506,209 +716,6 @@ $[a,b] \cong [0,1]$ та $[0,1] \cong [c,d] \implies [a,b] \cong [c,d]$.
 Мабуть, в алгебраїчній топології буде доведено, що $\mathbb{R}^n \cong \mathbb{R}^m \iff n = m$.
 \end{example}
 
-\subsection{Конструкція топології за базою}
-\begin{definition}
-Задано $(X,\tau)$ -- топологічний простір.\\
-Клас $\mathcal{B}$ підмножин $X$ назвемо \textbf{базою топології $\tau$}, якщо
-\begin{align*}
-\forall U \in \tau: U = \bigcup_{V \in \mathcal{\tilde{B}}} V,\ \mathcal{\tilde{B}} \subset \mathcal{B}
-\end{align*}
-Тобто $\mathcal{B}$ -- база, якщо кожна відкрита множина записується як об'єднання множин з класу $\mathcal{B}$.
-\end{definition}
-
-\begin{remark}
-Всі множини з класу $\mathcal{B}$ -- відкриті автоматично, тобто $\mathcal{B} \subset \tau$, просто тому що їх можна сприймати як об'єднання з одного елементу.
-\end{remark}
-
-\begin{example}
-Зокрема маємо метричний простір $(X,\rho)$, де індукується топологія $\tau_\rho$. Тоді для неї база $\mathcal{B} = \{ B(x;r) \mid x \in X, r > 0 \}$ -- набір всіх відкритих куль. Дійсно, нехай $U$ -- відкрита множина, тоді $\forall x \in U: x$ -- відкрита, а тому $\exists B(x;r_x) \subset U$. Тоді звідси $U = \displaystyle\bigcup_{x \in X} B(x;r_x)$. 
-\end{example}
-
-\begin{example}
-Якщо $(X,\tau_{\text{discr}})$ -- дискретна топологія, то тоді $\mathcal{B} = \{\{x\} \mid x \in X\}$ -- база. Дійсно, кожна підмножина $U = \displaystyle\bigcup_{x \in U} \{x\}$, ну й $U$ уже апріорі відкрита.
-\end{example}
-
-\begin{proposition}
-Задано $(X,\tau)$ -- топологічний простір та $\mathcal{B}$ -- база топології. Тоді:\\
-1. $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$ -- тобто $X$ записуємо як об'єданання всіх множин із бази;\\
-2. $\forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{\tilde{B}}} U$, де $\mathcal{\tilde{B}} \subset \mathcal{B}$ -- тобто перетин елементів з бази записуються як об'єднання з цієї самої бази.
-\end{proposition}
-
-\begin{proof}
-Дійсно, оскільки $\mathcal{B}$ -- база топології, то кожна відкрита множина -- це об'єдання множин із бази.\\
-1. Зокрема $X$ -- відкрита, тому $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$.\\
-2. Нехай $B_1,B_2 \in \mathcal{B}$. Вони вдвох -- відкриті (див. зауваження). Значить, $B_1 \cap B_2$ є відкритою множиною, а тому $B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{B}} U$.
-\end{proof}
-
-\begin{definition}
-Нехай задано множину $X$ (просто множина без топології).\\
-Клас $\mathcal{B}$ підмножин $X$ назвемо \textbf{базою множини $X$}, якщо
-\begin{align*}
-\text{1. } X = \bigcup_{U \in \mathcal{B}} U \\
-\text{2. } \forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \bigcup_{U \in \mathcal{\tilde{B}}} U, \text{ де } \mathcal{\tilde{B}} \subset \mathcal{B}
-\end{align*} 
-\end{definition}
-\noindent
-Якщо $(X,\tau)$ -- топологія та $\mathcal{B}$ -- база топології, то $\mathcal{B}$ -- база множини (щойно вище довели).\\
-Виявляється, що якщо в нас є множина $X$, для якої ми хочемо згенерувати топологію, то нам потрібно створити базу $\mathcal{B}$ множини $X$.
-
-\begin{proposition}[Конструкція топології за базою]
-Задано $X$ -- множину та $\mathcal{B}$ -- база цієї множини. Створимо $\tau_{\mathcal{B}} = \left\{ \displaystyle\bigcup_{U \in \mathcal{\mathcal{\tilde{B}}}} U \mid \mathcal{\tilde{B}} \subset \mathcal{B} \right\}$ -- тобто клас, що складається з усіх можливих об'єднань елементів з бази. Тоді $(X,\tau_{\mathcal{B}})$ утворює топологічний простір. Ми $\tau_{\mathcal{B}}$ називаємо \textbf{топологією, що породжена базою $\mathcal{B}$}. Причому це єдина така топологія, де $\mathcal{B}$ -- база топології.
-\end{proposition}
-
-\begin{proof}
-Маємо $\tau_{\mathcal{B}} = \left\{ \displaystyle\bigcup_{U \in \mathcal{\mathcal{\tilde{B}}}} U \mid \mathcal{\tilde{B}} \subset \mathcal{B} \right\}$, перевіримо всі пункти для топології.\\
-1. $\emptyset \in \tau_{\mathcal{B}}$, тому що можна записати $\emptyset = \displaystyle\bigcup_{U \in \emptyset} U$, де $\emptyset \subset \mathcal{B}$. Також $X \in \tau_{\mathcal{B}}$, тому що $\mathcal{B}$ -- база множини $X$, а значить, $X = \displaystyle\bigcup_{U \in \mathcal{B}} U$.\\
-2. Нехай $\{U_\alpha \mid U_\alpha \in \tau_{\mathcal{B}}\}$ -- сім'я відкритих множин. Тобто $U_\alpha = \displaystyle\bigcup_{\mathcal{B}_\alpha} U$, де $\mathcal{B}_\alpha \subset \mathcal{B}$. Тоді звідси $\displaystyle\bigcup_\alpha U_\alpha = \bigcup_{\bigcup_\alpha B_\alpha} U$, причому $\displaystyle\bigcup_\alpha \mathcal{B}_\alpha \subset \mathcal{B}$. Отже, $\displaystyle\bigcup_\alpha U_\alpha \in \tau_\mathcal{B}$.\\
-3. Нехай $U_1,U_2 \in \tau_\mathcal{B}$. Тобто звідси $U_1 = \displaystyle\bigcup_{U \in \mathcal{B}_1} U$ та $U_2 = \displaystyle\bigcup_{U \in \mathcal{B}_2} U$, де $\mathcal{B}_1,\mathcal{B}_2 \subset \mathcal{B}$. Значить, звідси $U_1 \cap U_2 = \displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} (U \cap V)$. Оскільки $U,V \in \mathcal{B}$, то в силу того, що $\mathcal{B}$ -- база множини $X$, звідси $U \cap V = \displaystyle\bigcup_{W \in \mathcal{\tilde{B}}_{U,V}} W$. Тоді $U_1 \cap U_2 = \displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} \bigcup_{W \in \mathcal{\tilde{B}}_{U,V}} W = \displaystyle\bigcup_{W \in \mathcal{\tilde{\tilde{B}}}} W$. Детально треба уточнити, що кожний $\mathcal{\tilde{B}}_{U,V} \subset \mathcal{B}$, тоді $\displaystyle\bigcup_{\substack{U \in \mathcal{B}_1 \\ V \in \mathcal{B}_2}} \mathcal{\tilde{B}}_{U,V} \overset{\text{позн.}}{=} \mathcal{\tilde{\tilde{B}}} \subset \mathcal{B}$. Висновок: $U_1 \cap U_2$ записали як об'єднання множин з бази $\mathcal{B}$, тож $U_1 \cap U_2 \in \tau_{\mathcal{B}}$.\\
-Із цих пунктів випливає, що $\tau_\mathcal{B}$ -- дійсно топологія.
-\bigskip \\
-Також з цього випливає, що $\mathcal{B}$ -- не просто база множини $X$, а ще й база топології $\tau_{\mathcal{B}}$.\\
-Припустимо, що існує $\tau'$ -- якась інша топологія на $X$, яка має базу топології $\mathcal{B}$. Нам треба довести, що $\tau' = \tau_{\mathcal{B}}$.\\
-Нехай $U \in \tau'$, тоді звідси за означенням бази топології, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, де $\mathcal{\tilde{B}} \subset \mathcal{B}$. Але в силу того, як ми визначали $\tau_{\mathcal{B}}$, випливає, що $U \in \tau_{\mathcal{B}}$.\\
-Нехай $U \in \tau_{\mathcal{B}}$, тоді звідси за побудовою, $U = \displaystyle\bigcup_{V \in \mathcal{\tilde{B}}} V$, але тоді $V \in \tau'$ -- відкрита множина як об'єднання однієї множини з бази. За означенням топології, $U \in \tau'$.\\
-Власне, з цього випливає, що $\tau_{\mathcal{B}} = \tau'$.
-\end{proof}
-
-\begin{remark}
-Не хочеться це вставляти як окреме твердження, але є ось така еквівалентність:\\
-$\forall B_1,B_2 \in \mathcal{B}: B_1 \cap B_2 = \displaystyle\bigcup_{U \in \mathcal{\tilde{B}}} U$, де $\mathcal{\tilde{B}} \subset \mathcal{B} \iff \forall B_1,B_2 \in \mathcal{B}: \forall x \in B_1 \cap B_2: \exists W \in \mathcal{B}: x \in W \subset B_1 \cap B_2$.\\
-Зазвичай саме праву частину використовують в якості другої умови бази множини та в твердженні про конструкцію топології за базою. Тим не менш, цю еквівалетність доведу.
-\end{remark}
-
-\begin{proof}
-\rightproof Дано: ліва частина. Нехай $B_1,B_2 \in \mathcal{B}$, тоді звідси $B_1 \cap B_2 = \displaystyle\bigcup_{W \in \mathcal{\tilde{B}}} W$. Оберемо точку $x \in B_1 \cap B_2$, тоді звідси $x \in W_0$, де $W_0 \in \mathcal{B}$. Отже, ми знашли $W_0 \in \mathcal{B}$, для якої $x \in W_0 \subset B_1 \cap B_2$.
-\bigskip \\
-\leftproof Дано: права частина. Нехай $B_1,B_2 \in \mathcal{B}$, тоді $\forall x \in B_1 \cap B_2: \exists W_x \in \mathcal{B}: x \in W_x \subset B_1 \cap B_2$. Зауважимо, що звідси $B_1 \cap B_2 = \displaystyle\bigcup_{x \in B_1 \cap B_2} W_x$, причому ми об'єднуємо елементи з $\mathcal{B}$. 
-\end{proof}
-
-\begin{proposition}
-Задані $(X,\tau), (Y,\tilde{\tau})$ -- топологічні простіри та $\tilde{\mathcal{B}}$ -- база топології $\tilde{\tau}$. Відомо, що $\forall U \in \tilde{\mathcal{B}}: f^{-1}(U) \in \tau$. Тоді $f \colon X \to Y$ -- неперервне.
-\end{proposition}
-
-\begin{remark}
-Тобто коли топологія побудована за базою, то для неперервності достатньо перевірити умову для елементів з бази, а не з усїєї топології.
-\end{remark}
-
-\begin{proof}
-Нехай $U$ -- відкрита множина в $Y$, тобто звідси $U = \displaystyle\bigcup_{V \in \mathcal{B}'} V$, де $\mathcal{B}' \subset \tilde{\mathcal{B}}$ за визначенням бази. Тоді звідси $f^{-1}(U) = \displaystyle\bigcup_{V \in \mathcal{B}'} f^{-1}(V)$, де всі $f^{-1}(V)$ відкриті за умовою. Отже, $f^{-1}(U)$ -- відкрита як об'єднання. Отже, $f \colon X \to Y$ -- неперервне.
-\end{proof}
-
-\begin{definition}
-Задано $(X,\tau)$ -- топологічний простір та $\mathcal{B}$ -- його база.\\
-Простір задовольняє \textbf{другу аксіому зліченності} (англ. \textbf{second-countable}), якщо
-\begin{align*}
-\mathcal{B} \text{ -- зліченна база}
-\end{align*}
-\end{definition}
-
-\begin{example}
-Зокрема $(\mathbb{R},\tau)$ з евклідовою топологією буде second-countable.\\
-Розглянемо $\mathcal{B} = \{ (a,b) \mid a,b \in \mathbb{Q} \}$. Варто спочатку довести, що вона утворює базу стандартної топології. Дійсно, нехай $U \in \tau$. Її можемо в стандартній топології записати як $U = \displaystyle\bigcup_{x \in U} (x-r,x+r)$.\\
-Надалі вся увага на $(x-r,x+r) \overset{\text{позн.}}{=} (u,v)$. Слід зауважити, що тут $u,v \in \mathbb{R}$. Але відомо, що для $u$ існує послідовність раціональних чисел $\{q_n, n \geq 1\}$ так, щоб $v \geq q_n \geq u$, а також $q_n \to u$. Аналогічно існує послідовність раціональних чисел $\{r_n, n \geq 1\}$ так, щоб $u \leq r_n \leq v$, а також $r_n \to v$. Тоді запишемо $(u,v) = \displaystyle\bigcup_{\substack{q_n,r_n \in \mathbb{Q} \\ q_n < r_n}} (q_n,r_n)$. Таким чином, отримали $(u,v)$ як об'єднання множин з бази, тобто $U$ записується як об'єднання множин з бази.\\
-Висновок: $\mathcal{B}$ -- база стандартної топології. Оскільки $\mathbb{Q}$ -- зліченна множина, то кількість інтервалів $(a,b)$ також буде зліченною, тому second-countable.
-%Wrong
-\iffalse
-Дійсно,\\
-$\mathbb{R} = \displaystyle\bigcup_{n \in \mathbb{N}} (-n,n)$.\\
-Нехай $B_1,B_2 \in \mathcal{B}$, тобто $B_1 = (a,b)$ та $B_2 = (c,d)$. Розглянемо $B_1 \cap B_2 = (a,b) \cap (c,d)$. Іллюстративно наведу кілька випадків:
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\draw[->] (0,0)--(5,0);
-\node at (0.5,0) {$($};
-\node at (0.5,-0.5) {$a$};
-\node at (1.5,0) {$)$};
-\node at (1.5,-0.5) {$b$};
-\node at (2.5,0) {$($};
-\node at (2.5,-0.5) {$c$};
-\node at (4,0) {$)$};
-\node at (4,-0.5) {$d$};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\draw[->] (0,0)--(5,0);
-\node at (0.5,0) {$($};
-\node at (0.5,-0.5) {$a$};
-\node at (2.5,0) {$)$};
-\node at (2.5,-0.5) {$b$};
-\node at (1.5,0) {$($};
-\node at (1.5,-0.5) {$c$};
-\node at (4,0) {$)$};
-\node at (4,-0.5) {$d$};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\draw[->] (0,0)--(5,0);
-\node at (0.5,0) {$($};
-\node at (0.5,-0.5) {$c$};
-\node at (2.5,0) {$)$};
-\node at (2.5,-0.5) {$b$};
-\node at (1.5,0) {$($};
-\node at (1.5,-0.5) {$a$};
-\node at (4,0) {$)$};
-\node at (4,-0.5) {$d$};
-\end{tikzpicture}
-\end{figure}
-\noindent
-1. $(a,b) \cap (c,d) = \emptyset$, але $\emptyset \in \mathcal{B}$, тому що $\emptyset = (q,q), q \in \mathbb{Q}$.\\
-2. $(a,b) \cap (c,d) = (c,b) \in \mathcal{B}$. Може бути інша перестановка літер, але суть ясна.\\
-3. $(a,b) \cap (c,d) = (a,b) \in \mathcal{B}$.\\
-Отже, $\mathcal{B}$ утворює базу $\mathbb{R}$, а тому звідси породжує топологію
-\fi
-\end{example}
-
-\subsection{Конструкція топології за передбазою}
-\begin{definition}
-Задано $(X,\tau)$ -- топологічний простір.\\
-Клас $\mathcal{S}$ підмножин $X$ назвемо \textbf{передбазою топології $\tau$}, якщо
-\begin{align*}
-\mathcal{B} \overset{\text{def.}}{=} \left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\} \text{ утворює базу топології } \tau.
-\end{align*}
-\iffalse
-Тобто з цього випливає, що
-\begin{align*}
-\forall U \in \tau: U = \displaystyle\bigcup_{\bigcap_{i=1}^n S_i \in \mathcal{\tilde{B}}} \bigcap_{i=1}^n S_i, \text{ де } \mathcal{\tilde{B}} \subset \mathcal{B}
-\end{align*}
-\fi
-Тобто звідси випливає, що кожна відкрита множина записується як об'єднання скінченних перетинів множин з $\mathcal{S}$.
-\end{definition}
-
-\noindent Ми вже знаємо, що якщо є база $\mathcal{B}$, то тоді можна побудувати топологію. Тобто якщо ми хочемо, щоб $\mathcal{S}$ була передбазою, то треба спочатку утворити базу $\mathcal{B}$, а із бази вже утворити топологію.
-
-\begin{proposition}
-Задано $(X,\tau)$ -- топологічний простір.\\
-$\mathcal{S}$ -- передбаза $X \iff \displaystyle\bigcup_{U \in \mathcal{S}} U = X$ (тут об'єднання всіх елементів з $\mathcal{S}$).
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $\mathcal{S}$ -- передбаза $X$, тоді $\mathcal{B} = \displaystyle\left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}$ утвроює базу топології, тому й базу $X$. Значить, $\displaystyle\bigcup_{V \in \mathcal{B}} V = X$. У цьому об'єднанні беруть участь множини $U \in \mathcal{S}$, а всі решта з об'єдання будуть перетинами з двох чи більше елементів $\mathcal{S}$. Таким чином, достатньо об'єднати $\displaystyle\bigcup_{U \in \mathcal{S}} U = X$.
-\bigskip \\
-\leftproof Дано: $\displaystyle\bigcup_{U \in \mathcal{S}} U = X$.\\
-Нам треба показати, що $\mathcal{B} = \displaystyle\left\{ \bigcap_{i=1}^n S_i \mid S_i \in \mathcal{S} \right\}$ -- база $X$. Дійсно,\\
-$X = \displaystyle\bigcup_{U \in \mathcal{S}} U = \bigcup_{V \in \mathcal{B}} V = X$ (пояснення вище).\\
-Нехай $B_1,B_2 \in \mathcal{B}$, тобто $\displaystyle B_1 = \bigcap_{i=1}^{n_1} S_i$ та $\displaystyle B_2 = \bigcap_{j=1}^{n_2} S_j$. Тоді звідси $B_1 \cap B_2 = \displaystyle\bigcap_{i=1}^{n_1} S_i \cap \bigcap_{j=1}^{n_2} S_j = \bigcap_{k=1}^{m} S_k$.\\
-Отже, $\mathcal{B}$ -- база множини $X$, а тому $\mathcal{S}$ -- передбаза $X$.
-\end{proof}
-
-\begin{proposition}
-Задано $(X,\tau)$ -- топологічний простір та $\mathcal{S}$ -- передбаза топології. Тоді $\tau$ -- найслабша топологія, що містить $\mathcal{S}$.
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $\mathcal{S}$ -- передбаза топології. Для зручності позначу початкову топологію за $\tau_{\mathcal{S}}$.\\
-Припустимо, що $\tau$ -- слабша топологія, що містить $\mathcal{S}$, тобто $\tau \subset \tau_{\mathcal{S}}$. Нам залишилося довести, що $\tau_{\mathcal{S}} \subset \tau$.\\
-Беремо $U \in \tau_{\mathcal{S}}$, тоді звідси $U = \displaystyle\bigcup \bigcap_{\text{скінченний}} W$, де $W \in \mathcal{S}$. Зауважимо, що $W \in \tau$ також, бо $\tau$ містить $\mathcal{S}$. Таким чином, $\displaystyle\bigcap_{\text{скінченний}} W \in \tau \implies U \in \tau$.
-\end{proof}
-
-\iffalse
-\begin{example}
-Зокрема $\mathcal{S} = \{(-\infty,b), (a,+\infty) \mid a,b \in \mathbb{R}\}$ буде передбазою $\mathbb{R}$, причому породжена топологія повністю збігатиметься зі стандартною.\\
-Те, що це передбаза, -- цілком зрозуміло, якщо об'єднати всі інтервали. Залишилося довести, що $\tau_{\mathcal{S}} = \tau_{\text{stand}}$.\\
-Цілком зрозуміло, що $\tau_{\mathcal{S}} \subset \tau_{\text{stand}}$. Тепер нехай $U \in \tau_{\text{stand}}$. Ми знаємо, що $\tau_{\text{stand}} = \tau_{\mathcal{B}}$, причому $\mathcal{B} = \{(a,b) \mid a,b \in \mathbb{Q}\}$
-\end{example}
-\fi
-
 \subsection{Характеристики точок множин}
 \noindent Нам вже відоме означення внутрішньої точки. Ще раз нагадаю:
 \begin{definition}
@@ -744,7 +751,109 @@ $A$ -- замкнена $\iff A$ містить всі граничні точк
 Тож звідси $X \setminus A$ -- відкрита, тобто $A$ -- замкнена.
 \end{proof}
 
-\textit{TODO: дописати!}
+\subsection{Замикання та внутрішність}
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$.\\
+\textbf{Замиканням} множини $A$ називають таку річ:
+\begin{align*}
+\Cl A = \bigcap_{\substack{\text{$V$ -- замкнена} \\ V \supset A}} V
+\end{align*}
+Тобто замиканням $A$ називають перетин всіх замкнених множин, що містить $A$.\\
+Альтернативне позначення: $\overline{A}$.
+\end{definition}
+
+\begin{proposition}
+$\Cl A$ -- найменша замкнена множина, що містить $A$.
+\end{proposition}
+
+\begin{proof}
+Нескінченний перетин замкнених множин $V$ -- замкнений, тому $\Cl A$ -- замкнена.\\
+Усі замкнені множини $V \supset A$, тому звідси $\Cl A \supset A$.\\
+Нехай існує замкнена множина $W \supset A$, але при цьому $W \subset \Cl A$. Тоді $\Cl A \subset W$, оскільки\\
+$\Cl A = \displaystyle\bigcap_{\substack{\text{$V$ -- замкнена} \\ V \supset A}} V = W \cap \bigcap_{\substack{\text{$V$ -- замкнена} \\ V \supset A \\ V \neq W}} V \subset W$.\\
+Отже, $W = \Cl A$, тобто нічого меншого за замикання нема.
+\end{proof}
+
+\begin{proposition}[Властивості замикання]
+Задано $(X,\tau)$ -- топологічний простір та $A,B \subset X$. Тоді
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $A$ -- замкнена множина $\iff \Cl A = A$;
+\item $\Cl(\Cl A) = \Cl A$;
+\item $A \subset B \implies \Cl A \subset \Cl B$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Доведемо кожну властивість.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Тут треба довести в обидві сторони.\\
+\rightproof Дано: $A$ -- замкнена. Тоді $\Cl A \subset A$ (бо замикання -- найменша замкнена). Із іншого боку, $\Cl A \supset A$. Отже, $\Cl A = A$.\\
+\leftproof Дано: $\Cl A = A$. Тоді автоматично $A$ -- замкнена (бо замикання -- замкнена).
+\item Оскільки $\Cl A$ -- замкнена множина, то за попередньою властивістю, $\Cl (\Cl A) = \Cl A$.
+\item Нехай $A \subset B$. Маємо наступне:\\
+$\Cl B = \displaystyle\bigcap_{\substack{\text{$V$ -- замкнена} \\ V \supset B}} V \supset \bigcap_{\substack{\text{$V$ -- замкнена} \\ V \supset B}} V \cap \bigcap_{\substack{\text{$V$ -- замкнена} \\ V \supset A \\ V \not\supset B}} V = \bigcap_{\substack{\text{$V$ -- замкнена} \\ V \supset A}} V = \Cl A$.
+\end{enumerate}
+Усі властивості доведені.
+\end{proof}
+
+\begin{proposition}[Інше визначення замикання]
+$\Cl A = \{x \in X: \forall U \text{ -- окіл точки $x$}: U \cap A \neq \emptyset\}$.
+\end{proposition}
+
+\begin{proof}
+Позначимо $V = \{x \in X: \forall U \text{ -- окіл точки $x$}: U \cap A \neq \emptyset\}$. Хочемо довести, що $\Cl A = V$.\\
+\textit{$V$ -- замкнена множина.}\\
+Ми будемо доводити, що $X \setminus V$ -- відкрита множина. Нехай $x \in X \setminus V$, тобто існує $U_x$ -- такий окіл, де $U_x \cap A = \emptyset$. Стверджую, що $U_x \subset X \setminus V$. Дійсно, нехай $z \in U_x$. Ми знайшли окіл точки $z$ так, що $U_x \cap A = \emptyset$, а тому вже $z \notin V \implies z \in X \setminus V$.\\
+\textit{$V \supset A$.}\\
+Справді, нехай $x \in A$. Тоді $U \cap A \neq \emptyset$ для будь-якого окола $U \ni x$. Отже, $x \in V$.\\
+\textit{$V$ -- найменша замкнена множина, що містить $A$.}\\
+Припустимо, що $K \supset A$ -- замкнена множина, але $K \subset V$. Ми хочемо довести, що $K \supset V$, а краще доведемо $X \setminus K \subset X \setminus V$. Нехай $z \in X \setminus K$. Оскільки $K \supset A$, то звідси $A \cap (X \setminus K) = \emptyset$. Тому отримаємо $z \notin V \implies z \in X \setminus V$.\\
+Отже, ми трьома етапами довели, що $V = \Cl A$.
+\end{proof}
+
+\begin{corollary}
+$\Cl A = A \cup \{ \text{граничні точки $A$} \}$.
+\end{corollary}
+
+\begin{proposition}[Означення неперервного відображення через замикання]
+Задані $(X,\tau),\ (Y,\tilde{\tau})$ -- два топологічні простори та відображення $f \colon X \to Y$.\\
+$f$ -- неперервне $\iff \forall A \subset X: f(\Cl A) \subset \Cl f(A)$.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $f$ -- неперервне. Нехай $A \subset X$. Оскільки $\Cl f(A)$ -- замкнена множина в $Y$, то за неперервністю $f^{-1} (\Cl f(A))$ -- замкнена. Причому $f^{-1}(\Cl f(A)) \supset f^{-1} (f(A)) \supset A$. Таким чином, $\Cl A \subset f^{-1} (\Cl f(A))$ (як найменша замкнена, що містить $A$). Отже, $f(\Cl A) \subset f(f^{-1}(\Cl f(A)) \subset \Cl f(A)$.
+\bigskip \\
+\leftproof Дано: $\forall A \subset X: f(\Cl A) \subset \Cl f(A)$. Оберемо $V$ -- замкнену множину на $Y$. Хочемо довести, що $f^{-1}(V)$ -- замкнена в $X$. Це теж саме, що довести рівність $\Cl f^{-1}(V) = f^{-1}(V)$.\\
+У нас вже є $\Cl f^{-1} V \supset f^{-1} V$. Із іншого боку, оскільки $f^{-1}(V) \subset X$, то за дано $f(\Cl f^{-1}(V)) \subset \Cl f(f^{-1}(V)) \subset \Cl V \overset{\text{$V$ -- замкнена}}{=} V$. Значить, $\Cl f^{-1}(V) \subset f^{-1}(V)$.
+\end{proof}
+
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$.\\
+\textbf{Внутрішністю} множини $A$ називають таку річ:
+\begin{align*}
+\Int A = \bigcup_{\substack{\text{$U$ -- відкриті} \\ U \subset A}} U
+\end{align*}
+Тобто внутрішністю $A$ називають об'єднання всіх відкритих множин, що містяться в $A$.
+\end{definition}
+
+\begin{proposition}
+Задано $(X,\tau)$ -- топологічний простір та $A \subset X$. Тоді\\
+$\Cl(X \setminus A) = X \setminus \Int A$;\\
+$\Int (X \setminus A) = X \setminus \Cl A$.\\
+\textit{Випливає зі законів де Моргана.}
+\end{proposition}
+\noindent
+Нижчі твердження можна довести, скориставшись рівністю $\Int A = X \setminus \Cl (X \setminus A)$.
+
+\begin{proposition}
+$\Int A$ -- найбільша відкрита множина, що міститься в $A$.
+\end{proposition}
+
+\begin{proposition}
+$\Int A = \{x \in X: \exists \text{$U$ -- окіл точки $x$}: U \subset A\} = \{ \text{внутрішні точки $A$}\}$.
+\end{proposition}
+
+
 
 \subsection{Топологічний підпростір}
 \begin{definition}
@@ -762,9 +871,13 @@ $\tau_A$ задає топологію та $(A,\tau_A)$ теж утворює �
 \end{proposition}
 
 \begin{proof}
-1. $\emptyset,A \in \tau_A$ зі зрозумілих причин;\\
-2. Нехай $\{U_\alpha \in \tau_A\}$ -- сім'я відкритих. Тобто $U_\alpha = A \cap W_\alpha$, де $\{W_\alpha \in \tau\}$ -- сім'я відкритих в $(X,\tau)$. Тоді звідси $\displaystyle\bigcup_\alpha U_\alpha = A \cap \bigcup_\alpha W_\alpha$, де множина $\displaystyle\bigcup_\alpha W_\alpha \in \tau$. Отже, $\displaystyle\bigcup_\alpha U_\alpha \in \tau_A$.\\
-3. Нехай $U_1, U_2 \in \tau_A$, тобто $U_1 = A \cap W_1$ та $U_2 = A \cap W_2$ при $W_1,W_2 \in \tau$. Звідси маємо $U_1 \cap U_2 = A \cap (W_1 \cap W_2)$, де $W_1 \cap W_2 \in \tau$, але звідси $U_1 \cap U_2 \in \tau_A$.
+Треба перевірити всі три пунктів.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\emptyset,A \in \tau_A$ зі зрозумілих причин;
+\item Нехай $\{U_\alpha \in \tau_A\}$ -- сім'я відкритих. Тобто $U_\alpha = A \cap W_\alpha$, де $\{W_\alpha \in \tau\}$ -- сім'я відкритих в $(X,\tau)$. Тоді звідси $\displaystyle\bigcup_\alpha U_\alpha = A \cap \bigcup_\alpha W_\alpha$, де множина $\displaystyle\bigcup_\alpha W_\alpha \in \tau$. Отже, $\displaystyle\bigcup_\alpha U_\alpha \in \tau_A$;
+\item Нехай $U_1, U_2 \in \tau_A$, тобто $U_1 = A \cap W_1$ та $U_2 = A \cap W_2$ при $W_1,W_2 \in \tau$. Звідси маємо $U_1 \cap U_2 = A \cap (W_1 \cap W_2)$, де $W_1 \cap W_2 \in \tau$, але звідси $U_1 \cap U_2 \in \tau_A$.
+\end{enumerate}
+Отже, дійсно $\tau_A$ -- топологія.
 \end{proof}
 
 \begin{example}
@@ -810,6 +923,8 @@ $V$ -- замкнена на $A \iff \exists S$ -- замкнена в $X: V = A
 Маємо $X = \mathbb{R}$ із евклідовою метрикою, $A = [0,+\infty)$ та $U = [0,1)$.\\
 У цьому випадку $A$ не є відкритою на $X$ -- зрозуміло. Далі зауважимо, що $U$ -- відкрита на $A$, просто тому що $[0,1) = [0,+\infty) \cap (1,+\infty)$, де $(1,+\infty)$ -- відкрита на $X$. Але $U$ -- не відкрита на $X$.
 \end{example}
+
+(TODO: move to another subsection)
 
 \begin{remark}
 Задано $(X,\tau)$ -- топологічний простір та $A \subset X$. Означення топології підпростору на $A$ можна переписати по-інакшому. Для цього розглянемо вкладення $\imath_A \colon A \to X$, а далі зауважимо, що для кожної $W \subset X$ маємо $\imath_A^{-1}(W) = W \cap A$. Тоді звідси маємо:
@@ -866,7 +981,7 @@ Y \arrow{r}{f} \arrow{dr}[swap]{\imath \circ f} & A \arrow{d}{\imath} \\
 \end{example}
 
 \subsection{Добуток просторів}
-Нехай задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори. Хочеться задати топологію на $X_1 \times X_2$. Перше вгадування: чи буде множина $\{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}$ утворювати топологію? Ні, цього недостатньо.
+Нехай задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічні простори. Хочеться задати топологію на $X_1 \times X_2$. Перше вгадування: чи буде множина $\{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}$ утворювати топологію? Ні, цього недостатньо.
 
 \begin{example}
 Зокрема маємо $(\mathbb{R},\tau_1)$ та $\mathbb{R},\tau_2)$ -- дві евклідові топології. Розглянемо множину $U_1 \times U_2 = (0,2) \times (0,2)$ та множину $V_1 \times V_2 = (1,3) \times (1,3)$. А далі треба подивитися на $(U_1 \times U_2) \cup (V_1 \times V_2)$ та зауважити наступне: це буде відкрита множина, але не потрапляє в нашу ''топологію'', тому що я не можу її записати як $W_1 \times W_2$.
@@ -886,13 +1001,15 @@ Y \arrow{r}{f} \arrow{dr}[swap]{\imath \circ f} & A \arrow{d}{\imath} \\
 Значить, треба трошки по-інакшому до цього підійти.
 \end{example}
 \noindent
-Розглянемо $\mathcal{B} = \{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}$. Якщо вона ще не утворює топологію, то спробуємо показати, що це утворює базу множини $X_1 \times X_2$. Дійсно:\\
-1. $X_1 \times X_2 \in \mathcal{B}$, навіть не обов'язково розписувати як об'єднання. Хоча можна це зробити, $X_1 \times X_2 = \displaystyle\bigcup_{U_1 \times U_2 \in \mathcal{B}} U_1 \times U_2$, і в це же об'єднання буде входити $X_1 \times X_2$, а тому рівність легітимна;\\
-2. Нехай $U,V \in \mathcal{B}$, тобто $U = U_1 \times U_2$ та $V = V_1 \times V_2$, у цьому випадку $U_1,V_1$ -- відкриті в $X_1$ та $U_2,V_2$ -- відкриті в $X_2$. Тоді звідси зауважимо, що $U \cap V = (U_1 \times U_2) \cap (V_1 \times V_2) = (U_1 \cap V_1) \times (U_2 \cap V_2)$. Оскільки $U_1 \cap V_1$ та $U_2 \cap V_2$ залишаються відкритими у себе, то звідси $U \cap V$ записали як добуток відкритих, тож $U \cap V \in \mathcal{B}$.\\
+Розглянемо $\mathcal{B} = \{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}$. Якщо вона ще не утворює топологію, то спробуємо показати, що це утворює базу множини $X_1 \times X_2$. Дійсно:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $X_1 \times X_2 \in \mathcal{B}$, навіть не обов'язково розписувати як об'єднання. Хоча можна це зробити, $X_1 \times X_2 = \displaystyle\bigcup_{U_1 \times U_2 \in \mathcal{B}} U_1 \times U_2$, і в це же об'єднання буде входити $X_1 \times X_2$, а тому рівність легітимна;
+\item Нехай $U,V \in \mathcal{B}$, тобто $U = U_1 \times U_2$ та $V = V_1 \times V_2$, у цьому випадку $U_1,V_1$ -- відкриті в $X_1$ та $U_2,V_2$ -- відкриті в $X_2$. Тоді звідси зауважимо, що $U \cap V = (U_1 \times U_2) \cap (V_1 \times V_2) = (U_1 \cap V_1) \times (U_2 \cap V_2)$. Оскільки $U_1 \cap V_1$ та $U_2 \cap V_2$ залишаються відкритими у себе, то звідси $U \cap V$ записали як добуток відкритих, тож $U \cap V \in \mathcal{B}$.
+\end{enumerate}
 Таким чином, $\mathcal{B}$ -- дійсно база $X_1 \times X_2$, а тому можна спородити топологію.
 
 \begin{definition}
-Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічних простори.\\
+Задані $(X_1,\tau_1)$ та $(X_2,\tau_2)$ -- два топологічні простори.\\
 \textbf{Добутком топологій} $\tau_1,\tau_2$ назвемо топологію, яка породжена базою
 \begin{align*}
 \mathcal{B} = \{U_1 \times U_2 \mid U_1 \in \tau_1, U_2 \in \tau_2\}
@@ -983,11 +1100,11 @@ $\tau_{\mathcal{B}} \subset \tau_{\mathcal{S}}$, просто лише варт�
 \end{remark}
 
 \subsubsection*{Узагальнення добутку топологій}
-Припустимо, що $\{(X_\alpha,\tau_\alpha, \alpha \in I \}$ -- довільна сім'я топологічних просторів. Ми вже з'ясували, що набору множин $\displaystyle\prod_{\alpha \in I} U_\alpha$, де $U_\alpha \in \tau_\alpha$, недостатньо для формування топології. Однак ми можемо знову розглянути наступний клас:
+Припустимо, що $\{(X_\alpha,\tau_\alpha), \alpha \in I \}$ -- довільна сім'я топологічних просторів. Ми вже з'ясували, що набору множин $\displaystyle\prod_{\alpha \in I} U_\alpha$, де $U_\alpha \in \tau_\alpha$, недостатньо для формування топології. Однак ми можемо знову розглянути наступний клас:
 \begin{align*}
 \mathcal{B}_{\blacksquare} = \left\{ \prod_{\alpha \in I} U_\alpha \mid U_\alpha \in \tau_\alpha  \right\}
 \end{align*}
-Це утворює базу множини $\displaystyle\prod_{\alpha \in I} X_\alpha$, тому ми знайшли топологію $\tau_{\mathcal{B}}$ для множини $\displaystyle\prod_{\alpha \in I} X_\alpha$. Така топологія в зарубіжній літературі називається \textbf{box topology}.\\
+Це утворює базу множини $\displaystyle\prod_{\alpha \in I} X_\alpha$, тому ми знайшли топологію $\tau_{\mathcal{B}_{\blacksquare}}$ для множини $\displaystyle\prod_{\alpha \in I} X_\alpha$. Така топологія в зарубіжній літературі називається \textbf{box topology}.\\
 На жаль, дане наївне узагальнення призводить до певних проблем.
 
 \begin{example}
@@ -997,7 +1114,7 @@ $f$ -- неперервне $\centernot\iff f_i$ -- неперервні (тоб
 \end{example}
 
 \noindent
-Цей приклад можна трактувати інакше: у нас ''дуже багато'' відкритих множин, які нам заважають жити. Аби працювало твердження вище, ми трошки змінимо базу ось таким чином:
+Цей приклад можна трактувати інакше: у нас ''дуже багато'' відкритих множин, які нам заважають жити. Аби працювала еквівалентність вище, ми трошки змінимо базу ось таким чином:
 \begin{align*}
 \mathcal{B} = \left\{ \prod_{\alpha \in I} U_\alpha \mid U_\alpha \in \tau_\alpha, U_\alpha \neq X_\alpha \text{ лише скінченне число разів} \right\}
 \end{align*}
@@ -1112,9 +1229,11 @@ $f$ -- неперервне $\iff f \circ \pi$ -- неперервне.
 \bigskip \\
 \leftproof Дано: $f \circ \pi$ -- неперервне. Нехай тепер $U$ -- відкрита в $Y$. За умовою, $(f \circ \pi)^{-1}(U)$ відкрита на $X$, але тоді $\pi^{-1} f^{-1}(U)$ відкрита на $X$. Значить, за означенням, $f^{-1}(U)$ -- відкрита на $X/_\sim$.
 \end{proof}
+\noindent
+Суть фактортопології полягає в тому, щоб створити новий топологічний простір шляхом ''склеювання'' точок. Не прикладі це стане зараз ясніше.
 
 \begin{example}
-Розглянемо відрізок $X = [-1,1]$. Ми можемо задати на ній відношення еквівалентності таким чином: $-1 \sim 1$. Інтуїтивно кажучи, відношення еквівалентності 'склеює' точки один з одним (тобто в цьому випадку $-1,1$ будуть склеєними). У результаті маємо отримати коло:
+Розглянемо відрізок $X = [-1,1]$. Ми можемо задати на ній відношення еквівалентності таким чином: $-1 \sim 1$. Інтуїтивно кажучи, відношення еквівалентності ''склеює'' точки один з одним (тобто в цьому випадку $-1,1$ будуть склеєними). У результаті маємо отримати коло:
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1130,11 +1249,118 @@ $f$ -- неперервне $\iff f \circ \pi$ -- неперервне.
 \end{tikzpicture}
 \caption*{Тобто, інтуїтивно кажучи, $X/{_\sim} \cong \mathcal{S}^1$, саме гомеоморфні.}
 \end{figure}
-\noindent Скоро математично я це доведу.
+\noindent
+Розглянемо функцію $f \colon X/_{\sim} \to \mathcal{S}^1$ ось таким чином: $f([t]) = (\sin \pi t, \cos \pi t)$. Нам треба довести, що $f$ -- гомеоморфізм.\\
+$f$ -- коректно визначене. Коректність треба тільки перевірити для $[-1],[1]$. Все ок там:\\
+$f([1]) = (\cos \pi, \sin \pi) = (-1, 0) = (\cos (-\pi), \sin(-\pi)) = f([-1])$.\\
+$f$ -- неперервне, оскільки композиція $f \circ \pi \colon X \to \mathcal{S}^1$, що задається як $(f \circ \pi)(t) = (\sin \pi t, \cos \pi t)$, буде неперервною функцією через покоординатну неперервність.\\
+$f$ -- бієкція (мабуть, тут все зрозуміло чому).\\
+Оскільки $X$ -- компактний простір та $\pi \colon X \to X/_{\sim}$ -- сюр'єкція, то тоді $X/_{\sim}$ має бути також компактним. Оскільки $X/_{\sim}$ компактний, $\mathcal{S}^1$ -- гаусдорфів (TODO: доводили?) та $f$ -- неперервна бієкція, то звідси (TODO: вставити твердження) $f$ має бути гомеоморфізмом.
 \end{example}
-\noindent \textit{TODO: доповнити!}
 
+\begin{example}
+Маємо квадрат $X = [0,1] \times [0,1]$. Задамо на ній відношення еквівалентності $(0,t) \sim (1,t)$ при $t \in [0,1]$. У результаті маємо таке ''склеювання'' -- отримали циліндр:
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (1,1);
+\node at (0.5,-0.5) {$X$};
+\draw[red,->] (0,0)--(0,1);
+\draw[red,->] (1,0)--(1,1);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw (0,0) ellipse (1 and 0.25);
+\draw (0,1) ellipse (1 and 0.25);
+\draw (1,0)--(1,1);
+\draw (-1,0)--(-1,1);
+\node at (0,-0.5) {$\mathcal{S}^1 \times [0,1]$};
+\end{tikzpicture}
+\caption*{Тобто, інтуїтивно кажучи, $X/_{\sim} \cong \mathcal{S}^1 \times [0,1]$.}
+\end{figure}
+\noindent
+Розглянемо функцію $f \colon X/_{\sim} \to \mathcal{S}^1 \times [0,1]$ ось таким чином: $f([(s,t)]) = (\cos (2\pi s), \sin (2\pi s), t)$. Можна аналогічними міркуваннями довести, що це задаватиме гомеоморфізм.
+\end{example}
+
+\begin{example}
+Знову маємо квадрат $X = [0,1] \times [0,1]$. Тільки цього разу задамо інше відношення еквівалентності: $(0,t) \sim (1,1-t)$ при $t \in [0,1]$. У результаті отримаємо так звану \textbf{стрічку Мьобіуса}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (1,1);
+\node at (0.5,-0.5) {$X$};
+\draw[red,->] (0,0)--(0,1);
+\draw[red,->] (1,1)--(1,0);
+\node at (0.5,-0.5) {$X$};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=0.4]
+\begin{axis}[
+    hide axis,
+    view={40}{40}
+]
+\addplot3 [
+    surf, shader=faceted interp,
+    point meta=x,
+    colormap/blackwhite,
+    samples=40,
+    samples y=5,
+    z buffer=sort,
+    domain=0:360,
+    y domain=-0.5:0.5
+] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)});
+
+\addplot3 [
+    samples=50,
+    domain=-145:180, % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
+    samples y=0,
+    thick
+] (
+    {cos(x)},
+    {sin(x)},
+    {0});
+\end{axis}
+\node at (2.5,-0.5) {$X/_{\sim}$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+Цей приклад дуже специфічний, тому просто залишу ось так.
+\end{example}
+
+\begin{example}
+Ще раз квадрат $X = [0,1] \times [0,1]$. Вчерговий раз інше відношення еквівалентності: $(0,t) \sim (1,t)$ при $t \in [0,1]$, а також $(s,0) \sim (s,1)$ при $s \in [0,1]$. Отримаємо тор.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (1,1);
+\node at (0.5,-0.5) {$X$};
+\draw[red,->] (0,0)--(0,1);
+\draw[red,->] (1,0)--(1,1);
+\draw[->] (0,0)--(1,0);
+\draw[->] (0,1)--(1,1);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw (0,0) ellipse (0.5 and 0.1);
+\draw (0,0) ellipse (1.5 and 1);
+\draw[dashed] (1,0) ellipse (0.5 and 0.15);
+\draw[dashed] (0,0.55) ellipse (0.05 and 0.45);
+\end{tikzpicture}
+\caption*{Тобто, інтуїтивно кажучи, $X/_{\sim} \cong \mathcal{S}^1 \times \mathcal{S}^1$.}
+\end{figure}
+\noindent
+(TODO: записати параметричне рівняння, яке задає тор).
+\end{example}
+
+\begin{example}
+Задовбався вже, але знову маємо квадрат $X = [0,1] \times [0,1]$, тільки цього разу відношення еквівалентності таке: $(0,t) \sim (1,t)$ при $t \in [0,1]$, а також $(s,0) \sim (1-s,1)$ при $s \in [0,1]$. Отримаємо так звану \textbf{пляшку Кляйна}.\\
+(TODO: вставити малюнок).
+\end{example}
 \newpage
+
 \section{Компактні простори}
 \subsection{Компактність}
 \begin{definition}
@@ -1220,6 +1446,15 @@ $A$ -- компактна $\iff$ будь-яке покриття $A$ відкр
 \leftproof Дано: будь-яке покриття $A$ відкритими підмножинами $X$ містить скінченне підпокриття. Насправді, ідейно все те саме робиться.
 \end{proof}
 
+\begin{proposition}
+Властивість компактності зберігається при гомеоморфності.
+\end{proposition}
+
+\begin{proof}
+Тобто нехай існують два гомеоморфних простори $X \cong Y$ та припустимо, що $X$ -- компактний. Доведемо, що $Y$ -- компактний.\\
+Нехай $\{U_i \mid i \in I\}$ -- відкрите покриття $Y$. Позначимо гомеоморфізм за $f \colon X \to Y$. Зауважимо, що $\{ f^{-1}(U_i) \mid i \in I \}$ -- відкрите покриття множини $X$. Справді, $X = f^{-1}(Y) = \displaystyle f^{-1}\left( \bigcup_{i \in I} U_i \right) = \bigcup_{i \in I} f^{-1}(U_i)$, а також в силу неперервності кожний $f^{-1}(U_i)$ буде відкритим. Оскільки $X$ -- компактний, то існує скінченне підпокриття $\{f^{-1}(U_i) \mid i = \overline{1,n}\}$, звідси $f^{-1}(Y) = X = \displaystyle\bigcup_{i=1}^n f^{-1}(U_i) = f^{-1}\left(\bigcup_{i=1}^n U_i \right)$, із цієї рівності отримаємо $Y = \displaystyle\bigcup_{i=1}^n U_i$. Отже, знайшли скінченне підпокриття $\{U_i \mid i = \overline{1,n}\}$.
+\end{proof}
+
 \subsection{Компактність та підпростори}
 \begin{example}
 Із курсу математичного аналізу, $[0,1]$ -- компактний (лема Гайне-Бореля). Однак $(0,1) \subset [0,1]$ більше не є компактом, тому що відкрите покриття $\{(\varepsilon,1) \mid \varepsilon > 0\}$ не містить скінченного підпокриття.
@@ -1269,14 +1504,25 @@ $A$ -- компактна $\iff A$ -- замкнена.
 Задані $(X,\tau_1)$ та $(Y,\tau_2)$ -- компактні топологічні простори. Тоді $(X \times Y, \tau_1 \times \tau_2)$ -- теж компактний топологічний простір.
 \end{theorem}
 
+%Proof is correct but less natural (IMHO)
+\iffalse
 \begin{proof}
 Отже, нехай $\{S_i \mid i \in I\}$ -- відкрите покриття $X \times Y$. Для кожного $(x,y) \in X \times Y$ можна обрати $S_i \ni (x,y)$, а звідси можна обрати відкриті $U_{x,y}, W_{x,y}$ -- відповідно околи точки $x,y$, для яких $U_{x,y} \times W_{x,y} \subset S_i$. Сім'я множин $\{U_{x,y} \times W_{x,y} \mid x \in X, y \in Y\}$ -- відкрите покриття $X \times Y$, бо\\
 $\displaystyle\bigcup_{(x,y) \in X \times Y} (U_{x,y} \times W_{x,y}) = \bigcup_{x \in X} U_{x,y} \times \bigcup_{y \in y} W_{x,y} = X \times Y$.\\
 Тому достатньо шукати скінченне підпокриття саме для цієї сім'ї.\\
-Зафіксуємо $x \in X$. Зауважимо, що $\{W_{x,y} \mid y \in Y\}$ -- відкрите покриття $Y$. Але оскільки $(Y,\tau_2)$ -- компактний, то існує скінченне підпокриття $\{W_{w,y} \mid y \in \tilde{Y}\}$. Покладемо тепер $U_x = \displaystyle\bigcap_{y \in \tilde{Y}} U_{x,y}$, що також буде відкритим околом точки $x$. Тоді звідси випливає, що $U_x \times Y \subset \displaystyle\bigcup_{y \in \tilde{Y}} (U_{x,y} \times W_{x,y})$, бо\\
+Зафіксуємо $x \in X$. Зауважимо, що $\{W_{x,y} \mid y \in Y\}$ -- відкрите покриття $Y$. Але оскільки $(Y,\tau_2)$ -- компактний, то існує скінченне підпокриття $\{W_{w,y_i} \mid i = \overline{1,n_x}\}$. Покладемо тепер $U_x = \displaystyle\bigcap_{y \in \tilde{Y}} U_{x,y}$, що також буде відкритим околом точки $x$. Тоді звідси випливає, що $U_x \times Y \subset \displaystyle\bigcup_{y \in \tilde{Y}} (U_{x,y} \times W_{x,y})$, бо\\
 $(x,y) \in U_x \times Y$, тому $x \in U_{x,y}$ для всіх $y \in \tilde{Y}$. Обравши довільний $y \in \tilde{Y}$, отримаємо $y \in W_{x,y}$.\\ 
 Тепер $\{U_x \mid x \in X\}$ -- відкрите покриття $X$ (за міркуваннями вище). Але оскільки $(X,\tau_1)$ -- компактний, то існує скінченне підпокриття $\{U_x \mid x \in \tilde{X}\}$.\\
 Нарешті, я стверджую, що $\{ U_{x,y} \times W_{x,y} \mid x \in \tilde{X}, y \in \tilde{Y} \}$ буде скінченним підпокриттям $X \times Y$. Те, що це скінченна, випливає зі скінченності $\tilde{X},\tilde{Y}$. Нехай тепер $(x,y) \in X \times Y$, тоді $x \in U_x$ для деякого $x \in \tilde{X}$, тож $(x,y) \in U_x \times Y$, але тоді $(x,y) \in U_{x,y} \times W_{x,y}$ для деякого $y \in \tilde{Y}$. 
+\end{proof}
+\fi
+
+\begin{proof}
+Отже, нехай $\{S_i \mid i \in I\}$ -- відкрите покриття $X \times Y$. Для кожного $(x,y) \in X \times Y$ можна обрати $S_i \ni (x,y)$, а звідси можна обрати відкриті $U_{x,y}, W_{x,y}$ -- відповідно околи точки $x,y$, для яких $U_{x,y} \times W_{x,y} \subset S_i$. Сім'я множин $\{U_{x,y} \times W_{x,y} \mid x \in X, y \in Y\}$ -- відкрите покриття $X \times Y$, бо\\
+$\displaystyle\bigcup_{(x,y) \in X \times Y} (U_{x,y} \times W_{x,y}) = \bigcup_{x \in X} U_{x,y} \times \bigcup_{y \in y} W_{x,y} = X \times Y$.\\
+Тому достатньо шукати скінченне підпокриття саме для цієї сім'ї.\\
+Фіксуємо $x \in X$ та дослідимо множину $\{x\} \times Y \cong Y$. Оскільки $Y$ -- компакт та гомеоморфізм зберігає компактність, то існує скінченне підпокриття із покриття $\{U_{x,y} \times W_{x,y} \mid x \in X, y \in Y\}$, що містить $\{x\} \times Y$. Маємо вже $\displaystyle\bigcup_{i=1}^{n_x} U_{x_i,y} \times W_{x_i,y} \supset \{x\} \times Y$. Позначимо $U_x = \displaystyle\bigcap_{i=1}^{n_x} U_{x_i,y}$, що буде теж відкритою множиною. Тоді $\displaystyle\bigcup_{i=1}^{n_x} U_{x_i,y} \times W_{x_i,y} \supset U_x \times Y$ (ну дійсно, кожний $U_{x_i,y} \supset U_x$). \\
+Сім'я $\{U_x \mid x \in X\}$ буде відкритим покриттям $X$. Просто тому що коли фіксували $x \in X$, то ми знаходили $x \in U_x$. Оскільки $X$ -- компакт, то існує скінченне підпокриття, тож $X = \displaystyle\bigcup_{j=1}^m U_{x_j}$. Зокрема звідси випливає, що $X \times Y = \displaystyle\bigcup_{j=1}^m (U_{x_j} \times Y) \subset \bigcup_{j=1}^m \bigcup_{i=1}^{n_{x_j}} (U_{x_i,y} \times W_{x_i,y})$. Ми знайшли скінченне підпокриття для множини $X \times Y$. Зокрема знайшли скінченне підпокриття із $\{S_i \mid i \in I\}$.
 \end{proof}
 
 \begin{remark}
@@ -1672,34 +1918,70 @@ $\mathbb{Q}$ -- цілком незв'язна множина (яка не є д
 \end{example}
 \newpage
 
-\section{Лема Урисона}
+\section{Лема Урисона та теорема Тітце}
 \subsection{Корисні леми}
 \begin{lemma}
 Задано $(X,\tau)$ -- топологічний простір. Для всіх $r \in [0,1] \cap \mathbb{Q}$ задамо відкриті множини $V_r \subset X$, для яких виконується $\Cl(V_r) \subset V_{r'}$ при $r < r'$. Тоді існує неперервна функція $f \colon X \to [0,1]$, для якої $f(x) = 0, x \in V_0$ та $f(x) = 1, x \notin V_1$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (6,4) node[anchor = north east] {$X$};
+\filldraw[fill = red!0, draw = red] (0.5,0.2) rectangle (5,3.8) node[scale=0.6, anchor = north east]{$V_{1}$};
+\filldraw[fill = red!20, draw = red] (0.8,0.5) rectangle (4.2,3.5) node[scale=0.6, anchor = north east]{$V_{8/9}$};
+\filldraw[fill = red!40, draw = red] (1,1.3) rectangle (4,3.1) node[scale=0.6, anchor = north east]{$V_{3/5}$};
+\filldraw[fill = red!60, draw = red] (1.5,1.5) rectangle (3.5,3) node[scale=0.6, anchor = north east]{$V_{1/2}$};
+\filldraw[fill = red!80, draw = red] (2,1.7) rectangle (2.5,2.5) node[scale=0.6, anchor = north east]{$V_0$};
+\end{tikzpicture}
+\caption*{Схематична картина умови $\Cl(V_r) \subset V_{r'}$ при $r < r'$.}
+\end{figure}
 \end{lemma}
 
 \begin{proof}
-Визначимо функцію $f \colon [0,1]$ ось таким чином: $f(x) = \begin{cases} 1, & x \notin V_1 \\ \inf_{x \in V_r} \{r\}, & x \in V_1 \end{cases}$. \\
+Визначимо функцію $f \colon X \to [0,1]$ ось таким чином: $f(x) = \begin{cases} 1, & x \notin V_1 \\ \inf_{x \in V_r} \{r\}, & x \in V_1 \end{cases}$. \\
 Зауважимо, що в нашому випадку, що при $x \in V_0$ маємо $f(x) = 0$. Дійсно, оскільки $x \in V_0$, то звідси $x \in V_r, \forall r \in [0,1] \cap \mathbb{Q}$, найменше можливе значення -- це нуль. Тож звідси $f(x) = 0$.\\
 Для доведення неперервності ми спочатку розглянемо сім'ю $\mathcal{S} = \displaystyle\bigcup_{a \in [0,1]} \{ [0,a), (a,1] \}$. Вона буде утворювати передбазу топології $[0,1]$. Це випливає з того факту, що $\mathcal{S}_{\mathbb{R}} = \displaystyle\bigcup_{a,b \in \mathbb{R}} \{(-\infty,a), (b,+\infty)\}$ утворює передбазу топології $\mathbb{R}$, а також з того факту, що $[0,1]$ -- топологічний підпростір $\mathbb{R}$.\\
 Нам залишилося перевірти два прообрази для кожного $a \in [0,1]$.\\
 $f^{-1}([0,a)) = \displaystyle\bigcup_{r < a} V_r$. \\
 Дійсно, маємо $x \in f^{-1}([0,a)) \iff f(x) < a \iff \displaystyle\inf_{x \in V_r} \{r\} < a \iff x \in V_r$ для деякого $r < a$.\\
 Ми отримали, що $f^{-1}([0,a))$ -- відкрита як зліченне об'єднання відкритих.\\
-$f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$. (TODO: додумати).
+$f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$.\\
+Маємо $x \in f^{-1}((a,1]) \implies a < f(x) \leq 1 \implies x \notin V_r$ для деякого $r > a$, але тоді $x \notin \Cl(V_{r'})$ для $r' < r$ (ми можемо знайти $r'$ так, щоб $r' \in (a,r)$). Тобто $x \in X \setminus \Cl(V_{r'})$ при деякому $r' > a$.\\
+Якщо $x \notin \Cl(V_r)$ при деякому $r > a$, то отримаємо $f(x) > a$. Адже якби $f(x) \leq a$, то $x \in V_{r'}$ при $r' \leq a < r$, але тоді $\Cl(V_{r'}) \subset V_r \subset \Cl(V_r)$. Таким чином, $f(x) > a \implies x \in f^{-1}((a,1])$.
 \end{proof}
 
 \begin{lemma}
-Задано $(X,\tau)$ -- нормальний топологічний простір. Припустимо, що $A$ -- замкнена та $U$ -- відкрита, де $A \subset U$. Тоді існує $V$ -- відкрита множина, для якої $A \subset V, \Cl(V) \subset U$.\\
-Тобто між замкненою та відкритою множинах можна підібрати проміжну відкриту множину, яка містить замкнену, а замикання міститься в відкритій.
+Задано $(X,\tau)$ -- нормальний топологічний простір. Припустимо, що $A$ -- замкнена та $U$ -- відкрита, де $A \subset U$. Тоді існує $V$ -- відкрита множина, для якої $A \subset V, \Cl(V) \subset U$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (2,1) node[anchor = north east] {$A$};
+\draw[dashed] (-1,-1) rectangle (3,2) node[anchor = north east] {$U$};
+\draw[dashed,red] (1,0.5) circle (1.4cm) node at (1,1.5) {$V$};
+\end{tikzpicture}
+\caption*{Тобто між замкненою та відкритою множинах можна підібрати проміжну відкриту множину, яка містить замкнену, а замикання міститься в відкритій.}
+\end{figure}
 \end{lemma}
-
+\newpage
 \begin{proof}
 Оберемо $A, X \setminus U$ -- обидва замкнені множини. За нормальністю, існують відкриті множини $V,W$, що неперетинні, для яких $V \supset A, W \supset X \setminus U$. Тобто $V \supset A$ та $X \setminus W \subset U$. Із того, що $V,W$ -- неперетинні, тобто $V \cap W = \emptyset$, випливає $V \subset X \setminus W$. Маємо ланцюг $A \subset V \subset X \setminus W \subset U$. Оскільки $V \subset X \setminus W$, то тоді й $\Cl(V) \subset \Cl(X \setminus W) = X \setminus W$. Власне, звідси довели: $A \subset V, \Cl(V) \subset U$.
 \end{proof}
 
 \begin{theorem}[Лема Урисона]
-Задано $(X,\tau)$ -- нормальни топологічний простір та $A,B$ -- замкнені та неперетинні. Тоді існує неперервна функція $f \colon X \to [0,1]$, для якої $f(x) = 0, x \in A$ та $f(x) = 1, x \in B$.
+Задано $(X,\tau)$ -- нормальний топологічний простір та $A,B$ -- замкнені та неперетинні. Тоді існує неперервна функція $f \colon X \to [0,1]$, для якої $f(x) = 0, x \in A$ та $f(x) = 1, x \in B$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (8,6) node[anchor = north east] {$X$};
+\filldraw[fill = red!0, draw = red] (0.2,0.2) rectangle (4.5,4.5) node[anchor = north east] {$V_{1}$};
+\filldraw[fill = red!20, draw = red] (0.5,0.4) rectangle (4,4) node[anchor = north east] {$V_{8/9}$};
+\filldraw[fill = red!40, draw = red] (0.6,0.6) rectangle (3.3,3.4) node[anchor = north east] {$V_{3/5}$};
+\filldraw[fill = red!60, draw = red] (0.8,0.7) rectangle (2.8,2.9) node[anchor = north east] {$V_{1/2}$};
+\filldraw[fill = red!80, draw = red] (0.9,0.9) rectangle (2.4,2.4) node[anchor = north east] {$V_0$};
+\filldraw[fill = blue, draw = black] (1,1) rectangle (2,2) node[anchor = north east] {$A$};
+\filldraw[fill = blue, draw = black] (5,4) rectangle (7,5) node[anchor = north east] {$B$};
+\end{tikzpicture}
+\caption*{Схематичний план доведення.}
+\end{figure}
 \end{theorem}
 
 \begin{proof}
@@ -1709,9 +1991,9 @@ $f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$. (TODO: д
 3) $r < r' \implies \Cl(V_r) \subset V_{r'}$.\\
 Оскільки $[0,1] \cap \mathbb{Q}$ -- зліченна множина, то ми маємо послідовність $r_1,r_2,r_3,\dots,r_n,\dots$ різних раціональних чисел. Не втрачаючи загальності, $r_1 = 1, r_2 = 0$, а всі решта $0 < r_n < 1$.\\
 \textit{База індукції} (їх будуть дві): треба побудувати $V_{r_1} = V_1$ та $V_{r_2} = V_0$. Покладемо $V_1 = X \setminus B$ -- уже відкрита. Оскільки $A \subset X, V_1 \subset X$ -- одна замкнена, інша відкрита, то за другою лемою, існує відкрита множина $V_0$, для якої $A \subset V_0$ та $\Cl(V_0) \subset V_1$. Уже маємо $V_{r_1},V_{r_2}$, які задовольняють вимогам 1),2),3).\\
-Для всіх інших $V_{r_n}$ нам достатньо буде довести 3).\\
+Для всіх інших $V_{r_n}$ нам досить буде довести 3).\\
 \textit{Припущення індукції}: $V_{r_3},\dots,V_{r_n}$ побудовані так, що задовольняють нашим умовам вище.\\
-\textit{Крок індукції}: побудуємо $V_{r_{n+1}}$. Із нашох послідовності $r_1,r_2,\dots,r_n$ оберемо два якнайближчих числа $r_i,r_j$, щоб $r_i < r_{n+1} < r_j$. Нам достатньо довести, що $\Cl(V_{r_i}) \subset V_{r_{n+1}},\ \Cl(V_{r_{n+1}}) \subset V_{r_j}$.\\
+\textit{Крок індукції}: побудуємо $V_{r_{n+1}}$. Із нашої послідовності $r_1,r_2,\dots,r_n$ оберемо два якнайближчих числа $r_i,r_j$, щоб $r_i < r_{n+1} < r_j$. Нам досить довести, що $\Cl(V_{r_i}) \subset V_{r_{n+1}},\ \Cl(V_{r_{n+1}}) \subset V_{r_j}$.\\
 Зауважимо, що $\Cl(V_{r_i})$ та $V_{r_j}$ -- відповідно замкнена та відкрита множини. Тоді за другою лемою, існує відкрита множина (яку як раз-таки позначимо й за $V_{r_{n+1}}$), для якої справджуються ці два вкладення. \\
 МІ доведено.\\
 Значить, за першою лемою, існує неперервна функція $f \colon X \to [0,1]$, для якої $f(x) = 0, x \in V_0$ та $f(x) = 1, x \notin V_1$. За умовами 1),2), отримаємо $f(x) = 0, x \in A$ та $f(x) = 1, x \in B$.
@@ -1722,7 +2004,41 @@ $f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$. (TODO: д
 \end{remark}
 
 \begin{proof}
-Припустимо, що $A,B$ -- замкнені та неперетинні множини. Тоді існує $f \colon X \to [0,1]$, що неперервна та задовільняє іншим умовам. Зауважимо, що $A \subset f^{-1} \left(\left[0, \dfrac{1}{2}\right)\right)$ та $B \subset f^{-1}\left(\left(\dfrac{1}{2},1\right]\right)$. Ці прообрази відкриті в силу неперервності, а також неперетинні в силу неперетинностей цих інтервалів. Тобто ми довели означення нормальності.
+Припустимо, що $A,B$ -- замкнені та неперетинні множини. Тоді існує $f \colon X \to [0,1]$, що неперервна та задовольняє іншим умовам. Зауважимо, що $A \subset f^{-1} \left(\left[0, \dfrac{1}{2}\right)\right)$ та $B \subset f^{-1}\left(\left(\dfrac{1}{2},1\right]\right)$. Ці прообрази відкриті в силу неперервності, а також неперетинні в силу неперетинностей цих інтервалів. Тобто ми довели означення нормальності.
+\end{proof}
+
+\begin{remark}
+Лему Урисона можна дещо узагальнити. Якщо маємо $(X,\tau)$ -- нормальний простір та $A,B$ -- неперетинні замкнені, то ми можемо навіть підібрати функцію $g \colon X \to [a,b]$, для якої $f(x) = a, x \in A$ та $f(x) = b, x \in B$. Тобто не обов'язково на відрізку $[0,1]$, а на будь-якому.\\
+\textit{Вказівка: $h \colon [0,1] \to [a,b],\ h(x) = a + (b-a)x$.}
+\end{remark}
+
+\subsection{Простори з аксіомами $T_{3 \frac{1}{2} }$}
+Пригадаємо, що ми переважно працювали з нормальними топологічними просторами $(X,\tau)$. Іншими словами, такий простір задовольняє аксіомі $T_4$ (або ще називають нормальним Гаусдорфовим).\\
+Щойно з'ясували, що $(X,\tau)$ задовольняє аксіомі $T_4 \iff$ існує функція $f \colon X \to [0,1]$, для якої $f(x) = 0, x \in A$ та $f(x) = 1, x \in B$.
+\bigskip \\
+Також в нас були регулярні простори $(X,\tau)$, тобто задовольняють аксіомі $T_3$. Виникає отримати таку саму еквівалентність:\\
+$(X,\tau)$ задовольняє аксіомі $T_3 \overset{?}{\iff}$ існує функція $f \colon X \to [0,1]$, для якої $f(x) = 0, x \in A$ та $f(y) = 1$.\\
+Насправді, виконується лише напрямок \leftproof. \\
+Ми можемо добитися еквівалентності лише в просторі з новим аксіомом.
+\begin{definition}
+Задано $(X,\tau)$ -- топологічний простір.\\
+Він \textbf{задовольняє аксіомі $T_{3 \frac{1}{2}}$} (це ще називають \textbf{повним регулярним простором}), якщо
+\begin{align*}
+\text{для кожної точки $x \in X$ та замкненої $x \notin A \subset X$ існує неперервна $f \colon X \to [0,1]$, для якої $f(x) = 1$ та $f|_A = 0$.}
+\end{align*}
+Такий простір ще називають \textbf{тіхоновським}.
+\end{definition}
+
+\begin{proposition}
+$T_4 \implies T_{3 \frac{1}{2}} \implies T_3$.
+\end{proposition}
+
+\begin{proof}
+$T_4 \implies T_{3 \frac{1}{2}}$.\\
+Нехай $(X,\tau)$ задовольняє $T_4$ (тобто нормальний простір). Оберемо довільну точку $x \in X$ та $A \not\ni x$ -- замкнена множина. Маємо дві замкнені неперетинні множини $\{x\}, A$, тому за лемою Урисона, існує неперервна функція $f \colon X \to [0,1]$, для якої $f(x) = 1$ та $f|_A = 0$. Отже, $(X,\tau)$ задовольняє $T_{3 \frac{1}{2}}$.
+\bigskip \\
+$T_{3 \frac{1}{2}} \implies T_3$.\\
+Нехай $(X,\tau)$ задовольняє $T_{3 \frac{1}{2}}$. Хочемо довести, що $(X,\tau)$ буде регулярним. Оберемо $x \in X$ та замкнену множину $A \not\ni x$. За умовою, існує неперервна функція $f \colon X \to [0,1]$, для якої $f(x) = 1$ та $f|_A = 0$. Аналогічно (як в зауваженні вище) маємо $A \subset f^{-1}\left( \left[0, \dfrac{1}{2}\right)\right) \overset{\text{позн.}}{=} U$ та $\{x\} \subset f^{-1}\left( \left(\dfrac{1}{2},1\right]\right) \overset{\text{позн.}}{=} V$. Знайшли неперетинні відкриті множини $U \supset A, V \supset \{x\}$.
 \end{proof}
 
 \subsection{Функціональна збіжність}
@@ -1735,13 +2051,13 @@ $f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$. (TODO: д
 \end{definition}
 
 \begin{remark}
-Якщо $f_n \to f$ поточково та $f_n \colon X \to Y$ -- неперервні, то не обов'язково $f \colon X \to Y$ буде неперервною.\\
-\textit{Контрприклад дивіться в мат. аналізі II}.
+Якщо $f_n \to f$ поточково та $f_n \colon X \to Y$ -- неперервні, то не обов'язково $f \colon X \to Y$ буде неперервною. Тому для нас поточкова збіжність -- проблематичне означення.\\
+\textit{Контрприклад дивіться в мат.\ аналізі II}.
 \end{remark}
 
 \begin{definition}
 Задані $(X,\tau), (Y,\rho)$ -- топологічний та метричний простори та $\{f_n, n \geq 1\},\ f_n \colon X \to Y$ -- функціональна послідовність.\\
-Послідовність $\{f_n\}$ \textbf{збігається поточково} до функції $f \colon X \to Y$, якщо
+Послідовність $\{f_n\}$ \textbf{збігається рівномірно} до функції $f \colon X \to Y$, якщо
 \begin{align*}
 \forall \varepsilon > 0: \exists N \in \mathbb{N}: \forall n \geq N: \forall x \in X: \rho(f_n(x), f(x)) < \varepsilon
 \end{align*}
@@ -1752,7 +2068,7 @@ $f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$. (TODO: д
 \end{proposition}
 
 \begin{proof}
-Нехай $x \in X$, також нехай $B(f(x),\varepsilon)$ -- відкритий окіл $f(x)$. Тоді за нашим $\varepsilon > 0$ (в силу рівномірної неперервності) $\exists N: \forall n \geq N: \rho(f_n(x),f(x)) < \varepsilon$, тобто звідси $f_n(x) \in B(f(x),\varepsilon)$.
+Нехай $x \in X$, також нехай $B(f(x),\varepsilon)$ -- відкритий окіл $f(x)$. Тоді за нашим $\varepsilon > 0$ (в силу рівномірної збіжності) $\exists N: \forall n \geq N: \rho(f_n(x),f(x)) < \varepsilon$, тобто звідси $f_n(x) \in B(f(x),\varepsilon)$.
 \end{proof}
 
 \begin{remark}
@@ -1760,18 +2076,407 @@ $f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$. (TODO: д
 \textit{Контрприклад дивіться в мат. аналізі II}.
 \end{remark}
 
+\noindent
+Мабуть, перед важливою теоремою я наведу еквівалентне означення неперервності відображення $f \colon X \to Y$, коли саме $Y$ -- метричний та $X$ -- топологічний. Цього робити мені було не обов'язково, але це для мого власного сприйняття.
+
 \begin{proposition}
-Задані $(X,\tau), (Y,\rho)$ -- топологічний та метричний простори. Відомо, що $\{f_n\},\ f_n \colon X \to Y$ -- збіжна рівномірно та всі $f_n$ -- неперервні. Тоді $f$ -- неперервне.
+Нехай $(X,\tau),\ (Y,\rho)$ -- топологічний та метричний простори та $f \colon X \to Y$.\\
+$f$ -- неперервний в точці $x_0 \iff \forall \varepsilon > 0: \exists U_\varepsilon$ -- окіл точки $x_0$: $\forall x \in U_\varepsilon: \rho(f(x), f(x_0)) < \varepsilon$.
 \end{proposition}
 
 \begin{proof}
-TODO: довести.
+\rightproof Дано: $f$ -- неперервний в точці $x_0$. Нехай $\varepsilon > 0$. Зафіксуємо $B(f(x_0), \varepsilon)$ -- відкрита куля. За означенням неперервності в точці (із топології), існує $U_\varepsilon$ окіл точки $x_0$ так, що $f(U_\varepsilon) \subset B(f(x_0), \varepsilon)$. Зокрема якщо $x \in U_\varepsilon$, то звідси $\rho(f(x),f(x_0)) < \varepsilon$.
+\bigskip \\
+\leftproof Дано: $\varepsilon > 0: \exists U_\varepsilon$ -- окіл точки $x_0: \forall x \in U_\varepsilon: \rho(f(x),f(x_0)) < \varepsilon$. Нехай $V$ -- окіл точки $f(x_0)$, тоді існує відкрита куля $B(f(x_0),\varepsilon) \subset V$. Те, що нам дано, означає, що $\forall x \in U_\varepsilon: f(x) \in B(f(x_0),\varepsilon)$. Тобто маємо ланцюг $f(U_\varepsilon) \subset B(f(x_0),\varepsilon) \subset V$. Отже, $f$ -- неперервний в точці $x_0$.
 \end{proof}
+
+\begin{theorem}
+Задані $(X,\tau), (Y,\rho)$ -- топологічний та метричний простори. Відомо, що послідовність $\{f_n\},\ f_n \colon X \to Y$ -- збіжна рівномірно до $f$ та всі $f_n$ -- неперервні. Тоді $f$ -- неперервне.
+\end{theorem}
+
+\begin{proof}
+Нехай $\varepsilon > 0$. За умовою, рівномірної збіжності, $\exists N: \rho(f_N(x),f(x)) < \varepsilon$, причому $\forall x \in X$. Також саме $f_N$ неперервне, тому $\exists U_N$ -- окіл точки $x_0$ так, що $\forall x \in U_N: \rho(f_N(x), f_N(x_0)) < \varepsilon$. Тоді\\
+$\rho(f(x),f(x_0)) \leq \rho(f(x),f_N(x)) + \rho(f_N(x), f_N(x_0)) + \rho(f_N(x_0), f(x_0)) < 3 \varepsilon$ -- виконано $\forall x \in U_N$.\\
+Отже, $f$ -- неперервний в будь-якій точці $x_0 \in X$.
+\end{proof}
+
+\subsection{Теорема Тітце}
+\begin{lemma}
+Задано $(X,\tau)$ -- нормальний простір, $A \subset X$ -- замкнена множина та $f \colon A \to \mathbb{R}$ -- неперервна функція, причому $\exists C > 0: \forall x \in A: |f(x)| \leq C$. Тоді існує неперервна функція $g \colon X \to \mathbb{R}$, для якої $\forall x \in X: |g(x)| \leq \dfrac{1}{3}C$ та $\forall x \in A: |f(x) - g(x)| \leq \dfrac{2}{3}C$.
+\end{lemma}
+
+\begin{proof}
+Розглянемо прообрази $Y = f^{-1}\left(\left[\dfrac{1}{3}C,C\right]\right)$ та $Z = f^{-1}\left(\left[-C, -\dfrac{1}{3}C \right]\right)$. Обидві множини $Y,Z$ -- замкнені, оскільки в прообраз (неперервної функції) передаємо замкнені множини в $\mathbb{R}$. Також оскільки ці відрізки неперетинні, то $Y,Z$ також неперетинні. Значить, за лемою Урисона (трошки в загальній формі) (TODO: вставити), існує функція $g \colon X \to \left[-\dfrac{1}{3}C, \dfrac{1}{3}C\right]$, де $g|_Y = \dfrac{1}{3}C$ та $g|_Z = -\dfrac{1}{3}C$. Зважаючи на область значень, маємо $|g(x)| \leq \dfrac{1}{3}C$. \\
+Залишилося довести, що $|f(x) - g(x)| \leq \dfrac{2}{3}C$. Розглянемо три випадки:\\
+$x \in Y$, тоді $g(x) = \dfrac{1}{3}C$ та $\dfrac{1}{3}C \leq f(x) \leq C$, тож звідси $0 \leq f(x) - g(x) \leq \dfrac{2}{3}C$;\\
+$x \in Z$, тоді $g(x) = -\dfrac{1}{3}C$ та $-C \leq f(x) \leq -\dfrac{1}{3}C$, тож звідси $-\dfrac{2}{3}C \leq f(x) - g(x) \leq 0$;\\
+$x \notin Y \sqcup Z$, тоді $|f(x)| \leq \dfrac{1}{3}C$ та $|g(x)| \leq \dfrac{1}{3}C$, тож за нерівністю трикутника $|f(x) - g(x)| \leq \dfrac{2}{3}C$.
+\end{proof}
+
+\begin{theorem}[Теорема Тітце]
+Задано $(X,\tau)$ -- нормальний простір, $A \subset X$ -- замкнена множина та $f \colon A \to [a,b]$ -- неперервна функція. Тоді існує неперервна функція $\overline{f} \colon X \to [a,b]$ -- розширення $f$, тобто $\overline{f}|_{A} = f$.
+\end{theorem}
+
+\begin{proof}
+За умовою, функція $f$ повертає значення відрізка $[a,b]$, тому маємо $\forall x \in A: |f(x)| \leq C$. Ми стверджуємо, що для кожного $n \in \mathbb{N}$ існує неперервна функція $g_n \colon X \to \mathbb{R}$, що задовольняє таким умовам:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\forall x \in X: |g_n(x)| \leq \dfrac{1}{3} \left( \dfrac{2}{3}\right)^{n-1} C$;
+\item $\forall x \in A: \displaystyle\left| f(x) - \sum_{k=1}^n g_k(x) \right| \leq \left( \dfrac{2}{3} \right)^n C$.
+\end{enumerate}
+\textit{База індукції}: при $n = 1$ така функція $g_1$ існує за попередньою лемою.\\
+\textit{Припущення індукції}: уже побудовані функції $g_1,\dots,g_n$, що задовольняють вимогам вище.\\
+\textit{Крок індукції}: позначмио функцію $\varphi(x) = \displaystyle f(x) - \sum_{k=1}^n g_k(x)$. Маємо функцію $\varphi \colon A \to \mathbb{R}$, яка неперервна (як сума неперервних) та обмежена ось так: $\forall x \in A: |\varphi(x)| \leq \left( \dfrac{2}{3} \right)^n C$. Звідси за лемою вище існує функція $g_{n+1} \colon X \to \mathbb{R}$, що неперервна та задовольняє оцінкам $|g_{n+1}(x)| \leq \dfrac{1}{3} \left[ \left(\dfrac{2}{3}\right)^n C \right]$ та $|\varphi(x) - g_{n+1}(x)| = \displaystyle\left| f(x) - \sum_{k=1}^{n+1} g_k(x) \right| \leq \left( \dfrac{2}{3} \right)^{n+1}C$.\\
+МІ доведено. \\
+Тепер визначимо функцію $\overline{f}_{\infty} \colon X \to \mathbb{R}$ ось таким чином: $\overline{f}_\infty(x) = \displaystyle\sum_{k=1}^\infty g_k(x)$. Дана функція визначена коректно (тобто ряд при кожному $x \in X$ збіжний в силу оцінки $|g_n(x)| \leq \dfrac{1}{3} \left( \dfrac{2}{3}\right)^{n-1}C$; навіть рівномірно збіжний ряд за мажорантою Ваєрштраса). \\
+Доведемо, що дана функція буде неперервною. Для цього позначимо $\overline{f}_n(x) = \displaystyle\sum_{k=1}^n g_k(x)$; ці функції є неперервними як сума неперервних. Далі зазначимо, що $\overline{f}_n$ збігається рівномірно до $\overline{f}_\infty$ в силу рівномірної збіжності ряду. Отже, $\overline{f}_\infty$ буде точно неперервною.\\
+Причому зазначимо, що $\forall x \in A: \overline{f}_\infty(x) = f(x)$. Справді, маємо оцінку:\\
+$\forall x \in A: \displaystyle\left| f(x) - \sum_{k=1}^n g_k(x) \right| \leq \left(\dfrac{2}{3}\right)^n C \overset{n \to \infty}{\implies} f(x) = \overline{f}_\infty(x)$.\\
+Утім все ж таки ми знайшли функцію $\overline{f}_\infty \colon X \to \mathbb{R}$, а нам потрібна функція $\overline{f} \colon X \to [a,b]$. Питань нема, визначимо її ось таким чином: $\overline{f}(x) = \begin{cases} \overline{f}_\infty(x), & x \in \overline{f}_\infty^{-1}([a,b]) \\ a, & x \in \overline{f}_\infty^{-1}((-\infty,a)) \\ b, & x \in \overline{f}_\infty^{-1}((b,+\infty)) \end{cases}$. Така функція буде неперервною (в принципі, зрозуміло), а також $\overline{f}|_A = f$. Дійсно, якщо $x \in A$, то тоді $f(x) = \overline{f}_\infty(x) \in [a,b]$, тобто $x \in \overline{f}_\infty^{-1}([a,b])$. Значить, $\overline{f}(x) = \overline{f}_\infty(x) = f(x)$.
+\end{proof}
+\noindent
+Це ми довели лише теорему Тітце для функції, що приймають значення лише на деякому відрізку. Трошки розшириимо клас функцій.
+
+\begin{theorem}[Теорема Тітце (розширення)]
+Задано $(X,\tau)$ -- нормальний простір, $A \subset X$ -- замкнена множина та $f \colon A \to \mathbb{R}$ -- неперервна функція. Тоді існує неперервна функція $\overline{f} \colon X \to \mathbb{R}$ -- розширення $f$, тобто $\overline{f}|_{A} = f$.
+\end{theorem}
+
+\begin{proof}
+Ми будемо доводити розширення теореми для випадку, коли задана функція $f \colon A \to (-1,1)$. Оскільки маємо $(-1,1) \subset [-1,1]$, то за теоремою вище, існує функція $\overline{f} \colon X \to [-1,1]$ -- неперервна та $\overline{f}_A = f$. На жаль, це ще не все, бо нам треба функція $\overline{g} \colon A \to (-1,1)$, у нас там проблемки в точках $\{-1,1\}$.\\
+Проте якщо взяти множину $B = \overline{f}^{-1}(\{-1,1\})$, що буде замкненою та $A \cap B = \emptyset$, то за лемою Урисона існуватиме функція $\varphi \colon X \to [0,1]$, де $\varphi|_A = 1$ та $\varphi|_B = 0$. Тепер визначимо функцію $\overline{g}(x) = \overline{f}(x) \cdot \varphi(x)$. Функція $g \colon X \to (-1,1)$, неперервна як добуток та $\overline{g}|_A = f$.\\
+Далі ми згадуємо той факт, що $(-1,1) \cong \mathbb{R}$ -- отримаємо бажане.
+\end{proof}
+
+\begin{theorem}
+Нехай $(X,\tau)$ -- топологічний простір, що задовольняє $T_1$. Нижче еквівалентні твердження:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $X$ -- нормальний простір;
+\item Для кожних неперетинних замкнених множин $A,B \subset X$ існує неперервна функція $f \colon X \to [0,1]$, де $f|_A = 0$ та $f|_B = 1$;
+\item Якщо $A \subset X$ замкнена та $f \colon A \to \mathbb{R}$ -- неперервна, то тоді існує неперервна функція $\overline{f} \colon X \to \mathbb{R}$, для якої $\overline{f}|_A = f$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$\boxed{1) \iff 2)}$ та $\boxed{1) \implies 3)}$ ми вже довели.\\
+$\boxed{3) \implies 1)}$. Нехай $A,B$ -- замкнені множини, що не перетинаються. (TODO: ?)
+\end{proof}
+\newpage
+
+\section{Теорема Урисона про метризацію}
+\begin{theorem}[Теорема Урисона про метризацію]
+Нехай $(X,\tau)$ -- нормальний та second-countable простір. Тоді $(X,\tau)$ -- метризуючий.
+\end{theorem}
+
+\subsection{Вступ}
+Ми вже знаємо, що кожний метризуючий простір -- топологічний. Але не навпаки. У будь-якому випадку виникає питання, коли можна сказати в зворотний бік. Відповідь на питання дає результат вище -- та сама теорема Урисона.\\
+Одразу зазначу, що якщо простір просто нормальний, то це не обов'язково метризуючий. Перед контрприкладом треба дати одну важливу теорему.
+
+\begin{theorem}
+Нехай $(X,\tau)$ -- метризуючий та сепарабельний простір. Тоді $X$ -- second-countable.
+\end{theorem}
+
+\begin{proof}
+Нехай $D$ -- скрізь щільна підмножина $X$ (уже метричного простору). Розглянемо сім'ю множин $\mathcal{B} = \{ B(x;r) : x \in D, r \in \mathbb{Q}_{>0} \}$. Така множина точно зліченна. Залишилося довести, що $\mathcal{B}$ -- база.\\
+Н\noindentехай $B(x;r_1), B(y;r_2)$ -- базові множини та $w \in B(x;r_1) \cap B(y;r_2)$. Наша задача знайти базову множину $B(z;R)$ так, що $w \in B(z;R) \subset B(x;r_1) \cap B(y;r_2)$.\\
+Оскільки мноина $B(x;r_1) \cap B(y;r_2)$ залишається відкритою множиною, то існує відкрита куля $B(w;\varepsilon) \subset B(x;r_1) \cap B(y;r_2)$. Оскільки $D$ -- скрізь щільна множина, то ми можемо знайти такий елемент $w_n \in D$ так, що $w_n \in B\left(w, \dfrac{\varepsilon}{3}\right)$. На проміжку $\left( \dfrac{\varepsilon}{3},\dfrac{\varepsilon}{2} \right)$ оберемо раціональне число $R \in \mathbb{Q}$ -- наш майбутній радіус майбутнього кола. Звідси отримаємо $w \in B(w_n;R)$, бо $\rho(w,w_n) < \dfrac{\varepsilon}{3} < R$. Зауважимо, що $B(w_n;R) \subset B(w;\varepsilon)$. Справді,\\
+$u \in B(w_n;R) \implies \rho(u,w_n) < R \implies \rho(u,w) \leq \rho(u,w_n) + \rho(w_n,w) < R + R < \varepsilon \implies u \in B(w;\varepsilon)$.\\
+Значить, $w \in B(w_n;R) \subset B(w;\varepsilon) \subset B(x;r_1) \cap B(y;r_2)$.\\
+Залишилося довести, що $X = \displaystyle\bigcup_{\substack{x \in D \\ r \in \mathbb{Q}_{>0}}} B(x;r)$, але це буде неважко.
+\end{proof}
+
+\begin{example}
+Задамо на $\mathbb{R}$ іншу топологію, що породжується базою $\mathcal{B} = \{ [a,b) \mid a,b \in \mathbb{R} \}$. Це називають \textbf{lower limit topology} (або \textbf{прямою Зоргенфрі}) та часто таку топологію позначають за $\mathbb{R}_l$.\\
+Зауважимо, що $(a,b]$ -- відкрита та замкнена одночасно. Відповідь на друге:\\
+$\mathbb{R} \setminus (a,b] = (-\infty,a) \cup [b,+\infty) = \displaystyle\bigcup_{n=1}^\infty [a-n,a) \cup \bigcup_{n=1}^\infty [b,b+n)$.
+\bigskip \\
+\textit{$\mathbb{R}_l$ -- нормальний простір.}\\
+Дійсно, нехай $A,B$ -- замкнені підмножини, що неперетинні. Оскільки $\mathbb{R} \setminus A$ відкрита, то за базою $\mathbb{R} \setminus A = \displaystyle\bigcup [a,b)$, але тоді $A = \displaystyle\bigcap \mathbb{R} \setminus [a,b) \subset \bigcap_{\text{скінченний}} \mathbb{R} \setminus [a,b)$ -- в кінці скінченний перетин відкритих множин. Аналогічно $B = \displaystyle\bigcap \mathbb{R} \setminus [c,d) \subset \bigcap_{\text{скінченний}} \mathbb{R} \setminus [c,d)$.\\
+Єдине ми прагнемо, щоб ці скінченні перетини самі по собі не перетиналися. Такого добитися можна.\\
+Нехай $x \in A$, тобто $x \in \mathbb{R} \setminus [a,b)$ будь-який. Але тоді $x \notin B$, тобто $x \notin \mathbb{R} \setminus [c,d)$ деякому. Серед цих деяких оберемо скінченне число таких множин -- побудуємо $\displaystyle\bigcap \mathbb{R} \setminus [c,d)$.\\
+Нехай $x \in B$, аналогічним чином побудуємо $\displaystyle\bigcap \mathbb{R} \setminus [a,b)$.\\
+Отже, для неперетинних замкнених $A,B$ ми можемо знайти відкриті множини, що неперетинні та містять кожну зі замкнених.
+\bigskip \\
+\textit{$\mathbb{R}_l$ -- не second countable.}\\
+За означенням бази, $\forall U$ -- відкрита: $\forall x \in U: \exists B \in \mathcal{B}: x \in B \subset U$.\\
+Для всіх $x \in \mathbb{R}$ оберемо відкриті $[x,x+\varepsilon)$ для деякого $\varepsilon > 0$. Тобто $\forall x \in \mathbb{R}: \exists B_x \in \mathcal{B}: x \in B_x \subset [x,x+\varepsilon)$. Зауважимо, що $\inf B_x = x$. Отже, для $x_1 \neq x_2$ ми маємо $B_{x_1} \neq B_{x_2}$. Інакше кажучи, відображення $x \mapsto B_x$ -- ін'єктивний та $\mathcal{B}$ має бути незліченним.
+\bigskip \\
+\textit{$\mathbb{R}_l$ -- сепарабельний}.\\
+Стверджуємо, що $\Cl(\mathbb{Q}) = \mathbb{R}_l$. Нехай $x \in \mathbb{R}_l$, тоді хочу $x \in \Cl(\mathbb{Q})$, тобто для кожного $U_x$ -- відкритого околу матимемо $U_x \cap \mathbb{Q} \neq \emptyset$.\\
+!Припустимо, що $U_x \cap \mathbb{Q} = \emptyset$.  Оскільки $U_x$ -- відкрита, то за базою існує $[a,b) \subset U_x$. Власне, тоді $[a,b) \cap \mathbb{Q} = \emptyset$. Тобто для кожного $z \in [a,b)$ не існує раціонального числа $q \in [a,b)$. Із іншого боку, на інтервалі $(z,b)$ існує раціональне число $q \in (z,b)$, а тому $[a,b) \cap \mathbb{Q} \neq \emptyset$ -- суперечність!
+\bigskip \\
+Пригадаємо, що сепарабельний та метризуючий -- автоматично second countable. Але в нас не second countable, тож звідси ми не можемо казати на метризуючніть.
+\end{example}
+\noindent
+Висновок: пряма Зоргенфрі -- нормальний простір, який не метризуючий.\\
+Довгий вступ закінчився. Тепер перейдемо до основного інструментарію, як пруфанути.
+
+\subsection{Вкладення та про метризуючі простори}
+\begin{definition}
+Нехай $(X,\tau),\ (Y,\tilde{\tau})$ -- топологічні простори, $\imath \colon X \to Y$ -- неперервне відображення.\\
+Відображення $\imath$ називається \textbf{вкладенням (embedding)}, якщо
+\begin{align*}
+X \cong \imath(X)
+\end{align*}
+\end{definition}
+\noindent
+Приклад вкладень з диференціальної топології можна побачити тут: \href{http://www.astro.yale.edu/vdbosch/astro610_lecture2.pdf}{\textcolor{red}{*клік*}} (на сторінку 14).
+
+\begin{lemma}
+Нехай $(X,\tau),\ (Y,\tilde{\tau})$ -- топологічні простори та $\jmath \colon X \to Y$ -- вкладення. Відомо, що $Y$ -- метризуючий простір. Тоді $X$ теж метризуючий.
+\end{lemma}
+
+\begin{proof}
+Справді, нехай $\rho$ -- метрика для $Y$. Зокрема $\rho$ -- метрика на $\imath(X)$ (на підпросторі). Значить, $\jmath(X)$ -- метризуючий. Оскільки $X \cong \jmath(X)$, то звідси $X$ -- метризуючий (можна задати метрику $\tilde{\rho}(x,y) = \rho(\jmath(x),\jmath(y))$ для всіх $x,y \in X$).
+\end{proof}
+
+\begin{proposition}
+Задані $\{X_i \mid i \in \mathbb{N}\}$ -- зліченна сім'я метризуючих просторів. Тоді $\displaystyle\prod_{i=1}^\infty X_i$ теж метризуючий.
+\end{proposition}
+
+\begin{proof}
+Нехай $\rho_i$ -- метрика $X_i$. Побудуємо нову функцію $\rho_i'(x,y) = \displaystyle\min\{\rho_i(x,y), 1\}$.
+ \iffalse $\rho_i'(x,y) = \begin{cases} \rho_i(x,y), & \rho_i(x,y) \leq 1 \\ 1, & \text{інакше} \end{cases}$. \fi У принципі, неважко буде переконатися, що $\rho'_i$ задаватиме метрику.\\
+Установимо нову функцію $d(x,y) = \displaystyle\sum_{i=1}^\infty \dfrac{1}{2^i} \rho_i'(x_i,y_i)$, де в цьому випадку $x = (x_1,x_2,\dots),\ y = (y_1,y_2,\dots) \in \displaystyle\prod_{i=1}^\infty X_i$. Дана функція буде задавати метрику (в принципі, ясно). Важливо підкреслити, що за рахунок оновлення метрики на $X_i$ ми тепер матимемо завжди збіжний ряд, тому $d$ цілком коректно визначена. Доведемо, що $d$ породжує ту саму топологію. Тобто $\tau_{\text{prod}} = \tau_d$.\\
+Нехай $U$ -- відкрита відносно метрики $d$. Хочемо довести, що $U$ -- відкрита в $\tau_{\text{prod}}$.\\
+Нехай $x \in U$. За умовою, $\exists B(x;r) \subset U$. Стверджується, що \\ $B\left(x_1;\dfrac{r}{2N}\right) \times \dots \times B\left(x_1;\dfrac{r}{2N}\right) \times X_{N+1} \times \dots \subset B(x;r) \subset U$. Ми оберемо такий $N$, щоб $\dfrac{1}{2^N} < \dfrac{r}{2}$. Дійсно, \\
+$d(x,y) = \displaystyle\sum_{i=1}^\infty \dfrac{1}{2^i} \rho_i'(x_i,y_i) = \sum_{i=1}^N \dfrac{1}{2^i} \rho_i'(x_i,y_i) + \sum_{i=N+1}^\infty \dfrac{1}{2^i} \rho_i'(x_i,y_i) \leq \sum_{i=1}^N \rho_i'(x_i,y_i) + \sum_{i=N+1}^\infty \dfrac{1}{2^i} <\\
+< \dfrac{r}{2N} \cdot N + \dfrac{1}{2^{N}} < \dfrac{r}{2} + \dfrac{r}{2} = r$.\\
+Отже, довели, що $U$ -- відкрита в $\tau_{\text{prod}}$.\\
+Нехай $U$ -- відкрита в $\tau_{\text{prod}}$. Хочемо довести, що $U$ -- відкрита в $\tau_{d}$.\\
+Нехай $x \in U$ (поки припустимо, що $U$ -- базова відкрита множина). Маємо $U = \displaystyle\prod_{i=1}^\infty U_i$, де $U_i \neq X_i$ лише для скінченного числа $i$. Нехай це будуть множини $U_{i_1},U_{i_2},\dots,U_{i_k}$ -- всі відкриті в $X_{i_p}$. Тоді для кожного існуватиме куля $B_{\rho'_{i_p}}(x_{i_p},r_{i_p}) \subset U_{i_p}$ при $p = \overline{1,k}$. Ми тепер оберемо радіус $0 < r < 1$ так, що $r \leq \dfrac{r_{i_1}}{2^{i_1}},\dots, r \leq \dfrac{r_{i_k}}{2^{i_k}}$.\\
+Ми доведемо, що відкрита куля $B_d(x;r) \subset U$. Нехай $y \in B_d(x;r)$, тобто $d(x,y) < r$. Зауважимо, що $\dfrac{\rho_{i_p}'(x_{i_p},y_{i_p})}{2^{i_p}} \leq d(x,y) < r \leq \dfrac{r_{i_p}}{2^{i_p}}$. Звідси випливає, що $\rho'_{i_p}(x_{i_p},y_{i_p}) < r_{i_p}$. Отже, $y_{i_p} \in B_{\rho'_{i_p}}(x_{i_p},r_{i_p}) \subset U_{i_p}$. Тому наша точка $y \in U$.\\
+Якщо $U \in x$ -- просто відкрита, тобто $U = \displaystyle\bigcup V$, де $V$ -- базова, то існує $V \ni x$, а далі за попереднім існує куля $B(x;r) \subset V \subset U$.
+\end{proof}
+
+\begin{remark}
+Зокрема ось така множина $[0,1]^{\aleph_0} \overset{\text{def.}}{=} \displaystyle\prod_{i \in \mathbb{N}} [0,1]$ буде метризуючим простором при метриці $d((t_i),(s_i)) = \displaystyle\sum_{i \in \mathbb{N}} \dfrac{1}{2^i} |t_i - s_i|$.
+\end{remark}
+
+\begin{definition}
+Нехай $(X,\tau)$ -- топологічний простір та $\{f_i \colon X \to [0,1] \}_{i \in I}$ -- сім'я неперервних функцій.\\
+Така сім'я \textbf{відокремлює точки від замкнених множин}, якщо
+\begin{align*}
+\forall x_0 \in X: \forall A \subset X: \text{$A$ -- замкнена та $x_0 \notin A$}: \exists f_j \in \{f_i\}: f_j(x_0) > 0,\ f_j|_A = 0
+\end{align*}
+\end{definition}
+
+\begin{lemma}
+Нехай $(X,\tau)$ -- $T_1$-простір. Припустимо, що $\{f_i \colon X \to [0,1] \}_{i \in I}$ -- сім'я функцій, що відокремлює точки від замкнених множин. Тоді відображення $f_\infty \colon X \to \displaystyle\prod_{i \in I} [0,1]$, що заданий як $f_\infty(x) = (f_i(x))_{i \in I}$, -- вкладення.
+\end{lemma}
+
+\begin{proof}
+\textit{$f_\infty$ -- неперервне відображення.}\\
+Справді, зауважимо, що $\pi_j \circ f_\infty = f_j$, де $\pi_j \colon \displaystyle\prod_{i \in I} [0,1] \to [0,1]$ -- проєкція на $j$-ту координату. Всі $f_j$ неперервні за умовою, тому зокрема й $f_\infty$.
+\bigskip \\
+\textit{$f_\infty$ -- ін'єкція.}\\
+Нехай $x,y \in X$ такі, що $x \neq y$. Хочемо довести, що $f_\infty(x) \neq f_\infty(y)$.\\
+Оскільки ми в просторі $T_1$, то $\{y\}$ -- замкнена множина. Значить, за означенням сім'ї функції, існуватиме $f_j \colon X \to [0,1]$ так, що $f_j|_{\{y\}} = 0$ та $f_j(x) > 0$. Власне, звідси $f_j(x) \neq f_j(y)$. Але тоді $f_\infty(x) \neq f_\infty(y)$, тому що щонайменше $j$-та координата вже не збігається.
+\bigskip \\
+\textit{$f_\infty(X) \cong \displaystyle\prod_{i \in I} [0,1]$.}\\
+Якщо звузити $f_\infty$ до відображення $f_\infty \colon X \to f_\infty(X)$, то отримаємо бієкцію, неперервність залишається досі. Залишилося довести, що $f_\infty^{-1}$ -- неперервне. На жаль, у явному вигляді не знайдемо функцію, але доведемо інакшим чином.\\
+Нам буде досить довести, що якщо $U$ -- відкрита в $X$, то $f_\infty(U)$ -- відкрита в $f_\infty(X)$.\\
+Нехай $x \in U$ -- відкрита. Нам треба знайти відкритий окіл $V$ точки $f_\infty(x)$, щоб $V \subset f_\infty(U)$. Оскільки $U$ -- відкрита, то $X \setminus U$ замкнена. За сім'єю існує функція $f_j \colon X \to [0,1]$ так, що $f_j|_{X \setminus U} = 0$ та $f_j(x) > 0$. Визначимо множину $V = f_\infty(X) \cap \pi_j^{-1}((0,1])$. Зауважимо, що $V$ -- відкрита множина.\\
+$V = \{f_\infty(x) \mid y \in X, \pi_j \circ f_\infty(y) > 0\} = \{f_\infty(y) \mid y \in X, f_j(y) > 0\} = \{f_\infty(y) \mid y \in U, f_j(y) > 0\} \implies V \subset f_\infty(U)$.
+\end{proof}
+
+\subsection{Доведення теореми Урисона про метризацію}
+\begin{proof}
+Нехай $\mathcal{B} = \{V_i\}_{i \in I}$ -- зліченна база. Визначимо множину $S = \{ (i,j) \mid \Cl V_i \subset V_j \}$ -- так само зліченна множина. Нехай $(i,j) \in S$. У нас множини $X \setminus V_j, \Cl V_i$ -- замкнені, тож за лемою Урисона, існує функція $f_{ij} \colon X \to [0,1]$ така, що $f|_{X \setminus V_j} = 0,\ f|_{\Cl V_i} = 1$.\\
+Стверджуємо, що $\{f_{ij}\}_{(i,j) \in S}$ буде утворювати сім'ю функцій, яка відокремлює точки від замкнених множин. Дійсно, нехай $A \subset X$ -- замкнена та $x_0 \notin A$. Значить, $X \setminus A$ -- відкрита, а тому існує $V_j \in \mathcal{B}$ так, що $x_0 \in V_j \subset X \setminus A$. Оскільки $\{x_0\}$ -- замкнена (ми в $T_1$) та $V_j$ -- відкрита, то існує відкрита множина $V_i \in \mathcal{B}$ так, що $x_0 \in V_i$ та $\Cl V_i \subset V_j$. Значить, $f_{ij}(x_0) = 1 > 0$ та $f_{ij}|_A= 0$ -- довели бажане.\\
+Застосуємо тоді лему про те, що тоді існує вкладення $X \hookrightarrow \displaystyle\prod_{(i,j) \in S} [0,1]$. Ми вже знаємо, що простір $\displaystyle\prod_{(i,j) \in S} [0,1]$ -- метризуючий (бо $S$ -- зліченна та $[0,1]$ -- метризуючий). Власне, отримаємо тоді, що $X$ -- метризуючий.
+\end{proof}
+
+\subsection{Трохи додаткової інфи}
+Теорему Урисона можна дещо послабити. Замість нормального простору можна замінити на регулярний. Причина:
+\begin{proposition}
+Нехай $(X,\tau)$ -- регулярний, second-countable топологічний простір. Тоді $(X,\tau)$ -- нормальний.
+\end{proposition}
+
+\begin{proof}
+Нехай $A,B$ -- неперетинні замкнені множини. \\
+Для кожної точки $x \in A$ множина $X \setminus B$ буде околом $x$, тому за регулярністю існує $U_x \in \mathcal{B}$ так, що $x \in U_x \subset \Cl U_x \subset X \setminus B$. Сім'я $\{U_x \mid x \in A\}$ буде зліченною (у нас second-countable простір), тому ми їх проіндексуємо, буде $\{U_i \mid i \in \mathbb{N}\}$. Тоді маємо $A \subset \displaystyle\bigcup_{i=1}^\infty U_i$ та $B \cap \Cl U_i = \emptyset$.\\
+Для кожної точки $x \in B$ аналогічно поступимо та отримаємо сім'ю $\{V_i \mid i \in \mathbb{N}\}$ так, що $B \subset \displaystyle\bigcup_{i=1}^\infty V_i$ та $A \cap \Cl V_i = \emptyset$.\\
+Визначимо нові множини $Y_i,Z_i$ таким чином: $Y_i = U_i \setminus \displaystyle\bigcup_{n=1}^i \Cl V_n$ та $Z_i = V_i \setminus \displaystyle\bigcup_{n=1}^i \Cl U_n$. Всі множини $Y_i,Z_i$ будуть відкритими. Позначимо $U = \displaystyle\bigcup_{i=1}^\infty Y_i$ та $V = \displaystyle\bigcup_{i=1}^\infty Z_i$ -- знову відкриті множини. Стверджуємо, що $U \cap V = \emptyset$, а також $U \supset A, V \supset B$ -- таким чином, ми завершимо доведення нормальності.\\
+!Припустимо $x \in U \cap V$, тоді $x \in Y_i \cap Z_j$ для деяких $(i,j)$. Не втрачаючи загальності, $i \geq j$, тому $x \in Y_i = U_i \setminus \displaystyle\bigcup_{n=1}^i \Cl V_n \subset U_i \setminus \Cl V_j$, а також $x \in Z_j \subset V_i$ -- суперечність! (при $i \leq j$ ситуація аналогічна). Значить, дійсно $U \cap V = \emptyset$.\\
+$A \subset U$, тому що $A \subset \displaystyle\bigcup_{i=1}^\infty U_i$ та $A \cap \Cl V_j = \emptyset$. Аналогічно $B \subset V$.
+\end{proof}
+
+\begin{remark}
+Я тут скористався фактом, про який я не знав.\\
+Якщо $X$ -- регулярний, то для кожної точки $x \in X$ та окола $U_x$ існуватиме замкнений окіл $V_x \subset U_x$.\\
+Дійсно, поки нехай $x \in X$ та $U_x$ -- відкритий окіл. Для $x \in X$ та замкненого $X \setminus U_x \not\ni x$ існуватимуть відкриті множини $Y \ni x,\ Z \supset X \setminus U_x$, причому $Y \cap Z = \emptyset$. Значить, $x \notin Z$, але $x \in X \setminus Z \subset U_x$.
+\end{remark}
+
+\noindent
+Отже, кожний регулярний та second-countable топологічний простір -- метризуючий.
+
+\begin{remark}
+Зворотне до теореми Урисона не працює. Тобто якщо $X$ -- метризуючий, то $X$ -- нормальний, але не обов'язково second-countable.\\
+Зокрема $(X,\tau_{\text{discr}})$ --  дискретний простір (який метризуючий та нормальний), де $X$ -- незліченна множина. Але не second-countable.
+\end{remark}
+\noindent
+Постає питання, яка теорема існує, щоб було пряме та звортне твердження.
+\begin{theorem}[Теорема Наґата-Смірнова про метризацію]
+Нехай $(X,\tau)$ -- топологічний простір.\\
+$(X,\tau)$ -- метризуючий $\iff (X,\tau)$ -- регулярний та має базу, який зліченно локально скінченний.\\
+\textit{Без доведення.}
+\end{theorem}
+
+\begin{definition}
+Нехай $(X,\tau)$ -- топологічний простір. \\
+Сім'я відкритих множин $\{U_i\}_{i \in I}$ називається \textbf{локально скінченним}, якщо
+\begin{align*}
+\forall x \in X: \exists V_x: V_x \cap U_i \neq \emptyset, \text{ де $i$ -- скінченна кількість}
+\end{align*}
+Сім'я відкритих множин $\mathcal{U} = \{U_i\}_{i \in I}$ називається \textbf{зліченно локально скінченним}, якщо
+\begin{align*}
+\mathcal{U} = \bigcup_{n=1}^\infty \mathcal{U}_n,\ \mathcal{U}_n \text{ -- локально скінченний.}
+\end{align*}
+\end{definition}
+\newpage
+
+\section{Теорема Тіхонова в загальному вигляді}
+\begin{theorem}
+Нехай $\{X_\lambda : \lambda \in I \}$ -- сім'я компактних топологічних просторів. Тоді $\displaystyle\prod_{\lambda \in I} X_\lambda$ -- компактний (добуток в сенсі product topology, але не box topology).
+\end{theorem}
+\noindent
+Перед доведенням даної теореми треба буде повчити деякі речі.
+
+\subsection{Властивість скінченного перетину}
+\begin{definition}
+Нехай $(X,\tau)$ -- топологічний простір та $\mathcal{F}$ -- набір підмножин $X$.\\
+Набір $\mathcal{F}$ має властивість \textbf{скінченного перетину}, якщо
+\begin{align*}
+\forall \{F_1,\dots,F_n\} \subset \mathcal{F}: \bigcap_{i=1}^n F_i \neq \emptyset
+\end{align*}
+Тобто для кожного скінченного піднабору перетин непорожній.\\
+Англійською кажуть, що $\mathcal{F}$ satisfies \textbf{finite intersection property} (скорочено \textbf{FIP}).
+\end{definition}
+
+\begin{theorem}
+\label{compactness_using_FIP}
+$(X,\tau)$ -- компактний $\iff$ для кожного $\mathcal{F}$ -- набору замкнених підмножин $X$, що має властивість скінченного перетину -- ми маємо $\displaystyle\bigcap_{F \in \mathcal{F}} F \neq \emptyset$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $(X,\tau)$ -- компактний. Нехай $\mathcal{F}$ -- набір замкнених підмножин $X$, що має властивість скінченного перетину.\\
+!Припустимо, що $\displaystyle\bigcap_{F \in \mathcal{F}} F = \emptyset$, це буде означати $\displaystyle\bigcup_{F \in \mathcal{F}} (X \setminus F) = X$. Отримали відкрите покриття $\{X \setminus F \mid F \in \mathcal{F}\}$, проте в силу компактності $X$ ми знайдемо скінченне підпокриття $\{X \setminus F_i \mid i = \overline{1,n}\}$, тож звідси $\displaystyle\bigcup_{i=1}^n (X \setminus F_i) = X \implies \bigcap_{i=1}^n F_i = \emptyset$. Із іншого боку, $\{F_1,\dots,F_n\} \subset \mathcal{F}$, що має властивість скінченного перетину -- суперечність!
+\bigskip \\
+\leftproof Дано: для кожного $\mathcal{F}$ -- набору замкнених підмножин $X$, що має властивість скінченного перетину -- ми маємо $\displaystyle\bigcap_{F \in \mathcal{F}} F \neq \emptyset$. Нехай маємо $\{U_i \mid i \in I\}$ -- відкрите покриття $X$, тобто $\displaystyle\bigcup_{i \in I} U_i = X \implies \bigcap_{i \in I} (X \setminus U_i) = \emptyset$. Ми маємо набір замкнених підмножин $X$, як-от $\{X \setminus U_i \mid i \in I\}$, але це не буде мати властивість скінченного перетину (просто тому що перетин цих множин порожній, а також за умовою дано). Отже, існує набір $\{X \setminus U_1, \dots, X \setminus U_n\}$, для яких $\displaystyle\bigcap_{i=1}^n (X \setminus U_i) = \emptyset \implies \bigcup_{i=1}^n U_i = X$ -- знайшли скінченне підпокриття $\{U_1,\dots,U_n\}$.
+\end{proof}
+
+\begin{definition}
+Нехай $(X,\tau)$ -- топологічний простір та $\mathcal{C}$ -- набір підмножин $X$, що має властивість скінченного перетину.\\
+Набір $\mathcal{C}$ називається \textbf{максимальним, що має властивість скінченного перетину}, якщо
+\begin{align*}
+\forall \mathcal{A} \text{ -- набір підмножин $X$, що має скінченний перетин}: \mathcal{A} \supset \mathcal{C} \implies \mathcal{A} = \mathcal{C}
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+\label{maximal_collection_with_FIP}
+Для кожного набору підмножин $\mathcal{C}$, із властивістю скінченного перетину, існує максимальний набір $\mathcal{A}$, причому $\mathcal{A} \supset \mathcal{C}$.
+\end{proposition}
+\noindent
+Перед доведенням варто згадати лему Цорна. Там потрібна пара $(P, \leq)$, що формує частково впорядковану множину.\\
+У контексті даного твердження в нас буде пара $(T, \subset)$. У цьому випадку $T$ -- це сім'я всіх наборів підмножин $X$ з властивістю скінченного перетину, яка буде мітстити $\mathcal{C}$. У нас $T \neq \emptyset$, оскільки $\mathcal{C} \in T$.
+
+\begin{proof}
+Отже, нехай $A$ -- лінійно впорядкована підмножина $T$. Хочемо довести, що $A$ має верхню межу.\\
+\textit{$\displaystyle\bigcup_{\mathcal{F} \in A} \mathcal{F}$ -- верхня межа для $A$.}\\
+Нам треба довести, що $\displaystyle\bigcup_{\mathcal{F} \in A} \mathcal{F} \in T$, а що саме:\\
+I. \textit{$\displaystyle\bigcup_{\mathcal{F} \in A} \mathcal{F}$ має властивість скінченного перетину.}\\
+Дійсно, нехай взяли $F_1,\dots,F_n \in \displaystyle\bigcup_{\mathcal{F} \in A} \mathcal{F}$, тоді існують набори $\mathcal{F}_1,\dots,\mathcal{F}_n$, для яких $F_1 \in \mathcal{F}_i, i = \overline{1,n}$. Множина $A$ в нас лінійно впорядкована, тому серед цих $\mathcal{F}_i$ знайдеться найбільший набір, тобто $\mathcal{F}_i \subset \mathcal{F}_N$ для всіх $i = \overline{1,n}$ та деякого $N = \overline{1,n}$. Звідси $F_i \in \mathcal{F}_n$ для всіх $i = \overline{1,n}$, але оскільки $\mathcal{F}_N$ має властивість скінченного перетину, то $\displaystyle\bigcap_{i=1}^n F_i \neq \emptyset$.\\
+II. \textit{$\displaystyle\bigcup_{\mathcal{F} \in A} \mathcal{F} \supset \mathcal{C}$.}\\
+Тут все зрозуміло, оскільки кожний $\mathcal{F} \in A \subset T$, а тому звідси $\mathcal{F} \supset \mathcal{C}$.\\
+Нарешті, $\displaystyle\bigcup_{\mathcal{F} \in A} \mathcal{F}$ обмежує множину зверху. Справді, для всіх $\tilde{\mathcal{F}} \in A$ ми маємо $\tilde{\mathcal{F}} \subset \displaystyle\bigcup_{\mathcal{F} \in A } \mathcal{F}$.\\
+Отже, $A \subset T$ містить верхню грань, а тому за лемою Цорна, $T$ містить максимальний елемент.
+\end{proof}
+
+\subsection{Фільтри}
+\begin{definition}
+Нехай $(X,\tau)$ -- топологічний простір та $\mathcal{F}$ -- набір підмножин $X$.\\
+Набір $\mathcal{F}$ називається \textbf{фільтром}, якщо
+\begin{align*}
+\forall \{F_1,\dots,F_n\} \subset \mathcal{F}: \bigcap_{i=1}^n F_i \in \mathcal{F} \\
+\emptyset \notin \mathcal{F},\ X \in \mathcal{F} \\
+B \subset A \subset X, B \in \mathcal{F} \implies A \in \mathcal{F}
+\end{align*}
+Тобто фільтр означає, що всі скінченні перетини містяться в наборі, $X$ міститься та $\emptyset$ не міститься в наборі, а також є замкненою згори (так текстово називається третя властивість, англійською це називають closed upwards).
+\end{definition}
+
+\begin{remark}
+Якщо $\mathcal{F}$ -- фільтр, то він задовольняє властивості скінченного перетину.\\
+Дійсно, беремо $\{F_1,\dots,F_n\} \subset \mathcal{F}$, тоді за першою властивістю, $\displaystyle\bigcap_{i=1}^n F_i \in \mathcal{F}$, а за другою властивістю, $\emptyset \notin \mathcal{F}$. Тому автоматично $\displaystyle\bigcap_{i=1}^n F_i \neq \emptyset$.
+\end{remark}
+
+\begin{theorem}
+\label{maximal_FIP_is_filter}
+Нехай $(X,\tau)$ -- топологічний простір та $\mathcal{F}$ -- максимальний набір підмножин $X$, що має властивість скінченного перетину. Тоді $\mathcal{F}$ -- фільтр.
+\end{theorem}
+
+\begin{proof}
+Нехай $\{F_1,\dots,F_n\} \subset \mathcal{F}$, тоді за властивістю скінченного перетину $\displaystyle\bigcap_{i=1}^n F_i \neq \emptyset$. Зауважимо, що набір $\displaystyle\left\{ \bigcap_{i=1}^n F_i \right\} \cup \mathcal{F}$ теж буде задовольняти властивості скінченного перетину. У силу максимальності $\mathcal{F}$ ми будемо мати $\mathcal{F} = \displaystyle\left\{ \bigcap_{i=1}^n F_i \right\} \cup \mathcal{F}$, внаслідок чого $\displaystyle \bigcap_{i=1}^n F_i \in \mathcal{F}$.\\
+Ясно, що $\emptyset \notin \mathcal{F}$, оскільки $\mathcal{F}$ має властивість скінченного перетину. Також $X \in \mathcal{F}$, оскільки $X \cap F = F \neq \emptyset$ для всіх $F \in \mathcal{F}$, тому набір $\mathcal{F} \cup \{X\}$ теж буде мати властивість скінченного перетину, а далі аналогічно за максимальністю отримаємо бажане.\\
+Нехай тепер $B \subset A \subset X$ та $B \in \mathcal{F}$, тоді звідси $B \cap F \subset A \cap F \subset X \cap F = F$ для всіх $F \in \mathcal{F}$. За властивістю скінченного перетину $B \cap F, F \neq \emptyset$, а тому звідси $A \cap F \neq \emptyset$, а далі аналогічними міркуваннями (як було з $X \in \mathcal{F}$) отримаємо $A \in \mathcal{F}$.
+\end{proof}
+
+\begin{theorem}
+\label{in_maximal_FIP_when_does_set_belong_to_collection}
+Нехай $(X,\tau)$ -- топологічний простір та $\mathcal{F}$ -- максимальний набір підмножин $X$, що має властивість скінченного перетину; також $A \subset X$.\\
+$A \in \mathcal{F} \iff \forall F \in \mathcal{F}: A \cap F \neq \emptyset$.
+\end{theorem}
+
+\begin{proof}
+\rightproof \textit{Усе зрозуміло.}
+\bigskip \\
+\leftproof Дано: $\forall F \in \mathcal{F}: A \cap F \neq \emptyset$. Нам залишилося довести, що $\{A\} \cup \mathcal{F}$ також має властивість скінченного перетину, а там вже отримаємо $A \in \mathcal{F}$. \\
+Дійсно, якщо $F_1,\dots,F_n \in \mathcal{F}$, то ми маємо $\displaystyle\bigcap_{i=1}^n F_i \in \mathcal{F}$ в силу фільтра, тому $\displaystyle\bigcap_{i=1}^n F_i \neq \emptyset$, внаслідок чого $\displaystyle\left( \bigcap_{i=1}^n F_i \right) \cap A \neq \emptyset$.
+\end{proof}
+
+\subsection{Доведення теореми Тіхонова}
+\begin{proof}
+Нехай $\mathcal{C}$ -- набір замкнених підмножин $\displaystyle\prod_{\lambda \in I} X_\lambda$, що має властивість скінченного перетину. Хочемо довести, що $\displaystyle\bigcap_{U \in \mathcal{C}} U \neq \emptyset$, за іншим означення компактності.\\
+Розширимо $\mathcal{C}$ до максимального набору $\mathcal{F}$ за \prpref{maximal_collection_with_FIP} (не забуваємо, що $\mathcal{F}$ є фільтром за \thref{maximal_FIP_is_filter}). У силу того, що $\mathcal{F} \supset \mathcal{C}$, то звідси зрозуміло цілком, що $\displaystyle\bigcap_{U \in \mathcal{C}} U \supset \bigcap_{U \in \mathcal{F}} U$. Насправді, ми маємо $\displaystyle\bigcap_{U \in \mathcal{C}} U \supset \bigcap_{U \in \mathcal{F}} \Cl(U)$.
+%in case I forget why
+\iffalse
+Дійсно, $\displaystyle\bigcap_{U \in \mathcal{F}} \Cl U = \bigcap_{U \in \mathcal{F} \setminus \mathcal{C}} \Cl U \cap \bigcap_{U \in \mathcal{C}} \Cl U \subset \bigcap_{U \in \mathcal{C}} \Cl U = \bigcap_{U \in \mathcal{C}} U$.
+\fi
+Отже, нам буде досить довести, що $\displaystyle\bigcap_{U \in \mathcal{F}} \Cl(U) \neq \emptyset$.\\
+Позначимо $\mathcal{F}_\lambda = \{ \pi_\lambda(U) : U \in \mathcal{F} \}$. Такий набір множин буде мати властивість скінченного перетину. Справді, $U_1 \cap U_2 \neq \emptyset$ (бо $\mathcal{F}$ має властивість скінченного перетину), а звідси $\pi_\lambda(U_1) \cap \pi_\lambda(U_2) \supset \pi_\lambda(U_1 \cap U_2) \neq \emptyset$. Звідси випливає, що набір $\{\Cl(\pi_\lambda(U)) : U \in \mathcal{F}\}$ буде також мати властивість скінченного перетину (просто тому що $\Cl(\pi_\lambda(U)) \supset \pi_\lambda(U) \neq \emptyset$). Оскільки, за умовою, $X_\lambda$ -- компакт, то за \thref{compactness_using_FIP} $\displaystyle\bigcap_{U \in \mathcal{F}} \Cl(\pi_\lambda(U)) \neq \emptyset$. Тож можемо обрати точку $x_\lambda \in \displaystyle\bigcap_{U \in \mathcal{F}} \Cl(\pi_\lambda(U))$.\\
+Ми сформували точку $\displaystyle\prod_{\lambda \in I} X_\lambda \ni x = (x_\lambda : \lambda \in I)$. Залишилося довести, що $x \in \displaystyle\bigcap_{U \in \mathcal{F}} \Cl (U)$.\\
+Тут буде кілька етапів, щоб завершити доведення.\\
+Спочатку оберемо $S = \pi_\lambda^{-1}(U_\lambda)$ -- передбазову відкриту множину таким чином, щоб $S \ni x$. Ми доведемо, що $S \in \mathcal{F}$. Дійсно, за умовою, $x \in \pi_\lambda^{-1}(U_\lambda) \implies x_\lambda \in U_\lambda$. За вибором точок $x_\lambda$, ми маємо $x_\lambda \in \displaystyle\bigcap_{U \in \mathcal{F}} \Cl(\pi_\lambda(U))$. Значить, для всіх $U \in \mathcal{F}$ маємо $x \in \Cl(\pi_\lambda(U))$, а це означає, що для кожного відкритого околу $V$ точки $x$ маємо $V \cap \pi_\lambda(U) \neq \emptyset$ для всіх $U \in \mathcal{F}$. Зокрема $U_\lambda$ -- відкритий окіл $x$, таким чином $U_\lambda \cap \pi_\lambda(U) \neq \emptyset$ для всіх $U \in \mathcal{F} \implies \pi_\lambda^{-1}(U_\lambda) \cap U \neq \emptyset$ для всіх $U \in \mathcal{F}$, внаслідок чого $\pi_\lambda^{-1}(U_\lambda) \in \mathcal{F}$ за \thref{in_maximal_FIP_when_does_set_belong_to_collection}.\\
+Тепер оберемо $B$ -- базову відкриту множину таким чином, щоб $B \ni x$. Але оскільки $B = \displaystyle\bigcap_{i=1}^n S_i$, маємо передбазові множини $S_i \ni x$, тоді всі $S_i \in \mathcal{F}$, зокрема $B \in \mathcal{F}$.\\
+Тепер нашо ми доводили це? Тому що, взявши будь-яку базову відкриту множину $B \ni x$, отримаємо $B \in \mathcal{F} \implies B \cap U \neq \emptyset$ для всіх $U \in \mathcal{F}$. Візьмемо будь-який відкритий окіл $V_x$ точки $x$, тоді звідси $V_x = \displaystyle\bigcup B$, де $B$ -- базові відкриті множини. Але тоді $V_x \cap U = \displaystyle\bigcup B \cap U \neq \emptyset$ для всіх $U \in \mathcal{F}$. Отже, $x \in \Cl(U)$ для кожного $U \in \mathcal{F}$.
+\end{proof}
+
+\begin{remark}
+Міні-епілог. Виявляється, що ми не зможемо довести теорему Тіхонова без використання леми Цорна. Або можемо, але тоді будуть використані інші доволі специфічні теореми (наприклад, аксіома вибору). Якщо зробити \textcolor{red}{\href{https://www.math.toronto.edu/~herzig/Tychonoff-lecture.pdf}{*клік*}}, там в четвертому розділі можна про це зауваження прочитати детальніше.
+\end{remark}
+\newpage
+
+\section{Деякі топологічні твердження}
+\begin{lemma}[Лема трубки]
+Задані $(X,\tau),\ (Y,\tilde{\tau})$ -- топологічні простори, причому $Y$ -- компактний, $x_0 \in X$. Нехай $N$ -- відкрита в $X \times Y$ так, що $\{x_0\} \times Y \subset N$. Тоді існує відкритий окіл $W$ точки $x_0$, для якого $\{x_0\} \times Y \subset W \times Y \subset N$.
+\end{lemma}
+
+\begin{proof}
+Оскільки $N$ -- відкритий в $X \times Y$, то звідси $N = \displaystyle\bigcup U \times W$, де $U,W$ -- відповідно відкриті множини $X,Y$. Оскільки $\{x_0\} \times Y$ -- компакт (тому що $\{x_0\} \times Y \cong Y$ та $Y$ -- компакт), то існує скінченне підпокриття, тоді $\{x_0\} \times Y \subset \displaystyle\bigcup_{i=1}^n U_i \times W_i$. Надалі вважаємо, що $(U_i \cap W_i) \cap (\{x_0\} \times Y) \neq \emptyset$ (якщо такий $U_i \cap W_i$ існує, що не перетинається, то ми його можемо нафіг викинути зі скінченного набору, все одно формуватиме підпокриття).\\
+Позначимо $W = \displaystyle\bigcap_{i=1}^n W_i$, що є відкритим околом точки $x_0$ (за останнім зауваженням). Стверджуємо, що $W \times Y \subset N$. Припустимо, що $(x,y) \in W \times Y$. Нам вже відомо, що точка $(x_0,y) \in U_i \times W_i$, тому звідси $y \in V_i$. Також $x \in W = \displaystyle\bigcap_{i=1}^n U_i \subset U_i$, внаслідок чого $(x,y) \in U_i \times W_i \subset N$.
+\end{proof}
+
+\begin{remark}
+Лему трубки можна було використати в теоремі Тіхонова, коли мали дві компактні множини.
+\end{remark}
 \newpage
 
 \section*{Використані джерела}
 \begin{enumerate}
 \item \href{https://www.maths.ed.ac.uk/~tl/topology/topology_notes.pdf}{Tom Leinster, General Topology, 2014-2015}
+\item \href{https://www.math.toronto.edu/~herzig/Tychonoff-lecture.pdf}{Micheal Pawliuk, The Tychonoff Theorem, 2011}
+\item \href{https://cronokirby.com/posts/2021/02/tychonoff-theorem-and-zorns-lemma/}{Tychonoff's Theorem and Zorn's Lemma, 2021}
+\item \href{https://www.math.auckland.ac.nz/~gauld/750-05/section3.pdf}{3 COUNTABILITY AND CONNECTEDNESS AXIOMS}
+\item \href{https://www.youtube.com/watch?v=6yusB-muawU&list=PLfKcn7LuYa_Kr3_aWePrYufu7MMYWYM5-&index=1&ab_channel=mth309}{MTH 427/527 Introduction to General Topology at the University at Buffalo}
 \end{enumerate}
 
 \iffalse
