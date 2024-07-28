@@ -118,6 +118,15 @@
 
 \newcommand\Norm[1]{\left\lVert#1\right\rVert}
 \DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Cl}{Cl}
+
+\newcommand\thref[1]{\textbf{Th.~\ref{#1}}}
+\newcommand\defref[1]{\textbf{Def.~\ref{#1}}}
+\newcommand\exref[1]{\textbf{Ex.~\ref{#1}}}
+\newcommand\prpref[1]{\textbf{Prp.~\ref{#1}}}
+\newcommand\rmref[1]{\textbf{Rm.~\ref{#1}}}
+\newcommand\lmref[1]{\textbf{Lm.~\ref{#1}}}
+\newcommand\crlref[1]{\textbf{Crl.~\ref{#1}}}
 
 \begin{document}
 
@@ -125,39 +134,209 @@
 \tableofcontents
 \newpage
 
+\iffalse %I really don't know if I need to rewrite topology
+\section{Деякі відомості з топології}
+\subsection{Інше означення неперервності}
+\begin{proposition}
+Задано функцію $f \colon \mathbb{R}^n \to \mathbb{R}^n$.\\
+$f \in C(\mathbb{R}^n) \iff \forall U$ -- відкрита: $f^{-1}(U)$ -- відкрита.
+\end{proposition}
+
+\begin{proof}
+\rightproof Дано: $f \in C(\mathbb{R}^n)$. Оберемо $U$ відкриту множину. Тепер оберемо точку $x_0 \in f^{-1}(U) \implies f(x_0) \in U$. Точка $f(x_0)$ -- внутрішня, тому звідси існує окіл $U_\varepsilon(f(x_0)) \subset U$. Водночас для цього $\varepsilon > 0$ існує $\delta > 0$ такий, що $\forall x \in U_\delta(x_0) \implies f(x) \in U_\varepsilon(f(x_0))$, тобто інакше $f(U_\delta(x_0)) \subset U_\varepsilon(f(x_0))$. Звідси випливає, що $U_\delta(x_0) \subset f^{-1}(U_\varepsilon (f(x_0))) \subset f^{-1}(U)$. Отже, $f^{-1}(U)$ -- відкрита.
+\bigskip \\
+\leftproof Дано: $\forall U$ -- відкрита: $f^{-1}(U)$ -- відкрита. Нехай $x_0 \in \mathbb{R}^n$ та $\varepsilon > 0$ задані. Розглянемо відкритий окіл $U_\varepsilon(f(x_0))$. Оскільки це відкрита множина, то $f^{-1}(U_\varepsilon(f(x_0)))$ -- також відкрита множина. Оскільки $x_0 \in f^{-1}(U_\varepsilon(f(x_0)))$, то тоді існує окіл $U_\delta \subset f^{-1}(U_\varepsilon(f(x_0))) \implies f(U_\delta) \subset U_\varepsilon(f(x_0))$. Це вкладення можна переписати так: існує $\delta > 0$ так, що $\forall x \in \mathbb{R}^n: \|x - x_0 \| < \delta \implies \|f(x) - f(x_0)\| < \varepsilon$. Це означає неперервність в точці $x_0$.
+\end{proof}
+
+\begin{proposition}
+Задано функцію $f \colon \mathbb{R}^n \to \mathbb{R}^n$.\\
+$f \in C(\mathbb{R}^n) \iff \forall V$ -- замкнена: $f^{-1}(V)$ -- замкнена.\\
+\textit{Вказівка: $V$ -- замкнена, тобто $\mathbb{R}^n \setminus V$ -- відкрита.}
+\end{proposition}
+
+\subsection{Корисні леми}
+\begin{lemma}
+Для всіх $r \in [0,1] \cap \mathbb{Q}$ задамо відкриті множини $V_r \subset \mathbb{R}^n$, для яких виконується $\Cl(V_r) \subset V_{r'}$ при $r < r'$. Тоді існує функція $f \colon \mathbb{R}^n \to [0,1],\ f \in C(\mathbb{R}^n)$, для якої $f(\vec{x}) = 0, x \in V_0$ та $f(\vec{x}) = 1, x \notin V_1$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (6,4) node[anchor = north east] {$X$};
+\filldraw[fill = red!0, draw = red] (0.5,0.2) rectangle (5,3.8) node[scale=0.6, anchor = north east]{$V_{1}$};
+\filldraw[fill = red!20, draw = red] (0.8,0.5) rectangle (4.2,3.5) node[scale=0.6, anchor = north east]{$V_{8/9}$};
+\filldraw[fill = red!40, draw = red] (1,1.3) rectangle (4,3.1) node[scale=0.6, anchor = north east]{$V_{3/5}$};
+\filldraw[fill = red!60, draw = red] (1.5,1.5) rectangle (3.5,3) node[scale=0.6, anchor = north east]{$V_{1/2}$};
+\filldraw[fill = red!80, draw = red] (2,1.7) rectangle (2.5,2.5) node[scale=0.6, anchor = north east]{$V_0$};
+\end{tikzpicture}
+\caption*{Схематична картина умови $\Cl(V_r) \subset V_{r'}$ при $r < r'$.}
+\end{figure}
+\end{lemma}
+
+\begin{proof}
+Визначимо функцію $f \colon \mathbb{R}^n \to [0,1]$ ось таким чином: $f(\vec{x}) = \begin{cases} 1, & \vec{x} \notin V_1 \\ \inf_{\vec{x} \in V_r} \{r\}, & \vec{x} \in V_1 \end{cases}$. \\
+Зауважимо, що в нашому випадку, що при $\vec{x} \in V_0$ маємо $f(\vec{x}) = 0$. Дійсно, оскільки $\vec{x} \in V_0$, то звідси $\vec{x} \in V_r, \forall r \in [0,1] \cap \mathbb{Q}$, найменше можливе значення -- це нуль. Тож звідси $f(\vec{x}) = 0$.
+Ми спочатку доведемо, що прообрази $f^{-1}([0,a))$ та $f^{-1}((a,1])$ будуть відкритими для кожного $a \in [0,1]$. Множини $[0,a),(a,1]$ є відкритими на відрізку $[0,1]$.\\
+$f^{-1}([0,a)) = \displaystyle\bigcup_{r < a} V_r$. \\
+Дійсно, маємо $x \in f^{-1}([0,a)) \iff f(x) < a \iff \displaystyle\inf_{x \in V_r} \{r\} < a \iff x \in V_r$ для деякого $r < a$.\\
+Ми отримали, що $f^{-1}([0,a))$ -- відкрита як зліченне об'єднання відкритих.\\
+$f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$.\\
+Маємо $x \in f^{-1}((a,1]) \implies a < f(x) \leq 1 \implies x \notin V_r$ для деякого $r > a$, але тоді $x \notin \Cl(V_{r'})$ для $r' < r$ (ми можемо знайти $r'$ так, щоб $r' \in (a,r)$). Тобто $x \in X \setminus \Cl(V_{r'})$ при деякому $r' > a$.\\
+Якщо $x \notin \Cl(V_r)$ при деякому $r > a$, то отримаємо $f(x) > a$. Адже якби $f(x) \leq a$, то $x \in V_{r'}$ при $r' \leq a < r$, але тоді $\Cl(V_{r'}) \subset V_r \subset \Cl(V_r)$. Таким чином, $f(x) > a \implies x \in f^{-1}((a,1])$.\\
+Оберемо довільний відкритий інтервал $(a,b) \subset [0,1]$. Тоді звідси $(a,b) = [0,b) \cap (a,1]$, а далі прообраз $f^{-1}((a,b)) = f^{-1}([0,b)) \cap f^{-1}((a,1])$ буде відкритою.\\
+Якщо $U$ -- довільна відкрита на $[0,1]$, то звідси $U = \displaystyle\bigcup (a,b) \cup \displaystyle\bigcup [0,c) \cup \displaystyle\bigcup (d,1]$, тому прообраз\\
+$f^{-1}(U) = \displaystyle\bigcup f^{-1}((a,b)) \cup \bigcup f^{-1}([0,c)) \cup \bigcup f^{-1}((d,1])$ -- відкрита.
+\end{proof}
+
+\begin{lemma}
+Задано $(X,\tau)$ -- нормальний топологічний простір. Припустимо, що $A$ -- замкнена та $U$ -- відкрита, де $A \subset U$. Тоді існує $V$ -- відкрита множина, для якої $A \subset V, \Cl(V) \subset U$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (2,1) node[anchor = north east] {$A$};
+\draw[dashed] (-1,-1) rectangle (3,2) node[anchor = north east] {$U$};
+\draw[dashed,red] (1,0.5) circle (1.4cm) node at (1,1.5) {$V$};
+\end{tikzpicture}
+\caption*{Тобто між замкненою та відкритою множинах можна підібрати проміжну відкриту множину, яка містить замкнену, а замикання міститься в відкритій.}
+\end{figure}
+\end{lemma}
+
+\begin{proof}
+Оберемо $A, X \setminus U$ -- обидва замкнені множини. За нормальністю, існують відкриті множини $V,W$, що неперетинні, для яких $V \supset A, W \supset X \setminus U$. Тобто $V \supset A$ та $X \setminus W \subset U$. Із того, що $V,W$ -- неперетинні, тобто $V \cap W = \emptyset$, випливає $V \subset X \setminus W$. Маємо ланцюг $A \subset V \subset X \setminus W \subset U$. Оскільки $V \subset X \setminus W$, то тоді й $\Cl(V) \subset \Cl(X \setminus W) = X \setminus W$. Власне, звідси довели: $A \subset V, \Cl(V) \subset U$.
+\end{proof}
+
+\begin{theorem}[Лема Урисона]
+Нехай $A,B \subset \mathbb{R}^n$ -- замкнені та неперетинні множини. Тоді існує функція $f \colon \mathbb{R}^n \to [0,1],\ f \in C(\mathbb{R}^n)$, для якої $f(\vec{x}) = 0, \vec{x} \in A$ та $f(\vec{x}) = 1, \vec{x} \in B$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw (0,0) rectangle (8,6) node[anchor = north east] {$\mathbb{R}^n$};
+\filldraw[fill = red!0, draw = red] (0.2,0.2) rectangle (4.5,4.5) node[anchor = north east] {$V_{1}$};
+\filldraw[fill = red!20, draw = red] (0.5,0.4) rectangle (4,4) node[anchor = north east] {$V_{8/9}$};
+\filldraw[fill = red!40, draw = red] (0.6,0.6) rectangle (3.3,3.4) node[anchor = north east] {$V_{3/5}$};
+\filldraw[fill = red!60, draw = red] (0.8,0.7) rectangle (2.8,2.9) node[anchor = north east] {$V_{1/2}$};
+\filldraw[fill = red!80, draw = red] (0.9,0.9) rectangle (2.4,2.4) node[anchor = north east] {$V_0$};
+\filldraw[fill = blue, draw = black] (1,1) rectangle (2,2) node[anchor = north east] {$A$};
+\filldraw[fill = blue, draw = black] (5,4) rectangle (7,5) node[anchor = north east] {$B$};
+\end{tikzpicture}
+\caption*{Схематичний план доведення.}
+\end{figure}
+\end{theorem}
+
+\begin{proof}
+Ідея доведення полягає в наступному: ми хочемо побудувати відкриті множини $V_r \subset \mathbb{R}^n, r \in [0,1] \cap \mathbb{Q}$, що задовольняє таким вимогам:\\
+1) $A \subset V_0$;\\
+2) $B \subset \mathbb{R}^n \setminus V_1$;\\
+3) $r < r' \implies \Cl(V_r) \subset V_{r'}$.\\
+Оскільки $[0,1] \cap \mathbb{Q}$ -- зліченна множина, то ми маємо послідовність $r_1,r_2,r_3,\dots,r_n,\dots$ різних раціональних чисел. Не втрачаючи загальності, $r_1 = 1, r_2 = 0$, а всі решта $0 < r_n < 1$.\\
+\textit{База індукції} (їх будуть дві): треба побудувати $V_{r_1} = V_1$ та $V_{r_2} = V_0$. Покладемо $V_1 = \mathbb{R}^n \setminus B$ -- уже відкрита. Оскільки $A \subset \mathbb{R}^n, V_1 \subset \mathbb{R}^n$ -- одна замкнена, інша відкрита, то за другою лемою, існує відкрита множина $V_0$, для якої $A \subset V_0$ та $\Cl(V_0) \subset V_1$. Уже маємо $V_{r_1},V_{r_2}$, які задовольняють вимогам 1),2),3).\\
+Для всіх інших $V_{r_n}$ нам досить буде довести 3).\\
+\textit{Припущення індукції}: $V_{r_3},\dots,V_{r_n}$ побудовані так, що задовольняють нашим умовам вище.\\
+\textit{Крок індукції}: побудуємо $V_{r_{n+1}}$. Із нашої послідовності $r_1,r_2,\dots,r_n$ оберемо два якнайближчих числа $r_i,r_j$, щоб $r_i < r_{n+1} < r_j$. Нам досить довести, що $\Cl(V_{r_i}) \subset V_{r_{n+1}},\ \Cl(V_{r_{n+1}}) \subset V_{r_j}$.\\
+Зауважимо, що $\Cl(V_{r_i})$ та $V_{r_j}$ -- відповідно замкнена та відкрита множини. Тоді за другою лемою, існує відкрита множина (яку як раз-таки позначимо й за $V_{r_{n+1}}$), для якої справджуються ці два вкладення. \\
+МІ доведено.\\
+Значить, за першою лемою, існує неперервна функція $f \colon \mathbb{R}^n \to [0,1]$, для якої $f(\vec{x}) = 0, \vec{x} \in V_0$ та $f(\vec{x}) = 1, \vec{x} \notin V_1$. За умовами 1),2), отримаємо $f(\vec{x}) = 0, \vec{x} \in A$ та $f(\vec{x}) = 1, \vec{x} \in B$.
+\end{proof}
+
+\begin{remark}
+Лему Урисона можна дещо узагальнити. Якщо маємо $A,B \subset \mathbb{R}^n$ -- неперетинні замкнені, то ми можемо навіть підібрати функцію $g \colon \mathbb{R}^n \to [a,b]$, для якої $f(\vec{x}) = a, \vec{x} \in A$ та $f(\vec{x}) = b, \vec{x} \in B$. Тобто не обов'язково на відрізку $[0,1]$, а на будь-якому.\\
+\textit{Вказівка: $h \colon [0,1] \to [a,b],\ h(\vec{x}) = a + (b-a)\vec{x}$.}
+\end{remark}
+
+\subsection{Теорема Тітце}
+\begin{lemma}
+Задана $A \subset \mathbb{R}^n$ -- замкнена множина та $f \colon A \to \mathbb{R}$ -- неперервна функція, причому $\exists C > 0: \forall \vec{x} \in A: |f(\vec{x})| \leq C$. Тоді існує неперервна функція $g \colon \mathbb{R}^n \to \mathbb{R}$, для якої $\forall \vec{x} \in \mathbb{R}^n: |g(\vec{x})| \leq \dfrac{1}{3}C$ та $\forall \vec{x} \in A: |f(\vec{x}) - g(\vec{x})| \leq \dfrac{2}{3}C$.
+\end{lemma}
+
+\begin{proof}
+Розглянемо прообрази $Y = f^{-1}\left(\left[\dfrac{1}{3}C,C\right]\right)$ та $Z = f^{-1}\left(\left[-C, -\dfrac{1}{3}C \right]\right)$. Обидві множини $Y,Z$ -- замкнені, оскільки в прообраз (неперервної функції) передаємо замкнені множини в $\mathbb{R}$. Також оскільки ці відрізки неперетинні, то $Y,Z$ також неперетинні. Значить, за лемою Урисона (трошки в загальній формі), існує функція $g \colon \mathbb{R}^n \to \left[-\dfrac{1}{3}C, \dfrac{1}{3}C\right]$, де $g|_Y = \dfrac{1}{3}C$ та $g|_Z = -\dfrac{1}{3}C$. Зважаючи на область значень, маємо $|g(\vec{x})| \leq \dfrac{1}{3}C$. \\
+Залишилося довести, що $|f(\vec{x}) - g(\vec{x})| \leq \dfrac{2}{3}C$. Розглянемо три випадки:\\
+$\vec{x} \in Y$, тоді $g(\vec{x}) = \dfrac{1}{3}C$ та $\dfrac{1}{3}C \leq f(\vec{x}) \leq C$, тож звідси $0 \leq f(\vec{x}) - g(\vec{x}) \leq \dfrac{2}{3}C$;\\
+$\vec{x} \in Z$, тоді $g(\vec{x}) = -\dfrac{1}{3}C$ та $-C \leq f(\vec{x}) \leq -\dfrac{1}{3}C$, тож звідси $-\dfrac{2}{3}C \leq f(\vec{x}) - g(\vec{x}) \leq 0$;\\
+$\vec{x} \notin Y \sqcup Z$, тоді $|f(\vec{x})| \leq \dfrac{1}{3}C$ та $|g(\vec{x})| \leq \dfrac{1}{3}C$, тож за нерівністю трикутника $|f(\vec{x}) - g(\vec{x})| \leq \dfrac{2}{3}C$.
+\end{proof}
+
+\begin{theorem}[Теорема Тітце]
+Задана $A \subset \mathbb{R}^n$ -- замкнена множина та $f \colon A \to [a,b]$ -- неперервна функція. Тоді існує неперервна функція $\overline{f} \colon \mathbb{R}^n \to [a,b]$ -- розширення $f$, тобто $\overline{f}|_{A} = f$.
+\end{theorem}
+
+\begin{proof}
+За умовою, функція $f$ повертає значення відрізка $[a,b]$, тому маємо $\forall \vec{x} \in A: |f(\vec{x})| \leq C$. Ми стверджуємо, що для кожного $n \in \mathbb{N}$ існує неперервна функція $g_n \colon X \to \mathbb{R}$, що задовольняє таким умовам:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\forall \vec{x} \in X: |g_n(\vec{x})| \leq \dfrac{1}{3} \left( \dfrac{2}{3}\right)^{n-1} C$;
+\item $\forall \vec{x} \in A: \displaystyle\left| f(\vec{x}) - \sum_{k=1}^n g_k(\vec{x}) \right| \leq \left( \dfrac{2}{3} \right)^n C$.
+\end{enumerate}
+\textit{База індукції}: при $n = 1$ така функція $g_1$ існує за попередньою лемою.\\
+\textit{Припущення індукції}: уже побудовані функції $g_1,\dots,g_n$, що задовольняють вимогам вище.\\
+\textit{Крок індукції}: позначмио функцію $\varphi(\vec{x}) = \displaystyle f(\vec{x}) - \sum_{k=1}^n g_k(\vec{x})$. Маємо функцію $\varphi \colon A \to \mathbb{R}$, яка неперервна (як сума неперервних) та обмежена ось так: $\forall \vec{x} \in A: |\varphi(\vec{x})| \leq \left( \dfrac{2}{3} \right)^n C$. Звідси за лемою вище існує функція $g_{n+1} \colon X \to \mathbb{R}$, що неперервна та задовольняє оцінкам $|g_{n+1}(\vec{x})| \leq \dfrac{1}{3} \left[ \left(\dfrac{2}{3}\right)^n C \right]$ та $|\varphi(\vec{x}) - g_{n+1}(\vec{x})| = \displaystyle\left| f(\vec{x}) - \sum_{k=1}^{n+1} g_k(\vec{x}) \right| \leq \left( \dfrac{2}{3} \right)^{n+1}C$.\\
+МІ доведено. \\
+Тепер визначимо функцію $\overline{f}_{\infty} \colon X \to \mathbb{R}$ ось таким чином: $\overline{f}_\infty(\vec{x}) = \displaystyle\sum_{k=1}^\infty g_k(\vec{x})$. Дана функція визначена коректно (тобто ряд при кожному $\vec{x} \in \mathbb{R}^n$ збіжний в силу оцінки $|g_n(\vec{x})| \leq \dfrac{1}{3} \left( \dfrac{2}{3}\right)^{n-1}C$; навіть рівномірно збіжний ряд за мажорантою Ваєрштраса). \\
+Доведемо, що дана функція буде неперервною. Для цього позначимо $\overline{f}_n(\vec{x}) = \displaystyle\sum_{k=1}^n g_k(\vec{x})$; ці функції є неперервними як сума неперервних. Далі зазначимо, що $\overline{f}_n$ збігається рівномірно до $\overline{f}_\infty$ в силу рівномірної збіжності ряду. Отже, $\overline{f}_\infty$ буде точно неперервною.\\
+Причому зазначимо, що $\forall \vec{x} \in A: \overline{f}_\infty(\vec{x}) = f(\vec{x})$. Справді, маємо оцінку:\\
+$\forall \vec{x} \in A: \displaystyle\left| f(\vec{x}) - \sum_{k=1}^n g_k(\vec{x}) \right| \leq \left(\dfrac{2}{3}\right)^n C \overset{n \to \infty}{\implies} f(\vec{x}) = \overline{f}_\infty(\vec{x})$.\\
+Утім все ж таки ми знайшли функцію $\overline{f}_\infty \colon X \to \mathbb{R}$, а нам потрібна функція $\overline{f} \colon X \to [a,b]$. Питань нема, визначимо її ось таким чином: $\overline{f}(\vec{x}) = \begin{cases} \overline{f}_\infty(\vec{x}), & \vec{x} \in \overline{f}_\infty^{-1}([a,b]) \\ a, & \vec{x} \in \overline{f}_\infty^{-1}((-\infty,a)) \\ b, & \vec{x} \in \overline{f}_\infty^{-1}((b,+\infty)) \end{cases}$. Така функція буде неперервною (в принципі, зрозуміло), а також $\overline{f}|_A = f$. Дійсно, якщо $\vec{x} \in A$, то тоді $f(\vec{x}) = \overline{f}_\infty(\vec{x}) \in [a,b]$, тобто $\vec{x} \in \overline{f}_\infty^{-1}([a,b])$. Значить, $\overline{f}(\vec{x}) = \overline{f}_\infty(\vec{x}) = f(\vec{x})$.
+\end{proof}
+\noindent
+Це ми довели лише теорему Тітце для функції, що приймають значення лише на деякому відрізку. Трошки розшириимо клас функцій.
+
+\begin{theorem}[Теорема Тітце (розширення)]
+Задана $A \subset X$ -- замкнена множина та $f \colon A \to \mathbb{R}$ -- неперервна функція. Тоді існує неперервна функція $\overline{f} \colon \mathbb{R}^n \to \mathbb{R}$ -- розширення $f$, тобто $\overline{f}|_{A} = f$.
+\end{theorem}
+
+\begin{proof}
+Ми будемо доводити розширення теореми для випадку, коли задана функція $f \colon A \to (-1,1)$. Оскільки маємо $(-1,1) \subset [-1,1]$, то за теоремою вище, існує функція $\overline{f} \colon X \to [-1,1]$ -- неперервна та $\overline{f}_A = f$. На жаль, це ще не все, бо нам треба функція $\overline{g} \colon A \to (-1,1)$, у нас там проблемки в точках $\{-1,1\}$.\\
+Проте якщо взяти множину $B = \overline{f}^{-1}(\{-1,1\})$, що буде замкненою та $A \cap B = \emptyset$, то за лемою Урисона існуватиме функція $\varphi \colon X \to [0,1]$, де $\varphi|_A = 1$ та $\varphi|_B = 0$. Тепер визначимо функцію $\overline{g}(x) = \overline{f}(x) \cdot \varphi(x)$. Функція $g \colon X \to (-1,1)$, неперервна як добуток та $\overline{g}|_A = f$.\\
+Далі ми згадуємо той факт, що $(-1,1) \cong \mathbb{R}$ -- отримаємо бажане.
+\end{proof}
+\newpage
+\fi
+
 \section{Кратні інтеграли}
-\subsection{Кратні інтеграли по брусу}
+\subsection{Бруси, розбиття, підрозбиття}
 \begin{definition}
 \textbf{Прямокутним паралелепіпедом в} $\mathbb{R}^m$ або \textbf{$m$-вимірних брусом} називають множину
 \begin{align*}
-Q = [a_1,b_1] \times \dots \times [a_m,b_m]
+Q = [a_1,b_1] \times \dots \times [a_m,b_m].
 \end{align*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale = 0.6]
+\filldraw[draw = blue, fill = blue!50] (0,0) rectangle (3,2);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale = 0.6]
+\fill[blue!50] (0,0.6)--(2,0.6)--(3,2.1)--(1,2.1)--cycle;
+\fill[blue!50] (2,0.6)--(2,-0.4)--(3,1.1)--(3,2.1);
+\fill[blue!50] (0,0.6)--(0,-0.4)--(2,-0.4)--(2,0.6);
+\draw[blue] (0,0.6)--(2,0.6)--(3,2.1)--(1,2.1)--cycle;
+\draw[blue] (2,0.6)--(2,-0.4)--(3,1.1)--(3,2.1);
+\draw[blue] (0,0.6)--(0,-0.4)--(2,-0.4);
+\end{tikzpicture}
+\caption*{Брусом в $\mathbb{R}^2$ буде прямокутник; брусом в $\mathbb{R}^3$ буде прямокутний паралелепіпед.}
+\end{figure}
 \textbf{Діаметром бруса} $Q$ називають число
 \begin{align*}
-d(Q) = \sup_{\vec{x},\vec{y} \in Q} \Norm{\vec{x}-\vec{y}}
+d(Q) = \sup_{\vec{x},\vec{y} \in Q} \Norm{\vec{x}-\vec{y}}.
 \end{align*}
-У нашому випадку $d(Q) = \sqrt{(b_1-a_1)^2 + \dots + (b_m-a_m)^2}$ - грубо кажучи, діагональ бруса.\\
+У нашому випадку $d(Q) = \sqrt{(b_1-a_1)^2 + \dots + (b_m-a_m)^2}$ -- власне кажучи, діагональ бруса.\\
 \textbf{Об'ємом} або \textbf{мірою} бруса $Q$ називається додатне число
 \begin{align*}
-m(Q) = \prod_{k=1}^m (b_k-a_k)
+m(Q) = \prod_{k=1}^m (b_k-a_k).
 \end{align*}
-\end{definition}
-
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\fill[red] (0,0) rectangle (4,2);
+\filldraw[draw = blue, fill = blue!50] (0,0) rectangle (4,2);
 \end{tikzpicture}
-\caption*{Випадок $\mathbb{R}^2$ - прямокутник $Q = [0,4] \times [0,2]$ з діаметром $d(Q) = 2 \sqrt{5}$ та мірою $m(Q) = 4 \cdot 2 = 8$.}
+\caption*{Випадок $\mathbb{R}^2$ -- прямокутник $Q = [0,4] \times [0,2]$ з діаметром $d(Q) = 2 \sqrt{5}$ та мірою $m(Q) = 4 \cdot 2 = 8$.}
 \end{figure}
-
-Далі нехай $Q = \displaystyle\prod_{k=1}^m [a_k,b_k]$ - брус. Ми розглянемо розбиття $\lambda_k = \{x_k^0, x_k^1,\dots,x_k^{n_k} \}$ відрізка $[a_k,b_k]$ для кожного $k = \overline{1,m}$. Нехай $\Delta x_k^v = x_k^{v+1} - x_k^v$, де $v = \overline{0,n_k-1}$.\\
-Після такого розбиття ми отримаємо набір брусів $Q(v_1,\dots,v_m) = \displaystyle\prod_{k=1}^m [x_{k}^{v_k}, x_k^{v_k+1}]$, об'єм якого $m(Q(v_1,\dots,v_m)) = \displaystyle\prod_{k=1}^m \Delta x_k^{v_k}$.
+\end{definition}
+\noindent
+Далі нехай $Q = \displaystyle\prod_{k=1}^m [a_k,b_k]$ -- брус. Ми розглянемо розбиття $\lambda_k = \{x_k^0, x_k^1,\dots,x_k^{n_k} \}$ відрізка $[a_k,b_k]$ для кожного $k = \overline{1,m}$. Нехай $\Delta x_k^v = x_k^{v} - x_k^{v-1}$, де $v = \overline{1,n_k}$.\\
+Після такого розбиття ми отримаємо набір брусів $Q(v_1,\dots,v_m) = \displaystyle\prod_{k=1}^m [x_{k}^{v_k-1}, x_k^{v_k}]$, об'єм якого $m(Q(v_1,\dots,v_m)) = \displaystyle\prod_{k=1}^m \Delta x_k^{v_k}$.
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\fill[red] (0,0) rectangle (4,2);
+\filldraw[draw = blue, fill = blue!50] (0,0) rectangle (4,2);
 \foreach \i in {1,2,3} {
 	\draw (\i,0)--(\i,2);
 	}
@@ -165,32 +344,30 @@ m(Q) = \prod_{k=1}^m (b_k-a_k)
 	\draw (0,\i)--(4,\i);
 	}
 \end{tikzpicture}
-\caption*{Випадок $\mathbb{R}^2$ - відрізок $[0,4]$ має розбиття $\{0,1,2,3,4\}$ та відрізок $[0,2]$ має розбиття $\{0,0.5,1.5,2\}$. Після розбиття ми отримали набір прямокутників.}
+\caption*{Випадок $\mathbb{R}^2$ -- відрізок $[0,4]$ має розбиття $\{0,1,2,3,4\}$ та відрізок $[0,2]$ має розбиття $\{0,0.5,1.5,2\}$. Після розбиття ми отримали набір прямокутників.}
 \end{figure}
 
 \begin{definition}
 Цей набір брусів $\lambda = \{Q(v_1,\dots,v_m)\}$ називається \textbf{розбиттям бруса} $Q$.\\
 \textbf{Діаметром розбиття} $\lambda$ називається число
 \begin{align*}
-|\lambda| = \max_{\substack{0 \leq v_k \leq n_k -1 \\ 1 \leq k \leq m}} d(Q(v_1,\dots,v_m))
+|\lambda| = \max_{\substack{1 \leq v_k \leq n_k \\ 1 \leq k \leq m}} d(Q(v_1,\dots,v_m))
 \end{align*}
-Грубо кажучи, шукаємо найбільшу діагональ бруса.
+По суті кажучи, діаметр розбиття означає шукати найбільшу діагональ бруса.
 \end{definition}
 
 \begin{remark}
-$\displaystyle\sum_{\substack{0 \leq v_k \leq n_k -1 \\ 1 \leq k \leq m}} m(Q(v_1,\dots,v_m)) = m(Q)$.\\
-Дійсно, зауважимо спочатку, що $\displaystyle\sum_{v=0}^{n_k-1} \Delta x_k^{v} = b_k-a_k$. А далі маємо:\\
-$\displaystyle\sum_{\substack{0 \leq v_k \leq n_k-1 \\ 1 \leq k \leq m}} m(Q(v_1,\dots,v_m)) = \sum_{\substack{0 \leq v_k \leq n_k-1 \\ 1 \leq k \leq m}} \Delta x_1^{v_1} \dots \Delta x_m^{v_m} = \\ = \Delta x_1^0 \sum_{\substack{0 \leq v_k \leq n_k-1 \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} + \dots + \Delta x_1^{n_1-1} \sum_{\substack{0 \leq v_k \leq n_k-1 \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} = \\ = \sum_{\substack{0 \leq v_k \leq n_k-1 \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} (\Delta x_1^0 + \dots + \Delta x_1^{n_1-1}) = (b_1-a_1) \sum_{\substack{0 \leq v_k \leq n_k-1 \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} = \\
+$\displaystyle\sum_{\substack{1 \leq v_k \leq n_k \\ 1 \leq k \leq m}} m(Q(v_1,\dots,v_m)) = m(Q)$.\\
+Дійсно, зауважимо спочатку, що $\displaystyle\sum_{v=1}^{n_k} \Delta x_k^{v} = b_k-a_k$. А далі маємо такий ланцюг рівностей:\\
+$\displaystyle\sum_{\substack{1 \leq v_k \leq n_k \\ 1 \leq k \leq m}} m(Q(v_1,\dots,v_m)) = \sum_{\substack{1 \leq v_k \leq n_k \\ 1 \leq k \leq m}} \Delta x_1^{v_1} \dots \Delta x_m^{v_m} = \\ = \textcolor{red}{\Delta x_1^1} \sum_{\substack{1 \leq v_k \leq n_k \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} + \dots + \textcolor{red}{\Delta x_1^{n_1}} \sum_{\substack{1 \leq v_k \leq n_k \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} = \\ = \sum_{\substack{1 \leq v_k \leq n_k \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} (\textcolor{red}{\Delta x_1^1 + \dots + \Delta x_1^{n_1}}) = (b_1-a_1) \sum_{\substack{1 \leq v_k \leq n_k \\ 2 \leq k \leq m}} \Delta x_2^{v_2} \dots \Delta x_m^{v_m} = \\
 = \dots = (b_1-a_1)(b_2-a_2) \dots (b_m-a_m) = m(Q)$.
 \end{remark}
 
-\subsubsection*{Як отримати підрозбиття розбиття}
-Маємо $Q$ - деякий брус та розбиття $\lambda$. Його ми отримали в результаті розбиття кожного відрізку.\\
-Щоб отримати підрозбиття $\lambda'$ розбиття $\lambda$, ми запишемо підрозбиття $\lambda'_k$ розбиття кожного відрізка $\lambda_k$ (ми це робили додаванням точок).\\
+Тепер з'ясуємо, як отримати підрозбиття. Маємо $Q$ -- деякий брус та розбиття $\lambda$. Його ми отримали в результаті розбиття кожного відрізку. Щоб отримати підрозбиття $\lambda'$ розбиття $\lambda$, ми запишемо підрозбиття $\lambda'_k$ розбиття кожного відрізка $\lambda_k$ (ми це робили додаванням точок).\\
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\fill[red] (0,0) rectangle (4,2);
+\filldraw[draw = blue, fill = blue!50] (0,0) rectangle (4,2);
 \foreach \i in {1,2,3} {
 	\draw (\i,0)--(\i,2);
 	}
@@ -200,18 +377,18 @@ $\displaystyle\sum_{\substack{0 \leq v_k \leq n_k-1 \\ 1 \leq k \leq m}} m(Q(v_1
 \end{tikzpicture}
 \qquad
 \begin{tikzpicture}
-\fill[red] (0,0) rectangle (4,2);
+\filldraw[draw = blue, fill = blue!50] (0,0) rectangle (4,2);
 \foreach \i in {1,2,3} {
 	\draw (\i,0)--(\i,2);
 	}
 \foreach \i in {0.5,1.5,2.5} {
-	\draw[gray] (\i,0)--(\i,2);
+	\draw[red] (\i,0)--(\i,2);
 	}
 \foreach \i in {0.5,1.5} {
 	\draw (0,\i)--(4,\i);
 	}
 \foreach \i in {1} {
-	\draw[gray] (0,\i)--(4,\i);
+	\draw[red] (0,\i)--(4,\i);
 	}
 \end{tikzpicture}
 \end{figure}
@@ -223,31 +400,30 @@ $Q(v_1,\dots,v_m) = [x_k^{v_1},x_k^{v_1+1}] \times \dots \times [x_k^{v_m}, x_k^
 = ([x_k^{v_1},y_0] \times [x_k^{v_2}, x_k^{v_2+1}] \times \dots \times [x_k^{v_m}, x_k^{v_m+1}]) \cup \dots \cup ([y_p,x_k^{v_k+1}] \times [x_k^{v_2}, x_k^{v_2+1}] \times \dots \times [x_k^{v_m}, x_k^{v_m+1}]) = \\
 = Q_1 \cup \dots \cup Q_p$.\\
 Ми тіпа розкриваємо дужки з точки зору теорії множин.\\
-Таким чином, отримали, що брус розіб'ється на підбруси.\\
-Причому згідно зі зауваженням вище, $\displaystyle\sum m(Q_i) = m(Q(v_1,\dots,v_m))$.\\
+Таким чином, отримали, що брус розіб'ється на підбруси. Причому згідно зі зауваженням вище, $\displaystyle\sum m(Q_i) = m(Q(v_1,\dots,v_m))$.\\
 Саме за таким процесом, розбиваючи $\lambda$, отримаємо підрозбиття $\lambda'$.
-\bigskip \\
-Надалі вводиться позначення $\omega(\lambda) = \{ (v_1,\dots,v_m) | 0 \leq v_k \leq n_k-1, 1 \leq k \leq m \}$
+
+\subsection{Кратні інтеграли по брусу}
+Надалі вводиться позначення $\omega(\lambda) = \{ (v_1,\dots,v_m) | 0 \leq v_k \leq n_k-1, 1 \leq k \leq m \}$.
 
 \begin{definition}
-Задано $Q$ - брус та функцію $f: Q \to \mathbb{R}$ - обмежена на $Q$ та $\lambda$ - розбиття бруса.\\
+Задано $Q$ -- брус та функцію $f \colon Q \to \mathbb{R}$ -- обмежена на $Q$ та $\lambda$ -- розбиття бруса.\\
 \textbf{Нижньою сумою Дарбу} для розбиття $\lambda$ та функції $f$ називається сума
 \begin{align*}
-L(f,\lambda) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} \inf_{\vec{x} \in Q(v_1,\dots,v_m)} f(\vec{x}) \cdot m(Q(v_1,\dots,v_m))
+L(f,\lambda) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} \inf_{\vec{x} \in Q(v_1,\dots,v_m)} f(\vec{x}) \cdot m(Q(v_1,\dots,v_m)).
 \end{align*}
 \textbf{Верхньою сумою Дарбу} для розбиття $\lambda$ та функції $f$ називається сума
 \begin{align*}
-U(f,\lambda) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} \sup_{\vec{x} \in Q(v_1,\dots,v_m)} f(\vec{x}) \cdot m(Q(v_1,\dots,v_m))
+U(f,\lambda) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} \sup_{\vec{x} \in Q(v_1,\dots,v_m)} f(\vec{x}) \cdot m(Q(v_1,\dots,v_m)).
 \end{align*}
 \end{definition}
 
 \begin{definition}
-Набір точок $\{ \vec{\xi}(v_1,\dots,v_m) | (v_1,\dots,v_m) \in \omega(\lambda) \} = \{ \vec{\xi} (v_1,\dots,v_m) \}$ назвемо \textbf{набором, що відповідає розбиттю} $\lambda$.\\
-Тут $\vec{\xi}(v_1,\dots,v_m) \in Q(v_1,\dots,v_m)$.
+Набір точок $\{ \vec{\xi}(v_1,\dots,v_m) | (v_1,\dots,v_m) \in \omega(\lambda) \} = \{ \vec{\xi} (v_1,\dots,v_m) \}$ назвемо \textbf{набором, що відповідає розбиттю} $\lambda$. Тут всі $\vec{\xi}(v_1,\dots,v_m) \in Q(v_1,\dots,v_m)$.
 \end{definition}
 
 \begin{definition}
-Задано $Q$ - брус та функцію $f: Q \to \mathbb{R}$ та $\lambda$ - розбиття бруса.\\
+Задано $Q$ -- брус та функцію $f \colon Q \to \mathbb{R}$ та $\lambda$ -- розбиття бруса.\\
 \textbf{Інтегральною сумою} для розбиття $\lambda$ з наборами $\{ \vec{\xi}(v_1,\dots,v_m) \}$ функції $f$ називається сума
 \begin{align*}
 \sigma(f,\lambda, \{ \vec{\xi}(v_1,\dots,v_m) \}) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} f(\vec{\xi}(v_1,\dots,v_m)) \cdot m(Q(v_1,\dots,v_m))
@@ -264,10 +440,10 @@ U(f,\lambda) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} \sup_{\vec{x} \in Q(v_
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale = 1.4]
-\draw[->] (0,0)--(4,0) node[anchor = north west] {$y$};
-\draw[->] (0,0)--(0,3) node[anchor = south east] {$z$};
-\draw[->] (0,0)--(-2.5,-2.5) node[anchor = north] {$x$};
+\begin{tikzpicture}
+\draw[->] (-0.5,0)--(4,0) node[anchor = north west] {$y$};
+\draw[->] (-0.5,0)--(-0.5,3) node[anchor = south east] {$z$};
+\draw[->] (-0.5,0)--(-3,-2.5) node[anchor = north] {$x$};
 \draw (1,-0.5)--(3,-0.5)--(2,-2)--(0,-2)--cycle;
 
 \draw[dashed] (0,-2)--(0,-0.5);
@@ -296,12 +472,13 @@ U(f,\lambda) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} \sup_{\vec{x} \in Q(v_
 \draw[red,->] (-0.5,{-1.5+0.25})--({1/3+1-0.2},{-1.5+0.25}) node[scale=1,red] at (-0.6,{-1.5+0.25-0.2}) {$\xi(v_1,v_2)$};
 
 %rectangle on surface
-\draw[dashed] ({1/3+1},0.7)--({2/3+1},{0.7+0.5})--({2/3+0.5},{0.7+0.5})--({1/3+0.5},{0.7})--cycle;
-\draw[dashed] ({1/3+1},-1.5)--({1/3+1},0.7);
-\draw[dashed] ({2/3+1},-1)--({2/3+1},1.2);
-\draw[dashed] ({2/3+0.5},-1)--({2/3+0.5},1.2);
-\draw[dashed] ({1/3+0.5},-1.5)--({1/3+0.5},0.7);
+\draw[blue,dashed] ({1/3+1},0.7)--({2/3+1},{0.7+0.5})--({2/3+0.5},{0.7+0.5})--({1/3+0.5},{0.7})--cycle;
+\draw[blue,dashed] ({1/3+1},-1.5)--({1/3+1},0.7);
+\draw[blue,dashed] ({2/3+1},-1)--({2/3+1},1.2);
+\draw[blue,dashed] ({2/3+0.5},-1)--({2/3+0.5},1.2);
+\draw[blue,dashed] ({1/3+0.5},-1.5)--({1/3+0.5},0.7);
 \end{tikzpicture}
+\caption*{Інтегральна сума для двовимірного бруса $Q$ та відповідно двовимірної функції $f(x,y)$.}
 \end{figure}
 
 \begin{definition}
@@ -310,39 +487,37 @@ U(f,\lambda) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} \sup_{\vec{x} \in Q(v_
 \exists I \in \mathbb{R}: \forall \varepsilon > 0: \exists \delta(\varepsilon): \forall (\lambda, \vec{\xi}(v_1,\dots,v_m) ): |\lambda| < \delta \implies |\sigma(f,\lambda,\vec{\xi}(v_1,\dots,v_m)) - I| < \varepsilon
 \end{align*}
 Число $I$ називають \textbf{$m$-кратним інтегралом Рімана}.\\
-Позначення: $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x}$ \hspace{3cm} або $\displaystyle\int_{a_1}^{b_1} \dots \int_{a_m}^{b_m} f(x_1,\dots,x_m)\,dx_1\dots \,dx_m$
+Позначення: $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x}$. Часто користуються позначенням $\displaystyle\idotsint_Q f(x_1,\dots,x_m)\,dx_1\,\dots\,dx_m$. У випадку $\mathbb{R}^2$ позначення завжди $\displaystyle\iint_Q f(x,y)\,dx\,dy$. У випадку $\mathbb{R}^3$ позначення завжди $\displaystyle\iiint_Q f(x,y,z)\,dx\,dy\,dz$.
 \end{definition}
 
 \begin{example}
-Довести, що $f(\vec{x}) = 1$ - інтегрована на брусі $Q$ та $\displaystyle\int\displaylimits_Q 1\,dx = m(Q)$.\\
+Довести, що $f(\vec{x}) = 1$ -- інтегрована на брусі $Q$ та $\displaystyle\int\displaylimits_Q 1\,d\vec{x} = m(Q)$.\\
 Дійсно, $\displaystyle\sigma(f,\lambda,\{\vec{\xi}(v_1,\dots,v_m) \}) = \sum_{(v_1,\dots,v_m) \in \omega(\lambda)} m(Q(v_1,\dots,v_m)) = m(Q)$.\\
 Отже, $\forall \varepsilon > 0: \exists \delta: \forall (\lambda, \{ \vec{\xi}(v_1,\dots,v_m \}): |\lambda| < \delta \implies |\sigma(f,\lambda,\{ \vec{\xi}(v_1,\dots,v_m) \} - m(Q)| = 0 < \varepsilon$.\\
-Отже, $\displaystyle\int\displaylimits_Q 1\,dx = m(Q)$.
+Отже, $\displaystyle\int\displaylimits_Q 1\,d\vec{x} = m(Q)$.
 \end{example}
 
-\begin{theorem}
-Задано функцію $f: Q \to \mathbb{R}$ - інтегрована по брусу $Q$. Тоді $f$ - обмежена на $Q$.\\
-\textit{Довденення аналогічне, як в матані $\mathbb{R}$.}
-\end{theorem}
+Всі теореми, твердження, леми та наслідки в даному підрозділі, які залишилися без доведення, вони доводяться \textit{аналогічно як в матані $\mathbb{R}$}. Там дійсно (майже) нічого нового не буде, якщо почати переписувати доведення в багатовимірний випадок.
 
-Всі властивості, які відомі про суму Дарбу, зберігаються тут. Я просто нагадаю.
+\begin{theorem}
+Задано функцію $f \colon Q \to \mathbb{R}$ -- інтегрована по брусу $Q$. Тоді $f$ -- обмежена на $Q$.
+\end{theorem}
 
 \begin{remark}
 $L(f,\lambda) \leq \sigma(f,\tau,\{ \vec{\xi}(v_1,\dots,x_m) \}) \leq U(f,\lambda)$.
 \end{remark}
 
 \begin{lemma}
-Задано функцію $f: Q \to \mathbb{R}$ - обмежена на брусі та будь-яке розбиття $\lambda$. Тоді маємо:\\
+Задано функцію $f \colon Q \to \mathbb{R}$ -- обмежена на брусі та будь-яке розбиття $\lambda$. Тоді маємо:\\
 $L(f,\lambda) = \displaystyle\inf_{\{ \vec{\xi}(v_1,\dots,x_m) \}} \sigma(f,\tau,\{ \vec{\xi}(v_1,\dots,x_m) \}) \hspace{1cm} U(f,\lambda) = \displaystyle\sup_{\{ \vec{\xi}(v_1,\dots,x_m) \}} \sigma(f,\tau,\{ \vec{\xi}(v_1,\dots,x_m) \})$
 \end{lemma}
 
 \begin{lemma}
-Задано функцію $f: Q \to \mathbb{R}$ - обмежена на брусі та розбиття $\lambda$. Також задамо підрозбиття $\lambda'$. Тоді $U(f,\lambda) \geq U(f,\lambda')$, а також $L(f,\lambda) \leq L(f,\lambda')$.
+Задано функцію $f \colon Q \to \mathbb{R}$ -- обмежена на брусі та розбиття $\lambda$. Також задамо підрозбиття $\lambda'$. Тоді $U(f,\lambda) \geq U(f,\lambda')$, а також $L(f,\lambda) \leq L(f,\lambda')$.
 \end{lemma}
 
 \begin{lemma}
-Задано функцію $f: Q \to \mathbb{R}$ - обмежена на брусі. Візьмемо будь-які два розбиття $\lambda', \lambda''$.\\
-Тоді $L(f,\lambda') \leq U(f,\lambda'')$.
+Задано функцію $f \colon Q \to \mathbb{R}$ -- обмежена на брусі. Візьмемо будь-які два розбиття $\lambda', \lambda''$. Тоді $L(f,\lambda') \leq U(f,\lambda'')$.
 \end{lemma}
 
 \begin{definition}
@@ -357,60 +532,151 @@ I^*(f) = \inf_\lambda U(f,\lambda) \hspace{1cm} I_*(f) = \sup_{\lambda} L(f,\lam
 \end{remark}
 
 \begin{theorem}[Перший критерій інтегрованості]
-Задано функцію $f: Q \to \mathbb{R}$, де $Q$ - брус.\\
-$f$ - інтегрована на $Q \iff f -$ обмежена на $Q$ та $I_*(f) = I^*(f)$.
+Задано функцію $f \colon Q \to \mathbb{R}$, де $Q$ -- брус.\\
+$f$ -- інтегрована на $Q \iff f$ -- обмежена на $Q$ та $I_*(f) = I^*(f)$.
 \end{theorem}
 
 \begin{theorem}[Другий критерій інтегрованості]
-Задано функцію $f: Q \to \mathbb{R}$, де $Q$ - брус.\\
-$f$ - інтегрована на $Q \iff f -$ обмежена на $Q$ та $\forall \varepsilon > 0: \exists \lambda: U(f,\lambda) - L(f,\lambda) < \varepsilon$.
+Задано функцію $f \colon Q \to \mathbb{R}$, де $Q$ -- брус.\\
+$f$ -- інтегрована на $Q \iff f$ -- обмежена на $Q$ та $\forall \varepsilon > 0: \exists \lambda: U(f,\lambda) - L(f,\lambda) < \varepsilon$.
 \end{theorem}
 
 \begin{theorem}
-Задано функцію $f \in C(Q)$, де $Q$ - брус. Тоді $f$ - інтегрована на $Q$.\\
-\textit{Доведення аналогічне, як в матані $\mathbb{R}$.}
+Задано функцію $f \in C(Q)$, де $Q$ -- брус. Тоді $f$ -- інтегрована на $Q$.
 \end{theorem}
 
 \begin{theorem}
-Задано $f: Q \to \mathbb{R}$, де $Q$ - брус. Припустимо, що $Q = Q_1 \cup Q_2$, де $Q_1,Q_2$ - бруси, що не мають спільних внутрішніх точок.\\
-$f$ - інтегрована на $Q \iff f$ - інтегрована на $Q_1$ та $Q_2$.\\
-\textit{Поки скіп.}
+Задано $f \colon Q \to \mathbb{R}$, де $Q$ -- брус. Припустимо, що $Q = Q_1 \cup Q_2$, де $Q_1,Q_2$ -- бруси, що не мають спільних внутрішніх точок, тобто $\Int(Q_1) \cap \Int(Q_2) = \emptyset$.\\
+$f$ -- інтегрована на $Q \iff f$ -- інтегрована на $Q_1$ та $Q_2$.
 \end{theorem}
+
+\begin{proof}
+Спершу нехай $Q = \displaystyle\prod_{k=1}^m [a_k,b_k]$. Умова $Q = Q_1 \cup Q_2$ та без спільних внутрішніх точок означає, що на $m-1$ відрізків буде ділення на два відрізки (не втрачаючи загальності, це будуть перші $m-1$ штук). Тобто $Q = \displaystyle\prod_{k=1}^{m-1} \left([a_k,c_k] \cup [c_k,b_k]\right) \times [a_m,b_m]$. Це означатиме, що\\
+$Q_1 = \displaystyle\prod_{k=1}^{m-1} [a_k,c_k] \times [a_m,b_m],\ Q_2 = \displaystyle\prod_{k=1}^{m-1} [c_k,b_k] \times [a_m,b_m]$.\\
+Приступимо до доведення.
+\bigskip \\
+\rightproof Дано: $f$ -- інтегрована на $Q$. Тоді $f$ -- обмежена на $Q$ (зокрема й на $Q_1,Q_2$), а також $\forall \varepsilon > 0: \exists \lambda: U(f,\lambda) - L(f,\lambda) < \varepsilon$. Маючи розбиття $\lambda$, ми розбиваємо кожний відрізок $[a_k,b_k]$, використовуючи $\tau_k = \{a_k = x_0^k, x_1^k, \dots, x_{n_k}^k = b_k\}$.\\
+Створимо нове розбиття, $\tau_m$ залишимо як є, а решта $\tau_k^{1} = \{a_k = x_0^k, x_1^k, \dots, c_k\},\ \tau_k^{2} = \{c_k, \dots, x_{n_k}^k = b_k\}$ при $k = \overline{1,m-1}$. Ми тоді отримаємо розбиття $\lambda_1, \lambda_2$ відповідно брусів $Q_1,Q_2$. Далі\\
+$U(f,\lambda_1) - L(f,\lambda_1) \leq U(f,\lambda) - L(f,\lambda) < \varepsilon$ (перша нерівність виникла, бо кількість додатних доданків менша за наступну частину).\\
+$U(f,\lambda_2) - L(f,\lambda_2) < \varepsilon$ (аналогічно).\\
+Власне, ми довели, що $f$ -- інтегрована на $Q_1$ та $Q_2$ одночасно.
+\bigskip \\
+\leftproof Дано: $f$ -- інтегрована на $Q_1$ та $Q_2$. Тоді $f$ -- обмежена на $Q_1$ та $Q_2$ (внаслідок чого обмежена на $Q$), а також $\forall \varepsilon > 0: \exists \lambda_1,\lambda_2:$\\
+$U(f,\lambda_1) - L(f,\lambda_1) < \varepsilon \qquad U(f,\lambda_2) - L(f,\lambda_2) < \varepsilon$.\\
+$\lambda_1$ розбиває відрізки з $Q_1$ шляхом $\tau_1^1,\dots,\tau_m^1$, та $\lambda_2$ розбиває відрізки з $Q_2$ шляхом $\tau_1^2,\dots,\tau_m^2$. Тоді покладемо нові розбиття відрізків $\tau_i = \tau_i^1 \cup \tau_i^2$ (до речі, точно одне з пар $\tau_i^1,\tau_i^2$ будуть однаковими, але це ролі не грає). Отримаємо розбиття $\lambda$ бруса $Q$. Далі\\
+$U(f,\lambda) - L(f,\lambda) \leq (U(f,\lambda_1) - L(f,\lambda_1)) + (U(f,\lambda_2) - L(f,\lambda_2)) < 2 \varepsilon$.\\
+Отже, $f$ -- інтегрована на $Q$.
+\end{proof}
+
+\begin{theorem}[Адитивність]
+$\displaystyle\int_{Q_1 \cup Q_2} f(\vec{x})\,d\vec{x} = \int_{Q_1} f(\vec{x})\,d\vec{x} + \int_{Q_2} f(\vec{x})\,d\vec{x}$. \qquad (за умовою, що $\Int(Q_1) \cap \Int(Q_2) = \emptyset$).\\
+\textit{Продовження попередньої теореми не вставлятиму, ось це дійсно аналогічно.}
+\end{theorem}
+
+\begin{theorem}[Лінійність]
+Задані функції $f_1,f_2 \colon Q \to \mathbb{R}$, де $Q$ -- брус. Відомо, що $f_1,f_2 \in \mathcal{R}(Q)$. Тоді $c_1 f_1 + c_2 f_2 \in \mathcal{R}(Q)$ при кожному $c_1,c_2 \in \mathbb{R}$, причому\\
+$\displaystyle\int\displaylimits_Q c_1 f_1(\vec{x}) + c_2 f_2(\vec{x})\,d\vec{x} = c_1 \int\displaylimits_Q f_1(\vec{x}) + c_2 \int\displaylimits_Q f_2(\vec{x})\,d\vec{x}$.
+\end{theorem}
+
+\begin{theorem}
+Задано $f \in \mathcal{R}(Q)$, де $Q$ -- брус. Відомо, що $f \geq 0$ на $Q$. Тоді $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x} \geq 0$.
+\end{theorem}
+
+\begin{corollary}
+Задані $f,g \in \mathcal{R}(Q)$, де $Q$ -- брус. Відомо, що $f \leq g$ на $Q$. Тоді $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x} \leq \int\displaylimits_Q g(\vec{x})\,d\vec{x}$.
+\end{corollary}
+
+\begin{corollary}
+$\displaystyle\left| \int\displaylimits_Q f(\vec{x})\,d\vec{x} \right| \leq \int\displaylimits_Q |f(\vec{x})|\,d\vec{x}$.
+\end{corollary}
+
+\begin{theorem}[Теорема про середнє]
+Задані функції $f,g \in \mathcal{R}(Q)$, причому $g$ має однаковий знак на брусі $Q$. Позначу $m = \displaystyle\inf_{\vec{x} \in Q} f(\vec{x}),\ M = \sup_{\vec{x} \in Q} f(\vec{x})$. Тоді існує число $c \in [m,M]$ таке, що $\displaystyle\int\displaylimits_Q f(\vec{x})g(\vec{x})\,d\vec{x} = c \int\displaylimits_Q g(\vec{x})\,d\vec{x}$.
+\end{theorem}
+
+\begin{corollary}
+Якщо додатково вимагати функцію $f \in C(Q)$, то тоді існуватиме точка $\vec{\theta} \in Q$, для якої $\displaystyle\int\displaylimits_Q f(\vec{x})g(\vec{x})\,dx = f(\vec{\theta}) \int\displaylimits_Q g(\vec{x})\,d\vec{x}$.
+\end{corollary}
+
+\begin{corollary}
+Зокрема при $f \in C(Q)$ існуватиме точка $\vec{\theta} \in Q$, для якої $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x} = f(\vec{\theta}) \cdot m (Q)$.
+\end{corollary}
 
 \subsection{Зведення кратних інтегралів до послідовних однократних}
-Ми хочемо обчислити $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x}$ через однократні інтеграли Рімана.\\
-Маємо брус $Q \subset \mathbb{R}^m$. Розглянемо такі бруси:\\
-$Q_k = \displaystyle\prod_{\substack{}1 \leq i \leq m \\ i \neq k} [a_i,b_i]$, де $Q_k \subset \mathbb{R}^{m-1}$. Даний брус - це проєкція брусу $Q$ на гіперплощину $x_k = 0$.\\
-Припустимо, що $f \in C(Q)$. Тоді $\forall \leq 1 \leq k \leq m: \forall c \in [a_k,b_k]: f \in C(Q \cap \{ \vec{x} | x_k = c \}$.\\
+Ми хочемо обчислити $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x}$ через однократні інтеграли Рімана. Маємо брус $Q \subset \mathbb{R}^m$. Розглянемо такі бруси:\\
+$Q_k = \displaystyle\prod_{\substack{1 \leq i \leq m \\ i \neq k}} [a_i,b_i]$, де $Q_k \subset \mathbb{R}^{m-1}$. \\
+Даний брус -- це проєкція брусу $Q$ на гіперплощину $x_k = 0$.\\
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale = 0.6]
+\draw[->] (-0.5,0)--(4,0) node[anchor = north west] {$y$};
+\draw[->] (-0.5,0)--(-0.5,3) node[anchor = south east] {$z$};
+\draw[->] (-0.5,0)--(-3,-2.5) node[anchor = north] {$x$};
+\draw (1,-0.5)--(3,-0.5)--(2,-2)--(0,-2)--cycle;
+
+\draw[dashed] (0,-2)--(0,-0.4);
+\draw[dashed] (2,-2)--(2,-0.4);
+\draw[dashed] (3,-0.5)--(3,1.1);
+
+\draw[blue] (0,0.6)--(2,0.6)--(3,2.1)--(1,2.1)--cycle;
+\draw[blue] (2,0.6)--(2,-0.4)--(3,1.1)--(3,2.1);
+\draw[blue] (0,0.6)--(0,-0.4)--(2,-0.4);
+\draw[dashed,blue] (0,-0.4)--(1,1.1)--(3,1.1);
+\draw[dashed,blue] (1,1.1)--(1,2.1);
+
+%specific part of partition
+%\fill[blue!20] ({1/3+1},-1.5)--({2/3+1},-1)--({2/3+0.5},-1)--({1/3+0.5},-1.5);
+
+%draw a partition
+%\draw ({1/3},-1.5)--({1/3+2},-1.5);
+%\draw ({2/3},-1)--({2/3+2},-1);
+%\draw (0.5,-2)--(1.5,-0.5);
+%\draw (1,-2)--(2,-0.5);
+%\draw (1.5,-2)--(2.5,-0.5);
+
+\end{tikzpicture}
+\caption*{На прикладі трьовимірний синій брус $Q$, а чорним на $XOY$ намальований брус $Q_3$.}
+\end{figure}
+Припустимо, що $f \in C(Q)$. Тоді $\forall 1 \leq k \leq m: \forall c \in [a_k,b_k]: f \in C(Q \cap \{ \vec{x} \mid x_k = c \})$.\\
 Тому для кожного $x \in [a_k,b_k]$ визначається $(m-1)$-кратний інтеграл по $Q_k$:\\
-$g_k(x) = \displaystyle\int\displaylimits_{Q_k}f(x_1,\dots,x_{k-1},x_k,x_{k+1},\dots,x_m)\,dx_1\dots \,dx_{k-1}\,dx_{k+1}\,\dots\,dx_m$.
+$g_k(\textcolor{red}{x}) = \displaystyle\int\displaylimits_{Q_k}f(x_1,\dots,x_{k-1},\textcolor{red}{x},x_{k+1},\dots,x_m)\,dx_1\dots \,dx_{k-1}\,dx_{k+1}\,\dots\,dx_m$.
 
 \begin{lemma}
 $g_k \in C([a_k,b_k])$.
 \end{lemma}
 
 \begin{proof}
-$f \in C(Q)$, де $Q$ - компакт $\implies \forall \varepsilon > 0: \exists \delta: \forall \vec{x}, \vec{y}: \Norm{\vec{x} - \vec{y}} < \delta \implies |f(\vec{x}) - f(\vec{y})| < \dfrac{\varepsilon}{m(Q)}$.\\
+$f \in C(Q)$, де $Q$ -- компакт $\implies \forall \varepsilon > 0: \exists \delta: \forall \vec{x}, \vec{y}: \Norm{\vec{x} - \vec{y}} < \delta \implies |f(\vec{x}) - f(\vec{y})| < \dfrac{\varepsilon}{m(Q_k)}$.\\
 Оберемо $x',x'' \in [a_k,b_k]$ так, щоб $|x'-x''|<\delta$. Тоді для векторів\\
 $\vec{x'} = (x_1,\dots,x_{k-1},x',x_{k+1},\dots,x_m)$\\
 $\vec{x''} = (x_1,\dots,x_{k-1},x'',x_{k+1},\dots,x_m)$,\\
 де $(x_1,\dots,x_{k-1},x_{k+1},\dots,q_m) \in Q_k$, ми маємо:\\
 $\Norm{\vec{x'} - \vec{x''}} = |x'-x''| < \delta$, а тому $|f(\vec{x'}) - f(\vec{x''})| < \dfrac{\varepsilon}{m(Q_k)}$.\\
 $\displaystyle |g_k(x') - g_k(x'')| \leq \dfrac{\varepsilon}{m(Q_k)} \int\displaylimits_{Q_k} dx_1\dots dx_{k-1}\,dx_{k+1}\dots dx_m = \varepsilon$.\\
-Таким чином, $g_k \in C_{unif}([a_k,b_k]) \implies g_k \in C([a_k,b_k])$.
+Таким чином, $g_k \in C_{\text{unif}}([a_k,b_k]) \implies g_k \in C([a_k,b_k])$.
 \end{proof}
 
 \begin{theorem}
 $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x} = \int_{a_k}^{b_k} \left( \int\displaylimits_{Q_k} f(x_1,\dots,x_{k-1},x_k,x_{k+1},\dots,x_m)\,dx_1\dots \,dx_{k-1}\,dx_{k+1}\,\dots\,dx_m \right)\,dx_k$
 \end{theorem}
 
+\iffalse
 \begin{proof}
-$f \in \mathcal{R}(Q)$, тому що ми вимагали функцію $f \in C(Q)$. Тому,\\
-$\forall \varepsilon > 0: \exists \lambda: U(f,\lambda) - L(f,\lambda) < \varepsilon$.\\
+Я запишу доведення для випадку функції трьох змінних. Тобто буду доводити, що \\ $\displaystyle\int_Q f(x,y,z)\,dx\,dy\,dz = \int_{a_3}^{b_3} \left(\int\displaylimits_{Q_3} f(x,y,z)\,dx\,dy\right)\,dz$.\\
+На вищу розмірність доведення повторюється.
+\bigskip \\
+$f \in \mathcal{R}(Q)$, тому що вимагали функцію $f \in C(Q)$. Тому $\forall \varepsilon > 0: \exists \lambda: U(f,\lambda) - L(f,\lambda) < \varepsilon$.\\
+Розбиття $\lambda$ природним чином розбиває також брус $Q_3$. Маємо:\\
+$\displaystyle\int_{a_3}^{b_3} g_3(t)\,dt = \displaystyle\sum_{v_3=1}^{n_3} \int_{z(v_3-1)}^{z(v_3)} g_3(t)\,dt \leq \sum_{v_3=1}^{n_3} \sup_{t \in [z(v_3-1),z(v_3)]} g_3(t) \Delta z(v_3)$
+\end{proof}
+\fi
+
+\begin{proof}
+$f \in \mathcal{R}(Q)$, тому що ми вимагали функцію $f \in C(Q)$. Тому $\forall \varepsilon > 0: \exists \lambda: U(f,\lambda) - L(f,\lambda) < \varepsilon$.\\
 Розбиття $\lambda$ природним чином розбиває брус $Q_k$. Маємо:\\
-$\displaystyle\int_{a_k}^{b_k} g_k(x)\,dx = \sum_{v_k = 0}^{n_k-1} \int_{x_k(v_k)}^{x_k(v_k+1)}g_k(x)\,dx \leq \sum_{v_k=0}^{n_k-1} \sup_{x \in [x_k(v_k),x_k(v_k+1)]} g_k(x) \cdot \Delta x_k(v_k) \leq \\
-\leq \sum_{v_k=0}^{n_k-1} \sup_{x \in [x_k(v_k),x_k(v_k+1)]} \left( \sum_{v_1,\dots,v_{k-1},v_{k+1},\dots,v_m} \sup_{\substack{(x_1,\dots,x_{k-1},x_{k+1},\dots,x_m) \\ \in \prod_{i \neq k} [x_i(v_i), x_i(v_i+1)]}} f(x_1,\dots,x_{k-1},x,x_{k+1},\dots,x_m) \prod_{i \neq k} \Delta x_i(v_i) \right) \Delta x_k(v_k) \\
-\overset{?}{\leq} \sum_{v_k=0}^{n_k-1} \sum_{v_1,\dots,v_{k+1},\dots,v_m} \sup_{x \in [x_k(v_k), x_k(v_k+1)]} \sup_{\substack{(x_1,\dots,x_{k-1},x_{k+1},\dots,x_m) \\ \in \prod_{i \neq k} [x_i(v_i), x_i(v_i+1)]}} f(x_1,\dots,x_{k-1},x,x_{k+1},\dots,x_m) \prod_{i \neq k} \Delta x_i(v_i) \Delta x_k(v_k) \overset{??}{\leq} \\ \overset{??}{\leq} \sum_{v_1,\dots,v_m} \sup_{\vec{x} \in Q(v_1,\dots,v_m)} f(\vec{x}) m(Q(v_1,\dots,v_m)) = U(f,\lambda)$.\\
+$\displaystyle\int_{a_k}^{b_k} g_k(x)\,dx = \sum_{v_k = 1}^{n_k} \int_{x_k(v_k-1)}^{x_k(v_k)}g_k(x)\,dx \leq \sum_{v_k=1}^{n_k} \sup_{x \in [x_k(v_k-1),x_k(v_k)]} g_k(x) \cdot \Delta x_k(v_k) \leq \\
+\leq \sum_{v_k=1}^{n_k} \sup_{x \in [x_k(v_k-1),x_k(v_k)]} \left( \sum_{\substack{v_1,\dots,v_{k-1},\\ v_{k+1},\dots,v_m}} \sup_{\substack{(x_1,\dots,x_{k-1},x_{k+1},\dots,x_m) \\ \in \prod_{i \neq k} [x_i(v_i-1), x_i(v_i)]}} f(x_1,\dots,x_{k-1},x,x_{k+1},\dots,x_m) \prod_{i \neq k} \Delta x_i(v_i) \right) \Delta x_k(v_k) \\
+\overset{?}{\leq} \sum_{v_k=1}^{n_k} \sum_{\substack{v_1,\dots,v_{k-1},\\ v_{k+1},\dots,v_m}} \sup_{x \in [x_k(v_k-1), x_k(v_k)]} \sup_{\substack{(x_1,\dots,x_{k-1},x_{k+1},\dots,x_m) \\ \in \prod_{i \neq k} [x_i(v_i-1), x_i(v_i)]}} f(x_1,\dots,x_{k-1},x,x_{k+1},\dots,x_m) \prod_{i \neq k} \Delta x_i(v_i) \Delta x_k(v_k) \overset{??}{\leq} \\ \overset{??}{\leq} \sum_{v_1,\dots,v_m} \sup_{\vec{x} \in Q(v_1,\dots,v_m)} f(\vec{x}) m(Q(v_1,\dots,v_m)) = U(f,\lambda)$.\\
 Пояснення до кількох нерівностей.\\
 $\overset{?}{\leq}$. Поясню на функції двох змінних. У нас тут записано \\ $\displaystyle\sup_{y \in [y(v_2),y(v_2+1)]} \left( \sup_{x \in [x(0),x(1)]} f(x,y) + \dots + \sup_{x \in [x(n_1-1), x(n_1)] }f(x,y)\right)$.\\
 Кожний $\displaystyle\sup_{x \in [x(v_1),x(v_1+1)]} f(x,y)$ стане функцією від однієї змінної (у цьому випвадку від $y$), всі вони будуть визначені на одному відрізку $[y(v_2),y(v_2+1)]$. А ми вже знаємо, що $\displaystyle\sup_D (f+g) \leq \sup_D f + \sup_D g$. Отже,\\
@@ -418,9 +684,7 @@ $\displaystyle\sup_{y \in [y(v_2),y(v_2+1)]} \left( \sup_{x \in [x(0),x(1)]} f(x
 $\overset{??}{\leq}$. Поясню на функції двох змінних. Хочемо $\displaystyle\sup_{y \in [y(v_k),y(v_k+1)]} \sup_{x \in [x(v_l),x(v_l+1)]} f(x,y) \leq \sup_{\substack{x \in [x(v_l),x(v_l+1)] \\ y \in [y(v_k),y(v_k+1)]}} f(x,y)$.\\
 Позначимо $\displaystyle\sup_{(x,y)} f(x,y) = M$. Тоді $\forall (x,y): f(x,y) \leq M$. Зокрема $\forall x: f(x,y) \leq M \\ \implies \displaystyle\sup_x f(x,y) \leq M$, ця нерівність виконана $\forall y$. Тому звідси $\displaystyle\sup_y \sup_x f(x,y) \leq M$.\\
 Аналогічним чином ми доводимо, що $\displaystyle\int_{a_k}^{b_k} g_k(x)\,dx \geq L(f,\lambda)$.\\
-Оскільки $L(f,\lambda) \leq \displaystyle\int\displaylimits_Q f(\vec{x})\,d \vec{x} \leq U(f,\lambda)$, то звідси\\
-$\displaystyle\abs{\int\displaylimits_Q f(\vec{x})\,d \vec{x} - \int_{a_k}^{b_k} g_k(x)\,dx} \leq U(f,\lambda) - L(f,\lambda) < \varepsilon$.\\
-Оскільки це виконано $\forall \varepsilon >0$, то довели рівність.
+Оскільки $L(f,\lambda) \leq \displaystyle\int\displaylimits_Q f(\vec{x})\,d \vec{x} \leq U(f,\lambda)$, то звідси $\displaystyle\abs{\int\displaylimits_Q f(\vec{x})\,d \vec{x} - \int_{a_k}^{b_k} g_k(x)\,dx} \leq U(f,\lambda) - L(f,\lambda) < \varepsilon$. Оскільки це виконано $\forall \varepsilon >0$, то довели рівність.
 \end{proof}
 
 \begin{corollary}
@@ -432,15 +696,24 @@ $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x} = \int_{a_m}^{b_m} \dots
 \end{remark}
 
 \begin{corollary}
+\label{multiple_integral_reducing_dimension_2}
 $\displaystyle\int\displaylimits_Q f(\vec{x})\,d\vec{x} = \int\displaylimits_{Q_k} \left( \int_{a_k}^{b_k} f(x_1,\dots,x_{k-1},x_k,x_{k+1},\dots,x_m)\,dx_k \right)\,dx_1 \dots dx_{k-1}\,dx_{k+1}\,\dots dx_m$.\\
 \textit{Випливає з попереднього наслідка.}
 \end{corollary}
 
 \begin{corollary}
+\label{lagrange_and_integral}
 $\displaystyle\int\displaylimits_Q \departial{f}{x_k}(\vec{x})\,d\vec{x} = \displaystyle\int\displaylimits_{Q_k} f(x_1,\dots,x_{k-1},b_k,x_{k+1},\dots,x_m)\,dx_1\dots dx_{k-1}\,dx_{k+1}\dots dx_m - \\ - \int\displaylimits_{Q_k} f(x_1,\dots,x_{k-1},a_k,x_{k+1},\dots,x_m)\,dx_1\dots dx_{k-1}\,dx_{k+1}\dots dx_m$.\\
 Це за умовою, що $\departial{f}{x_k} \in C(Q)$.\\
 \textit{Випливає з попереднього наслідка та формули Ньютона-Лейбніца.}
 \end{corollary}
+
+\noindent
+Трохи додаткової вставочки, чому ми вимагаємо $f \in C(Q)$. Виявляється, якщо трохи послабити та вимагати лише $f \in \mathcal{R}(Q)$ (уже без неперервності), то ми не зможемо обчислювати кратні інтеграли через зведення до однократних. Я дам приклад, але не буду в деталі ритися. Це можна побачити в використаних джерелах.
+
+\begin{example}
+Розглянемо брус $Q = [0,1] \times [0,1]$, а також функцію $f(x,y) = \begin{cases} 1, & x = \dfrac{1}{2}, y \in \mathbb{Q} \\ 0, & \text{інакше} \end{cases}$. Зауважимо спочатку, що функція $f \in \mathcal{R}([0,1] \times [0,1])$, причому $\displaystyle\iint\displaylimits_Q f(x,y)\,dx\,dy = 0$. Проте не існує інтеграла $\displaystyle\int_0^1 \left( \int\displaylimits_{Q_2} f(x,y)\,dy \right)\,dx$, де $Q_1 = [0,1]$ -- проєкція $Q$ на $OY$. Отже, уже можна сказати, що $\displaystyle\iint\displaylimits_Q f(x,y)\,dx\,dy \neq \int_0^1 \left( \int\displaylimits_{Q_2} f(x,y)\,dy \right)\,dx$. 
+\end{example}
 
 \iffalse
 \begin{remark}
@@ -472,34 +745,30 @@ $Q(v_1,\dots,v_m) \cap Q_1$ та $Q(v_1,\dots,v_m) \cap Q_2$ мають непо
 
 Допоміжна теорема на майбутнє.
 \begin{theorem}[Теорема Вейєрштрасса про наближення неперервної функції]
-Задано $f \in C([a,b])$. Тоді $\forall \varepsilon > 0: \exists P_\varepsilon$ - многочлен: $\forall x \in [a,b]: |f(x) - P_\varepsilon(x)| < \varepsilon$.
+Задано $f \in C([a,b])$. Тоді $\forall \varepsilon > 0: \exists P_\varepsilon$ -- многочлен: $\forall x \in [a,b]: |f(x) - P_\varepsilon(x)| < \varepsilon$.
 \end{theorem}
 
 \begin{proof}
 Розглянемо випадок, коли функція $f \in C([0,1])$. Введемо такий многочлен:\\
 $B_n(f,x) = \displaystyle\sum_{k=0}^n f \left( \dfrac{k}{n} \right) p_{nk}(x)$, де $p_{nk}(x) = C_n^k x^k (1-x)^{n-k}$.\\
-Тут $n \in \mathbb{N}, x \in [0,1]$. Її ще називають \textbf{многочленом Бернштейна}. \\
-(щось схожий на сумування ймовірностей за схемою Бернуллі).\\
-Тут вважаємо, що $0^0 = 1$, бо можна довизначити усунені точки.\\
-За теоремою Кантора, для числа $\dfrac{\varepsilon}{2}$\\
-$\exists \delta: \forall x_1,x_2 \in [0,1]: |x_1-x_2| < \delta \implies |f(x_1)-f(x_2)| < \dfrac{\varepsilon}{2}$.\\
+Тут $n \in \mathbb{N}, x \in [0,1]$. Її ще називають \textbf{многочленом Бернштейна}. (чимось схожий на сумування ймовірностей за схемою Бернуллі). Тут вважаємо, що $0^0 = 1$, бо можна довизначити усунені точки. За теоремою Кантора, для числа $\dfrac{\varepsilon}{2}$ існуватиме $\delta$, де $\forall x_1,x_2 \in [0,1]: |x_1-x_2| < \delta \implies |f(x_1)-f(x_2)| < \dfrac{\varepsilon}{2}$.\\
 Зауважимо, що $\displaystyle\sum_{k=0}^n p_{nk}(x) = 1$.
 Тоді\\
 $|f(x) - B_{n}(f,x)| = \displaystyle\abs{\sum_{k=0}^n \left( f(x) - f\left( \dfrac{k}{n} \right) \right) p_{nk}(x) } \leq \sum_{k=0}^n \abs{f(x) - f\left( \dfrac{k}{n} \right)} |p_{nk}(x)| \\
 = \sum_{k: \left| x -\frac{k}{n} \right| < \delta} \abs{f(x) - f\left( \dfrac{k}{n} \right)} p_{nk}(x) + \sum_{k: \left| x -\frac{k}{n} \right| \geq \delta} \abs{f(x) - f\left( \dfrac{k}{n} \right)} p_{nk}(x) \boxed{<}$\\
 У першій сумі $\abs{f(x) - f\left( \dfrac{k}{n} \right)} < \dfrac{\varepsilon}{2}$ за Кантором.\\
-У другій сумі $\abs{f(x) - f\left( \dfrac{k}{n} \right)} \leq 2C$, оскільки $f$ - обмежена.\\
+У другій сумі $\abs{f(x) - f\left( \dfrac{k}{n} \right)} \leq 2C$, оскільки $f$ -- обмежена.\\
 $\boxed{<} \displaystyle \dfrac{\varepsilon}{2} \sum_{k: \left| x -\frac{k}{n} \right| < \delta} p_{nk}(x) + 2C \sum_{k: \left| x -\frac{k}{n} \right| \geq \delta} p_{nk}(x) \overset{?}{\leq} \dfrac{\varepsilon}{2} \sum_{k=0}^n p_{nk}(x) + 2C \dfrac{1}{\delta^2} \sum_{k=0}^n \left( x -\dfrac{k}{n} \right)^2 p_{nk}(x) = \dfrac{\varepsilon}{2} + \dfrac{2C}{\delta^2} \dfrac{x(1-x)}{n} \leq \dfrac{\varepsilon}{2} + \dfrac{C}{2n\delta^2}$\\
 Пояснення $\overset{?}{\leq}$. Маємо $\abs{x - \dfrac{k}{n}} \geq \delta \implies \left( x - \dfrac{k}{n} \right)^2 \geq \delta^2 \implies \dfrac{1}{\delta^2} \left( x - \dfrac{k}{n} \right)^2 \geq 1$. А отже, звідси\\
 $\displaystyle\sum_{k: \abs{x - \frac{k}{n}} \geq \delta} p_{nk}(x) \cdot 1 \leq \sum_{k: \abs{x - \frac{k}{n}} \geq \delta} p_{nk}(x) \dfrac{1}{\delta^2} \left( x - \dfrac{k}{n} \right)^2 \leq \dfrac{1}{\delta^2} \sum_{k=0}^n p_{nk}(x) \left( x - \dfrac{k}{n} \right)^2$.\\
-Оскільки $\dfrac{C}{2n\delta^2} \to 0$, то $\exists N: \dfrac{C}{2n\delta^2} < \dfrac{\varepsilon}{2}$.\\
-Таким чином, $\forall \varepsilon > 0: \exists N: \exists P_\varepsilon(x) = B_n(f,x): \forall x \in [0,1]: \\ |f(x)- P_{\varepsilon}(x)| < \varepsilon$.
+Оскільки $\dfrac{C}{2n\delta^2} \to 0$, то $\exists N: \dfrac{C}{2N\delta^2} < \dfrac{\varepsilon}{2}$.\\
+Таким чином, $\forall \varepsilon > 0: \exists N: \exists P_\varepsilon(x) = B_n(f,x): \forall x \in [0,1]: |f(x)- P_{\varepsilon}(x)| < \varepsilon$.
 \bigskip \\
 У випадку $f \in C([a,b])$ ми розглянемо функцію $g(t) = f(a+t(b-a)) \in C([0,1])$.
 \end{proof}
 
 \begin{theorem}[Теорема Вейєрштрасса про наближення неперервної функції в $\mathbb{R}^n$]
-Задано функцію $f \in C(A)$, де $A$ - компакт. Тоді $\forall \varepsilon > 0: \exists P_\varepsilon$ - многочлен: $\forall \vec{x} \in A: |f(\vec{x}) - P_\varepsilon(\vec{x})| < \varepsilon$.
+Задано функцію $f \in C(A)$, де $A$ -- компакт. Тоді $\forall \varepsilon > 0: \exists P_\varepsilon$ -- многочлен: $\forall \vec{x} \in A: |f(\vec{x}) - P_\varepsilon(\vec{x})| < \varepsilon$.
 \end{theorem}
 
 \begin{proof}
@@ -514,13 +783,14 @@ I. $(i_1,\dots,i_m)$, щоб $\Norm{(x_1,\dots,x_m) - \left(\dfrac{i_1}{s_1},\do
 II. $(i_1,\dots,i_m)$, щоб $\Norm{(x_1,\dots,x_m) - \left(\dfrac{i_1}{s_1},\dots,\dfrac{i_m}{s_m} \right)} \geq \delta$\\
 Із другого випливає, що $\left( x_1 - \dfrac{i_1}{s_1}\right)^2 + \dots + \left( x_m - \dfrac{i_m}{s_m} \right)^2 \geq \delta^2$, а звідси\\
 $1 \leq \dfrac{1}{\delta^2} \left( x_1 - \dfrac{i_1}{s_1}\right)^2 + \dots + \dfrac{1}{\delta^2} \left( x_m - \dfrac{i_m}{s_m}\right)^2$. Ну а там вже аналогічно доведеться все, що треба. Але це тільки частинний випадок.\\
-Тепер нехай $f \in C(A)$, де $A$ - компакт. Звідси обмеженість множини, а тому $\exists R > 0: A \subset U_R(\vec{0})$.\\
+Тепер нехай $f \in C(A)$, де $A$ -- компакт. Звідси обмеженість множини, а тому $\exists R > 0: A \subset U_R(\vec{0})$.\\
 Навколо цього окола можемо описати куб $S_R = \{ \vec{x} \in \mathbb{R}^m: |x_1| \leq R, \dots |x_m| \leq R \} \supset U_R(\vec{0})$.\\
 Ми продовжимо функцію $f$ до $S_R$ так, щоб $f \in C(S_R)$. Це можна зробити, завдяки теоремі Тітце.\\
 Зауважимо, що $S_R = [-x_1,x_1] \times \dots \times [-x_m,x_m]$. А ось тепер розглянемо функцію $g(t_1,\dots,t_m) = f(-x_1+2t_1x_1, \dots, -x_m+2t_mx_m)$, причому тепер $t_1,\dots,t_m \in [0,1]$. Для цієї функції вже многочлен існує, за попереднім пунктом.
 \end{proof}
 
-\subsection{Розбиття простору $\mathbb{R}^2$}
+\subsection{Розбиття простору $\mathbb{R}^m$}
+Я вирішив спочатку показати розбиття простору $\mathbb{R}^2$. Як узагальнити на $\mathbb{R}^m$, буде ясно.
 \begin{definition}
 \textbf{Розбиття нульового порядку} простора $\mathbb{R}^2$ визначається ось так:
 \begin{align*}
@@ -602,9 +872,10 @@ Q^{(n)} = \left\{ (x,y): x \in \left[\dfrac{n_1}{2^n},\dfrac{n_1+1}{2^n} \right]
 \end{enumerate}
 \end{remark}
 
-Позначення: $\pi^{(n)} = \{ Q^{(n)}(n_1,n_2) \mid n_1,n_2 \in \mathbb{Z}\}$ -- множина цих брусів довжиною $\dfrac{1}{2^n}$.
+Позначення: $\pi^{(n)} = \{ Q^{(n)}(n_1,n_2) \mid n_1,n_2 \in \mathbb{Z}\}$ -- множина цих брусів довжиною $\dfrac{1}{2^n}$. Або позначають ще інколи $\pi^{(n)}_{\textcolor{red}{2}}$, де червона двійка -- це розмірність простору.
 
 \subsection{Вимірні множини. Міра Жордана}
+Аналогічно для нормального сприйняття інфи я розгляну двовимірний випадок, узагальнити можна.\\
 Уже відомо, що для бруса $Q = [a_1,b_1] \times [a_2,b_2]$ міра визначається як
 \begin{align*} 
 m(Q) = (b_1-a_1)(b_2-a_2).
@@ -733,7 +1004,7 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \qqu
 \end{scope}
 \end{scope}
 \end{tikzpicture}
-\caption*{Тут червона область заповнена всередині, не просто множиина лінія.}
+\caption*{Тут червона область заповнена всередині.}
 \end{figure}
 
 \begin{remark}
@@ -788,7 +1059,7 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \qqu
 \end{figure}
 
 \begin{remark}
-Якщо не існує бруса $Q \in \pi^{(n)}$, для якого $Q \subset F$, вважаємо, що $F_{(n)} = \emptyset$.
+Якщо не існує бруса $Q \in \pi^{(n)}$, для якого $Q \subset F$, природно вважати, що $F_{(n)} = \emptyset$.
 \end{remark}
 
 \begin{figure}[H]
@@ -835,10 +1106,10 @@ F^{(n)} = \bigcup_{\substack{Q \in \pi^{(n)} \\ Q \cap F \neq \emptyset}} Q \qqu
 \node[red] at (0.25,0.25) {$F$};
 \node[blue] at (2,-1.55) {$\Delta F_{(n)}$};
 \end{tikzpicture}
-\caption*{Тут червона область уже НЕ заповненав всередині, тобто $F$ -- це просто лінія.}
+\caption*{Тут червона область уже НЕ заповненав всередині, тобто $F$ -- це просто контур.}
 \end{figure}
 
-Згідно з цими визначеннями, має місце співвідношення:\\
+Згідно з визначеннями $F_{(n)},F^{(n)}, \Delta F_{(n)}$, мають місця співвідношення:\\
 $F_{(n)} \subset F \subset F^{(n)} \hspace{3cm} F \setminus F_{(n)} \subset F^{(n)} \setminus F_{(n)} \subset \Delta F_{(n)}$.\\
 %uncomennt if details needed
 \iffalse
@@ -864,7 +1135,7 @@ $0 \leq m(F_{(n)}) \leq m(F_{n+1}) \leq m(F^{(n+1)}) \leq m(F^{(n)})$.\\
 Міри $m(F_{(0)})$ та $m(F^{(0)})$ -- скінченні, просто тому що множина $F$ обмежена. Тоді ми отримаємо, що послідовність $\{m(F_{(n)}), n \geq 0\}$ -- монотонно неспадна та обмежена; послідовність $\{m(F^{(n)}), n \geq 0\}$ -- монотонно незростаюча та обмежена. Отримаємо нові означення:
 
 \begin{definition}
-Задано $F \subset \mathbb{R}^2$ -- обмежена множина.\\
+Задано $F \subset \mathbb{R}^m$ -- обмежена множина.\\
 \textbf{Внутрішньою мірою} множини $F$ називають число
 \begin{align*}
 m_*(F) \overset{\text{def.}}{=} \lim_{n \to \infty} m(F_{(n)}) \overset{\text{або}}{=} \sup_{n \geq 0} m(F_{(n)})
@@ -880,7 +1151,7 @@ m^*(F) \overset{\text{def.}}{=} \lim_{n \to \infty} m(F^{(n)}) \overset{\text{а
 \end{remark}
 
 \begin{definition}
-Обмежена множина $F \subset \mathbb{R}^2$ називається \textbf{вимірною за Жорданом}, якщо
+Обмежена множина $F \subset \mathbb{R}^m$ називається \textbf{вимірною за Жорданом}, якщо
 \begin{align*}
 m_*(F) = m^*(F)
 \end{align*}
@@ -889,22 +1160,27 @@ m_*(F) = m^*(F)
 \end{definition}
 
 \begin{remark}
-$\mathcal{K}_m \neq \emptyset$ (оскільки ми зараз розглядаємо переважно випадок $\mathcal{K}_2$, то я знайду множину на площині, яка вимірна за Жорданом. Для вищих розмірностей можна аналогічно побудувати приклад).\\
+$\mathcal{K}_2 \neq \emptyset$ \\
+\textit{(оскільки ми зараз розглядаємо переважно випадок $\mathcal{K}_2$, то я знайду множину на площині, яка вимірна за Жорданом. Для вищих розмірностей можна аналогічно побудувати приклад)}.\\
 Наприклад, беремо множину $F = [0,1] \times [0,1]$. Множина $F_{(n)} = F$ за властивостями розбиття $\mathbb{R}^2$. Водночас $F^{(n)} = \left[ 0 - \dfrac{1}{2^n}, 1+\dfrac{1}{2^n} \right] \times \left[0 - \dfrac{1}{2^n}, 1+\dfrac{1}{2^n} \right]$.\\
-$m_*(F) = 1, \qquad m^*(F) = \displaystyle\lim_{n \to \infty} \left( 1+\dfrac{1}{2^n} - 0 + \dfrac{1}{2^n} \right)^2 = 1$\\
+$m_*(F) = 1, \qquad m^*(F) = \displaystyle\lim_{n \to \infty} \left( 1+\dfrac{1}{2^n} - 0 + \dfrac{1}{2^n} \right)^2 = 1$.\\
 Отже, множина $F \in \mathcal{K}_2$.
 \end{remark}
 
-\begin{example}
-Довести, що якщо $F \in \mathcal{K}$ та не містить внутрішніх точок, то $m(F) = 0$. Дане твердження працює для будь-якої розмірності, тому я індекс не писав.\\
+\begin{proposition}
+Нехай $F$ -- вимірна (тобто $F \in \mathcal{K}$), причому не містить внутрішні точки, тобто $\Int F = \emptyset$. Тоді $m(F) = 0$.\\
+\textit{Дане твердження працює для будь-якої розмірності, тому я індекс в $\mathcal{K}$ не писав.}
+\end{proposition}
+
+\begin{proof}
 Маємо $m_*(F) = m^*(F)$. Покажемо, що $m_*(F) = 0$, а для цього ми покажемо, що $F_{(n)} = \emptyset, \forall n \geq 1$.\\
 !Припустимо, що $F_{(n)} \neq \emptyset$, тоді існує принаймні один брус $Q \subset F$. Оскільки брус $Q$ містить внутрішні точки, тому ці ж внутрішні точки лежать в $F$. Суперечність!\\
 Отже, $F_{(n)} = \emptyset \implies m_*(F) = 0 \implies m(F) = 0$.
-\end{example}
+\end{proof}
 
 \begin{theorem}
-Задано $F \subset \mathbb{R}^2$ -- обмежена.\\
-$F \in \mathcal{K}_2 \iff m(\Delta F_{(n)}) \to 0, n \to \infty$.\\
+Задано $F \subset \mathbb{R}^m$ -- обмежена.\\
+$F \in \mathcal{K}_m \iff m(\Delta F_{(n)}) \to 0, n \to \infty$.\\
 \textit{Переформулювання означення вимірної множини.}
 \end{theorem}
 
@@ -920,7 +1196,7 @@ $F \in \mathcal{K}_2 \iff m(\Delta F_{(n)}) \to 0, n \to \infty$.\\
 Довести, що $[a,b] \in \mathcal{K}_1$ та $m([a,b]) = b-a$.\\
 Спочатку зауважимо, що $\Delta [a,b]_{(n)}$ складається або з одного, або з двох відрізків довжинами $\dfrac{1}{2^n}$.\\
 В обох випадках ми отримаємо $m(\Delta [a,b]_{(n)}) \to 0$ при $n \to \infty$. Отже, $[a,b] \in \mathcal{K}_1$.\\
-Розглянемо тепер $[a,b]_{(n)}$. Зрозуміло, що $m([a,b]_{(n)}) \leq b-a$, оскільки $[a,b]_{(n)}$ складається з відрізків, що всередині $[a,b]$, а міра $m([a,b]_{(n)}) = r - l$, де $r,l$ - відповідно правий та лівий кінці, що лежать всередині $[a,b]$.\\
+Розглянемо тепер $[a,b]_{(n)}$. Зрозуміло, що $m([a,b]_{(n)}) \leq b-a$, оскільки $[a,b]_{(n)}$ складається з відрізків, що всередині $[a,b]$, а міра $m([a,b]_{(n)}) = r - l$, де $r,l$ -- відповідно правий та лівий кінці, що лежать всередині $[a,b]$.\\
 Також зауважимо, що $m([a,b]_{(n)}) \geq b-a -2 \cdot \dfrac{1}{2^n}$, оскільки $r \geq b- \dfrac{1}{2^n}$ та $l \geq a- \dfrac{1}{2^n}$.\\
 Загалом маємо $b-a- 2 \cdot \dfrac{1}{2^n} \leq m([a,b]_{(n)}) \leq b-a$.\\
 Якщо $n \to \infty$, то отримаємо $m_*([a,b]) = b-a = m^*([a,b])$.\\
@@ -1093,14 +1369,14 @@ $A \cap B \in \mathcal{K}$, оскільки $A \cap B = A \setminus (A \setminu
 \end{theorem}
 
 \begin{proof}
-1.Зауважимо, що $(A \cup B)_{(n)} \subset A_{(n)} \cup \Delta A_{(n)} \cup B_{(n)} \cup \Delta B_{(n)}$. Дійсно,\\
+1) Зауважимо, що $(A \cup B)_{(n)} \subset A_{(n)} \cup \Delta A_{(n)} \cup B_{(n)} \cup \Delta B_{(n)}$. Дійсно,\\
 беремо якийсь брус $Q$ із $(A \cup B)_{(n)}$, тоді звідси $Q \subset A \cup B$. Тут є кілька варіантів:\\
 $\left[\begin{gathered} Q \subset A \\ Q \subset B \\ Q \not\subset A, Q \cap A \neq \emptyset, Q \not\subset B, Q \cap B \neq \emptyset \end{gathered} \right. \implies \left[ \begin{gathered} Q \text{ із } A_{(n)} \\ Q \text{ із } B_{(n)} \\ Q \text{ із } \Delta A_{(n)} \text{ та із } \Delta B_{(n)}   \end{gathered} \right. \\ \implies Q \text{ із } A_{(n)} \cup B_{(n)} \cup \Delta A_{(n)} \cup \Delta B_{(n)}$. Таким чином, отримаємо бажане.\\
 Тоді $m((A \cup B)_{(n)}) \leq m(A_{(n)}) + m(\Delta A_{(n)}) + m(B_{(n)}) + m(\Delta B_{(n)})$.\\
 \textit{Тут саме множини, що допускають розклад в бруси. Монотонність для них виконана.}\\
 Отже, $m(A \cup B) = \displaystyle\lim_{n \to \infty} m((A \cup B)_{(n)}) \leq \lim_{n \to \infty} m(A_{(n)}) + 0 + \lim_{n \to \infty} m(B_{(n)}) + 0 = m(A) + m(B)$.
 \bigskip \\
-2. Для цього нам достатньо довести нерівність $m(A \cup B) \geq m(A) + m(B)$.\\
+2) Для цього нам достатньо довести нерівність $m(A \cup B) \geq m(A) + m(B)$.\\
 Маємо $A_{(n)} \cup B_{(n)} \subset (A \cup B)_{(n)}$, причому $A_{(n)},B_{(n)}$ не мають спільних брусів $Q \in \pi^{(n)}$.\\
 !Припустимо, що це не так. Маємо $Q$ - брус для $A_{(n)}$ та $B_{(n)}$. Цей брус $Q$ ясно, що має внутрішні точки, тоді звідси $A_{(n)}, B_{(n)}$ мають ці внутрішні точки. Раз $A_{(n)},B_{(n)}$ мають внутрішні точки, то тоді $A,B$ мають ці внутрішні точки, тобто $\Int(A) \cap \Int(B) \neq \emptyset$, що суперечить!\\
 Отже, $m(A_{(n)} \cup B_{(n)}) = m(A_{(n)}) + m(B_{(n)}) \leq m((A \cup B)_{(n)})$.\\
@@ -1108,7 +1384,7 @@ $\left[\begin{gathered} Q \subset A \\ Q \subset B \\ Q \not\subset A, Q \cap A 
 Таким чином, $m(A \cup B) = \displaystyle\lim_{n \to \infty} m((A \cup B)_{(n)}) \geq \lim_{n \to \infty} m(A_{(n)}) + \lim_{n \to \infty} m(B_{(n)}) = m(A) + m(B)$.\\
 Із властивості 1 випливає, що $m(A \cup B) = m(A) + m(B)$.
 \bigskip \\
-3. Тут зауважимо, що $B = A \cup (B \setminus A)$, причому $A \cap (B \setminus A) = \emptyset$, а тому за властивостю 2,\\
+3) Тут зауважимо, що $B = A \cup (B \setminus A)$, причому $A \cap (B \setminus A) = \emptyset$, а тому за властивостю 2,\\
 $m(B) = m(A) + m(B \setminus A) \geq m(A)$.
 \end{proof}
 
@@ -1124,14 +1400,14 @@ C = \{ (x,y): x \in A, y \in [u_1(x),u_2(x)] \}
 \centering
 \begin{tikzpicture}
 \draw[thick] (-0.2,0)--(0.5,0);
-\draw[thick,red] (0.5,0)--(4,0);
-\draw[thick,->] (4,0)--(5,0) node[anchor = north west] {$x$};
+\draw[thick,red] (0.4,0)--(3.9,0);
+\draw[thick,->] (3.9,0)--(5,0) node[anchor = north west] {$x$};
 \draw[thick,->] (0,-0.2)--(0,3) node[anchor = south east] {$y$};
-\draw [red, thick, name path=A] plot [smooth] coordinates {(0.5,0.5) (2,1) (3,0.5) (4,1)} node[anchor = north west] {$u_1$};
-\draw [red, thick, name path=B] plot [smooth] coordinates {(0.5,2.5) (1,1.5) (2,2.5) (4,2)} node[anchor = north west] {$u_2$};
+\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (3.9,1)} node[anchor = north west] {$u_1$};
+\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.2) (2,2.5) (3.9,2)} node[anchor = north west] {$u_2$};
 \tikzfillbetween[of=A and B]{red, opacity=0.2};
-\draw[red] (0.5,0.5)--(0.5,2.5);
-\draw[red] (4,1)--(4,2);
+\draw[red] (0.4,0.4)--(0.4,2.4);
+\draw[red] (3.9,1)--(3.9,2);
 \node at (2,2) {$C$};
 \node at (2,-0.5) {$baC$};
 \end{tikzpicture}
@@ -1139,8 +1415,17 @@ C = \{ (x,y): x \in A, y \in [u_1(x),u_2(x)] \}
 \end{definition}
 
 \begin{example}
-Трикутник - приклад циліндричної множини.
+Трикутник -- приклад циліндричної множини.
 \end{example}
+
+\begin{remark}
+Швиденько узагальню означення дли вищих розмірностей. Маємо $A \subset \mathbb{R}^{m-1}$ та дві функції $u_1,u_2 \colon A \to \mathbb{R}$ так, що $u_1(x_1,\dots,x_{m-1}) \leq u_2(x_1,\dots,x_{m-1})$. \\
+Тоді циліндричною в напрямку осі $OX_m$ множиною назвемо підмножину $\mathbb{R}^m$ ось таку:
+\begin{align*}
+C = \{ (x_1,\dots,x_{m-1},x_m): (x_1,\dots,x_{m-1}) \in A,\ x_m \in [u_1(x_1,\dots,x_{m-1}),u_2(x_1,\dots,x_{m-1}) \}
+\end{align*}
+Аналогічно множина $A$ називають основною $C$ та позначають за $baC$.
+\end{remark}
 
 \begin{remark}
 Брус $Q = [a_1,b_1] \times [a_2,b_2]$ також є циліндричною множиною з основною $baQ = [a_1,b_1]$, тут визначаються функції $u_1(x) = a_2$ та $u_2(x) = b_2$.\\
@@ -1148,79 +1433,138 @@ C = \{ (x,y): x \in A, y \in [u_1(x),u_2(x)] \}
 \end{remark}
 
 \begin{theorem}
-Задано $C$ - циліндрична множина за означенням вище. Припустимо, що\\
-1) $ba C$ - компактна, вимірна на $\mathbb{R}$;\\
-2) $u_1,u_2 \in C(ba C)$.\\
-Тоді $C$ - компактна, вимірна на $\mathbb{R}^2$.
+Задано $C$ -- циліндрична множина за означенням вище. Припустимо, що
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $ba C$ -- компактна, вимірна на $\mathbb{R}^{m-1}$;
+\item $u_1,u_2 \in C(ba C)$.
+\end{enumerate}
+Тоді $C$ -- компактна, вимірна на $\mathbb{R}^m$.
 \end{theorem}
 
 \begin{proof}
-Множина $C$ буде обмеженою. Дійсно, за умовою, $\exists R > 0: \forall x \in baC: |x| \leq R$. Також $(x,y) \in C$ означає, що $u_1 \leq y \leq u_2$, але оскільки $baC$ - компакт, то ці функції обмежені, тож $R_1 \leq y \leq R_2 \implies |y| \leq R^*$, де $R^* = \max\{R_1,R_2\}$. Отже,\\
-$\Norm{(x,y)} = \sqrt{x^2+y^2} \leq \sqrt{R^2 + (R^*)^2}$ - обмежили деяких числом.
+Обмежусь доведенням в двовимірному випадку. На іншу розмірність доведення залишається таким самим.\\
+Множина $C$ буде обмеженою. Дійсно, за умовою, $\exists R > 0: \forall x \in baC: |x| \leq R$. Також $(x,y) \in C$ означає, що $u_1 \leq y \leq u_2$, але оскільки $baC$ -- компакт, то ці функції обмежені, тож $R_1 \leq y \leq R_2 \implies |y| \leq R^*$, де $R^* = \max\{R_1,R_2\}$. Отже, $\|(x,y)\| = \sqrt{x^2+y^2} \leq \sqrt{R^2 + (R^*)^2}$ -- обмежили числом.
 \bigskip \\
-Множина $C$ буде замкненою. Дійсно, нехай $(x_0,y_0) \in \mathbb{R}^2$ - гранична точка $C$. Тоді існує послідовність $\{(x^{(n)},y^{(n)}), n \geq 1\} \subset C$, причому $(x_0,y_0) \neq (x^{(n)},y^{(n)})$, яка збігається до точки $(x_0,y_0)$. Оскільки $x^{(n)} \in baC$ та $x^{(n)} \to x$, то звідси $x$ - гранична точка $baC$, а в силу замкнености маємо $x \in baC$.\\
-Більш того, $u_1(x^{(n)}) \leq y^{(n)} \leq u_2(x^{(n)}) \overset{n \to \infty}{\implies} u_1(x) \leq y \leq u_2(x)$, тобто звідси $(x,y) \in C$.
+Множина $C$ буде замкненою. Дійсно, нехай $(x_0,y_0) \in \mathbb{R}^2$ -- гранична точка $C$. Тоді існує послідовність $\{(x^{(n)},y^{(n)}), n \geq 1\} \subset C$, причому $(x_0,y_0) \neq (x^{(n)},y^{(n)})$, яка збігається до точки $(x_0,y_0)$. Оскільки $x^{(n)} \in baC$ та $x^{(n)} \to x_0$, то звідси в силу замкнености маємо $x_0 \in baC$. Більш того, $u_1(x^{(n)}) \leq y^{(n)} \leq u_2(x^{(n)}) \overset{n \to \infty}{\implies} u_1(x_0) \leq y_0 \leq u_2(x_0)$, тобто звідси $(x_0,y_0) \in C$.
 \bigskip \\
-Залишилось показати, що $C$ - вимірна за Жорданом. Нам необхідно для цього оцінити $m(\Delta C_{(n)})$. Маємо розбиття $\mathbb{R}^2$ порядку $n$. Ми поки розбиваємо $\mathbb{R}^2$, ми тим часом також розбиваємо $\mathbb{R}$.\\
+Залишилось показати, що $C$ -- вимірна за Жорданом. Нам необхідно для цього оцінити $m(\Delta C_{(n)})$. Маємо розбиття $\mathbb{R}^2$ порядку $n$. Ми поки розбиваємо $\mathbb{R}^2$, ми тим часом також розбиваємо $\mathbb{R}$.\\
 Зауважимо, що\\
-$\Delta C_{(n)} = \displaystyle\bigcup_{\substack{Q \not\subset C_{(n)} \\ Q \subset C^{(n)}}} Q = \bigcup_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset \Delta (baC)_{(n)} }} Q \cup \bigcup_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset (baC)_{(n)} }} Q$.\\
-Відповідно\\
-$m(\Delta C_{(n)}) = \displaystyle\sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset \Delta (baC)_{(n)} }} m(Q) + \displaystyle\sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset (baC)_{(n)} }} m(Q)$.\\
-Зрозуміло, що всюди бруси $Q \in \pi_2^{(n)}$. Просто лінь вже це писати.\\
-За умовою задачі, оскільки $u_1,u_2 \in C(baC)$, де $baC$ - це компакт, то ці функції обмежені, тобто $\exists L > 0: \forall x \in baC: -L \leq u_1(x) \leq u_2(x) \leq L$.\\
-Також $u_1,u_2 \in U_{unif}(baC)$ за теоремою Кантора, тобто звідси\\
-$\forall \varepsilon > 0: \exists \delta: \forall x_1,x_2 \in baC: |x_1-x_2| < \delta \implies |u_i(x_1) - u_i(x_2)| < \varepsilon, i = 1,2$.\\
-Оберемо такий порядок $n$, щоб діагональ бруса, тобто $\dfrac{\sqrt{m}}{2^n} < \min\{\varepsilon,\delta\}$, де в нашому випадку $m = 2$, бо ми зараз в $\mathbb{R}^2$.\\
-Тепер найскладніше - це подивитись ще детальніше на бруси з $\Delta C_{(n)}$.
+$\Delta C_{(n)} = \displaystyle\bigcup_{\substack{Q \not\subset C_{(n)} \\ Q \subset C^{(n)}}} Q = \bigcup_{\substack{Q \subset \Delta C_{(n)}: \\ baQ \subset \Delta (baC)_{(n)} }} Q \cup \bigcup_{\substack{Q \subset \Delta C_{(n)}: \\ baQ \subset (baC)_{(n)} }} Q$.
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale = 1.5]
+\begin{tikzpicture}
+\fill[blue!50] (0.25,0.75) rectangle (0.5,1);
+\fill[green!50] (0.75,0.5) rectangle (1,0.75);
 \draw[step=.25cm] (-0.4,-0.4) grid (4.9,2.9);
 \draw[thick] (-0.2,0)--(0.4,0);
 \draw[thick,red] (0.4,0)--(4,0);
-\draw[thick,->] (4,0)--(5,0) node[anchor = north west] {$x$};
+\draw[thick,->] (3.9,0)--(5,0) node[anchor = north west] {$x$};
 \draw[thick,->] (0,-0.2)--(0,3) node[anchor = south east] {$y$};
-\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (4,1)} node[anchor = north west] {$u_1$};
-\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.5) (2,2.5) (4,2)} node[anchor = north west] {$u_2$};
+\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (3.9,1)} node[anchor = north west] {$u_1$};
+\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.2) (2,2.5) (3.9,2)} node[anchor = north west] {$u_2$};
 \tikzfillbetween[of=A and B]{red, opacity=0.2};
 \draw[red] (0.4,0.4)--(0.4,2.4);
-\draw[red] (4,1)--(4,2);
+\draw[red] (3.9,1)--(3.9,2);
 \node at (2,2) {$C$};
 \node at (2,-0.75) {$baC$};
 \node[scale=0.75] at (0.4,0.2) {$baQ$};
 \end{tikzpicture}
+\caption*{Синій брус із першого об'єднання. Зелений брус із другого об'єднання.}
 \end{figure}
-Спочатку розглянемо брус $baQ \subset \Delta (baC)_{(n)}$. Нас цікавить оцінити зараз першу суму мір брусів (а ця сума мір - це крайні стовпчики на малюнку). Оберемо найбільший стовпчик серед всіх, що там є. Позначу висоту за $h_1$.\\
-$h_1 \leq 2L + 2 \cdot \dfrac{1}{2^n}$, де $\dfrac{1}{2^n}$ - сторона бруса. Тут $2L + 2 \dfrac{1}{2^n}$ - це найбільша висота, яка може тут бути в принципі між функціями $u_1$ та $u_2$ з урахуванням $2$-х квадратиків поза межами.\\
-Відповідно міра такої штуки, тобто $\displaystyle\sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset \Delta (baC)_{(n)} }} m(Q) = \sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset \Delta (baC)_{(n)} }}  m(baQ) \cdot h_1 \leq \left( 2L + 2\dfrac{1}{2^n} \right) m(\Delta (baC)_{(n)})$.
+Відповідно\\
+$m(\Delta C_{(n)}) = \displaystyle\sum_{\substack{Q \subset \Delta C_{(n)}: \\ baQ \subset \Delta (baC)_{(n)} }} m(Q) + \displaystyle\sum_{\substack{Q \subset \Delta C_{(n)}: \\ baQ \subset (baC)_{(n)} }} m(Q)$.\\
+Зрозуміло, що всюди бруси $Q \in \pi^{(n)}$. Просто лінь вже це писати.\\
+За умовою задачі, оскільки $u_1,u_2 \in C(baC)$, де $baC$ -- це компакт, то ці функції обмежені, тобто $\exists L > 0: \forall x \in baC: -L \leq u_1(x) \leq u_2(x) \leq L$.\\
+Також $u_1,u_2 \in C_{\text{unif}}(baC)$ за теоремою Кантора, тобто звідси\\
+$\forall \varepsilon > 0: \exists \delta: \forall x_1,x_2 \in baC: |x_1-x_2| < \delta \implies |u_i(x_1) - u_i(x_2)| < \varepsilon,\ i = 1,2$.\\
+Оберемо такий порядок $n$, щоб діагональ бруса $\dfrac{\sqrt{m}}{2^n} < \min\{\varepsilon,\delta\}$, де в нашому випадку $m = 2$, бо ми зараз в $\mathbb{R}^2$. Тепер найскладніше -- це подивитись ще детальніше на бруси з $\Delta C_{(n)}$. Будемо спочатку оцінювати першу суму, а потім другу суму.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale = 1.5]
+\fill[blue!50] (0.25,0.25) rectangle (0.5,2.5);
+\draw[step=.25cm] (-0.4,-0.4) grid (4.9,2.9);
+\draw[thick] (-0.2,0)--(0.4,0);
+\draw[very thick,blue] (0.25,0)--(0.5,0);
+\draw[thick,red!80] (0.4,0)--(3.9,0);
+\draw[thick,->] (3.9,0)--(5,0) node[anchor = north west] {$x$};
+\draw[thick,->] (0,-0.2)--(0,3) node[anchor = south east] {$y$};
+\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (3.9,1)} node[anchor = north west] {$u_1$};
+\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.2) (2,2.5) (3.9,2)} node[anchor = north west] {$u_2$};
+\tikzfillbetween[of=A and B]{red, opacity=0.2};
+\draw[red] (0.4,0.4)--(0.4,2.4);
+\draw[red] (3.9,1)--(3.9,2);
+\node at (2,2) {$C$};
+\node at (2,-0.75) {$baC$};
+\node[color = blue, scale=0.75] at (0.4,-0.2) {$baQ$};
+\end{tikzpicture}
+\end{figure}
+Спочатку розглянемо брус $baQ \subset \Delta (baC)_{(n)}$ (на малюнку синій). Даний брус $baQ$ -- основа деякого числа синіх брусів $Q$ із $\Delta C_{(n)}$. Вони формують деякий стовпчик. Висота $H_{\text{стопвчик}} \leq 2L + 2 \cdot \dfrac{1}{2^n}$, де $\dfrac{1}{2^n}$ -- сторона бруса. Тут $2L + 2\cdot \dfrac{1}{2^n}$ -- це найбільша висота, яка може тут бути в принципі між функціями $u_1$ та $u_2$ з урахуванням $2$-х квадратиків на краях. Відповідно $m(\text{стовпчик}) = m(baQ) \cdot H_{\text{стовпчик}} \leq m(baQ) \left(2L + 2 \cdot \dfrac{1}{2^n}\right)$.\\
+Тепер оцінимо першу суму мір:\\
+$\displaystyle\sum_{\substack{Q \subset \Delta C_{(n)}: \\ baQ \subset \Delta (baC)_{(n)} }} m(Q) = \sum_{\substack{Q \subset \Delta C_{(n)}: \\ baQ \subset \Delta (baC)_{(n)} }} m(baQ) \cdot \dfrac{1}{2^n} = \sum_{baQ \subset \Delta (baC)_{(n)}} m(baQ) \cdot H_{\text{стовпчик}} \leq \\ \leq \left( 2L + 2 \cdot \dfrac{1}{2^n} \right) \sum_{baQ \subset \Delta (baC)_{(n)}} m(baQ) = \left( 2L + 2 \cdot \dfrac{1}{2^n} \right) m(\Delta (baC)_{(n)})$.\\
+\iffalse
 \bigskip \\
-Тепер розглянемо брус $baQ \subset (baC)_{(n)}$. Нас цікавить оцінити зараз другу суму мір брусів. У нас будуть на основі $baQ$ два стопчика. Висоту двох стовпчиків позначу за $h_2$.\\
-Сторона бруса точно менша за діагональ, а тому які б точки $x_1,x_2$ з цього стовпчика я не взяв, буде $|x_1-x_2| < \delta \implies |f(x_1)-f(x_2)| < \varepsilon$. Ми оберемо ті точки, де буде найбільший модуль різниці. Відповідно, $h_2 \leq 2 \cdot \dfrac{1}{2^n} + \max |f(x_1)-f(x_2)| < 2 \cdot \dfrac{1}{2^n} + \varepsilon$.\\
-Відповідно міра такої штуки, тобто $\displaystyle\sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset \Delta (baC)_{(n)} }} m(Q) = \sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset \Delta (baC)_{(n)}}} m(baQ) \cdot h_2 \leq \left( 2 \varepsilon + 2 \dfrac{1}{2^n} \right) m(baC_{(n)})$.\\
-Отже, $m(\Delta C_{(n)}) \left( 2L + 2\dfrac{1}{2^n} \right) m(\Delta (baC)_{(n)}) + \left( 2 \varepsilon + 2 \dfrac{1}{2^n} \right) m(baC_{(n)})$.\\
-Відомо, що $baC$ вимірна за Жорданом, а тому $m(\Delta (baC)_{(n)}) < \varepsilon$, починаючи з деякого номера.\\
-Отже, $m(\Delta C_{(n)}) < \left( 2L + 2\dfrac{1}{2^n} \right) \varepsilon + \left( 2 \varepsilon + 2 \dfrac{1}{2^n} \right) m(baC) < (2L+1)\varepsilon + 2\varepsilon m(baC) = (2L+1+2m(baC))\varepsilon$.\\
-Тобто звідси $C$ - вимірна за Жорданом.
+$\displaystyle\sum_{\substack{Q \subset \Delta C_{(n)}: \\ baQ \subset \Delta (baC)_{(n)} }} m(Q) = \sum_{baQ \subset \Delta (baC)_{(n)}} \sum_{Q \subset C_{(n)}} m(Q) = \sum_{baQ \subset \Delta (baC)_{(n)}} m(baQ) \cdot H_{\text{стопвчик}} \leq \\ \leq \left( 2L + 2 \cdot \dfrac{1}{2^n} \right) \sum_{baQ \subset \Delta (baC)_{(n)}} m(baQ) = \left( 2L + 2 \cdot \dfrac{1}{2^n} \right) m(\Delta (baC)_{(n)})$.\\
+\fi
+Відомо, що $baC$ вимірна за Жорданом, а тому $m(\Delta (baC)_{(n)}) < \varepsilon$, починаючи з деякого номера. Отже,\\
+$\displaystyle\sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset \Delta (baC)_{(n)} }} m(Q) < \left(2L + 2 \cdot \dfrac{1}{2^n}\right) \varepsilon$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale = 1.5]
+\fill[green!50] (1.5,0.75) rectangle (1.75,1);
+\fill[green!50] (1.5,1.75) rectangle (1.75,2.5);
+\draw[step=.25cm] (-0.4,-0.4) grid (4.9,2.9);
+\draw[thick] (-0.2,0)--(0.4,0);
+\draw[very thick,green] (1.5,0)--(1.75,0);
+\draw[thick,red!80] (0.4,0)--(4,0);
+\draw[thick,->] (3.9,0)--(5,0) node[anchor = north west] {$x$};
+\draw[thick,->] (0,-0.2)--(0,3) node[anchor = south east] {$y$};
+\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (3.9,1)} node[anchor = north west] {$u_1$};
+\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.2) (2,2.5) (3.9,2)} node[anchor = north west] {$u_2$};
+\tikzfillbetween[of=A and B]{red, opacity=0.2};
+\draw[red] (0.4,0.4)--(0.4,2.4);
+\draw[red] (3.9,1)--(3.9,2);
+\node at (2,2) {$C$};
+\node at (2,-0.75) {$baC$};
+\node[color=green, scale=0.75] at (1.7,-0.2) {$baQ$};
+\draw[thick] (1.75,2.3)--(1.3,2.3);
+\draw[thick] (1.5,1.95)--(1.3,1.95);
+\draw[<->] (1.3,2.4)--(1.3,1.85);
+
+\draw[thick] (1.5,0.85)--(2,0.85);
+\draw[thick] (1.75,0.95)--(2,0.95);
+\draw[<->] (2, 0.75)--(2,1.1);
+\end{tikzpicture}
+\end{figure}
+Тепер розглянемо брус $baQ \subset (baC)_{(n)}$ (на малюнку зелений). Даний брус -- основа двох стовпчиків із зелених брусів $Q$ із $\Delta C_{(n)}$. Діагональ бруса $baQ$ (в одновимірному випадку це просто сторона) менша за діагональ $Q$. Ну дійсно, діагональ бруса $baQ$ буде $\dfrac{\sqrt{m-1}}{2^n} < \dfrac{\sqrt{m}}{2^n} < \delta$. Це означає, що які б ми точки $x_1,x_2 \in baQ$ не взяли, ми матимемо завжди $|x_1-x_2| < \delta$. Внаслідок чого $|u_i(x_1) - u_i(x_2)| < \varepsilon$. Що із себе представляють $|u_1(x_1) - u_1(x_2)|$ та $|u_2(x_1) - u_2(x_2)|$, -- це відповідні чорні стрілочки в дві сторони. Ми можемо обрати найбільші можливі. Тоді висота кожного стовпчика $H_{\text{стовпчик}_1} < \varepsilon + 2 \cdot \dfrac{1}{2^n}$,\ $H_{\text{стовпчик}_2} < \varepsilon + 2 \cdot \dfrac{1}{2^n}$. Сумарну висоту позначу за $h_2 = H_{\text{стопвчик}_1} + H_{\text{стопвчик}_2}$.\\
+Тепер оцінимо другу суму мір:\\
+$\displaystyle\sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset (baC)_{(n)} }} m(Q) = \sum_{\substack{Q \subset \Delta C_{(n)} \\ baQ \subset (baC)_{(n)}}} m(baQ) \cdot \dfrac{1}{2^n} = \sum_{\substack{baQ \subset (baC)_{(n)}}} m(baQ) \cdot h_2 \leq 2 \left(  \varepsilon + 2 \dfrac{1}{2^n} \right) m(baC_{(n)}) < 6 \varepsilon m(baC_{(n)})$.\\
+Отже, $m(\Delta C_{(n)}) \\ < \left( 2L + 2 \cdot \dfrac{1}{2^n} \right) \varepsilon + 6 m(baC_{(n)}) \varepsilon = \tilde{D} \varepsilon$. Тобто звідси $C$ -- вимірна за Жорданом.
 \end{proof}
+
+\begin{example}
+Зокрема розглянемо графік $\Gamma = \{(x,y) \mid x \in [a,b], y = f(x)\}$ при функції $f \in C([a,b])$. Доведемо, що $\Gamma$ -- вимірна за Жорданом в $\mathbb{R}^2$, а також $m(\Gamma) = 0$.\\
+Зауважимо, що $ba \Gamma = [a,b]$, яка є компактною та вимірною. Множину $\Gamma$ можна інтерпретувати як циліндричну множину. Я перепишу ось так: $\Gamma = \{(x,y) \mid x \in [a,b], f(x) \leq y \leq f(x)\}$. У цьому випадку в нас ніби $u_1 = f, u_2 = f$. Отже, за щойно доведеною теоремою, $\Gamma$ -- вимірна, так ще й компактна. \\
+Залишилося переконатися, що $m(\Gamma) = 0$. Але тут треба просто зауважити, що $\Gamma$ взагалі не має внутрішніх точок -- і тоді ми закінчили. Якби $(x,y) \in \Gamma$ стала внутрішньою, то існував би окіл $U_{\varepsilon}((x,y)) \subset \Gamma$. Зокрема тоді функція $f$ уже не стала б функцією, бо в точці $x$ функція приймала б два значення: $y + \dfrac{\varepsilon}{2}$ та $y$.
+\end{example}
 
 \subsection{Кратні інтеграли по вимірних множнах}
 \begin{definition}
-Маємо $A \subset \mathbb{R}^2$ - вимірна, функція $f$ - обмежена та неперервна на $A$. Для розбиття $\pi^{(n)}$ простору $\mathbb{R}^2$ визначимо множину $A_{(n)} = \displaystyle\bigcup_{\substack{Q \in \pi^{(n)} \\ Q \subset A}} Q$.\\
+Маємо $A \subset \mathbb{R}^m$ -- вимірна, функція $f \colon A \to \mathbb{R}$. Для розбиття $\pi^{(n)}$ простору $\mathbb{R}^m$ ми вже визначали множину $A_{(n)} = \displaystyle\bigcup_{\substack{Q \in \pi^{(n)} \\ Q \subset A}} Q$.\\
 \textbf{Інтеграл на множині} $A_{(n)}$ визначається таким чином:
 \begin{align*}
-\int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy = \sum_{\substack{Q \in \pi^{(n)} \\ Q \subset A_{{(n)}}}} \int\displaylimits_Q f(x,y)\,dx\,dy
+\int\displaylimits_{A_{(n)}} f(\vec{x})\,d\vec{x} = \sum_{\substack{Q \in \pi^{(n)}: \\ Q \subset A_{{(n)}}}}\, \int\displaylimits_Q f(\vec{x})\,d\vec{x}
 \end{align*}
-Якщо $A_{(n)} = \emptyset$, то вважаємо, що $\displaystyle\int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy = 0$.
+Якщо $A_{(n)} = \emptyset$, то вважаємо, що $\displaystyle\int\displaylimits_{A_{(n)}} f(\vec{x})\,d\vec{x} = 0$.
 \end{definition}
 
 \begin{lemma}
-Послідовніть $\displaystyle\left\{ \int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy, n \geq 1 \right\}$ - фундаментальна.
+Послідовніть $\displaystyle\left\{ \int\displaylimits_{A_{(n)}} f(\vec{x})\,d\vec{x},\ n \geq 1 \right\}$ -- фундаментальна (якщо $f$ -- обмежена на $A$).
 \end{lemma}
 
 \begin{proof}
-На початку припущу, що $k>n$.\\
-$\displaystyle \left| \int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy - \int\displaylimits_{A_{(k)}} f(x,y)\,dx\,dy  \right|= \abs{\sum_{Q \subset A_{(k)} \setminus A^0_{(n)}} \int\displaylimits_{Q} f(x,y)\,dx\,dy} \leq \sum_{Q \subset A_{(k)} \setminus A^0_{(n)}} \int\displaylimits_Q |f(x,y)|\,dx\,dy \overset{f - \text{ обм}}{\leq} L\sum_{Q \subset A_{(k)} \setminus A^0_{(n)}} \int\displaylimits_Q \,dx\,dy = L \sum_{Q \subset A_{(k)} \setminus A^0_{(n)}} m(Q) = L\left( \sum_{Q \subset A_{(k)}} m(Q) - \sum_{Q \subset A_{(n)}} m(Q) \right) = L(m(A_{(k)}) - m(A_{(n)})) < L\varepsilon$\\
-Послідовність $\{ m(A_{(n)}), n \geq 1 \}$ - збіжна, а тому фундаментальна.
+На початку припущу, що $k>n$. Далі оцінимо різницю.\\
+$\displaystyle \left| \int\displaylimits_{A_{(n)}} f(\vec{x})\,d\vec{x} - \int\displaylimits_{A_{(k)}} f(\vec{x})\,d\vec{x} \right|= \abs{\sum_{Q \subset A_{(k)} \setminus \Int(A_{(n)})} \int\displaylimits_{Q} f(\vec{x})\,d\vec{x} } \leq \sum_{Q \subset A_{(k)} \setminus \Int(A_{(n)})} \int\displaylimits_Q |f(\vec{x})|\,d\vec{x} \overset{f \text{-- обмежена}}{\leq} \\ \leq L\sum_{Q \subset A_{(k)} \setminus \Int(A_{(n)})} \int\displaylimits_Q\,d\vec{x} = L \sum_{Q \subset A_{(k)} \setminus \Int(A_{(n)})} m(Q) = L\left( \sum_{Q \subset A_{(k)}} m(Q) - \sum_{Q \subset A_{(n)}} m(Q) \right) = \\ = L(m(A_{(k)}) - m(A_{(n)})) < L\varepsilon$.\\
+(ми знаємо, що послідовність $\{ m(A_{(n)}), n \geq 1 \}$ -- збіжна, а тому фундаментальна, тому остання нерівність працює).
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1248,60 +1592,65 @@ $\displaystyle \left| \int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy - \int\display
 \node[red] at (0.25,0.25) {$A$};
 \node[blue] at (2,-1.5) {$A_{(k)}$};
 \end{tikzpicture}
+\caption*{Просто з $A_{(k)}$ приберемо бруси з $A_{(n)}$ -- і буде цілком ясно, чому в сумі $Q \subset A_{(k)} \setminus \Int(A_{(n)})$.}
 \end{figure}
 \end{proof}
+\noindent
+Саме ця лема дозволить нам визначити наступне:
 
 \begin{definition}
-Маємо $A \subset \mathbb{R}^2$ - вимірна, функція $f$ - обмежена та неперервна на $A$.\\
+Маємо $A \subset \mathbb{R}^m$ -- вимірна, функція $f$ -- обмежена на $A$.\\
 \textbf{Інтеграл на множині} $A$ визачається таким чином:
 \begin{align*}
-\int\displaylimits_A f(x,y)\,dx\,dy = \lim_{n \to \infty} \int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy
+\int\displaylimits_A f(\vec{x})\,d\vec{x} = \lim_{n \to \infty} \int\displaylimits_{A_{(n)}} f(\vec{x})\,d\vec{x}
 \end{align*}
-Якщо $m(A) = 0$, то тоді $A_{(n)} = \emptyset$, а тому вважаємо, що $\displaystyle\int\displaylimits_A f(x,y)\,dx\,dy = 0$.
+Якщо $m(A) = 0$, то тоді $A_{(n)} = \emptyset$, а тому вважаємо, що $\displaystyle\int\displaylimits_A f(\vec{x})\,d\vec{x} = 0$.\\
+Знову ж таки, часто користуються позначенням $\displaystyle\idotsint_A f(x_1,\dots,x_m)\,dx_1\,\dots\,dx_m$. У випадку $\mathbb{R}^2$ позначення завжди $\displaystyle\iint_A f(x,y)\,dx\,dy$. У випадку $\mathbb{R}^3$ позначення завжди $\displaystyle\iiint_A f(x,y,z)\,dx\,dy\,dz$.
 \end{definition}
 
 \begin{theorem}
-Маємо $A \subset \mathbb{R}^2$ - вимірна, функція $f(x,y) =c $. Тоді\\
-$\displaystyle\int\displaylimits_A c\,dx\,dy = cm(A)$.
+Маємо $A \subset \mathbb{R}^m$ -- вимірна. Тоді $\displaystyle\int\displaylimits_A 1\,d\vec{x}  = m(A)$.
 \end{theorem}
 
 \begin{proof}
-$\displaystyle\int\displaylimits_{A_{(n)}} c\,dx\,dy = \sum_{Q \subset A_{(n)}} \int\displaylimits_Q c\,dx\,dy = \sum_{Q \subset A_{(n)}} c m(Q) = c m(A_{(n)}$.\\
-А далі просто $n \to \infty$.
+$\displaystyle\int\displaylimits_{A_{(n)}} 1\,d\vec{x} = \sum_{Q \subset A_{(n)}} \int\displaylimits_Q 1\,d\vec{x} = \sum_{Q \subset A_{(n)}} m(Q) = m(A_{(n)})$.\\
+А далі просто $n \to \infty$ -- отримаємо $\displaystyle\int\displaylimits_A 1\,d\vec{x} = m(A)$.
 \end{proof}
 
 \begin{theorem}
-Маємо $A \subset \mathbb{R}^2$ - вимірна, функції $f_1,f_2$ - обмежені та неперервні на $A$. \\
-Тоді $\forall c_1,c_2 \in \mathbb{R}:$\\
-$\displaystyle\int\displaylimits_A c_1 f_1(x,y) + c_2 f_2(x,y)\,dx\,dy = c_1 \int\displaylimits_A f_1(x,y) \,dx\,dy + c_2 \int\displaylimits_A f_2(x,y)\,dx\,dy$.\\
+Маємо $A \subset \mathbb{R}^m$ -- вимірна, функції $f_1,f_2$ -- обмежені на $A$. Тоді \\ $\forall c_1,c_2 \in \mathbb{R}: \displaystyle\int\displaylimits_A c_1 f_1(\vec{x}) + c_2 f_2(\vec{x})\,d\vec{x} = c_1 \int\displaylimits_A f_1(\vec{x}) \,d\vec{x} + c_2 \int\displaylimits_A f_2(\vec{x})\,d\vec{x}$.\\
 \textit{Аналогічні міркування застосувати.}
 \end{theorem}
 
 \begin{theorem}
-Маємо $A,B \subset \mathbb{R}^2$ - вимірні, причому $A^0 \cap B^0 = \emptyset$, функція $f$ - обмежена та неперервна на $A \cup B$. Тоді\\
-$\displaystyle\int\displaylimits_{A \cup B} f(x,y)\,dx\,dy = \int\displaylimits_{A} f(x,y)\,dx\,dy + \int\displaylimits_{B} f(x,y)\,dx\,dy$.
+Маємо $A,B \subset \mathbb{R}^m$ -- вимірні, причому $\Int(A) \cap \Int(B) = \emptyset$, функція $f$ -- обмежена на $A \cup B$. Тоді $\displaystyle\int\displaylimits_{A \cup B} f(\vec{x})\,d\vec{x} = \int\displaylimits_{A} f(\vec{x})\,d\vec{x} + \int\displaylimits_{B} f(\vec{x})\,d\vec{x}$.
 \end{theorem}
 
 \begin{proof}
-Було вже зауваження, що оскільки $A^0 \cap B^0 = \emptyset$, то звідси $A_{(n)},B_{(n)}$ не можуть мати спільних брусів. Завдяки цьому, отримаємо:\\
-$\displaystyle\int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy + \int\displaylimits_{B_{(n)}} f(x,y)\,dx\,dy = \int\displaylimits_{A_{(n)} \cup B_{(n)}} f(x,y)\,dy\,dy$.\\
-Позначимо $C_n = (A \cup B)_{(n)} \setminus ( A_{(n)} \cup B_{(n)} )^0$. Зауважимо, що $C_n \subset \Delta A_{(n)} \cup \Delta B_{(n)}$. Тоді\\
-$\displaystyle\abs{\int\displaylimits_{(A \cup B)_{(n)}} f(x,y)\,dx\,dy - \int\displaylimits_{A_{(n)} \cup B_{(n)}} f(x,y)\,dx\,dy} \leq \abs{\int\displaylimits_{C_n} f(x,y)\,dx\,dy} \leq L m(C_n) \leq L(m(\Delta A_{(n)}) + m(\Delta B_{(n)})$.\\
-Тут маємо $L = \displaystyle\sup_{(x,y) \in A \cup B} f(x,y)$. А далі просто $n \to \infty$.
+Було вже зауваження, що оскільки $\Int(A) \cap \Int(B) = \emptyset$, то звідси $A_{(n)},B_{(n)}$ не можуть мати спільних брусів. Завдяки цьому, отримаємо:\\
+$\displaystyle\int\displaylimits_{A_{(n)}} f(\vec{x})\,d\vec{x} + \int\displaylimits_{B_{(n)}} f(\vec{x})\,d\vec{x} = \int\displaylimits_{A_{(n)} \cup B_{(n)}} f(\vec{x})\,d\vec{x}$.\\
+Позначимо $C_n = (A \cup B)_{(n)} \setminus \Int( A_{(n)} \cup B_{(n)} )$. Зауважимо, що $C_n \subset \Delta A_{(n)} \cup \Delta B_{(n)}$. Тоді\\
+$\displaystyle\abs{\int\displaylimits_{(A \cup B)_{(n)}} f(\vec{x})\,d\vec{x} - \int\displaylimits_{A_{(n)} \cup B_{(n)}} f(\vec{x})\,d\vec{x}} \leq \abs{\int\displaylimits_{C_n} f(\vec{x})\,d\vec{x}} \leq L m(C_n) \leq L(m(\Delta A_{(n)}) + m(\Delta B_{(n)})$.\\
+Тут маємо $L = \displaystyle\sup_{\vec{x} \in A \cup B} f(\vec{x})$. А далі просто $n \to \infty$.
 \end{proof}
 
 \begin{theorem}
-Маємо $A \subset \mathbb{R}^2$ - вимірна, функція $f$ - обмежена та неперервна на $A$. Тоді\\
-$\displaystyle\abs{\int\displaylimits_A f(x,y)\,dx\,dy} \leq \int\displaylimits_A |f(x,y)|\,dx\,dy$.
+Маємо $A \subset \mathbb{R}^m$ -- вимірна, функція $f \geq 0$ -- обмежена на $A$. Тоді $\displaystyle\int\displaylimits_A f(\vec{x})\,d\vec{x} \geq 0$.\\
+\textit{Вказівка: граничний перехід.}
 \end{theorem}
 
 \begin{theorem}
-Маємо $A \subset \mathbb{R}^2$ - вимірна, функція $f \geq 0$ - обмежена та неперервна на $A$. Тоді\\
-$\displaystyle\int\displaylimits_A f(x,y)\,dx\,dy \geq 0$.
+Маємо $A \subset \mathbb{R}^m$ -- вимірна, функції $f,g$ -- обмежені на $A$, причому $f \leq g$. Тоді $\displaystyle\int\displaylimits_A f(\vec{x})\,d\vec{x} \leq \int\displaylimits_A g(\vec{x})\,d\vec{x}$.
 \end{theorem}
 
+\begin{theorem}
+Маємо $A \subset \mathbb{R}^m$ -- вимірна, функція $f$ -- обмежена на $A$. Тоді $\displaystyle\abs{\int\displaylimits_A f(\vec{x})\,d\vec{x}} \leq \int\displaylimits_A |f(\vec{x})|\,d\vec{x}$.
+\end{theorem}
+
+
+
 \subsection{Обчислення інтеграла за циліндричними множинами}
-Нехай $A$ - циліндрична множина так, що $baA$ - компакт та $u_1,u_2 \in C(baA)$. Нехай $f \in C(A)$. Визначимо таку функцію:
+На даному підрозділі припускаємо, що $A$ -- циліндрична множина так, що $baA$ -- компакт та $u_1,u_2 \in C(baA)$. Також нехай всюди $f \in C(A)$. Визначимо таку функцію:
 \begin{align*}
 g(x)= \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy
 \end{align*}
@@ -1311,65 +1660,98 @@ $g \in C(baA)$.
 \end{lemma}
 
 \begin{proof}
-I. $f$ - многочлен, тоді лема - наслідок теореми про неперервність складеної функції.\\
-II. $f$ - загальна функція. Нехай $\varepsilon > 0$, тоді за теоремою Вейєрштраса, існує многочлен $P_\varepsilon$, для якого $\displaystyle\max_{(x,y) \in A} |f(x,y) - P_\varepsilon(x,y)| < \varepsilon$.\\
-Позначимо $h_\varepsilon(x) = \displaystyle\int_{u_1(x)}^{u_2(x)}P_\varepsilon(x,y)\,dy$, де точки $x \in baA$. Тоді $h_\varepsilon \in C(baA)$ за пунктом І. Ба більше,\\
+Розглянемо два випадки:\\
+I. \textit{$f$ -- многочлен}.\\
+Тобто $f(x,y) = \displaystyle\sum_{(i,j)} a_{ij} x^i y^j$. У результаті чого отримаємо $g(x) = \displaystyle\sum_{(i,j)} a_{ij} x^i \dfrac{y^{j+1}}{j+1} \Big|_{u_1(x)}^{u_2(x)}$ -- неперервна функція.\\
+II. \textit{$f$ -- загальна функція}. \\
+Нехай $\varepsilon > 0$, тоді за теоремою Вейєрштраса, існує многочлен $P_\varepsilon$, де $\displaystyle\max_{(x,y) \in A} |f(x,y) - P_\varepsilon(x,y)| < \varepsilon$.\\
+Позначимо $h_\varepsilon(x) = \displaystyle\int_{u_1(x)}^{u_2(x)}P_\varepsilon(x,y)\,dy$, де точка $x \in baA$. Тоді $h_\varepsilon \in C(baA)$ за пунктом І. Ба більше,\\
 $|g(x)-h_\varepsilon(x)| < \varepsilon (L_2-L_1)$, де $L_1 = \displaystyle\min_{x \in baA} u_1(x), L_2 = \displaystyle\max_{x \in baA} u_2(x)$.\\
-Нехай $x_0 \in baA$ фіксована та $\delta > 0$  обрано так, що $|x-x_0| < \delta, \forall x \in baA \implies |h_\varepsilon(x)-h_\varepsilon(x_0)| < \varepsilon$. Тоді\\
-$|g(x)-g(x_0)| < 2\varepsilon(L_2-L_1)+\varepsilon$.\\
+Нехай $x_0 \in baA$ фіксована. Оскільки $h$ -- неперервна в точці $x_0$, то можна обрати $\delta > 0$ так, що $\forall x \in baA: |x-x_0| < \delta \implies |h_\varepsilon(x)-h_\varepsilon(x_0)| < \varepsilon$. Тоді $|g(x)-g(x_0)| < 2\varepsilon(L_2-L_1)+\varepsilon$.\\
 Таким чином, $g \in C(baA)$.
 \end{proof}
 
 \begin{theorem}
-Задано $A$ - циліндричну множину так, що $baA$ - компакт та $u_1,u_2 \in C(baA)$. Нехай $f \in C(A)$, тоді\\
-$\displaystyle\int\displaylimits_A f(x,y)\,dx\,dy = \int\displaylimits_{baA} \left( \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy \right)\,dx$
+Задано $A$ -- циліндричну множину так, що $baA$ -- вимірний компакт та $u_1,u_2 \in C(baA)$. Нехай $f \in C(A)$. Тоді $\displaystyle\int\displaylimits_A f(x,y)\,dx\,dy = \int\displaylimits_{baA} \left( \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy \right)\,dx$.
 \end{theorem}
 
 \begin{proof}
-Визначимо множини $A_{(n)}$ та $(baA)_{(n)}$. Уже відомо, що $A$ - вимірна, а тому\\
+Визначимо множини $A_{(n)}$ та $(baA)_{(n)}$. Уже відомо, що (через задані умови) $A$ -- вимірна, а тому\\
 $\displaystyle\int\displaylimits_A f(x,y)\,dx\,dy = \lim_{n \to \infty} \int\displaylimits_{A_{(n)}}f(x,y)\,dx\,dy$.\\
 Розглянемо випадок, коли проєкція $A_{(n)}$ на підпростір $y = 0$ збігається з $(baA)_{(n)}$.
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale = 1.5]
+\begin{tikzpicture}
 \draw[step=.25cm] (-0.4,-0.4) grid (4.9,2.9);
 \draw[thick] (-0.2,0)--(0.4,0);
-\draw[thick,red] (0.4,0)--(4,0);
-\draw[thick,->] (4,0)--(5,0) node[anchor = north west] {$x$};
+\draw[thick,red!80] (0.4,0)--(4,0);
+\draw[thick,->] (3.9,0)--(5,0) node[anchor = north west] {$x$};
 \draw[thick,->] (0,-0.2)--(0,3) node[anchor = south east] {$y$};
-\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (4,1)} node[anchor = north west] {$u_1$};
-\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.5) (2,2.5) (4,2)} node[anchor = north west] {$u_2$};
+\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (3.9,1)} node[anchor = north west] {$u_1$};
+\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.2) (2,2.5) (3.9,2)} node[anchor = north west] {$u_2$};
 \tikzfillbetween[of=A and B]{red, opacity=0.2};
 \draw[red] (0.4,0.4)--(0.4,2.4);
-\draw[red] (4,1)--(4,2);
+\draw[red] (3.9,1)--(3.9,2);
 \node at (2,2) {$C$};
 \node at (2,-0.75) {$baC$};
-\node[scale=0.75] at (0.4,0.2) {$baQ$};
+
+%function u1 bar
+\draw[very thick, blue] (0.5,0.75)--(1,0.75);
+\draw[very thick, blue] (1,1)--(2.75,1);
+\draw[very thick, blue] (2.75,0.75)--(3.5,0.75);
+\draw[very thick, blue] (3.5,1)--(3.75,1);
 \end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw[step=.25cm] (-0.4,-0.4) grid (4.9,2.9);
+\draw[thick] (-0.2,0)--(0.4,0);
+\draw[thick,red!80] (0.4,0)--(4,0);
+\draw[thick,->] (3.9,0)--(5,0) node[anchor = north west] {$x$};
+\draw[thick,->] (0,-0.2)--(0,3) node[anchor = south east] {$y$};
+\draw [red, thick, name path=A] plot [smooth] coordinates {(0.4,0.4) (2,1) (3,0.5) (3.9,1)} node[anchor = north west] {$u_1$};
+\draw [red, thick, name path=B] plot [smooth] coordinates {(0.4,2.4) (1,1.2) (2,2.5) (3.9,2)} node[anchor = north west] {$u_2$};
+\tikzfillbetween[of=A and B]{red, opacity=0.2};
+\draw[red] (0.4,0.4)--(0.4,2.4);
+\draw[red] (3.9,1)--(3.9,2);
+\node at (2,2) {$C$};
+\node at (2,-0.75) {$baC$};
+
+%function u2 bar
+\draw[very thick, green] (0.5,1.5)--(0.75,1.5);
+\draw[very thick, green] (0.75,1)--(1.25,1);
+\draw[very thick, green] (1.25,1.5)--(1.5,1.5);
+\draw[very thick, green] (1.5,1.75)--(1.75,1.75);
+\draw[very thick, green] (1.75,2.25)--(3,2.25);
+\draw[very thick, green] (3,2)--(3.75,2);
+\end{tikzpicture}
+\caption*{Синім намальована функція $\overline{u_1}$; зеленим намальована функція $\overline{u_2}$.}
 \end{figure}
 $A_{(n)}$ складена із стовпчиків, що є циліндричними множини, основи яких є бруси $Q \subset (baA)_{(n)}$.\\
 На кожному $(baA)_{(n)}$ ми визначимо функції $\overline{u_1}(x) = \displaystyle\min_{(x,y_) \in A_{(n)}} y$ та $\overline{u_2}(x) = \displaystyle\max_{(x,y_) \in A_{(n)}} y$, де $x \in (baA)_{(n)}$.\\
-Функції $\overline{u_1}, \overline{u_2}$ постійні на кожному $Q^0, Q \subset baA$. Тоді маємо за адитивністю та (???)\\
+Функції $\overline{u_1}, \overline{u_2}$ постійні на кожному $\Int(Q)$, де $Q \subset (baA)_{(n)}$. Тоді маємо за адитивністю та \crlref{multiple_integral_reducing_dimension_2},\\
 $\displaystyle\int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy = \int\displaylimits_{(baA)_{(n)}} \left(\int_{\overline{u_1}(x)}^{\overline{u_2}(x)} f(x,y)\,dy \right)\,dx$.\\
 Оскільки $u_1,u_2$ неперервні на компакті, то тоді\\
 $\forall \varepsilon > 0: \exists \delta: \forall x_1,x_2 \in baA: |x_1-x_2| < \delta \implies |u_i(x_1)-u_i(x_2)| < \varepsilon, i =1,2$.\\
-Оберемо такий номер $n$, щоб $\dfrac{\sqrt{2}}{2^n} < \delta$, тобто діагональ бруса менша за це число. Тоді $\forall x \in (baA)_{(n)}:$\\
+Оберемо такий номер $n$, щоб $\dfrac{\sqrt{m}}{2^n} < \delta$, тобто діагональ бруса менша за це число (на нашому прикладі $m =2$, бо ми доводимо в двовимірному випадку). Тоді $\forall x \in (baA)_{(n)}:$\\
 $0 \leq \overline{u_1}(x) - u_1(x) < \varepsilon + 2 \cdot \dfrac{1}{2^n}$\\
 $0 \leq u_2(x) - \overline{u_2}(x) < \varepsilon + 2 \cdot \dfrac{1}{2^n}$.\\
-$\displaystyle\abs{\int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy - \int\displaylimits_{(baA)_{(n)}} g(x)\,dx} = \abs{\int\displaylimits_{(baA)_{(n)}} \left(\int_{\overline{u_1}(x)}^{\overline{u_2}(x)} f(x,y)\,dy \right)\,dx - \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy} \leq \\
+Тут ми двічі до $\varepsilon$ додали сторону бруса $\dfrac{1}{2^n}$. Внаслідок цього\\
+$\displaystyle\abs{\int\displaylimits_{A_{(n)}} f(x,y)\,dx\,dy - \int\displaylimits_{(baA)_{(n)}} g(x)\,dx} = \abs{\int\displaylimits_{(baA)_{(n)}} \left(\int_{\overline{u_1}(x)}^{\overline{u_2}(x)} f(x,y)\,dy- \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy \right)\,dx} \leq \\
 \leq 2L\left(\varepsilon + 2 \dfrac{1}{2^n}\right) m((baA)_{(n)}) \leq 2L\left(\varepsilon + 2 \dfrac{1}{2^n}\right) m(baA)$.\\
-Далі ми $n \to \infty$ - отримаємо бажане.
+Далі при $n \to \infty$ ми отримаємо ось таку нерівність, що виконана при всіх $\varepsilon > 0$:\\
+$\displaystyle\left| \int\displaylimits_{A} f(x,y)\,dx\,dy - \int\displaylimits_{baA} g(x)\,dx \right| \leq 2L \varepsilon m(baA)$.\\
+Остаточно отримаємо рівність $\displaystyle\int\displaylimits_A f(x,y)\,dx\,dy = \int\displaylimits_{baA} g(x)\,dx$.
 \end{proof}
 
 \begin{corollary}
-Якщо $A$ - циліндрична множина, задовольняюча умові теореми, тоді\\
+Якщо $A$ -- циліндрична множина, задовольняюча умові теореми, тоді\\
 $m(A) = \displaystyle\int\displaylimits_A dx\,dy = \int\displaylimits_{baA} (u_2(x)-u_1(x)\,dx$.
 \end{corollary}
 
 \subsection{Відображення спеціального вигляду}
 \begin{definition}
-Задано $A \subset \mathbb{R}^m$ - відкрита підмножина, число $1 \leq k \leq m$ та функція $u \in C^{1}(A)$.\\
-Встановимо відображення $\vec{g}: A \to \mathbb{R}^m$ за формулою:
+Задано $A \subset \mathbb{R}^m$ -- відкрита підмножина, число $1 \leq k \leq m$ та функція $u \in C^{1}(A)$.\\
+Встановимо відображення $\vec{g} \colon A \to \mathbb{R}^m$ за формулою:
 \begin{align*}
 \vec{g}(\vec{x}) = (x_1,\dots,x_{k-1},u(\vec{x}),x_{k+1},\dots,x_m) \\ \vec{x} \in A
 \end{align*}
@@ -1380,90 +1762,93 @@ $m(A) = \displaystyle\int\displaylimits_A dx\,dy = \int\displaylimits_{baA} (u_2
 Надалі вважаємо, що для даного відображення виконуються дві умови:
 \begin{align*}
 L = \sup_{\vec{x} \in A} |u'_k(\vec{x})| < +\infty \\
-\forall \vec{x} \in A: u'_k(\vec{x}) > 0 \text{ або } u'_k(\vec{x}) < 0
+\forall \vec{x} \in A: u'_k(\vec{x}) > 0 \text{ або } \forall \vec{x} \in A: u'_k(\vec{x}) < 0
 \end{align*}
 \end{remark}
 
 \begin{lemma}
-Задано відображення $\vec{h}: A \to \mathbb{R}^m$ з такими умовами:\\
-1) $\vec{h}$ - ін'єкція;\\
+Задано відображення $\vec{h} \colon A \to \mathbb{R}^m$ з такими умовами:\\
+1) $\vec{h}$ -- ін'єкція;\\
 2) $\vec{h} \in C(A)$.\\
-Тоді $\forall G \subset A, F \subset A$ таких, що $G^0 \cap F^0 = \emptyset$ виконується рівність $(\vec{h}(G))^0 \cap (\vec{h}(F))^0 = \emptyset$.
+Тоді $\forall G \subset A, F \subset A$ таких, що $\Int(G) \cap \Int(F) = \emptyset$ виконується рівність $\Int(\vec{h}(G)) \cap \Int(\vec{h}(F)) = \emptyset$.
 \end{lemma}
 
 \begin{proof}
-!Припустимо, що $(\vec{h}(G))^0 \cap (\vec{h}(F))^0 \neq \emptyset$. Значить, на цій множині є деякий елемент $\vec{y} \in (\vec{h}(G))^0 \cap (\vec{h}(F))^0$. Оскільки перетин відкритих множин дає відкриту, то тоді $\exists \varepsilon > 0: B(\vec{y}, \varepsilon) \subset (\vec{h}(G)) \cap (\vec{h}(F))$.\\
+!Припустимо, що існує деякий елемент $\vec{y} \in \Int(\vec{h}(G)) \cap \Int(\vec{h}(F))$. Оскільки перетин відкритих множин дає відкриту, то тоді $\exists \varepsilon > 0: B(\vec{y}, \varepsilon) \subset \vec{h}(G) \cap \vec{h}(F)$.\\
 Нехай $\vec{y} = \vec{h}(\vec{x}), \vec{x} \in A$, в силу неперервності маємо $\exists \delta > 0: \vec{h}(B( \vec{x}, \delta )) \subset B(\vec{y},\varepsilon)$.\\
-Оскільки $B(\vec{y},\varepsilon) \subset \vec{h}(G)$ та $B(\vec{y},\varepsilon) \subset \vec{h}(F)$, то звідси\\
-$\vec{h}(B(\vec{x},\delta)) \subset \vec{h}(G)$ та $\vec{h}(B(\vec{x},\delta)) \subset \vec{h}(F)$.\\
+Оскільки $B(\vec{y},\varepsilon) \subset \vec{h}(G)$ та $B(\vec{y},\varepsilon) \subset \vec{h}(F)$, то звідси $\vec{h}(B(\vec{x},\delta)) \subset \vec{h}(G)$ та $\vec{h}(B(\vec{x},\delta)) \subset \vec{h}(F)$.\\
 Таким чином, згідно з умовою ін'єктивності, $B(\vec{x},\delta) \subset G, B(\vec{x},\delta) \subset F$. Суперечність!
 \end{proof}
 
 \begin{theorem}
-Задано $\vec{g}: A \to \mathbb{R}^m$ - відображення спеціального вигляду з умовами зауваження. Нехай $B \subset A$, $B$ - вимірна та компактна.\\
-Тоді $\vec{g}(B)$ - вимірна та компактна.
+Задано $\vec{g} \colon A \to \mathbb{R}^m$ -- відображення спеціального вигляду з умовами зауваження. Нехай $B \subset A$, $B$ -- вимірна та компактна. Тоді $\vec{g}(B)$ -- вимірна та компактна. Крім того,\\
+$m(\vec{g}(B)) = \displaystyle\lim_{n \to \infty} m(\vec{g}(B_{(n)}))$ (або можна $m(\vec{g}(B)) = \displaystyle\lim_{n \to \infty} m(\vec{g}(B^{(n)}))$).
 \end{theorem}
 
 \begin{proof}
-I. Розглянемо випадок, коли $B$ - брус. Тобто $B = Q = [a_1,b_1] \times \dots \times [a_m,b_m]$.\\
-$baQ = \{(x_1,\dots,x_{k-1},x_{k+1},\dots,x_m) | a_i \leq x_i \leq b_i, i \neq k\}$.\\
-Зауважимо, що $\vec{g}(Q)$ буде вимірною. При виконанні умови $u_k'>0$ на $A$ образ $\vec{g}(Q)$ є така циліндрична множина:\\
-$\vec{g}(Q) = \\ =\{(y_1,\dots,y_m) | (y_1,\dots,y_{k-1},y_{k+1},\dots,y_m) \in baQ, u(y_1,\dots,y_{k-1},a_k,y_{k+1},\dots,y_m) \leq y_k \leq u(y_1,\dots,y_{k-1},b_k,y_{k+1},\dots,y_m)\}$.\\
+Доведення теореми розіб'ємо на два випадки.\\
+I. \textit{$B$ -- брус}.\\
+Для зручності позначатиму $B = Q$. Тобто маємо $B = Q = [a_1,b_1] \times \dots \times [a_m,b_m]$. Відомо, що $baQ = \{(x_1,\dots,x_{k-1},x_{k+1},\dots,x_m) | a_i \leq x_i \leq b_i, i \neq k\}$.\\
+Зауважимо, що $\vec{g}(Q)$ буде вимірною. Дійсно, при виконанні умови $u_k'>0$ на $A$ образ $\vec{g}(Q)$ є така циліндрична множина: $\vec{g}(Q) = \\ =\{(y_1,\dots,y_m) | (y_1,\dots,y_{k-1},y_{k+1},\dots,y_m) \in baQ, u(y_1,\dots,y_{k-1},a_k,y_{k+1},\dots,y_m) \leq y_k \leq u(y_1,\dots,y_{k-1},b_k,y_{k+1},\dots,y_m)\}$.\\
 Нам $u_k' > 0$ дає право на монотонність на $[a_k,b_k]$. Тому там нерівності з'явились.\\
-$baQ$ - компакт та $u_1 = u(y_1,\dots,y_{k-1},a_k,y_{k+1},\dots,y_m), u_2 = u(y_1,\dots,y_{k-1},b_k,y_{k+1},\dots,y_m) \in C(baQ)$.\\
-Тож циліндрична множина $\vec{g}(Q)$ - компакт та вимірна. Ба більше,\\
-$m(\vec{g}(Q)) = \displaystyle\int\displaylimits_{baQ} |u(x_1,\dots,x_{k-1},b_k,x_{k+1},\dots,x_m) - u(x_1,\dots,x_{k-1},a_k,x_{k+1},\dots,x_m)|\,dx_1\dots\,dx_{k-1}\,dx_{k+1}\dots\,dx_m$.\\
-За \textbf{Crl. 1.2.6.} та теореми про середнє, отримаємо:\\
-$m(\vec{g}(Q)) = \displaystyle\int\displaylimits_Q |u'_k(\vec{x})|\,d\vec{x} = |u_k'(\vec{x}(Q))| m(Q)$, для деякої точки $\vec{x}(Q) \in Q$.
+$baQ$ -- компакт та $u_1 = u(y_1,\dots,y_{k-1},a_k,y_{k+1},\dots,y_m), u_2 = u(y_1,\dots,y_{k-1},b_k,y_{k+1},\dots,y_m) \in C(baQ)$.\\
+Тож циліндрична множина $\vec{g}(Q)$ -- компакт та вимірна. Ба більше,\\
+$m(\vec{g}(Q)) = \displaystyle\int\displaylimits_{baQ} (u(x_1,\dots,x_{k-1},b_k,x_{k+1},\dots,x_m) - u(x_1,\dots,x_{k-1},a_k,x_{k+1},\dots,x_m))\,dx_1\dots\,dx_{k-1}\,dx_{k+1}\dots\,dx_m$.\\
+За \crlref{lagrange_and_integral} та теореми про середнє, отримаємо:\\
+$m(\vec{g}(Q)) = \displaystyle\int\displaylimits_Q u'_k(\vec{x})\,d\vec{x} = u_k'(\vec{x}(Q)) m(Q)$, для деякої точки $\vec{x}(Q) \in Q$.
 \bigskip \\
-II. Для розбиття $\pi^{(n)}$ визначимо множини $B_{(n)}, B^{(n)}, \Delta B_{(n)}$. Розглянемо їхні образи $\vec{g}(B_{(n)}), \vec{g}(B^{(n)}), \vec{g}(\Delta B_{(n)})$.\\
-Оскільки $A$ відкрита, то $B^{(n)} \subset A, \forall n > N_0$.\\
-При виконанні умов теореми відображення $\vec{g}$ буде неперервною ін'єкцією з $A$. Тож\\
+II. \textit{$B$ -- довільна компактна}.\\
+Для розбиття $\pi^{(n)}$ визначимо $B_{(n)}, B^{(n)}, \Delta B_{(n)}$. Розглянемо їхні образи $\vec{g}(B_{(n)}), \vec{g}(B^{(n)}), \vec{g}(\Delta B_{(n)})$.\\
+Оскільки $A$ відкрита, то $B^{(n)} \subset A, \forall n > N_0$ (TODO: геометрично ясно, але строго -- ні). При виконанні умов теореми відображення $\vec{g}$ буде неперервною ін'єкцією з $A$. Крім того,\\
 $B_{(n)} \subset B \subset B^{(n)} \implies \vec{g}(B_{(n)}) \subset \vec{g}(B) \subset \vec{g}(B^{(n)})$.\\
-Більш того, $\vec{g}(B_{(n)}) = \displaystyle\bigcup_{\substack{Q \in \pi^{(n)} \\ Q \subset B_{(n)}}} \vec{g}(Q)$.\\
-Зауважимо, що $\vec{g}(B_{(n)})$ - вимірна, тому що кожний $\vec{g}(Q)$ вимірний за І. Тоді\\
+Також за властивістю образа, $\vec{g}(B_{(n)}) = \displaystyle\bigcup_{\substack{Q \in \pi^{(n)} \\ Q \subset B_{(n)}}} \vec{g}(Q)$.\\
+Зауважимо, що $\vec{g}(B_{(n)})$ -- вимірна, тому що кожний $\vec{g}(Q)$ вимірний за пунктом І. Оскільки бруси $Q$ не мають спільних внутрішніх точок та $\vec{g}$ -- неперервна ін'єкція, то образи $\vec{g}(G)$ не матимуть також спільних внутрішніх точок. Власне, звідси\\
 $m(\vec{g}(B_{(n)})) = \displaystyle\sum_{\substack{Q \in \pi^{(n)} \\ Q \subset B_{(n)}}} m(\vec{g}(Q))$.\\
-Все робиться аналогічним чином для $\vec{g}(B^{(n)})$ та $\vec{g}(\Delta B_{(n)})$, міри обчислюються аналогічно.\\
+Все робиться аналогічним чином для $\vec{g}(B^{(n)})$ та $\vec{g}(\Delta B_{(n)})$, міри обчислюються аналогічно. Внаслідок чого вони будуть також вимірними.\\
 Доведемо тепер, що $m(\vec{g}(\Delta B_{(n)})) \to 0, n \to \infty$.\\
 Для будь-якого $Q \subset A$ маємо $m(\vec{g}(Q)) = |u_k'(\vec{x}(Q))| m(Q) \leq Lm(Q)$.\\
 $m(\vec{g}(\Delta B_{(n)}) \leq \displaystyle\sum_{\substack{Q \subset \pi^{(n)} \\ Q \subset \Delta B_{(n)}}} m(\vec{g}(Q)) \leq Lm(\Delta B_{(n)})$.\\
 При $n \to \infty$ в цій нерівності отримаємо $m(\vec{g}(\Delta B_{(n)})) \to 0$, в силу вимірності $B$.
 \bigskip \\
-III. Доведемо вимірність $\vec{g}(B)$. Оскільки $\vec{g}(B_{(n)}), \vec{g}(B^{(n)})$ вимірні, то тоді $\exists N_1: \forall N \geq N_1:$\\
-$( \vec{g}(B_{(n)}) )_{(N)} \subset \vec{g}(B_{(n)}) \subset \vec{g}(B) \subset \vec{g}(B^{(n)}) \subset ( \vec{g}(B^{(n)}) )^{(N)}$\\
+Доведемо вимірність $\vec{g}(B)$. Оскільки $\vec{g}(B_{(n)}), \vec{g}(B^{(n)})$ вимірні, то тоді $\exists N_1: \forall N \geq N_1:$\\
 $m(\vec{g}(B_{(n)})) - m((\vec{g}(B_{(n)}))_{(N)}) < \dfrac{\varepsilon}{2}$\\
 $m((\vec{g}(B^{(n)}))^{(N)}) - m(\vec{g}(B^{(n)})) < \dfrac{\varepsilon}{2}$.\\
-Звідси випливає, що\\
-$m(\Delta \vec{g}(B)_{(N)}) \leq m(( \vec{g}(B^{(n)}) )^{(N)}) - m(( \vec{g}(B_{(n)}) )_{(N)}) = \\
-= m((\vec{g}(B^{(n)}))^{(N)}) - m(\vec{g}(B^{(n)})) + m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) + m(\vec{g}(B_{(n)}) - m((\vec{g}(B_{(n)}))_{(N)}) <\\ < \varepsilon + m(\vec{g}(\Delta B_{(n)}))$.\\
-Якщо $n$ таке, що $m(\vec{g}(\Delta B_{(n)})) < \varepsilon$, то звідси $m(\Delta \vec{g}(B)_{(N)}) < 2\varepsilon$ для $N \geq N_1$.\\
-Тобто звідси $m(\Delta \vec{g}(B)_{(N)}) \to 0, N \to \infty$, тобто $\vec{g}(B)$ - вимірна.\\
-Оскільки $m(\vec{g}(B_{(n)}) \leq m(\vec{g}(B)) \leq m(\vec{g}(B^{(n)}))$, то\\
-$m(\vec{g}(B)) - m(\vec{g}(B_{(n)})) < m(\vec{g}(\Delta B_{(n)}))$.\\
-Тобто $m(\vec{g}(B)) =\displaystyle \lim_{n \to \infty} m (\vec{g}(B_{(n)}))$.\\
-Ба більше, $\vec{g}(B)$ - компактна множина як неперервний образ компакта.
+Крім того, $( \vec{g}(B_{(n)}) )_{(N)} \subset \vec{g}(B_{(n)}) \subset \vec{g}(B) \subset \vec{g}(B^{(n)}) \subset ( \vec{g}(B^{(n)}) )^{(N)}$. Звідси випливає, що\\
+$m(\Delta \vec{g}(B)_{(N)}) \overset{\text{(TODO: ?)}}{\leq} m(( \vec{g}(B^{(n)}) )^{(N)}) - m(( \vec{g}(B_{(n)}) )_{(N)}) = \\
+= m((\vec{g}(B^{(n)}))^{(N)}) \textcolor{red}{- m(\vec{g}(B^{(n)})) + m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) + m(\vec{g}(B_{(n)}))} - m((\vec{g}(B_{(n)}))_{(N)}) <\\ < \varepsilon + m(\vec{g}(\Delta B_{(n)}))$.\\
+Якщо цілком зрозуміло, звідки взявся $\varepsilon$, то ось $m(\vec{g}(\Delta B_{(n)}))$ поясню детальніше:\\
+$m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) \overset{\vec{g}(B^{(n)}) \supset \vec{g}(B_{(n)})}{=} m(\vec{g}(B^{(n)}) \setminus \vec{g}(B_{(n)})) = m(\vec{g}(B^{(n)} \setminus B_{(n)})) \leq m(\vec{g}(\Delta B_{(n)}))$.\\
+Якщо $n$ таке, що $m(\vec{g}(\Delta B_{(n)})) < \varepsilon$, то звідси $m(\Delta \vec{g}(B)_{(N)}) < 2\varepsilon$ для $N \geq N_1$. Тобто звідси $m(\Delta \vec{g}(B)_{(N)}) \to 0, N \to \infty$, тобто $\vec{g}(B)$ -- вимірна.\\
+Оскільки $m(\vec{g}(B_{(n)})) \leq m(\vec{g}(B)) \leq m(\vec{g}(B^{(n)}))$, то отримаємо\\
+$m(\vec{g}(B)) - m(\vec{g}(B_{(n)})) \leq m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) \leq m(\vec{g}(\Delta B_{(n)})) \to 0$.\\
+Тобто справді $m(\vec{g}(B)) = \displaystyle\lim_{n \to \infty} m(\vec{g}(B_{(n)}))$. Ба більше, $\vec{g}(B)$ -- компактна множина як неперервний образ компакта.
+\bigskip \\
+Дуже (ОТ ПРОСТО ПІЗДЄЦ НАСКІЛЬКИ ДУЖЕ) детальне пояснення до $\overset{\text{(TODO:?)}}{\leq}$.\\
+$m(\Delta \vec{g}(B)_{(N)}) = m((\vec{g}(B))^{(N)}) - m((\vec{g}(B))_{(N)})$.\\
+Доведемо, що $(\vec{g}(B))^{(N)} \subset (\vec{g}(B^{(n)}))^{(N)}$. Дійсно, візьмемо брус $Q$ із об'єднання $(\vec{g}(B))^{(N)}$, тобто $Q \cap \vec{g}(B) \neq \emptyset$. Але оскільки $\vec{g}(B) \subset \vec{g}(B^{(n)})$, то тим паче $Q \cap \vec{g}(B^{(n)}) \neq \emptyset$. Отже, брус $Q$ міститься в об'єднанні $(g(B^{(n)}))^{(N)}$.\\
+Доведемо, що $(\vec{g}(B))_{(N)} \supset (g(B_{(n)}))_{(N)}$. Дійсно, беремо брус $Q$ із об'єднання $(g(B_{(n)}))_{(N)}$, тобто $Q \subset \vec{g}(B_{(n)})$, але $\vec{g}(B_{(n)}) \subset \vec{g}(B)$, тож звідси $Q \subset \vec{g}(B)$. Тобто брус $Q$ міститься в об'єднанні $(\vec{g}(B))_{(N)}$.\\
+Далі за монотонністю міри Жордана, $m(\Delta \vec{g}(B)_{(N)}) = m((\vec{g}(B))^{(N)}) - m((\vec{g}(B))_{(N)}) \leq m(( \vec{g}(B^{(n)}) )^{(N)}) - m(( \vec{g}(B_{(n)}) )_{(N)})$.
 \end{proof}
 
 \begin{theorem}[Формула заміни змінних]
-Задано $\vec{g}: A \to \mathbb{R}^m$ - відображення спеціального вигляду з обмеженнями зі зауваження. Відомо, що $B \subset A$ - компактна, вимірна та $f \in C(\vec{g}(B)))$. Тоді\\
-$\displaystyle\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} = \int\displaylimits_B f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x}$
+Задано $\vec{g} \colon A \to \mathbb{R}^m$ -- відображення спеціального вигляду з обмеженнями зі зауваження. Відомо, що $B \subset A$ -- компактна, вимірна та $f \in C(\vec{g}(B)))$. Тоді $\displaystyle\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} = \int\displaylimits_B f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x}$.
 \end{theorem}
 
 \begin{proof}
-Обидва інтеграли визначені, тому що $\vec{g}(B)$ - компактна, вимірна, а також $f(\vec{g}) |u_k'| \in C(B)$.\\
-Маємо розбиття $\pi^{(n)}_m$ та розглянемо множину $B_{(n)}$ і для коного бруса $Q \in B_{(n)}$ виберемо якусь довільну точку $\vec{x}(Q) \in Q$. Маємо нерівність:\\
-$\displaystyle\abs{\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} - \int\displaylimits_B f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} } \leq I_n^{(1)} + I_n^{(2)} + I_n^{(3)} + I_n^{(4)}$, де\\
-$I_n^{(1)} = \displaystyle\abs{\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} -\int\displaylimits_{\vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} }$\\
-$I_n^{(2)} = \displaystyle\abs{\int\displaylimits_{\vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) }$\\
-$I_n^{(3)} = \displaystyle\abs{\sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) - \int\displaylimits_{B_{(n)}} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} }$\\
+Обидва інтеграли визначені, тому що $\vec{g}(B)$ -- компактна, вимірна, а також $f(\vec{g}) |u_k'| \in C(B)$.\\
+Маємо розбиття $\pi^{(n)}$ та розглянемо множину $B_{(n)}$ і для коного бруса $Q \in B_{(n)}$ виберемо якусь довільну точку $\vec{x}(Q) \in Q$. Маємо нерівність:\\
+$\displaystyle\abs{\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} - \int\displaylimits_B f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} } \leq I_n^{(1)} + I_n^{(2)} + I_n^{(3)} + I_n^{(4)} \overset{\text{хочемо довести}}{\longrightarrow} 0, n \to \infty$, де\\
+$I_n^{(1)} = \displaystyle\abs{\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} -\int\displaylimits_{\vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} }$;\\
+$I_n^{(2)} = \displaystyle\abs{\int\displaylimits_{\vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) }$;\\
+$I_n^{(3)} = \displaystyle\abs{\sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) - \int\displaylimits_{B_{(n)}} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} }$;\\
 $I_n^{(4)} = \displaystyle\abs{\int\displaylimits_{B_{(n)}} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} - \int\displaylimits_{B} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} }$.\\
-Хочемо показати, що права частина прямує до нуля при $n \to \infty$.\\
-Позначимо $\tilde{L} =\displaystyle \max \{ \max_{\vec{g}(B)} |f|, \max_{B} |f(\vec{g}) u_k'| \}$.\\
-В силу властивості модуля інтеграла, константи $\tilde{L}$ та формули $m(\vec{g}(B)) = \displaystyle\lim_{n \to \infty} m(\vec{g}(B_{(n)}))$ маємо:\\
-$I_{n}^{(1)} \leq \tilde{L}(m(\vec{g}(B)) - m(\vec{g}(B_{(n)}))) \to 0$.\\
-$I_{(n)}^{(4)} \leq \tilde{L}(m(B) - m(B_{(n)})) \to 0$.\\
-Далі оберемо для кожного $Q$ точку $\vec{x}(Q)$ таким чином, щоб виконувалась рівність $m(\vec{g}(Q)) = |u_k'(\vec{x}(Q))| m(Q)$. Отримаємо\\
-$I_n^{(2)} \leq \displaystyle\sum_{Q \subset B} \abs{\int\displaylimits_{\vec{g}(Q)} f(\vec{y}) - f(\vec{g}(\vec{x}(Q)))\,d\vec{y} }$.\\
+Позначимо $\tilde{L} =\displaystyle \max \{ \max_{\vec{g}(B)} |f|, \max_{B} |f(\vec{g}) u_k'| \}$. У силу властивості модуля інтеграла, константи $\tilde{L}$ та формули $m(\vec{g}(B)) = \displaystyle\lim_{n \to \infty} m(\vec{g}(B_{(n)}))$ маємо:\\
+$I_{n}^{(1)} = \displaystyle\abs{\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} -\int\displaylimits_{\vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} } = \left| \int\displaylimits_{\vec{g}(B) \setminus \vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} \right| \leq \int\displaylimits_{\vec{g}(B) \setminus \vec{g}(B_{(n)})} |f(\vec{y})|\,d\vec{y} \leq \tilde{L} m(\vec{g}(B) \setminus \vec{g}(B_{(n)})) = \tilde{L}(m(\vec{g}(B)) - m(\vec{g}(B_{(n)}))) \to 0$.\\
+$I_n^{(4)} = \displaystyle\abs{\int\displaylimits_{B_{(n)}} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} - \int\displaylimits_{B} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} } = \left| \int\displaylimits_{B \setminus B_{(n)}} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} \right| \leq \int\displaylimits_{B \setminus B_{(n)}} |f(\vec{g}(\vec{x})) |u_k'(\vec{x})||\,d\vec{x} \leq \tilde{L} m(B \setminus B_{(n)}) = \tilde{L} (m(B) - m(B_{(n)})) \to 0$.\\
+Далі оберемо для кожного $Q$ точку $\vec{x}(Q)$ таким чином, щоб виконувалась рівність $m(\vec{g}(Q)) = |u_k'(\vec{x}(Q))| m(Q)$. Отримаємо:\\
+$I_n^{(2)} = \displaystyle\abs{\int\displaylimits_{\vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) } = \left| \sum_{\vec{g}(Q)) \subset \vec{g}(B_{(n)})} \int\displaylimits_{\vec{g}(Q)} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) m(\vec{g}(Q)) \right| \\
+\left| \sum_{\vec{g}(Q) \subset \vec{g}(B_{(n)})} \int\displaylimits_{\vec{g}(Q)} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} \int\displaylimits_{\vec{g}(Q)} f(\vec{g}(\vec{x}(Q)))\,d\vec{y} \right| = \left|\sum_{Q \subset B_{(n)}} \int\displaylimits_{g(\vec{Q})} f(\vec{y}) - f(\vec{g}(\vec{x}(Q)))\,d\vec{y} \right| \leq
+\\ \leq \displaystyle\sum_{Q \subset B_{(n)}} \abs{\int\displaylimits_{\vec{g}(Q)} f(\vec{y}) - f(\vec{g}(\vec{x}(Q)))\,d\vec{y} }$.\\
 Зважаючи на рівномірну неперервність функції $f$ на $\vec{g}(B)$ та $u_k'$ на $B$ можна показати, що $I_n^{(2)} \to 0$.\\
 Для $I_n^{(3)}$ застосувати теорему про середнє, отримаємо:\\
 $I_n^{(3)} \leq \displaystyle\abs{\sum_{Q \subset B_{(n)}} (f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x})(Q))| - f(\vec{g}(\vec{\theta}(Q)) |u_k'(\vec{\theta}(Q))|) m(Q) }$.\\
@@ -1477,6 +1862,58 @@ $I_n^{(3)} \leq \displaystyle\abs{\sum_{Q \subset B_{(n)}} (f(\vec{g}(\vec{x}(Q)
 $\vec{g}(\vec{x}) = \vec{g}_{(m)}( \vec{g}_{(m-1)} (\dots \vec{g}_{(1)} (\vec{x}) \dots ) )$, де $\vec{g}_{(1)},\dots,\vec{g}_{(m)}$ - відображення спеціального вигляду.\\
 Тобто $\vec{g}$ розкладається на композицію відображень спеціального вигляду.
 \end{lemma}
+
+\subsection{Локальне зведення загального відображення до композицій спеціальних виглядів}
+Задано $A \subset \mathbb{R}^m$ -- відкрита підмножина та $\vec{g} \colon A \to \mathbb{R}^m$, причому $\vec{g} \in C^1(A)$, а також $\forall \vec{x} \in A: \det \vec{g}'(\vec{x}) \neq 0$.
+
+\begin{lemma}
+$\forall \vec{x}_0 \in A: \exists r > 0: \forall \vec{x} \in B(\vec{x}_0;r): \vec{g}(\vec{x}) = \vec{g}_{(m)} \circ \vec{g}_{(m-1)} \circ \dots \circ \vec{g}_{(1)}(\vec{x})$.\\
+Усі відображення $\vec{g}_{(i)}$ мають спеціальний вигляд.
+\end{lemma}
+
+\begin{proof}
+За умовою підрозділу маємо $\det \vec{g}'(\vec{x}_0) \neq 0$. Звідси має існувати ненулевий мінор $(m-1)$-го порядку. Не втрачаючи загальності, нехай $\dfrac{\partial(g_1,\dots,g_{m-1})}{\partial(x_1,\dots,x_{m-1})}(\vec{x}_0) \neq 0$. Такими самими міркуваннями ми можемо довести, що $\dfrac{\partial(g_1,\dots,g_k)}{\partial(x_1,\dots,x_k)}(\vec{x}_0) \neq 0$ для всіх $1 \leq k \leq m$.\\
+Нехай $\vec{x} \in A$. Розглянемо відображення $\vec{g}_{(1)}(\vec{x}) = (g_1(\vec{x}), x_2,\dots,x_m) = (y_1^{(1)}, \dots, y_m^{(1)}) = \vec{y}^{(1)}$. Для цього відображення якобіан $\dfrac{\partial(y_1^{(1)},\dots,y_m^{(1)})}{\partial(x_1,\dots,x_m)} = \dfrac{\partial g_1}{\partial x_1} \neq 0$, тобто існує оборотний якобіан. Тоді за теоремою про локально обернену функцію, існує функція $h_1 \in C^1$, що визначена в околі $B_1(\vec{y}_0^{(1)})$, причому\\
+$x_1 = h_1(\vec{y}^{(1)}),\ x_2 = y_2^{(1)}, \dots, x_m = y_m^{(1)}$. Коротше, ми знайшли оборотну функцію $\vec{h}_1(\vec{y^{(1)}}) = (h_1(\vec{y}^{(1)}), y_2^{(1)},\dots,y_m^{(1)})$.\\
+Тепер розглянемо відображення $\vec{g}_{(2)}(\vec{y}^{(1)}) = (y_1^{(1)}, g_2(\vec{x}), \dots, y_m^{(1)}) = (y_1^{(2)},y_2^{(2)},\dots,y_m^{(2)}) = \vec{y}^{(2)}$. У цьому випадку $g_2(\vec{x}) = g_2(\vec{h}_1(\vec{y}^{(1)}))$. Тобто наша функція дійсно залежить від $\vec{y}^{(1)}$. Маємо якобін $\dfrac{\partial(y_1^{(2)},\dots,y_m^{(2)})}{\partial(y_1^{(1)},\dots,y_m^{(1)})} = \dfrac{\partial y_2^{(2)}}{\partial y_2^{(1)}} = \dfrac{\partial g_2}{\partial y_2^{(1)}} (x_1,\dots,x_m) = \dfrac{\partial}{\partial y_2^{(1)}} g_2(h_1(y_1^{(1)},y_2^{(1)},\dots,y_m^{(1)}),y_2^{(1)},\dots,y_m^{(1)}) = \\
+= \dfrac{\partial g_2}{\partial x_1} \dfrac{\partial x_1}{\partial y_2^{(1)}} + \dfrac{\partial g_2}{\partial x_2} \dfrac{\partial x_2}{\partial y_2^{(1)}} = \dfrac{\partial g_2}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_2}{\partial x_2}$.\\
+Зауважимо, що $\dfrac{\partial g_1}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_1}{\partial x_2} = 0$ (TODO: ?). Внаслідок чого $\dfrac{\partial y_2^{(2)}}{\partial y_2^{(1)}} \neq 0$.\\
+!Припустимо, що це не так, тобто $\dfrac{\partial y_2^{(2)}}{\partial y_2^{(1)}} = 0$. Ми маємо однорідну систему:\\
+$\begin{cases}
+\dfrac{\partial g_1}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_1}{\partial x_2} = 0 \\
+\dfrac{\partial g_2}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_2}{\partial x_2} = 0
+\end{cases}$.\\
+Тоді матимемо розв'язок $\left( \dfrac{\partial h_1}{\partial y_2^{(1)}},1 \right)$. Проте в нас визначник системи ненулевий, тому ненулевий розв'язок існувати не може -- суперечність!\\
+Раз $\dfrac{\partial(y_1^{(2)},\dots,y_m^{(2)})}{\partial(y_1^{(1)},\dots,y_m^{(1)})}$, то аналогічно застосуємо теорему про локально обернену функцію. Внаслідок чого ми вже отримаємо $\vec{y}^{(2)}(\vec{x}) = \vec{g}_{(2)} \circ \vec{g}_{(1)}(\vec{x})$.\\
+Далі міркування йдуть аналогічним чином -- так і закінчимо доведення.
+\end{proof}
+
+\begin{theorem}[Формула заміни змінних]
+Задано $\vec{g} \colon A \to \mathbb{R}^m$ -- функція, що задовольняє вимогам:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\vec{g} \in C^1(A)$;
+\item $\vec{g}|_B$ -- бієкція, де $B \subset A$ -- компактна;
+\item $\forall \vec{x} \in B: J_g(\vec{x}) > 0$ або $\forall \vec{x} \in B: J_g(\vec{x}) < 0$.
+\end{enumerate}
+Також нехай $f \colon \vec{g}(B) \to \mathbb{R}$ та $f \in C(\vec{g}(B))$. Тоді множина $\vec{g}(B)$ -- компактна, вимірна, а також\\
+$\displaystyle\int_{\vec{g}(B)} f(\vec{y})\,d\vec{y} = \int_B f(\vec{g}(\vec{x})) |J_g(\vec{x})|\,dx$.
+\end{theorem}
+
+\begin{proof}
+За попередньою лемою, $\forall \vec{x} \in B: \exists \delta = \delta(\vec{x}) > 0: \forall \vec{u} \in B(\vec{x},\delta): \vec{g}(\vec{u)} = \vec{g}_{(m)} \circ \vec{g}_{(m-1)} \circ \dots \circ \vec{g}_{(1)} (\vec{u})$.\\
+Система куль $\left\{ B\left(\vec{x}, \dfrac{\delta}{2} \right) \mid \vec{x} \in B \right\}$ буде відкритим покриттям компактної множини $B$. Значить, існує скінченне підпокриття $\left\{ B\left(\vec{x}^{(i)}, \dfrac{\delta^{(i)}}{2}\right) \mid 1 \leq i \leq s \right\}$. Позначимо $\gamma = \displaystyle\min_{1 \leq i \leq s} \dfrac{\delta}{2}$.\\
+Ми будемо розглядати розбиття $\pi_m^{(n)}$ простору $\mathbb{R}^m$, для яких діаметр брусів $\pi_m^{(n)}$ менший за $\gamma$. Припустимо, що $Q(1),\dots,Q(N)$ -- всі ті бруси, що мають непорожній перетин з $B$. Позначимо $B(i) = B \cap Q(i)$ при $1 \leq i \leq N$. Зауважимо, шо $B = \displaystyle\bigcup_{i=1}^N B(i)$, а також $B(\nu)^0 \cap B(\mu)^0 = \emptyset$ при $\nu \neq \mu$.\\
+Оскільки $\forall 1 \leq \nu \leq N: \exists i_0: B(\nu) \cap B\left( \vec{x}^{(i_0)}, \dfrac{\delta_{i_0}}{2}\right) \neq \emptyset$ та $B(\nu) \subset Q(\nu)$, то звідси $B(\nu) \subset B(\vec{x}^{(i_0)}, \delta_{i_0})$ при $i_0 = i_0(\nu)$ (TODO: ?). Таким чином, розглядаючи відображення $\vec{g}$ на $B(\nu)$, можна припустити, що воно розписується як композиція спеціальних відображень, причому\\
+$\vec{g}(B(\nu)) = \vec{g}_{(m)}(B^{(m-1)}(\nu)),\dots, B^{(2)}(\nu) = \vec{g}_{(2)}(B^{(1)}(\nu)), B^{(1)}(\nu) = \vec{g}_{(1)}(B(\nu))$.\\
+Всі ці множини $B^{(i)}(\nu)$ компактні та вимірні за минулим пуктом. Тоді\\
+$\displaystyle\int_{\vec{g}(B(\nu))} f(\vec{y})\,d\vec{y} = \int_{\vec{g}_{(m)}(B^{(m-1)}(\nu)} f(\vec{y})\,d\vec{y} = \int_{B^{(m-1)}(\nu)} f(\vec{g}_{m}(\vec{z})) \left| \dfrac{\partial (y_1,\dots,y_m)}{\partial(z_1,\dots,z_m)} \right|\,d \vec{z} = \int_{B^{(m-2)}} f(\vec{g}_{(m)}(\vec{g}_{(m-1)}(\vec{u}))) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(z_1,\dots,z_m)} \right| \left| \dfrac{\partial(z_1,\dots,z_m)}{\partial(u_1,\dots,u_m)} \right|\,d\vec{u} = \int_{B^{(m-2)}(\nu)} f(\vec{g}_{(m)}(\vec{g}_{(m-1)}(\vec{u}))) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(u_1,\dots,u_m)} \right|\,d\vec{u} = \dots = \int_{B(\nu)} f(\vec{g}(\vec{x})) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(x_1,\dots,x_m)} \right|\,d\vec{x}$.\\
+Оскільки $\vec{g}(B) = \displaystyle\bigcup_{i=1}^N \vec{g}(B(i))$, то $\vec{g}(B)$ -- теж компактна та вимірна. Остаточно\\
+$\displaystyle\int_{\vec{g}(B)} f(\vec{y})\,d\vec{y} = \sum_{\nu = 1}^N \int_{\vec{g}(B(\nu))} f(\vec{y})\,d\vec{y} = \sum_{\nu = 1}^N \int_{B(\nu)} f(\vec{g}(\vec{x})) |J|\,d\vec{x} = \int_B f(\vec{g}(\vec{x}))|J|\,d\vec{x}$.
+\end{proof}
+\noindent
+Трохи треба відволіктися та порівнянти формулу заміни змінних з такою самою формулою заміною змінних в одновимірному інтегралі.\\
+Нехай функція $f \in C([a,b])$, а також функція $\varphi \in C^1([\alpha,\beta])$. причому $a = \varphi(a), b = \varphi(b)$. Ми тоді мали формулу $\displaystyle\int_\alpha^\beta f(\varphi(t))\varphi'(t)\,dt = \int_{\varphi(\alpha)}^{\varphi(\beta)} f(x)\,dx$.\\
+
 
 \iffalse
 \section{Кратні інтеграли}
@@ -3466,6 +3903,14 @@ $\displaystyle\oint_{\partial \sigma} (\vec{F}, d \vec{l}) = \iint_\sigma (\text
 Дуже хочеться застосувати формулу Гріна, але поки що крива задається не на площині, а в просторі, треба виправити цю ситуацію.
 \end{proof}
 
+\begin{corollary}
+$m(\vec{g}(B)) = \displaystyle\int_B \left| \dfrac{\partial(g_1,\dots,g_m)}{\partial(x_1,\dots,x_m)} \right|\,d\vec{x}$.
+\end{corollary}
+
+\begin{corollary}
+При афінному перетворенні міра Жордана не змінюється.
+\end{corollary}
+
 \subsection{Незалежність криволінійного інтегралу ІІ роду від шляху інтегрування в $\mathbb{R}^3$}
 \begin{lemma}[Лема Пуанкаре в $\mathbb{R}^3$]
 Задано множину $V \subset \mathbb{R}^3$ - замкнена однозв'язна область. Нехай $\vec{F} = (P,Q)^T$ визначено на $V$ та неперервно-диференційоване. Тоді нижчезгадані твердження еквівалентні:\\
@@ -3476,4 +3921,10 @@ $\displaystyle\oint_{\partial \sigma} (\vec{F}, d \vec{l}) = \iint_\sigma (\text
 4. Існує $U(x,y,z)$ - двічі неперервно-дифереційована функція, для якого $\departial{U}{x}(x,y,z) = P(x,y,z)$, $\departial{U}{y}(x,y,z) = Q(x,y,z)$, $\departial{U}{z}(x,y,z) = R(x,y,z), \forall (x,y,z) \in V$. Інакше кажучи,\\ $dU(x,y) =  P(x,y)\,dx + Q(x,y)\,dy$.\\
 \textit{Доведення повторюється, тому нема сенсу розписувати.}
 \end{lemma}
+\newpage
+
+\section*{Використані джерела}
+\begin{enumerate}
+\item \href{https://www.jirka.org/ra/html/sec_iteratedints.html#fig_fubinibad}{Iterated integrals and Fubini theorem}
+\end{enumerate}
 \end{document}

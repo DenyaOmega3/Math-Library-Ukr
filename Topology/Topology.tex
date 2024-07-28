@@ -1961,7 +1961,7 @@ $f^{-1}((a,1]) = \displaystyle\bigcup_{r > a} (X \setminus \Cl(V_r))$.\\
 \caption*{Тобто між замкненою та відкритою множинах можна підібрати проміжну відкриту множину, яка містить замкнену, а замикання міститься в відкритій.}
 \end{figure}
 \end{lemma}
-\newpage
+
 \begin{proof}
 Оберемо $A, X \setminus U$ -- обидва замкнені множини. За нормальністю, існують відкриті множини $V,W$, що неперетинні, для яких $V \supset A, W \supset X \setminus U$. Тобто $V \supset A$ та $X \setminus W \subset U$. Із того, що $V,W$ -- неперетинні, тобто $V \cap W = \emptyset$, випливає $V \subset X \setminus W$. Маємо ланцюг $A \subset V \subset X \setminus W \subset U$. Оскільки $V \subset X \setminus W$, то тоді й $\Cl(V) \subset \Cl(X \setminus W) = X \setminus W$. Власне, звідси довели: $A \subset V, \Cl(V) \subset U$.
 \end{proof}
@@ -2106,7 +2106,7 @@ $\rho(f(x),f(x_0)) \leq \rho(f(x),f_N(x)) + \rho(f_N(x), f_N(x_0)) + \rho(f_N(x_
 \end{lemma}
 
 \begin{proof}
-Розглянемо прообрази $Y = f^{-1}\left(\left[\dfrac{1}{3}C,C\right]\right)$ та $Z = f^{-1}\left(\left[-C, -\dfrac{1}{3}C \right]\right)$. Обидві множини $Y,Z$ -- замкнені, оскільки в прообраз (неперервної функції) передаємо замкнені множини в $\mathbb{R}$. Також оскільки ці відрізки неперетинні, то $Y,Z$ також неперетинні. Значить, за лемою Урисона (трошки в загальній формі) (TODO: вставити), існує функція $g \colon X \to \left[-\dfrac{1}{3}C, \dfrac{1}{3}C\right]$, де $g|_Y = \dfrac{1}{3}C$ та $g|_Z = -\dfrac{1}{3}C$. Зважаючи на область значень, маємо $|g(x)| \leq \dfrac{1}{3}C$. \\
+Розглянемо прообрази $Y = f^{-1}\left(\left[\dfrac{1}{3}C,C\right]\right)$ та $Z = f^{-1}\left(\left[-C, -\dfrac{1}{3}C \right]\right)$. Обидві множини $Y,Z$ -- замкнені, оскільки в прообраз (неперервної функції) передаємо замкнені множини в $\mathbb{R}$. Також оскільки ці відрізки неперетинні, то $Y,Z$ також неперетинні. Значить, за лемою Урисона (трошки в загальній формі), існує функція $g \colon X \to \left[-\dfrac{1}{3}C, \dfrac{1}{3}C\right]$, де $g|_Y = \dfrac{1}{3}C$ та $g|_Z = -\dfrac{1}{3}C$. Зважаючи на область значень, маємо $|g(x)| \leq \dfrac{1}{3}C$. \\
 Залишилося довести, що $|f(x) - g(x)| \leq \dfrac{2}{3}C$. Розглянемо три випадки:\\
 $x \in Y$, тоді $g(x) = \dfrac{1}{3}C$ та $\dfrac{1}{3}C \leq f(x) \leq C$, тож звідси $0 \leq f(x) - g(x) \leq \dfrac{2}{3}C$;\\
 $x \in Z$, тоді $g(x) = -\dfrac{1}{3}C$ та $-C \leq f(x) \leq -\dfrac{1}{3}C$, тож звідси $-\dfrac{2}{3}C \leq f(x) - g(x) \leq 0$;\\

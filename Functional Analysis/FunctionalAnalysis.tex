@@ -2312,10 +2312,11 @@ $\|x\|^2 = \|\pr_G x\|^2 + \|\ort_G x\|^2$.\\
 \begin{proof}
 I. \textit{Існування.}\\
 Якщо $l \equiv 0$, то існує вектор $u = 0$ -- все ясно.\\
-Нехай $l \in H'$, де функціонал ненулевий. Розглянемо $G = \ker l$. Існує елемент $y \notin G$ такий, що $\forall x \in H: x = g + \lambda y$ (це виконано за \prpref{kernel_as_subspace}). Можна переписати елемент $x = g' + \lambda(y- \pr_G y)$.\\
-Візьмемо вектор $e = y - \pr_Gy$. Звідси $e \in G^\perp$. Отже, маємо $x = g' + \lambda e$, де можна вважати $\|e\| = 1$. Тоді розпишемо функціонал та скалярний добуток:\\
-$l(x) = l(g'+\lambda e) = 0 + \lambda l(e)$ (у нас дійсно $g' \in G = \ker l$, бо $g' = g + \lambda \pr_G y$).\\
-$(x,e) = (g'+\lambda e,e) = \lambda \|e\|^2 = \lambda$.\\
+Нехай $l \in H'$, де функціонал ненулевий. Розглянемо $G = \ker l$. Існує елемент $y \notin G$ такий, що $\forall x \in H: x = g + \lambda y$ (це виконано за \prpref{kernel_as_subspace}). Можна переписати елемент \\
+$x = g + \lambda (\pr_G y + \ort_G y) = (g + \lambda \pr_G y) + \lambda \ort_G y$.\\
+Позначимо $g' = g + \lambda \pr_G y \in G$, а також $e = \dfrac{\ort_G y}{\|\ort_G y\|} \in G^\perp$. Отже, маємо $x = g' + \mu e$, де в цьому випадку $\|e\| = 1$. Тоді розпишемо функціонал та скалярний добуток:\\
+$l(x) = l(g'+\mu e) = 0 + \mu l(e)$.\\
+$(x,e) = (g'+\mu e,e) = \mu \|e\|^2 = \mu$.\\
 $l(x) = l(e)(x,e) = (x,\overline{l(e)}e) \implies u = \overline{l(e)}e$.\\
 Отриманий елемент $u = \overline{l(e)}e$ -- шуканий вектор, що задовольняє рівності $l(x) = (x,u)$.
 \bigskip \\
