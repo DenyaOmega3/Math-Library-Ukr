@@ -123,7 +123,7 @@
 \includepdf{preview.jpg}
 \tableofcontents
 \newpage
-\iffalse
+%\iffalse
 \section{Невизначений інтеграл}
 У рамках даного розділу розглядатимуться множини $I,J$, що будуть проміжками одного з типів:\\
 $[a,b], (a,b), (a,b]$, причому можливий нескінчений проміжок.
@@ -481,9 +481,9 @@ $\boxed{=} \huge -\frac{\ln|t+1|}{2} + \frac{\ln(t^2-t+1)}{4} - \frac{\sqrt{3}}{
 \end{example}
 
 \newpage
-\fi
+%\fi
 
-\iffalse
+%\iffalse
 \section{Визначений інтеграл}
 \subsection{Підхід Рімана}
 \begin{definition}
@@ -1636,6 +1636,30 @@ V_*(G) = V^*(G) = V
 \end{theorem}
 \newpage
 
+\subsection*{Опціональна вставка}
+Коли читав конспект Чаповського, мені потрапило ось таке означення інтегрованої функції за Ріманом.
+\begin{theorem}
+$f \in \mathcal{R}([a,b]) \iff \forall \varepsilon > 0: \exists \tau_\varepsilon: \forall \tau$ -- підрозбиття $\tau_\varepsilon: \forall \xi: |\sigma(f,\tau,\xi) - I| < \varepsilon$.
+\end{theorem}
+
+\begin{proof}
+\rightproof Дано: $f \in \mathcal{R}([a,b])$, тобто за стандартним означенням, $\forall \varepsilon > 0: \exists \delta > 0: \forall \tau: |\tau| < \delta: \forall \xi: |\sigma(f,\tau,\xi) - I| < \varepsilon$. Ми можемо обрати розбиття $\tau_\varepsilon$ таке, що $|\tau| < \delta$. Тоді для кожного підрозбиття $\tau$ розбиття $\tau_\varepsilon$ ми маємо $|\tau| \leq |\tau_\varepsilon| < \delta$, а тому $|\sigma(f,\tau,\xi) - I| < \varepsilon$.
+\bigskip \\
+\leftproof Дано: $\varepsilon > 0: \exists \tau_\varepsilon: \forall \tau$ -- підрозбиття $\tau_\varepsilon: \forall \xi: |\sigma(f,\tau,\xi) - I| < \varepsilon$.\\
+Нехай $\varepsilon > 0$ задане. Уже маємо розбиття $\tau_\varepsilon$ за умовою задачі. Оберемо довільне розбиття $\tau$, щоб $|\tau| < \delta$ (яке саме $\delta$ взяти, буде згодом). Розглянемо $\tilde{\tau} = \tau \cup \tau_\varepsilon$ -- підрозбиття $\tau$ та $\tau_\varepsilon$. Звідси тоді $|\sigma(f,\tilde{\tau},\xi) - I| < \varepsilon$.\\
+$|\sigma(f,\tau,\xi) - I| \leq |\sigma(f,\tau,\xi) - \sigma(f,\tilde{\tau}, \tilde{\xi})| + |\sigma(f,\tilde{\tau}, \tilde{\xi}) - I|$.\\
+Нам залишилося оцінити вираз $|\sigma(f,\tau,\xi) - \sigma(f,\tilde{\tau}, \tilde{\xi})|$. Припустимо, що $\tilde{\tau}$ має на одну точку розбиття більшу за $\tau$ (якщо більше, то індуктивно робимо). Ми беремо будь-який набір точок $\xi$ розбиття $\tau$, а також $\tilde{\xi}$ -- такий же набір точок, як $\xi$, але з додатковою точкою (і це для розбиття $\tilde{\tau}$). Тепер детальніше розпишемо:\\
+$\sigma(f,\tau,\xi) = f(\xi_1) \Delta x_1 + \dots + f(\xi_{k_0}) \Delta x_{k_0} + \dots + f(\xi_m) \Delta x_m$;\\
+$\sigma(f,\tilde{\tau},\tilde{\xi}) = f(\xi_1) \Delta x_1 + \dots + f(\xi_{\text{new}})(x_{k_0}-y) + f(\xi_{k_0})(y - x_{k_0-1}) + \dots + f(\xi_m) \Delta x_m$.\\
+$\implies |\sigma(f,\tau,\xi) - \sigma(f,\tilde{\tau},\tilde{\xi})| = |f(\xi_{k_0}) - f(\xi_{\text{new}})| |x_{k_0}-y| \leq 2L \cdot |\tilde{\tau}| \leq 2L \cdot |\tau| < \varepsilon$.\\
+У такому разі необхідно обрати $\delta = \dfrac{\varepsilon}{2L}$, де число $L = \displaystyle\sup_{x \in [a,b]} |f(x)|$.\\
+Отже, $\forall \varepsilon > 0: \exists \delta > 0: \forall (\tau,\xi): |\tau| < \delta \implies |\sigma(f,\tau,\xi) - I| < 2\varepsilon$.
+\end{proof}
+
+\begin{remark}
+Якби працювало друге означення інтегрованості за Ріманом, із цього би також випливала обмеженість (доведення тупо таке саме). Тому я легітимно користувався фактом обмеженості функції.
+\end{remark}
+
 \iffalse
 \subsection{Додаткові теореми}
 \begin{theorem}
@@ -1700,9 +1724,9 @@ III. \textit{$0 < F(0) + F(\pi) < 1$}.\\
 Нарешті, прийшли до суперечності!
 \end{proof}
 \newpage
-\fi
+%\fi
 
-\iffalse
+%\iffalse
 \section{Невласні інтеграли}
 \subsection{Основні означення}
 Розглянемо два основні випадки:\\
@@ -2191,7 +2215,7 @@ $\displaystyle\boxed{=} \dfrac{1}{9} \lim_{A \to \infty} \lim_{\varepsilon \to 0
 = \lim_{A \to \infty} \ln \left| \dfrac{9-A}{9+A} \right| = 0$.
 \end{example}
 \newpage
-\fi
+%\fi
 
 %\iffalse
 \section{Ряди}

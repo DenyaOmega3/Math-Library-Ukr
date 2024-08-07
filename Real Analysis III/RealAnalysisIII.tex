@@ -15,6 +15,7 @@
 \usepackage{mathabx}
 \usepackage{float}
 \usepackage{physics}
+\usepackage{centernot}
 \usepackage[unicode]{hyperref}
 \usepackage{pdfpages}
 \usepackage{tikz-3dplot}
@@ -83,22 +84,43 @@
 \newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{theoremdd}
+\newtheorem*{definition*}{Definition.}
+
+\theoremstyle{theoremdd}
 \newtheorem{samedef}[theorem]{Definition}
 
 \theoremstyle{theoremdd}
 \newtheorem{example}[theorem]{Example}
 
 \theoremstyle{theoremdd}
+\newtheorem*{example*}{Example.}
+
+\theoremstyle{theoremdd}
+\newtheorem*{lemma*}{Lemma.}
+
+\theoremstyle{theoremdd}
+\newtheorem*{theorem*}{Theorem.}
+
+\theoremstyle{theoremdd}
 \newtheorem{proposition}[theorem]{Proposition}
 
 \theoremstyle{theoremdd}
+\newtheorem*{proposition*}{Proposition.}
+
+\theoremstyle{theoremdd}
 \newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{theoremdd}
+\newtheorem*{remark*}{Remark.}
 
 \theoremstyle{theoremdd}
 \newtheorem{lemma}[theorem]{Lemma}
 
 \theoremstyle{theoremdd}
 \newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{theoremdd}
+\newtheorem*{corollary*}{Corollary.}
 
 \makeatletter
 \renewenvironment{proof}[1][Proof.\\]{\par
@@ -119,6 +141,7 @@
 \newcommand\Norm[1]{\left\lVert#1\right\rVert}
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\pr}{pr}
 
 \newcommand\thref[1]{\textbf{Th.~\ref{#1}}}
 \newcommand\defref[1]{\textbf{Def.~\ref{#1}}}
@@ -1654,9 +1677,10 @@ $\displaystyle\abs{\int\displaylimits_{(A \cup B)_{(n)}} f(\vec{x})\,d\vec{x} - 
 \begin{align*}
 g(x)= \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy
 \end{align*}
+Знову ж таки, ми не будемо послабляти умову на функцію $f$, оскільки це доволі важливо.
 
 \begin{lemma}
-$g \in C(baA)$.
+$g \in \mathcal{C}(baA)$.
 \end{lemma}
 
 \begin{proof}
@@ -1670,6 +1694,8 @@ $|g(x)-h_\varepsilon(x)| < \varepsilon (L_2-L_1)$, де $L_1 = \displaystyle\min
 Нехай $x_0 \in baA$ фіксована. Оскільки $h$ -- неперервна в точці $x_0$, то можна обрати $\delta > 0$ так, що $\forall x \in baA: |x-x_0| < \delta \implies |h_\varepsilon(x)-h_\varepsilon(x_0)| < \varepsilon$. Тоді $|g(x)-g(x_0)| < 2\varepsilon(L_2-L_1)+\varepsilon$.\\
 Таким чином, $g \in C(baA)$.
 \end{proof}
+
+Ця лема дозволить одразу сказати, що від даної функції можна брати буде інтеграл.
 
 \begin{theorem}
 Задано $A$ -- циліндричну множину так, що $baA$ -- вимірний компакт та $u_1,u_2 \in C(baA)$. Нехай $f \in C(A)$. Тоді $\displaystyle\int\displaylimits_A f(x,y)\,dx\,dy = \int\displaylimits_{baA} \left( \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy \right)\,dx$.
@@ -1748,6 +1774,28 @@ $\displaystyle\left| \int\displaylimits_{A} f(x,y)\,dx\,dy - \int\displaylimits_
 $m(A) = \displaystyle\int\displaylimits_A dx\,dy = \int\displaylimits_{baA} (u_2(x)-u_1(x)\,dx$.
 \end{corollary}
 
+\begin{example}
+Маємо інтеграл $\displaystyle\iint\displaylimits_A f(x,y)\,dx\,dy$, де множина $A$ обмежена параболами $y = x^2$ та $x = y^2$. Задача буде перейти до повторного інтегралу.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1.5]
+\draw[color=blue, name path = A, domain=0:1]   plot (\x,{\x*\x});
+\draw[color=blue, name path = B, variable=\y, domain=0:1]   plot ({\y*\y},\y);
+\tikzfillbetween[of=A and B]{blue, opacity=0.2};
+\draw[->] (0,0)--(1.5,0) node[anchor = north] {$x$};
+\draw[->] (0,0)--(0,1.5) node[anchor = east] {$y$};
+\node at (0.5,0.5) {$A$};
+\draw (1,1pt)--(1,-1pt) node[anchor = north] {$1$};
+\draw (1pt,1)--(-1pt,1) node[anchor = east] {$1$};
+\end{tikzpicture}
+\end{figure}
+Зауважимо, що $A$ -- та сама циліндрична множина, маємо функції $u_1(x) = x^2$ та $u_2(x) = \sqrt{x}$. У цьому випадку $ba A = [0,1]$. Оскільки $ba A$ -- вимірний компакт та $u_1,u_2$ -- неперервні, то звідси\\
+$\displaystyle\iint\displaylimits_A f(x,y)\,dx\,dy = \int\displaylimits_{ba A} \left( \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy \right)\,dx = \int_0^1 \left( \int_{x^2}^{\sqrt{x}} f(x,y)\,dy\right)\,dx \overset{\text{ще пишуть так}}{=} \int_0^1\,dx \int_{x^2}^{\sqrt{x}} f(x,y)\,dy$.
+\bigskip \\
+Можна було інакше. Маємо $u_1(y) = y^2$ та $u_2(y) = \sqrt{y}$. У цьому випадку $ba A = [0,1]$. Аналогічними міркуваннями отримаємо\\
+$\displaystyle\iint_A f(x,y)\,dx\,dy = \int_0^1 \left( \int_{y^2}^{\sqrt{y}} f(x,y)\,dx \right)\,dy \overset{\text{ще пишуть так}}{=} \int_0^1\,dy \int_{y^2}^{\sqrt{y}} f(x,y)\,dx$.
+\end{example}
+
 \subsection{Відображення спеціального вигляду}
 \begin{definition}
 Задано $A \subset \mathbb{R}^m$ -- відкрита підмножина, число $1 \leq k \leq m$ та функція $u \in C^{1}(A)$.\\
@@ -1814,7 +1862,7 @@ $m(\vec{g}(\Delta B_{(n)}) \leq \displaystyle\sum_{\substack{Q \subset \pi^{(n)}
 $m(\vec{g}(B_{(n)})) - m((\vec{g}(B_{(n)}))_{(N)}) < \dfrac{\varepsilon}{2}$\\
 $m((\vec{g}(B^{(n)}))^{(N)}) - m(\vec{g}(B^{(n)})) < \dfrac{\varepsilon}{2}$.\\
 Крім того, $( \vec{g}(B_{(n)}) )_{(N)} \subset \vec{g}(B_{(n)}) \subset \vec{g}(B) \subset \vec{g}(B^{(n)}) \subset ( \vec{g}(B^{(n)}) )^{(N)}$. Звідси випливає, що\\
-$m(\Delta \vec{g}(B)_{(N)}) \overset{\text{(TODO: ?)}}{\leq} m(( \vec{g}(B^{(n)}) )^{(N)}) - m(( \vec{g}(B_{(n)}) )_{(N)}) = \\
+$m(\Delta \vec{g}(B)_{(N)}) \overset{\text{(???)}}{\leq} m(( \vec{g}(B^{(n)}) )^{(N)}) - m(( \vec{g}(B_{(n)}) )_{(N)}) = \\
 = m((\vec{g}(B^{(n)}))^{(N)}) \textcolor{red}{- m(\vec{g}(B^{(n)})) + m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) + m(\vec{g}(B_{(n)}))} - m((\vec{g}(B_{(n)}))_{(N)}) <\\ < \varepsilon + m(\vec{g}(\Delta B_{(n)}))$.\\
 Якщо цілком зрозуміло, звідки взявся $\varepsilon$, то ось $m(\vec{g}(\Delta B_{(n)}))$ поясню детальніше:\\
 $m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) \overset{\vec{g}(B^{(n)}) \supset \vec{g}(B_{(n)})}{=} m(\vec{g}(B^{(n)}) \setminus \vec{g}(B_{(n)})) = m(\vec{g}(B^{(n)} \setminus B_{(n)})) \leq m(\vec{g}(\Delta B_{(n)}))$.\\
@@ -1823,7 +1871,7 @@ $m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) \overset{\vec{g}(B^{(n)}) \supset \ve
 $m(\vec{g}(B)) - m(\vec{g}(B_{(n)})) \leq m(\vec{g}(B^{(n)})) - m(\vec{g}(B_{(n)})) \leq m(\vec{g}(\Delta B_{(n)})) \to 0$.\\
 Тобто справді $m(\vec{g}(B)) = \displaystyle\lim_{n \to \infty} m(\vec{g}(B_{(n)}))$. Ба більше, $\vec{g}(B)$ -- компактна множина як неперервний образ компакта.
 \bigskip \\
-Дуже (ОТ ПРОСТО ПІЗДЄЦ НАСКІЛЬКИ ДУЖЕ) детальне пояснення до $\overset{\text{(TODO:?)}}{\leq}$.\\
+Дуже детальне пояснення до $\overset{\text{(???)}}{\leq}$.\\
 $m(\Delta \vec{g}(B)_{(N)}) = m((\vec{g}(B))^{(N)}) - m((\vec{g}(B))_{(N)})$.\\
 Доведемо, що $(\vec{g}(B))^{(N)} \subset (\vec{g}(B^{(n)}))^{(N)}$. Дійсно, візьмемо брус $Q$ із об'єднання $(\vec{g}(B))^{(N)}$, тобто $Q \cap \vec{g}(B) \neq \emptyset$. Але оскільки $\vec{g}(B) \subset \vec{g}(B^{(n)})$, то тим паче $Q \cap \vec{g}(B^{(n)}) \neq \emptyset$. Отже, брус $Q$ міститься в об'єднанні $(g(B^{(n)}))^{(N)}$.\\
 Доведемо, що $(\vec{g}(B))_{(N)} \supset (g(B_{(n)}))_{(N)}$. Дійсно, беремо брус $Q$ із об'єднання $(g(B_{(n)}))_{(N)}$, тобто $Q \subset \vec{g}(B_{(n)})$, але $\vec{g}(B_{(n)}) \subset \vec{g}(B)$, тож звідси $Q \subset \vec{g}(B)$. Тобто брус $Q$ міститься в об'єднанні $(\vec{g}(B))_{(N)}$.\\
@@ -1849,42 +1897,48 @@ $I_n^{(4)} = \displaystyle\abs{\int\displaylimits_{B_{(n)}} f(\vec{g}(\vec{x})) 
 $I_n^{(2)} = \displaystyle\abs{\int\displaylimits_{\vec{g}(B_{(n)})} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) } = \left| \sum_{\vec{g}(Q)) \subset \vec{g}(B_{(n)})} \int\displaylimits_{\vec{g}(Q)} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) m(\vec{g}(Q)) \right| \\
 \left| \sum_{\vec{g}(Q) \subset \vec{g}(B_{(n)})} \int\displaylimits_{\vec{g}(Q)} f(\vec{y})\,d\vec{y} - \sum_{Q \subset B_{(n)}} \int\displaylimits_{\vec{g}(Q)} f(\vec{g}(\vec{x}(Q)))\,d\vec{y} \right| = \left|\sum_{Q \subset B_{(n)}} \int\displaylimits_{g(\vec{Q})} f(\vec{y}) - f(\vec{g}(\vec{x}(Q)))\,d\vec{y} \right| \leq
 \\ \leq \displaystyle\sum_{Q \subset B_{(n)}} \abs{\int\displaylimits_{\vec{g}(Q)} f(\vec{y}) - f(\vec{g}(\vec{x}(Q)))\,d\vec{y} }$.\\
-Зважаючи на рівномірну неперервність функції $f$ на $\vec{g}(B)$ та $u_k'$ на $B$ можна показати, що $I_n^{(2)} \to 0$.\\
-Для $I_n^{(3)}$ застосувати теорему про середнє, отримаємо:\\
-$I_n^{(3)} \leq \displaystyle\abs{\sum_{Q \subset B_{(n)}} (f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x})(Q))| - f(\vec{g}(\vec{\theta}(Q)) |u_k'(\vec{\theta}(Q))|) m(Q) }$.\\
-Тут $\vec{\theta}(Q) \in Q$, а далі використати рівномірну неперервність функції $f(\vec{g}) |u_k'|$ на $B$.
+Нехай $\varepsilon > 0$. Оскільки функція $f \in C_{\text{unif}}(\vec{g}(B))$, то тоді існує $\delta > 0$ такий, що $\forall \vec{y}_1,\vec{y}_2 \in \vec{g}(B): \| \vec{y}_1 - \vec{y}_2 \| < \delta \implies |f(\vec{y}_1) - f(\vec{y}_2)| < \varepsilon$. Також функція $\vec{g} \in C_{\text{unif}}(B)$, тож для $\delta > 0$ існуватиме $\tilde{\delta} > 0$ такий, що $\forall \vec{x}_1,\vec{x}_2 \in B: \| \vec{x}_1 - \vec{x}_2 \| < \tilde{\delta} \implies \| \vec{g}(\vec{x}_1) - \vec{g}(\vec{x}_2)\| < \delta$.\\
+Оберемо номер $N$ таким чином, що $\dfrac{\sqrt{m}}{2^N} < \tilde{\delta}$ (ліворуч -- діагональ бруса). Оберемо $\vec{y} \in \vec{g}(Q)$, тобто $\vec{y} = \vec{g}(\vec{\theta})$ при $\theta \in Q$. Також маємо $\vec{g}(\vec{x}(Q)) \in \vec{g}(Q)$ при $\vec{x}(Q) \in Q$. Відповідно $\| \vec{x}(Q) - \theta \| < \tilde{\delta} \implies \| \vec{g}(\vec{x}(Q)) - \vec{g}(\theta)| = \| \vec{g}(\vec{x}(Q)) - \vec{y}| < \delta \implies | f(\vec{g}(\vec{x}(Q))) - f(\vec{y})| < \varepsilon$. Власне, звідси\\
+$I_n^{(2)} < \displaystyle\sum_{Q \subset B_{(n)}} \varepsilon m(\vec{g}(Q)) = \varepsilon m(\vec{g}(B_{(n)})) \leq \varepsilon m(\vec{g}(B))$ для всіх $n \geq N$.\\
+Таким чином, ми довели, що $I_n^{(2)} \to 0$ при $n \to \infty$.\\
+$I_n^{(3)} = \displaystyle \left| \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) - \int\displaylimits_{B_{(n)}} f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} \right| = \\
+\left| \sum_{Q \subset B_{(n)}} f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) - \sum_{Q \subset B_{(n)}}\int\displaylimits_Q f(\vec{g}(\vec{x})) |u_k'(\vec{x})|\,d\vec{x} \right| \overset{\text{теорема про середнє}}{=} \\
+= \left| \sum_{Q \subset B_{(n)}} \left(f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| m(Q) - f(\vec{g}(\vec{\theta}(Q))) |u_k'(\vec{\theta}(Q))| m(Q)\right) \right| \leq \\
+\leq \sum_{Q \subset B_{(n)}} |f(\vec{g}(\vec{x}(Q))) |u_k'(\vec{x}(Q))| - f(\vec{g}(\vec{\theta}(Q))) |u_k'(\vec{\theta}(Q))| m(Q)$.\\
+Тут $\vec{\theta}(Q) \in Q$ із теореми про середнє. Нехай знову $\varepsilon > 0$. Оскільки функція $f(\vec{g}) |u_k'| \in C_{\text{unif}}(B)$, то звідси $\exists \delta > 0: \forall \vec{x}_1, \vec{x}_2 \in B: \| \vec{x}_1 - \vec{x}_2\| < \delta \implies |f(\vec{g}(\vec{x}_1)) |u_k'(\vec{x}_1)| - f(\vec{g}(\vec{x}_2)) |u_k'(\vec{x}_2)|| < \varepsilon$.\\
+Оберемо число $N$ так, що $\dfrac{\sqrt{m}}{2^N} < \delta$. Ми маємо $\|\vec{x}(Q) - \vec{\theta}(Q)\| < \delta \implies |f(\vec{g}(\vec{x}_1)) |u_k'(\vec{x}(Q))| - f(\vec{g}(\vec{x}_2)) |u_k'(\vec{\theta}(Q))|| < \varepsilon$. Власне, звідси\\
+$I_n^{(3)} < \displaystyle\sum_{Q \subset B_{(n)}} \varepsilon m(Q) = \varepsilon m(B_{(n)}) \leq \varepsilon m(B)$ для всіх $n \geq N$.\\
+Таким чином, ми довели, що $I_n^{(3)} \to 0$ при $n \to \infty$.
 \end{proof}
 
-\begin{lemma}
-Задано $A$ - відкрита множина в $\mathbb{R}^m$ та $\vec{g}: A \to \mathbb{R}^m$, причому $\vec{g} \in C^{1}(A)$.\\
-Нехай $\forall \vec{x} \in A: \det \vec{g}'(\vec{x}) \neq 0$.\\
-Тоді $\forall \vec{x}_0 \in A: \exists B(\vec{x}_0,r): \forall \vec{x} \in B(\vec{x}_0,r):$\\
-$\vec{g}(\vec{x}) = \vec{g}_{(m)}( \vec{g}_{(m-1)} (\dots \vec{g}_{(1)} (\vec{x}) \dots ) )$, де $\vec{g}_{(1)},\dots,\vec{g}_{(m)}$ - відображення спеціального вигляду.\\
-Тобто $\vec{g}$ розкладається на композицію відображень спеціального вигляду.
-\end{lemma}
+\begin{remark}
+Маючи відображення спеціального вигляду $\vec{g}$, ми можемо зауважити, що $u_k'(\vec{x}) = J_g(\vec{x})$. Тож формулу заміни змінних можна переписати інакше:\\
+$\displaystyle\int\displaylimits_{\vec{g}(B)} f(\vec{y})\,d\vec{y} = \int\displaylimits_B f(\vec{g}(\vec{x})) |J_g(\vec{x})|\,d\vec{x}$.
+\end{remark}
 
 \subsection{Локальне зведення загального відображення до композицій спеціальних виглядів}
-Задано $A \subset \mathbb{R}^m$ -- відкрита підмножина та $\vec{g} \colon A \to \mathbb{R}^m$, причому $\vec{g} \in C^1(A)$, а також $\forall \vec{x} \in A: \det \vec{g}'(\vec{x}) \neq 0$.
+Задано $A \subset \mathbb{R}^m$ -- відкрита підмножина та $\vec{g} \colon A \to \mathbb{R}^m$, причому $\vec{g} \in C^1(A)$, а також $\forall \vec{x} \in A: \det \vec{g}\prime(\vec{x}) \neq 0$.
 
 \begin{lemma}
 $\forall \vec{x}_0 \in A: \exists r > 0: \forall \vec{x} \in B(\vec{x}_0;r): \vec{g}(\vec{x}) = \vec{g}_{(m)} \circ \vec{g}_{(m-1)} \circ \dots \circ \vec{g}_{(1)}(\vec{x})$.\\
-Усі відображення $\vec{g}_{(i)}$ мають спеціальний вигляд.
+Усі відображення $\vec{g}_{(i)}$ мають спеціальний вигляд.\\
+Дана лема каже, що в кожній точці функцію $\vec{g}$ можна локально розписати як композицію спеціальних.
 \end{lemma}
 
 \begin{proof}
-За умовою підрозділу маємо $\det \vec{g}'(\vec{x}_0) \neq 0$. Звідси має існувати ненулевий мінор $(m-1)$-го порядку. Не втрачаючи загальності, нехай $\dfrac{\partial(g_1,\dots,g_{m-1})}{\partial(x_1,\dots,x_{m-1})}(\vec{x}_0) \neq 0$. Такими самими міркуваннями ми можемо довести, що $\dfrac{\partial(g_1,\dots,g_k)}{\partial(x_1,\dots,x_k)}(\vec{x}_0) \neq 0$ для всіх $1 \leq k \leq m$.\\
+За умовою підрозділу маємо $\det \vec{g}\prime(\vec{x}_0) \neq 0$. Звідси має існувати ненулевий мінор $(m-1)$-го порядку. Не втрачаючи загальності, нехай $\dfrac{\partial(g_1,\dots,g_{m-1})}{\partial(x_1,\dots,x_{m-1})}(\vec{x}_0) \neq 0$. Такими самими міркуваннями ми можемо довести, що $\dfrac{\partial(g_1,\dots,g_k)}{\partial(x_1,\dots,x_k)}(\vec{x}_0) \neq 0$ для всіх $1 \leq k \leq m$.\\
 Нехай $\vec{x} \in A$. Розглянемо відображення $\vec{g}_{(1)}(\vec{x}) = (g_1(\vec{x}), x_2,\dots,x_m) = (y_1^{(1)}, \dots, y_m^{(1)}) = \vec{y}^{(1)}$. Для цього відображення якобіан $\dfrac{\partial(y_1^{(1)},\dots,y_m^{(1)})}{\partial(x_1,\dots,x_m)} = \dfrac{\partial g_1}{\partial x_1} \neq 0$, тобто існує оборотний якобіан. Тоді за теоремою про локально обернену функцію, існує функція $h_1 \in C^1$, що визначена в околі $B_1(\vec{y}_0^{(1)})$, причому\\
-$x_1 = h_1(\vec{y}^{(1)}),\ x_2 = y_2^{(1)}, \dots, x_m = y_m^{(1)}$. Коротше, ми знайшли оборотну функцію $\vec{h}_1(\vec{y^{(1)}}) = (h_1(\vec{y}^{(1)}), y_2^{(1)},\dots,y_m^{(1)})$.\\
+$x_1 = h_1(\vec{y}^{(1)}),\ x_2 = y_2^{(1)}, \dots, x_m = y_m^{(1)}$. Коротше, ми знайшли оборотну функцію $\vec{h}_{(1)}(\vec{y^{(1)}}) = (h_1(\vec{y}^{(1)}), y_2^{(1)},\dots,y_m^{(1)})$.\\
 Тепер розглянемо відображення $\vec{g}_{(2)}(\vec{y}^{(1)}) = (y_1^{(1)}, g_2(\vec{x}), \dots, y_m^{(1)}) = (y_1^{(2)},y_2^{(2)},\dots,y_m^{(2)}) = \vec{y}^{(2)}$. У цьому випадку $g_2(\vec{x}) = g_2(\vec{h}_1(\vec{y}^{(1)}))$. Тобто наша функція дійсно залежить від $\vec{y}^{(1)}$. Маємо якобін $\dfrac{\partial(y_1^{(2)},\dots,y_m^{(2)})}{\partial(y_1^{(1)},\dots,y_m^{(1)})} = \dfrac{\partial y_2^{(2)}}{\partial y_2^{(1)}} = \dfrac{\partial g_2}{\partial y_2^{(1)}} (x_1,\dots,x_m) = \dfrac{\partial}{\partial y_2^{(1)}} g_2(h_1(y_1^{(1)},y_2^{(1)},\dots,y_m^{(1)}),y_2^{(1)},\dots,y_m^{(1)}) = \\
 = \dfrac{\partial g_2}{\partial x_1} \dfrac{\partial x_1}{\partial y_2^{(1)}} + \dfrac{\partial g_2}{\partial x_2} \dfrac{\partial x_2}{\partial y_2^{(1)}} = \dfrac{\partial g_2}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_2}{\partial x_2}$.\\
-Зауважимо, що $\dfrac{\partial g_1}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_1}{\partial x_2} = 0$ (TODO: ?). Внаслідок чого $\dfrac{\partial y_2^{(2)}}{\partial y_2^{(1)}} \neq 0$.\\
+Зауважимо, що $\dfrac{\partial g_1}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_1}{\partial x_2} = 0$. Дійсно, ми маємо $y_1^{(1)} = g_1(x_1,\dots,x_m)$. Зокрема $0 = \departial{y_1^{(1)}}{y_2^{(1)}} = \departial{g_1}{y_2^{(1)}} = \dfrac{\partial g_1}{\partial x_1} \dfrac{\partial x_1}{\partial y_2^{(1)}} + \dfrac{\partial g_1}{\partial x_2}$. Внаслідок чого $\dfrac{\partial y_2^{(2)}}{\partial y_2^{(1)}} \neq 0$.\\
 !Припустимо, що це не так, тобто $\dfrac{\partial y_2^{(2)}}{\partial y_2^{(1)}} = 0$. Ми маємо однорідну систему:\\
 $\begin{cases}
 \dfrac{\partial g_1}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_1}{\partial x_2} = 0 \\
 \dfrac{\partial g_2}{\partial x_1} \dfrac{\partial h_1}{\partial y_2^{(1)}} + \dfrac{\partial g_2}{\partial x_2} = 0
 \end{cases}$.\\
 Тоді матимемо розв'язок $\left( \dfrac{\partial h_1}{\partial y_2^{(1)}},1 \right)$. Проте в нас визначник системи ненулевий, тому ненулевий розв'язок існувати не може -- суперечність!\\
-Раз $\dfrac{\partial(y_1^{(2)},\dots,y_m^{(2)})}{\partial(y_1^{(1)},\dots,y_m^{(1)})}$, то аналогічно застосуємо теорему про локально обернену функцію. Внаслідок чого ми вже отримаємо $\vec{y}^{(2)}(\vec{x}) = \vec{g}_{(2)} \circ \vec{g}_{(1)}(\vec{x})$.\\
+Раз $\dfrac{\partial(y_1^{(2)},\dots,y_m^{(2)})}{\partial(y_1^{(1)},\dots,y_m^{(1)})} \neq 0$, то аналогічно застосуємо теорему про локально обернену функцію. Внаслідок чого ми вже отримаємо $\vec{y}^{(2)}(\vec{x}) = \vec{g}_{(2)} \circ \vec{g}_{(1)}(\vec{x})$.\\
 Далі міркування йдуть аналогічним чином -- так і закінчимо доведення.
 \end{proof}
 
@@ -1902,25 +1956,112 @@ $\displaystyle\int_{\vec{g}(B)} f(\vec{y})\,d\vec{y} = \int_B f(\vec{g}(\vec{x})
 \begin{proof}
 За попередньою лемою, $\forall \vec{x} \in B: \exists \delta = \delta(\vec{x}) > 0: \forall \vec{u} \in B(\vec{x},\delta): \vec{g}(\vec{u)} = \vec{g}_{(m)} \circ \vec{g}_{(m-1)} \circ \dots \circ \vec{g}_{(1)} (\vec{u})$.\\
 Система куль $\left\{ B\left(\vec{x}, \dfrac{\delta}{2} \right) \mid \vec{x} \in B \right\}$ буде відкритим покриттям компактної множини $B$. Значить, існує скінченне підпокриття $\left\{ B\left(\vec{x}^{(i)}, \dfrac{\delta^{(i)}}{2}\right) \mid 1 \leq i \leq s \right\}$. Позначимо $\gamma = \displaystyle\min_{1 \leq i \leq s} \dfrac{\delta}{2}$.\\
-Ми будемо розглядати розбиття $\pi_m^{(n)}$ простору $\mathbb{R}^m$, для яких діаметр брусів $\pi_m^{(n)}$ менший за $\gamma$. Припустимо, що $Q(1),\dots,Q(N)$ -- всі ті бруси, що мають непорожній перетин з $B$. Позначимо $B(i) = B \cap Q(i)$ при $1 \leq i \leq N$. Зауважимо, шо $B = \displaystyle\bigcup_{i=1}^N B(i)$, а також $B(\nu)^0 \cap B(\mu)^0 = \emptyset$ при $\nu \neq \mu$.\\
+Ми будемо розглядати розбиття $\pi^{(n)}$ простору $\mathbb{R}^m$, для яких діаметр брусів $\pi^{(n)}$ менший за $\gamma$. Припустимо, що $Q(1),\dots,Q(N)$ -- всі ті бруси, що мають непорожній перетин з $B$. Позначимо $B(i) = B \cap Q(i)$ при $1 \leq i \leq N$. Зауважимо, що $B = \displaystyle\bigcup_{i=1}^N B(i)$, а також $\Int(B(\nu)) \cap \Int(B(\mu)) = \emptyset$ при $\nu \neq \mu$.\\
 Оскільки $\forall 1 \leq \nu \leq N: \exists i_0: B(\nu) \cap B\left( \vec{x}^{(i_0)}, \dfrac{\delta_{i_0}}{2}\right) \neq \emptyset$ та $B(\nu) \subset Q(\nu)$, то звідси $B(\nu) \subset B(\vec{x}^{(i_0)}, \delta_{i_0})$ при $i_0 = i_0(\nu)$ (TODO: ?). Таким чином, розглядаючи відображення $\vec{g}$ на $B(\nu)$, можна припустити, що воно розписується як композиція спеціальних відображень, причому\\
 $\vec{g}(B(\nu)) = \vec{g}_{(m)}(B^{(m-1)}(\nu)),\dots, B^{(2)}(\nu) = \vec{g}_{(2)}(B^{(1)}(\nu)), B^{(1)}(\nu) = \vec{g}_{(1)}(B(\nu))$.\\
-Всі ці множини $B^{(i)}(\nu)$ компактні та вимірні за минулим пуктом. Тоді\\
-$\displaystyle\int_{\vec{g}(B(\nu))} f(\vec{y})\,d\vec{y} = \int_{\vec{g}_{(m)}(B^{(m-1)}(\nu)} f(\vec{y})\,d\vec{y} = \int_{B^{(m-1)}(\nu)} f(\vec{g}_{m}(\vec{z})) \left| \dfrac{\partial (y_1,\dots,y_m)}{\partial(z_1,\dots,z_m)} \right|\,d \vec{z} = \int_{B^{(m-2)}} f(\vec{g}_{(m)}(\vec{g}_{(m-1)}(\vec{u}))) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(z_1,\dots,z_m)} \right| \left| \dfrac{\partial(z_1,\dots,z_m)}{\partial(u_1,\dots,u_m)} \right|\,d\vec{u} = \int_{B^{(m-2)}(\nu)} f(\vec{g}_{(m)}(\vec{g}_{(m-1)}(\vec{u}))) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(u_1,\dots,u_m)} \right|\,d\vec{u} = \dots = \int_{B(\nu)} f(\vec{g}(\vec{x})) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(x_1,\dots,x_m)} \right|\,d\vec{x}$.\\
+Всі ці множини $B^{(i)}(\nu)$ компактні та вимірні за минулим пунктом. Тоді\\
+$\displaystyle\int_{\vec{g}(B(\nu))} f(\vec{y})\,d\vec{y} = \int_{\vec{g}_{(m)}(B^{(m-1)}(\nu)} f(\vec{y})\,d\vec{y} = \int_{B^{(m-1)}(\nu)} f(\vec{g}_{m}(\vec{z})) \left| \dfrac{\partial (y_1,\dots,y_m)}{\partial(z_1,\dots,z_m)} \right|\,d \vec{z} = \\ = \int_{B^{(m-2)}} f(\vec{g}_{(m)}(\vec{g}_{(m-1)}(\vec{u}))) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(z_1,\dots,z_m)} \right| \left| \dfrac{\partial(z_1,\dots,z_m)}{\partial(u_1,\dots,u_m)} \right|\,d\vec{u} = \int_{B^{(m-2)}(\nu)} f(\vec{g}_{(m)}(\vec{g}_{(m-1)}(\vec{u}))) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(u_1,\dots,u_m)} \right|\,d\vec{u} = \dots = \int_{B(\nu)} f(\vec{g}(\vec{x})) \left| \dfrac{\partial(y_1,\dots,y_m)}{\partial(x_1,\dots,x_m)} \right|\,d\vec{x}$.\\
 Оскільки $\vec{g}(B) = \displaystyle\bigcup_{i=1}^N \vec{g}(B(i))$, то $\vec{g}(B)$ -- теж компактна та вимірна. Остаточно\\
 $\displaystyle\int_{\vec{g}(B)} f(\vec{y})\,d\vec{y} = \sum_{\nu = 1}^N \int_{\vec{g}(B(\nu))} f(\vec{y})\,d\vec{y} = \sum_{\nu = 1}^N \int_{B(\nu)} f(\vec{g}(\vec{x})) |J|\,d\vec{x} = \int_B f(\vec{g}(\vec{x}))|J|\,d\vec{x}$.
 \end{proof}
-\noindent
-Трохи треба відволіктися та порівнянти формулу заміни змінних з такою самою формулою заміною змінних в одновимірному інтегралі.\\
-Нехай функція $f \in C([a,b])$, а також функція $\varphi \in C^1([\alpha,\beta])$. причому $a = \varphi(a), b = \varphi(b)$. Ми тоді мали формулу $\displaystyle\int_\alpha^\beta f(\varphi(t))\varphi'(t)\,dt = \int_{\varphi(\alpha)}^{\varphi(\beta)} f(x)\,dx$.\\
 
+\begin{example}
+Обчислити $\displaystyle\iint\displaylimits_D xy\,dx\,dy$, де область $D$ обмежується кривими:\\
+$y^2 = 4x,\ y^2 = 9x,\ xy = 1,\ xy = 5$.\\
+Проведемо заміну: $\begin{cases} u = \dfrac{y^2}{x} \\ v = xy \end{cases} \implies \begin{cases} y = \sqrt[3]{uv} \\ x = \sqrt[3]{\dfrac{v^2}{u}} \end{cases}$. Тобто ми створили функцію $\vec{g}$, яка відображає $(u,v) \overset{\vec{g}}{\mapsto} \left( \sqrt[3]{uv}, \sqrt[3]{\dfrac{v^2}{u}}\right)$. Зауважимо, що $\vec{g} \in C^1$, його якобіан $J_{\vec{g}} = \dfrac{1}{3u} > 0$. Також зазначимо, що $\vec{g}^{-1}(D) = \{(u,v): (x,y) \in D\} = \{ (u,v): 4 \leq u \leq 9, 1 \leq v \leq 5\} = [4,9] \times [1,5]$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[color=blue, name path = A, domain={(9)^(-1/3)}:{(4)^(-1/3)}]   plot (\x,{1/\x});
+\draw[color=blue, name path = B, domain={5*(45)^(-1/3)}:{5*(20)^(-1/3)}]   plot (\x,{5/\x});
+\draw[color=blue, name path = C, variable=\y, domain={(4)^(1/3)}:{(20)^(1/3)}]   plot ({\y*\y/4},\y);
+\draw[color=blue, name path = D, variable=\y, domain={(9)^(1/3)}:{(45)^(1/3)}]   plot ({\y*\y/9},\y);
+\draw[->] (0,0)--(4,0) node[anchor = north] {$x$};
+\draw[->] (0,0)--(0,4) node[anchor = east] {$y$};
+\node at (1,2.5) {$D$};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale = 0.5]
+\draw[red] (4,1) rectangle (9,5);
+\draw[->] (0,0)--(10,0) node[anchor = north] {$u$};
+\draw[->] (0,0)--(0,6) node[anchor = east] {$v$};
+\node at (6,3) {$\vec{g}^{-1}(D)$};
+\end{tikzpicture}
+\end{figure}
+Цілком ясно, що $\vec{g}$ бієктивне відображення на компактній множині. Отже, можемо застосовувати теорему про заміну змінних.\\
+$\displaystyle\iint\displaylimits_D xy\,dx\,dy = \iint\displaylimits_{\vec{g}^{-1}(D)} \sqrt[3]{uv} \sqrt[3]{\dfrac{v^2}{u}} \cdot \dfrac{1}{3u}\,du\,dv = \iint\displaylimits_{\vec{g}^{-1}(D)} \dfrac{v}{3u}\,du\,dv = \int_4^9 \int_1^5 \dfrac{v}{3u}\,dv\,du = \int_4^9 \dfrac{v^2}{6u} \Big|_1^5\,du = \\
+ = \int_4^9 \dfrac{4}{u}\,du = 4 \ln |u| \Big|_4^9 = 4 \ln \dfrac{9}{4}$.
+\end{example}
 
-\iffalse
+\subsection{Класичні заміни змінних}
+\subsubsection{Полярна заміна}
+Маємо $\displaystyle\iint_{\vec{g}(B)} f(x,y)\,dx\,dy$. Проведемо ось таку заміну:\\
+$\begin{cases}
+x = \rho \cos \varphi \\
+y = \rho \sin \varphi
+\end{cases}$.\\
+Ми побудували функцію $(\phi,\rho) \overset{\vec{g}}{\mapsto} (\rho \cos \varphi, \rho \sin \varphi)$. Зрозуміло, що така функція $\vec{g} \in C^1(A)$.\\
+Маючи таку заміну, ми маємо $x^2 + y^2 = \rho^2$. Ми вже якось обчислювали якобіан (дивись мат.\ аналіз II), одразу напишу, що $J = \rho$. Отримаємо\\
+$\displaystyle\iint_{\vec{g}(B)} f(x,y)\,dx\,dy = \iint_{B} f(\rho \cos \varphi, \rho \sin \varphi) \cdot \rho\,d\rho\,d\varphi$.\\
+У цьому випадку $B = \{ (\varphi,\rho) : \varphi \in [0,2\pi], \rho \in [0,r] \}$. \\
+Щоправда, ми записали знак рівності, але тут проблема полягає в тому, що $\vec{g}$ уже не буде бієктивним, оскільки $(\varphi,0) \mapsto (0,0)$ при кожному $\varphi$. Тим не менш, зараз доведемо, що рівність легітимна.
+\bigskip \\
+Нехай $0 < \varepsilon < \min\{\pi,r\}$ та розглянемо $B_\varepsilon = \{ (\varphi,\rho) : \varphi \in [\varepsilon,2\pi - \varepsilon], \rho \in [\varepsilon,r]\}$. Зауважимо, що $B_\varphi \subset B$, а також \\
+$m(B \setminus B_\varepsilon) = m(B) - m(B_\varepsilon) = 2\pi r - (2\pi - 2\varepsilon) (r - \varepsilon) = 2\pi \varepsilon + 2r\varepsilon - 2\varepsilon^2 \to 0$ при $\varepsilon \to 0+0$.\\
+Звідси $\displaystyle\left| \iint\displaylimits_{B \setminus B_\varepsilon} f(\rho \cos \varphi, \rho \sin \varphi) \rho\,d\rho\,d\varphi \right| \leq r \max_{\vec{g}(B)} |f| m(B \setminus B_\varepsilon) \to 0$ при $\varepsilon  \to 0+0$.\\
+Відображення $\vec{g} \colon B_\varepsilon \to \vec{g}(B_\varepsilon)$ уже буде бієктивним, тому $\displaystyle\iint\displaylimits_{\vec{g}(B_\varepsilon)} f(x,y)\,dx\,dy = \iint\displaylimits_{B_\varepsilon} f(\rho \cos \varphi, \rho \sin \varphi) \rho\,d\rho\,d\varphi$.\\
+Також додатково $\displaystyle\left| \iint\displaylimits_{\vec{g}(B)} f(x,y)\,dx\,dy - \iint\displaylimits_{\vec{g}(B_\varepsilon)} f(x,y)\,dx\,dy \right| \leq \max_{\vec{g}(B)} |f| m(\vec{g}(B \setminus B_\varepsilon)) \overset{(TODO:?)}{\leq} \max_{\vec{g}(B)} |f| (\pi \varepsilon^2 + r^2 \tg \varepsilon) \to 0$ при $\varepsilon \to 0+0$. Отже,\\
+$\displaystyle\iint\displaylimits_{\vec{g}(B)} f(x,y)\,dx\,dy = \iint\displaylimits_{\vec{g}(B_\varepsilon)} f(x,y)\,dx\,dy + \iint\displaylimits_{\vec{g}(B \setminus B_\varepsilon)} f(x,y)\,dx\,dy = \iint\displaylimits_{B_\varepsilon} f(\rho \cos \varphi, \rho \sin \varphi) \rho \,d\rho\,d\varphi + \iint\displaylimits_{\vec{g}(B \setminus B_\varepsilon)} f(x,y)\,dx\,dy = \iint\displaylimits_{B} f(\rho \cos \varphi, \rho \sin \varphi) \rho \,d\rho\,d\varphi - \iint\displaylimits_{B \setminus B_\varepsilon} f(\rho \cos \varphi, \rho \sin \varphi) \rho \,d\rho\,d\varphi  + \iint\displaylimits_{\vec{g}(B \setminus B_\varepsilon)} f(x,y)\,dx\,dy$.\\
+Якщо спрямувати $\varepsilon \to 0+0$, то отримаємо бажаний результат.
+
+\begin{example}
+Обчислити $\displaystyle\iint\displaylimits_D e^{x^2+y^2}\,dx\,dy$, де область $D$ обмежена колом $x^2+y^2 = 1$ (беремо лише першу чверть), а також $y = x,\ y = x \sqrt{3}$.\\
+Проведемо заміну: $\begin{cases} x = \rho \cos \varphi \\ y = \rho \sin \varphi \end{cases}$. Його якобіан $J = \rho$. Також зазначимо, що $x^2 + y^2 = \rho^2$. Звідси\\
+$D_{\varphi,\rho} = \{ (\varphi,\rho) : (x,y) \in D\} = \left\{ (\varphi,\rho) :  \varphi \in \left[ \dfrac{\pi}{4}, \dfrac{\pi}{3}\right], \rho \in [0,1] \right\}$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[->] (-1.5,0)--(1.5,0) node[anchor = north] {$x$};
+\draw[->] (0,-1.5)--(0,1.5) node[anchor = east] {$y$};
+\draw[dashed] (0,0) circle (1);
+\draw[color=blue] (1,0) arc (0:90:1);
+\draw[color=blue, domain=0:1]   plot (\x,\x);
+\draw[color=blue, domain=0:1]   plot (\x,{\x*sqrt(3)});
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\draw[red] ({pi/4},0) rectangle ({pi/3},1);
+\draw[->] (0,0)--(2,0) node[anchor = north] {$\varphi$};
+\draw[->] (0,0)--(0,2) node[anchor = east] {$\rho$};
+%\node at (6,3) {$\vec{g}^{-1}(D)$};
+\end{tikzpicture}
+\end{figure}
+Відображення в нас бієктивне, класу $C^1$, а $D$ є вимірним та компактним. Тож звідси\\
+$\displaystyle\iint\displaylimits_D e^{x^2+y^2}\,dx\,dy = \iint\displaylimits_{D_{\varphi,\rho}} e^{\rho^2} \rho\,d\rho\,d\varphi = \int_{\frac{\pi}{4}}^{\frac{\pi}{3}}\,d\varphi \int_{0}^1 e^{\rho^2}\rho\,d\rho = \dots = \dfrac{\pi}{12} (e-1)$.
+\end{example}
+\newpage
+
+\section*{Різні вставочки до даного розділу}
+На жаль, розділ про кратні інтеграли розповідаються по-різному, подекуди різні вимоги на кожні теореми. Коротше, нема певної стандартизації (як наприклад, тема про границі числової послідовності, функцій тощо). Мені є що сказати саме ось тут.
+
+\subsection*{Інтегровані функції та обмеженість функцій}
+Ви навчилися визначати інтеграл $\displaystyle\int_A f(\vec{x})\,d\vec{x}$ на кожній вимірній (за Жорданом) множині $A$. Коли ми проходили мат.\ аналіз ІІ семестру, то там ми знаємо один факт: $f \in \mathcal{R}([a,b]) \implies f$ -- обмежена на $[a,b]$.\\
+Проблема в тому, що в загальному випадку $f \in \mathcal{R}(A) \centernot\implies f$ -- обмежена на $A$. Ось специфічний приклад.\\
+Маємо множину $A = ([0,1] \times [0,1]) \cup ((1,3] \times \{0\})$. Думаю, не варто вже пояснювати, що $A$ -- вимірна множина. Тепер розглянемо функцію $f(x,y) = \begin{cases} 0, & \text{інакше} \\ \dfrac{1}{3-x}, & x \in (2,3) \end{cases}$. Цілком зрозуміло, що вона необмежена. Але при цьому $f \in \mathcal{R}(A)$ в сенсі класичного означення через інтегральні суми.\\
+Нехай $\varepsilon > 0$, оберемо $\delta = 1$ та нехай розбиття $\tau = \{A_i\}$ таке, що $|\tau| < \delta = 1$. Оберемо будь-який набір відмічених точок $(\xi,\eta)$. Тоді в нас або $f(\xi_i,\eta_i) = 0$, або $m(A_i) = 0$. Автоматично отримаємо $\sigma(f,\tau,(\xi,\eta)) = 0 < \varepsilon$. Короче, звідси $\displaystyle\iint_A f(x,y)\,dx\,dy = 0$, навіть попри необмеженість (до речі, необмежена саме на множині міри нуль).
+\bigskip \\
+Отже, коли визначаємо інтеграл Рімана, то ми вимагаємо функцію бути обмеженою.\\
+Або якщо не хочете таке визнавати, то тоді, насправді, справедливе наступне:
+\begin{theorem*}
+Нехай функція $f \in \mathcal{R}(A)$, де $A$ -- вимірна. Тоді $f$ -- обмежена на $\Int A$.
+\end{theorem*}
+
+Тепер інше питання (принаймні це в мене виникнуло): а що можна сказати за $\displaystyle\int\displaylimits_{(0,1)} \dfrac{1}{x}\sin \dfrac{1}{x}\,dx$? Інтеграл скінченний, на відкритій множині функція необмежена. Ось тільки $f \notin \mathcal{R}((0,1))$ в сенсі класичного означення через інтегральні суми (TODO: добити).
+\newpage
+
+%An alternative approach
 \section{Кратні інтеграли}
 \subsection{Міра Жордана}
-Задамо множини $A_k \subset \mathbb{R}^n, k = \overline{1,m}$ таким чином, щоб $A_i \cap A_j = \emptyset$ при $i \neq j$. Встановимо множину $A = \huge\bigcup_{k=1}^m A_k$. У цьому випадку існує альтернативне позначення:
-$$ A = \bigsqcup_{k=1}^m A_k $$
-
 \begin{definition}
 Задано напівінтервали $I_k = [a_k, b_k), k = \overline{1,n}$, причому $a_k \leq b_k$.\\
 \textbf{Прямокутним паралелепіпедом} називатимемо таку множину:
@@ -1949,9 +2090,17 @@ P(\vec{a},\vec{b}) = I_1 \times I_2 \times \dots \times I_n
 \draw[thick, dashed, red] (1,1.5)--(2.5,1.5);
 \draw[thick, dashed, red] (2.5,0.5)--(2.5,1.5);
 \end{tikzpicture}
-\caption*{$n=1$ - напівінтервал, $n=2$ - напівпрямокутник.}
+\caption*{$n=1$ -- напівінтервал, $n=2$ -- напівпрямокутник.}
 \end{figure}
 \end{definition}
+
+\begin{remark}
+Якщо $P_1,P_2$ -- два бруси, то $P_1 \cap P_2$ теж буде брусом. Дійсно,\\
+$P_1 = [a_1,b_1) \times \dots \times [a_n,b_n)$;\\
+$P_2 = [a_2,b_2) \times \dots \times [a_2,b_2)$;\\
+Звідси $P_1 \cap P_2 = ([a_1,b_1) \cap [c_1,d_1)) \times \dots \times ([a_n,b_n) \times [c_n,d_n))$.\\
+Тепер розглянемо $[a,b) \cap [c,d)$. У залежності від розташування на числовій прямій ми все одно отримаємо проміжок формату $[u,v)$ при перетині. Отже, $P_1 \cap P_2 = [u_1,v_1) \times \dots \times [u_n,v_n)$, тобто є брусом. Якщо раптом один із $[u,v) = \emptyset$, то тоді $P_1 \cap P_2 = \emptyset = [u_1,u_1) \times \dots \times [u_n,u_n)$, що теж можна записати як брус.
+\end{remark}
 
 \begin{definition}
 Задано прямокутні паралелепіпеди $P_i \subset \mathbb{R}^n, i = \overline{1,s}$.\\
@@ -1978,32 +2127,54 @@ Q = \bigsqcup_{i=1}^s P_i
 \end{figure}
 \end{definition}
 
+\begin{remark}
+Якщо $P_1,P_2$ -- два бруси, то $P_1 \setminus P_2$ не обов'язково брус, але точно буде простою множиною.\\
+\textit{Одновимірний випадок}.\\
+Нехай $P_1 = [a,b)$ та $P_2 = [c,d)$. Тоді маємо $P_1 \setminus P_2 = [a,b) \setminus [c,d)$. Якщо вони не перетинаються, то $P_1 \setminus P_2 = [a,b)$. Якщо (не втрачаючи загальності) $a < c < b < d$, то $P_1 \setminus P_2 = [a,c)$. Якщо (не втрачаючи загальності) $[c,d) \subset [a,b)$, то $P_1 \setminus P_2 = [a,c) \sqcup [b,d)$ -- об'єднання двух неперетинних брусів.\\
+Коротше, у будь-якому випадку $P_1 \setminus P_2$ -- проста множина.
+\bigskip \\
+\textit{Двовимірний випадок}.\\
+Нехай $P_1 = I_1 \times I_2$ та $P_2 = J_1 \times J_2$. Тоді маємо ось таку рівність:\\
+$P_1 \setminus P_2 = [(I_1 \setminus J_1) \times I_2] \sqcup [(I_1 \cap J_1) \times (I_2 \setminus J_2)]$ (вправа: довести).\\
+Зауважимо, що $I_1 \setminus J_1$ та $I_2 \setminus J_2$ -- прості множини із минулого пункту, тому $I_1 \setminus J_1 = \displaystyle\bigsqcup_k S_k$, а також $I_2 \setminus J_2 = \displaystyle\bigsqcup_p T_p$. Кожний $S_k, T_p$ є одновимірним брусом. Допишемо рівність:\\
+$P_1 \setminus P_2 = \displaystyle\bigsqcup_k (S_k \times I_2) \sqcup \bigsqcup_p ((I_1 \cap J_1) \times T_p)$.\\
+Множина $S_k \times I_2$ є двовимірним брусом. Уже відомо, що $I_1 \cap J_1$ (перетин двох брусів) теж дає брус. Отже, $(I_1 \cap J_1) \times T_p$ -- двовимірний брус. Тим самим довели, що $P_1 \setminus P_2$ -- проста множина.
+\bigskip \\
+\textit{Загальний випадок}.\\
+Маємо $P_1 = I_1 \times R_2$ та $P_2 = J_1 \times S_2$, де $I_1,J_1$ -- одновимірний брус та $R_2,S_2$ -- двовимірний брус. Далі буквально аналогічно. Так можна повторювати індуктивно для вищих розмірностей.
+\end{remark}
+
 \begin{proposition}
-Задано $Q_1,Q_2 \in \mathcal{S}_n$. Тоді:\\
-$\emptyset \in \mathcal{S}_n, \hspace{1cm} Q_1 \setminus Q_2 \in \mathcal{S}_n, \hspace{1cm} Q_1 \cup Q_2 \in \mathcal{S}_n, \hspace{1cm} Q_1 \cap Q_2 \in \mathcal{S}_n$.
+Задано $Q_1,Q_2$ -- проста множина. Тоді $\emptyset, \quad Q_1 \cap Q_2, \quad Q_1 \setminus Q_2, \quad Q_1 \cup Q_2$ -- вони теж прості. (доводити будемо саме в такому порядку)
 \end{proposition}
 
 \begin{proof}
-$\emptyset$:\\
-Можна записати ось так: $\emptyset = [a_1,a_1) \times \dots \times [a_n,a_n) = P(\vec{a},\vec{a})$. Тобто фактично ми маємо такий дивний паралелепіпед. Отже, автоматично маємо, що $\emptyset \in \mathcal{S}_n$.
+Можна записати ось так: $\emptyset = [a_1,a_1) \times \dots \times [a_n,a_n) = P(\vec{a},\vec{a})$. Тобто фактично ми маємо такий дивний паралелепіпед. Отже, автоматично маємо, що $\emptyset$ -- проста множина.
 \bigskip \\
-Решта без доведення: не можу знайти.
+Маємо $Q_1 = \displaystyle\bigsqcup_i P_i$ та $Q_2 = \displaystyle\bigsqcup_j S_j$. Тоді матимемо\\
+$Q_1 \cap Q_2 = \displaystyle\bigsqcup_{i,j} (P_i \cap S_j)$, але ми знаємо, що $P_i \cap S_j$ (перетин двох брусів) залишається брусом. Отже, $Q_1 \cap Q_2$ -- проста множина.
+\bigskip \\
+$\displaystyle Q_1 \setminus Q_2 = Q_1 \setminus \bigsqcup_j S_j = \bigcap_j (Q_1 \setminus S_j)$;\\
+$Q_1 \setminus S_j = \displaystyle\bigsqcup_i P_i \setminus S_j = \bigsqcup_i (P_i \setminus S_j)$.\\
+Зауважимо, що $Q_1 \setminus S_j$ -- проста множина, тому що кожна $P_i \setminus S_j$ -- проста множина. Звідси випливає, що $Q_1 \setminus Q_2$ -- проста множина як перетин простих.
+\bigskip \\
+$Q_1 \cup Q_2 = (Q_1 \setminus Q_2) \sqcup (Q_1 \cap Q_2) \sqcup (Q_2 \setminus Q_1)$.
 \end{proof}
 
 \begin{definition}
 \textbf{Мірою Жордана} прямокутного паралелепіпеда $P(\vec{a},\vec{b})$ називають число:
 \begin{align*}
-\lambda (P(\vec{a},\vec{b})) = (b_1-a_1)\cdot (b_2-a_2) \cdots (b_n-a_n)
+m (P(\vec{a},\vec{b})) = (b_1-a_1)\cdot (b_2-a_2) \cdots (b_n-a_n)
 \end{align*}
 \textbf{Мірою Жордана} простої множини $Q = \huge\bigsqcup_{i=1}^s P_i$ називають число:
 \begin{align*}
-\lambda (Q) = \huge\sum_{i=1}^s \lambda (P_i)
+m(Q) = \huge\sum_{i=1}^s m (P_i)
 \end{align*}
 \end{definition}
 
 \begin{proposition}
-Означення міри Жордана простої множини - коректне.\\
-Тобто якщо $Q = \huge\bigsqcup_{i=1}^s P_i$ та $Q = \huge\bigsqcup_{j=1}^t R_j$, тобто ми маємо два представлення множини, то $\huge\sum_{i=1}^s \lambda (P_i) = \huge\sum_{j=1}^t \lambda (R_j)$, тобто міра Жордана не зміниться.
+Означення міри Жордана простої множини -- коректне.\\
+Тобто якщо $Q = \huge\bigsqcup_{i=1}^s P_i$ та $Q = \huge\bigsqcup_{j=1}^t R_j$, тобто ми маємо два представлення множини, то $\huge\sum_{i=1}^s m (P_i) = \huge\sum_{j=1}^t m (R_j)$, тобто міра Жордана не зміниться.
 \end{proposition}
 
 \begin{proof}
@@ -2011,50 +2182,46 @@ $\emptyset$:\\
 $S_{i_1,j_1} \cap S_{i_2,j_2} = (P_{i_1} \cap R_{j_1}) \cap (P_{i_2} \cap R_{j_2}) = \emptyset$.\\
 $\huge\bigsqcup_{i=1}^s S_{i,j} = \bigsqcup_{i=1}^s (P_i \cap R_j) = R_j \cap \bigsqcup_{i=1}^s P_i = R_j \cap Q = R_j$;\\
 $\huge\bigsqcup_{j=1}^t S_{i,j} = \bigsqcup_{j=1}^t (P_i \cap R_j) = P_i \cap \bigsqcup_{j=1}^t R_j = P_i \cap Q = P_i$;\\
-Отже, із першого та другого маємо: $\lambda (Q) = \huge\sum_{j=1}^t \sum_{i=1}^s \lambda(S_{i,j}) = \sum_{j=1}^t \lambda(R_j)$.\\
-Також із першого та третього маємо: $\lambda (Q) = \huge\sum_{i=1}^s \sum_{j=1}^t \lambda(S_{i,j}) = \sum_{i=1}^s \lambda(P_i)$.
+Отже, із першого та другого маємо: $m (Q) = \huge\sum_{j=1}^t \sum_{i=1}^s m(S_{i,j}) = \sum_{j=1}^t m(R_j)$.\\
+Також із першого та третього маємо: $m(Q) = \huge\sum_{i=1}^s \sum_{j=1}^t m(S_{i,j}) = \sum_{i=1}^s m(P_i)$.
 \end{proof}
 
 \begin{proposition}
-Задано $Q_1,Q_2 \in \mathcal{S}_n$. Тоді:\\
-1) $\lambda(Q) \geq 0$, а також $\lambda(\emptyset) = 0$;\\
-2) $\lambda(Q_1 \bigsqcup Q_2) = \lambda(Q_1) + \lambda(Q_2)$;\\
-3) $\lambda (Q_1 \cup Q_2) \leq \lambda(Q_1) + \lambda(Q_2)$;\\
-При $Q_1 \subset Q_2$ маємо такі пункти:\\
-4) $\lambda(Q_1) \leq \lambda(Q_2)$;\\
-5) $\lambda(Q_2 \setminus Q_1) = \lambda(Q_2) - \lambda(Q_1)$.
+Задано $Q_1,Q_2$ -- прості множини. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $m(Q) \geq 0$, а також $m(\emptyset) = 0$;
+\item Нехай $Q_1 \cap Q_2 = \emptyset$. Тоді $m(Q_1 \sqcup Q_2) = m(Q_1) + m(Q_2)$;
+\item Нехай $Q_1 \subset Q_2$. Тоді $m(Q_1) \leq m(Q_2)$;
+\item Нехай $Q_1 \subset Q_2$. Тоді $m(Q_2 \setminus Q_1) = m(Q_2) - m(Q_1)$;
+\item $m(Q_1 \cup Q_2) \leq m(Q_1) + m(Q_2)$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-1) Оскільки $\lambda(P) = (b_1-a_1)\dots (b_n-a_n) \geq 0$, то автоматично звідси $\lambda(Q) = \huge\sum_{i=1}^s \lambda(P_i) \geq 0$.\\
-Порожню множину визначали $\emptyset = [a_1,a_1) \times \dots \times [a_n,a_n)$, а тому автоматично \\ $\lambda (\emptyset) = (a_1-a_1) \dots (a_n-a_n) = 0$.
-\bigskip \\
-Надалі маємо $Q_1 = \huge\bigsqcup_{i=1}^s P_i$ та $Q_2 = \huge\bigsqcup_{j=1}^t R_j$.\\
-2) Вважаємо, що $Q_1 \cap Q_2 = \emptyset$, тобто ми маємо справу з $Q_1 \bigsqcup Q_2 = (P_1 \bigsqcup \dots \bigsqcup P_s) \bigsqcup (R_1 \bigsqcup \dots \bigsqcup R_t)$.\\
-$\lambda (Q_1 \bigsqcup Q_2) = \lambda(P_1) + \dots + \lambda(P_s) + \lambda(R_1) + \dots + \lambda(R_t) = \lambda(Q_1) + \lambda(Q_2)$.
-\bigskip \\
-Перед доведенням 3) ми доведемо 4) та 5).
-\bigskip \\
-4) Оскільки $Q_1 \subset Q_2$, то звідси має місце рівність $Q_2 = Q_1 \cup (Q_2 \setminus Q_1)$, причому ці дві множини між собою не перетинаються.\\
+Надалі маємо $Q_1 = \huge\bigsqcup_{i=1}^s P_i$ та $Q_2 = \huge\bigsqcup_{j=1}^t R_j$. Доведемо кожну властивість окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Оскільки $m(P) = (b_1-a_1)\dots (b_n-a_n) \geq 0$, то автоматично звідси $m(Q) = \huge\sum_{i=1}^s \lambda(P_i) \geq 0$. Порожню множину визначали $\emptyset = [a_1,a_1) \times \dots \times [a_n,a_n)$, а тому автоматично $m(\emptyset) = (a_1-a_1) \dots (a_n-a_n) = 0$.
+\item Вважаємо, що $Q_1 \cap Q_2 = \emptyset$, тобто ми маємо справу з $Q_1 \sqcup Q_2 = (P_1 \sqcup \dots \sqcup P_s) \sqcup (R_1 \sqcup \dots \sqcup R_t)$.\\
+$m(Q_1 \sqcup Q_2) = m(P_1) + \dots + m(P_s) + m(R_1) + \dots + m(R_t) = m(Q_1) + m(Q_2)$.
+\item Оскільки $Q_1 \subset Q_2$, то звідси має місце рівність $Q_2 = Q_1 \cup (Q_2 \setminus Q_1)$, причому ці дві множини між собою не перетинаються.\\
 Тоді $\lambda(Q_2) = \lambda(Q_1 \bigsqcup (Q_2 \setminus Q_1)) = \lambda(Q_1) + \lambda(Q_2 \setminus Q_1) \leq \lambda(Q_1)$.
-\bigskip \\
-5) прямий наслідок 4)
-\bigskip \\
-3) Розглянемо три множини: $Q_1 \setminus Q_2$, $Q_1 \cap Q_2$, $Q_2 \setminus Q_1$ - всі вони прості.\\
-Також зазначимо, що вони між собою не перетинаються, а в об'єднанні дають множину $Q_1 \cup Q_2$. Тоді:\\
-$\lambda(Q_1 \cup Q_2) = \lambda(Q_1 \setminus Q_2) + \lambda (Q_1 \cap Q_2) + \lambda(Q_2 \setminus Q_1) = \\ = (\lambda(Q_1 \setminus Q_2) + \lambda(Q_1\cap Q_2) + (\lambda(Q_2 \setminus Q_1) + \lambda(Q_1 \cap Q_2) - \lambda(Q_1 \cap Q_2) = \lambda(Q_1) + \lambda(Q_2) - \lambda(Q_1 \cap Q_2)$.\\
-Таким чином, $\lambda(Q_1 \cup Q_2) \leq \lambda(Q_1) + \lambda(Q_2)$.
+\item \textit{прямий наслідок з попереднього}.
+\item Розглянемо три множини: $Q_1 \setminus Q_2$, $Q_1 \cap Q_2$, $Q_2 \setminus Q_1$ -- всі вони прості. Також зазначимо, що вони між собою не перетинаються, а в об'єднанні дають множину $Q_1 \cup Q_2$. Тоді:\\
+$m(Q_1 \cup Q_2) = m(Q_1 \setminus Q_2) + m(Q_1 \cap Q_2) + m(Q_2 \setminus Q_1) = \\ = (m(Q_1 \setminus Q_2) + m(Q_1\cap Q_2) + (m(Q_2 \setminus Q_1) + m(Q_1 \cap Q_2) - m(Q_1 \cap Q_2) = m(Q_1) + m(Q_2) - m(Q_1 \cap Q_2)$.\\
+Таким чином, $m(Q_1 \cup Q_2) \leq m(Q_1) + m(Q_2)$.
+\end{enumerate}
+Всі властивості доведені.
 \end{proof}
 
 \begin{definition}
-Задано $A \subset \mathbb{R}^n$ - обмежена.\\
+Задано $A \subset \mathbb{R}^n$ -- обмежена.\\
 \textbf{Внутрішньою мірою} множини $A$ назвемо таке число:
 \begin{align*}
-\lambda_*(A) = \sup_{\substack{Q \in \mathcal{S}_n \\ Q \subset A}} \lambda(Q)
+m_*(A) = \sup_{\substack{Q \text{ -- проста множина} \\ Q \subset A}} m(Q)
 \end{align*}
 \textbf{Зовнішньою мірою} множини $A$ назвемо таке число:
 \begin{align*}
-\lambda^*(A) = \inf_{\substack{Q \in \mathcal{S}_n \\ Q \supset A}} \lambda(Q)
+m^*(A) = \inf_{\substack{Q \text{ -- проста множина} \\ Q \supset A}} m(Q)
 \end{align*}
 \begin{figure}[H]
 \centering
@@ -2080,198 +2247,261 @@ $\lambda(Q_1 \cup Q_2) = \lambda(Q_1 \setminus Q_2) + \lambda (Q_1 \cap Q_2) + \
 \node[red] at (0.5,0.5) {$A$};
 \end{tikzpicture}
 
-\caption*{Ліворуч - зовнішня міра. Праворуч - внутрішня міра.}
+\caption*{Ліворуч -- зовнішня міра. Праворуч -- внутрішня міра.}
 \end{figure}
 \end{definition}
 
 \begin{definition}
 Обмежена множина $A \subset \mathbb{R}^n$ називається \textbf{вимірною за Жорданом}, якщо
 \begin{align*}
-\lambda_*(A) = \lambda^*(A)
+m_*(A) = m^*(A)
 \end{align*}
-Тоді обидві міри позначимо за $\lambda(A)$, що буде \textbf{мірою Жордана} множини $A$.
+Тоді обидві міри позначимо за $m(A)$, що буде \textbf{мірою Жордана} множини $A$.
 \end{definition}
 
+\begin{remark}
+Усі прості фігури $Q$ -- вимірні за Жорданом.\\
+$m^*(Q) = \displaystyle\inf_{\substack{R \text{ -- проста множина} \\ R \supset Q}} m(R) = m(Q)$;\\
+$m_*(Q) = \displaystyle\inf_{\substack{R \text{ -- проста множина} \\ R \subset Q}} m(R) = m(Q)$.\\
+Тобто ми отримали $m^*(Q) = m_*(Q) = m(Q)$.
+\end{remark}
+
 \begin{example}
-Доведемо, що множина $\{x\} \subset \mathbb{R}$ - вимірна за Жорданом та $\lambda(\{x\}) = 0$.\\
-Нехай $\varepsilon > 0$, тоді візьмемо напівінтервал $[x,x+\varepsilon)$. Ясно, що $\{x\} \subset [x,x+\varepsilon)$, тоді за критерієм інфімума, маємо:\\
-$0 \leq \lambda^*(\{x\}) \leq \lambda([x,x+\varepsilon)) = \varepsilon$. Звідси випливає, що $\lambda^*(\{x\}) = 0$.\\
-Тепер розглянемо $\lambda_*(\{x\})$. Ми перебираємо всі підмножини множини $\{x\}$, а єдина така - це порожня множина, тоді $\lambda_*(\{x\}) = 0$.\\
-Отже, $\lambda_*(\{x\}) = \lambda^*(\{x\})$, а тому $\{x\}$ - вимірна за Жорданом, а також $\lambda(\{x\}) = 0$.
+Доведемо, що множина $\{x\} \subset \mathbb{R}$ -- вимірна за Жорданом та $m(\{x\}) = 0$.\\
+Нехай $\varepsilon > 0$, тоді візьмемо напівінтервал $[x,x+\varepsilon)$. Ясно, що $\{x\} \subset [x,x+\varepsilon)$, тоді за критерієм інфімума, маємо $0 \leq m^*(\{x\}) \leq m([x,x+\varepsilon)) = \varepsilon$. Звідси випливає, що $m^*(\{x\}) = 0$.\\
+Тепер розглянемо $m_*(\{x\})$. Ми перебираємо всі підмножини множини $\{x\}$, а єдина така -- це порожня множина, тоді $m_*(\{x\}) = 0$.\\
+Отже, $m_*(\{x\}) = m^*(\{x\})$, а тому $\{x\}$ -- вимірна за Жорданом, а також $m(\{x\}) = 0$.
 \end{example}
 
 \begin{example}
-Доведемо, що множина $A =[0,1) \cap \mathbb{Q}$ - не вимірна за Жорданом.\\
-Нехай $a<b$, де $a,b \in \mathbb{R}$. Тоді $[a,b) \not\subset A$, за щілністю раціональних та ірраціональних чисел. Тому єдиний можливий варіант підмножини $A$ - це порожня множина $\emptyset$. Звідси $\lambda_*(A) = 0$.\\
-А далі нехай $Q = \huge\bigsqcup_{k=1}^m [a_k,b_k) \supset A$ - проста множина, де числа $a_1 < b_1 \leq a_2 < b_2 \leq \dots \leq a_m < b_m$. Спробуємо довести, що $Q \supset [0,1)$.\\
+Доведемо, що множина $A =[0,1) \cap \mathbb{Q}$ -- не вимірна за Жорданом.\\
+Нехай $a<b$, де $a,b \in \mathbb{R}$. Тоді $[a,b) \not\subset A$, за щільністю раціональних та ірраціональних чисел. Тому єдиний можливий варіант підмножини $A$ -- це порожня множина $\emptyset$. Звідси $m*(A) = 0$.\\
+Далі нехай $Q = \huge\bigsqcup_{k=1}^m [a_k,b_k) \supset A$ -- проста множина, де числа $a_1 < b_1 \leq a_2 < b_2 \leq \dots \leq a_m < b_m$. Спробуємо довести, що $Q \supset [0,1)$.\\
 !Припустимо, що це не так, тобто при деякому $x \in [0,1)$ маємо $x \not \in Q$. Тоді має існувати такий $k$, щоб $x \in [b_k,a_{k+1})$. Із одного боку, $[b_k,a_{k+1}) \cap Q = \emptyset$. Із іншого боку, $[b_k,a_{k+1})$ містить раціональні числа з $[0,1)$, тож $[b_k,a_{k+1}) \cap A \neq \emptyset$. Якщо розглянути $x \in \mathbb{Q}, x \in \mathbb{R} \setminus \mathbb{Q}$, то в обох випадках отримаємо суперечність!\\
-Таким чином, $Q \supset [0,1)$, а тому $\lambda^*(A) \geq 1$, але оскільки $[0,1) \supset A$, то $\lambda^*(A) \leq 1$. Отже, $\lambda^*(A) = 1$.\\
-Оскільки $\lambda_*(A) \neq \lambda^*(A)$, то маємо, що $A = [0,1) \cap \mathbb{Q}$ - не вимірна за Жорданом.
+Таким чином, $Q \supset [0,1)$, а тому $m^*(A) \geq 1$, але оскільки $[0,1) \supset A$, то $m^*(A) \leq 1$. Отже, $m^*(A) = 1$.\\
+Оскільки $m_*(A) \neq m^*(A)$, то маємо, що $A = [0,1) \cap \mathbb{Q}$ -- не вимірна за Жорданом.
 \end{example}
 
 \begin{proposition}
-Задано $A \subset \mathbb{R}^n$ - обмежена. Тоді $\lambda_*(A) \leq \lambda^*(A)$.
+Задано $A \subset \mathbb{R}^n$ -- обмежена. Тоді $m_*(A) \leq m^*(A)$.
 \end{proposition}
 
 \begin{proof}
-Візьмемо деякі $Q_1,Q_2 \in \mathcal{S}_n$, щоб $Q_1 \subset A \subset Q_2$. Звідси маємо, що $\lambda(Q_1) \leq \lambda(Q_2)$.\\
-Оскільки виконано $\forall Q_1$, то звідси $\lambda_*(A) \leq \lambda(Q_2)$.\\
-Оскільки остання виконана $\forall Q_2$, то звідси $\lambda_*(A) \leq \lambda^*(A)$.
+Візьмемо деякі прості множини $Q_1,Q_2$, щоб $Q_1 \subset A \subset Q_2$. Звідси маємо, що $\lambda(Q_1) \leq \lambda(Q_2)$.\\
+Оскільки нерівність виконана $\forall Q_1$ -- простих множин, то звідси $m_*(A) \leq m(Q_2)$.\\
+Оскільки остання нерівність виконана $\forall Q_2$ -- простих множин, то звідси $m_*(A) \leq m^*(A)$.
 \end{proof}
 
 \begin{theorem}
-Задано $A \subset \mathbb{R}^n$ - обмежена.\\
-$A$ - вимірна за Жорданом $\iff \forall \varepsilon > 0: \exists Q_+,Q_-: Q_- \subset A \subset Q_+$ та $\lambda(Q_+ \setminus Q_-) < \varepsilon$.
+Задано $A \subset \mathbb{R}^n$ -- обмежена.\\
+$A$ -- вимірна за Жорданом $\iff \forall \varepsilon > 0: \exists Q_+,Q_- \text{ -- прості}: Q_- \subset A \subset Q_+$ та $m(Q_+ \setminus Q_-) < \varepsilon$.
 \end{theorem}
 
 \begin{proof}
-\rightproof Дано: $A$ - вимірна за Жорданом, тобто $\lambda_*(A) = \lambda^*(A)$. Одразу нехай $\varepsilon > 0$.\\
-$\lambda_*(A) = \huge\sup_{Q \subset A} \lambda(Q) \implies \exists Q_-: \lambda(Q_-) > \lambda_*(A) - \varepsilon$.\\
-$\lambda^*(A) = \huge\inf_{Q \supset A} \lambda(Q) \implies \exists Q_+: \lambda(Q_+) < \lambda^*(A) + \varepsilon$.\\
-Отже, $\lambda(Q_+ \setminus Q_-) = \lambda(Q_+) - \lambda(Q_-) = (\lambda(Q_+)-\lambda(A))+(\lambda(A)-\lambda(Q_-) = 2\varepsilon$, це для $Q_- \subset A \subset Q_+$.
+\rightproof Дано: $A$ -- вимірна за Жорданом, тобто $m_*(A) = m^*(A)$. Одразу нехай $\varepsilon > 0$.\\
+$m_*(A) = \huge\sup_{Q \subset A} m(Q) \implies \exists Q_-: m(Q_-) > m_*(A) - \varepsilon$.\\
+$m^*(A) = \huge\inf_{Q \supset A} m(Q) \implies \exists Q_+: m(Q_+) < m^*(A) + \varepsilon$.\\
+Отже, $m(Q_+ \setminus Q_-) = m(Q_+) - m(Q_-) = (m(Q_+)-m(A))+(m(A)-m(Q_-) = 2\varepsilon$, це для $Q_- \subset A \subset Q_+$.
 \bigskip \\
-\leftproof Дано: $\forall \varepsilon > 0: \exists Q_+,Q_-: Q_- \subset A \subset Q_+$ та $\lambda(Q_+ \setminus Q_-) < \varepsilon$.\\
-Тоді $\lambda(Q_-) \leq \lambda_*(A) \leq \lambda^*(A) \leq \lambda(Q_+)$.\\
-Отже, $0 \leq \lambda_*(A) - \lambda^*(A) \leq \lambda(Q_+) - \lambda(Q_-) = \lambda(Q_+ \setminus Q_-) < \varepsilon$.\\
-Таким чином, $\lambda_*(A) = \lambda^*(A)$.
+\leftproof Дано: $\forall \varepsilon > 0: \exists Q_+,Q_-: Q_- \subset A \subset Q_+$ та $m(Q_+ \setminus Q_-) < \varepsilon$.\\
+Тоді $m(Q_-) \leq m_*(A) \leq m^*(A) \leq m(Q_+)$.\\
+Отже, $0 \leq m_*(A) - m^*(A) \leq m(Q_+) - m(Q_-) = m(Q_+ \setminus Q_-) < \varepsilon$.\\
+Таким чином, $m_*(A) = m^*(A)$.
 \end{proof}
 
 \begin{definition}
-Задано $A \subset \mathbb{R}^n$ - обмежена.\\
+Задано $A \subset \mathbb{R}^n$ -- обмежена.\\
 Множина $A$ називається \textbf{множиною міри нуль}, якщо
 \begin{align*}
-\lambda^*(A) = 0
+m^*(A) = 0
 \end{align*}
 \end{definition}
 
 \begin{example}
-Зокрема множина $\{x\} \subset \mathbb{R}$ - множина міри нуль.
+Зокрема множина $\{x\} \subset \mathbb{R}$ -- множина міри нуль.
 \end{example}
 
 \begin{theorem}
-Задано функцію $f: A \to \mathbb{R}$ таку, що $f \in C(A)$, де $A \subset \mathbb{R}^n$ - обмежена та замкнена.\\
-Тоді графік функції $f$, позначу за $\Gamma \subset \mathbb{R}^{n+1}$, - множина міри нуль.\\
+Задано функцію $f \colon A \to \mathbb{R}$ таку, що $f \in C(A)$, де $A \subset \mathbb{R}^n$ -- обмежена та замкнена. Тоді графік функції $f$, позначу за $\Gamma \subset \mathbb{R}^{n+1}$, -- множина міри нуль.\\
 \textit{Поки без доведення.}
 \end{theorem}
 
 \begin{proposition}
-Задано $A \subset \mathbb{R}^n$ - множина міри нуль. \\ Тоді $A$ - вимірна за Жорданом та $\lambda(A) = 0$.
+Задано $A \subset \mathbb{R}^n$ -- множина міри нуль. Тоді $A$ -- вимірна за Жорданом та $m(A) = 0$.
 \end{proposition}
 
 \begin{proof}
-$\lambda_*(A) \leq \lambda^*(A) = 0 \implies \lambda_*(A) = 0 \implies \lambda(A) = 0$.
+$m_*(A) \leq m^*(A) = 0 \implies m_*(A) = 0 \implies m(A) = 0$.
 \end{proof}
 
 \begin{definition}
 \textbf{Границею} множини $A \subset \mathbb{R}^n$ назвемо таку множину:
 \begin{align*}
-\partial A = \overline{A} \setminus A^\circ
+\partial A = \Cl A \setminus \Int A
 \end{align*}
-Тут $\overline{A}$ - множина $A$ з її граничними точками та $A^\circ$ - множина всіх внутрішніх точок.
 \end{definition}
 
 \begin{theorem}
-Задано $A \subset \mathbb{R}^n$ - обмежена.\\
-$A$ - вимірна за Жорданом $\iff \partial A$ має міру нуль.\\
-\textit{Поки без доведення.}
+Задано $A \subset \mathbb{R}^n$ -- обмежена.\\
+$A$ -- вимірна за Жорданом $\iff \partial A$ має міру нуль.
 \end{theorem}
 
+\begin{proof}
+\rightproof Дано: $A$ -- вимірна за Жорданом.\\
+Нехай $\varepsilon > 0$. Ми хочемо знайти просту фігуру $Q \supset \partial A$, для якого $m(Q) < \varepsilon$.\\
+Оскільки $A$ -- вимірна за Жорданом, то існують $Q_+,Q_-$ -- прості фігури, причому $Q_- \subset A \subset Q_+$, а також $m(Q_+ \setminus Q_-) < \varepsilon$.\\
+Доведемо, що для кожного $\delta > 0$ виконується $\Cl A \subset Q_+(\delta)$. У цьому випадку $Q_+(\delta) = \displaystyle\bigsqcup_i P_i(\delta)$, де кожний $P_i(\delta) = \displaystyle\prod_{j=1}^n [a_j-\delta, b_j+\delta)$. \\
+Якщо $\vec{x} \in A$, то зрозуміло $\vec{x} \in Q_+ \subset Q_+(\delta)$. Тепер нехай $\vec{x}$ -- гранична точка $A$, тобто $\forall \delta > 0: U_\delta(\vec{x}) \cap A \neq \emptyset$. Тобто існує точка $\vec{y} \in A$ така, що $\|\vec{x} - \vec{y}\| < \delta$. Зауважимо, що координата $a_j \leq y_j < b_j$, оскільки $\vec{y} \in A \subset Q_+$. Але тоді $|x_i - y_i| < \delta \implies a_i-\delta \leq y_i - \delta < x_i < y_i + \delta < b_i + \delta$, тобто $x_i \in [a_i-\delta,b_i+\delta)$. Таким чином, отримаємо $\vec{x} \in Q_+(\delta)$.\\
+Коротше, $\Cl A \subset Q_+(\delta)$. Зауважимо, що при $\delta \to 0+0$ маємо $m(Q_+(\delta)) \to m(Q_+)$. Звідси можна підібрати такий $\delta_1 > 0$, щоб $m(Q_+(\delta_1)) - m(Q_+) < \varepsilon$.
+\bigskip \\
+Доведемо, що для кожного $\delta > 0$ виконується $\Int A \supset Q_-(\delta)$. У цьому випадку $Q_-(\delta) = \displaystyle\bigsqcup_i P_i(\delta)$, де кожний $P_i(\delta) = \displaystyle\prod_{j=1}^n [a_j+\delta,b_j-\delta)$ (можливо, виникне порожня множина, але це ніяк не заважатиме).\\
+Нехай $\vec{x} \in Q_-(\delta)$. Тоді маємо $\vec{x} \in P_i(\delta)$, тобто звідси $a_j + \delta \leq x_j < b_j - \delta$, або $a_j < x_j < b_j - \delta$. Оскільки $x_j \in (a_j,b_j-\delta)$, тобто потрапляємо в відкритий інтервал, то $\exists U_{\varepsilon_j}(x_j) \subset (a_j,b_j-\delta)$. Зокрема звідси $U = \displaystyle\prod_{j=1}^n U_{\varepsilon_j}(x_j) \subset P_i(\delta) \subset Q_-(\delta) \subset Q_- \subset A$. Оскільки множина $U$ та $\vec{x} \in U$, то існує куля $U_{\varepsilon}(\vec{x}) \subset U \subset A$. Ми щойно довели, що $\vec{x}$ -- внутрішня точка $A$, тобто $\vec{x} \in \Int A$.\\
+Коротше, $\Int A \supset Q_-(\delta)$. Аналогічно при $\delta \to 0+0$ маємо $m(Q_-(\delta)) \to m(Q_-)$. Звідси підберемо такий $\delta_2 > 0$, щоб $m(Q_-) - m(Q_-(\delta_2)) < \varepsilon$.\\
+Тепер зауважимо, що $Q_+(\delta_1) \setminus Q_-(\delta_2)$ -- наша шукана проста фігура. Дійсно,\\
+$m(Q_+(\delta_1) \setminus Q_-(\delta_2)) = m(Q_+(\delta_1)) - m(Q_-(\delta_2)) < \varepsilon + m(Q_+) + \varepsilon - m(Q_-) = 2 \varepsilon + m(Q_+ \setminus Q_-) < 3 \varepsilon$.\\
+Нарешті, ми довели, що $m^*(\partial A) = 0$.
+\bigskip \\
+\leftproof Дано: $\partial A$ має міру нуль, тобто $m^*(\partial A) = 0$.
+\iffalse
+Розглянемо множину $Q_+^n = \displaystyle\bigsqcup_i P_i^n$, де кожний $P_i^n$ був побудований із $P_i$ шляхом зменшення лівого кінця та збільшення правого кінця на $\dfrac{1}{n}$ (тобто було $[a,b)$ та стало $\left[a-\dfrac{1}{n},b+\dfrac{1}{n}\right)$). Зауважимо, що $m(Q_+^n) \to m(Q_+)$ при $n \to \infty$. Тобто знайдеться номер $N$ так, що $m(Q_+^N) - m(Q_+) < \varepsilon$.
+\fi
+\end{proof}
+
 \begin{example}
-Задамо $B[\vec{0},1]$ - замкнений шар в в центрі $\vec{0}$ радіусом $1$. Доведемо, що $B[\vec{0},1]$ - вимірна за Жорданом.\\
+Задамо $B[\vec{0},1]$ -- замкнений шар в в центрі $\vec{0}$ радіусом $1$. Доведемо, що $B[\vec{0},1]$ -- вимірна за Жорданом.\\
 $\partial B[\vec{0},1] = \{ \vec{x} \in \mathbb{R}^n: \Norm{x} = 1 \}$, де $\Norm{x} = \sqrt{x_1^2+\dots+x_n^2} = 1$. Звідси виразимо $x_n$ та отримаємо:\\
 $x_n = \pm \sqrt{1-x_1^2-\dots-x_{n-1}^2}$.\\
-Встановимо функцію $f_{\pm}(x_1,\dots,x_{n-1}) = \pm \sqrt{1-x_1^2-\dots-x_{n-1}^2}$. Відносно ясно, що $f \in C(B[\vec{0},1])$. Тоді графік функції $\Gamma_{f_+}$ та $\Gamma_{f_-}$ - множини міри нуль, звідси $\partial B[\vec{0},1] = \Gamma_{f_+} \cup \Gamma_{f_-}$ - множина міри нуль.\\
+Встановимо функцію $f_{\pm}(x_1,\dots,x_{n-1}) = \pm \sqrt{1-x_1^2-\dots-x_{n-1}^2}$. Відносно ясно, що $f \in C(B[\vec{0},1])$. Тоді графік функції $\Gamma_{f_+}$ та $\Gamma_{f_-}$ -- множини міри нуль, звідси $\partial B[\vec{0},1] = \Gamma_{f_+} \cup \Gamma_{f_-}$ -- множина міри нуль.\\
 Таким чином, $B[\vec{0},1]$ - вимірна за Жорданом.
 \end{example}
 
 \begin{proposition} Маємо такі твердження:
-1. Задано $A \subset B$. Відомо, що $B$ - множина міри нуль. Тоді $A$ - множина міри нуль.\\
-2. Задано $A,B$ - множини міри нуль. Тоді $A \cup B$ - множина міри нуль.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Задано $A \subset B$. Відомо, що $B$ -- множина міри нуль. Тоді $A$ -- множина міри нуль.
+\item Задано $A,B$ -- множини міри нуль. Тоді $A \cup B$ -- множина міри нуль.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-1. Маємо, що $\forall Q \supset B: \lambda(Q) \geq \lambda^*(B)$. Оскільки $B \supset A$, то $Q \supset A \implies \lambda(Q) \geq \lambda^*(A)$.\\
-Остання нерівність виконана $\forall Q \supset B$. Отже, $0= \lambda^*(B) \geq \lambda^*(A) \geq 0 \implies \lambda^*(A) = 0$.\\
-Отримали, що $A$ - множина міри нуль.
-\bigskip \\
-2. Поки без доведення.
+Кожний пункт доведемо окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Маємо $m^*(B) = 0$. Нехай $\varepsilon > 0$. Маємо, що існує $Q \supset B$ -- проста фігура така, що $m(Q) < \varepsilon$. Але зауважимо, що $Q \supset A$, при цьому $m(Q) < \varepsilon$. Тобто звідси $m^*(A) = 0$.
+\item Маємо $m^*(A) = 0,\ m^*(B) = 0$. Нехай $\varepsilon > 0$. Тоді існують прості фігури $Q_1 \supset A,\ Q_2 \supset B$, для яких $m(Q_1) < \varepsilon$ та $m(Q_2) < \varepsilon$. Відомо, що $Q_1 \cup Q_2$ теж проста фігура, причому $Q_1 \cup Q_2 \supset A \cup B$. Звідси випливає, що $m(Q_1 \cup Q_2) \leq m(Q_1) + m(Q_2) < 2\varepsilon$. Отже, $m^*(A \cup B) = 0$.
+\end{enumerate}
+Всі твердження доведені.
 \end{proof}
 
 \begin{proposition}
-Задано $A,B$ - обидва вимірні за Жорданом. Тоді $A \cup B, A \cap B, A \setminus B$ - вимірні за Жорданом.
+Задано $A,B$ -- обидва вимірні за Жорданом. Тоді $A \cup B, A \setminus B, A \cap B$ -- вимірні за Жорданом.
 \end{proposition}
 
 \begin{proof}
-Необхідно зауважити, що $\partial (A \cup B), \partial (A \cap B), \partial (A \setminus B) \subset \partial A \cup \partial B$.\\
-Тоді твердження автоматично довдиться. Розпишу це все згодом.
+$A \cup B$.\\
+Спочатку доведемо, що $\partial (A \cup B) \subset \partial A \cup \partial B$.\\
+Нехай $\vec{x} \in \partial (A \cup B)$, тобто звідси $\forall \varepsilon > 0$ ми маємо $U_\varepsilon(\vec{x}) \cap (A \cup B) \neq \emptyset$ та $U_\varepsilon(\vec{x}) \cap (A \cup B)^c \neq \emptyset$.\\
+$(U_\varepsilon(\vec{x}) \cap A) \cup (U_\varepsilon \cap B) \neq \emptyset$;\\
+$(U_\varepsilon(\vec{x}) \cap A^c) \cap (U_\varepsilon(\vec{x}) \cap B^c) \neq \emptyset$.\\
+Із другого випливає, що $U_\varepsilon(\vec{x}) \cap A^c \neq \emptyset$ та $U_\varepsilon(\vec{x}) \cap B^c \neq \emptyset$. А із першого випливає, що або $U_\varepsilon(\vec{x}) \cap A \neq \emptyset$, або $U_\varepsilon(\vec{x}) \cap B \neq \emptyset$. Тобто або звідси $\vec{x} \in \partial A$, або $\vec{x} \in \partial B$.\\
+Тепер $\partial A, \partial B$ -- обидва множини міри нуль. Тоді $\partial A \cup \partial B$ -- множина міри нуль. Звідси $\partial (A \cup B)$ -- множина міри нуль.\\
+Так ми доводимо, що $A \cup B$ -- вимірна за Жорданом.
+\bigskip \\
+$A \setminus B$.\\
+Аналогічно доводиться, що $\partial(A \setminus B) \subset \partial A \cup \partial B$.\\
+Дійсно, $\vec{x} \in \partial(A \setminus B)$, тобто $U_\varepsilon(\vec{x}) \cap (A \setminus B) \neq \emptyset$ та $U_\varepsilon(\vec{x}) \setminus (A \setminus B)^c \neq \emptyset$.\\
+$(U_\varepsilon(\vec{x}) \cap A) \cap (U_\varepsilon(\vec{x}) \cap B^c) \neq \emptyset$\\
+$U_\varepsilon(\vec{x}) \cap (A^c \cup B) = (U_\varepsilon(\vec{x}) \cap A^c) \cup (U_\varepsilon(\vec{x}) \cap B) \neq \emptyset$.\\
+Далі так само доводимо, що або $\vec{x} \in \partial A$, або $\vec{x} \in \partial B$.\\
+Аналогічними міркуваннями доводимо, що $\partial(A \setminus B)$ -- множина міри нуль.\\
+Так ми доводимо, що $A \setminus B$ -- вимірна за Жорданом.
+\bigskip \\
+$A \cap B$.\\
+Насправді, $A \cap B = A \setminus (A \setminus B)$. Множина $A,B$ -- вимірна за Жорданом, тому $A \setminus B$ -- вимірна за Жорданом. Значить, $A \setminus (A \setminus B)$ -- вимірна за Жорданом.
 \end{proof}
 
 \begin{theorem}
-Задано $A_1,A_2$ - вимірні за Жорданом. Тоді:\\
-1) $\lambda(A) \geq 0$, а також $\lambda(\emptyset) = 0$ ($\emptyset$ - теж вимірна за Жорданом);\\
-2) $\lambda(A_1 \bigsqcup A_2) = \lambda(A_1) + \lambda(A_2)$;\\
-3) $\lambda (A_1 \cup A_2) \leq \lambda(A_1) + \lambda(A_2)$;\\
-При $A_1 \subset A_2$ маємо такі пункти:\\
-4) $\lambda(A_1) \leq \lambda(A_2)$;\\
-5) $\lambda(A_2 \setminus A_1) = \lambda(A_2) - \lambda(A_1)$.
+Задано $A_1,A_2$ -- вимірні за Жорданом. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $m(A) \geq 0$, а також $m(\emptyset) = 0$;
+\item Нехай $A_1 \cap A_2 = \emptyset$. Тоді $m(A_1 \sqcup A_2) = m(A_1) + m(A_2)$;
+При  маємо такі пункти:
+\item Нехай $A_1 \subset A_2$. Тоді $m(A_1) \leq m(A_2)$;
+\item Нехай $A_1 \subset A_2$. Тоді $m(A_2 \setminus A_1) = m(A_2) - m(A_1)$;
+\item $m(A_1 \cup A_2) \leq m(A_1) + m(A_2)$.
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-1) Відносно зрозуміло.
-\bigskip \\
-2) Ми доведемо, що $\lambda_*(A_1 \cup A_2) = \lambda_*(A_1) + \lambda_*(A_2)$.\\
-Маємо, $\forall Q_1 \subset A_1, \forall Q_2 \subset A_2: \begin{cases} \lambda(Q_1) \leq \lambda_*(A_1) \\ \lambda(Q_2) \leq \lambda_*(A_2) \end{cases}$.\\
-Важливо зауважити, що оскільки $A_1 \cap A_2 = \emptyset$, то також $Q_1 \cap Q_2 = \emptyset$, а тому:\\
-$\lambda(Q_1 \cup Q_2) = \lambda(Q_1) + \lambda(Q_2) \leq \lambda_*(A_1) + \lambda_*(A_2)$ - виконано $\forall Q_1 \cup Q_2 \subset A_1 \cup A_2$.\\
-Таким чином, $\lambda_*(A_1) + \lambda_*(A_2)$ - "верхня грань" для $\lambda(Q)$, де $Q \subset A_1 \cup A_2$, а тому \\ $\lambda_*(A_1 \cup A_2) \leq \lambda_*(A_1) + \lambda_*(A_2)$.\\
-Друге маємо: $\forall \varepsilon > 0: \exists \tilde{Q_1} \subset A_1, \exists \tilde{Q_2} \subset A_2: \begin{cases} \lambda(\tilde{Q_1}) > \lambda_*(A_1) - \varepsilon \\ \lambda(\tilde{Q_2}) > \lambda_*(A_2) - \varepsilon \end{cases} $\\
-$\implies \lambda_*(A_1 \cup A_2) \geq \lambda(\tilde{Q_1} \cup \tilde{Q_2}) = \lambda(\tilde{Q_1}) + \lambda(\tilde{Q_2}) > \lambda_*(A_1) + \lambda_*(A_2) - 2\varepsilon$.\\
-$\implies 0 \leq [\lambda_*(A_1)+\lambda_*(A_2)] - \lambda_*(A_1 \cup A_2) < 2\varepsilon$, виконано $\forall \varepsilon > 0$.\\
-Майже остаточно $\lambda_*(A_1) + \lambda_*(A_2) = \lambda_*(A_1 \cup A_2)$.\\
-Оскільки $A_1,A_2$ - вимірні за Жорданом (тому й $A_1 \cup A_2$ теж), то звідси можна переписати рівність таким чином:\\
-$\lambda(A_1) + \lambda(A_2) = \lambda(A_1 \cup A_2)$, де $A_1 \cap A_2 = \emptyset$.
-\bigskip \\
-4) Ми доведемо, що $\lambda_*(A_1) \leq \lambda_*(A_2)$ при $A_1 \subset A_2$.\\
-$\forall Q \subset A_1: \lambda(Q) \leq \lambda_*(A_1)$. Водночас $Q \subset A_2 \implies \lambda(Q) \leq \lambda_*(A_2)$.\\
-Остання нерівність виконана $\forall Q \subset A_1$, тому звідси $\lambda_*(A_1) \leq \lambda_*(A_2)$.\\
-Через Жорданову вимірність автоматично маємо $\lambda(A_1) \leq \lambda(A_2)$.
-\bigskip \\
-5) прямий наслідок 4)
-\bigskip \\
-3) доводиться аналогічно як властивість 3) міри Жордана простих множин.
+Доведемо кожний пункт окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $m(A) = m^*(A) = \displaystyle\inf_{\substack{Q \text{ -- проста множина} \\ Q \supset A}} m(Q)$, причому всі $m(Q) \geq 0$. Тому звідси $m(A) \geq 0$.\\
+\item Будемо доводити, що $m_*(A_1 \cup A_2) = m_*(A_1) + m_*(A_2)$.
+\iffalse
+Маємо, що $\forall Q_1 \subset A_1, \forall Q_2 \subset A_2: \begin{cases} m(Q_1) \leq m_*(A_1) \\ m(Q_2) \leq m_*(A_2) \end{cases}$. Важливо зауважити, що оскільки $A_1 \cap A_2 = \emptyset$, то також $Q_1 \cap Q_2 = \emptyset$, а тому $m(Q_1 \cup Q_2) = m(Q_1) + m(Q_2) \leq m*(A_1) + m_*(A_2)$ -- нерівність виконана $\forall Q_1 \cup Q_2 \subset A_1 \cup A_2$.\\
+Таким чином, $m_*(A_1) + m_*(A_2)$ -- "верхня грань" для $\lambda(Q)$, де $Q \subset A_1 \cup A_2$, а тому \\
+$m_*(A_1 \cup A_2) \leq m_*(A_1) + m_*(A_2)$.\\
+\fi \\
+Маємо $\forall \varepsilon > 0: \exists \tilde{Q_1} \subset A_1, \exists \tilde{Q_2} \subset A_2: \begin{cases} m(\tilde{Q_1}) > m_*(A_1) - \varepsilon \\ m(\tilde{Q_2}) > m_*(A_2) - \varepsilon \end{cases}$.\\
+Оскільки $A_1 \cap A_2 = \emptyset$, то тоді $\tilde{Q}_1 \cap \tilde{Q}_2 = \emptyset$, тож виникає такий ланцюг:\\
+$m_*(A_1 \cup A_2) \geq m(\tilde{Q_1} \cup \tilde{Q_2}) = m(\tilde{Q_1}) + m(\tilde{Q_2}) > m_*(A_1) + m_*(A_2) - 2\varepsilon$.\\
+$0 \leq [m_*(A_1) + m_*(A_2)] - m_*(A_1 \cup A_2) < 2\varepsilon$, виконано $\forall \varepsilon > 0$.\\
+Отже, ми дійсно отримали $m_*(A_1) + m_*(A_2) = m_*(A_1 \cup A_2)$. Оскільки $A_1,A_2$ -- вимірні за Жорданом (тому й $A_1 \cup A_2$ теж), то звідси можна переписати рівність таким чином:\\
+$m(A_1) + m(A_2) = m(A_1 \cup A_2)$, де $A_1 \cap A_2 = \emptyset$.
+\item Будемо доводити, що $m_*(A_1) \leq m_*(A_2)$ при $A_1 \subset A_2$.\\
+$\forall Q \subset A_1: m(Q) \leq m_*(A_1)$. Водночас $Q \subset A_2 \implies m(Q) \leq m_*(A_2)$.\\
+Остання нерівність виконана $\forall Q \subset A_1$, тому звідси $m_*(A_1) \leq m_*(A_2)$. Через Жорданову вимірність автоматично маємо $m(A_1) \leq m(A_2)$.
+\item $m(A_2) = m(A_1 \cup (A_2 \setminus A_1) = m(A_1) + m(A_2 \setminus A_1)$.
+\item доводиться аналогічно як властивість 5) міри Жордана простих множин.
+\end{enumerate}
+Всі пункти доведені.
 \end{proof}
 
 \begin{corollary}
-Задано $A$ - вимірна за Жорданом. Тоді $\overline{A} = A \cup \partial A$ - вимірна за Жорданом та $\lambda(\overline{A}) = \lambda(A)$.
+Задано $A$ -- вимірна за Жорданом. Тоді $\Cl A$ -- вимірна за Жорданом, причому $m(\Cl A) = m(A)$.
 \end{corollary}
 
 \begin{proof}
-$\lambda(A) \leq \lambda(\overline{A}) = \lambda(A \cup \partial A) \leq \lambda(A) + \lambda(\partial A)$.\\
+Дійсно, $\Cl A = A \cup \partial A$. Множина $A$ (звідси й $\partial A$) будуть вимірними за Жорданом. Значить, $\Cl A$ -- вимірна за Жорданом. Крім того,\\
+$m(A) \leq m(\Cl A) = m(A \cup \partial A) \leq m(A) + m(\partial A)$.\\
 Перша частина нерівності за 4), а друга за 3).
 \end{proof}
 
+\begin{example}
+Навпаки не працює. Множина $\mathbb{Q} \cap [0,1]$ не вимірна за Жорданом, але $\Cl (\mathbb{Q} \cap [0,1]) = [0,1]$ -- вимірна.
+\end{example}
+
+\iffalse
 \begin{corollary}
-Задано $A_1,\dots,A_m$ - вимірні за Жорданом. Відомо, що $\lambda(A_i \cap A_j) = 0, \forall i \neq j$. Тоді\\
-$\lambda(A_1 \cup \dots \cup A_m) = \lambda(A_1) + \dots + \lambda(A_m)$.
+Задано $A$ -- вимірна за Жорданом. Тоді $\Int A$ -- вимірна за Жорданом, причому $m(\Int A) = m(A)$.
 \end{corollary}
 
 \begin{proof}
-Це можна довести за МІ. Я лише розгляну $m = 2$. Маємо:\\
-$\lambda(A_1 \cup A_2) = \lambda(A_1) + \lambda(A_2) - \lambda(A_1 \cap A_2) = \lambda(A_1) + \lambda(A_2)$.
+Дійсно, $\Int A = A \setminus \partial A$. Множина $A$ (звідси й $\partial A$) будуть вимірними за Жорданом. Значить, $\Cl A$ -- вимірна за Жорданом. Крім того,\\
+$m(A) \geq m(\Int A) = m(A \setminus \partial A)$
 \end{proof}
+\fi
 
 \subsection{Інтеграл Рімана}
 \begin{definition}
-Задано $A \subset \mathbb{R}^n$ - вимірна за Жорданом.\\
+Задано $A \subset \mathbb{R}^n$ -- вимірна за Жорданом.\\
 \textbf{Розбиттям} множини $A$ називають множину вимірних за Жорданом множин $\tau = \{Q_1,\dots,Q_m\}$, для яких
 \begin{align*}
 A = \bigcup_{k=1}^m Q_k \\
-\lambda(Q_j \cap Q_k) = 0, \forall j \neq k
+m(Q_j \cap Q_k) = 0, \forall j \neq k.
 \end{align*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw [red, thick] plot [smooth cycle] coordinates {(0,0) (1,2) (3,1) (3,0)};
+\node[red] at (0.5,0.75) {$A$};
+\draw[blue,thick] plot [smooth] coordinates {(0,0) (0.5,0.5) (3,1)};
+\draw[blue,thick] plot [smooth] coordinates {(2,1.65) (1.5,0.5) (1,-0.15)};
+\end{tikzpicture}
+\caption*{Приклад розбиття вимірної множини.}
+\end{figure}
 \end{definition}
 
 \begin{definition}
-Задано $A \subset \mathbb{R}^n$ - вимірна за Жорданом та розбиття $\tau = \{Q_1,\dots,Q_m\}$.\\
+Задано $A \subset \mathbb{R}^n$ -- вимірна за Жорданом та розбиття $\tau = \{Q_1,\dots,Q_m\}$.\\
 Візьмемо кожну множину $Q_k$ та утворимо розбиття $\tau_k = \{Q_{k1},\dots,Q_{ks_k}\}$.\\
 \textbf{Підрозбиттям} розбиття $\tau$ назвемо розбиття
 \begin{align*}
@@ -2293,9 +2523,9 @@ A = \bigcup_{k=1}^m Q_k \\
 \fi
 
 \begin{definition}
-Задано $\tau = \{Q_1,\dots,Q_n\}$ - розбиття множини $A \subset \mathbb{R}^n$, що вимірна за Жорданом.\\
-Елементи множини $\xi = \{\vec{\xi_1}, \dots, \vec{\xi_m} \}$ називають \textbf{відміченими точками}.\\
-Тут $\vec{\xi_1} \in Q_1, \dots, \vec{\xi_m} \in Q_m$.
+Задано $\tau = \{Q_1,\dots,Q_n\}$ -- розбиття множини $A \subset \mathbb{R}^n$, що вимірна за Жорданом.\\
+Елементи множини $\xi = \{\vec{\xi}_1, \dots, \vec{\xi}_m \}$ називають \textbf{відміченими точками}.\\
+Тут $\vec{\xi}_1 \in Q_1, \dots, \vec{\xi}_m \in Q_m$.
 \end{definition}
 
 \begin{definition}
@@ -2305,89 +2535,129 @@ A = \bigcup_{k=1}^m Q_k \\
 \end{align*}
 Водночас всередині записано \textbf{діаметр} множини $Q_k$, що визначена таким чином:
 \begin{align*}
-\diam Q_k = \sup_{\xi^\prime, \xi^{\prime \prime} \in Q_k} \Norm{\xi^\prime - \xi^{\prime \prime}}
+\diam Q_k = \sup_{\vec{\xi}^\prime, \vec{\xi}^{\prime \prime} \in Q_k} \|\vec{\xi}^\prime - \vec{\xi}^{\prime \prime}\|
 \end{align*}
 \end{definition}
 
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$, де $A \subset \mathbb{R}^n$ - вимірна за Жорданом, розбиття $\tau = \{Q_1,\dots,Q_m\}$ та відмічені точки $\xi = \{\vec{\xi_1}, \dots, \vec{\xi_m} \}$.\\
-\textbf{Інтегральною сумою Рімана} функції $f$ для нашого розбиття $\tau$ та відмічених точок називають число:
+Задано функцію $f \colon A \to \mathbb{R}$, де $A \subset \mathbb{R}^n$ -- вимірна за Жорданом, розбиття $\tau = \{Q_1,\dots,Q_m\}$ та відмічені точки $\xi = \{\vec{\xi}_1, \dots, \vec{\xi}_m \}$.\\
+\textbf{Інтегральною сумою Рімана} функції $f$ для розбиття $\tau$ та відмічених точок називають число:
 \begin{align*}
-\sigma (f, \tau, \xi) = \sum_{k=1}^m f(\vec{\xi_k}) \lambda(Q_k)
+\sigma (f, \tau, \xi) = \sum_{k=1}^m f(\vec{\xi}_k) m(Q_k)
 \end{align*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[->] (-0.5,0)--(4,0) node[anchor = north west] {$y$};
+\draw[->] (-0.5,0)--(-0.5,3) node[anchor = south east] {$z$};
+\draw[->] (-0.5,0)--(-3,-2.5) node[anchor = north] {$x$};
+\draw (1,-0.5)--(3,-0.5)--(2,-2)--(0,-2)--cycle;
+
+\draw[dashed] (0,-2)--(0,-0.5);
+\draw[dashed] (2,-2)--(2,0.5);
+\draw[dashed] (3,-0.5)--(3,1);
+\draw[dashed] (1,-0.5)--(1,2);
+
+\filldraw [draw = red, fill = red!40] plot [smooth cycle] coordinates {(0,-0.5) (0.5,0.25) (1.2,0.5) (2,0.5) (2.3,0.8) (3,1) (2,1.8) (1,2) (0,1)} node[scale=1,red] at (0.2,0.2) {$f$};
+
+
+%specific part of partition
+\fill[blue!20] ({1/3+1},-1.5)--({2/3+1},-1)--({2/3+0.5},-1)--({1/3+0.5},-1.5)--cycle;
+
+%draw a partition
+\draw ({1/3},-1.5)--({1/3+2},-1.5);
+\draw ({2/3},-1)--({2/3+2},-1);
+\draw (0.5,-2)--(1.5,-0.5);
+\draw (1,-2)--(2,-0.5);
+\draw (1.5,-2)--(2.5,-0.5);
+
+%go up to function
+\fill[red] ({1/3+1-0.1},{-1.5+0.25}) circle (1pt);
+\draw[red,dashed] ({1/3+1-0.1},{-1.5+0.25})--({1/3+1-0.1},0.9);
+\fill[red] ({1/3+1-0.1},0.9) circle (1pt);
+
+\draw[red,->] (-0.5,{-1.5+0.25})--({1/3+1-0.2},{-1.5+0.25}) node[scale=1,red] at (-0.6,{-1.5+0.25-0.2}) {$\vec{\xi}_i$};
+
+%rectangle on surface
+\draw[blue,dashed] ({1/3+1},0.7)--({2/3+1},{0.7+0.5})--({2/3+0.5},{0.7+0.5})--({1/3+0.5},{0.7})--cycle;
+\draw[blue,dashed] ({1/3+1},-1.5)--({1/3+1},0.7);
+\draw[blue,dashed] ({2/3+1},-1)--({2/3+1},1.2);
+\draw[blue,dashed] ({2/3+0.5},-1)--({2/3+0.5},1.2);
+\draw[blue,dashed] ({1/3+0.5},-1.5)--({1/3+0.5},0.7);
+\end{tikzpicture}
+\caption*{Інтегральна сума для двовимірної функції $f(x,y)$. Тут вирішив взяти стандартне розбиття та стандартну фігуру.}
+\end{figure}
 \end{definition}
 
-\textbf{TODO: вставити малюнок}
-
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$, де $A \subset \mathbb{R}^n$ - вимірна за Жорданом.\\
+Задано функцію $f \colon A \to \mathbb{R}$, де $A \subset \mathbb{R}^n$ -- вимірна за Жорданом.\\
 Функція $f$ називається \textbf{інтегрованою за Ріманом} на $A$, якщо існує таке число $I \in \mathbb{R}$, для якого виконана умова:
 \begin{align*}
 \forall \varepsilon > 0: \exists \delta(\varepsilon) > 0: \forall (\tau, \xi): |\tau| < \delta \implies \abs{\sigma(\tau, \xi, f) - I} < \varepsilon
 \end{align*}
 Число $I$ називають \textbf{інтегралом Рімана}.
 \begin{align*}
-I = \int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x}) \hspace{2cm} I = \int\displaylimits_A f(x_1,\dots,x_n)\,dx_1\dots \,dx_n
+I = \int\displaylimits_A f(\vec{x})\,d\vec{x} \qquad I = \int\displaylimits_A f(x_1,\dots,x_n)\,dx_1\dots \,dx_n
 \end{align*}
-Позначення: $I = \huge\lim_{|\tau| \to 0} \sigma(f, \tau, \xi)$ (трошки нелегально, тому що не знаю, що таке границя за базою).\\
+Інколи ще буває таке позначення: $I = \huge\lim_{|\tau| \to 0} \sigma(f, \tau, \xi)$.\\
 Множина інтегрованих функцій за Ріманом позначається так: $\mathcal{R}(A)$.
 \end{definition}
 
 \begin{example}
-Доведемо, що функція $f(\vec{x}) = 1 \in \mathcal{R}(A)$, а також $\huge \int\displaylimits_A 1\,d \lambda(\vec{x}) = \lambda(A)$.\\
-Візьмемо деяке розбиття $\tau = \{Q_1,\dots,Q_m\}$ та відмічені точки $\xi = \{\vec{\xi_1},\dots,\vec{\xi_m}\}$. Тоді\\
-$\sigma(\tau, \xi, f) = \huge\sum_{k=1}^m f(\vec{\xi_k}) \lambda(Q_k) = \sum_{k=1}^m \lambda(Q_k) = \lambda\left( \bigcup_{k=1}^m Q_k \right) = \lambda(A)$.\\
-Тоді $\exists I = \lambda(A): \forall \varepsilon > 0: \exists \delta: \forall (\tau,\xi): |\tau| < \delta \implies |\sigma(\tau,\xi,f) - I| = 0 < \varepsilon$.\\
-Отже, $f \in \mathcal{R}(A)$, а також $\huge \int\displaylimits_A 1\,d \lambda(\vec{x}) = \lambda(A)$.
+Доведемо, що функція $f(\vec{x}) = 1 \in \mathcal{R}(A)$, а також $\huge \int\displaylimits_A 1\,d\vec{x} = m(A)$.\\
+Візьмемо деяке розбиття $\tau = \{Q_1,\dots,Q_m\}$ та відмічені точки $\xi = \{\vec{\xi}_1,\dots,\vec{\xi}_m\}$. Тоді\\
+$\sigma(\tau, \xi, f) = \huge\sum_{k=1}^m f(\vec{\xi}_k) m(Q_k) = \sum_{k=1}^m m(Q_k) = m\left( \bigcup_{k=1}^m Q_k \right) = m(A)$.\\
+Тоді $\exists I = m(A): \forall \varepsilon > 0: \exists \delta: \forall (\tau,\xi): |\tau| < \delta \implies |\sigma(\tau,\xi,f) - I| = 0 < \varepsilon$.\\
+Отже, $f \in \mathcal{R}(A)$, а також $\huge \int\displaylimits_A 1\,d\vec{x} = m(A)$.
 \end{example}
 
 \begin{proposition}
-Задано функцію $f: Z \to \mathbb{R}$ - обмежена на $Z \subset \mathbb{R}^n$ - множина міри нуль.\\
-Тоді $\huge\int\displaylimits_Z f(\vec{x})\,d \lambda(\vec{x}) = 0$.
+Задано функцію $f \colon N \to \mathbb{R}$ -- обмежена на $N \subset \mathbb{R}^n$ -- множина міри нуль. Тоді $\huge\int\displaylimits_N f(\vec{x})\,d\vec{x} = 0$.
 \end{proposition}
 
 \begin{proof}
-Маємо $f$ - обмежена на $Z$, тобто $\exists C>0: \forall \vec{x} \in Z: |f(\vec{x})| \leq C$.\\
-Візьмемо деяке розбиття $\tau = \{Q_1,\dots,Q_m\}$ множини $Z$ та відмічені точки $\xi = \{\vec{\xi_1},\dots,\vec{\xi_m}\}$. Тоді\\
-$|\sigma(\tau,\xi,f)| = \huge \abs{\sum_{k=1}^m f(\vec{\xi_k}) \lambda(Q_k)} \leq \sum_{k=1}^m |f(\vec{\xi_k})| \lambda(Q_k) \leq C \sum_{k=1}^m \lambda(Q_k) = C \lambda(Z) = 0$.
-Таким чином, $\sigma(\tau,\xi,f) = 0$, а тому автоматично $\huge\int\displaylimits_Z f(\vec{x})\,d \lambda(\vec{x}) = 0$.
+Маємо $f$ -- обмежена на $N$, тобто $\exists C>0: \forall \vec{x} \in Z: |f(\vec{x})| \leq C$.\\
+Візьмемо деяке розбиття $\tau = \{Q_1,\dots,Q_m\}$ множини $N$ та відмічені точки $\xi = \{\vec{\xi}_1,\dots,\vec{\xi}_m\}$. Тоді\\
+$|\sigma(\tau,\xi,f)| = \huge \abs{\sum_{k=1}^m f(\vec{\xi}_k) m(Q_k)} \leq \sum_{k=1}^m |f(\vec{\xi}_k)| m(Q_k) \leq C \sum_{k=1}^m m(Q_k) = C \lambda(N) = 0$.
+Таким чином, $\sigma(\tau,\xi,f) = 0$, а тому автоматично $\huge\int\displaylimits_N f(\vec{x})\,d \vec{x} = 0$.
 \end{proof}
 
 \subsection{Суми Дарбу}
 \begin{definition}
-Задано функцію $f: A \to \mathbb{R}$ - обмежена. Визначмо такі значення для розбиття $\tau = \{Q_1,\dots,Q_m\}$:
+Задано функцію $f \colon A \to \mathbb{R}$ -- обмежена. Для розбиття $\tau = \{Q_1,\dots,Q_m\}$ визначимо:
 \begin{align*}
 m_k = \inf_{\vec{x} \in Q_k} f(\vec{x}) \hspace{2cm} M_k = \sup_{\vec{x} \in Q_k} f(\vec{x}) \hspace{0.5cm} k=1,\dots,m
 \end{align*}
 \textbf{Верхньою та нижньою сумою Дарбу} називають такі суми:
 \begin{align*}
-U(f, \tau) = \sum_{k=1}^m M_k \lambda(Q_k) \hspace{2cm} L(f,\tau) = \sum_{k=1}^m m_k \lambda(Q_k) \hspace{2cm}
+U(f, \tau) = \sum_{k=1}^m M_k m(Q_k) \qquad\qquad L(f,\tau) = \sum_{k=1}^m m_k m(Q_k) \hspace{2cm}
 \end{align*}
+(трохи не влучив із позначеннями, але в контексті має бути ясно.)
 \end{definition}
 
 \begin{remark}
-Із означення випливає, що $L(f,\tau) \leq \sigma(f,\tau,\xi) \leq U(f,\tau)$, оскільки $m_k \leq f(\vec{\xi_k}) \leq M_k$.
+Із означення випливає, що $L(f,\tau) \leq \sigma(f,\tau,\xi) \leq U(f,\tau)$, оскільки $m_k \leq f(\vec{\xi}_k) \leq M_k$.
 \end{remark}
 
 Усі леми, твердження, теореми в цьому підпункті я залишаю без доведення, оскільки міркування повторюються з аналізом $\mathbb{R}$.
 
 \begin{lemma}
-Задано функцію $f: A \to \mathbb{R}$ - обмежена та будь-яке розбиття $\tau$. Тоді маємо:\\
+Задано функцію $f \colon A \to \mathbb{R}$ -- обмежена та будь-яке розбиття $\tau$. Тоді маємо:\\
 $L(f,\tau) = \huge\inf_{\xi} \sigma(f,\tau,\xi) \hspace{1cm} U(f,\tau) = \huge\sup_{\xi} \sigma(f,\tau,\xi)$.
 \end{lemma}
 
 \begin{lemma}
-Задано функцію $f: A \to \mathbb{R}$ - обмежена та розбиття $\tau$. Також задамо підрозбитя $\tau'$. Тоді $U(f,\tau) \geq U(f,\tau')$, а також  $L(f,\tau) \leq L(f,\tau')$.
+Задано функцію $f \colon A \to \mathbb{R}$ -- обмежена та розбиття $\tau$. Також задамо підрозбитя $\tau'$. Тоді $U(f,\tau) \geq U(f,\tau')$, а також $L(f,\tau) \leq L(f,\tau')$.
 \end{lemma}
 
 \begin{lemma}
-Задано функцію $f: A \to \mathbb{R}$ - обмежена. Візьмемо будь-які два розбиття $\tau', \tau''$. Тоді $L(f,\tau') \leq U(f,\tau'')$.
+Задано функцію $f \colon A \to \mathbb{R}$ -- обмежена. Візьмемо будь-які два розбиття $\tau', \tau''$. Тоді $L(f,\tau') \leq U(f,\tau'')$.
 \end{lemma}
 
 \begin{definition}
 \textbf{Верхнім/нижнім інтегралом Дарбу} будемо називати такі вирази:
 \begin{align*}
-I^*(f) = \inf_\tau U(f, \tau) \hspace{1cm} I_*(f) = \sup_\tau L(f,\tau)
+I^*(f) = \inf_\tau U(f, \tau) \qquad I_*(f) = \sup_\tau L(f,\tau)
 \end{align*}
 \end{definition}
 
@@ -2396,29 +2666,38 @@ I^*(f) = \inf_\tau U(f, \tau) \hspace{1cm} I_*(f) = \sup_\tau L(f,\tau)
 \end{remark}
 
 \begin{proposition}
-Задано функцію $f: A \to \mathbb{R}$ - обмежена. Тоді\\
+Задано функцію $f \colon A \to \mathbb{R}$ - обмежена. Тоді\\
 $\huge\lim_{|\tau| \to 0} L(f,\tau) = I_*(f) \hspace{2cm} \lim_{|\tau| \to 0} U(f,\tau) = I^*(f)$.
 \end{proposition}
 
 \subsection{Існування інтеграла}
 \begin{theorem}
-Задано функцію $f \in \mathcal{R}(A)$, де $A$ - відкрита, вимірна за Жорданом. Тоді $f$ - обмежена на $A$.\\
+Задано функцію $f \in \mathcal{R}(A)$, де $A$ -- відкрита, вимірна за Жорданом. Тоді $f$ -- обмежена на $A$.\\
 \textit{Хід доведення повторюється як в аналізі $\mathbb{R}$.}
 \end{theorem}
 
+\begin{remark}
+Хоча в одновимірному випадку ми знали, що $f \in \mathcal{R}([a,b]) \implies f$ -- обмежена на $[a,b]$ (саме не на відкритій множині). У загальному випадку це не завжди працює. Бувають інтегровані функції на вимірних замкнених множинах, але функція не обмежена.
+\end{remark}
+
+\begin{example}
+Маємо множину $A = ([0,1] \times [0,1]) \cup ((1,3] \times \{0\})$. Думаю, не варто вже пояснювати, що $A$ -- вимірна множина. Тепер розглянемо функцію $f(x,y) = \begin{cases} 0, & \text{інакше} \\ \dfrac{1}{3-x}, & x \in (2,3) \end{cases}$. Цілком зрозуміло, що вона необмежена. Але при цьому $f \in \mathcal{R}(A)$ в сенсі класичного означення через інтегральні суми.\\
+Нехай $\varepsilon > 0$, оберемо $\delta = 1$ та нехай розбиття $\tau = \{A_i\}$ таке, що $|\tau| < \delta = 1$. Оберемо будь-який набір відмічених точок $(\xi,\eta)$. Тоді в нас або $f(\xi_i,\eta_i) = 0$, або $m(A_i) = 0$. Автоматично отримаємо $\sigma(f,\tau,(\xi,\eta)) = 0 < \varepsilon$. Короче, звідси $\displaystyle\iint_A f(x,y)\,dx\,dy = 0$, навіть попри необмеженість (до речі, необмежена саме на множині міри нуль).
+\end{example}
+
 \begin{theorem}[Перший критерій інтегрованості]
-Задано функцію $f: A \to \mathbb{R}$, де $A$ - вимірна за Жорданом.\\
-$f \in \mathcal{R}(A) \iff f$ - обмежена на $A$ та $I_*(f) = I^*(f)$.
+Задано функцію $f \colon A \to \mathbb{R}$, де $A$ -- вимірна за Жорданом.\\
+$f \in \mathcal{R}(A) \iff f$ -- обмежена на $A$ та $I_*(f) = I^*(f)$.
 \end{theorem}
 
 \begin{corollary}
-Якщо функція $f \in \mathcal{R}(A)$ та $I = \huge\int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x})$ - його відповідний інтеграл, то справедлива нерівність:\\
-$L(f,\tau) \leq \huge\int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x}) \leq U(f, \tau)$.
+Якщо функція $f \in \mathcal{R}(A)$ та $I = \huge\int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x})$ -- його відповідний інтеграл, то справедлива нерівність:\\
+$L(f,\tau) \leq \huge\int\displaylimits_A f(\vec{x})\,d\vec{x} \leq U(f, \tau)$.
 \end{corollary}
 
 \begin{theorem}[Другий критерій інтегрованості]
-Задано функцію $f: A \to \mathbb{R}$, де $A$ - вимірна за Жорданом.\\
-$f \in \mathcal{R}(A) \iff f$ - обмежена на $A$ та $\forall \varepsilon > 0: \exists \tau: U(f,\tau) - L(f,\tau) < \varepsilon$.
+Задано функцію $f \colon A \to \mathbb{R}$, де $A$ -- вимірна за Жорданом.\\
+$f \in \mathcal{R}(A) \iff f$ -- обмежена на $A$ та $\forall \varepsilon > 0: \exists \tau: U(f,\tau) - L(f,\tau) < \varepsilon$.
 \end{theorem}
 
 \begin{remark}
@@ -2427,7 +2706,7 @@ $f \in \mathcal{R}(A) \iff f$ - обмежена на $A$ та $\forall \varepsi
 
 \subsection{Класи інтегрованих функцій}
 \begin{theorem}
-Задано функцію $f,g \in \mathcal{R}(A)$. Тоді $f+g \in \mathcal{R}(A)$
+Задано функцію $f,g \in \mathcal{R}(A)$. Тоді $f+g \in \mathcal{R}(A)$.
 \end{theorem}
 
 \begin{theorem}
@@ -2435,99 +2714,250 @@ $f \in \mathcal{R}(A) \iff f$ - обмежена на $A$ та $\forall \varepsi
 \end{theorem}
 
 \begin{theorem}
-Функція $f \in \mathcal{R}(A) \iff f \in \mathcal{R}(A_1)$ та $f \in \mathcal{R}(A_2)$, причому $A_1 \cup A_2 = A$ та $\lambda(A_1 \cap A_2) = 0$.
+Функція $f \in \mathcal{R}(A) \iff f \in \mathcal{R}(A_1)$ та $f \in \mathcal{R}(A_2)$, причому $A_1 \cup A_2 = A$ та $m(A_1 \cap A_2) = 0$.
 \bigskip \\
 Ідея доведення в один напрямок: за умовою, існуватиме розбиття $\tau = \{Q_1,\dots,Q_k\}$ для $A$. А далі створюємо розбиття $\tau_1 = \{R_k: R_k = Q_k \cap A_1\}$ дла множини $A_1$ та розбиття $\tau_2 = \{S_k: S_k = Q_k \cap A_2\}$ дла множини $A_2$. А далі зауважити треба, що для множини $Q_k = R_{k_1} \cup S_{k_2}$ справедлива оцінка $M_k^{(Q_k)}\lambda (Q_k) \geq M_{k_1}^{(R_{k_1})} \lambda(R_{k_1}) + M_{k_2}^{(S_{k_2})} \lambda(S_{k_2})$.
 \end{theorem}
 
 \begin{theorem}
-Задано функцію $f \in C(A)$, де $A$ - замкнена, обмежена. Тоді $f \in \mathcal{R}(A)$.
+Задано функцію $f \in C(A)$, де $A$ -- компактна. Тоді $f \in \mathcal{R}(A)$.
 \end{theorem}
 
 \begin{proof}
-За теоремою Кантора, оскільки $A$ - замкнена, обмежена, то $f \in C_{unif}(A) \implies \\ \forall \varepsilon > 0: \exists \delta: \forall \vec{x}_1,\vec{x}_2 \in A: \Norm{\vec{x}_1-\vec{x}_2}<\delta \implies |f(\vec{x}_1)-f(\vec{x}_2)| < \varepsilon$.\\
-Створимо розбиття $\tau = \{Q_1,\dots,Q_m\}$, щоб $|\tau| < \delta$ та $Q_k = P_k \cap A$, де $P_k$ - паралелепіпеди. Неважко довести, що $P_k$ - замкнені, а тому $Q_k$ - замкнені.\\
-А ще відносно зрозуміло, що $Q_k$ - обмежена.
-$f \in C(Q_k)$, тому \\
+За теоремою Кантора, оскільки $A$ -- компактна, то $f \in C_{\text{unif}}(A) \implies \\ \forall \varepsilon > 0: \exists \delta: \forall \vec{x}_1,\vec{x}_2 \in A: \Norm{\vec{x}_1-\vec{x}_2}<\delta \implies |f(\vec{x}_1)-f(\vec{x}_2)| < \varepsilon$.\\
+Створимо розбиття $\tau = \{Q_1,\dots,Q_m\}$, щоб $|\tau| < \delta$ та $Q_k = P_k \cap A$, де $P_k$ -- паралелепіпеди. Неважко довести, що $P_k$ -- замкнені, а тому $Q_k$ -- замкнені. А ще відносно зрозуміло, що $Q_k$ -- обмежена. $f \in C(Q_k)$, тому \\
 $\exists \vec{\xi}_1^{(k)},\vec{\xi}_2^{(k)} \in Q_k: f(\vec{\xi}_1^{(k)}) = \huge\sup_{\vec{x} \in Q_k} f(\vec{x}) = M_k, \hspace{1cm} f(\vec{\xi}_2^{(k)}) = \huge\inf_{\vec{x} \in Q_k} f(\vec{x}) = m_k$.\\
 Зазначимо, що $\Norm{\xi_1^{(k)} - \xi_2^{(k)}} \leq \diam Q_k \leq |\tau| < \delta$, а тому звідси $M_k - m_k < \varepsilon$.\\
-Значить $U(\tau,f) - L(\tau,f) = \huge\sum_k (M_k-m_k)\lambda(Q_k) < \varepsilon \lambda(A)$.\\
+Значить $U(\tau,f) - L(\tau,f) = \huge\sum_k (M_k-m_k)m(Q_k) < \varepsilon m(A)$.\\
 Таким чином, довели, що $f \in \mathcal{R}(A)$.
 \end{proof}
 
 \begin{theorem}
-Задано функцію $f: A \to \mathbb{R}$ - замкнена, обмежена. Відомо, що $f \in C(A \setminus B)$, де $B \subset A$ - множина міри нуль. Тоді $f \in \mathcal{R}(A)$.\\
-\textit{Поки без доведення.}
+Задано функцію $f \colon A \to \mathbb{R}$ -- замкнена, обмежена. Відомо, що $f \in C(A \setminus N)$, де $N \subset A$ -- множина міри нуль. Тоді $f \in \mathcal{R}(A)$.
 \end{theorem}
+
+\begin{proof}
+За умовою, $\partial A \cup N$ -- множина міри нуль, тоді $\forall \varepsilon > 0: \exists Q \supset \partial A \cup N$ -- проста множина: $m(Q) < \varepsilon$.\\
+Трошечки просту множину 'роздуємо'. У нас зараз $Q = \displaystyle\bigsqcup_i P_i$, а тепер розглянемо $Q(\delta) = \displaystyle\bigsqcup_i P_i(\delta)$ при $\delta > 0$, де кожний $P_i(\delta) = \displaystyle\prod_{j=1}^n [a_j-\delta,b_j+\delta)$. Цілком зрозуміло, що $m(Q(\delta)) \to m(Q)$ при $\delta \to 0+0$. Значить, знайдеться такий $\delta > 0$, для якого $m(Q(\delta)) < \varepsilon$.\\
+Тепер розглянемо множину $A \setminus Q(\delta)$, яка збігається з множиною $\Cl A \setminus Q(\delta)$ (тому що граничні точки потрапляють в $Q(\delta)$). Цілком ясно, що $\Cl A \setminus Q(\delta)$ буде компактною множиною. Оскільки $f \in C(\Cl A \setminus Q(\delta))$, то тоді $f \in \mathcal{R}(\Cl A \setminus Q(\delta))$. Значить, $\exists \tilde{\tau}: U(f,\tilde{\tau}) - L(f,\tilde{\tau}) < \varepsilon$. Тут уважно треба зазначити, що $\tilde{\tau}$ -- це розбиття $\Cl A \setminus Q(\delta)$.\\
+Утворимо $\tau = \tilde{\tau} \cup (Q(\delta) \cap A)$ -- розбиття $A$. Тоді\\
+$U(f,\tau) - L(f,\tau) = U(f,\tilde{\tau}) - L(f,\tilde{\tau}) + \displaystyle\left( \sup_{\vec{x} \in Q(\delta) \cap A} f(\vec{x}) - \inf_{\vec{x} \in Q(\delta) \cap A} f(\vec{x}) \right) m(Q(\delta) \cap A) < \varepsilon + 2L \varepsilon$.\\
+У цьому випадку $L$ -- константа, що обмежує функцію $f$.\\
+Отже, ми довели, що дійсно $f \in \mathcal{R}(A)$.
+\end{proof}
 
 \begin{theorem}
 Задано функцію $f,g \in \mathcal{R}(A)$. Тоді $f \cdot g \in \mathcal{R}(A)$.
 \end{theorem}
 
 \begin{corollary}
-Задано функцію $f \in \mathcal{R}([a,b])$. Тоді $|f| \in \mathcal{R}([a,b])$.
+Задано функцію $f \in \mathcal{R}(A)$. Тоді $|f| \in \mathcal{R}(A)$.
 \end{corollary}
+
+%Not necessary because it'll be proven later
+\iffalse
+\begin{theorem}
+Задані множини $A \subset B$. Відомо, що $f \in \mathcal{R}(B)$. Тоді $f \in \mathcal{R}(A)$.\\
+\textit{Вказівка: якщо існує $\tau_\varepsilon = \{Q_i\}$, то тоді розглянути $\tau_\varepsilon^A = \{Q_i \cap A\}$.}
+\end{theorem}
+\fi
+
+\begin{theorem}
+Задані множини $A \subset B$. Тоді $\mathbbm{1}_A \in \mathcal{R}(B)$.
+\end{theorem}
+\noindent
+Перед цим доведу важливу лему.
+
+\begin{lemma}
+Маємо $\mathbbm{1}_A$ на множині $A \subset \mathbb{R}^n$. Позначимо $N = \{ \vec{x} \in \mathbb{R}^n : 1_A \text{ не неперервна в точці } \vec{x} \}$. Тоді $N = \partial A$.
+\end{lemma}
+
+\begin{proof}
+Нехай $\vec{x} \in N$, тобто нема неперервності, тобто $\exists \varepsilon > 0: \forall \delta > 0: \exists \vec{x}_\delta: \|\vec{x} - \vec{x}_\delta\| < \delta$, але при цьому $|\mathbbm{1}_A(\vec{x}) - \mathbbm{1}_A(\vec{x}_\delta)| \geq \varepsilon$.\\
+Нехай $\vec{x} \in A$, тобто $\mathbbm{1}_A(\vec{x}) = 1$. Тоді обов'язково $\mathbbm{1}_A(\vec{x}_\delta) = 0$ при кожному $\delta > 0$. Тобто при кожному $\delta > 0$ існуватиме точка $\vec{x}_\delta \in \mathbb{R}^n \setminus A$ така, що $U_\delta(\vec{x}) \cap (\mathbb{R}^n \setminus A) \neq \emptyset$. Отже, $\vec{x} \in A \subset \Cl A$, а також $\vec{x}$ -- гранична точка $\mathbb{R}^n \setminus A$, тобто $\vec{x} \in \Cl (\mathbb{R}^n \setminus A)$. Значить, $\vec{x} \in \partial A$.\\
+Нехай $\vec{x} \notin A$, тобто $\mathbbm{1}_A(\vec{x}) = 0$. Тоді обов'язково $\mathbbm{1}_A(\vec{x}_\delta) = 1$ при кожному $\delta > 0$. Тобто при кожному $\delta > 0$ існуватиме точка $\vec{x}_\delta \in A$ така, що $U_\delta(\vec{x}) \cap A \neq \emptyset$. Отже, $\vec{x} \in \mathbb{R}^n \setminus A \subset \Cl (\mathbb{R}^n \setminus A)$, а також $\vec{x}$ -- гранична точка $A$, тобто $\vec{x} \in \Cl A$. Значить, $\vec{x} \in \partial A$.
+\bigskip \\
+Нехай $\vec{x} \in \partial A$. Тоді для кожного $\delta > 0$ існуватимуть точки $\vec{x}^1_\delta \in A$ та $\vec{x}^2_\delta \in \mathbb{R}^n \setminus A$, для яких $\|\vec{x} - \vec{x}^1_\delta\| < \delta$ та $\|\vec{x} - \vec{x}^2_\delta \| < \delta$. Знову ж таки два варіанти:\\
+$\vec{x} \in A$, тоді $\mathbbm{1}_A(\vec{x}) = 1$, але при цьому $\mathbbm{1}_A(\vec{x}^2_\delta) = 0$, тобто $|\mathbbm{1}_A(\vec{x}) - \mathbbm{1}_A(\vec{x}^2_\delta)| \geq 1$.\\
+$\vec{x} \notin A$, тоді $\mathbbm{1}_A(\vec{x}) = 0$, але при цьому $\mathbbm{1}_A(\vec{x}^1_\delta) = 0$, тобто $|\mathbbm{1}_A(\vec{x}) - \mathbbm{1}_A(\vec{x}^1_\delta)| \geq 1$.\\
+Ми знайшли $\varepsilon = 1$, для якого для кожного $\delta > 0$ знайдуться $\vec{x}_\delta$ так, що хоча $\|\vec{x} - \vec{x}_\delta\| < \delta$, але $|\mathbbm{1}_A(\vec{x}) - \mathbbm{1}_A(\vec{x}_\delta)| \geq \varepsilon$. Значить, у точці $\vec{x}$ функція $\mathbbm{1}_A$ не є неперервною, тобто $\vec{x} \in N$.
+\end{proof}
+\noindent
+Повертаємось до доведення основної
+
+\begin{proof}
+Для мноижни $N = \{ \vec{x} \in \mathbb{R}^n : 1_A \text{ не неперервна в точці } \vec{x} \}$ ми щойно довели, що $N = \partial A$. Оскільки $A$ -- вимірна за Жорданом, то $\partial A$ має міру нуль, тому $N$ теж. Функція $\mathbbm{1}_A \in C(\mathbb{R}^n \setminus N)$, або одразу $\mathbbm{1}_A \in C(B \setminus N)$ з множиною $N$ міри нуль. Отже, тоді $\mathbbm{1}_A \in \mathcal{R}(B)$.
+\end{proof}
+
+\begin{theorem}
+Задані множини $A \subset B$. Відомо, що $f \in \mathcal{R}(B)$. Тоді $\mathbbm{1}_A f \in \mathcal{R}(B)$, при цьому $\displaystyle\int\displaylimits_B f(\vec{x})\mathbbm{1}_A(\vec{x})\,d\vec{x} = \int\displaylimits_A f(\vec{x})\,d\vec{x}$.\\
+Бонусом ми доводимо, що якщо $A \subset B$ та $f \in \mathcal{R}(B)$, то $f \in \mathcal{R}(A)$.
+\end{theorem}
+
+\begin{proof}
+Як добуток двох функцій, $f \in \mathcal{R}(B), \mathbbm{1}_A \in \mathcal{R}(B) \implies \mathbbm{1}_A f \in \mathcal{R}(B)$. Залишилося довести рівність.\\
+Для зручності позначу $I = \displaystyle\int\displaylimits_B f(\vec{x})\mathbbm{1}_A(\vec{x})\,d\vec{x}$ та $J = \displaystyle\int\displaylimits_A f(\vec{x})\,d\vec{x}$. Справедлива нерівність $L(f \cdot \mathbbm{1}_A,\tau) \leq I \leq U(f \cdot \mathbbm{1}_A, \tau)$ для кожного розбиття $\tau$.\\
+Нехай $\varepsilon > 0$. Тоді існує таке розбиття $\tau$, щоб $U(f \mathbbm{1}_A, \tau) - L(f \mathbbm{1}_A, \tau) < \varepsilon$.\\
+Маємо $\tau = \{Q_1,\dots,Q_m\}$. Якщо $Q_i \subset A$, то його так і залишаємо. Якщо $Q_i \not\subset A$, то тоді підрозіб'ємо $Q_i = (Q_i \cap A) \cup (Q_i \cap A^c)$. Отримаємо підрозбиття $\tilde{\tau} = \tau_A \cup \tau_{A^c}$.\\
+Тобто ми зараз маємо $U(f \mathbbm{1}_A, \tilde{\tau}) - L(f \mathbbm{1}_A, \tilde{\tau}) < \varepsilon$.\\
+Проте $U(f \mathbbm{1}_A, \tilde{\tau}) = U(f,\tau_A)$, а також $L(f \mathbbm{1}_A, \tilde{\tau}) = L(f,\tau_A)$. Отже, звідси $U(f,\tau_A) - L(f,\tau_A) < \varepsilon$.\\
+Отже, $f \in \mathcal{R}(A)$. Тим часом також $L(f,\tau_A) \leq J \leq U(f,\tau_A)$. Водночас $L(f,\tau_A) \leq I \leq L(f,\tau_A)$. Тобто\\
+$-\varepsilon < J - I < \varepsilon$ для всіх $\varepsilon > 0$. Довели рівність.
+\iffalse
+Нехай $\varepsilon > 0$ та для зручності позначу $I = \displaystyle\int\displaylimits_B f(\vec{x})\mathbbm{1}_A(\vec{x})\,d\vec{x}$. Тоді оскільки $\mathbbm{1}_A f \in \mathcal{R}(B)$, то тоді існує $\delta > 0$ такий, що $\forall (\tau,\xi): |\tau| < \delta \implies |\sigma(\mathbbm{1}_A f, \tau, \xi) - I| < \varepsilon$.\\
+Оберемо такий $\tau = \{Q_1,\dots,Q_m\}$ -- розбиття $B$ так, що $|\tau| < \delta$, а також оберемо відмічені точки $\xi = \{\vec{x}_1,\dots,\vec{x}_m\}$. Якщо $Q_i \subset A$, то його так і залишаємо. Якщо $Q_i \not\subset A$, то тоді підрозіб'ємо $Q_i = (Q_i \cap A) \cup (Q_i \cap A^c)$. Якщо $\vec{x}_i \in Q_i \cap A$, то ми додамо ще одну точку $\vec{x} \in Q_i \cap A^c$ в набір відмічених точок (можливо, навпаки). Отримаємо підрозбиття $\tilde{\tau} = \tau_A \cup \tau_{A^c}$.\\
+Оберемо $\delta = \dfrac{1}{2} |\tau_A|$. Тоді оберемо $\tau$ -- розбиття $A$ так, що $|\tau| < \delta$
+\iffalse
+підрозбиття $\tilde{\tau} = \{R_1,\dots,R_p\}$, причому $|\tilde{\tau}| \leq |\tau| < \delta$. Тоді\\
+$\sigma(\mathbbm{1}_A f, \tilde{\tau}, \xi) = \displaystyle\sum_{k} \mathbbm{1}_A(\vec{x}_k) f(\vec{x}_k) m(R_k) = \sum_k f(\vec{x}_k) m(Q_k \cap A)$.\\
+У кінці залишилися тільки ті відмічені точки, які потрапили в $A$ через індикатор. Але зазначимо, що $\sigma(\mathbbm{1}_A f,\tilde{\tau},\xi) = \sigma(f,\tau_A,\xi_A)$, де $\tau_A = \{Q_i \cap A\}$ та $\xi_A$ -- відмічені точки з $\xi$, які лежать в $A$.\\
+Отже, $|\sigma(f,\tau_A,\xi_A) - I| < \varepsilon$.
+\fi
+\fi
+\end{proof}
 
 \subsection{Властивість інтеграла}
 \begin{theorem}[Лінійність І]
-$\huge\int\displaylimits_A f(\vec{x})+g(\vec{x})\,d\lambda(\vec{x}) = \int\displaylimits_A f(\vec{x})\,d \lambda (\vec{x}) + \int\displaylimits_A g(\vec{x})\,d \lambda(\vec{x})$.
+$\huge\int\displaylimits_A f(\vec{x})+g(\vec{x})\,d\vec{x} = \int\displaylimits_A f(\vec{x})\,d\vec{x} + \int\displaylimits_A g(\vec{x})\,d\vec{x}$.
 \end{theorem}
 
 \begin{theorem}[Лінійність ІІ]
-$\huge\int\displaylimits_A \alpha f(\vec{x})\,d\lambda(\vec{x}) = \alpha \int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x})$.\\
+$\huge\int\displaylimits_A \alpha f(\vec{x})\,d\vec{x} = \alpha \int\displaylimits_A f(\vec{x})\,d\vec{x}$.\\
 \end{theorem}
 
 \begin{theorem}[Адитивність]
-$\huge\int\displaylimits_{A_1 \cup A_2} f(\vec{x})\,d\lambda(\vec{x}) = \int\displaylimits_{A_1} f(\vec{x})\,dx + \int\displaylimits_{A_2} f(\vec{x})\,d\lambda(\vec{x})$.\\
-$\lambda(A_1 \cap A_2) = 0$.
+$\huge\int\displaylimits_{A_1 \cup A_2} f(\vec{x})\,d\vec{x} = \int\displaylimits_{A_1} f(\vec{x})\,d\vec{x} + \int\displaylimits_{A_2} f(\vec{x})\,d\vec{x}$ за умовою, що $\lambda(A_1 \cap A_2) = 0$.
 \end{theorem}
 
 \begin{theorem}
-Задано $f \in \mathcal{R}(A)$, де $A$ - вимірна за Жорданом. Відомо, що $\forall \vec{x} \in A: f(\vec{x}) \geq 0$. Тоді $\huge\int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x}) \geq 0$.
+Задано $f \in \mathcal{R}(A)$, де $A$ -- вимірна за Жорданом. Відомо, що $\forall \vec{x} \in A: f(\vec{x}) \geq 0$. Тоді $\huge\int\displaylimits_A f(\vec{x})\,d\vec{x} \geq 0$.
 \end{theorem}
 
 \begin{corollary}
-Якщо $\forall \vec{x} \in A: f(\vec{x}) \leq g(\vec{x})$, то тоді $\huge\int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x}) \leq \int\displaylimits_A g(\vec{x})\,d\lambda(\vec{x})$.
+Якщо $\forall \vec{x} \in A: f(\vec{x}) \leq g(\vec{x})$, то тоді $\huge\int\displaylimits_A f(\vec{x})\,d\vec{x} \leq \int\displaylimits_A g(\vec{x})\,d\vec{x}$.
 \end{corollary}
 
 \begin{corollary}
-$\huge \abs{\int\displaylimits_A f(\vec{x})\,d\lambda(\vec{x})} \leq \int\displaylimits_A |f(\vec{x})|\,d\lambda(\vec{x})$.
+$\huge \abs{\int\displaylimits_A f(\vec{x})\,d\vec{x}} \leq \int\displaylimits_A |f(\vec{x})|\,d\vec{x}$.
 \end{corollary}
 
 \subsection{Обчислення кратних інтегралів}
 \subsubsection{Зведення до повторних інтегралів}
 \begin{definition}
-Задано функцію $f: P^x \times P^y \to \mathbb{R}$, де $P^x \subset \mathbb{R}^n, P^y \subset \mathbb{R}^m$ - замкнені паралелепіпеди.\\
+Задано функцію $f \colon P^x \times P^y \to \mathbb{R}$, де $P^x \subset \mathbb{R}^n, P^y \subset \mathbb{R}^m$ -- замкнені паралелепіпеди.\\
 \textbf{Повторним інтегралом} від функції $f$ називають такі інтеграли:
 \begin{align*}
 \int\displaylimits_{P^x} \left( \int\displaylimits_{P^y} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dy_1\dots\,dy_m \right)\,dx_1\dots\,dx_n \\
 \int\displaylimits_{P^y} \left( \int\displaylimits_{P^x} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dx_1\dots\,dx_n \right)\,dy_1\dots\,dy_m
 \end{align*}
-за умовою, що перший внутрішній інтеграл існує $\forall \vec{x} \in P^x$. Аналогічно другий $\forall \vec{y} \in P^y$.\\
+за умовою, що перший внутрішній інтеграл існує $\forall \vec{x} = (x_1,\dots,x_n) \in P^x$. Аналогічно другий $\forall \vec{y} = (y_1,\dots,y_m) \in P^y$.\\
 Позначення першого повторного інтеграла: $\huge\int\displaylimits_{P^x}\,dx_1\dots\,dx_n \int\displaylimits_{P^y} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dy_1\dots\,dy_m$.\\
 Позначення другого повторного інтеграла: $\huge\int\displaylimits_{P^y}\,dy_1\dots\,dy_m \int\displaylimits_{P^x} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dx_1\dots\,dx_n$.
+\bigskip \\
+Інтеграли, що були записані вище, буду позначати коротко ось таким чином:\\
+\begin{align*}
+\int\displaylimits_{P^x} \left( \int\displaylimits_{P^y} f(\vec{x},\vec{y})\,d\vec{y}\right)\,d\vec{x} \\
+\int\displaylimits_{P^y} \left( \int\displaylimits_{P^x} f(\vec{x},\vec{y})\,d\vec{x}\right)\,d\vec{y}
+\end{align*}
+Повторні інтеграли відповідно позначатиму так: $\displaystyle\int\displaylimits_{P^x}\,d\vec{x} \int\displaylimits_{P^y} f(\vec{x},\vec{y})\,d\vec{y}$ та $\displaystyle\int\displaylimits_{P^y}\,d\vec{y} \int\displaylimits_{P^x} f(\vec{x},\vec{y})\,d\vec{x}$.
 \end{definition}
 
-\begin{theorem}[Теорема Фубіні]
-Задано функцію $f: P^x \times P^y \to \mathbb{R}$, де $P^x \subset \mathbb{R}^n, P^y \subset \mathbb{R}^m$ - замкнені паралелепіпеди. Відомо, що $f \in \mathcal{R}(P^x \times P^y)$.\\ 
-Тоді $\huge\int\displaylimits_{P^x \times P^y} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dx_1\dots\,dx_n\,dy_1\dots\,dy_m = \huge\int\displaylimits_{P^x}\,dx_1\dots\,dx_n \int\displaylimits_{P^y} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dy_1\dots\,dy_m$.
-Або $\huge\int\displaylimits_{P^x \times P^y} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dx_1\dots\,dx_n\,dy_1\dots\,dy_m = \huge\int\displaylimits_{P^y}\,dy_1\dots\,dy_m \int\displaylimits_{P^x} f(x_1,\dots,x_n,y_1,\dots,y_m)\,dx_1\dots\,dx_n$.
+\begin{theorem}
+Задано $P^x \subset \mathbb{R}^n, P^y \subset \mathbb{R}^m$ -- замкнені паралелепіпеди та функцію $f \in \mathcal{R}(P^x \times P^y)$. Позначимо функцію $g(\vec{x}) = I_*(\vec{x})$ та $h(\vec{x}) = I^*(\vec{x})$. Тоді звідси $g,h \in \mathcal{R}(P^x)$, причому\\
+$\displaystyle\int\displaylimits_{P^x} g(\vec{x})\,d\vec{x} = \int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y}$ \qquad $\displaystyle\int\displaylimits_{P^x} h(\vec{x})\,d\vec{x} = \int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y}$.
 \end{theorem}
 
 \begin{proof}
-Ми обмежимось випадком, коли $P^x,P^y \subset \mathbb{R}$ та доведемо лише першу рівність. Для цього ми розглянемо функцію $F(x) = \huge\int\displaylimits_{P^y} f(x,y)\,dy$.\\
-Візьмемо розбиття $\tau$ для $P^x \times P^y$, що розбита прямокутниками. Тоді маємо:\\
-$L(\tau,f) = \huge\sum_{k_1,k_2} m_{k_1,k_2} \Delta x_{k_1} \Delta y_{k_2} \overset{?}{\leq} \sum_{k_1} \inf_{x \in \Delta x_{k_1}} \left( \sum_{k_2} \inf_{y \in \Delta y_{k_2}} f(x,y) \cdot \Delta x_{k_1} \Delta y_{k_2} \right) = \sum_{k_1} \inf_{x \in \Delta x_{k_1}} L(\tau_{P_y},f) \Delta x_{k_1} \leq \\
-\leq \sum_{k_1} \inf_{x \in \Delta x_{k_1}} F(x) \Delta x_{k_1}$.\\
-Аналогічно отримаємо таку нерівність:\\
-$U(\tau,f) \geq \huge\sum_{k_1} \sup_{x \in \Delta x_{k_1}} F(x)\Delta x_{k_1}$.\\
-Таким чином, отримали оцінку:\\
-$L(\tau,f) \leq \huge\sum_{k_1} F(x)\Delta x_{k_1} \leq U(\tau,f)$.\\
-Оскільки $f \in \mathcal{R}(P^x \times P^y)$, то при $|\tau| \to 0$ та за теоремою про двох поліцаїв, отримаємо:\\
-$\huge\int\displaylimits_{P^x} F(x)\,dx = \int\displaylimits_{P^x} \left(\int\displaylimits_{P^y} f(x,y)\,dy \right) \,dx = \int\displaylimits_{P^x \times P^y} f(x,y)\,dx\,dy$.\\
-\textit{Розібрати (?)}.
+Нехай $\tau' = \{A_1,\dots,A_s\}$ -- розбиття $P^x$ та $\tau'' = \{B_1,\dots,B_l\}$ -- розбиття $P^y$. Ми тим самим можемо визначити $\tau = \{A_i \times B_j \mid i = \overline{1,s}, j = \overline{1,l}\}$ -- розбиття $P^x \times P^y$.\\
+Заздалегідь зауважимо, що $m(A_i \times B_j) = m(A_i) m(B_j)$. Тепер почнемо робити оцінки.\\
+Набрехав, ми ще зробимо позначення $m_{ij} = \displaystyle\inf_{(\vec{x},\vec{y}) \in A_i \times B_j} f(\vec{x},\vec{y})$. Ось тепер починаємо:\\
+$L(f,\tau) = \displaystyle\sum_{i,j} m_{ij} m(A_i \times B_j) = \sum_i \left( \sum_j m_{ij} m(B_j) \right) m(A_i)$.\\
+Тепер позначимо $m_j(\vec{x}) = \displaystyle\inf_{\vec{y} \in B_j} f(\vec{x},\vec{y}) = \inf_{\vec{y} \in B_j} f_{\vec{x}}(\vec{y})$. Зазначимо, що для $\vec{x} \in A_i$ маємо $m_{ij} \leq m_j(x)$.\\
+$\displaystyle\sum_j m_{ij} m(B_j) \leq \sum_j m_j(x) m(B_j) = L(f_{\vec{x}},\tau'') \leq I_*(\vec{x}) = g(x)$.\\
+Дана нерівність виконана для всіх $\vec{x} \in A_i$, тому звідси $\displaystyle\sum_j m_{ij} m(B_j) \leq \inf_{\vec{x} \in A_i} g(x)$. Тоді\\
+$L(f,\tau) \leq \displaystyle\sum_j \inf_{\vec{x} \in A_i} g(x) m(A_i) = L(g,\tau')$.\\
+Аналогічними міркуваннями доведемо, що $U(f,\tau) \geq U(h,\tau')$.\\
+Із урахуванням того, що $g(x) \leq h(x)$ для всіх $x$, а також двох отриманих нерівностей, отримаємо\\
+$L(f,\tau) \leq L(g,\tau') \leq U(g,\tau') \leq U(h,\tau') \leq U(f,\tau)$.\\
+Отже, $U(g,\tau') - L(g,\tau') \leq U(f,\tau) - L(f,\tau)$, а оскільки $f \in \mathcal{R}(P^x \times P^y)$, то із цієї нерівності випливає, що $g \in \mathcal{R}(P^x)$. Крім того, ми маємо\\
+$L(f,\tau) \leq \displaystyle\int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y} \leq U(f,\tau)$ \qquad $L(f,\tau) \leq L(g,\tau') \leq \displaystyle\int\displaylimits_{P^x}g(\vec{x})\,d\vec{x} \leq U(g,\tau') \leq U(f,\tau)$.\\
+Тоді в силу того, що $f$ інтегрована за Ріманом, ми маємо $\displaystyle\left| \int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y} - \int\displaylimits_{P^x} g(\vec{x})\,d\vec{x} \right| < \varepsilon$ для кожного $\varepsilon > 0$. Внаслідок цього матимемо рівність $\displaystyle\int\displaylimits_{P^x} g(\vec{x})\,d\vec{x} = \int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y}$.\\
+Аналогічно можна довести, що $h \in \mathcal{R}(P^x)$ та рівність вище, маючи ланцюг\\
+$L(f,\tau) \leq L(g,\tau') \leq L(h,\tau') \leq U(h,\tau') \leq U(f,\tau)$.
 \end{proof}
 
+\begin{theorem}
+Задано $P^x \subset \mathbb{R}^n, P^y \subset \mathbb{R}^m$ -- замкнені паралелепіпеди та функцію $f \in \mathcal{R}(P^x \times P^y)$. Позначимо функцію $g(\vec{y}) = I_*(\vec{y})$ та $h(\vec{y}) = I^*(\vec{y})$. Тоді звідси $g,h \in \mathcal{R}(P^y)$, причому\\
+$\displaystyle\int\displaylimits_{P^y} g(\vec{y})\,d\vec{y} = \int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y}$ \qquad $\displaystyle\int\displaylimits_{P^y} h(\vec{x})\,d\vec{x} = \int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y}$.\\
+\textit{Все буквально те саме, що було минулого разу.}
+\end{theorem}
+
+\begin{corollary}[Теорема Фубіні (частинний випадок)]
+Задано функцію $f \colon P^x \times P^y \to \mathbb{R}$, де $P^x \subset \mathbb{R}^n, P^y \subset \mathbb{R}^m$ -- замкнені паралелепіпеди. Відомо, що $f \in C(P^x \times P^y)$. Тоді\\
+$\displaystyle\int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y} = \int\displaylimits_{P^x}\,d\vec{x} \int\displaylimits_{P^y}f(\vec{x},\vec{y})\,d\vec{y}$ \qquad $\displaystyle\int\displaylimits_{P^x \times P^y} f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y} = \int\displaylimits_{P^y}\,d\vec{y} \int\displaylimits_{P^x}f(\vec{x},\vec{y})\,d\vec{x}$.
+\end{corollary}
+
+\begin{example}
+Обчислити $\displaystyle\iint\displaylimits_P xy^2\,dx\,dy$, де $P = [0,1] \times [0,1]$.\\
+Оскільки функція $xy^2$ неперервна на брусі, то можна сміло користуватися теоремою Фубіні.\\
+$\displaystyle\iint\displaylimits_P xy^2\,dx\,dy = \int_0^1 \,dx\int_0^1 xy^2\,dy = \int_0^1\,dx \left(x \int_0^1 y^2\,dy\right) = \int_0^1 \,dx \left( x \dfrac{y^3}{3} \Big|_0^1 \right) = \dfrac{1}{3}\int_0^1 x\,dx = \dfrac{1}{3} \dfrac{x^2}{2} \Big|_0^1 = \dfrac{1}{6}$.
+\end{example}
+\noindent
+Надалі $A \subset \mathbb{R}^{n+m}$ -- вимірна за Жорданом. Зробимо деякі позначення:\\
+$\pr_{\vec{y}} A = \{ \vec{y} \in \mathbb{R}^m \mid \exists \vec{x} \in \mathbb{R}^n: (\vec{x},\vec{y}) \in A \}$ \qquad $\pr_{\vec{x}} A = \{ \vec{x} \in \mathbb{R}^n \mid \exists \vec{y} \in \mathbb{R}^m: (\vec{x},\vec{y}) \in A \}$.\\
+$A(\vec{x}) = \{ \vec{y} \in \mathbb{R}^m: (\vec{x},\vec{y}) \in A \}$ \qquad\qquad\qquad $A(\vec{y}) = \{ \vec{x} \in \mathbb{R}^n: (\vec{x},\vec{y}) \in A \}$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[->] (-0.5,0) -- (5,0) node[anchor = north] {$x$};
+\draw[->] (0,-0.5) -- (0,3) node[anchor = east] {$y$};
+\draw [red, thick] plot [smooth cycle] coordinates {(1,0.5) (2,2.5) (4,1.5) (4,0.5)} node at (2,2) {$A$};
+\draw[blue,thick] (0,0.4)--(0,2.5) node[anchor = north east] {$\pr_y A$};
+\fill (0,1.5) circle(1pt);
+\draw[dashed] (0,1.5)--(1.2,1.5);
+\draw[blue, thick] (1.2,1.5)--(4,1.5) node[anchor = north east] {$A(y)$};
+\end{tikzpicture}
+\caption*{Схематична ілюстрація $\pr_x A$, а також $A(y)$.}
+\end{figure}
+
+\begin{theorem}[Теорема Фубіні]
+Маємо $A \subset \mathbb{R}^{n+m}$ -- вимірна за Жорданом. Припустимо, що $f \in \mathcal{R}(A)$, а також існує $F(\vec{y}) = \displaystyle\int\displaylimits_{A(\vec{y})} f(\vec{x},\vec{y})\,d\vec{x}$ при кожному $\vec{y} \in \mathbb{R}^m$. Тоді існуватиме $\displaystyle\int\displaylimits_{\pr_{\vec{y}} A} \left( \int\displaylimits_{A(\vec{y})} f(\vec{x},\vec{y})\,d\vec{x} \right)\,d\vec{y}$ (тобто $F \in \mathcal{R}(\pr_{\vec{y}} A)$), причому\\
+$\displaystyle\int\displaylimits_{\pr_{\vec{y}} A} \left( \int\displaylimits_{A(\vec{y})} f(\vec{x},\vec{y})\,d\vec{x} \right)\,d\vec{y} = \int\displaylimits_A f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y}$.
+\end{theorem}
+
+\begin{proof}
+Дійсно, оскільки $A$ -- обмежена множина (за замовчуванням), то можна її охопити брусом $P^x \times P^y \supset A$. Тепер визначимо функцію $f^* \colon P^x \times P^y \to \mathbb{R}$ таким чином: $f^*(\vec{x},\vec{y}) = f(\vec{x},\vec{y}) \cdot \mathbbm{1}_{A}(\vec{x},\vec{y})$. Зазначимо вже, що $\displaystyle\int\displaylimits_{P^x \times P^y} f^*(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y} = \int\displaylimits_A f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y}$.\\
+Розглянемо функцію $F^*(\vec{y}) = \displaystyle\int\displaylimits_{P^x} f^*(\vec{x},\vec{y})\,d\vec{x}$. Зауважимо, що насправді $F^*(\vec{y}) = F(\vec{y}) \cdot \mathbbm{1}_{\pr_{\vec{y}}(A)}$. Дійсно, якщо $\vec{y} \notin \pr_{\vec{y}}A$, то тоді для кожного $\vec{x}$ матимемо $(\vec{x},\vec{y}) \notin A$. Тобто $F^*(\vec{y}) = 0$. Якщо $\vec{y} \in \pr_{\vec{y}} A$, тобто існуватиме точка $\vec{x}$, щоб $(\vec{x},\vec{y}) \in A$, тоді $F^*(\vec{y}) = \displaystyle\int\displaylimits_{A(y)} f(\vec{x},\vec{y})\,d\vec{x} = F(\vec{y})$. \\
+$\displaystyle\int\displaylimits_{P^x \times P^y} f^*(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y} = \int\displaylimits_{P^y} \left( \int\displaylimits_{P^x} f^*(\vec{x},\vec{y})\,d\vec{x} \right)\,d\vec{y} = \int\displaylimits_{P^y} F^*(y)\,d\vec{y}$.\\
+Звідси отримаємо бажану рівність:\\
+$\displaystyle\int\displaylimits_A f(\vec{x},\vec{y})\,d\vec{x}\,d\vec{y} = \int\displaylimits_{\pr_{\vec{y}} A} F(\vec{y})\,d\vec{y} = \int\displaylimits_{\pr_{\vec{y}} A} \left(\int\displaylimits_{A(\vec{y})} f(\vec{x},\vec{y}) \,d\vec{x} \right)\,d\vec{y}$.
+\end{proof}
+
+Таку ж теорему можна сформулювати для $\vec{x}$ всюди, але мені вже трохи лінь.
+
+\begin{example}
+Маємо інтеграл $\displaystyle\iint\displaylimits_A f(x,y)\,dx\,dy$, де множина $A$ обмежена параболами $y = x^2$ та $x = y^2$. Задача буде перейти до повторного інтегралу.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1.5]
+\draw[color=blue, name path = A, domain=0:1]   plot (\x,{\x*\x});
+\draw[color=blue, name path = B, variable=\y, domain=0:1]   plot ({\y*\y},\y);
+\tikzfillbetween[of=A and B]{blue, opacity=0.2};
+\draw[->] (0,0)--(1.5,0) node[anchor = north] {$x$};
+\draw[->] (0,0)--(0,1.5) node[anchor = east] {$y$};
+\node at (0.5,0.5) {$A$};
+\draw (1,1pt)--(1,-1pt) node[anchor = north] {$1$};
+\draw (1pt,1)--(-1pt,1) node[anchor = east] {$1$};
+\end{tikzpicture}
+\end{figure}
+У цьому випадку маємо $\pr_x A = [0,1]$, а також $A(x) = \{ y: u_1(x) \leq y \leq u_2(x) \} = [x^2, \sqrt{x}]$.\\
+$\displaystyle\iint\displaylimits_A f(x,y)\,dx\,dy = \int\displaylimits_{\pr_x A} \left( \int_{u_1(x)}^{u_2(x)} f(x,y)\,dy \right)\,dx = \int_0^1 \left( \int_{x^2}^{\sqrt{x}} f(x,y)\,dy\right)\,dx = \int_0^1\,dx \int_{x^2}^{\sqrt{x}} f(x,y)\,dy$.
+\bigskip \\
+Можна було інакше. Маємо $u_1(y) = y^2$ та $u_2(y) = \sqrt{y}$. У цьому випадку $\pr_y A = [0,1]$, а також $A(y) = \{x : u_1(y) \leq x \leq u_2(y)\} = [y^2, \sqrt{y}]$. Аналогічними міркуваннями отримаємо\\
+$\displaystyle\iint\displaylimits_A f(x,y)\,dx\,dy = \int_0^1 \left( \int_{y^2}^{\sqrt{y}} f(x,y)\,dx \right)\,dy = \int_0^1\,dy \int_{y^2}^{\sqrt{y}} f(x,y)\,dx$.
+\end{example}
+
+\iffalse
 \begin{corollary}
 Задані функції $\varphi_1,\varphi_2 \in C(D)$, де $D \subset \mathbb{R}^n$ - вимірна за Жорданом. Встановимо множину $V = \{(\vec{x},y) \in \mathbb{R}^{n+1}: \varphi_1(\vec{x}) \leq y \leq \varphi_2(\vec{x})\}$. Відомо, що функція $f \in \mathcal{R}(D)$.\\
 Тоді $\huge\int\displaylimits_V f(x_1,\dots,x_n,y)\,dx_1\dots \,dx_n\,dy = \int\displaylimits_D \,dx_1 \dots \,dx_n \int_{\varphi_1(\vec{x})}^{\varphi_2(\vec{x})} f(x_1,\dots,x_n,y)\,dy$.
@@ -2559,11 +2989,41 @@ $\boxed{=} \huge\int\displaylimits_{P^x} \left( \int_{\varphi_1(x)}^{\varphi_2(x
 Встановимо множину $V = \{(\vec{x},y) \in \mathbb{R}^{n+1}: 0 \leq y \leq f(\vec{x})\}$.\\
 Тоді $\lambda_{n+1}(V) = \huge\int\displaylimits_V \,dx_1\dots\,dx_n\,dy \overset{\text{або}}{=} \int\displaylimits_D f(\vec{x},y)\,dx_1\dots\,dx_n$.
 \end{corollary}
+\fi
 
+\iffalse
 \subsubsection*{Застосування}
 Із щойно отриманого наслідку ми можемо:\\
 - обчислити площу квадрованої множини $V$ шляхом $S(V) = \huge\iint\displaylimits_V \,dx\,dy = \int\displaylimits_D f(x)\,dx$;\\
 - обчислити об'єм кубованої множини $V$ шляхом $S(V) = \huge\iiint\displaylimits_V \,dx\,dy\,dz = \int\displaylimits_D f(x,y)\,dx\,dy$.
+\fi
+
+\subsection{Заміна змінних}
+\begin{definition}
+Відображення $\varphi \colon M \to N$, де $M,N$ -- відкриті, назвемо \textbf{дифеоморфізмом}, якщо
+\begin{align*}
+\varphi \text{ -- бієкція} \\
+\varphi \in C^1(M) \\
+\varphi^{-1} \in C^1(N)
+\end{align*}
+(часто для дифеоморфізму просять бути $C^\infty$ замість $C^1$, але це вже тонкощі).
+\end{definition}
+
+\begin{definition}
+Дифеоморфізм $\varphi \colon M \to N$ називається \textbf{простим}, якщо
+\begin{align*}
+\varphi(\vec{t}) = (t_1,\dots,t_{k-1}, \varphi_k(\vec{t}), t_{k+1}, \dots, t_n)
+\end{align*}
+Тобто такий дифеоморфізм змінює лише одну координату.
+\end{definition}
+
+\begin{theorem}
+Нехай $M,N \subset \mathbb{R}^n$ -- відкриті та $\varphi \colon M \to N$ -- простий дифеоморфізм. Відомо, що $A$ -- вимірна за Жорданом, причому $\Cl A \subset M$. Тоді $\varphi(A)$ -- вимірна за Жорданом, її міра $m(\varphi(A)) = \displaystyle\int\displaylimits_A \left| J_\varphi(\vec{t}) \right|\,d\vec{t}$.
+\end{theorem}
+
+\begin{proof}
+Не втрачаючи загальності, ми будемо розглядати дифеоморфізм $\varphi(t_1,\dots,t_n) = (\varphi_1(t_1,\dots,t_n), t_2,\dots,t_n)$, тобто будемо змінювати першу координату. Зауважимо, що $\det J_\varphi(\vec{t}) = \departial{\varphi_1}{t_1}$.
+\end{proof}
 
 \subsection{Заміна змінних}
 \iffalse
@@ -2711,7 +3171,6 @@ $\dfrac{S(A_1B_1C_1D_1)}{S(ABCD)} = |\det \vec{g}'(u_0,v_0)|$.\\
 А далі ми просто розписуємо інтегральну суму та прямуємо.\\
 Важливо - що тут зрозуміло, звідки береться якобіан в інтегралі.
 \newpage
-\fi
 
 \newpage
 \section{Криволінійні інтеграли}
