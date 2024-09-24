@@ -93,6 +93,9 @@
 \includepdf[scale=1]{preview.jpg}
 \tableofcontents
 \newpage
+\section*{Вступ}
+Ви обрали щойно пдф з теорії ймовірності на \textbf{нестрогому} рівні. Більшість доведень певних фактів залишаються, але деякі означення розкрити в повній мірі не вийде. Цей варіант призначений для тих, хто не орієнтується в дисциплині ''теорія міри''.
+\newpage
     	
 \section{Основи теорії ймовірності}
 \subsection{Імовірнісний простір}
@@ -160,13 +163,63 @@ A_i \cap A_j = \emptyset,\ i \neq j
 \end{definition}
 
 \begin{definition}
-Маємо простір елементарних подій $\Omega$, створимо $\sigma$-алгебру $\mathcal{F}$ підмножин.\\
-Така $\sigma$-алгебра називається \textbf{$\sigma$-алгеброю подій}. Вимірний простір $(\Omega,\mathcal{F})$ називають \textbf{вимірним простором стохастичного експерименту}.
+Маємо простір елементарних подій $\Omega$. Створимо $\mathcal{F}$ -- клас всіх підмножин $\Omega$, що буде задовольняти таким властивостям:
+\begin{align*}
+\Omega \in \mathcal{F}; \\
+A \in \mathcal{F} \implies A^c \in \mathcal{F}; \\
+A_1,A_2,\dots \in \mathcal{F} \implies \bigcup_{i=1}^\infty A_i \in \mathcal{F}
+\end{align*}
+Такий клас підмножин $\mathcal{F}$ називають \textbf{$\sigma$-алгеброю подій}.\\
+Пара $(\Omega, \mathcal{F})$ називають \textbf{вимірним простором}.
 \end{definition}
+
+\begin{proposition}
+Нехай $\Omega$ -- простір елементарних подій та $\mathcal{F}$ -- $\sigma$-алгебра подій. Тоді:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\emptyset \in \mathcal{F}$;
+\item $A,B \in \mathcal{F} \implies A \cap B \in \mathcal{F}$;
+\item $A,B \in \mathcal{F} \implies A \setminus B \in \mathcal{F}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Доведення неважке.
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Оскільки $\Omega \in \mathcal{F}$, то звідси $\Omega^c = \emptyset \in \mathcal{F}$.
+\item Нехай $A,B \in \mathcal{F}$. Тоді $A \cap B = (A^c \cup B^c)^c \in \mathcal{F}$.
+\item Нехай $A,B \in \mathcal{F}$. Маємо $A \setminus B = A \cap B^c$. За другою властивістю, $A \setminus B \in \mathcal{F}$. 
+\end{enumerate}
+Усі властивості доведені.
+\end{proof}
+
 \begin{remark}
 Якщо простір елементарних подій $\Omega$ буде скінченним або зліченним, то $\sigma$-алгебру подій можна покласти за $\mathcal{F} = 2^\Omega$. 
 \end{remark}
 
+%for those who knows measure theory
+\iffalse
+\begin{definition}
+Маємо простір елементарних подій $\Omega$, створимо $\sigma$-алгебру $\mathcal{F}$ підмножин.\\
+Така $\sigma$-алгебра називається \textbf{$\sigma$-алгеброю подій}. Вимірний простір $(\Omega,\mathcal{F})$ називають \textbf{вимірним простором стохастичного експерименту}.
+\end{definition}
+\fi
+
+\begin{definition}
+Задано $(\Omega,\mathcal{F})$ -- вимірний простір.\\
+\textbf{Імовірністю} назвемо функцію множин $\mathbb{P} \colon \mathcal{F} \to \mathbb{R}$, яка задовольняє трьом аксіомам Колмогорова:
+\begin{align*}
+\text{1) $\forall A \in \mathcal{F}: \mathbb{P}(A) \geq 0;$} \\
+\text{2) $\forall A_1,A_2,\dots \in \mathcal{F}: \forall i \neq j: A_i \cap A_j \neq \emptyset: \mathbb{P}\left( \bigcup_{n=1}^\infty A_n \right) = \sum_{n=1}^\infty \mathbb{P}(A_n)$;} \\
+\text{3) $\mathbb{P}(\Omega) = 1$.}
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Насправді кажучи, перші дві аксіоми для $\mathbb{P}$ означають, що $\mathbb{P}$ -- це міра.
+\end{remark}
+
+%for those who knows measure theory
+\iffalse
 \begin{definition}
 Задано $(\Omega,\mathcal{F})$ -- вимірний простір.\\
 \textbf{Імовірністю} назвемо міру $\mathbb{P} \colon \mathcal{F} \to [0,+\infty)$, яка додатково має властивість:
@@ -175,16 +228,7 @@ A_i \cap A_j = \emptyset,\ i \neq j
 \end{align*}
 Трійка $(\Omega,\mathcal{F},\mathbb{P})$ називається \textbf{ймовірнісним простром}.
 \end{definition}
-
-\begin{remark}
-Тобто міра $\mathbb{P} \colon \mathcal{F} \to [0,+\infty)$ задовольняє таким умовам:
-\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $\forall A \in \mathcal{F}: \mathbb{P}(A) \geq 0$;
-\item $\forall A_1,A_2,\dots \in \mathcal{F}$ -- неперетинні множини: $\displaystyle\mathbb{P}\left( \bigcup_{n=1}^\infty A_n \right) = \sum_{n=1}^\infty \mathbb{P}(A_n)$;
-\item $\mathbb{P}(\Omega) = 1$.
-\end{enumerate}
-Такі властивості часто називають \textbf{аксіомами ймовірності} (або \textbf{аксіоми Колмогорова}).
-\end{remark}
+\fi
 
 \begin{proposition}[Властивості ймовірності]
 Справедливе наступне:
@@ -197,7 +241,7 @@ A_i \cap A_j = \emptyset,\ i \neq j
 \item $\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)$ (цю формулу можна узагальнити на довільне скінченне число множин, як це було з потужностями);
 \item $\mathbb{P}$ неперервна зверху та знизу одночасно.
 \end{enumerate}
-\textit{Всі ці властивості випливають з теорії міри. Передоводити не планую.}
+\textit{Всі ці властивості -- це випливає з теорії міри.}
 \end{proposition}
 
 \subsection{Класична модель імовірності}
@@ -638,15 +682,23 @@ p_n(k_1,\dots,k_m) = C_n^{k_1,k_2,\dots,k_m} p_1^{k_1} p_2^{k_2} \dots p_m^{k_m}
 \section{Випадкові величини}
 \subsection{Перші означення}
 \begin{definition}
+Заданий $(\Omega,\mathcal{F})$ -- вимірний простір.\\
+Функцію $\xi \colon \Omega \to \mathbb{R}$ називають \textbf{випадковою величиною}. Тобто ця функція описує числовий результат експерименту.\\
+\textit{Увага! Дане означення не є строгим. Про це згодом.}
+\end{definition}
+
+%rigorous definition
+\iffalse
+\begin{definition}
 Заданий $(\Omega,\mathcal{F})$ -- вимірний простір, також розглянемо $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$.\\
-$\mathcal{F}$-вимірна функція
+Функція $\xi \colon \Omega \to \mathbb{R}$ називається \textbf{випадковою величиною}, якщо
 \begin{align*}
-\xi \colon \Omega \to \mathbb{R}
+\xi \text{ -- $\mathcal{F}$-вимірна функція.}
 \end{align*}
-називається \textbf{випадковою величиною}.
 \end{definition}
 \noindent
 Оскільки $\xi$ -- $\mathcal{F}$-вимірна функція, то це (із курсу теорії міри) дозволяє сказати нам, що $\{\xi < a\} \in \mathcal{F},\ \{\xi \leq a \} \in \mathcal{F},\ \{\xi \geq a\} \in \mathcal{F},\ \{\xi > a \} \in \mathcal{F}$ для будь-якого $a \in \mathbb{R}$. Таке означення зумовлено тим, щоб ми мали змогу обчислювати (наприклад) $\mathbb{P}\{\xi \in [a,b]\}$.
+\fi
 
 \begin{example}
 Розглянемо модель підкидання монети двічі. Визначимо випадкову величину $\xi$ -- кількість решок (tail). Нагадаю, що $\Omega = \{HH,HT,TH,TT\}$. У такому разі випадкова величина діє таким чином:\\
@@ -678,7 +730,11 @@ $\xi(HH) = 0$ \qquad $\xi(HT) = \xi(TH) = 1$ \qquad $\xi(TT) = 2$.
 \caption*{Схематичне представлення функції розподілу. Кожній елементарній події ставиться ймовірність. Кожному числу кількості решок за два підкидання також ставиться своя ймовірність.}
 \end{figure}
 \end{example}
+\noindent
+Нас цікавлять випадкові величини, оскільки ми зможемо таким чином рахувати (скажімо) $\mathbb{P}\{\xi \in [a,b]\}$. Але для цього нам потрібно, щоб в нашу $\sigma$-алгебру подій $\mathcal{F}$ потрапляли $(a,b), (-\infty,a), [a,b]$ тощо. При незліченній множині $\Omega$ ми не зможемо оголосити $\mathcal{F} = 2^\Omega$, інакше це призведе до деяких парадоксів.\\
+Виявляється, що нам буде досить вимагати для випадкових величин, щоб $\{\xi \in (-\infty,x])\} \in \mathcal{F}$ для всіх $x \in \mathbb{R}$. Таким чином, ми можемо отримати $(a,b),[a,b],(a,b],[a,b),(-\infty,a),[b,+\infty),(b,+\infty) \in \mathcal{F}$.
 
+\iffalse
 \begin{definition}
 \textbf{Імовірнісним розподілом} випадкової величини $\xi$ називають таку міру:
 \begin{align*}
@@ -686,6 +742,7 @@ P_\xi(B) = \mathbb{P}(\xi^{-1}(B)),\ B \in \mathcal{B}(\mathbb{R}),
 \end{align*}
 така міра визначена на просторі $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$.
 \end{definition}
+\fi
 
 \begin{definition}
 \textbf{Функцією розподілу} випадкової величини $\xi$ називають таку функцію:
@@ -772,8 +829,16 @@ F_\xi(x) = \mathbb{P}\{\xi < x\},\ x \in \mathbb{R}
 
 \subsection{Основні види випадкових величин}
 \subsubsection{Дискретна випадкова величина}
-Розглянемо $P_\xi$ -- дискретний ймовірнісний розподіл, тобто існує не більше ніж зліченна підмножина $S = \{x_1,x_2,\dots\} \subset \mathbb{R}$, для якої $P_{\xi}(X \setminus S) = 0$, а всі решта $P_\xi(\{x\}) = p_i$ визначені. Зауважимо, що з іншого боку $p_i = \mathbb{P}\{\xi = x_i\}$. Будемо вимагати, щоб події $\{\xi = x_i\}$ утворювали повну групу подій, тобто $\displaystyle\sum_{k=1}^\infty p_i = 1$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{дискретною}.\\
-Імовірнісний розподіл часто зручно записувати в \textbf{ряд розподілу}, що виглядає таким чином:
+\begin{definition}
+Випадкова величина $\xi$ називається \textbf{дискретною}, якщо
+\begin{align*}
+\xi \text{ набуває скінченну чи зліченну кількість значень.}
+\end{align*}
+\end{definition}
+\noindent Для того, щоб задати дискретну випадкову величину, крім значень випадкової величини ще треба мати ймовірності, із якими ці значення приймаються.\\
+$p_i = P\{\xi^{-1}\{x_i\}\} = \mathbb{P}(\xi = x_i), \qquad \displaystyle\sum_{i=1}^\infty p_i = 1$.
+\bigskip \\
+Часто всі дані зручно записувати в \textbf{ряд розподілу}, що виглядає таким чином:
 \begin{figure}[H]
 \centering
 \begin{tabular}{c|c|c|c|c|c}
@@ -791,7 +856,7 @@ p_1 + p_2, & x_2 \leq x < x_3 \\
 \vdots \\
 p_1 + p_2 + \dots = 1, & x \geq x_n
 \end{cases}$.\\
-Графік даної функції розподілу буде просто сходинкова функція.
+Графік даної функції розподілу буде просто ступінчата функція.
 
 \begin{example}
 Зокрема в нас був експеримент підкидання монети два рази. Встановлювали випадкову величину $\xi$ -- кількість решок. Це -- приклад дискретної випадкової величини, оскільки приймає три значення. Кожна з яких має власну ймовірність. Наведу ряд розподілу:
@@ -824,52 +889,23 @@ $\mathbb{P}$ & $\dfrac{1}{4}$ & $\dfrac{1}{2}$ & $\dfrac{1}{4}$
 \end{figure}
 \end{example}
 
-\subsubsection{Неперервна випадкова величина}
-Розглянемо $P_{\xi}$ -- неперервний ймовірнісний розподіл, тобто $P_\xi(\{x\}) = 0$ для всіх $x \in \mathbb{R}$. Відповідно, звідси отримаємо, що $\mathbb{P}\{\xi = \{x\}\} = 0$.
-
-\begin{proposition}
-$F_\xi \in C(\mathbb{R}) \iff \forall x \in \mathbb{R}: \mathbb{P}\{\xi = x\} = 0$.
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $F_\xi \in C(\mathbb{R})$. Тоді звідси $\mathbb{P}\{\xi = x\} = \mathbb{P}\{\xi \leq x\} - \mathbb{P}\{\xi < x\} = F_\xi(x) - F_\xi(x-0) = 0$.
-\bigskip \\
-\leftproof Дано: $\forall x \in \mathbb{R}: \mathbb{P}\{\xi = x\} = 0$. Іншими словами, $\mathbb{P}\{\xi = x\} = \mathbb{P}\{\xi \leq x\} - \mathbb{P}\{\xi < x\} = 0$, або ще іншими словами, $F_\xi(x) - F_\xi(x-0) = 0$. У силу неперервності справа отримаємо, що $F_\xi(x+0) = F_\xi(x-0)$, а тому функція неперервна в точці $x$, зокрема $F_\xi \in C(\mathbb{R})$.
-\end{proof}
-\noindent
-Ми закінчили на тому, що $\mathbb{P}\{ \xi = \{x\} \} = 0$. Тому, як ми вже знаємо, функція розподілу $F_\xi$ буде неперервною на $\mathbb{R}$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{неперервною}.
-
 \subsubsection{Абсолютно неперервна випадкова величина}
-Нам неперервної випадкової величини буде недостатньо. Оскільки в кожній одноточковій множині ймовірність нуль, то тоді це виконується й для не більш ніж зліченної множини.\\
-Проте існує множина Кантора. Це борельова множина лебегової міри нуль, яка при цьому більш, ніж зліченна. Тобто ми, наспраді, хочемо захопити більш широкий клас множин, що приведе до звуженню класів неперервних випадкових величин.\\
-Розглянемо $P_{\xi}$ -- абсолютно неперервний ймовірнісний розподіл відносно $\lambda_1$ (міри Лебега). Тобто тепер $\forall C$ -- борельової множини лебегової міри нуль: $P_{\xi}(C) = 0$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{абсолютно неперервною}. \\
-Ми маємо $P_\xi \ll \lambda_1$. Згідно з теореми Радона-Нікодими, існує функція $f_\xi \colon \mathbb{R} \to \mathbb{R}$, для якої виконується наступне: $P_\xi(B) = \displaystyle\int_B f_\xi(t)\,d\lambda_1(t),\ B \in \mathcal{B}(\mathbb{R})$.
-
 \begin{definition}
-Така функція $f_\xi$ називається \textbf{щільністю розподілу} абсолютно неперервної випадкової величини $\xi$.\\
-Така функція $f_{\xi}$ визначена з точністю до еквівалентності $\pmod \lambda$. Такі функції будемо ототожнювати.
+Випадкова величина $\xi$ називається \textbf{неперервною}, якщо
+\begin{align*}
+F_\xi \in C(\mathbb{R})
+\end{align*}
 \end{definition}
 
-\begin{proposition}[Властивості щільності розподілу]
-Справедливе наступне:
-\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $f_\xi = F'_\xi \pmod {\lambda_1}$;
-\item $f_{\xi} \geq 0 \pmod {\lambda_1}$;
-\item $\displaystyle\int_{-\infty}^{+\infty} f_\xi(x)\,dx = 1$ (умова нормування);
-\item $\displaystyle\mathbb{P}\{\xi \in \left<a,b\right>\} = \int_a^b f_\xi(x)\,dx$.
-\end{enumerate}
+\begin{proposition}
+$\xi$ -- неперервна випадкова величина $\iff \forall x \in \mathbb{R}: \mathbb{P}\{\xi = x\} = 0$.
 \end{proposition}
 
 \begin{proof}
-Доведемо кожну властивість:
-\begin{enumerate}[wide=0pt,label={\arabic*)}]
-\item Маємо $P_\xi(B) = \displaystyle\int_B f_\xi(t)\,d\lambda_1(t)$. Якщо покласти $B = (-\infty,x] \in \mathcal{B}(\mathbb{R})$, то ми отримаємо $F_\xi(x) = \mathbb{P}\{\xi \leq x\} = \displaystyle\int_{-\infty}^x f_\xi(t)\,dt$. Зокрема звідси $f_{\xi} = F'_{\xi}$.
-
-\item Оскільки $F_\xi$ неспадна, то звідси випливає $f_{\xi} = F'_{\xi} \geq 0$.
-\item Маємо $P_\xi(B) = \displaystyle\int_B f_\xi(t)\,d\lambda_1(t)$. Якщо покласти $B = \mathbb{R} \in \mathcal{B}(\mathbb{R})$, то ми отримаємо $1 = \mathbb{P}\{\xi \in \mathbb{R}\} = \displaystyle\int_{-\infty}^{+\infty} f_\xi(x)\,dx$.
-\item $\displaystyle \mathbb{P}\{\xi \in \left<a,b\right>\} = F_\xi(b) - F_\xi(a) = \int_{-\infty}^b f_\xi(x)\,dx - \int_{-\infty}^a f_\xi(x)\,dx = \int_a^b f_\xi(x)\,dx$.
-\end{enumerate}
-Всі властивості доведені.
+\rightproof Дано: $\xi$ -- неперервна випадкова величина, тобто $F_\xi \in C(\mathbb{R})$. Тоді звідси \\
+$\mathbb{P}\{\xi = x\} = \mathbb{P}\{\xi \leq x\} - \mathbb{P}\{\xi < x\} = F_\xi(x) - F_\xi(x-0) = 0$.
+\bigskip \\
+\leftproof Дано: $\forall x \in \mathbb{R}: \mathbb{P}\{\xi = x\} = 0$. Іншими словами, $\mathbb{P}\{\xi = x\} = \mathbb{P}\{\xi \leq x\} - \mathbb{P}\{\xi < x\} = 0$, або ще іншими словами, $F_\xi(x) - F_\xi(x-0) = 0$. У силу неперервності справа отримаємо, що $F_\xi(x+0) = F_\xi(x-0)$, а тому функція неперервна в точці $x$, зокрема $F_\xi \in C(\mathbb{R})$.
 \end{proof}
 
 \begin{example}
@@ -887,8 +923,66 @@ $F_\xi \in C(\mathbb{R}) \iff \forall x \in \mathbb{R}: \mathbb{P}\{\xi = x\} = 
 \end{tikzpicture}
 \end{figure}
 \noindent Позначимо $\xi$ -- випадкова величина, що описує точку перетину з $OX$. Зауважимо, що $\ctg \alpha = \dfrac{-\xi}{1}$, тобто звідси $\xi = -\ctg \alpha$. Тепер обчислимо функцію розподілу.\\
-$F_\xi(x) = \mathbb{P}\{\xi \leq x\} = \mathbb{P}\{-\ctg \alpha \leq x\} = \mathbb{P}\{\ctg \alpha \geq x\} = \mathbb{P}\{\alpha \in [0,\arcctg(-x)]\} = \\ = \mathbb{P}\{\alpha \in [0,\pi-\arctg x]\} = \dfrac{\pi - \arcctg x}{\pi} = 1 - \dfrac{\arcctg x}{\pi}$.\\
-Можемо обчислити щільність -- отримаємо $f_\xi(x) = \dfrac{1}{\pi} \dfrac{1}{1+x^2}$. Зараз намалюємо графік та з'ясуємо зміст щільності.
+$F_\xi(x) = \mathbb{P}\{\xi \leq x\} = \mathbb{P}\{-\ctg \alpha \leq x\} = \mathbb{P}\{\ctg \alpha \geq x\} = \mathbb{P}\{\alpha \in [0,\arcctg(-x)]\} = \\ = \mathbb{P}\{\alpha \in [0,\pi-\arctg x]\} = \dfrac{\pi - \arcctg x}{\pi} = 1 - \dfrac{\arcctg x}{\pi}$.
+\end{example}
+\noindent
+У нас зараз виникає певна проблема. Імовірність потрапляння в будь-яку точку нулева. Спробуємо тоді оцінити ймовірність потрапляння в маленький окіл даної точки.
+
+\begin{definition}
+\textbf{Щільністю розподілу} неперервної випадкової величини $\xi$ називають границю
+\begin{align*}
+f_\xi(x) = \lim_{\Delta x \to 0} \dfrac{\mathbb{P}\{x \leq \xi < x + \Delta x\}}{\Delta x},
+\end{align*}
+якщо така границя існує.\\
+Із означення та властивостей функцій розподілу випливає, що $f_\xi(x) = F'_\xi(x)$.\\
+\textit{Увага! Дане означення не є строгим. Правильніше було би зробити таким чином.}
+\end{definition}
+
+\begin{definition}
+Випадкова величина $\xi$ називається \textbf{абсолютно неперервною}, якщо
+\begin{align*}
+\exists f_\xi \colon \mathbb{R} \to \mathbb{R}: F_\xi(x) = \int_{-\infty}^x f_\xi(t)\,dt,
+\end{align*}
+водночас функція $f_\xi$ називається \textbf{щільністю розподілу}.
+\end{definition}
+
+\begin{remark}
+$\xi$ -- абсолютно неперервна $\implies \xi$ -- неперервна.\\
+На жаль, зворотне твердження не є вірним. Саме тому перше означення про щільність розподілу було нестрогим. Просто тому що не для всіх неперервних випадкових величин можна підібрати щільність розподілу. Це не єдина причина, там воно буде видно нижче.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw [red] plot [smooth cycle] coordinates {(0,0) (1,1) (4,1) (4,0) (2,-1)} node at (3,0.5) {$\text{НВВ}$};
+\draw [blue] plot [smooth cycle] coordinates {(0.5,0.5) (1.8,0.7) (1.7, -0.5)} node[scale=0.8] at (1.2,0.2) {$\text{АНВВ}$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+\textit{TODO: додати приклад}
+\end{remark}
+
+\begin{proposition}[Властивості щільності розподілу]
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $f_\xi = F'_\xi$;
+\item $f_{\xi} \geq 0$;
+\item $\displaystyle\int_{-\infty}^{+\infty} f_\xi(x)\,dx = 1$ (умова нормування);
+\item $\displaystyle\mathbb{P}\{\xi \in \left<a,b\right>\} = \int_a^b f_\xi(x)\,dx$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Доведемо кожну властивість:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item \textit{випливає з означення абсолютно неперервної випадкової величини}.
+\item Оскільки $F_\xi$ то звідси випливає $f_{\xi} = F'_{\xi} \geq 0$.
+\item $\displaystyle\int_{-\infty}^{+\infty} f_\xi(x)\,dx = \lim_{t \to +\infty} \int_{-\infty}^t f_\xi(x)\,dx = \lim_{t \to +\infty} F_\xi(t) = 1$.
+\item $\displaystyle \mathbb{P}\{\xi \in \left<a,b\right>\} = F_\xi(b) - F_\xi(a) = \int_{-\infty}^b f_\xi(x)\,dx - \int_{-\infty}^a f_\xi(x)\,dx = \int_a^b f_\xi(x)\,dx$.
+\end{enumerate}
+Всі властивості доведені.
+\end{proof}
+
+\begin{example}
+Повернімось до прикладу вище. Ми вже знайшли, чому дорівнює функція розподілу $F_\xi(x) = 1 - \dfrac{\arcctg x}{\pi}$. Можемо обчислити щільність -- отримаємо $f_\xi(x) = \dfrac{1}{\pi} \dfrac{1}{1+x^2}$. Зараз намалюємо графік та з'ясуємо зміст щільності.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -932,118 +1026,13 @@ $F_\xi(x) = \mathbb{P}\{\xi \leq x\} = \mathbb{P}\{-\ctg \alpha \leq x\} = \math
 \subsection{Числові характеристики випадкових величин}
 \subsubsection{Математичне сподівання}
 \begin{definition}
-\textbf{Математичним сподіванням} випадкової величини $\xi$, що задана на ймовірнісному просторі $(\Omega,\mathcal{F},\mathbb{P})$, називають такий інтеграл Лебега:
+\textbf{Математичним сподіванням} (або ще кажуть \textbf{середнім значенням}) випадкової величини $\xi$ називають таку величину:
 \begin{align*}
-\mathbb{E} \xi = \int_\Omega \xi(\omega)\,d\mathbb{P}.
+\mathbb{E}\xi = \displaystyle\sum_{k=1}^\infty x_i p_i \text{ -- для дискретної величини} \\
+\mathbb{E}\xi = \int_{-\infty}^{+\infty} x f_\xi(x)\,dx \text{ -- для неперервної величини}
 \end{align*}
-Математичне сподівання існує, якщо інтеграл збіжний. При існуванні математичного сподівання випадкову величину $\xi$ ще називають \textbf{інтегровною}.
+Математичне сподівання існує, якщо відбувається абсолютна збіжність (ряда або інтеграла залежно від ситуації).
 \end{definition}
-
-\begin{definition}
-Нехай $c \in \mathbb{R}$.\\
-Випадкова величина $\xi = c$ \textbf{м.н.} (\textbf{майже напевно}, англійською \textbf{almost surely}), якщо
-\begin{align*}
-\mathbb{P}\{\xi = c\} = 1
-\end{align*}
-\end{definition}
-
-\begin{proposition}
-$\xi = c$ м.н. $\iff \xi = c \pmod {\mathbb{P}}$.
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $\xi = c$ м.н. Тобто за означенням, $\mathbb{P}\{\xi = c\} = 1$. Розглянемо множину $N = \{\omega : \xi(\omega) \neq c \} \subset \Omega$. Тоді $\mathbb{P}(N) = 0$, при цьому $\forall \omega \in \Omega \setminus N: \xi = c$. Таким чином, $\xi = c \pmod {\mathbb{P}}$.
-\bigskip \\
-\leftproof Дано: $\xi = c \pmod {\mathbb{P}}$. Тобто існує $N \subset \Omega$, для якої $\mathbb{P}(N) = 0$, а також $\xi(\omega) = c$ для всіх $\omega \in \Omega \setminus N$. Значить, $\mathbb{P}\{ \xi = c\} = \mathbb{P}(\Omega \setminus N) = \mathbb{P}(\Omega) - \mathbb{P}(N) = 1$. Таким чином, $\xi = c$ м.н.
-\end{proof}
-
-\begin{proposition}[Властивості математичного сподівання]
-Припустимо, що $\xi_1,\xi_2$ -- інтегровні випадкові величини. Справедливе наступне:
-\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $\mathbb{E}(\alpha \xi_1 + \beta \xi_2) = \alpha \mathbb{E}\xi_1 + \beta \mathbb{E}\xi_2$;
-\item $\mathbb{E} |\xi| = 0 \iff \xi = 0 \text{ м.н.}$;
-\item $\xi \geq 0 \text{ м.н.} \implies \mathbb{E}\xi \geq 0$;
-\item $\xi_1 \leq \xi_2 \text{ м.н.} \implies \mathbb{E}\xi_1 \leq \mathbb{E}\xi_2$;
-\item $|\mathbb{E}\xi| \leq \mathbb{E}|\xi|$;
-\item $\mathbb{E} c = c$, під математичним сподівання мається на увазі стала випадкова величина $\xi \equiv c$;
-\item $\mathbb{E}\mathbbm{1}_A = \mathbb{P}(A)$;
-\item $\mathbb{E}(\xi_1 \cdot \xi_2) = \mathbb{E} \xi_1 \cdot \mathbb{E}\xi_2$ за умовою, що $\xi_1,\xi_2$ -- незалежні.
-\end{enumerate}
-\textit{Всі ці властивості випливають з інтеграла Лебега.}
-\end{proposition}
-
-\begin{definition}
-Випадкові величини $\xi_1,\xi_2$, що задані на одному ймовірнісному просторами, називаються \textbf{незалежними}, якщо
-\begin{align*}
-\forall x,y: \{\xi_1 \leq x\} \text{ та } \{\xi_2 \leq y \} \text{ -- незалежні події.}
-\end{align*}
-Внаслідок чого можемо отримати $\mathbb{P}\{\xi_1 \leq x, \xi_2 \leq y\} = F_{\xi_1}(x) F_{\xi_2}(y)$.
-\end{definition}
-
-\begin{proof}
-Останню властивість я все ж таки доведу.
-\bigskip \\
-I. \textit{$\xi_1 = \mathbbm{1}_A$ та $\xi_2 = \mathbbm{1}_B$, причому $A,B \in \mathcal{F}$.}\\
-$\mathbb{E}(\xi_1 \xi_2) = \mathbb{E}(\mathbbm{1}_{A \cap B}) = \mathbb{P}(A \cap B) = \mathbb{P}(A) \mathbb{P}(B) = \mathbb{E} \mathbbm{1}_A \cdot \mathbb{E} \mathbbm{1}_B = \mathbb{E}\xi_1 \cdot \mathbb{E}\xi_2$.\\
-Події $A,B$ у нас справді незалежні. Події $\{\xi_1 \leq 0\} = \Omega \setminus A$ та $\{\xi_2 \leq 0\} = \Omega \setminus B$ -- незалежні за означенням, тому $A,B$ -- також.
-\bigskip \\
-II. \textit{$\xi_1,\xi_2$ -- прості функції.}\\
-Тобто $\xi_1 = \displaystyle\sum_i a_i \mathbbm{1}_{A_i}$ та $\xi_1 = \displaystyle\sum_j b_j \mathbbm{1}_{B_j}$. Звідси випливає, що $\xi_1\xi_2 = \displaystyle\sum_{i,j} a_i b_j \mathbbm{1}_{A_i \cap B_j}$. Використовуючи І та властивість лінійності, отримаємо:\\
-$\mathbb{E}(\xi_1 \xi_2) = \displaystyle\mathbb{E}\left( \sum_{i,j} a_i b_j \mathbbm{1}_{A_i \cap B_j}\right) = \sum_{i,j} a_i b_j \mathbb{E}\mathbbm{1}_{A_i \cap B_j} = \sum_{i,j} a_i b_j \mathbb{E} \mathbbm{1}_{A_i} \mathbb{E} \mathbbm{1}_{B_j} = \left( \sum_i a_i \mathbb{E} \mathbbm{1}_{A_i}\right) \left( \sum_j b_j \mathbb{E} \mathbbm{1}_{B_j}\right) = \mathbb{E}\xi_1 \mathbb{E}\xi_2$.\\
-Події $A_i, B_j$ справді будуть незалежними. Зауважимо, що $\{xi_1 = a_i\} = A_i$ та $\{\xi_2 = b_j\} = B_j$ -- незалежні, бо $\{a_i\},\{b_j\}$ -- борельові. 
-\bigskip \\
-III. \textit{$\xi_1,\xi_2$ -- невід'ємні функції.}\\
-Значить, існує послідовності $\{\xi_1^n, n \geq 1\},\{\xi_2^n, n \geq 1\}$ простих невід'ємних монотонних функцій, де $\xi_1^n \to \xi_1$ та $\xi_2^n \to \xi_2$. Значить, маємо $\mathbb{E}(\xi_1^n \xi_2^n) = \mathbb{E}\xi_1^n \mathbb{E}\xi_2^n$. За інтегруванням невід'ємної послідовності монотонних, при $n \to \infty$ матимемо $\mathbb{E}(\xi_1 \xi_2) = \mathbb{E}\xi_1 \mathbb{E}\xi_2$.\\
-Залишилося довести, що $\xi_1^n,\xi_2^n$ -- дійсно незалежні.
-\bigskip \\
-IV. \textit{$\xi_1,\xi_2$ -- довільні функції.}\\
-Маємо $\xi_1 = \xi_1^+ - \xi_1^-$ та $\xi_2 = \xi_2^+ - \xi_2^-$, причому всі $\xi_1^+,\xi_1^-,\xi_2^+,\xi_2^-$ -- невід'ємні. Значить,\\
-$\mathbb{E}(\xi_1 \xi_2) = \mathbb{E}(\xi_1^+ \xi_2^+ - \xi_1^- \xi_2^+ - \xi_1^+ \xi_2^- + \xi_1^- \xi_2^-) = \mathbb{E}\xi_1^+ \mathbb{E}\xi_2^+ - \mathbb{E}\xi_1^- \mathbb{E}\xi_2^+ - \mathbb{E}\xi_1^+ \mathbb{E}\xi_2^- + \mathbb{E}\xi_1^- \mathbb{E}\xi_2^- = (\mathbb{E}\xi_1^+ - \mathbb{E}\xi_1^-)(\mathbb{E}\xi_2^+ - \mathbb{E}\xi_2^-) = \mathbb{E}\xi_1 \mathbb{E}\xi_2$.
-\bigskip \\
-(TODO: з'ясувати за незалежність).
-\end{proof}
-
-\begin{proposition}
-Нехай $\xi_1,\xi_2$ -- випадкові величини на одному ймовірнісному просторі.\\
-$\xi_1,\xi_2$ -- незалежні $\iff \forall A,B \in \mathcal{B}(\mathbb{R}): \mathbb{P}(\{\xi_1 \in A\} \cap \{\xi_2 \in B\} ) = \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B\}$.
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $\xi_1,\xi_2$ -- незалежні, тобто $\mathbb{P}( \{\xi_1 \leq x\} \cap \{\xi_2 \leq y\} ) = \mathbb{P}\{\xi_1 \leq x\} \mathbb{P}\{\xi_2 \leq y\}$.\\
-Позначимо $\mathcal{P} = \{(-\infty,t] \mid t \in \mathbb{R}\}$, що формує так звану $\pi$-систему. Зафіксуємо множину $A = (\infty,x] \in \mathcal{P}$ та розглянемо клас $\mathcal{L} = \{B \in \mathcal{B}(\mathbb{R}) \mid \mathbb{P}\{\{\xi_1 \in A\}\} \cap \{\xi_2 \in B\}\} \} = \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B\}$. Доведемо, що $\mathcal{L}$ утворює $\lambda$-систему.\\
-$\Omega \in \mathcal{L}$, просто тому що $\mathbb{P}\{ \{\xi_1 \in A\} \cap \{ \xi_2 \in \Omega\} \} = \mathbb{P}\{ \xi_1 \in A\} = \mathbb{P}\{ \xi_1 \in A\} \mathbb{P} \{\xi_2 \in \Omega\}$.\\
-Нехай $B \in \mathcal{L}$, тоді доведемо, що $B^c \in \mathcal{L}$. \\
-$\mathbb{P}\{\{\xi_1 \in A\} \cap \{\xi_2 \in B^c\} \} = \mathbb{P}\{\xi_1 \in A\} - \mathbb{P}\{ \{ \xi_1 \in A\} \cap \{\xi_2 \in B\} \} = \mathbb{P}\{\xi_1 \in A\} - \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B\} = \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B^c\}$.\\
-Нехай $B_n \in \mathcal{L}$ -- неперетинний набір. Доведемо, що $\displaystyle\bigsqcup_{n=1}^\infty B_n \in \mathcal{L}$.\\
-$\displaystyle\mathbb{P}\left\{ \{\xi_1 \in A\} \cap \left\{ \xi_2 \in \bigsqcup_{n=1}^\infty B_n \right\} \right\} = \sum_{n=1}^\infty \mathbb{P}\{ \{\xi_1 \in A\} \cap \{\xi_2 \in B_n\} \} = \sum_{n=1}^\infty \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B_n\} = \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\left\{ \bigsqcup_{n=1}^\infty B_n \right\}$.\\
-Отже, $\mathcal{L}$ -- справді $\lambda$-система. Причому $\mathcal{L} \supset \mathcal{P}$ за умовою незалежності $\xi_1,\xi_2$. Отже, за теоремою $\pi$-$\lambda$, отримаємо $\mathcal{L} \supset \sigma a(\mathcal{P}) = \sigma a(\mathcal{P}_1) = \mathcal{B}(\mathbb{R})$.\\
-Отже, $\forall B \in \mathcal{B}(\mathbb{R}): \mathbb{P}\{ \{ \xi_1 \leq x\} \cap \{\xi_2 \in B\} \} = \mathbb{P}\{\xi_1 \leq x\} \mathbb{P}\{\xi_2 \in B\}$.\\
-Тепер нехай $B \in \mathcal{B}(\mathbb{R})$. Розглянемо клас $\mathcal{L}' = \{A \in \mathcal{B}(\mathbb{R}) \mid \mathbb{P}\{\{\xi_1 \in A\}\} \cap \{\xi_2 \in B\}\} \} = \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B\}\}$. Повністю аналогічно доводиться, що $\mathcal{L}'$ -- $\lambda$-система, при цьому $\mathcal{L}' \supset \mathcal{P}$. Отже, за теоремою $\pi$-$\lambda$, отримаємо $\mathcal{L}' \supset \sigma a(\mathcal{P}) = \sigma a(\mathcal{P}_1) = \mathcal{B}(\mathbb{R})$.\\
-Отже, $\forall A \in \mathcal{B}(\mathbb{R}), \forall B \in \mathcal{B}: \mathbb{P}(\{\xi_1 \in A\} \cap \{\xi_2 \in B\} ) = \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B\}$.
-\bigskip \\
-\leftproof Дано: $\forall A,B \in \mathcal{B}(\mathbb{R}): \mathbb{P}(\{\xi_1 \in A\} \cap \{\xi_2 \in B\} ) = \mathbb{P}\{\xi_1 \in A\} \mathbb{P}\{\xi_2 \in B\}$. Миттєво ми знаємо, що $(-\infty,x],\ (-\infty,y] \in \mathcal{B}(\mathbb{R})$ для всіх $x,y \in \mathbb{R}$. Звідси $\mathbb{P}\{ \{\xi_1 \leq x\} \cap \{\xi_2 \leq y\} \} = \mathbb{P}\{\xi_1 \leq x\} \cap \mathbb{P}\{\xi_2 \leq y\}$. Отже, $\xi_1,\xi_2$ -- незалежні.
-\end{proof}
-
-\begin{theorem}
-Нехай $\xi$ -- випадкова величина на $(\Omega,\mathcal{F},\mathbb{P})$ та функція $g \colon \mathbb{R} \to \mathbb{R}$ -- борельова. Тоді $\displaystyle\mathbb{E} g(\xi) = \int_{\mathbb{R}} g(x)\,dP_\xi$.
-\end{theorem}
-
-\begin{proof}
-Насправді, рівність $\displaystyle\int_{\mathbb{R}}g(x)\,dP_\xi = \int_{\Omega} g(\xi(\omega))\,d\mathbb{P}$ випливає з теореми про заміну змінної інтеграла Лебега.
-\end{proof}
-
-\begin{corollary}
-Якщо $\xi$ -- дискретна випадкова величина та $g \colon \mathbb{R} \to \mathbb{R}$ -- борельова, то $\mathbb{E} g(\xi) = \displaystyle\sum_i g(x_i) p_i$.
-\end{corollary}
-
-\begin{proof}
-$\mathbb{E}g(\xi) = \displaystyle\int_{\mathbb{R}} g(x)\,dP_{\xi} = \int_{\mathbb{R} \setminus S} g(x)\,dP_{\xi} + \int_S g(x)\,dP_{\xi} = \int_S g(x)\,dP_\xi = \sum_i \int_{\{x_i\}} g(x_i)\,dP_{\xi} = \\
-= \sum_i g(x_i) P_{\xi}(\{x_i\}) = \sum_i g(x_i) p_i$.
-\end{proof}
-
-\begin{remark}
-Зокрема звідси отримаємо $\mathbb{E}\xi = \displaystyle\sum_i x_i p_i$ -- математичне сподівання дискретної випадкової величини $\xi$.
-\end{remark}
 
 \begin{example}
 Щоб кинути два кубики d6, нам треба заплатити $100$ грн. Якщо сума очок складає $7$ або $11$, то ми виграємо $400$ грн. Знайти можливий прибуток за одну гру.\\
@@ -1070,21 +1059,43 @@ $\mathbb{E}\eta = 0 \cdot \dfrac{7}{9} + 400 \cdot \dfrac{2}{9} = 88 \dfrac{8}{9
 Тобто це означає, що в будь-якому випадку ми будемо йти в мінус. Платимо $100$ грн, а очікується майже $89$ грн.
 \end{example}
 
-\begin{corollary}
-Якщо $\xi$ -- абсолютно неперервна випадкова величина та $g \colon \mathbb{R} \to \mathbb{R}$ -- борельова, то $\mathbb{E} g(\xi) = \displaystyle\int_{\mathbb{R}} g(x)f_{\xi}(x)\,d\lambda_1(x)$.
-\end{corollary}
-
-\begin{proof}
-Нам треба довести рівність інтегралів $\displaystyle\int_{\mathbb{R}}g(x)\,dP_\xi = \int_{\mathbb{R}} g(x)f_{\xi}(x)\,d\lambda_1(x)$. Але, насправді, ця рівність працює, оскільки в нас $P_\xi \ll \lambda_1$ та функція $f_\xi = \dfrac{dP_{\xi}}{d\lambda_1}$.
-\end{proof}
-
-\begin{remark}
-Зокрема звідси отримаємо $\mathbb{E}\xi = \displaystyle\int_{\mathbb{R}} x f_{\xi}(x)\,dx$ -- математичне сподівання абсолютно неперервної випадкової величини $\xi$.
-\end{remark}
-
 \begin{example}
 У нас вже був приклад вище, де знайдена була щільність розподілу $f_\xi(x) = \dfrac{1}{\pi} \dfrac{1}{1+x^2}$. Тут математичне сподівання не знайти, оскільки $\mathbb{E}\xi = \displaystyle\int_{-\infty}^{+\infty} x f_\xi(x)\,dx$ -- розбіжний інтеграл.
 \end{example}
+
+\begin{definition}
+Випадкові величини $\xi_1,\xi_2$, що задані на одному ймовірнісному просторами, називаються \textbf{незалежними}, якщо
+\begin{align*}
+\forall x,y: \{\xi_1 \leq x\} \text{ та } \{\xi_2 \leq y \} \text{ -- незалежні події.}
+\end{align*}
+Внаслідок чого можемо отримати $\mathbb{P}\{\xi_1 \leq x, \xi_2 \leq y\} = F_{\xi_1}(x) F_{\xi_2}(y)$.
+\end{definition}
+
+\begin{proposition}[Властивості математичних сподівань]
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\mathbb{E}c = c$, під математичним сподіванням мається на увазі стала випадкова величина $\xi \equiv c$;
+\item $\mathbb{E}(\lambda \xi) = \lambda \mathbb{E} \xi,\ \lambda \in \mathbb{R}$;
+\item $\mathbb{E}(\xi + \eta) = \mathbb{E}\xi + \mathbb{E}\eta$;
+\item $\mathbb{E}(\xi_1 \xi_2) = \mathbb{E} \xi_1 \mathbb{E} \xi_2$ за умовою, що $\xi_1,\xi_2$ -- незалежні.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Будемо доводити лише в випадку дискретної випадкової величини.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Випадкова величина $\xi \equiv c$, що дискретна, означає, що $\mathbb{P}\{\xi = c\} = 1$. Внаслідок чого, за означенням математичного сподівання, $\mathbb{E} c = c \cdot 1 = c$.
+\item $\mathbb{E}(\lambda \xi) = \displaystyle\sum_{k=1}^\infty \lambda   x_i p_i = \lambda\sum_{k=1}^\infty x_i p_i = \lambda \mathbb{E} \xi$.
+\item $\displaystyle\mathbb{E}(\xi + \eta) = \sum_{i,j}(x_i+y_j) p_{ij}$, де під ймовірністю $p_{ij} = \mathbb{P}\{\xi + \eta = x_i + y_j\}$.\\
+Звідси випливає, що $\mathbb{E}(\xi + \eta) = \displaystyle x_i \sum_i \sum_j p_{ij} + y_i \sum_i \sum_j p_{ij}$.\\
+Окремо розглянемо $\displaystyle\sum_{j} p_{ij} = \sum_{j} \mathbb{P}\{\xi + \eta = x_i + y_j\} \overset{\text{стверджую}}{=} \mathbb{P}\{\xi = x_i\} = p_i$. По-перше, зауважимо, що події $\{\xi + \eta = x_i + y_j\}, \forall j$ -- несумісні уже (це ясно). По-друге, нехай $\xi(\omega) + \eta(\omega) = x_i + y_{j_0}$, тоді обов'язково з цього випливає $\xi(\omega) = x_i$. Бо якби $\xi(\omega) \neq x_i$, то було би $\eta(\omega) \neq y_j, \forall j$, що неможливо. Отже, $\displaystyle\bigsqcup_j \{\xi + \eta = x_i + y_j\} = \{\xi = x_i\}$, а далі $\sigma$-адитивність ймовірності.\\
+Аналогічно доведемо $\displaystyle\sum_{i} p_{ij} = \sum_{i} \mathbb{P}\{\xi + \eta = x_i + y_j\} = \mathbb{P}\{\eta = y_j\} = p_j$.\\
+$\mathbb{E}(\xi + \eta) = \displaystyle\sum_{i} x_i p_i + \sum_{j} y_j p_j = \mathbb{E} \xi + \mathbb{E} \eta$.
+\item $\mathbb{E}(\xi_1 \xi_2) = \displaystyle \sum_{i,j} (x_i y_j) \mathbb{P}\{\xi_1 \xi_2 = x_i y_j\} = \sum_{i,j} (x_i y_j) \mathbb{P} \{ \{\xi_1 = x_i\} \cap \{ \xi_2 = y_j\} \} \overset{\text{незалежність}}{=} \\
+= \sum_{i,j} x_i p_i y_j p_j = \left( \sum_i x_i p_i \right) \left( \sum_j y_j p_j \right) = \mathbb{E}\xi_1 \mathbb{E}\xi_2$.
+\end{enumerate}
+Для неперервних випадкових величин доведення 3),4) буде пізніше.
+\end{proof}
 
 \subsubsection{Дисперсія, середньоквадратичне відхилення}
 Задана випадкова величина $\xi$. Суть дисперсії полягає в тому, щоб охарактеризувати степінь розкиду значень $\xi$ навколо середнього $\mathbb{E}\xi$.
@@ -1101,7 +1112,7 @@ $\mathbb{E}\eta = 0 \cdot \dfrac{7}{9} + 400 \cdot \dfrac{2}{9} = 88 \dfrac{8}{9
 \noindent
 Розпишемо дисперсію більш детально:\\
 $\mathbb{D}\xi = \mathbb{E}(\xi^2) - 2 \xi \mathbb{E}\xi + (\mathbb{E}\xi)^2) = \mathbb{E} \xi^2 - \mathbb{E}(2 \xi \mathbb{E}\xi) + \mathbb{E}(\mathbb{E}\xi)^2 = \mathbb{E}\xi^2 - 2 (\mathbb{E}\xi)^2 + (\mathbb{E}\xi)^2$.\\
-Отже, дисперсію випадкової величини $\xi$ можна обчислити за такою формулою:
+Отже, дисперсія випадкової величини $\xi$ можна обчислити за такою формулою:
 \begin{align*}
 \mathbb{D}\xi = \mathbb{E}(\xi^2) - (\mathbb{E}\xi)^2
 \end{align*}
@@ -1110,11 +1121,11 @@ $\mathbb{D}\xi = \mathbb{E}(\xi^2) - 2 \xi \mathbb{E}\xi + (\mathbb{E}\xi)^2) = 
 Справедливе наступне:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 \item $\mathbb{D}\xi \geq 0$;
-\item $\mathbb{D}\xi = 0 \iff \xi = c$ м.н.;
+\item $\mathbb{D}\xi = 0 \iff \xi \equiv c$;
 \item $\mathbb{D}(c \xi) = c^2 \mathbb{D}\xi$;
 \item $\mathbb{D}(\xi_1 + \xi_2) = \mathbb{D}\xi_1 + \mathbb{D}\xi_2$ за умовою, що $\xi_1,\xi_2$ -- незалежні.
 \end{enumerate}
-\textit{1),2) випливає з означення математичного сподівання та решта 3),4),5) випливають з другої формули.}
+\textit{1) випливає з означення математичного сподівання та решта 2),3),4),5) випливають з другої формули.}
 \end{proposition}
 
 \begin{definition}
@@ -1175,23 +1186,9 @@ G_\xi(z) = \mathbb{E}(z^\xi)
 \item \textit{Зрозуміло}.
 \item Дана властивість означає, що за допомогою генератриси ми можемо повністю відновити ряд розподілу. Тобто кожному значенню випадкової величини можемо відновити ймовірність. Доведемо, що $p_k = \dfrac{G_\xi^{(k)}(0)}{k!}$. Для цього ми просто диференціюємо (скільки треба), маємо права в силу того, що це степеневий ряд. А далі просто підставляємо $z = 0$.
 \item $G_{\xi + \eta}(z) = \mathbb{E}(z^{\xi + \eta}) = \mathbb{E}(z^{\xi}z^{\eta}) = \mathbb{E}(z^\xi) \mathbb{E}(z^\eta) = G_\xi(z) G_\eta(z)$.\\
-Єдине треба переконатися, що коли $\xi,\eta$ незалежні, то $z^\xi,z^\eta$ -- незалежні при $|z| \leq 1$. Буде нижче.
+Єдине треба переконатися, що коли $\xi,\eta$ незалежні, то звідси $z^\xi, z^\eta$ теж незалежні. Це вже поясню, коли буду вводити строго через теорію міри.
 \end{enumerate}
-Всі властивості довели.
-\end{proof}
-
-\begin{lemma}
-Нехай $\xi,\eta \in \{0,1,2,\dots\}$ та припустимо, що $\xi, \eta$ -- незалежні. Тоді $z^\xi, z^\eta$ -- незалежні при $|z| \leq 1$.
-\end{lemma}
-
-\begin{proof}
-При $0 < z < 1$ маємо $\{z^\xi \leq t\} = \emptyset$ при $t \leq 0$ або $\{z^\xi \leq t\} = \{\xi \geq \log_z t\}$ при $t > 0$ (при цьому $[\log_z t, + \infty) \in \mathcal{B}(\mathbb{R})$).\\
-При $-1 < z < 0$ маємо багато варіантів:\\
-$\{z^\xi \leq t\} = \Omega$ при $t \geq 1$ або $\{z^\xi \leq t\} = \emptyset$ при $t \leq -1$.\\
-$\{z^\xi \leq t\} = \{ \xi \in \mathbb{N} \setminus \{1,2,\dots,k\}\}$ при $0 < t < 1$;\\
-$\{z^\xi \leq t\} = \{ \xi \in (2\mathbb{N}-1) \setminus \{1,2,\dots,k\}\}$ при $-1 < t < 0$.\\
-При $z = 1$ або $z = -1$ цілком зрозуміло, що там буде.\\
-Отже, $\{z^\xi \leq x\} = \{\xi \in A\}$ при $A \in \mathcal{B}(\mathbb{R})$ в будь-якому випадку. Аналогічно $\{z^\eta \leq y\} = \{\eta \in B\}$ при $B \in \mathcal{B}(\mathbb{R})$ в будь-якому випадку. Власне, звідси й випливає незалежність $z^\xi,z^\eta$.
+Всі властивості (майже чесно) довели.
 \end{proof}
 
 \begin{remark}
@@ -1546,33 +1543,6 @@ $\mathbb{D}\xi = \mathbb{D}(a +\sigma \xi_0) = \sigma^2 \mathbb{D}\xi_0 = \sigma
 \xi_i, i = \overline{1,n} \text{ -- випадкова величина.}
 \end{align*}
 \end{definition}
-\noindent
-Тепер перепишемо еквівалентним чином означення, уже без прив'язки до координат. Це нам дасть підстави узагальнити означення чогось випадкового (величина, вектор або будь-який елемент).
-\begin{definition}
-Задано $(\Omega,\mathcal{F})$ -- вимірний простір, також розглянемо $(\mathbb{R},\mathcal{B}(\mathbb{R}^d))$.\\
-Функція $\vec{\xi} \colon \Omega \to \mathbb{R}^d$ називається \textbf{випадковим вектором}, якщо
-\begin{align*}
-\xi \text{ -- $(\mathcal{F},\mathcal{B}(\mathbb{R}^d))$-вимірна функція.}
-\end{align*}
-\end{definition}
-
-\begin{proposition}
-Вищезгадані два означення справді еквівалентні.
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: перше означення. Хочемо довести, що $\vec{\xi}$ є $(\mathcal{F},\mathcal{B}(\mathbb{R}^d)$-вимірною. В курсі теорії міри ми вже якось доводили, що якщо всі $\xi_i$ є $\mathcal{F}$-вимірною, то тоді $\vec{\xi}$ є $(\mathcal{F},\mathcal{B}(\mathbb{R}^d)$-вимірною (коли мова йшла про композицію відображень).
-\bigskip \\
-\leftproof Дано: друге означення. Хочемо довести, що кожна $\xi_i$ -- випадкова величина. Тобто хочемо, щоб $\xi_i$ була $\mathcal{F}$-вимірною. Ми розглянемо функцію $\pi_i$ -- проєкція, яка працює як $\pi_i(\vec{\xi}) = \xi_i$. Зауважимо, що це неперервне відображення, а тому борельова. Тому $\xi_i$ буде вимірною як композиція.
-\end{proof}
-
-\begin{definition}
-Задано $(\Omega,\mathcal{F})$ -- вимірний простір, також розглянемо вимірний простір $(U, \mathcal{U})$.\\
-Функція $\xi \colon \Omega \to U$ називається \textbf{випадковим елементом}, якщо
-\begin{align*}
-\xi \text{ -- $(\mathcal{F},\mathcal{U})$-вимірна функція.}
-\end{align*}
-\end{definition}
 
 \begin{definition}
 \textbf{(Сумісною) функцією розподілу} випадкового вектора $\vec{\xi}$ називають таку функцію:
@@ -1582,7 +1552,7 @@ F_{\vec{\xi}}(\vec{x}) = \mathbb{P}\{\xi_1 \leq x_1,\ \dots \xi_n \leq x_n\},\ \
 Часто ми будемо розглядати випадкові вектори в двовимірному (інколи тривірному) просторах. 
 \end{definition}
 
-\begin{proposition}[Властивості (сумісної) функції розподілу]
+\begin{proposition}[Властивості функції розподілу]
 Справедливе наступне:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 \item $F_{\vec{\xi}} \in [0,1]$;
@@ -1613,173 +1583,7 @@ $F_{\vec{\xi}}(b,d) = F_{\vec{\xi}}(a,c) + \mathbb{P}\{a < \xi_1 \leq b,\ \xi_2 
 Функції розподілу $F_{\xi_k}(x_k)$, які були отримані із сумісної функції розподілу $F_{\vec{\xi}}(\vec{x})$ за властивістю 5), називаються \textbf{маргинальними функціями розподілу}.
 \end{definition}
 
-\begin{definition}
-\textbf{Розподілом} випадкового вектора $\vec{\xi}$ називають таку міру:
-\begin{align*}
-P_{\vec{\xi}}(B) = \mathbb{P}(\vec{\xi}^{-1}(B)),\ B \in \mathcal{B}(\mathbb{R}^d),
-\end{align*}
-така міра визначена на просторі $(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$.
-\end{definition}
-
 \subsection{Основні види випадкових векторів}
-\subsubsection{Дискретний випадковий вектор}
-Розглянемо $P_{\vec{\xi}}$ -- дискретний ймовірнісний розподіл, тобто існує не більше ніж зліченна підмножина $S = \{\vec{x}_1,\vec{x}_2,\dots\} \subset \mathbb{R}^d$, для якої $P_{\vec{\xi}}(X \setminus S) = 0$, а всі решта $P_{\vec{\xi}}(\{\vec{x}_i\}) = P_{\vec{\xi}}(\{(x_{i_1},\dots,x_{i_d})\}) = p_{i_1,\dots,i_d}$ визначені. Зауважимо, що з іншого боку $p_i = \mathbb{P}\{\xi = x_i\}$. Будемо вимагати, щоб події $\{\xi = x_i\}$ утворювали повну групу подій, тобто $\displaystyle\sum_{k=1}^\infty p_i = 1$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{дискретною}.\\
-Імовірнісний розподіл часто зручно записувати в \textbf{ряд розподілу}, що виглядає таким чином:
-\begin{figure}[H]
-\centering
-\begin{tabular}{c|c|c|c|c|c}
-$\xi$ & $x_1$ & $x_2$ & $\dots$ & $x_n$ & $\dots$ \\
-\hline
-$\mathbb{P}$ & $p_1$ & $p_2$ & $\dots$ & $p_n$ & $\dots$
-\end{tabular}
-\end{figure}
-\noindent
-Подивимося, як виглядає функція розподілу в такому разі:\\
-$F_\xi(x) = \begin{cases}
-0, & x < x_1 \\
-p_1, & x_1 \leq x < x_2 \\
-p_1 + p_2, & x_2 \leq x < x_3 \\
-\vdots \\
-p_1 + p_2 + \dots = 1, & x \geq x_n
-\end{cases}$.\\
-Графік даної функції розподілу буде просто сходинкова функція.
-
-\begin{example}
-Зокрема в нас був експеримент підкидання монети два рази. Встановлювали випадкову величину $\xi$ -- кількість решок. Це -- приклад дискретної випадкової величини, оскільки приймає три значення. Кожна з яких має власну ймовірність. Наведу ряд розподілу:
-\begin{figure}[H]
-\centering
-\begin{tabular}{c|c|c|c}
-$\xi$ & $0$ & $1$ & $2$ \\
-\hline
-$\mathbb{P}$ & $\dfrac{1}{4}$ & $\dfrac{1}{2}$ & $\dfrac{1}{4}$
-\end{tabular}
-\end{figure}
-\noindent
-Якщо просумувати всі ймовірності, то отримаємо одиницю -- тобто це справді ряд розподілу. Як вже було раніше зазначено, ми отримаємо сходинкову функцію розподілу. Не лінь ще раз намалювати.
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\draw[->] (-2,0)--(4,0) node[anchor = north] {$x$};
-\draw[->] (0,-0.25)--(0,1.5) node[anchor = east] {$F_\xi(x)$};
-\draw[->, red] (-2,0)--(0,0);
-\draw[->, red] (0,{1/4})--(1,{1/4});
-\draw[->, red] (1,{3/4})--(2,{3/4});
-\draw[->, red] (2,1)--(4,1);
-\draw (-1pt,1)--(1pt,1) node[scale = 0.6, anchor = east] {$1$};
-\draw (-1pt,0.75)--(1pt,0.75) node[scale = 0.6, anchor = east] {$\frac{3}{4}$};
-\draw (-1pt,0.25)--(1pt,0.25) node[scale = 0.6, anchor = east] {$\frac{1}{4}$};
-\node[scale = 0.6] at (-0.1,-0.1) {$0$};
-\draw (1,-1pt)--(1,1pt) node[scale = 0.6, anchor = north] {$1$};
-\draw (2,-1pt)--(2,1pt) node[scale = 0.6, anchor = north] {$2$};
-\end{tikzpicture}
-\end{figure}
-\end{example}
-
-\subsubsection{Неперервна випадкова величина}
-Розглянемо $P_{\xi}$ -- неперервний ймовірнісний розподіл, тобто $P_\xi(\{x\}) = 0$ для всіх $x \in \mathbb{R}$. Відповідно, звідси отримаємо, що $\mathbb{P}\{\xi = \{x\}\} = 0$.
-
-\begin{proposition}
-$F_\xi \in C(\mathbb{R}) \iff \forall x \in \mathbb{R}: \mathbb{P}\{\xi = x\} = 0$.
-\end{proposition}
-
-\begin{proof}
-\rightproof Дано: $F_\xi \in C(\mathbb{R})$. Тоді звідси $\mathbb{P}\{\xi = x\} = \mathbb{P}\{\xi \leq x\} - \mathbb{P}\{\xi < x\} = F_\xi(x) - F_\xi(x-0) = 0$.
-\bigskip \\
-\leftproof Дано: $\forall x \in \mathbb{R}: \mathbb{P}\{\xi = x\} = 0$. Іншими словами, $\mathbb{P}\{\xi = x\} = \mathbb{P}\{\xi \leq x\} - \mathbb{P}\{\xi < x\} = 0$, або ще іншими словами, $F_\xi(x) - F_\xi(x-0) = 0$. У силу неперервності справа отримаємо, що $F_\xi(x+0) = F_\xi(x-0)$, а тому функція неперервна в точці $x$, зокрема $F_\xi \in C(\mathbb{R})$.
-\end{proof}
-\noindent
-Ми закінчили на тому, що $\mathbb{P}\{ \xi = \{x\} \} = 0$. Тому, як ми вже знаємо, функція розподілу $F_\xi$ буде неперервною на $\mathbb{R}$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{неперервною}.
-
-\subsubsection{Абсолютно неперервна випадкова величина}
-Нам неперервної випадкової величини буде недостатньо. Оскільки в кожній одноточковій множині ймовірність нуль, то тоді це виконується й для не більш ніж зліченної множини.\\
-Проте існує множина Кантора. Це борельова множина лебегової міри нуль, яка при цьому більш, ніж зліченна. Тобто ми, наспраді, хочемо захопити більш широкий клас множин, що приведе до звуженню класів неперервних випадкових величин.\\
-Розглянемо $P_{\xi}$ -- абсолютно неперервний ймовірнісний розподіл відносно $\lambda_1$ (міри Лебега). Тобто тепер $\forall C$ -- борельової множини лебегової міри нуль: $P_{\xi}(C) = 0$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{абсолютно неперервною}. \\
-Ми маємо $P_\xi \ll \lambda_1$. Згідно з теореми Радона-Нікодими, існує функція $f_\xi \colon \mathbb{R} \to \mathbb{R}$, для якої виконується наступне: $P_\xi(B) = \displaystyle\int_B f_\xi(t)\,d\lambda_1(t),\ B \in \mathcal{B}(\mathbb{R})$.
-
-\begin{definition}
-Така функція $f_\xi$ називається \textbf{щільністю розподілу} абсолютно неперервної випадкової величини $\xi$.\\
-Така функція $f_{\xi}$ визначена з точністю до еквівалентності $\pmod \lambda$. Такі функції будемо ототожнювати.
-\end{definition}
-
-\begin{proposition}[Властивості щільності розподілу]
-Справедливе наступне:
-\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
-\item $f_\xi = F'_\xi \pmod {\lambda_1}$;
-\item $f_{\xi} \geq 0 \pmod {\lambda_1}$;
-\item $\displaystyle\int_{-\infty}^{+\infty} f_\xi(x)\,dx = 1$ (умова нормування);
-\item $\displaystyle\mathbb{P}\{\xi \in \left<a,b\right>\} = \int_a^b f_\xi(x)\,dx$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-Доведемо кожну властивість:
-\begin{enumerate}[wide=0pt,label={\arabic*)}]
-\item Маємо $P_\xi(B) = \displaystyle\int_B f_\xi(t)\,d\lambda_1(t)$. Якщо покласти $B = (-\infty,x] \in \mathcal{B}(\mathbb{R})$, то ми отримаємо $F_\xi(x) = \mathbb{P}\{\xi \leq x\} = \displaystyle\int_{-\infty}^x f_\xi(t)\,dt$. Зокрема звідси $f_{\xi} = F'_{\xi}$.
-
-\item Оскільки $F_\xi$ неспадна, то звідси випливає $f_{\xi} = F'_{\xi} \geq 0$.
-\item Маємо $P_\xi(B) = \displaystyle\int_B f_\xi(t)\,d\lambda_1(t)$. Якщо покласти $B = \mathbb{R} \in \mathcal{B}(\mathbb{R})$, то ми отримаємо $1 = \mathbb{P}\{\xi \in \mathbb{R}\} = \displaystyle\int_{-\infty}^{+\infty} f_\xi(x)\,dx$.
-\item $\displaystyle \mathbb{P}\{\xi \in \left<a,b\right>\} = F_\xi(b) - F_\xi(a) = \int_{-\infty}^b f_\xi(x)\,dx - \int_{-\infty}^a f_\xi(x)\,dx = \int_a^b f_\xi(x)\,dx$.
-\end{enumerate}
-Всі властивості доведені.
-\end{proof}
-
-\begin{example}
-Розглянемо координатну площину. Через точку $(0,1)$ під випадковим кутом $\alpha \in [0,\pi)$ (подія, що проведемо з таким кутом) проводимо пряму. Необхідно знайти точку перетину з $OX$. Згодом описати функцію розподілу.
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\draw[->] (-2,0)--(2,0) node[anchor = north] {$x$};
-\draw[->] (0,-2)--(0,2) node[anchor = south] {$y$};
-\draw[red] (1,2)--(-2,-1);
-\fill (-1,0) circle (1pt) node[anchor = north] {$\xi$};
-\fill (0,1) circle (1pt) node[anchor = east] {$(0,1)$};
-\draw[dashed] (0,1)--(0.5,1);
-\draw (0.5,1) arc (0:45:0.5) node[anchor = west] {$\alpha$};
-\end{tikzpicture}
-\end{figure}
-\noindent Позначимо $\xi$ -- випадкова величина, що описує точку перетину з $OX$. Зауважимо, що $\ctg \alpha = \dfrac{-\xi}{1}$, тобто звідси $\xi = -\ctg \alpha$. Тепер обчислимо функцію розподілу.\\
-$F_\xi(x) = \mathbb{P}\{\xi \leq x\} = \mathbb{P}\{-\ctg \alpha \leq x\} = \mathbb{P}\{\ctg \alpha \geq x\} = \mathbb{P}\{\alpha \in [0,\arcctg(-x)]\} = \\ = \mathbb{P}\{\alpha \in [0,\pi-\arctg x]\} = \dfrac{\pi - \arcctg x}{\pi} = 1 - \dfrac{\arcctg x}{\pi}$.\\
-Можемо обчислити щільність -- отримаємо $f_\xi(x) = \dfrac{1}{\pi} \dfrac{1}{1+x^2}$. Зараз намалюємо графік та з'ясуємо зміст щільності.
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\draw[->] (-3,0)--(3,0) node[anchor = north] {$x$};
-\draw[->] (0,-0.5)--(0,1.5) node[anchor = east] {$f_\xi(x)$};
-\draw[domain=-3:3, smooth, variable=\x, red] plot ({\x}, {3/pi*1/(1+\x*\x)});
-\node at (-0.5,1) {$\frac{1}{\pi}$};
-\end{tikzpicture}
-\caption*{Графік каже наступне. Найчастіше за всього ми будемо потрапляти в окіл точки $0$. Це означатиме, з точки зору нашої задачі, що точка перетину з $OX$ (а це наша $\xi$) буде частіше за всього неподалік від точки $0$.}
-\end{figure}
-\end{example}
-
-\begin{example}
-Нехай випадкова величина $\xi$ задається щільністю $f_\xi(x) = \begin{cases} a(2 - |x|), & x \in [-2,2] \\ 0, & \text{інакше} \end{cases}$. Знайти функцію розподілу та ймовірність того, що випадкова величина знаходиться в інтервалі $(1,5)$ (перед цією задачею треба з'ясувати, чому дорівнює $a \in \mathbb{R}$).\\
-За умовою нормування, $\displaystyle\int_{-\infty}^{+\infty} f_\xi(x)\,dx = 1$, тобто площа має бути одиничною. Якщо намалювати схематично, то там буде рівнобедрений трикутник, площа якої $1 = S = \dfrac{1}{2} \cdot 4 \cdot 2a$. Отже, $a = \dfrac{1}{4}$.
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\draw[->] (-3,0)--(3,0) node[anchor = north] {$x$};
-\draw[->] (0,-0.5)--(0,2.5) node[anchor = east] {$f_\xi(x)$};
-\draw (2,-2pt)--(2,2pt) node[anchor = north] {$2$};
-\draw (-2,-2pt)--(-2,2pt) node[anchor = north] {$-2$};
-\draw (-2pt,2)--(2pt,2) node[anchor = east] {$2a$};
-\draw[red] (-3,0)--(-2,0)--(0,2)--(2,0)--(3,0);
-\end{tikzpicture}
-\end{figure}
-\noindent
-Знайдемо тепер функцію розподілу, яка рахуєтсья як $F_\xi(x) = \displaystyle\int_{-\infty}^t f_\xi(t)\,dt$.\\
-Якщо $x \in (-\infty,-2]$, то звідси $F_\xi(x) = \displaystyle\int_{-\infty}^x 0\,dt = 0$.\\
-Якщо $x \in (-2,0]$, то звідси $F_\xi(x) = \displaystyle\int_{-\infty}^{-2} f_\xi(t)\,dt + \int_{-2}^x \dfrac{1}{4}(2+t)\,dt = \dots = \dfrac{x^2}{8} + \dfrac{x}{2} + \dfrac{1}{2}$.\\
-Якщо $x \in (0,2]$, то звідси $F_\xi(x) = \displaystyle\int_{-\infty}^0 f_\xi(t)\,dt + \int_0^x \dfrac{1}{4}(2-t)\,dt = \left( \dfrac{0^2}{8} + \dfrac{0}{2} + \dfrac{1}{2} \right) + \int_0^x \dfrac{1}{4}(2-t)\,dt = \dots = -\dfrac{x^2}{8} + \dfrac{x}{2} + \dfrac{1}{2}$.\\
-Якщо $x \in (2,+\infty)$, то звідси $F_\xi(x) = \displaystyle\int_{-\infty}^2 f_\xi(t)\,dt + \int_2^x 0\,dt = \left( -\dfrac{2^2}{8} + \dfrac{2}{2} + \dfrac{1}{2} \right) = 1$.\\
-Власне, отримали $F_\xi(x) = \begin{cases} 0, & x \in (-\infty,-2] \\ \dfrac{x^2}{8} + \dfrac{x}{2} + \dfrac{1}{2}, & x \in (-2,0] \\ -\dfrac{x^2}{8} + \dfrac{x}{2} + \dfrac{1}{2}, & x \in (0,2] \\ 1, & x \in (2,+\infty) \end{cases}$.\\
-Знайдемо тепер ймовірність. Це можна зробити двома способами, але зроблю це через функцію розподілу, раз її було вже знайдено. Тобто $\mathbb{P}\{\xi \in (1,5)\} = F_\xi(5) - F_\xi(1) = 1 - \dfrac{7}{8} = \dfrac{1}{8}$.
-\bigskip \\
-Порада як перевірити, що функція розподілу коректно знайдена:\\
-1) продиференціювати назад та отримати ту саму щільність;\\
-2) перерірити на неперервність функцію.
-\end{example}
-
 \subsubsection{Дискретний випадковий вектор}
 \begin{definition}
 Випадковий вектор $\vec{\xi}$ називається \textbf{дискретним}, якщо
@@ -2591,6 +2395,77 @@ $\mathbb{D}\left( \dfrac{\xi_1+\dots+\xi_n}{n} - \dfrac{a_1+\dots+a_n}{n} \right
 
 \newpage
 \subsection*{По-строгому про всі ці поняття}
+\subsubsection*{Дискретна випадкова величина}
+Визначимо тепер строго, як ми це отримали.\\
+Розглянемо $P_\xi$ -- дискретний ймовірнісний розподіл, тобто існує не більше ніж зліченна підмножина $S = \{x_1,x_2,\dots\} \subset \mathbb{R}$, для якої $P_{\xi}(X \setminus S) = 0$, а всі решта $P_\xi(\{x\}) = p_i$ визначені. Зауважимо, що з іншого боку $p_i = \mathbb{P}\{\xi = x_i\}$. Будемо вимагати, щоб події $\{\xi = x_i\}$ утворювали повну групу подій, тобто $\displaystyle\sum_{k=1}^\infty p_i = 1$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{дискретною}. Її ймовірнісний розподіл зазвичай записують в той самий вигляд ряд розподілу, який у нас був.
+
+\subsubsection*{Неперервна випадкова величина}
+Визначимо тепер строго, як ми це отримали.\\
+Розглянемо $P_{\xi}$ -- неперервний ймовірнісний розподіл, тобто $P_\xi(\{x\}) = 0$ для всіх $x \in \mathbb{R}$. Відповідно, звідси отримаємо, що $\mathbb{P}\{\xi = \{x\}\} = 0$. Звідси, як ми вже знаємо, функція розподілу $F_\xi$ буде неперервною на $\mathbb{R}$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{неперервною}.
+
+\subsubsection*{Абсолютно неперервна випадкова величина та щільність розподілу}
+Нам неперервної випадкової величини буде недостатньо. Оскільки в кожній одноточковій множині ймовірність нуль, то тоді це виконується й для не більш ніж зліченної множини.\\
+Проте існує множина Кантора. Це борельова множина лебегової міри нуль, яка при цьому більш, ніж зліченна. Тобто ми, наспраді, хочемо захопити більш широкий клас множин, що приведе до звуженню класів неперервних випадкових величин.\\
+Розглянемо $P_{\xi}$ -- абсолютно неперервний ймовірнісний розподіл відносно $\lambda_1$. Тобто тепер $\forall C$ -- борельової множини лебегової міри нуль: $P_{\xi}(C) = 0$. У такому випадку випадкова величина $\xi$ буде називатися \textbf{абсолютно неперервною}. \\
+Ми маємо $P_\xi \ll \lambda_1$. Згідно з теоремою Радона-Нікодими, існує функція $f_\xi \colon \mathbb{R} \to \mathbb{R}$, для якої виконується наступне:\\
+$P_\xi(B) = \displaystyle\int_B f_\xi(t)\,d\lambda_1(t),\ B \in \mathcal{B}(\mathbb{R})$.\\
+Ось саме ця шукана функція $f_\xi$ -- та сама \textbf{щільність розподілу} абсолютно неперервної випадкової величини. Така функція визначена з точністю до еквівалентності $\pmod \lambda$. Такі функції будемо ототожнювати.\\
+Із щойно отриманої формули ми отримаємо властивості щільності розподілу. Покладемо $B = (-\infty,x]$.\\
+$F_\xi(x) = \mathbb{P}\{\xi \leq x\} = \displaystyle\int_{-\infty}^x f_\xi(t)\,dx$ -- звичне означення щільності.\\
+Якщо ще покласти $B = \mathbb{R}$, то отримаємо таку формулу:\\
+$\displaystyle\int_{-\infty}^{+\infty} f_\xi(t)\,dt = \mathbb{P}\{\xi \in \mathbb{R}\} = 1$.\\
+Невід'ємність щільності -- наслідок невід'ємності міри.
+
+\subsubsection*{Математичне сподівання}
+\begin{definition}
+\textbf{Математичним сподіванням} випадкової величини $\xi$, що задана на ймовірнісному просторі $(\Omega,\mathcal{F},\mathbb{P})$, називають такий інтеграл Лебега:
+\begin{align*}
+\mathbb{E} \xi = \int_\Omega \xi(\omega)\,d\mathbb{P}
+\end{align*}
+Математичне сподівання існує, якщо інтеграл збіжний. При існуванні математично сподівання випадкову величину $\xi$ ще називають \textbf{інтегровною}.
+\end{definition}
+
+\noindent Зараз будуть такі самі та ще додаткові властивості, які не були зазначені вище.
+
+\begin{proposition}[Властивості математичного сподівання]
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\mathbb{E} |\xi| = 0 \iff \xi = 0 \text{ майже скрізь}$;
+\item $\xi \geq 0 \text{ майже скрізь} \implies \mathbb{E}\xi \geq 0$;
+\item $\xi_1 \leq \xi_2 \text{ майже скрізь} \implies \mathbb{E}\xi_1 \leq \mathbb{E}\xi_2$;
+\item $|\mathbb{E}\xi| \leq \mathbb{E}|\xi|$;
+\item $\mathbb{E} c = c$ (знову ж таки, стала випадкова величина);
+\item $\mathbb{E}\mathbbm{1}_A = \mathbb{P}(A)$;
+\item $\mathbb{E}(\alpha \xi_1 + \beta \xi_2) = \alpha \mathbb{E}\xi_1 + \beta \mathbb{E}\xi_2$.
+\end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+Нехай $\xi$ -- випадкова величина на $(\Omega,\mathcal{F},\mathbb{P})$ та функція $g \colon \mathbb{R} \to \mathbb{R}$ -- борельова. Тоді $\displaystyle\mathbb{E} g(\xi) = \int_{\mathbb{R}} g(x)\,dP_\xi$.
+\end{theorem}
+
+\begin{proof}
+Насправді, рівність $\displaystyle\int_{\mathbb{R}}g(x)\,dP_\xi = \int_{\Omega} g(\xi(\omega))\,d\mathbb{P}$ випливає з теореми про заміну змінної інтеграла Лебега.
+\end{proof}
+
+\begin{corollary}
+Якщо $\xi$ -- дискретна випадкова величина та $g \colon \mathbb{R} \to \mathbb{R}$ -- борельова, то $\mathbb{E} g(\xi) = \displaystyle\sum_i g(x_i) p_i$.\\
+Зокрема звідси отримаємо відому формулу $\mathbb{E}\xi = \displaystyle\sum_i x_i p_i$.
+\end{corollary}
+
+\begin{proof}
+$\mathbb{E}g(\xi) = \displaystyle\int_{\mathbb{R}} g(x)\,dP_{\xi} = \int_{\mathbb{R} \setminus S} g(x)\,dP_{\xi} + \int_S g(x)\,dP_{\xi} = \int_S g(x)\,dP_\xi = \sum_i \int_{\{x_i\}} g(x_i)\,dP_{\xi} = \\
+= \sum_i g(x_i) P_{\xi}(\{x_i\}) = \sum_i g(x_i) p_i$.
+\end{proof}
+
+\begin{corollary}
+Якщо $\xi$ -- абсолютно неперервна випадкова величина та $g \colon \mathbb{R} \to \mathbb{R}$ -- борельова, то $\mathbb{E} g(\xi) = \displaystyle\int_{\mathbb{R}} g(x)f_{\xi}(x)\,d\lambda_1(x)$.\\
+Зокрема звідси отримаємо відому формулу $\mathbb{E}\xi = \displaystyle\int_{\mathbb{R}} x f_{\xi}(x)\,dx$.
+\end{corollary}
+
+\begin{proof}
+Нам треба довести рівність інтегралів $\displaystyle\int_{\mathbb{R}}g(x)\,dP_\xi = \int_{\mathbb{R}} g(x)f_{\xi}(x)\,d\lambda_1(x)$. Але, насправді, ця рівність працює, оскільки в нас $P_\xi \ll \lambda_1$ та функція $f_\xi = \dfrac{dP_{\xi}}{d\lambda_1}$.
+\end{proof}
 
 \subsubsection*{Випадкові вектори}
 Нагадаю, що в нас було трошечки інше означення, яке прив'язувалося до координат.

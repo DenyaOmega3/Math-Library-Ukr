@@ -108,6 +108,7 @@
 
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\dir}{dir}
 
 
 \begin{document}
@@ -118,7 +119,7 @@
 \subsection{Основні означення}
 \begin{definition}
 \textbf{Вектором} називають напрямлений відрізок.\\
-Позначення: $\vec{a}$.
+Позначення: $\vec{a}, \vec{b}, \vec{c}, \dots$.
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}
@@ -128,7 +129,7 @@
 \end{definition}
 
 \begin{definition}
-Два вектора, що лежать на паралельних прямих (або на одній прямій), називають \textbf{колінеарними}.\\
+Два вектори $\vec{a},\vec{b}$, що лежать на паралельних прямих (або на одній прямій), називають \textbf{колінеарними}.\\
 Позначення: $\vec{a} \parallel \vec{b}$.\\
 Інші позначення для колінеарних векторів: \\ 
 $\vec{a} \uparrow \uparrow \vec{b}$ -- колінеарні вектори в одному напрямку, вони ще називаються \textbf{співнапрямленими};\\
@@ -147,8 +148,9 @@ $\vec{a} \uparrow \downarrow \vec{b}$ -- колінеарні вектори в 
 \end{definition}
 
 \begin{definition}
-Задамо ілюстративним чином операції над векторами:\\
-	- \textbf{додавання} (є два способи, яка додавати);
+Задамо ілюстративним чином операції над векторами:
+	\begin{itemize}[nosep,wide=0pt]
+	\item \textbf{додавання;} (є два способи, як додавати);
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -168,7 +170,7 @@ $\vec{a} \uparrow \downarrow \vec{b}$ -- колінеарні вектори в 
 	\node at (2,-1) {правило паралелограма};
 	\end{tikzpicture}
 \end{figure}
-	- \textbf{множення на скаляр;}
+	\item \textbf{множення на скаляр;}
 
 \begin{figure}[H]
 \centering
@@ -186,10 +188,12 @@ $\vec{a} \uparrow \downarrow \vec{b}$ -- колінеарні вектори в 
 	\node at (-1,-2) {$\text{при } \lambda < 0$};
 	\end{tikzpicture}
 \end{figure}
+\end{itemize}
 \end{definition}
 
-	Завдяки геометричній інтерпретації, ми можемо довести кілька властивостей, які виконані для всіх векторів $\vec{a}, \vec{b}, \vec{c}$ та для всіх чисел $\forall \lambda, \mu \in \mathbb{R}$:\\
-	1) $\vec{a} + \vec{b} = \vec{b} + \vec{a}$;
+	Завдяки геометричній інтерпретації, ми можемо довести кілька властивостей, які виконані для всіх векторів $\vec{a}, \vec{b}, \vec{c}$ та для всіх чисел $\forall \lambda, \mu \in \mathbb{R}$:
+	\begin{enumerate}[wide=0pt,label={\arabic*)}]
+	\item $\vec{a} + \vec{b} = \vec{b} + \vec{a}$;
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -204,7 +208,7 @@ $\vec{a} \uparrow \downarrow \vec{b}$ -- колінеарні вектори в 
 	\draw[thick, red, ->] (0,0)--(4,2) node at (2,1.6) {$\vec{b}+\vec{a}$};
 	\end{tikzpicture}
 \end{figure}
-	2) $(\vec{a} + \vec{b}) + \vec{c} = \vec{a} + (\vec{b} + \vec{c})$;
+	\item $(\vec{a} + \vec{b}) + \vec{c} = \vec{a} + (\vec{b} + \vec{c})$;
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -223,11 +227,11 @@ $\vec{a} \uparrow \downarrow \vec{b}$ -- колінеарні вектори в 
 	\draw[thick, blue, ->] (0,0)--(6,1) node at (3,-0.1) {$\vec{a} + (\vec{b} + \vec{c})$};
 	\end{tikzpicture}
 \end{figure}
-	3) $\text{існує $\vec{0}$, так званий нульовий вектор, для якого } \vec{a} + \vec{0} = \vec{a}$; цей нульовий вектор має нульову довжину, тобто $|\vec{0}| = 0$, а геометричним чином представляє собою точку;\\
-	4) $\text{існує $\tilde{\vec{a}}$, так званий протилежнй вектор, для якого } \vec{a} + \tilde{\vec{a}} = \vec{0}$; насправді, цей $\tilde{\vec{a}} = -\vec{a}$, тобто це той же самий вектор тільки в протилежному напрямку;\\
+	\item $\text{існує $\vec{0}$, так званий нульовий вектор, для якого } \vec{a} + \vec{0} = \vec{a}$; цей нульовий вектор має нульову довжину, тобто $|\vec{0}| = 0$, а геометричним чином представляє собою точку;
+	\item $\text{Для кожного $\vec{a}$ існує $\vec{d}$, так званий протилежнй вектор, для якого } \vec{a} + \vec{d} = \vec{0}$; насправді, цей $\vec{d} = -\vec{a}$, тобто це той же самий вектор тільки в протилежному напрямку;\\
 	\textit{(для 3), 4), малюнок навряд знадобиться)}
-	\bigskip \\
-	5) $\lambda(\vec{a}+\vec{b}) = \lambda \vec{a} + \lambda \vec{b}$ \textit{(випливає з подібності двох трикутників)};
+	\item $\lambda(\vec{a}+\vec{b}) = \lambda \vec{a} + \lambda \vec{b}$ \\
+	\textit{(випливає з подібності двох трикутників)};
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}[scale = 0.8]
@@ -248,17 +252,18 @@ $\vec{a} \uparrow \downarrow \vec{b}$ -- колінеарні вектори в 
 	\draw[thick, red, ->] (0,0)--(8,4) node at (5,2) {$\lambda \vec{a}+ \lambda \vec{b}$};
 	\end{tikzpicture}
 \end{figure}
-	6) $\vec{a} (\lambda + \mu) = \lambda \vec{a} + \mu \vec{a}$;\\
-	7) $(\lambda \mu) \vec{a} = (\lambda \mu) \vec{a}$;\\
-	8) $1 \cdot \vec{a} = \vec{a}$.\\
+	\item $\vec{a} (\lambda + \mu) = \lambda \vec{a} + \mu \vec{a}$;
+	\item $(\lambda \mu) \vec{a} = (\lambda \mu) \vec{a}$;
+	\item $1 \cdot \vec{a} = \vec{a}$.\\
 	\textit{(для 6), 7), 8), малюнок навряд знадобиться)}
+	\end{enumerate}
 
 \begin{definition}
 	Два вектори, що лежать на перпендикулярних прямих, називають \textbf{ортогональними}.\\
 Позначення: $\vec{a} \perp \vec{b}$.
 \end{definition}
 
-\subsection{Поняття базиса}
+\subsection{Вступ до поняття базису}
 \begin{proposition}
 \label{collinear_vectors}
 $\vec{a} \parallel \vec{b} \iff \exists \lambda \in \mathbb{R}: \vec{a} = \lambda \vec{b}$.\\
@@ -372,7 +377,8 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні $\iff \exists \alpha, 
 	$\overrightarrow{C_1D_1},$ $\vec{a}$ -- колінеарні, тому $\overrightarrow{C_1D_1} = \alpha \vec{a}$;\\
 	$\overrightarrow{C_1B_1},$ $\vec{b}$ -- колінеарні, тому $\overrightarrow{C_1B_1} = \beta \vec{b}$;\\
 	$\overrightarrow{C_1C_2},$ $\vec{c}$ -- колінеарні, тому $\overrightarrow{C_1C_2} = \gamma \vec{c}$.\\
-	Тому $\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$.\\
+	Тому $\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$.
+	\bigskip \\
 	II. \textit{Єдиність.} \\
 	Доводиться аналогічно, як в \thref{basis_on_plane}. Тільки ми до суперечності прийдемо від того, що ці вектори стануть компланарними після припущення.
 \end{proof}
@@ -380,12 +386,12 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні $\iff \exists \alpha, 
 \begin{definition}
 \textbf{Базисом в просторі} будемо називати  пару некомпланарних векторів $\vec{a}$, $\vec{b}$, $\vec{c}$.\\
 Уже довели, що кожний вектор $\vec{d}$ виражається через базисні вектори як $\vec{d} = \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c}$ -- це \textbf{розклад за базисом}. Коефіцієнти $\alpha,\beta,\gamma$ задають \textbf{координати} вектора $\vec{d}$ в базисі $\vec{a},\vec{b},\vec{c}$.
-\bigskip \\
-Можна також позначати вектор $\vec{d}$ таким чином: $\vec{d} = (\alpha, \beta, \gamma)$ -- як набір координат в заданому базисі.
 \end{definition}
+\noindent
+Можна також позначати вектор $\vec{d}$ таким чином: $\vec{d} = (\alpha, \beta, \gamma)$ -- як набір координат в заданому базисі. У випадку на площині аналогічно можна позначати.
 
 \begin{proposition} 
-Задано базис векторів $\vec{a}$, $\vec{b}$, $\vec{c}$ і вектори $\vec{d}_1 = (\alpha_1, \beta_1, \gamma_1)$, $\vec{d}_2 = (\alpha_2, \beta_2, \gamma_2)$. Тоді:
+Заданий базис векторів $\vec{a}$, $\vec{b}$, $\vec{c}$ і вектори $\vec{d}_1 = (\alpha_1, \beta_1, \gamma_1)$, $\vec{d}_2 = (\alpha_2, \beta_2, \gamma_2)$. Тоді:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 \item $\vec{d}_1 + \vec{d}_2 = (\alpha_1+\alpha_2, \beta_1+\beta_2, \gamma_1+\gamma_2)$;
 \item $\lambda \vec{d}_1 = (\lambda \alpha_1, \lambda \beta_1, \lambda \gamma_1)$.
@@ -422,7 +428,7 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні $\iff \exists \alpha, 
 \subsection{Декартова система координат}
 \begin{definition}
 Нехай в просторі заданий базис $\vec{a}$, $\vec{b}$, $\vec{c}$. Встановимо фіксовану точку $O$ -- початок координат, туди й прикладемо всі вектори.\\
-Початок координат та базисні вектори в сукупності називається \textbf{декартовою системою координат.}
+Початок координат та базисні вектори в сукупності називають \textbf{декартовою системою координат.}
 \begin{figure}[H]
 \centering
 	\begin{tikzpicture}
@@ -444,13 +450,15 @@ $\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні $\iff \exists \alpha, 
 	
 \subsection{Лінійна залежність/незалежність}
 \begin{definition}
-Система векторів $\{\vec{a_1}, \dots, \vec{a_n}\}$ називається:\\
-	- \textbf{лінійно незалежною}, якщо з рівності $\alpha_1 \vec{a_1} + \dots + \alpha_n \vec{a_n} = \vec{0}$, де $\alpha_1, \dots, \alpha_n \in \mathbb{R}$, випливає $\alpha_1 = \dots = \alpha_n = 0$;\\
-	- \textbf{лінійно залежною}, якщо $\exists \alpha_1, \dots, \alpha_n \in \mathbb{R}: |\alpha_1| + \dots + |\alpha_n| \neq 0: \alpha_1 \vec{a_1} + \dots + \alpha_n \vec{a_n} = \vec{0}$.
+Система векторів $\{\vec{a}_1, \dots, \vec{a}_n\}$ називається:
+\begin{itemize}[nosep,wide=0pt]
+	\item \textbf{лінійно незалежною}, якщо з рівності $\alpha_1 \vec{a}_1 + \dots + \alpha_n \vec{a}_n = \vec{0}$, де $\alpha_1, \dots, \alpha_n \in \mathbb{R}$, випливає $\alpha_1 = \dots = \alpha_n = 0$;
+	\item \textbf{лінійно залежною}, якщо $\exists \alpha_1, \dots, \alpha_n \in \mathbb{R}: |\alpha_1| + \dots + |\alpha_n| \neq 0: \alpha_1 \vec{a}_1 + \dots + \alpha_n \vec{a}_n = \vec{0}$.
+\end{itemize}
 \end{definition}
 
 \begin{definition}
-Вираз $\alpha_1 \vec{a_1} + \dots + \alpha_n \vec{a_n}$, де $\alpha_1, \dots, \alpha_n \in \mathbb{R}$, називається \textbf{лінійною комбінацією}.
+Вираз $\alpha_1 \vec{a}_1 + \dots + \alpha_n \vec{a}_n$, де $\alpha_1, \dots, \alpha_n \in \mathbb{R}$, називається \textbf{лінійною комбінацією}.
 \end{definition}
 
 \begin{proposition}
@@ -488,7 +496,7 @@ $\{\vec{a},\vec{b},\vec{c} \}$ -- лінійно залежні $\iff$ $\vec{a},
 
 \begin{proof}
 	$\{\vec{a},\vec{b},\vec{c}\}$ -- лінійно залежні $\iff \exists \alpha, \beta, \gamma: |\alpha| + |\beta| + |\gamma| \neq 0: \alpha \vec{a} + \beta \vec{b} + \gamma \vec{c} = \vec{0} \boxed{\iff}$\\
-	Не обмежуючи загальності, нехай $\alpha \neq 0$.\\
+	Не втрачаючи загальності, нехай $\alpha \neq 0$.\\
 $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} \vec{c} \overset{\textrm{позн.} \lambda = -\frac{\beta}{\alpha}, \mu = -\frac{\gamma}{\alpha}}{=} \lambda \vec{b} + \mu \vec{c} \iff$ $\vec{a},\vec{b},\vec{c}$ -- компланарні.
 \end{proof}
 
@@ -501,7 +509,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \end{proposition}
 
 \begin{proof}
-	Розглянемо вектори $\{\vec{a},\vec{b},vec{c},\vec{d}\}$. І знову не втрачаючи загальності, візьмемо перші три вектори та розглянемо два підпункти:\\
+	Розглянемо вектори $\{\vec{a},\vec{b},\vec{c},\vec{d}\}$. І знову не втрачаючи загальності, візьмемо перші три вектори та розглянемо два підпункти:\\
 	I. $\vec{a}$, $\vec{b}$, $\vec{c}$ -- компланарні.\\
 	Тоді $\exists \alpha, \beta: \vec{c} = \alpha \vec{a} + \beta \vec{b} \implies \alpha \vec{a} + \beta \vec{b} + (-1)\vec{c} + 0 \cdot \vec{d} = \vec{0}$, причому тут $|\alpha| + |\beta| + |-1| + |0| \neq 0$. Отже, $\{\vec{a}, \vec{b}, \vec{c}, \vec{d}\}$ -- лінійно залежна.
 	\bigskip \\
@@ -537,7 +545,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \end{figure}
 \end{definition}
 
-	Якщо перемістити паралельно $\vec{a}$ так, щоб початок був в точці $A$, то маємо з малюнку:\\
+	Якщо перемістити паралельно вектор $\vec{a}$ так, щоб початок був в точці $A$, то маємо з малюнку:\\
 	$|AB| = |\vec{a}| \cos \alpha$.\\
 	Ця формула буде також справедливою при розгляданні тупого кута.\\
 	Отримали інакшу формулу проєкції:
@@ -545,7 +553,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 	\pr_l \vec{a} = |\vec{a}| \cos \alpha
 	\end{align*}
 	
-\begin{proposition}[Властивості]
+\begin{proposition}[Властивості проєкції]
 Справедливе наступне:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 	\item $\pr_l (\vec{a} + \vec{b}) = \pr_l \vec{a} + \pr_l \vec{b}$;
@@ -721,12 +729,12 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 	$(\vec{a}, \vec{b}) = 0 \iff |\vec{a}| |\vec{b}| \cos \alpha = 0 \iff \cos \alpha = 0 \iff \vec{a} \perp \vec{b}$.
 \end{proof}
 
-\begin{proposition}[Властивості]
+\begin{proposition}[Властивості скалярного добутку]
 Справедливе наступне:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 	\item $(\vec{a}, \vec{b}) = (\vec{b}, \vec{a})$;
 	\item $(\vec{a}, \vec{b}) = \pr_{\vec{b}} \vec{a} \cdot |\vec{b}| = \pr_{\vec{a}} \vec{b} \cdot |\vec{a}|$;
-	\item $(\vec{a_1}+\vec{a_2}, \vec{b}) = (\vec{a_1}, \vec{b}) + (\vec{a_2}, \vec{b})$;
+	\item $(\vec{a}_1+\vec{a}_2, \vec{b}) = (\vec{a}_1, \vec{b}) + (\vec{a}_2, \vec{b})$;
 	\item $(\lambda \vec{a}, \vec{b}) = \lambda (\vec{a}, \vec{b})$;
 	\item $(\vec{a}, \vec{a}) = |\vec{a}|^2$;
 	\item $\forall \vec{b}: (\vec{a}, \vec{b}) = 0 \implies \vec{a} = \vec{0}$;
@@ -739,12 +747,13 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \begin{enumerate}[wide=0pt,label={\arabic*)}]
 	\item $(\vec{a}, \vec{b}) = |\vec{a}| |\vec{b}| \cos \alpha = |\vec{b}| |\vec{a}| \cos \alpha = (\vec{b}, \vec{a})$;
 	\item $(\vec{a}, \vec{b}) = |\vec{a}| |\vec{b}| \cos \alpha = \pr_{\vec{b}} \vec{a} \cdot |\vec{b}| = \pr_{\vec{a}} \vec{b} \cdot |\vec{a}|$;
-	\item $(\vec{a_1}+\vec{a_2}, \vec{b}) = \pr_{\vec{b}} (\vec{a_1} + \vec{a_2}) |\vec{b}| = \pr_{\vec{b}} \vec{a_1} |\vec{b}| + \pr_{\vec{b}} \vec{a} |\vec{b}| = (\vec{a_1}, \vec{b}) + (\vec{a_2}, \vec{b})$;
+	\item $(\vec{a}_1+\vec{a}_2, \vec{b}) = \pr_{\vec{b}} (\vec{a}_1 + \vec{a}_2) |\vec{b}| = \pr_{\vec{b}} \vec{a}_1 |\vec{b}| + \pr_{\vec{b}} \vec{a} |\vec{b}| = (\vec{a}_1, \vec{b}) + (\vec{a}_2, \vec{b})$;
 	\item $(\lambda \vec{a}, \vec{b}) = \pr_{\vec{b}} (\lambda \vec{a}) |\vec{b}| = \lambda \pr_{\vec{b}} (\vec{a}) |\vec{b}| = \lambda (\vec{a}, \vec{b})$;
 	\item $(\vec{a}, \vec{a}) = |\vec{a}| |\vec{a}| \cos 0 = |\vec{a}|^2$;
 	\item $\forall \vec{b}: (\vec{a}, \vec{b}) = 0 \overset{\vec{b} = \vec{a}}{\implies} (\vec{a}, \vec{a}) = 0 \implies \vec{a} = \vec{0}$;
 	\item $\forall \vec{d}: (\vec{a}, \vec{d}) = (\vec{b}, \vec{d}) \implies (\vec{a}-\vec{b}, \vec{d}) = (\vec{a}, \vec{d}) - (\vec{b}, \vec{d}) = 0 \implies \vec{a} - \vec{b} = 0 \implies \vec{a} = \vec{b}$.
 \end{enumerate}
+Усі властивості доведені.
 \end{proof}
 
 \begin{example}
@@ -764,15 +773,15 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 	$(\vec{p}, \vec{q}) = (\vec{q}, \vec{r}) = (\vec{r}, \vec{p}) = 0$.
 	
 \begin{definition}
-	Базис, в якому всі вектори перпендикулярні між собою, називається \textbf{ортогональним}.
+	Базис, в якому всі вектори оротогональні між собою, називається \textbf{ортогональним}.
 \end{definition}
 
 	Тоді отримаємо такий вираз:\\
 	$(\vec{a}, \vec{b}) = a_1 b_1 |\vec{p}|^2 + a_2 b_2 |\vec{q}|^2 + a_3 b_3 |\vec{r}|^2$.\\
-	Уже формула приємніше. Але буде краще, коли додамо умову, щоб $\vec{p}$, $\vec{q}$, $\vec{r}$ будуть одиничними, тобто $|\vec{p}| = |\vec{q}| = |\vec{r}| = 1$.
+	Уже формула приємніше. Але буде краще, коли додамо умову, що $\vec{p}$, $\vec{q}$, $\vec{r}$ будуть одиничними, тобто $|\vec{p}| = |\vec{q}| = |\vec{r}| = 1$.
 	
 \begin{definition}
-	Ортогональний базис, в якому довжина векторів одинична, називається \textbf{ортонормальним}.\\
+	Ортогональний базис, в якому довжина векторів одинична, називається \textbf{ортонормованим}.\\
 	Для такого базису вектори по-особливому позначені: $\{\vec{i}, \vec{j}, \vec{k}\}$.
 \end{definition}
 
@@ -819,8 +828,9 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \end{figure}
 \end{definition}
 
-\begin{proposition}[Властивості]
-	Задано праву трійку $\{\vec{a}, \vec{b}, \vec{c}\}$. Тоді:
+\begin{proposition}[Властивості трійки векторів]
+\label{vector_trio_properties}
+	Задана права трійка $\{\vec{a}, \vec{b}, \vec{c}\}$. Тоді:
 	\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 	\item $\{\vec{b}, \vec{c}, \vec{a}\}, \{\vec{c}, \vec{a}, \vec{b}\}$ -- права трійка;
 	\item $\{\vec{a}, \vec{b}, -\vec{c}\}, \{-\vec{a}, \vec{b}, -\vec{c}\}, \{\vec{a}, -\vec{b}, -\vec{c}\}$ -- ліва трійка;
@@ -830,7 +840,7 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 \end{proposition}
 
 \begin{definition}
-	\textbf{Векторним добутком векторів $\vec{a}, \vec{b}$} називають вектор $\vec{c}$, для якого
+	\textbf{Векторним добутком векторів $\vec{a}, \vec{b}$} називають такий вектор $\vec{c}$, що
 	\begin{align*}
 	\text{1) } |\vec{c}| = |\vec{a}| |\vec{b}| \sin \alpha \text{, де $\alpha$ -- кут між векторами $\vec{a},\vec{b}$}; \\
 	\text{2) }  \vec{c} \perp \vec{a}, \vec{c} \perp \vec{b}; \\
@@ -851,24 +861,28 @@ $\boxed{\iff} \vec{a} = -\dfrac{\beta}{\alpha} \vec{b} - \dfrac{\gamma}{\alpha} 
 Позначення: $\vec{c} = [\vec{a}, \vec{b}]$.
 \end{definition}
 
-\begin{proposition}[Властивості]
-1) $[\vec{a}, \vec{b}] = -[\vec{b}, \vec{a}]$\\
-2) $[\vec{a}, \vec{b}] = \vec{0} \iff \vec{a} \parallel \vec{b}$\\
-3) $[\vec{a_1} + \vec{a_2}, \vec{b}] = [\vec{a_1}, \vec{b}] + [\vec{a_2}, \vec{b}]$\\
-4) $[\lambda \vec{a}, \vec{b}] = \lambda [\vec{a}, \vec{b}]$
+\begin{proposition}[Властивості векторного добутку]
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $[\vec{a}, \vec{b}] = -[\vec{b}, \vec{a}]$;
+\item $[\vec{a}, \vec{b}] = \vec{0} \iff \vec{a} \parallel \vec{b}$;
+\item $[\vec{a_1} + \vec{a_2}, \vec{b}] = [\vec{a_1}, \vec{b}] + [\vec{a_2}, \vec{b}]$;
+\item $[\lambda \vec{a}, \vec{b}] = \lambda [\vec{a}, \vec{b}]$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-1) $|[\vec{b}, \vec{a}]| = |[\vec{a}, \vec{b}]| = |\vec{a}| |\vec{b}| \sin \alpha$\\
+Доведемо кожну властивість окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $|[\vec{b}, \vec{a}]| = |[\vec{a}, \vec{b}]| = |\vec{a}| |\vec{b}| \sin \alpha$\\
 За означенням, $[\vec{a}, \vec{b}]$ та $[\vec{b}, \vec{a}]$ одночасно $\perp \vec{a}$, $\perp \vec{b}$. Звідси випливає (із геометрії), що
 $[\vec{a}, \vec{b}] \parallel [\vec{b}, \vec{a}] \implies [\vec{a}, \vec{b}] = \pm [\vec{b}, \vec{a}]$.\\
 Коли $\{\vec{b}, \vec{a}, [\vec{b}, \vec{a}]\}$ - права, то $\{\vec{a}, \vec{b}, [\vec{b}, \vec{a}]\}$ - ліва, а тому $\{\vec{a}, \vec{b}, -[\vec{b}, \vec{a}]\}$ - права. Отже, $[\vec{b},\vec{a}] = -[\vec{a}, \vec{b}]$.
-\bigskip \\
-2) Тут ми розглядатимемо ненульові вектори $\vec{a},\vec{b}$. Бо в тому випадку нецікаво.\\
-$[\vec{a}, \vec{b}] = \vec{0} \iff |[\vec{a}, \vec{b}]| = 0 \iff |\vec{a}| |\vec{b}| \sin \alpha = 0 \iff \alpha = 0,\pi \iff \vec{a} \parallel \vec{b}$.
-\bigskip \\
+
+\item Тут ми розглядатимемо ненульові вектори $\vec{a},\vec{b}$. Бо в тому випадку нецікаво.\\
+$[\vec{a}, \vec{b}] = \vec{0} \iff |[\vec{a}, \vec{b}]| = 0 \iff |\vec{a}| |\vec{b}| \sin \alpha = 0 \iff \alpha = 0,\pi \iff \vec{a} \parallel \vec{b}$.\bigskip \\
 3), 4) на потім залишемо. Хоча залишу інший варіант.\\
-\textit{Альтернативне доведення.}\\
+\item \textit{Альтернативне доведення.}\\
 Зробимо ось такий геометричний малюнок. Векторний добуток $[\vec{a_1},\vec{b}]$ відповідатиме блакитній грані. Векторний добуток $[\vec{a_2},\vec{b}]$ відповідатиме зеленій грані. Нарешті, векторний добуток $[\vec{a_1}+\vec{a_2}, \vec{b}]$ відповідатиме останній грані.
 \begin{figure}[H]
 \centering
@@ -905,6 +919,8 @@ $\theta$ - кут між $\vec{a_1}+\vec{a_2}, \vec{b}$.\\
 $|\vec{a_1}|^2 |\vec{b}|^2 \cos^2 \varphi_1 + |\vec{a_2}|^2 |\vec{b}|^2 \cos^2 \varphi_2 = |\vec{a_1}+\vec{a_2}|^2 |\vec{b}|^2 \cos^2 \theta$ (*).\\
 Зауважимо тепер, що $[\vec{a_1},\vec{b}]$ перпендикулярний синій стороні, $[\vec{a_2},\vec{b}]$ перпендикулярний зеленій стороні, $[\vec{a_1}+\vec{a_2},\vec{b}]$ перпендикулярний червоній стороні.\\
 Якщо на $90^\circ$ повернути малюнок з трикутником за годинниковою стрілкою, то ці векторні добутки будуть лежати на цих сторонах. Їх можна об'єднати, просто тому що виконується рівність (*).
+\end{enumerate}
+Усі властивості доведені.
 \end{proof}
 
 \begin{remark}[Геометричний зміст]
@@ -937,26 +953,37 @@ $S_{\text{паралелограм}} = |[\vec{a},\vec{b}]|$.
 Тобто тут скалярний добуток $\vec{a}$ з векторним добутком $\vec{b},\vec{c}$.
 \end{definition}
 
-\begin{proposition}[Властивості]
-1) Знак мішаного добутку:\\
-+, якщо $\{\vec{a}, \vec{b}, \vec{c}\}$ - права трійка\\
--, якщо $\{\vec{a}, \vec{b}, \vec{c}\}$ - ліва трійка\\
-2) $(\vec{a}, \vec{b}, \vec{c}) = (\vec{b}, \vec{c}, \vec{a}) = (\vec{c}, \vec{a}, \vec{b}) = -(\vec{b}, \vec{a}, \vec{c}) = -(\vec{a}, \vec{c}, \vec{b}) = -(\vec{c}, \vec{b}, \vec{a})$\\
-3) $(\vec{a}, \vec{b}, \vec{c}) = 0 \iff \vec{a}, \vec{b}, \vec{c}$ - компланарні\\
-4) $(\vec{a}, \vec{b}, \vec{c}) = (\vec{a}, [\vec{b}, \vec{c}]) = ([\vec{a},\vec{b}],\vec{c})$\\
-5) $(\vec{a_1}+\vec{a_2}, \vec{b}, \vec{c}) = (\vec{a_1},\vec{b},\vec{c}) + (\vec{a_2},\vec{b},\vec{c})$\\
-6) $(\lambda \vec{a}, \vec{b}, \vec{c}) = \lambda (\vec{a},\vec{b},\vec{c})$
+\begin{proposition}[Властивості мішаного добутку]
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item Знак мішаного добутку:\\
++, якщо $\{\vec{a}, \vec{b}, \vec{c}\}$ -- права трійка;\\
+-, якщо $\{\vec{a}, \vec{b}, \vec{c}\}$ -- ліва трійка;
+\item $(\vec{a}, \vec{b}, \vec{c}) = (\vec{b}, \vec{c}, \vec{a}) = (\vec{c}, \vec{a}, \vec{b}) = -(\vec{b}, \vec{a}, \vec{c}) = -(\vec{a}, \vec{c}, \vec{b}) = -(\vec{c}, \vec{b}, \vec{a})$;
+\item $(\vec{a}, \vec{b}, \vec{c}) = 0 \iff \vec{a}, \vec{b}, \vec{c}$ -- компланарні;
+\item $(\vec{a}, \vec{b}, \vec{c}) = (\vec{a}, [\vec{b}, \vec{c}]) = ([\vec{a},\vec{b}],\vec{c})$;
+\item $(\vec{a}_1+\vec{a}_2, \vec{b}, \vec{c}) = (\vec{a}_1,\vec{b},\vec{c}) + (\vec{a}_2,\vec{b},\vec{c})$;
+\item $(\lambda \vec{a}, \vec{b}, \vec{c}) = \lambda (\vec{a},\vec{b},\vec{c})$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-1) $(a,b,c) > 0 \iff pr_{[\vec{b}, \vec{c}]} \vec{a} > 0 \iff$ кут між цими векторами - гострий $\iff \{\vec{a}, \vec{b}, \vec{c}\}$ - права.\\
-$(a,b,c) < 0 \iff pr_{[\vec{b}, \vec{c}]} \vec{a} < 0 \iff$ кут між цими векторами - тупий $\iff \{\vec{a}, \vec{b}, \vec{c}\}$ - ліва.
-\bigskip \\
-2) Дивись \textbf{Prp. 1.7.3.}, яка трійка: права та ліва. А далі користуємось властивістю 1), щойно доведеною. Тому й виникають рівності.\bigskip \\
-3) $(\vec{a}, \vec{b}, \vec{c}) = 0 \iff V = 0$ (див. зауваження нижче), тобто ці вектори лежать на одній площині - компланарні. \bigskip \\
-4) $(\vec{a}, [\vec{b},\vec{c}]) = (\vec{a}, \vec{b}, \vec{c}) = (\vec{c}, \vec{a}, \vec{b}) = (\vec{c}, [\vec{a}, \vec{b}]) = ([\vec{a},\vec{b}], \vec{c})$ \bigskip \\
-5) $(\vec{a_1}+\vec{a_2}, \vec{b}, \vec{c}) = (\vec{a_1}+\vec{a_2}, [\vec{b},\vec{c}]) = (\vec{a_1},[\vec{b},\vec{c}]) + (\vec{a_2},[\vec{b},\vec{c}]) = (\vec{a_1},\vec{b},\vec{c}) + (\vec{a_2},\vec{b},\vec{c})$\bigskip \\
-6) $(\lambda \vec{a}, \vec{b}, \vec{c}) = (\lambda \vec{a}, [\vec{b}, \vec{c}]) = \lambda (\vec{a},[\vec{b},\vec{c}]) = \lambda (\vec{a},\vec{b},\vec{c})$
+Доведемо кожну властивість окремо:
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $(a,b,c) > 0 \iff pr_{[\vec{b}, \vec{c}]} \vec{a} > 0 \iff$ кут між цими векторами -- гострий $\iff \{\vec{a}, \vec{b}, \vec{c}\}$ -- права.\\
+$(a,b,c) < 0 \iff pr_{[\vec{b}, \vec{c}]} \vec{a} < 0 \iff$ кут між цими векторами -- тупий $\iff \{\vec{a}, \vec{b}, \vec{c}\}$ -- ліва.
+
+\item Дивись \prpref{vector_trio_properties}, яка трійка: права та ліва. А далі користуємось властивістю 1), щойно доведеною. Тому й виникають рівності.
+
+\item $(\vec{a}, \vec{b}, \vec{c}) = 0 \iff V = 0$ (див.\ зауваження нижче), тобто ці вектори лежать на одній площині -- компланарні.
+
+\item $(\vec{a}, [\vec{b},\vec{c}]) = (\vec{a}, \vec{b}, \vec{c}) = (\vec{c}, \vec{a}, \vec{b}) = (\vec{c}, [\vec{a}, \vec{b}]) = ([\vec{a},\vec{b}], \vec{c})$.
+
+\item $(\vec{a}_1+\vec{a}_2, \vec{b}, \vec{c}) = (\vec{a}_1+\vec{a}_2, [\vec{b},\vec{c}]) = (\vec{a}_1,[\vec{b},\vec{c}]) + (\vec{a}_2,[\vec{b},\vec{c}]) = (\vec{a}_1,\vec{b},\vec{c}) + (\vec{a}_2,\vec{b},\vec{c})$.
+
+\item $(\lambda \vec{a}, \vec{b}, \vec{c}) = (\lambda \vec{a}, [\vec{b}, \vec{c}]) = \lambda (\vec{a},[\vec{b},\vec{c}]) = \lambda (\vec{a},\vec{b},\vec{c})$.
+\end{enumerate}
+Усі властивості доведені.
 \end{proof}
 
 \begin{remark}[Геометричний зміст]
@@ -976,37 +1003,66 @@ $V_{\text{паралелепіпед}} = |(\vec{a},\vec{b},\vec{c})|$.
 \draw[thick, dashed] (3,2,2)--(5,2,0)--(3,2,-2)--(1,2,0)--cycle;
 \end{tikzpicture}
 \end{figure}
-Справді, $V = S\cdot h = |[\vec{b}, \vec{c}]| \cdot |pr_{[\vec{b}, \vec{c}]} \vec{a}| = |[\vec{b}, \vec{b}] pr_{[\vec{b}, \vec{c}]} \vec{a}| = |(\vec{a}, [\vec{b}, \vec{c}])| = |(\vec{a},\vec{b},\vec{c})|$.
+Справді, $V = S\cdot h = |[\vec{b}, \vec{c}]| \cdot |\pr_{[\vec{b}, \vec{c}]} \vec{a}| = |[\vec{b}, \vec{b}] \pr_{[\vec{b}, \vec{c}]} \vec{a}| = |(\vec{a}, [\vec{b}, \vec{c}])| = |(\vec{a},\vec{b},\vec{c})|$.
 \end{remark}
 
 \textbf{Повернміось до п. 1.7.}\\
 Доведемо останні два пункти:\\
 3) Візьмемо довільний вектор $\vec{d}$ і знайдемо наступний скалярний добуток:\\
-$(\vec{d}, [\vec{a_1}+\vec{a_2}, \vec{b}]) = (\vec{d}, \vec{a_1}+\vec{a_2}, \vec{b}) = (\vec{d}, \vec{a_1}, \vec{b}) + (\vec{d}, \vec{a_2}, \vec{b}) = \\ = (\vec{d}, [\vec{a_1}, \vec{b}]) + (\vec{d}, [\vec{a_2}, \vec{b}]) = (\vec{d}, [\vec{a_1},\vec{b}]+[\vec{a_2},\vec{b}])$\\
-$\Rightarrow [\vec{a_1}+\vec{a_2}, \vec{b}] = [\vec{a_1},\vec{b}]+[\vec{a_2},\vec{b}]$
+$(\vec{d}, [\vec{a}_1+\vec{a}_2, \vec{b}]) = (\vec{d}, \vec{a}_1+\vec{a}_2, \vec{b}) = (\vec{d}, \vec{a}_1, \vec{b}) + (\vec{d}, \vec{a}_2, \vec{b}) = \\ = (\vec{d}, [\vec{a}_1, \vec{b}]) + (\vec{d}, [\vec{a}_2, \vec{b}]) = (\vec{d}, [\vec{a}_1,\vec{b}]+[\vec{a}_2,\vec{b}])$\\
+$\implies [\vec{a}_1+\vec{a}_2, \vec{b}] = [\vec{a}_1,\vec{b}]+[\vec{a}_2,\vec{b}]$.
 \bigskip \\
 4) Візьмемо довільний вектор $\vec{d}$ і знайдемо наступний скалярний добуток:\\
 $(\vec{d}, [\lambda \vec{a}, \vec{b}]) = (\vec{d}, \lambda \vec{a}, \vec{b}) = \lambda (\vec{d}, \vec{a}, \vec{b}) = \lambda (\vec{d}, [\vec{a}, \vec{b}]) = (\vec{d}, \lambda [\vec{a}, \vec{b}])$\\
-$\Rightarrow [\lambda \vec{a}, \vec{b}] = \lambda [\vec{a}, \vec{b}]$ \qed
+$\implies [\lambda \vec{a}, \vec{b}] = \lambda [\vec{a}, \vec{b}]$.
 \bigskip \\
-Розглянемо вектори $\vec{a} = (a_1,a_2,a_3), \vec{b} = (b_1,b_2,b_3)$, які розкладені за ортонормованим базисом\\
-Знайдемо їхній векторний добуток:\\
+Перед доведенням іншої формули хочеться повернутися до ортонормованого базису $\{\vec{i},\vec{j},\vec{k}\}$ та зауважити, що між ними векторний добуток буде ось такий:\\
+$[\vec{i},\vec{j}] = \vec{k}$, \qquad $[\vec{j},\vec{k}] = \vec{i}$, \qquad $[\vec{k},\vec{i}] = \vec{j}$.\\
+Всі ці рівності випливають безспосередьно з означення векторного добутку.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\fill (0,0) circle (1pt) node at (0,-0.3) {$\vec{i}$};
+\fill (-1,1) circle (1pt) node at (-1.3,1) {$\vec{j}$};
+\fill (1,1) circle (1pt) node at (1.3,1) {$\vec{k}$};
+\draw[->] (-0.1,0.1)--(-0.9,0.9);
+\draw[->] (-0.9,1)--(0.9,1);
+\draw[->] (0.9,0.9)--(0.1,0.1);
+\end{tikzpicture}
+\caption*{Наприклад, $[\vec{i},\vec{j}] = \vec{k}$. Із точки $\vec{i}$ до точки $\vec{j}$ -- потрапимо до точки $\vec{k}$.}
+\end{figure}
+Розглянемо вектори $\vec{a} = (a_1,a_2,a_3), \vec{b} = (b_1,b_2,b_3)$, які розкладені за ортонормованим базисом. Знайдемо їхній векторний добуток:\\
 $[\vec{a}, \vec{b}] = [a_1\vec{i}+a_2\vec{j}+a_3\vec{k}, b_1\vec{i}+b_2\vec{j}+b_3\vec{k}] = \\ a_1 b_1 [\vec{i}, \vec{i}] + a_1 b_2 [\vec{i}, \vec{j}] + a_1 b_3 [\vec{i}, \vec{k}] + a_2 b_1 [\vec{j}, \vec{i}] + a_2 b_2 [\vec{j}, \vec{j}] + a_2 b_3 [\vec{j}, \vec{k}] + a_3 b_1 [\vec{k}, \vec{i}] + a_3 b_2 [\vec{k}, \vec{j}] + a_3 b_3 [\vec{k}, \vec{k}] = \\
-= (a_2 b_3 - a_3 b_2) \vec{i} + (a_1 b_3 - a_3 b_1) \vec{j} + (a_1 b_2 - a_2 b_1) \vec{k} = \begin{vmatrix}
+= (a_2 b_3 - a_3 b_2) \vec{i} + (a_1 b_3 - a_3 b_1) \vec{j} + (a_1 b_2 - a_2 b_1) \vec{k} \overset{\text{скорочено}}{=} \begin{vmatrix}
 \vec{i} & \vec{j} & \vec{k} \\
 a_1 & a_2 & a_3 \\
 b_1 & b_2 & b_3
 \end{vmatrix}$.\\
-Координати вектора $[\vec{a}, \vec{b}] = \left(\begin{vmatrix} a_2 & b_2 \\ a_3 & b_3 \end{vmatrix}, \begin{vmatrix} a_1 & b_1 \\ a_3 & b_3 \end{vmatrix}, \begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix} \right)$.\\
-Тут ще про визначники ми нычого не говорили, але хотілось цю формулу залишити в компактному вигляді.
-\bigskip \\
+Координати вектора $[\vec{a}, \vec{b}] = (a_2b_3-a_3b_2,\ a_1b_3-a_3b_1,\ a_1b_2-a_2b_1) \overset{\text{скорочено}}{=} \left(\begin{vmatrix} a_2 & b_2 \\ a_3 & b_3 \end{vmatrix}, \begin{vmatrix} a_1 & b_1 \\ a_3 & b_3 \end{vmatrix}, \begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix} \right)$.\\
+Скорочено ми записували через такий математичний об'єкт як \textit{визначник}. Про них поговоримо детально пізніше. Підсумуємо:
+\begin{proposition}
+Для векторів $\vec{a} = (a_1,a_2,a_3),\ \vec{b} = (b_1,b_2,b_3)$ в ортонормованому базисі векторний добуток рахується таким чином: $[\vec{a}.\vec{b}] = \begin{vmatrix}
+\vec{i} & \vec{j} & \vec{k} \\
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3
+\end{vmatrix}$.
+\end{proposition}
+
 \textbf{Повернімось до п. 1.8.}\\
 Розглянемо вектори $\vec{a} = (a_1,a_2,a_3), \vec{b} = (b_1,b_2,b_3), \vec{c} = (c_1,c_2,c_3)$, які розкладені за ортонормованим базисом. Знайдемо їхній мішаний добуток:\\
 $(\vec{a}, \vec{b}, \vec{c}) = ([\vec{a}, \vec{b}], \vec{c}) = c_1 \begin{vmatrix} a_2 & b_2 \\ a_3 & b_3 \end{vmatrix} + c_2 \begin{vmatrix} a_1 & b_1 \\ a_3 & b_3 \end{vmatrix} + c_3 \begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix} = \begin{vmatrix}
 a_1 & a_2 & a_3 \\
 b_1 & b_2 & b_3 \\
 c_1 & c_2 & c_3
-\end{vmatrix}$
+\end{vmatrix}$.\\
+Знову все це ми записали в скороченому вигляді, як це було вище. Підсумуємо:
+\begin{proposition}
+Для векторів $\vec{a} = (a_1,a_2,a_3),\ \vec{b} = (b_1,b_2,b_3), \vec{c} = (c_1,c_2,c_3)$ в ортонормованому базисі мішаний добуток рахується таким чином: $(\vec{a},\vec{b},\vec{c}) = \begin{vmatrix}
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3 \\
+c_1 & c_2 & c_3
+\end{vmatrix}$.
+\end{proposition}
 
 \subsection{Подвійний векторний добуток}
 \begin{definition}
@@ -1017,16 +1073,18 @@ c_1 & c_2 & c_3
 Позначення: $\vec{d} = [\vec{a},\vec{b},\vec{c}]$.
 \end{definition}
 
-\begin{proposition}
-$[\vec{a},[\vec{b},\vec{c}]] = \vec{b} (\vec{a}, \vec{c}) - \vec{c} (\vec{a}, \vec{b})$.\\
+\begin{proposition}[Формула Лагранжа]
+Справедлива рівність $[\vec{a},[\vec{b},\vec{c}]] = \vec{b} (\vec{a}, \vec{c}) - \vec{c} (\vec{a}, \vec{b})$ при ортонормованому базисі.\\
 \textit{Розмновна формула: бац мінус цаб :)}
 \end{proposition}
 
 \begin{proof}
-Розглянемо вектори $\vec{a} = (a_1, a_2, a_3), \vec{b} = (b_1,b_2,0), \vec{c} = (c_1,0,0)$, які розкладені за ортонормованим базисом. Маємо тоді, що $[\vec{b}, \vec{c}] = (0,0,-b_2 c_1)$.\\
-Також $[\vec{a}, [\vec{b}, \vec{c}]] = (-a_2b_2c_1, a_1b_2c_1,0)$.\\
-Водночас $\vec{b} (\vec{a}, \vec{c}) - \vec{c} (\vec{a}, \vec{b}) = a_1c_1\vec{b} - (a_1b_1+a_2b_2)\vec{c} = (-a_2b_2c_1,a_1b_2c_1,0)$\\
-Отже, $[\vec{a},[\vec{b},\vec{c}]] = \vec{b} (\vec{a}, \vec{c}) - \vec{c} (\vec{a}, \vec{b})$.
+Розглянемо вектори $\vec{a} = (a_1, a_2, a_3), \vec{b} = (b_1,b_2,b_3), \vec{c} = (c_1,c_2,c_3)$. Оскільки ми в ортонормованому базисі, то $[\vec{b},\vec{c}] = (b_2c_3-b_3c_2,\ b_1c_3-b_3c_1,\ b_1c_2-b_2c_1)$. Далі маємо наступне: $[\vec{a}, [\vec{b},\vec{c}]] = \\ = (a_2 (b_1c_2-b_2c_1) - a_3 (b_1c_3-b_3c_1),\quad a_1(b_1c_2-b_2c_1) - a_3(b_2c_3-b_3c_2), \quad a_1 (b_1c_3 - b_3c_1) - a_2 (b_2c_3 - b_3c_2)) \\
+= (a_2b_1c_2-a_2b_2c_1-a_3b_1c_3+a_3b_3c_1,\ a_1b_1c_2-a_1b_2c_1-a_3b_2c_3+a_3b_3c_2,\ a_1b_1c_3-a_1b_3c_1-a_2b_2c_3+a_2b_3c_2) \\
+= (a_2b_1c_2-a_2b_2c_1-a_3b_1c_3+a_3b_3c_1 \textcolor{red}{+a_1b_1c_1 - a_1b_1c_1},\\
+a_1b_1c_2-a_1b_2c_1-a_3b_2c_3+a_3b_3c_2 \textcolor{red}{+a_2b_2c_2 - a_2b_2c_2},\\
+a_1b_1c_3-a_1b_3c_1-a_2b_2c_3+a_2b_3c_2 \textcolor{red}{+a_3b_3c_3 - a_3b_3c_3}) = \\
+= (b_1(a_1c_1+a_2c_2$
 \end{proof}
 
 \textit{Альтернативне доведення.}
@@ -1039,23 +1097,20 @@ $[\vec{a},[\vec{b},\vec{c}]] = \vec{b} (\vec{a}, \vec{c}) - \vec{c} (\vec{a}, \v
 \draw[thick,->] (0,0,0) -- (1,2,1) node[anchor=north west]{$\vec{a}$};
 \end{tikzpicture}
 \end{figure}
-Розглянемо більш детально подвійні добутки.\\
-Спочатку створімо вектор $[\vec{b}, \vec{c}]$. За означенням, $[\vec{b}, \vec{c}] \perp \vec{b},\vec{c}$\\
-А потім вже вектор $[\vec{a},\vec{b},\vec{c}]$. За означенням, $[\vec{a},\vec{b},\vec{c}] \perp [\vec{b}, \vec{c}]$.\\
-А це означає, що $[\vec{a},\vec{b},\vec{c}]$ лежить на площині, що створена векторами $\vec{b},\vec{c}$, тоді цей вектор розкладемо за базисом: $[\vec{a}, \vec{b}, \vec{c}] = \beta \vec{b} + \gamma \vec{c}$.\\
-Залишилось знайти координати $\beta, \gamma$.\\
+Розглянемо більш детально подвійні добутки. Спочатку створімо вектор $[\vec{b}, \vec{c}]$. За означенням, $[\vec{b}, \vec{c}] \perp \vec{b},\vec{c}$.\\
+А потім створімо вже вектор $[\vec{a},\vec{b},\vec{c}]$. За означенням, $[\vec{a},\vec{b},\vec{c}] \perp [\vec{b}, \vec{c}]$.\\
+А це означає, що $[\vec{a},\vec{b},\vec{c}]$ лежить на площині, що створена векторами $\vec{b},\vec{c}$, тоді цей вектор розкладемо за базисом: $[\vec{a}, \vec{b}, \vec{c}] = \beta \vec{b} + \gamma \vec{c}$. Залишилось знайти координати $\beta, \gamma$.\\
 Нам також відомо, що $[\vec{a},\vec{b},\vec{b}] \perp \vec{a} \implies ([\vec{a}, \vec{b}, \vec{b}], \vec{a}) = 0$.\\
 Але з іншого боку, $([\vec{a}, \vec{b}, \vec{b}], \vec{a}) = (\beta \vec{b} + \gamma \vec{c}, \vec{a}) = \beta (\vec{b}, \vec{a}) + \gamma (\vec{c}, \vec{a})$.\\
 Таким чином, $(\vec{a}, \vec{b}) \beta + (\vec{a}, \vec{c}) \gamma = 0 \implies \dfrac{\gamma}{(\vec{a}, \vec{b})} = - \dfrac{\beta}{(\vec{a}, \vec{c})} = \lambda$.\\
-$\Rightarrow [\vec{a}, \vec{b}, \vec{c}] = -\lambda \vec{b} (\vec{a}, \vec{c}) + \lambda \vec{c} (\vec{a}, \vec{b})$\\
-А тепер нехай $\vec{a} = \vec{i}, \vec{b} = \vec{j}, \vec{c} = \vec{i}$. Отримаємо, що\\
-$\vec{j} = [\vec{i}, \vec{j}, \vec{i}] = -\lambda \vec{j} \Rightarrow \lambda = -1$.\\
-Підставимо це значення та отримаємо $[\vec{a},[\vec{b},\vec{c}]] = \vec{b} (\vec{a}, \vec{c}) - \vec{c} (\vec{a}, \vec{b})$ \qed
+$\implies [\vec{a}, \vec{b}, \vec{c}] = -\lambda \vec{b} (\vec{a}, \vec{c}) + \lambda \vec{c} (\vec{a}, \vec{b})$\\
+А тепер нехай $\vec{a} = \vec{i}, \vec{b} = \vec{j}, \vec{c} = \vec{i}$. Отримаємо, що $\vec{j} = [\vec{i}, \vec{j}, \vec{i}] = -\lambda \vec{j} \implies \lambda = -1$. Підставимо це значення та отримаємо $[\vec{a},[\vec{b},\vec{c}]] = \vec{b} (\vec{a}, \vec{c}) - \vec{c} (\vec{a}, \vec{b})$.
 
 \begin{corollary}[Тотожність Якобі]
 $[\vec{a}, [\vec{b}, \vec{c}]] + [\vec{b}, [\vec{c}, \vec{a}]] + [\vec{c}, [\vec{a}, \vec{b}]] = \vec{0}$.
 \end{corollary}
 
+\iffalse
 \subsection{*Формула ділення відрізка в заданому співвідношенні}
 Задані точки $A(x_A,y_A,z_A), B(x_B,y_B,z_B)$. Проведемо відрізок $AB$. Встановимо точку $P(x_P,y_P,z_P) \in AB$ таким чином, що $\dfrac{AP}{PB} = \dfrac{\lambda}{\mu}$
 \begin{figure}[H]
@@ -1075,11 +1130,17 @@ $\overrightarrow{AP} = (x_P - x_A, y_P - y_A, z_P - z_A)$, $\overrightarrow{PB} 
 $\mu \overrightarrow{AP} = \lambda \overrightarrow{PB}$.\\
 Тому $\mu (x_P - x_A) = \lambda (x_B - x_P) \implies \dots \Rightarrow x_P = \dfrac{\lambda x_B + \mu x_A}{\lambda + \mu}$.\\
 Для $y_P, z_P$ аналогічна формула.
+\fi
 \newpage
 
 \section{Початок аналітичної геометрії. Прямі та площини}
 \begin{definition}
-\textbf{Рівнянням геометричного місця точок (ГМТ)} називається рівняння $$F(x,y,z) = 0 \text{ - випадок в просторі}$$ або $$F(x,y) = 0 \text{ - випадок на площині},$$ якому задовольняє будь-яка точка, що належить даному ГМТ, та не задовольняє жодна точка, що не належить ГМТ.
+\textbf{Рівнянням геометричного місця точок (ГМТ)} називається рівняння
+\begin{align*}
+F(x,y,z) = 0 \text{ -- випадок в просторі} \\
+F(x,y) = 0 \text{ -- випадок на площині},
+\end{align*}
+якому задовольняє будь-яка точка, що належить даному ГМТ, та не задовольняє жодна точка, що не належить ГМТ.
 \end{definition}
 
 \begin{definition}
@@ -1090,15 +1151,16 @@ $\mu \overrightarrow{AP} = \lambda \overrightarrow{PB}$.\\
 \textbf{Спрямованим вектором прямої (площини)} називають будь-який ненульовий вектор, що паралельний до цієї прямої (площини).
 \end{definition}
 
-Надалі для зручності розглядається ортонормований базис $\{\vec{i},\vec{j},\vec{k}\}$.
+\begin{remark}
+Надалі всюди розглядається ортонормований базис $\{\vec{i},\vec{j},\vec{k}\}$ при роботі з векторами.
+\end{remark}
 
 \subsection{Пряма на площині}
-Знайдемо рівняння прямої, що проходить через т. $M_0 = (x_0,y_0)$.\\
-Задамо пряму $l$, довільну т. $M = (x,y) \in l$ та нормаль $\vec{n} = (A,B)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0)$.\\
-Оскільки $\vec{n} \perp \overrightarrow{M_0 M}$, то це теж саме, що $(\vec{n}, \overrightarrow{M_0 M}) = 0 \iff A(x-x_0)+B(y-y_0)=0$.\\
-Отже, отримали \textbf{рівняння прямої, що проходить через т. $M_0$}:
+Знайдемо рівняння прямої, що проходить через точку $M_0 = (x_0,y_0)$.\\
+Задамо пряму $l$, довільну точку $M = (x,y) \in l$ та нормальний вектор $\vec{n} = (A,B)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0)$. Оскільки $\vec{n} \perp \overrightarrow{M_0 M}$, то це теж саме, що $(\vec{n}, \overrightarrow{M_0 M}) = 0 \iff A(x-x_0)+B(y-y_0)=0$.\\
+Отже, отримали \textbf{рівняння прямої, що проходить через точку $M_0$}:
 \begin{align*}
-A(x-x_0) + B(y-y_0) = 0
+A(x-x_0) + B(y-y_0) = 0.
 \end{align*}
 
 \begin{figure}[H]
@@ -1117,18 +1179,21 @@ A(x-x_0) + B(y-y_0) = 0
 $Ax + By \underbrace{-Ax_0 - By_0}_{= C} = Ax+By+C = 0$.\\
 Отже, отримали \textbf{загальне рівняння прямої}:
 \begin{align*}
-Ax + By + C = 0
+Ax + By + C = 0.
 \end{align*}
 
 \subsubsection*{Частинні випадки}
-I. $A = 0$.\\
+\begin{enumerate}[wide=0pt,label={\Roman*.}]
+\item $A = 0$.\\
 Тоді маємо рівняння $By + C = 0 \implies y = -\dfrac{C}{B}$. Отримали \textbf{пряму, що паралельна осі $OX$}.
-\bigskip \\
-II. $B = 0$.\\
+
+\item $B = 0$.\\
 Тоді маємо рівняння $Ax + C = 0 \implies x = \dfrac{-C}{A}$. Отримали \textbf{пряму, що паралельна осі $OY$}.
-\bigskip \\
-III. $C = 0$.\\
+
+\item $C = 0$.\\
 Тоді маємо рівняння $Ax + By = 0$. Отримали \textbf{пряму, що проходить через початок координат}.
+\end{enumerate}
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=0.8]
@@ -1150,11 +1215,9 @@ III. $C = 0$.\\
 \end{tikzpicture}
 \end{figure}
 
-Розглянемо окремо, коли $A,B,C \neq 0$. Маємо:\\
-$Ax + By = - C$.\\
-Поділимо обидві частини рівності на $C$ - отримаємо таке:\\
-$\dfrac{x}{-\frac{C}{A}} + \dfrac{y}{-\frac{C}{B}} = 1$\\
-Позначмо $-\dfrac{C}{A} = a$, $-\dfrac{C}{B} = b$. Тоді $\dfrac{x}{a} + \dfrac{y}{b} = 1$.\\
+Розглянемо окремо, коли $A,B,C \neq 0$. Маємо $Ax + By = - C$. Поділимо обидві частини рівності на $C$ -- отримаємо таке:\\
+$\dfrac{x}{-\frac{C}{A}} + \dfrac{y}{-\frac{C}{B}} = 1$.\\
+Позначмо $-\dfrac{C}{A} = a$, $-\dfrac{C}{B} = b$. Тоді виникне рівняння $\dfrac{x}{a} + \dfrac{y}{b} = 1$.\\
 Отже, отримали \textbf{рівняння прямої в відрізках}:
 \begin{align*}
 \dfrac{x}{a} + \dfrac{y}{b} = 1
@@ -1170,11 +1233,10 @@ $\dfrac{x}{-\frac{C}{A}} + \dfrac{y}{-\frac{C}{B}} = 1$\\
 \end{tikzpicture}
 \end{figure}
 
-Шукаємо тепер рівняння прямої, що проходить через т. $M_0 = (x_0, y_0)$ іншим шляхом.\\
-Задано пряму $l$, довільну т. $M = (x,y) \in l$ та спрямований вектор $\vec{a} = (m,n)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0)$.\\
-Оскільки $\vec{a} \parallel \overrightarrow{M_0M}$ то це теж саме, що $\vec{a} = t \overrightarrow{M_0 M} \iff
+Шукаємо тепер рівняння прямої, що проходить через точку $M_0 = (x_0, y_0)$ іншим шляхом.\\
+Задано пряму $l$, довільну точку $M = (x,y) \in l$ та спрямований вектор $\vec{a} = (m,n)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0)$. Оскільки $\vec{a} \parallel \overrightarrow{M_0M}$ то це теж саме, що $\vec{a} = t \overrightarrow{M_0 M} \iff
 \dfrac{x-x_0}{m} = \dfrac{y-y_0}{n} = t$.\\
-Отже, отримали \textbf{канонічне рівняння прямої, що проходить через т. $M_0$:}
+Отже, отримали \textbf{канонічне рівняння прямої, що проходить через точку $M_0$:}
 \begin{align*}
 \dfrac{x-x_0}{m} = \dfrac{y-y_0}{n}
 \end{align*}
@@ -1196,25 +1258,25 @@ $\dfrac{x}{-\frac{C}{A}} + \dfrac{y}{-\frac{C}{B}} = 1$\\
 \begin{cases}
 x = x_0 + mt\\
 y = y_0 + nt
-\end{cases}, t \in \mathbb{R}
+\end{cases}, t \in \mathbb{R}.
 \end{align*}
 
-Задані дві т. $M_1 = (x_1,y_1), M_2 = (x_2,y_2)$. Знайдемо рівняння прямої, що проходить через них.\\
+Задані дві точки $M_1 = (x_1,y_1), M_2 = (x_2,y_2)$. Знайдемо рівняння прямої, що проходить через них.\\
 Створимо спрямлений вектор $\vec{a} = \overrightarrow{M_2M_1} = (x_2-x_1,y_2-y_1)$. Тоді, використовуючи канонічне рівняння прямої, отримаємо \textbf{рівняння прямої, що проходить через дві точки}:
 \begin{align*}
-\dfrac{x-x_1}{x_2-x_1} = \dfrac{y-y_1}{y_2-y_1}
+\dfrac{x-x_1}{x_2-x_1} = \dfrac{y-y_1}{y_2-y_1}.
 \end{align*}
 
 \subsection{Нормальне рівняння прямої}
 У нас вже є загальне рівняння прямої $Ax + By + C = 0$.\\
 Поділимо обидві частини рівняння на $\pm \sqrt{A^2+B^2}$, щоб величина $C$ стала недодатною (із плюсюм, коли $C<0$, інакше з мінусом).\\
 $\pm \dfrac{A}{\sqrt{A^2+B^2}}x \pm \dfrac{B}{\sqrt{A^2+B^2}}y \pm \dfrac{C}{\sqrt{A^2+B^2}} = 0$.\\
-Отримаємо нормаль $\vec{n} = \left(\pm \dfrac{A}{\sqrt{A^2+B^2}}, \pm \dfrac{B}{\sqrt{A^2+B^2}} \right)$, причому $|\vec{n}| = 1$. Більш того, маємо інші деталі:\\
+Отримаємо нормальний вектор $\vec{n} = \left(\pm \dfrac{A}{\sqrt{A^2+B^2}}, \pm \dfrac{B}{\sqrt{A^2+B^2}} \right)$, причому $|\vec{n}| = 1$. Більш того, маємо інші деталі:\\
 $(\vec{n}, \vec{i}) = \cos \alpha = \pm \dfrac{A}{\sqrt{A^2+B^2}}$;\\
 $(\vec{n}, \vec{j}) = \cos \beta = \pm \dfrac{A}{\sqrt{A^2+B^2}}$.\\
-Тут $\alpha$ - кут між нормаллю та $OX$, а тут $\beta$ - кут між нормаллю та $OY$.\\
+Тут $\alpha$ -- кут між нормальним вектором та $OX$, а тут $\beta$ -- кут між нормальним вектором та $OY$.\\
 Отже, маємо $\vec{n} = (\cos \alpha, \cos \beta)$.\\
-Також вважатимемо, що $\pm \dfrac{C}{\sqrt{A^2+B^2}} = -p$, причому $p \geq 0$.\\
+Також позначимо $\pm \dfrac{C}{\sqrt{A^2+B^2}} = -p$, причому $p \geq 0$.\\
 Отримаємо \textbf{нормальне рівняння прямої:}
 \begin{align*}
 x \cos \alpha + y \cos \beta - p = 0\\
@@ -1240,8 +1302,8 @@ p \geq 0
 \end{tikzpicture}
 \end{figure}
 
-Час дізнатись, що таке взагалі $p$ і в чому взагалі зміст.\\
-Нехай задана т. $P = (x_P, y_P) \not \in l$. Візьмемо таку т. $M = (x_M, y_M) \in l$, щоб $\overrightarrow{MP} \parallel \vec{n}$. Тоді розпишемо параметричне рівняння:\\
+Час дізнатись, що таке взагалі $p$ і в чому зміст.\\
+Нехай задана точка $P = (x_P, y_P) \not \in l$. Візьмемо таку точку $M = (x_M, y_M) \in l$, щоб $\overrightarrow{MP} \parallel \vec{n}$. Тоді розпишемо параметричне рівняння:\\
 $\begin{cases}
 x_M - x_P = t \cos \alpha\\
 y_M - y_P = t \cos \beta
@@ -1253,16 +1315,16 @@ $x_P \cos \alpha + y_P \cos \beta + t(\cos^2 \alpha + \cos^2 \beta) - p = 0$\\
 $x_P \cos \alpha + y_P \cos \beta -p = -t$.\\
 Маємо таке означення:
 \begin{definition}
-\textbf{Відхиленням т. $P$ від прямої $l$} називається величина:
+\textbf{Відхиленням точки $P$ від прямої $l$} називається величина:
 \begin{align*}
 \delta(P,l) = x_P \cos \alpha + y_P \cos \beta - p
 \end{align*}
 \end{definition}
 
 Отже, $\delta(P,l)=-t$.\\
-Зокрема отримаємо, що відстань від т. $P$ до прямої визначається таким чином:\\
+Зокрема отримаємо, що відстань від точки $P$ до прямої визначається таким чином:\\
 $d(P,l)=|\overrightarrow{PM}| = |t \vec{n}| = |\delta(P,l)|$.\\
-Отже, відстань $d(P,l)$ - це модуль відхилення:
+Отже, відстань $d(P,l)$ -- це модуль відхилення:
 \begin{align*}
 d(P,l) = |\delta(P,l)|
 \end{align*}
@@ -1271,19 +1333,16 @@ d(P,l) = |\delta(P,l)|
 \begin{align*}
 p = d(O,l)
 \end{align*}
-І наостанок зауважимо інше. Маємо:\\
-$d(P,l) = |x_P \cos \alpha + y_P \cos \beta - p|$.\\
-Її можна переписати іншим шляхом, якщо згадати, що таке $\cos \alpha, \cos \beta, p$ з аналітичної точки зору:
+І наостанок зауважимо інше. Маємо $d(P,l) = |x_P \cos \alpha + y_P \cos \beta - p|$. Її можна переписати іншим шляхом, якщо згадати, що таке $\cos \alpha, \cos \beta, p$ з аналітичної точки зору:
 \begin{align*}
 d(P,l) = \dfrac{|Ax_P + By_P + C|}{\sqrt{A^2+B^2}}
 \end{align*}
 
 
 \subsection{Площина в просторі}
-Знайдемо рівняння площини, що проходить через т. $M_0 = (x_0,y_0,z_0)$.\\
-Задамо площину $\pi$, довільну т. $M = (x,y,z) \in \pi$ та нормаль $\vec{n} = (A,B,C)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0, z-z_0)$.\\
-Оскільки $\vec{n} \perp \overrightarrow{M_0 M}$, то це теж саме, що $(\vec{n}, \overrightarrow{M_0 M}) = 0 \iff A(x-x_0)+B(y-y_0)+C(z-z_0)=0$.\\
-Отже, отримали \textbf{рівняння площини, що проходить через т. $M_0$}:
+Знайдемо рівняння площини, що проходить через точку $M_0 = (x_0,y_0,z_0)$.\\
+Задамо площину $\pi$, довільну точку $M = (x,y,z) \in \pi$ та нормальний вектор $\vec{n} = (A,B,C)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0, z-z_0)$. Оскільки $\vec{n} \perp \overrightarrow{M_0 M}$, то це теж саме, що $(\vec{n}, \overrightarrow{M_0 M}) = 0 \iff A(x-x_0)+B(y-y_0)+C(z-z_0)=0$.\\
+Отже, отримали \textbf{рівняння площини, що проходить через точку $M_0$}:
 \begin{align*}
 A(x-x_0) + B(y-y_0) + C(z-z_0) = 0
 \end{align*}
@@ -1304,30 +1363,33 @@ A(x-x_0) + B(y-y_0) + C(z-z_0) = 0
 $Ax + By + Cz \underbrace{-Ax_0 - By_0 - Cz_0}_{= D} = Ax+By+Cz+D = 0$.\\
 Отже, отримали \textbf{загальне рівняння площини:}
 \begin{align*}
-Ax + By + C = 0
+Ax + By + C = 0.
 \end{align*}
 
 \subsubsection*{Частинні випадки}
-I. $A = 0$.\\
+\begin{enumerate}[wide=0pt,label={\Roman*.}]
+\item $A = 0$.\\
 Оскільки $\vec{n} = (0,B,C)$, то $\vec{n} \perp \vec{i}$ або $\vec{n} \perp OX$. Отже, маємо $By + Cz + D = 0$. Отримали \textbf{площину, що паралельна осі} $OX$.
-\bigskip \\
-II. $B = 0$.\\
+
+\item $B = 0$.\\
 Оскільки $\vec{n} = (A,0,C)$, то $\vec{n} \perp \vec{j}$ або $\vec{n} \perp OY$. Отже, маємо $Ax + Cz + D = 0$. Отримали \textbf{площину, що паралельна осі} $OY$.
-\bigskip \\
-III. $C = 0$.\\
+
+\item $C = 0$.\\
 Оскільки $\vec{n} = (A,B,0)$, то $\vec{n} \perp \vec{k}$ або $\vec{n} \perp OZ$. Отже, маємо $Ax + By + D = 0$. Отримали \textbf{площину, що паралельна осі} $OZ$.
-\bigskip \\
-IV. $A=B=0$.\\
+
+\item $A=B=0$.\\
 Тоді $\vec{n} = (0,0,C) \perp \vec{i}; \perp \vec{j}$. Отже, маємо $Cz + D = 0$. Отримали \textbf{площину, що паралельна площині} $XOY$.
-\bigskip \\
-V. $B=C=0$.\\
+
+\item $B=C=0$.\\
 Тоді $\vec{n} = (A,0,0) \perp \vec{j}; \perp \vec{k}$. Отже, маємо $Ax + D = 0$. Отримали \textbf{площину, що паралельна площині} $YOZ$.
-\bigskip \\
-6) $A=C=0$.
+
+\item $A=C=0$.
 Тоді $\vec{n} = (0,B,0) \perp \vec{i}; \perp \vec{k}$. Отже, маємо $By + D = 0$. Отримали \textbf{площину, що паралельна площині} $XOZ$.
-\bigskip \\
-7) $D = 0$.\\
-Тоді маємо $Ax + By + Cz = 0$. Отримали \textbf{площину, що проходить через початок координат.}
+
+\item $D = 0$.\\
+Тоді маємо $Ax + By + Cz = 0$. Отримали \textbf{площину, що проходить через початок координат}.
+\end{enumerate}
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1361,11 +1423,9 @@ V. $B=C=0$.\\
 \end{tikzpicture}
 \end{figure}
 
-Розглянемо окремо, коли $A,B,C,D \neq 0$. Маємо:\\
-$Ax + By + Cz = - D$\\
-Поділимо обидві частини рівності на $D$ - отримаємо таке:\\
+Розглянемо окремо, коли $A,B,C,D \neq 0$. Маємо $Ax + By + Cz = - D$. Поділимо обидві частини рівності на $D$ -- отримаємо таке:\\
 $\dfrac{x}{-\frac{D}{A}} + \dfrac{y}{-\frac{D}{B}} + \dfrac{z}{-\frac{D}{C}} = 1$.\\
-Позначмо $-\dfrac{C}{A} = a$, $-\dfrac{B}{A} = b$, $-\dfrac{z}{-\frac{D}{C}} = c$. Тоді $\dfrac{x}{a} + \dfrac{y}{b} + \dfrac{z}{c} = 1$.\\
+Позначмо $-\dfrac{C}{A} = a$, $-\dfrac{B}{A} = b$, $-\dfrac{z}{-\frac{D}{C}} = c$. Тоді виникне рівняння $\dfrac{x}{a} + \dfrac{y}{b} + \dfrac{z}{c} = 1$.\\
 Отже, отримали \textbf{рівняння площини в відрізках}:
 \begin{align*}
 \dfrac{x}{a} + \dfrac{y}{b} + \dfrac{z}{c} = 1
@@ -1393,8 +1453,8 @@ $\dfrac{x}{-\frac{D}{A}} + \dfrac{y}{-\frac{D}{B}} + \dfrac{z}{-\frac{D}{C}} = 1
 \end{tikzpicture}
 \end{figure}
 
-Задані три т. $M_1 = (x_1,y_1,z_1), M_2 = (x_2,y_2,z_2), M_3 = (x_3,y_3,z_3)$. Знайдемо рівняння площини, що проходить через них.\\
-Оберему довільну т. $M = (x,y,z)$. Ця точка $M \in (M_1 M_2 M_3) \iff \overrightarrow{M_1M}, \overrightarrow{M_2M_1}, \overrightarrow{M_3M_1}$ - компланарні $\iff (\overrightarrow{M_1M}, \overrightarrow{M_2M_1}, \overrightarrow{M_3M_1}) = 0$.\\
+Задані три точки $M_1 = (x_1,y_1,z_1), M_2 = (x_2,y_2,z_2), M_3 = (x_3,y_3,z_3)$. Знайдемо рівняння площини, що проходить через них.\\
+Оберему довільну точку $M = (x,y,z)$. Ця точка $M \in (M_1 M_2 M_3) \iff \overrightarrow{M_1M}, \overrightarrow{M_2M_1}, \overrightarrow{M_3M_1}$ -- компланарні $\iff (\overrightarrow{M_1M}, \overrightarrow{M_2M_1}, \overrightarrow{M_3M_1}) = 0$.\\
 Отримаємо \textbf{рівняння площини, що проходить через три точки}:
 \begin{align*}
 \begin{vmatrix}
@@ -1415,14 +1475,13 @@ x_3-x_1 & y_3-y_1 & z_3-z_1
 \end{figure}
 
 \subsection{Нормальне рівняння площини}
-У нас вже є загальне рівняння площини $Ax + By + Cz + D = 0$.\\
-Поділимо обидві частини рівняння на $\pm \sqrt{A^2+B^2+C^2}$, щоб величина $D$ стала недодатною (плюс, коли $D<0$, інакше мінус).\\
+У нас вже є загальне рівняння площини $Ax + By + Cz + D = 0$. Поділимо обидві частини рівняння на $\pm \sqrt{A^2+B^2+C^2}$, щоб величина $D$ стала недодатною (плюс, коли $D<0$, інакше мінус).\\
 $\pm \dfrac{A}{\sqrt{A^2+B^2+C^2}}x \pm \dfrac{B}{\sqrt{A^2+B^2+C^2}}y \pm \dfrac{C}{\sqrt{A^2+B^2+C^2}}z \pm \dfrac{D}{\sqrt{A^2+B^2+C^2}} = 0$.\\
-Отримаємо нормаль $\vec{n} = \left(\pm \dfrac{A}{\sqrt{A^2+B^2+C^2}}, \pm \dfrac{B}{\sqrt{A^2+B^2+C^2}}, \pm \dfrac{C}{\sqrt{A^2+B^2+C^2}} \right)$, причому $|\vec{n}| = 1$. Більш того, маємо інші деталі:\\
+Отримаємо нормальний вектор $\vec{n} = \left(\pm \dfrac{A}{\sqrt{A^2+B^2+C^2}}, \pm \dfrac{B}{\sqrt{A^2+B^2+C^2}}, \pm \dfrac{C}{\sqrt{A^2+B^2+C^2}} \right)$, причому $|\vec{n}| = 1$. Більш того, маємо інші деталі:\\
 $(\vec{n}, \vec{i}) = \cos \alpha = \pm \dfrac{A}{\sqrt{A^2+B^2+C^2}}$;\\
 $(\vec{n}, \vec{j}) = \cos \beta = \pm \dfrac{B}{\sqrt{A^2+B^2+C^2}}$;\\
 $(\vec{n}, \vec{k}) = \cos \gamma = \pm \dfrac{C}{\sqrt{A^2+B^2+C^2}}$.\\
-Тут $\alpha$ - кут між нормаллю та $OX$, $\beta$ - кут між нормаллю та $OY$, $\gamma$ - кут між нормаллю та $OZ$.\\
+Тут $\alpha$ -- кут між нормаллю та $OX$, $\beta$ -- кут між нормальним вектором та $OY$, $\gamma$ -- кут між нормальним вектором та $OZ$.\\
 Отже, маємо $\vec{n} = (\cos \alpha, \cos \beta, \cos \gamma)$.\\
 Також вважатимемо, що $\pm \dfrac{D}{\sqrt{A^2+B^2+C^2}} = -p$, причому $p \geq 0$.\\
 Отримаємо \textbf{нормальне рівняння площини}:
@@ -1458,8 +1517,8 @@ p \geq 0
 \end{tikzpicture}
 \end{figure}
 
-Час дізнатись, що таке взагалі $p$ і в чому взагалі зміст (спойлер: зміст аналогічний).\\
-Нехай задана т. $P = (x_P, y_P, z_P) \not \in \pi$. Візьмемо таку т. $M = (x_M, y_M, z_M) \in \pi$, щоб $\overrightarrow{MP} \parallel \vec{n}$. Тоді $\overrightarrow{MP} = t \vec{n}$.\\
+Час дізнатись, що таке взагалі $p$ і в чому зміст (спойлер: зміст аналогічний).\\
+Нехай задана точка $P = (x_P, y_P, z_P) \not \in \pi$. Візьмемо таку точку $M = (x_M, y_M, z_M) \in \pi$, щоб $\overrightarrow{MP} \parallel \vec{n}$. Тоді $\overrightarrow{MP} = t \vec{n}$.\\
 $\begin{cases}
 x_M - x_P = t \cos \alpha\\
 y_M - y_P = t \cos \beta\\
@@ -1472,15 +1531,15 @@ $x_P \cos \alpha + y_P \cos \beta + z_P \cos \gamma + t(\cos^2 \alpha + \cos^2 \
 $x_P \cos \alpha + y_P \cos \beta + z_P \cos \gamma -p = -t$.\\
 Маємо таке означення:
 \begin{definition}
-\textbf{2.4.1. Відхиленням т. $P$ від площини $\pi$} називається величина:
+\textbf{Відхиленням точки $P$ від площини $\pi$} називається величина:
 \begin{align*}
 \delta(P,\pi) = x_P \cos \alpha + y_P \cos \beta + z_P \cos \gamma - p
 \end{align*}
 \end{definition}
 Отже, $\delta(P,\pi)=-t$.\\
-Зокрема отримаємо, що відстань від т. $P$ до площини визначається таким чином:\\
+Зокрема отримаємо, що відстань від точки $P$ до площини визначається таким чином:\\
 $d(P,\pi)=|\overrightarrow{PM}| = |t \vec{n}| = |\delta(P,\pi)|$.\\
-Отже, відстань $d(P,\pi)$ - модуль відхилення:
+Отже, відстань $d(P,\pi)$ -- модуль відхилення:
 \begin{align*}
 d(P,\pi) = |\delta(P,\pi)|
 \end{align*}
@@ -1489,16 +1548,14 @@ d(P,\pi) = |\delta(P,\pi)|
 \begin{align*}
 p = d(O,\pi)
 \end{align*}
-І наостанок зауважимо інше. Маємо:\\
-$d(P,\pi) = |x_P \cos \alpha + y_P \cos \beta + z_P \cos \gamma - p|$.\\
-Її можна переписати іншим шляхом, якщо згадати, що таке $\cos \alpha, \cos \beta, \cos \gamma, p$ з аналітичної точки зору:
+І наостанок зауважимо інше. Маємо $d(P,\pi) = |x_P \cos \alpha + y_P \cos \beta + z_P \cos \gamma - p|$. Її можна переписати іншим шляхом, якщо згадати, що таке $\cos \alpha, \cos \beta, \cos \gamma, p$ з аналітичної точки зору:
 \begin{align*}
-d(P,\pi) = \dfrac{|Ax_P + By_P + Cz_P + D|}{\sqrt{A^2+B^2+C^2}}
+d(P,\pi) = \dfrac{|Ax_P + By_P + Cz_P + D|}{\sqrt{A^2+B^2+C^2}}.
 \end{align*}
 
 
 \subsection{Пряма в просторі}
-Із геометрії відомо, що дві площини перетинаються по прямій. Тому якщо задати два рівняння площини з нормалями $\vec{n_1} = (A_1,B_1,C_1), \vec{n_2} = (A_2,B_2,C_2)$, причому вони не є паралельними, то отримаємо \textbf{рівняння прямої, за якою перетинаються дві площини}:
+Із геометрії відомо, що дві площини перетинаються по прямій. Тому якщо задати два рівняння площини з нормальними векторами $\vec{n_1} = (A_1,B_1,C_1), \vec{n_2} = (A_2,B_2,C_2)$, причому вони не є паралельними, то отримаємо \textbf{рівняння прямої, за якою перетинаються дві площини}:
 \begin{align*}
 \begin{cases}
 A_1x + B_1y + C_1z + D_1 = 0 \\
@@ -1506,10 +1563,10 @@ A_2x + B_2y + C_2z + D_2 = 0
 \end{cases}
 \end{align*}
 
-Шукаємо тепер рівняння прямої, що проходить через т. $M_0 = (x_0, y_0,z_0)$. Тобто рівняння тепер буде в просторі.\\
-Задано пряму $l$, довільну т. $M = (x,y,z) \in l$ та спрямований вектор $\vec{a} = (m,n,p)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0, z-z_0)$.\\
+Шукаємо тепер рівняння прямої, що проходить через точку $M_0 = (x_0, y_0,z_0)$. Тобто рівняння тепер буде в просторі.\\
+Задано пряму $l$, довільну точку $M = (x,y,z) \in l$ та спрямований вектор $\vec{a} = (m,n,p)$. Тоді $\overrightarrow{M_0M} = (x-x_0, y-y_0, z-z_0)$.\\
 Оскільки $\vec{a} \parallel \overrightarrow{M_0M}$ то це теж саме, що $\vec{a} = t \overrightarrow{M_0 M} \iff \dfrac{x-x_0}{m} = \dfrac{y-y_0}{n} = \dfrac{z-z_0}{p} = t$.\\
-Отже, отримали \textbf{канонічне рівняння прямої, що проходить через т. $M_0$}:
+Отже, отримали \textbf{канонічне рівняння прямої, що проходить через точку $M_0$}:
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1531,7 +1588,7 @@ z = z_0 + pt
 \end{cases}, t \in \mathbb{R}
 \end{align*}
 
-Задані дві т. $M_1 = (x_1,y_1,z_1), M_2 = (x_2,y_2,z_2)$. Знайдемо рівняння прямої, що проходить через них.\\
+Задані дві точки $M_1 = (x_1,y_1,z_1), M_2 = (x_2,y_2,z_2)$. Знайдемо рівняння прямої, що проходить через них.\\
 Створимо спрямлений вектор $\vec{a} = \overrightarrow{M_2M_1} = (x_2-x_1,y_2-y_1,z_2-z_1)$. Тоді, використовуючи канонічне рівняння прямої, отримаємо \textbf{рівняння прямої, що проходить через дві точки}:
 \begin{align*}
 \dfrac{x-x_1}{x_2-x_1} = \dfrac{y-y_1}{y_2-y_1} = \dfrac{z-z_1}{z_2-z_1}
@@ -1539,9 +1596,7 @@ z = z_0 + pt
 
 \subsection{Відстані}
 \subsubsection{Від точки до прямої в просторі}
-Маємо канонічне рівняння прямої, що проходить через т. $M_0 = (x_0,y_0,z_0)$:\\
-$\dfrac{x-x_0}{m} = \dfrac{y-y_0}{n} = \dfrac{z-z_0}{p}$.\\
-Зафіксуємо т. $M \in l$. Знайдемо відстань від т. $P$ до прямої.
+Маємо канонічне рівняння прямої, що проходить через точку $M_0 = (x_0,y_0,z_0)$: $\dfrac{x-x_0}{m} = \dfrac{y-y_0}{n} = \dfrac{z-z_0}{p}$. Зафіксуємо точку $M \in l$. Знайдемо відстань від точки $P$ до прямої.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1566,15 +1621,16 @@ d(P,l)= \dfrac{\abs{\left[\overrightarrow{M_0M},\overrightarrow{M_0P} \right]}}{
 \end{align*}
 
 \subsubsection{Від точки до площини}
-Насправді, ми вже ці формули знайшли, коли мова була про нормальне рівняння.\\
-$d(P,\pi) = \dfrac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}$\\
-$d(P,\pi) = |x_P \cos \alpha + y_P \cos \beta +z_P \cos \gamma - p|$
+Насправді, ми вже ці формули знайшли, коли мова йшла про нормальне рівняння.\\
+$d(P,\pi) = \dfrac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}$;\\
+$d(P,\pi) = |x_P \cos \alpha + y_P \cos \beta +z_P \cos \gamma - p|$.
 
 \subsubsection{Між двома прямими в просторі}
-I. $l_1 \parallel l_2$.\\
-Можна обрати довільну точку прямої $l_2$ та рахувати відстань за пунктом 1.
-\bigskip \\
-II. $l_1, l_2$ - мимобіжні.\\
+\begin{enumerate}[wide=0pt,label={\Roman*.}]
+\item $l_1 \parallel l_2$.\\
+Можна обрати довільну точку прямої $l_2$ та рахувати відстань за пунктом 2.6.1.
+
+\item $l_1, l_2$ -- мимобіжні.\\
 Необхідно знайти довжину їхнього спільного перпендикуляру.
 \begin{figure}[H]
 \def\size{3}
@@ -1607,6 +1663,7 @@ $V_{\textrm{паралелепіпед}} = S_{\textrm{паралелограм}}
 \begin{align*}
 d(l_1,l_2) = \dfrac{\abs{\left(\overrightarrow{M_1M_2}, \vec{a_1}, \vec{a_2}\right)}}{\abs{[\vec{a_1}, \vec{a_2}]}}
 \end{align*}
+\end{enumerate}
 
 Ми додатково знайдемо рівняння спільного перпендикуляру за цим малюнком:\\
 $l_1: \begin{cases}
@@ -1618,9 +1675,9 @@ $l_2: \begin{cases}
 x = x_2 + sm_2 \\
 y = y_2 + sn_2 \\
 z = z_2 + sp_2 \\
-\end{cases}$
+\end{cases}$.
 \\
-Нехай $N_1 \in l_1$ та $N_2 \in l_2$ - точки спільного перпендикуляру. Тоді $\overrightarrow{N_1 N_2} \perp \vec{a_1}; \overrightarrow{N_1 N_2} \perp \vec{a_2} \iff \begin{cases}
+Нехай $N_1 \in l_1$ та $N_2 \in l_2$ -- точки спільного перпендикуляру. Тоді $\overrightarrow{N_1 N_2} \perp \vec{a_1}; \overrightarrow{N_1 N_2} \perp \vec{a_2} \iff \begin{cases}
  (\overrightarrow{N_1 N_2}, \vec{a_1}) = 0\\
  (\overrightarrow{N_1 N_2}, \vec{a_2}) = 0\\
  \end{cases}$.\\
@@ -1677,7 +1734,7 @@ a_{11}x^2 + 2a_{12}xy + a_{22}y^2 + b_1x+b_2y+c=0
 
 \subsection{Еліпс}
 \begin{definition}
-\textbf{Еліпсом} називають ГМТ, для яких сума відстаней від двох фіксованих точок $F_1,F_2$ - фокуси еліпса - є постійною.
+\textbf{Еліпсом} називають ГМТ, для яких сума відстаней від двох фіксованих точок $F_1,F_2$ -- фокуси еліпса -- є постійною.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1690,11 +1747,11 @@ a_{11}x^2 + 2a_{12}xy + a_{22}y^2 + b_1x+b_2y+c=0
 \end{definition}
 
 Тобто задані дві точки $F_1 = (x_1,y_1)$, $F_2 = (x_2,y_2)$.\\
-$M = (x,y)$ - точка еліпсу $\iff |MF_1|+|MF_2| = 2a$.
+$M = (x,y)$ -- точка еліпсу $\iff |MF_1|+|MF_2| = 2a$.
 \bigskip \\
 Нехай $F_1 = (-c,0), F_2 = (c,0), c > 0$. Тоді $|F_1F_2|=2c$.\\
 При $2c > 2a$ випадок не є можливим (нерівність трикутника підтвердить).\\
-При $2c = 2a$ отримаємо, що т. $M$ належить відрізку $|F_1F_2|$.\\
+При $2c = 2a$ отримаємо, що точку $M$ належить відрізку $|F_1F_2|$.\\
 При $2c < 2a$ знайдемо рівняння:\\
 $|MF_1|=\sqrt{(x+c)^2+y^2}, |MF_2|=\sqrt{(x-c)^2+y^2} \implies$\\
 $\sqrt{(x+c)^2+y^2} + \sqrt{(x-c)^2+y^2} = 2a$\\
@@ -1703,9 +1760,9 @@ $(x+c)^2+y^2=4a^2+(x-c)^2+y^2-4a\sqrt{(x-c)^2+y^2}$\\
 $4a\sqrt{(x-c)^2+y^2} = 4a^2 -4cx$\\
 $a^2(x^2-2cx+c^2+y^2)=a^4-2a^2cx+c^2x^2$\\
 $(a^2-c^2)x^2+a^2c^2+a^2y^2=a^4$\\
-Позначимо $a^2-c^2=b^2>0$.\\
+Позначимо $a^2-c^2=b^2>0$. Отримаємо наступне:\\
 $b^2x^2+a^2c^2=a^4-a^2c^2=a^2b^2$.\\
-Нарешті, отримаємо \textbf{канонічне рівняння еліпса:}
+Нарешті, отримаємо \textbf{канонічне рівняння еліпса}:
 \begin{align*}
 \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
 \end{align*}
@@ -1716,9 +1773,9 @@ $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1 \implies y^2 = b^2\left(1 - \dfrac{x^2}
 $|MF_1| = \sqrt{(x+c)^2+y^2} = \sqrt{x^2+2xc+c^2+b^2 - \dfrac{x^2}{a^2}b^2} = \\ = \sqrt{x^2 \left(1 - \dfrac{b^2}{a^2} \right) + 2xc + a^2} = \sqrt{x^2 \dfrac{c^2}{a^2} + 2xc + a^2} = \sqrt{\left(\dfrac{xc}{a} + a\right)^2} = \abs{\dfrac{xc}{a}+a} = \dfrac{c}{a} \abs{x + \dfrac{a^2}{c}}$\\
 Із рівняння $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$ випливає, що $\dfrac{x^2}{a^2} \leq 1 \implies |x| \leq a = a \dfrac{a}{c} = \dfrac{a^2}{c}$.\\
 Тому $|MF_1| = \dfrac{c}{a} \left(x + \dfrac{a^2}{c} \right)$. Аналогічно для $|MF_2|$. Тому $|MF_2| = \dfrac{c}{a} \left(\dfrac{a^2}{c} - x\right)$.\\
-$\implies |MF_1| + |MF_2| = 2a$
+$\implies |MF_1| + |MF_2| = 2a$.
 \bigline
-Отже, канонічне $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$ - нормально задане та описує еліпс.
+Отже, канонічне $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$ -- нормально задане та описує еліпс.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1738,7 +1795,7 @@ $\implies |MF_1| + |MF_2| = 2a$
 
 \begin{definition}
 Прямі $x = \pm \dfrac{a^2}{c}$ називають \textbf{директрисами еліпса}.\\
-Позначення: $dir_1 = x + \dfrac{a^2}{c}$ \hspace{1cm} $dir_2 = x - \dfrac{x^2}{c}$.
+Позначення: $\dir_1 = x + \dfrac{a^2}{c}$ \qquad $\dir_2 = x - \dfrac{x^2}{c}$.
 \end{definition}
 
 \begin{remark}
@@ -1747,33 +1804,37 @@ $\implies |MF_1| + |MF_2| = 2a$
 
 \begin{definition}
 Величину $\dfrac{c}{a}$ називають \textbf{ексцентриситетом}.\\
-Позначення: $\varepsilon = \dfrac{c}{a} \overset{\text{випадок еліпса}}{<} 1$.
+Позначення: $\varepsilon = \dfrac{c}{a}$.
 \end{definition}
 
-Повернімось до $|MF_1|,|MF_2|$. Там, насправді, "стоїть" \textrm{} відстань від т. $M$, що належить еліпсу, до директрис. Рівності можна записати таким чином:\\
-$|MF_1| = \varepsilon \cdot d(dir_1, M)$ \hspace{1cm} $|MF_2| = \varepsilon \cdot d(dir_2, M)$\\
+\begin{remark}
+$\varepsilon < 1$ для випадку еліпса.
+\end{remark}
+
+Повернімось до $|MF_1|,|MF_2|$. Там, насправді, "стоїть" \textrm{} відстань від точки $M$, що належить еліпсу, до директрис. Рівності можна записати таким чином:\\
+$|MF_1| = \varepsilon \cdot d(\dir_1, M)$ \qquad $|MF_2| = \varepsilon \cdot d(\dir_2, M)$\\
 або\\
-$\dfrac{|MF_1|}{d(dir_1, M)} = \varepsilon$ \hspace{1cm} $\dfrac{|MF_2|}{d(dir_2, M)} = \varepsilon$
+$\dfrac{|MF_1|}{d(dir_1, M)} = \varepsilon$ \qquad $\dfrac{|MF_2|}{d(dir_2, M)} = \varepsilon$.
 
 \begin{remark}
-Директриса еліпса - прямі, що перпендикулярні до фокальної осі $F_1F_2$ та віддалені від центра еліпса на відстань $\dfrac{a^2}{c}$.
+Директриса еліпса -- прямі, що перпендикулярні до фокальної осі $F_1F_2$ та віддалені від центра еліпса на відстань $\dfrac{a^2}{c}$.
 \end{remark}
 
 \begin{theorem}[Геометрична характеристика еліпсу]
-Точка $M$ належить деякому еліпсу $\iff \dfrac{d(M,F)}{d(M,dir)} = \varepsilon$.
+Точка $M$ належить деякому еліпсу $\iff \dfrac{d(M,F)}{d(M,\dir)} = \varepsilon$.
 \end{theorem}
 
 \begin{proof}
-При паралельному переносі та повороті відстані не змінюються. Тому розташуємо еліпс канонічним чином. А для канонічно розташованого еліпсу співвідношення $\dfrac{d(M,F)}{d(M,dir)} = \varepsilon$ вірне.
+При паралельному переносі та повороті відстані не змінюються. Тому розташуємо еліпс канонічним чином. А для канонічно розташованого еліпсу співвідношення $\dfrac{d(M,F)}{d(M,\dir)} = \varepsilon$ вірне.
 \end{proof}
 
 \subsection{Гіпербола}
 \begin{definition}
-\textbf{Гіперболой} називають ГМТ, для яких модуль різниці відстаней від двох фіксованих точок $F_1,F_2$ - фокуси гіперболи - є постійною.
+\textbf{Гіперболой} називають ГМТ, для яких модуль різниці відстаней від двох фіксованих точок $F_1,F_2$ -- фокуси гіперболи -- є постійною.
 \end{definition}
 
 Тобто задані дві точки $F_1 = (x_1,y_1)$, $F_2 = (x_2,y_2)$.\\
-$M = (x,y)$ - точка гіперболи $\iff ||MF_1|-|MF_2|| = 2a$.
+$M = (x,y)$ -- точка гіперболи $\iff ||MF_1|-|MF_2|| = 2a$.
 \bigskip \\
 Нехай $F_1 = (-c,0), F_2 = (c,0), c>0$. Тоді $|F_1F_2| = 2c$.\\
 Випадок $2c<2a$ не є можливим, а при $2c = 2a$ маємо пряму, що містить 'пробіл' між двома точками.\\
@@ -1785,9 +1846,9 @@ $x^2+2cx+c^2+y^2=4a^2+4a\sqrt{(x-c)^2+y^2}+x^2-2cx+c^2+y^2$\\
 $a\sqrt{(x-c)^2+y^2}=-a^2+xc$\\
 $a^2(x^2-2cx+c^2+y^2)=a^4-2a^2cx+c^2x^2$\\
 $x^2(a^2-c^2)+a^2y^2=a^2(a^2-c^2)$\\
-Позначимо $c^2-a^2=b^2>0$.\\
+Позначимо $c^2-a^2=b^2>0$. Отримаємо наступне:\\
 $-b^2x^2+a^2y^2=-a^2b^2$.\\
-Нарешті, отримаємо \textbf{канонічне рівняння гіперболи:}
+Нарешті, отримаємо \textbf{канонічне рівняння гіперболи}:
 \begin{align*}
 \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1,
 \end{align*}
@@ -1800,9 +1861,9 @@ $|MF_1| = \sqrt{(x+c)^2+y^2} = \sqrt{x^2+2cx+c^2+b^2\dfrac{x^2}{a^2} - b^2} = \\
 Із рівняння $\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$ випливає, що $\dfrac{x^2}{a^2} \geq 1 \implies |x| \geq a > \dfrac{a^2}{c}$.\\
 Тому $|MF_1| = \left[ \begin{gathered} \dfrac{c}{a} \left(x + \dfrac{a^2}{c} \right), x > 0 \\ -\dfrac{c}{a} \left(x + \dfrac{a^2}{c} \right), x < 0 \end{gathered} \right.$.\\
 Аналогічно для $|MF_2|$. Тому $|MF_2| = \left[ \begin{gathered} \dfrac{c}{a} \left(x - \dfrac{a^2}{c} \right), x > 0 \\ -\dfrac{c}{a} \left(x - \dfrac{a^2}{c} \right), x < 0 \end{gathered} \right.$\\
-$\implies ||MF_1| - |MF_2|| = 2a$
+$\implies ||MF_1| - |MF_2|| = 2a$.
 \bigskip \\
-Отже, $\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$ - нормально задане та описує гіперболу.
+Отже, $\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$ -- нормально задане та описує гіперболу.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -1829,7 +1890,7 @@ $\implies ||MF_1| - |MF_2|| = 2a$
 
 \begin{definition}
 Прямі $x = \pm \dfrac{a^2}{c}$ називають \textbf{директрисами гіперболи}.\\
-Позначення: $dir_1 = x + \dfrac{a^2}{c}$ \hspace{1cm} $dir_2 = x - \dfrac{x^2}{c}$.
+Позначення: $\dir_1 = x + \dfrac{a^2}{c}$ \qquad $\dir_2 = x - \dfrac{x^2}{c}$.
 \end{definition}
 
 \begin{remark}
@@ -1838,34 +1899,38 @@ $\implies ||MF_1| - |MF_2|| = 2a$
 
 \begin{definition}
 Величину $\dfrac{c}{a}$ називають \textbf{ексцентриситетом}.\\
-Позначення: $\varepsilon = \dfrac{c}{a} \overset{\text{випадок гіперболи}}{>} 1$.
+Позначення: $\varepsilon = \dfrac{c}{a}$.
 \end{definition}
 
-Повернімось до $|MF_1|,|MF_2|$. Там, насправді, "стоїть" \textrm{} відстань від т. $M$, що належить еліпсу, до директрис. Рівності можна записати таким чином:\\
-$|MF_1| = \varepsilon \cdot d(dir_1, M)$ \hspace{1cm} $|MF_2| = \varepsilon \cdot d(dir_2, M)$\\
+\begin{remark}
+$\varepsilon > 1$ для впиадку гіперболи.
+\end{remark}
+
+Повернімось до $|MF_1|,|MF_2|$. Там, насправді, "стоїть" \textrm{} відстань від точки $M$, що належить еліпсу, до директрис. Рівності можна записати таким чином:\\
+$|MF_1| = \varepsilon \cdot d(\dir_1, M)$ \qquad $|MF_2| = \varepsilon \cdot d(\dir_2, M)$\\
 або\\
-$\dfrac{|MF_1|}{d(dir_1, M)} = \varepsilon$ \hspace{1cm} $\dfrac{|MF_2|}{d(dir_2, M)} = \varepsilon$
+$\dfrac{|MF_1|}{d(\dir_1, M)} = \varepsilon$ \qquad $\dfrac{|MF_2|}{d(\dir_2, M)} = \varepsilon$.
 
 \begin{remark}
-Директриса гіперболи - прямі, що перпендикулярні до фокальної осі $F_1F_2$ та віддалені від початку координат на відстань $\dfrac{a^2}{c}$.
+Директриса гіперболи -- прямі, що перпендикулярні до фокальної осі $F_1F_2$ та віддалені від початку координат на відстань $\dfrac{a^2}{c}$.
 \end{remark}
 
 \begin{theorem}[Геометрична характеристика гіперболи]
-Точка $M$ належить деякій гіперболі $\iff \dfrac{d(M,F)}{d(M,dir)} = \varepsilon$.
+Точка $M$ належить деякій гіперболі $\iff \dfrac{d(M,F)}{d(M,\dir)} = \varepsilon$.
 \end{theorem}
 
 \begin{proof}
-При паралельному переносі та повороті відстані не змінюються. Тому розташуємо гіперболу канонічним чином. А для канонічно розташованої гіперболи співвідношення $\dfrac{d(M,F)}{d(M,dir)} = \varepsilon$ вірне.
+При паралельному переносі та повороті відстані не змінюються. Тому розташуємо гіперболу канонічним чином. А для канонічно розташованої гіперболи співвідношення $\dfrac{d(M,F)}{d(M,\dir)} = \varepsilon$ вірне.
 \end{proof}
 
 \subsection{Парабола}
 \begin{definition}
-\textbf{Параболою} називають ГМТ, для яких відстань до фіксованої точки - фокуса $F$ - дорівнює відстані до фіксованої прямої - директриси $dir$.
+\textbf{Параболою} називають ГМТ, для яких відстань до фіксованої точки -- фокуса $F$ -- дорівнює відстані до фіксованої прямої -- директриси $\dir$.
 \end{definition}
 
-Тобто $M=(x,y)$ - точка параболи $\iff |MF|=d(M,dir)$, або $\dfrac{MF}{d(M,dir)}=1$.
+Тобто $M=(x,y)$ -- точка параболи $\iff |MF|=d(M,\dir)$, або $\dfrac{MF}{d(M,\dir)}=1$.
 \bigskip \\
-Нехай $F = (p,0)$, а діректриса: $dir = x + p$, тобто $x = -p$.\\
+Нехай $F = (p,0)$, а діректриса: $\dir = x + p$, тобто $x = -p$.\\
 $d(M,F)=\sqrt{(x-p)^2+y^2}$\\
 $d(M,dir)=|x+p|$
 $\Rightarrow \sqrt{(x-p)^2+y^2}=|x+p|$\\
@@ -1892,9 +1957,11 @@ y^2 = 4px
 \end{figure}
 
 \subsubsection*{Вироджені криві другого порядку}
-I. $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 0$ - точка.
-II. $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = -1$ - уявний еліпс.
-III. $(A_1 x + B_1 y + C_1)(A_2 x + B_2 y + C_2) = 0$ - пара прямих.
+\begin{enumerate}[nosep,wide=0pt,label={\Roman*.}]
+\item $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 0$ -- точка.
+\item $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = -1$ -- уявний еліпс.
+\item $(A_1 x + B_1 y + C_1)(A_2 x + B_2 y + C_2) = 0$ -- пара прямих.
+\end{enumerate}
 
 \subsection{Оптичні властивості кривих другого порядку}
 \begin{figure}[H]
@@ -1912,7 +1979,7 @@ III. $(A_1 x + B_1 y + C_1)(A_2 x + B_2 y + C_2) = 0$ - пара прямих.
 \draw[fill] (-1.2,0) circle[radius=1 pt] node[anchor = north] {$F_2$};
 \end{tikzpicture}
 \end{figure}
-Через т. $F_1$ проводяться промені. Тоді виявляється, що всі вони будуть збігатись в т. $F_2$.
+Через точку $F_1$ проводяться промені. Тоді виявляється, що всі вони будуть збігатись в точці $F_2$.
 
 \begin{figure}[H]
 \centering
@@ -1932,7 +1999,7 @@ III. $(A_1 x + B_1 y + C_1)(A_2 x + B_2 y + C_2) = 0$ - пара прямих.
 \end{tikzpicture}
 \end{figure}
 
-Через т. $F_1$ проводяться промені. Тоді виявляється, що всі вони будуть уявно збігатись в т. $F_2$.
+Через точку $F_1$ проводяться промені. Тоді виявляється, що всі вони будуть уявно збігатись в точці $F_2$.
 
 \begin{figure}[H]
 \centering
@@ -1945,7 +2012,7 @@ III. $(A_1 x + B_1 y + C_1)(A_2 x + B_2 y + C_2) = 0$ - пара прямих.
 \draw[fill = yellow, draw = yellow] (1,0) circle[radius=1 pt] node[anchor = north] {$F_1$};
 \draw[thick] (1,0)--(0.6,{sqrt(4*\p*0.6)})--(2.5,{sqrt(4*\p*0.6)});
 \end{tikzpicture}\\
-Через т. $F_1$ проводяться проміні. Тоді виявляється, що всі вони будуть паралельні вісі абсцис.
+Через точку $F_1$ проводяться проміні. Тоді виявляється, що всі вони будуть паралельні вісі абсцис.
 \end{figure}
 
 \subsection{Криві другого порядку як конічний перетин}
@@ -1953,10 +2020,10 @@ III. $(A_1 x + B_1 y + C_1)(A_2 x + B_2 y + C_2) = 0$ - пара прямих.
 \centering
 \includegraphics[width=.5\textwidth]{cone_intersection.jpg}
 \end{figure}
-Якщо площина паралельна основі конуса, то перетин - коло.\\
-Якщо площина нахилена основі конуса, то перетин - еліпс.\\
-Якщо площина нахилена так, що вона паралельна твірної, то перетин - парабола.\\
-Якщо площина ще сильніше нахилена, то перетин - гіпербола.
+Якщо площина паралельна основі конуса, то перетин -- коло.\\
+Якщо площина нахилена основі конуса, то перетин -- еліпс.\\
+Якщо площина нахилена так, що вона паралельна твірної, то перетин -- парабола.\\
+Якщо площина ще сильніше нахилена, то перетин -- гіпербола.
 
 
 \subsection{Поверхні другого роду}
@@ -1968,12 +2035,11 @@ a_{11}x^2 + a_{22}y^2 + a_{33}z^2 + 2a_{12}xy + 2a_{13}xz + 2a_{23}yz + b_1x + b
 \end{definition}
 
 \begin{lemma}
-Задано точку $M_0 = (x_0,y_0)$. При обертанні цієї точки навколо вісі $OX$ отримуємо коло, яке задається рівнянням:\\
-$\begin{cases}
+Задано точку $M_0 = (x_0,y_0)$. При обертанні цієї точки навколо вісі $OX$ отримуємо коло, яке задається рівнянням $\begin{cases}
 x = x_0 \\
 y^2 + z^2 = y_0^2
 \end{cases}
-$\\
+$.\\
 \textit{Думаю, тут все зрозуміло}.
 \begin{figure}[H]
 \centering
@@ -1991,25 +2057,22 @@ $\\
 \end{lemma}
 
 \begin{lemma}
-У площині $XOY$ задана така крива рівнянням $F(x,y)$, що є парною відносно $y$ (тобто крива симетрична відносно $OY$). При обертанні цієї кривої навколо осі $OX$ отримуємо поверхню, яка задається рівнянням:\\
-$F(x,\sqrt{y^2+z^2})=0$.
+У площині $XOY$ задана така крива рівнянням $F(x,y)$, що є парною відносно $y$ (тобто крива симетрична відносно $OY$). При обертанні цієї кривої навколо осі $OX$ отримуємо поверхню, яка задається рівнянням $F(x,\sqrt{y^2+z^2})=0$.
 \end{lemma}
 
 \begin{proof}
-Фіксуємо $M_0 = (x_0,y_0)$ - точку кривої. Зробимо обертання навколо $OX$, тоді отримаємо коло:\\
+Фіксуємо $M_0 = (x_0,y_0)$ -- точку кривої. Зробимо обертання навколо $OX$, тоді отримаємо коло:\\
 $\begin{cases}
 x = x_0 \\
 y^2 + z^2 = y_0^2
 \end{cases}
-$\\
-Звідси $|y_0| = \sqrt{y^2+z^2}$. Для т. $x_0,y_0$ виконана рівність:\\
-$F(x_0,y_0) = F(x_0, \sqrt{y^2+z^2}) = 0$.\\
-Але т. $M_0$ була довільною, тому $F(x,\sqrt{y^2+z^2})=0$, що й є бажаною поверхнею.
+$.\\
+Звідси $|y_0| = \sqrt{y^2+z^2}$. Для точки $x_0,y_0$ виконана рівність: $F(x_0,y_0) = F(x_0, \sqrt{y^2+z^2}) = 0$.\\
+Але точка $M_0$ була довільною, тому $F(x,\sqrt{y^2+z^2})=0$, що й є бажаною поверхнею.
 \end{proof}
 
 \subsubsection{Еліпсоїд}
-У нас вже є еліпс $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$. Обернемо його навколо $OX$, тоді отримуємо:\\
-$\dfrac{x^2}{a^2} + \dfrac{y^2+z^2}{b^2} = 1$\\
+У нас вже є еліпс $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$. Обернемо його навколо $OX$, тоді отримаємо $\dfrac{x^2}{a^2} + \dfrac{y^2+z^2}{b^2} = 1$ю\\
 Отримаємо еліпсоїд обертання:\\
 $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{b^2} = 1$\\
 Зробимо стискання/розтягнення вздовж осі $OZ$, тобто $z_{old} = \lambda z_{new}$. Тобто $\dfrac{z^2}{b^2} \to \dfrac{\lambda^2 z^2}{b^2} = \dfrac{z^2}{c^2}$.\\
@@ -2036,7 +2099,8 @@ $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{b^2} = 1$\\
 %\end{tikzpicture}
 
 \subsubsection{Гіперболоїд}
-I. Візьмемо гіперболу $\dfrac{z^2}{c^2} - \dfrac{x^2}{a^2} = 1$. Обернемо навколо $OZ$, тоді отримаємо:\\
+\begin{enumerate}[wide=0pt,label={\Roman*.}]
+\item Візьмемо гіперболу $\dfrac{z^2}{c^2} - \dfrac{x^2}{a^2} = 1$. Обернемо навколо $OZ$, тоді отримаємо:\\
 $\dfrac{z^2}{c^2} - \dfrac{x^2+y^2}{b^2} = 1$.\\
 Отримаємо гіперболоїд обертання:\\
 $\dfrac{z^2}{c^2} - \dfrac{x^2}{b^2} - \dfrac{y^2}{b^2} = 1$\\
@@ -2050,7 +2114,7 @@ $\dfrac{z^2}{c^2} - \dfrac{x^2}{b^2} - \dfrac{y^2}{b^2} = 1$\\
 \includegraphics[scale=1]{2-shit-hyperboloid.jpeg}
 \end{figure}
 
-II. Візьмемо гіперболу $\dfrac{x^2}{a^2} - \dfrac{z^2}{c^2} = 1$. Обернемо навколо $OZ$, тоді отримаємо:\\
+\item Візьмемо гіперболу $\dfrac{x^2}{a^2} - \dfrac{z^2}{c^2} = 1$. Обернемо навколо $OZ$, тоді отримаємо:\\
 $\dfrac{x^2+y^2}{a^2} - \dfrac{z^2}{c^2} = 1$\\
 $\dfrac{x^2}{a^2} + \dfrac{y^2}{a^2} - \dfrac{z^2}{c^2} = 1$\\
 Зробимо стискання/розтягнення вздовж осі $OY$, тобто $y_{old} = \lambda y_{new}$. Тобто $\dfrac{y^2}{a^2} \to \dfrac{\lambda^2 y^2}{a^2} = \dfrac{y^2}{b^2}$\\
@@ -2063,12 +2127,14 @@ $\dfrac{x^2}{a^2} + \dfrac{y^2}{a^2} - \dfrac{z^2}{c^2} = 1$\\
 \centering
 \includegraphics[scale=1]{1-shit-hyperboloid.jpeg}
 \end{figure}
+\end{enumerate}
 
 \subsubsection{Параболоїд}
 У нас вже є парабола $y^2 = 4px$. Обернемо навколо $OX$, тоді отримаємо:\\
 $y^2+z^2 = 4px \implies x = \dfrac{y^2}{4p} + \dfrac{z^2}{4p}$.\\
 Знову ті махінації з $OZ$, а також $z \to x$.\\
-I. Отримаємо \textbf{рівняння еліптичного параболоїду:}
+\begin{enumerate}[wide=0pt,label={\Roman*.}]
+\item Отримаємо \textbf{рівняння еліптичного параболоїду:}
 \begin{align*}
 z = \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2}
 \end{align*}
@@ -2076,7 +2142,7 @@ z = \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2}
 \centering
 \includegraphics[scale=1]{elliptic-paraboloid.jpeg}
 \end{figure}
-II. Також отримаємо \textbf{рівняння гіперболічного параболоїду:}
+\item Також отримаємо \textbf{рівняння гіперболічного параболоїду:}
 \begin{align*}
 z = \dfrac{x^2}{a^2} - \dfrac{y^2}{b^2}
 \end{align*}
@@ -2085,9 +2151,10 @@ z = \dfrac{x^2}{a^2} - \dfrac{y^2}{b^2}
 \centering
 \includegraphics[scale=1]{hyperbolic-paraboloid.jpeg}
 \end{figure}
+\end{enumerate}
 
 \subsection{Циліндри}
-На площині $XOY$ задана крива $F(x,y) = 0$ - основа циліндра - та пряма $l$, що перетинає основу. Через кожну точку основи $M = (x,y,0)$ проведемо пряму, паралельну $l$.\\
+На площині $XOY$ задана крива $F(x,y) = 0$ -- основа циліндра -- та пряма $l$, що перетинає основу. Через кожну точку основи $M = (x,y,0)$ проведемо пряму, паралельну $l$.\\
 Отримана множина точок і є \textbf{циліндром} із основою $F(x,y) = 0$ та прямою $l$.\\
 
 \subsubsection{Еліптичний циліндр}
@@ -2106,25 +2173,27 @@ $y^2 = 4px$\\
 Будь-яка точка, що належить параболі, буде належати циліндру.
 
 \subsection{Конічні поверхні}
-На площині $XOY$ задана крива $F(x,y) = 0$ - основа конуса - та пряма $l$, що перетинає основу. Через кожну точку основи $M = (x,y,0)$ проведемо пряму, паралельну $l$.\\
-Отримана множина точок і є \textbf{циліндром} із основою $F(x,y) = 0$ та т. $K = (x_k, y_k, \underset{\neq 0}{z_k})$ - вершина конусу. Проведемо прямі, які проходять через вершину конусу $K$ та через основу\\
+На площині $XOY$ задана крива $F(x,y) = 0$ -- основа конуса -- та пряма $l$, що перетинає основу. Через кожну точку основи $M = (x,y,0)$ проведемо пряму, паралельну $l$.\\
+Отримана множина точок і є \textbf{циліндром} із основою $F(x,y) = 0$ та точкою $K = (x_k, y_k, \underset{\neq 0}{z_k})$ -- вершина конусу. Проведемо прямі, які проходять через вершину конусу $K$ та через основу\\
 Отримана множина точок і є \textbf{конусом} із основою $F(x,y) = 0$ та вершиною $K = (x_k, y_k, \underset{\neq 0}{z_k})$.
 
 \subsubsection*{Вироджені поверхні другого роду}
-I. $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{c^2} = 0$ - точка.\\
-II. $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{c^2} = -1$ - уявний еліпсоїд.\\
-III. $(A_1 x + B_1 y + C_1 z + D_1)(A_2 x + B_2 y + C_2 z + D_2) = 0$ - пара площин.
+\begin{enumerate}[nosep,wide=0pt,label={\Roman*.}]
+\item $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{c^2} = 0$ -- точка.
+\item $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{c^2} = -1$ -- уявний еліпсоїд.
+\item $(A_1 x + B_1 y + C_1 z + D_1)(A_2 x + B_2 y + C_2 z + D_2) = 0$ -- пара площин.
+\end{enumerate}
 \newpage
 
-\section{Многочлени}
+\section{Многочлени з дійсними та комплексними коефіцієнтами}
 \begin{definition}
 \textbf{Многочленом} називають функцію такого вигляду:
 \begin{align*}
 P_n(x) = a_0 + a_1 x + \dots + a_n x^n,
 \end{align*}
-де $a_0,a_1,\dots,a_n \in \mathbb{R}$ або $\mathbb{C}$ (або будь-яке інше поле $k$).\\
+де $a_0,a_1,\dots,a_n \in \mathbb{R}$ або $\mathbb{C}$.\\
 Для них все зрозуміло з операціями додавання та множення многочлена на скаляр.\\
-Позначення: $\mathbb{R}[x]$ - клас многочленів з дійсними коефіцієнтами.
+Позначення: $\mathbb{R}[x]$ або $\mathbb{C}[x]$ -- клас многочленів з дійсними або комплексними коефіцієнтами.
 \end{definition}
 
 \begin{definition}
@@ -2143,11 +2212,11 @@ P_n(x) = a_0 + a_1 x + \dots + a_n x^n,
 \end{theorem}
 
 \begin{proof}
-\textit{Існування.}\\
+I. \textit{Існування.}\\
 Маємо якісь многочлени $f,g$. Тут є два випадки.
-I. $\deg f < \deg g$. Тоді $s(x) = 0$ та $r(x) = f(x)$. Отримали те, що потрібно було.
+1. $\deg f < \deg g$. Тоді $s(x) = 0$ та $r(x) = f(x)$. Отримали те, що потрібно було.
 \bigskip \\
-II. $\deg f \geq \deg g$. Проведемо МІ за числом $\deg f -\deg g = k$.\\
+2. $\deg f \geq \deg g$. Проведемо МІ за числом $\deg f -\deg g = k$.\\
 База індукції. $k = 0$, тобто $\deg f = \deg g \overset{\text{позн.}}{=} n$.
 Тож маємо такі многочлени:\\
 $f(x) = a_n x^n + \dots + a_0$;\\
@@ -2170,7 +2239,7 @@ $f(x) = \dfrac{a_{m+k+1}}{b_m}x^{k+1}g(x) + \tilde{s}(x)g(x) + \tilde{r}(x) = \u
 Зауважимо, що $\deg r < \deg g$ (припущення МІ) або $r \equiv 0$.\\
 МІ доведено.
 \bigskip \\
-\textit{Єдиність.}\\
+II. \textit{Єдиність.}\\
 !Припустимо, що крім $s,r$ існують ще $s^*,r^*$, такі, що також $f(x) = s^*(x)g(x) + r^*(x)$. Причому $\deg r^* < \deg g$ або $r^* \equiv 0$. Тоді \\ $0 = f(x) - f(x) = (s(x)-s^*(x))g(x) + (r(x)-r^*(x))$.\\
 $(s(x)-s^*(x))g(x) = r^*(x)-r(x)$, де $\deg(r^*-r) < \deg g$. Із цієї оцінки випливає, що рівність можлива лише тоді, коли $s(x)-s^*(x) =0 \implies s(x) = s^*(x)$.\\
 А звідси й $r(x) = r^*(x)$. Суперечність!
@@ -2194,13 +2263,11 @@ f(a) = 0
 \end{theorem}
 
 \begin{proof}
-Дійсно, маємо $f(x) = s(x)(x-a) + r(x)$, причому $\deg r < \deg (x-a) = 1$. Тому єдиний варіант - це бути $r(x) = c, c \in \mathbb{R}$.\\
-Отже, $f(x) = s(x)(x-a) + c$. Нарешті, підставимо $x = a$ - отримаємо $f(a) = c$. Отже,\\
-$f(x) = s(x)(x-a) + f(a)$.
+Дійсно, маємо $f(x) = s(x)(x-a) + r(x)$, причому $\deg r < \deg (x-a) = 1$. Тому єдиний варіант -- це бути $r(x) = c, c \in \mathbb{R}$. Отже, $f(x) = s(x)(x-a) + c$. Нарешті, підставимо $x = a$ -- отримаємо $f(a) = c$. Отже, $f(x) = s(x)(x-a) + f(a)$.
 \end{proof}
 
 \begin{corollary}
-$a$ - корінь многочлена $f(x) \iff \exists h: f(x) = (x-a)h(x)$.\\
+$a$ -- корінь многочлена $f(x) \iff \exists h: f(x) = (x-a)h(x)$.\\
 \textit{Думаю, зрозуміло.}
 \end{corollary}
 
@@ -2213,10 +2280,9 @@ f(x) = (x-a)^k g(x),
 Іншими словами, $(x-a)^k \mid f$, але $(x-a)^{k+1} \nmid f$.
 \end{definition}
 
-\subsection*{Розклад многочлена за степенем лінійного двочлена}
-Перед однією теоремою зауважимо наступне. Маємо многочлен\\
-$f(x) = a_0 + a_1 x + \dots + a_n x^n$.\\
-Хочеться переписати його в іншому вигляді. Замість $x$ хочеться всюди $x-a$.\\
+\subsection{Розклад многочлена за степенем лінійного двочлена}
+Перед однією теоремою про кратність кореня зауважимо наступне. \\
+Маємо многочлен $f(x) = a_0 + a_1 x + \dots + a_n x^n$. Хочеться переписати його в іншому вигляді. Замість $x$ хочеться всюди $x-a$.\\
 За теоремою Безу, маємо $f(x) = (x-a)s_1(x) + f(a)$. Тут обов'язково $\deg s_1 = n-1$. Для спрощення позначу $f(a) = c_0$.\\
 Знову за теоремою Безу, маємо $f(x) = (x-a)((x-a)s_2(x) + s_1(a)) + c_0 = (x-a)^2 s_2(x) + c_1 (x-a) + c_0$, тут $c_0 = s_1(a)$. Обов'язково $\deg s_2 = n-2$.\\
 Знову за теоремою Безу, маємо $f(x) = (x-a)^2 ((x-a)s_3(x) + s_2(a)) + c_1(x-a) + c_0 = (x-a)^3 s_3(x) + c_2 (x-a)^2 + c_1(x-a) + c_0$.\\
@@ -2226,9 +2292,9 @@ $f(x) = c_0 + c_1 (x-a) + c_2 (x-a)^2 + \dots + c_{n-2}(x-a)^{n-2} + s_{n-1}(x) 
 Останній раз беремо Безу, отримаємо $s_{n-1}(x) = (x-a) c_n + c_{n-1}$, де $c_{n-1} = s_{n-1}(a)$.\\
 Разом отримали таку форму:
 \begin{align*}
-f(x) = c_0 + c_1(x-a) + c_2(x-a)^2 + \dots + c_n(x-a)^n
+f(x) = c_0 + c_1(x-a) + c_2(x-a)^2 + \dots + c_n(x-a)^n.
 \end{align*}
-Тепер питання полягає в тому, як знайти $c_0,c_1,\dots,c_n$. Ми вже знаємо, що многочлен - диференційована функція, тому можемо знайти коефіцієнти через похідні таким чином:\\
+Тепер питання полягає в тому, як знайти $c_0,c_1,\dots,c_n$. Ми вже знаємо, що многочлен -- диференційована функція (див.\ мат.\ аналіз), тому можемо знайти коефіцієнти через похідні таким чином:\\
 $\begin{cases}
 f(a) = c_0\\
 f'(a) = 1!c_1\\
@@ -2240,40 +2306,40 @@ f^{(n)}(a) = n!c_n
 \begin{align*}
 f(x) = f(a) + \dfrac{f'(a)}{1!}(x-a) + \dots + \dfrac{f^{(n)}(a)}{n!}(x-a)^n
 \end{align*}
-Права частина має особливу назву - \textbf{многочлен Тейлора}.
+Права частина має особливу назву -- \textbf{многочлен Тейлора}.
 \bigskip \\
 \textbf{Повернімось до попереднього розділу.}
 \begin{theorem}[Критерій кратності кореня]
-$a$ - корінь кратності $k$ многочлена $f(x) \iff f(a)=f'(a)=\dots=f^{(k-1)}(a) =0$, але $f^{(k)}(a) \neq 0$.
+$a$ -- корінь кратності $k$ многочлена $f(x) \iff f(a)=f'(a)=\dots=f^{(k-1)}(a) =0$, але $f^{(k)}(a) \neq 0$.
 \end{theorem}
 
 \begin{proof}
-\rightproof Дано: $a$ - корінь кратності $k$ для $f(x)$, тобто $f(x) = (x-a)^k g(x)$, де $g(a) \neq 0$.\\
+\rightproof Дано: $a$ -- корінь кратності $k$ для $f(x)$, тобто $f(x) = (x-a)^k g(x)$, де $g(a) \neq 0$.\\
 Ба більше, якщо $\deg f = n$, то звідси $\deg g = n-k$. Тому розкладемо функцію $g$ за щойно отриманою формулою:\\
 $f(x) = (x-a)^k \left(g(a) + \dfrac{g'(a)}{1!}(x-a) + \dots + \dfrac{g^{(n-k)}(a)}{(n-k)!}(x-a)^{n-k} \right) = \\
-= (x-a)^k g(a) + (x-a)^{k+1}\dfrac{g'(a)}{1!} + \dots + (x-a)^n\dfrac{g^{(n+k)}(a)}{(n+k)!}$\\
+= (x-a)^k g(a) + (x-a)^{k+1}\dfrac{g'(a)}{1!} + \dots + (x-a)^n\dfrac{g^{(n+k)}(a)}{(n+k)!}$.\\
 Але з іншого боку,\\
-$f(x) = f(a) + \dfrac{f'(a)}{1!}(x-a) + \dots + \dfrac{f^{(k-1)}(a)}{(k-1)!}(x-a)^{k-1} + \dfrac{f^{(k)}(a)}{k!}(x-a)^{k} + \dots + \dfrac{f^{(n)}(a)}{n!}(x-a)^n$\\
+$f(x) = f(a) + \dfrac{f'(a)}{1!}(x-a) + \dots + \dfrac{f^{(k-1)}(a)}{(k-1)!}(x-a)^{k-1} + \dfrac{f^{(k)}(a)}{k!}(x-a)^{k} + \dots + \dfrac{f^{(n)}(a)}{n!}(x-a)^n$.\\
 В першому рівності многочлен починався зі степені $k$, тому й друга рівність має починатись зі степені $k$, звідси й\\
-$f(a) = 0 \hspace{0.5 cm} \dfrac{f'(a)}{1!} = 0 \hspace{0.5 cm} \dots \hspace{0.5 cm} \dfrac{f^{(k-1)}(a)}{k!} = 0$\\
+$f(a) = 0 \hspace{0.5 cm} \dfrac{f'(a)}{1!} = 0 \hspace{0.5 cm} \dots \hspace{0.5 cm} \dfrac{f^{(k-1)}(a)}{k!} = 0$.\\
 При цьому $\dfrac{f^{(k)}(a)}{k!} \neq 0$. Отже, отримали бажану умову.
-\bigline
+\bigskip \\
 \leftproof Дано: $f(a)=f'(a)=\dots=f^{(k-1)}(a) =0$, але $f^{(k)}(a) \neq 0$.\\
 Розкладемо нашу функцію $f$ за формулою:\\
 $f(x) = f(a) + \dfrac{f'(a)}{1!}(x-a) + \dots \dfrac{f^{(k-1)}(a)}{(k-1)!}(x-a)^{k-1} + \dfrac{f^{(k)}(a)}{k!}(x-a)^{k} + \dots + \dfrac{f^{(n)}(a)}{n!}(x-a)^n$\\
 Тоді\\
 $f(x) = \dfrac{f^{(k)}(a)}{k!}(x-a)^{k} + \dots + \dfrac{f^{(n)}(a)}{n!}(x-a)^n = (x-a)^k \underbrace{\left(\dfrac{f^{(k)}(a)}{k!} + \dots + \dfrac{f^{(n)}(a)}{n!}(x-a)^{n-k} \right)}_{=g(x)}$.\\
-Через те, що $f^{(k)}(a) \neq 0$, то звідси $g(a) \neq 0$. Отже, $f(x) = (x-a)^k g(x) \Rightarrow$ $a$ - корінь кратності $k$.
+Через те, що $f^{(k)}(a) \neq 0$, то звідси $g(a) \neq 0$. Отже, $f(x) = (x-a)^k g(x) \Rightarrow$ $a$ -- корінь кратності $k$.
 \end{proof}
 
 \subsection{Комплексні корені многочленів}
 \begin{proposition}
-Якщо $z \in \mathbb{C}$ є коренем многочлена $f(x)$ з дійсними коефіцієнтами, то $\bar{z}$ - теж корінь многочлена $f(x)$.
+Якщо $z \in \mathbb{C}$ є коренем многочлена $f \in \mathbb{R}[x]$, то $\bar{z}$ -- теж корінь многочлена $f$.
 \end{proposition}
 
 \begin{proof}
-Задано многочлен $f(x) = a_n x^n + \dots + a_0$, для якого $f(z) = 0$. Тоді маємо:\\
-$f(\bar{z}) = a_n \bar{z}^n + \dots + a_0 = \overline{a_n z^n} + \dots + \overline{a_0} = \overline{a_n z^n + \dots + a_0} = \overline{f(z)} = \bar{0} = 0$
+Заданий многочлен $f(x) = a_n x^n + \dots + a_0$, для якого $f(z) = 0$. Тоді маємо:\\
+$f(\bar{z}) = a_n \bar{z}^n + \dots + a_0 = \overline{a_n z^n} + \dots + \overline{a_0} = \overline{a_n z^n + \dots + a_0} = \overline{f(z)} = \bar{0} = 0$.
 \end{proof}
 
 \begin{proposition}
@@ -2281,22 +2347,22 @@ $f(\bar{z}) = a_n \bar{z}^n + \dots + a_0 = \overline{a_n z^n} + \dots + \overli
 \end{proposition}
 
 \begin{proof}
-Нехай $z$ - корінь кратності $k$, тобто $f(z) = f'(z) = \dots = f^{(k-1)}(z) = 0, f'^{(k)}(z) \neq 0$.\\
-Тоді за міркуваннями попереднього твердження, і$f(\bar{z}) = f'(\bar{z}) = \dots = f^{(k-1)}(\bar{z}) = 0, f'^{(k)}(\bar{z}) \neq 0$. \\ Отже, $\bar{z}$ - корінь кратності $k$.
+Нехай $z$ -- корінь кратності $k$, тобто $f(z) = f'(z) = \dots = f^{(k-1)}(z) = 0, f'^{(k)}(z) \neq 0$.\\
+Тоді за міркуваннями попереднього твердження, і$f(\bar{z}) = f'(\bar{z}) = \dots = f^{(k-1)}(\bar{z}) = 0, f'^{(k)}(\bar{z}) \neq 0$. \\ Отже, $\bar{z}$ -- корінь кратності $k$.
 \end{proof}
 
 \begin{theorem}[Основна теорема алгебри]
-У многочлена з комплексними коефіцієнтами є принаймні один корень $z_0 \in \mathbb{C}$.\\
+У многочлена $f \in \mathbb{C}[x]$ існує принаймні один корень $z_0 \in \mathbb{C}$.\\
 \textit{Без доведення.}\\
 \textit{А все тому, що доведення або вимагає знання комплексного аналізу, або треба вчити спеціальні розділи математики. Простого доведення нема.}
 \end{theorem}
 
 \begin{corollary}
-Задано многочлен степені $n$ з комплексними коефіцієнтами. Тоді многочлен має рівно $n$ коренів, враховуючи кратність.
+Заданий многочлен степені $n$ з комплексними коефіцієнтами. Тоді многочлен має рівно $n$ коренів, враховуючи кратність.
 \end{corollary}
 
 \begin{proof}
-Нехай (за основною теоремою алгебри) $z_1$ - корінь $f(z) \implies f(z) = (z-z_1)^{k_1} g(z)$, причому $g(z_1) \neq 0$.\\
+Нехай (за основною теоремою алгебри) $z_1$ -- корінь $f(z) \implies f(z) = (z-z_1)^{k_1} g(z)$, причому $g(z_1) \neq 0$.\\
 За основною теоремою алгебри, $g(z)$ має корінь $z_2 \implies g(z) = (z-z_2)^{k_2} g_2(z)$, причому $g_2(z_2) \neq 0$.\\
 І знову за основною теоремою алгебри, $g_2(z)$ має корінь $z_3\dots$\\
 Продовжуючи до кінця, отримуємо остаточно:\\
@@ -2304,11 +2370,11 @@ $f(z) = A_0(z-z_1)^{k_1}(z-z_2)^{k_2}\dots(z-z_m)^{k_m}$, де \hspace{0.5cm} $k
 \end{proof}
 
 \begin{theorem}
-Функція $f(x)$ з дійсними коефіцієнтами розкладається на такі прості множники:\\
+Многочлен $f \in \mathbb{R}[x]$ розкладається на такі прості множники:\\
 $f(x) = A_0 (x-a_1)^{k_1} \dots (x-a_m)^{k_m} (x^2+p_1x+q_1)^{s_1} \dots (x^2+p_j+q_j)^{s_j}$, де \\
 $k_1 + \dots + k_m + 2s_1 + \dots + 2s_j = n = \deg f$.\\
 Тут $A_0, a_1,\dots,a_m, p_1,q_1,\dots,p_j,q_j \in \mathbb{R}$.\\
-Ба більше, всі дискримінанти квадратних рівнянь - від'ємні.
+Ба більше, всі дискримінанти квадратних рівнянь -- від'ємні.
 \end{theorem}
 
 \begin{proof}
@@ -2320,14 +2386,14 @@ $z_1 + \bar{z_1} = 2 \Re z_1 \overset{\textrm{позн.}}{=} -p_1 \in \mathbb{R}
 $z_1 \bar{z_1} = |z|^2 \overset{\textrm{позн.}}{=} q_1 \in \mathbb{R}$\\
 $\boxed{=} x^2 + p_1x + q_1$, для якого $D < 0$. Бо мали справу з комплексними коренями.\\
 І так з рештою. Тому\\
-$f(x) = A_0 (x-a_1)^{k_1} \dots (x-a_m)^{k_m} (x^2+p_1x+q_1)^{s_1} \dots (x^2+p_j+q_j)^{s_j}$
+$f(x) = A_0 (x-a_1)^{k_1} \dots (x-a_m)^{k_m} (x^2+p_1x+q_1)^{s_1} \dots (x^2+p_j+q_j)^{s_j}$.
 \end{proof}
 
 \subsection{Спільні дільники та кратні двох многочленів}
 \begin{definition}
 Многочлен $h(x)$ називається \textbf{дільником} многочлена $f(x)$, якщо
 \begin{align*}
-\exists s(x): f(x) = s(x) h(x)
+\exists s(x): f(x) = s(x) h(x).
 \end{align*}
 Позначення: $h \mid f$.
 \end{definition}
@@ -2348,26 +2414,23 @@ d \mid f \hspace{1cm} d \mid g
 \end{definition}
 
 \begin{corollary}
-Нехай $d$ - довільний дільник многочленів $f,g$.\\
-Тоді $\deg d \leq \deg \gcd(f,g)$.\\
+Нехай $d$ -- довільний дільник многочленів $f,g$. Тоді $\deg d \leq \deg \gcd(f,g)$.\\
 \textit{Відносно зрозуміло.}
 \end{corollary}
 
 \begin{proposition}
-Нехай $D_1, D_2$ - два найбільших спільних дільника многочленів $f,g$.\\
-Тоді $\exists c \in \mathbb{R}: D_1(x) = c D_2(x)$.
+Нехай $D_1, D_2$ -- два найбільші спільні дільники многочленів $f,g$. Тоді $\exists c \in \mathbb{R}: D_1(x) = c D_2(x)$.\\
+Тобто найбільші спільні дільники многочленів рівні з точністю до константи.
 \end{proposition}
 
 \begin{proof}
-Якщо $D_1(x) = \gcd(f,g) (x)$ та $D_2$ - спільний дільник $f,g$, то $D_2 \mid D_1$, тобто $D_1(x) = s_1(x) D_2(x)$.\\
-Якщо $D_2(x) = \gcd(f,g) (x)$ та $D_1$ - спільний дільник $f,g$, то $D_1 \mid D_2$, тобто $D_2(x) = s_2(x) D_1(x)$.\\
-Друге рівняння підставимо в перше - отримаємо:\\
+Якщо $D_1(x) = \gcd(f,g) (x)$ та $D_2$ -- спільний дільник $f,g$, то $D_2 \mid D_1$, тобто $D_1(x) = s_1(x) D_2(x)$.\\
+Якщо $D_2(x) = \gcd(f,g) (x)$ та $D_1$ -- спільний дільник $f,g$, то $D_1 \mid D_2$, тобто $D_2(x) = s_2(x) D_1(x)$.\\
+Друге рівняння підставимо в перше -- отримаємо:\\
 $D_1(x) = s_1(x) D_2(x) = s_1(x)s_2(x)D_1(x)$\\
 $\implies s_1(x)s_2(x) = 1 \implies s_1(x) = c_1, s_2(x) = c_2 = \dfrac{1}{c_1}$.\\
 Отже, $D_1(x) = c_1 D_2(x)$.
 \end{proof}
-
-Отже, всі найбільші спільні дільники між многочленами $f,g$ рівні з точністю до деякої константи.
 
 \begin{theorem}[Алгоритм Евкліда]
 Задані многочлени $f,g$. Запишемо ділення з остачею таким чином:\\
@@ -2389,10 +2452,10 @@ $\deg f > \deg g > \deg r_1 > \deg r_2 > \dots > \deg r_n$.\\
 \end{remark}
 
 \begin{proof}
-Покажемо, що $r_n(x)$ - спільний дільник $f,g$.\\
+Покажемо, що $r_n(x)$ -- спільний дільник $f,g$.\\
 Дійсно, якщо $r_{n-1}$ підставити в останнє рівняння, потім $r_{n-2}$ в передостаннє і так до кінця, то отримаємо, що спочатку $r_n \mid g$, а якщо підставити $g$ в найперше рівняння, то $r_n \mid f$.\\
-Покажемо, що $r_n(x)$ - найбільший спільний дільник $f,g$.\\
-Дійсно, якщо $d$ - довільний спільний дільник $f,g$, то звідси $d \mid r_1, d \mid r_2, \dots, d \mid r_n$. Це доводиться, якщо йти згори вниз поступово.\\
+Покажемо, що $r_n(x)$ -- найбільший спільний дільник $f,g$.\\
+Дійсно, якщо $d$ -- довільний спільний дільник $f,g$, то звідси $d \mid r_1, d \mid r_2, \dots, d \mid r_n$. Це доводиться, якщо йти згори вниз поступово.\\
 Таким чином, $r_n(x) = \gcd(f,g)$.
 \end{proof}
 
@@ -2451,7 +2514,7 @@ $\textrm{LCM}(f,g) = \dfrac{f(x)g(x)}{\textrm{GCD}(f,g)}$
 
 \subsection{Дробово-раціональні вирази, розклад}
 \begin{definition}
-\textbf{Дробово-раціональним виразом} називають дріб $\dfrac{P(x)}{Q(x)}$, де $P(x),Q(x)$ - многочлени.
+\textbf{Дробово-раціональним виразом} називають дріб $\dfrac{P(x)}{Q(x)}$, де $P(x),Q(x)$ -- многочлени.
 \end{definition}
 
 \begin{definition}
@@ -2459,7 +2522,7 @@ $\textrm{LCM}(f,g) = \dfrac{f(x)g(x)}{\textrm{GCD}(f,g)}$
 \begin{align*}
 \dfrac{1}{x-a} \hspace{1cm} \dfrac{1}{(x-a)^k} \hspace{1cm} \dfrac{Ax+B}{x^2+px+q} \hspace{1cm} \dfrac{Ax+B}{(x^2+px+q)^k}
 \end{align*}
-Останні два дроби - це в дійсному випадку. Ба більше, дискриминанти знаменників - від'ємні.
+Останні два дроби -- це в дійсному випадку. Ба більше, дискриминанти знаменників -- від'ємні.
 \end{definition}
 
 \subsubsection*{Розклад дробово-раціональних виразів на суму простих дробів}
@@ -2473,8 +2536,7 @@ II. $\deg P < \deg Q$.\\
 Уже відомо, що можна розкласти $Q(x) = E(x-a_1)^{k_1} \dots (x-a_m)^{k_m} (x^2+p_1x+q_1)^{l_1} \dots (x^2+p_s x+q_s)^{l_s}$ саме таким чином.
 
 \begin{lemma}
-Задано $\dfrac{P(x)}{Q(x)}$ - такий дробово-раціональний вираз, що $\deg P < \deg Q$. Відомо, що $Q(x) = (x-a)^k Q_1(x)$, де $Q_1(a) \neq 0$.\\
-Тоді $\exists A \in \mathbb{R}, \exists P_1(x): \deg P_1 < \deg P$, для яких можемо записати\\
+Заданий $\dfrac{P(x)}{Q(x)}$ -- такий дробово-раціональний вираз, що $\deg P < \deg Q$. Відомо, що $Q(x) = (x-a)^k Q_1(x)$, де $Q_1(a) \neq 0$. Тоді $\exists A \in \mathbb{R}, \exists P_1(x): \deg P_1 < \deg P$, для яких можемо записати\\
 $\dfrac{P(x)}{Q(x)} = \dfrac{A}{(x-a)^k} + \dfrac{P_1(x)}{(x-a)^{k-1}Q_1(x)}$.
 \end{lemma}
 
@@ -2494,8 +2556,7 @@ $\dfrac{P(x)}{Q_1(x)(x-a)^k} = \dfrac{A_k}{(x-a)^k} + \dfrac{A_{k-1}}{(x-a)^{k-1
 \end{corollary}
 
 \begin{lemma}
-Задано $\dfrac{P(x)}{Q(x)}$ - такий дробово-раціональний вираз, що $\deg P < \deg Q$. Відомо, що $Q(x) = (x^2+px+q)^kQ_1(x)$, де $Q_1(z_0) \neq 0$. Тут в нас $x^2+px+q = (x-z_0)(x+\bar{z_0})$.\\
-Тоді $\exists B,C \in \mathbb{R}, \exists P_1(x): \deg P_1 < \deg P$ та $P_1(x)$ не ділиться на $x^2+px+q$, для яких можемо записати\\
+Заданий $\dfrac{P(x)}{Q(x)}$ -- такий дробово-раціональний вираз, що $\deg P < \deg Q$. Відомо, що $Q(x) = (x^2+px+q)^kQ_1(x)$, де $Q_1(z_0) \neq 0$. Тут в нас $x^2+px+q = (x-z_0)(x+\bar{z_0})$. Тоді $\exists B,C \in \mathbb{R}, \exists P_1(x): \deg P_1 < \deg P$ та $P_1(x)$ не ділиться на $x^2+px+q$, для яких можемо записати\\
 $\dfrac{P(x)}{Q(x)} = \dfrac{Bx+C}{(x^2+px+q)^k} + \dfrac{P_1(x)}{(x^2+px+q)^{k-1}Q_1(x)}$.
 \end{lemma}
 
@@ -2504,7 +2565,7 @@ $\dfrac{P(x)}{Q(x)} = \dfrac{Bx+C}{(x^2+px+q)^k} + \dfrac{P_1(x)}{(x^2+px+q)^{k-
 $\dfrac{P(x)}{(x^2+px+q)^k Q_1(x)} = \dfrac{Bx+C}{(x^2+px+q)^k} + \dfrac{P_1(x)}{(x^2+px+q)^{k-1}Q_1(x)}$.\\
 $\dfrac{P(x)}{(x^2+px+q)^k Q_1(x)} = \dfrac{(Bx+C)Q_1(x)+P_1(x)(x^2+px+q)}{(x^2+px+q)^k Q_1(x)}$\\
 $P(x) = (Bx+C)Q_1(x)+P_1(x)(x^2+px+q)$ $(*)$\\
-Нехай $z_0$ та $\bar{z_0}$ - корені $x^2+px+q$. Вони комплексні та спряжені між собою, бо $D < 0$. Ці корені підставимо в наше рівняння (*) - отримаємо ось таку систему:
+Нехай $z_0$ та $\bar{z_0}$ -- корені $x^2+px+q$. Вони комплексні та спряжені між собою, бо $D < 0$. Ці корені підставимо в наше рівняння (*) -- отримаємо ось таку систему:
 $\begin{cases} 
 P(z_0) = (Bz_0+C)Q_1(z_0) \\
 P(\bar{z_0}) = (B\bar{z_0}+C) Q_1(\bar{z_0})
@@ -2532,7 +2593,7 @@ $\dfrac{P(x)}{Q_1(x)(x^2+px+q)^k} = \dfrac{B_kx+C_k}{(x^2+px+q)^k} + \dots + \df
 \end{corollary}
 
 \begin{theorem}
-Задано $\dfrac{P(x)}{Q(x)}$ - такий дробово-раціональний вираз, що $\deg P < \deg Q$. Відомо (із наслідку основної теореми алгебри), що \\ $Q(x) = E(x-a_1)^{k_1} \dots (x-a_m)^{k_m} (x^2+p_1x+q_1)^{l_1} \dots (x^2+p_s x+q_s)^{l_s}$. Тоді\\
+Заданий $\dfrac{P(x)}{Q(x)}$ -- такий дробово-раціональний вираз, що $\deg P < \deg Q$. Відомо (із наслідку основної теореми алгебри), що $Q(x) = E(x-a_1)^{k_1} \dots (x-a_m)^{k_m} (x^2+p_1x+q_1)^{l_1} \dots (x^2+p_s x+q_s)^{l_s}$. Тоді\\
 $E \cdot \dfrac{P(x)}{Q(x)} = \dfrac{A_{11}}{(x-a_1)} + \dots + \dfrac{A_{1k_1}}{(x-a_1)^{k_1}} + \dfrac{A_{21}}{(x-a_2)} + \dots + \dfrac{A_{2k_2}}{(x-a_2)^{k_2}} + \dots + \dfrac{A_{m1}}{(x-a_m)} + \dots + \dfrac{A_{mk_m}}{(x-a_m)^{k_m}} \\ + \dfrac{B_{11}x + C_{11}}{x^2+p_1x+q_1} + \dots + \dfrac{B_{1l_1}x + C_{1l_1}}{(x^2+p_1x+q_1)^{l_1}} + \dots + \dfrac{B_{s1}x + C_{s1}}{x^2+p_s x+q_s} + \dots + \dfrac{B_{sl_s}x + C_{sl_s}}{(x^2+p_s x+q_s)^{l_s}}$\\
 \textit{Ґрунтується на основі двох наслідків з двох лем.}
 \end{theorem}

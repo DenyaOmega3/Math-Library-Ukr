@@ -90,7 +90,7 @@
 	2. & $\forall x \in L, \forall \lambda \in \mathbb{R}: \exists! w \in L: w = \lambda x$ -- операція множення на скаляр \\
 	\end{tabular}
 	\end{align*}
-	та які задовільняють наступним аксіомам:
+	та які задовольняють таким аксіомам:
 	\begin{align*}
 	\begin{tabular}{cl}
 	1) & $\forall x,y \in L: x + y = y + x$\\
@@ -103,13 +103,13 @@
 	8) & $\forall x \in L: 1 \cdot x = x$
 	\end{tabular}
 	\end{align*}
-	Деколи лінійний простір називають по-іншому: \textbf{векторний простір}.\\
-	Всі елементи векторного простору називають часто ще \textbf{векторами}. Я цього робити не буду.
+	Частіше лінійний простір називають по-іншому: \textbf{векторний простір}.\\
+	Всі елементи векторного простору називають часто ще \textbf{векторами}.
 	\end{definition}
 	
 	\begin{remark}
 	Якщо $\alpha, \beta \in \mathbb{R}$, то лінійний простір називається  \textbf{дійсним}. При $\mathbb{C}$ -- \textbf{комплексним}.\\
-	\textit{Я далі лише буду розглядати дійсні простори, якщо щось додаткове не буде сказано. Для комплексних просторів все буде аналогічно.}
+	\textit{Я далі лише буду розглядати дійсні простори, якщо щось додаткове не буде сказано. Для комплексних просторів все буде аналогічно (якщо ніде інше не буде уточнено).}
 	\end{remark}
 	
 	%additional info
@@ -151,7 +151,7 @@
 	\item існуючий елемент $0 \in L$ -- єдиний;
 	\item $\forall x \in L$ існуючий елемент $\tilde{x}$ -- єдиний;
 	\item $\underset{\in \mathbb{R}}{0} \cdot x = \underset{\in L}{0}$;
-	\item $\tilde{x} = (-1) \cdot x$. Скорочено позначають елемент $(-1) \cdot = -x$.
+	\item $\tilde{x} = (-1) \cdot x$. Скорочено позначають елемент $(-1) \cdot x = -x$.
 	\end{enumerate}
 	\end{proposition}
 	
@@ -167,7 +167,7 @@
 	\end{proof}
 	
 	\begin{remark}
-	У разі якщо принаймні один з властивостей не буде виконаним, то $L$ більше не буде лінійним простором.
+	У разі якщо принаймні одна з властивостей не буде виконаною, то $L$ більше не буде лінійним простором.
 	\end{remark}
 	
 	\begin{example}
@@ -235,11 +235,11 @@
 	Задано $L$ -- лінійний простір.\\
 	Система елементів $\{x_1, \dots, x_n\} \subset L$ називається \textbf{лінійно незалежною (л.н.з.)}, якщо
 	\begin{align*}
-	\alpha_1 x_1 + \dots + \alpha_n x_n = 0 \implies \alpha_1 = \dots = \alpha_n = 0
+	\alpha_1 x_1 + \dots + \alpha_n x_n = 0 \implies \alpha_1 = \dots = \alpha_n = 0.
 	\end{align*}
 	Система елементів $\{x_1, \dots, x_n\} \subset L$ називається \textbf{лінійно залежною (л.з.)}, якщо
 	\begin{align*}
-	\exists \alpha_1,\dots,\alpha_n \in \mathbb{R}: |\alpha_1| + \dots + |\alpha_n| \neq 0: \alpha_1 x_1 + \dots + \alpha_n x_n = 0
+	\exists \alpha_1,\dots,\alpha_n \in \mathbb{R}: |\alpha_1| + \dots + |\alpha_n| \neq 0: \alpha_1 x_1 + \dots + \alpha_n x_n = 0.
 	\end{align*}
 	\end{definition}
 	
@@ -264,12 +264,12 @@
 	\end{example}
 	
 	\begin{example}
-	Задано лінійний простір $L = \mathbb{R}^4$ і система векторів $\{\vec{x}_1,\vec{x}_2,\vec{x}_3,\vec{x}_4\}$, де\\
+	Заданий лінійний простір $L = \mathbb{R}^4$ і система векторів $\{\vec{x}_1,\vec{x}_2,\vec{x}_3,\vec{x}_4\}$, де\\
 	$\vec{x}_1 =\begin{pmatrix} 1\\ 0\\ 2\\ 3 \end{pmatrix},\ \vec{x}_2 =\begin{pmatrix} 4\\ -1\\ 2\\ 1 \end{pmatrix},\ \vec{x}_3 =\begin{pmatrix} 2\\ 1\\ -1\\ 3 \end{pmatrix},\ \vec{x}_4 =\begin{pmatrix} 1\\ -2\\ 1\\ -5 \end{pmatrix}$.\\
 	Перевіримо, чи буде система $\{\vec{x}_1,\vec{x}_2,\vec{x}_3,\vec{x}_4\}$ л.н.з. Розпишемо їхню лінійну комбінацію:\\
 	$\alpha_1 \vec{x}_1 + \alpha_2 \vec{x}_2 + \alpha_3 \vec{x}_3 + \alpha_4 \vec{x}_4 = \vec{0}$.\\
 	$\alpha_1 \begin{pmatrix} 1\\ 0\\ 2\\ 3 \end{pmatrix} + \alpha_2 \begin{pmatrix} 4\\ -1\\ 2\\ 1 \end{pmatrix} + \alpha_3 \begin{pmatrix} 2\\ 1\\ -1\\ 3 \end{pmatrix} + \alpha_4 \begin{pmatrix} 1\\ -2\\ 1\\ -5 \end{pmatrix} = \begin{pmatrix} 0\\ 0\\ 0\\ 0 \end{pmatrix}$.\\
-	Дана рівняння можна записати в вигляді системи рівнянь:\\
+	Дане рівняння можна записати в вигляді системи рівнянь:\\
 	$\begin{cases}
 	(1): \alpha_1 + 4\alpha_2 + 2\alpha_3 + \alpha_4 = 0\\
 	(2): -\alpha_2 + \alpha_3 - 2\alpha_4 = 0\\
@@ -294,7 +294,7 @@
 	\alpha_2 = -3\alpha_4\\
 	\alpha_3 = \alpha_4
 	\end{cases} 
-	$\\
+	$.\\
 	Звісно, є нульовий розв'язок, але такий розв'язок не буде єдиним. Можна взяти $(9,-3,1,1)$, щоб наша лінійна комбінація елементів $\vec{x}_1,\vec{x}_2,\vec{x}_3,\vec{x}_4$ була нулевою. Отже, $\{\vec{x}_1,\vec{x}_2,\vec{x}_3,\vec{x}_4\}$ -- л.з.
 	\end{example}
 	
@@ -330,11 +330,11 @@
 	\end{remark}
 	
 	\begin{proposition}[Властивості л.з.\ систем]
-	Задано $L$ -- лінійний простір та система $\{x_1,\dots,x_n\}$. Тоді виконуються такі пункти:
+	Заданий $L$ -- лінійний простір та система $\{x_1,\dots,x_n\}$. Тоді виконуються такі пункти:
 	\begin{enumerate}[nosep, wide = 0pt, label={\arabic*)}]
 	\item Якщо система містить л.з.\ підсистему $\{x_{j_1} \dots, x_{j_k}\}$, то вся система $\{x_1,\dots,x_n\}$ л.з.;
 	\item Якщо $\{x_1 \dots, x_n\}$ містить принаймні один нульовий елемент, то ця система -- л.з.;
-	\item Система $\{x_1 \dots, x_n\}$ -- л.з. $\iff$ існує елемент, який можна виразити як лінійну комбінацію від інших.
+	\item Система $\{x_1 \dots, x_n\}$ -- л.з. $\iff$ існує елемент системи, який можна виразити як лінійну комбінацію від всіх інших.
 	\end{enumerate}
 	\end{proposition}
 	
@@ -914,13 +914,13 @@ $x_2 = \beta_2^{-1}y_2 - \beta_2^{-1}\beta_1 y_1 - \dots - \beta_2^{-1} \beta_m 
 	\end{pmatrix},\ \vec{x}_3 = \begin{pmatrix}
 	-4 \\ -2 \\ 6
 	\end{pmatrix}$.\\
-	За щойно доведеною теоремою, нам необхідно знайти базу $\{\vec{x}_1,\vec{x}_2,\vec{x}_3 \}$. Зрозуміло, що $\{\vec{x}_1\}$ - л.н.з. та $\{\vec{x}_1, \vec{x}_2\}$ - л.н.з. (не колінеарні вектори). Тоді перевіряємо $\{\vec{x}_1,\vec{x}_2,\vec{x}_3 \}$ на л.н.з.\\
+	За щойно доведеною теоремою, нам необхідно знайти базу $\{\vec{x}_1,\vec{x}_2,\vec{x}_3 \}$. Зрозуміло, що $\{\vec{x}_1\}$ -- л.н.з. та $\{\vec{x}_1, \vec{x}_2\}$ -- л.н.з. (не колінеарні вектори). Тоді перевіряємо $\{\vec{x}_1,\vec{x}_2,\vec{x}_3 \}$ на л.н.з.\\
 	$\alpha_1 \vec{x}_1 + \alpha_2 \vec{x}_2 + \alpha_3 \vec{x}_3 = \vec{0} \implies 		\begin{cases}
 	\alpha_1 - 3 \alpha_2 - 4 \alpha_3 = 0 \\
 	-4\alpha_1 + 6 \alpha_2 - 2 \alpha_3 = 0 \\
 	-3\alpha_1 + 7 \alpha_2 + 6 \alpha_3 = 0
-	\end{cases} \implies \dots \implies \begin{cases} \alpha_1 - 3 \alpha_2 - 4 \alpha_3 = 0 \\ \alpha_2 + 3 \alpha_3 = 0 \end{cases}$ - має безліч розв'язків. Отже, $\{\vec{x}_1,\vec{x}_2,\vec{x}_3\}$ - л.з.\\
-	Тоді $\{\vec{x}_1,\vec{x}_2\}$ - max. л.н.з., а отже, є базою, а отже, є базисом $\linspan \{\vec{x}_1,\vec{x}_2,\vec{x}_3 \} = \linspan \{\vec{x}_1,\vec{x}_2 \}$. Нарешті, $\dim \linspan \{\vec{x}_1,\vec{x}_2,\vec{x}_3\} = 2$.
+	\end{cases} \implies \dots \implies \begin{cases} \alpha_1 - 3 \alpha_2 - 4 \alpha_3 = 0 \\ \alpha_2 + 3 \alpha_3 = 0 \end{cases}$ - має безліч розв'язків. Отже, $\{\vec{x}_1,\vec{x}_2,\vec{x}_3\}$ -- л.з.\\
+	Тоді $\{\vec{x}_1,\vec{x}_2\}$ -- max. л.н.з., а отже, є базою, а отже, є базисом $\linspan \{\vec{x}_1,\vec{x}_2,\vec{x}_3 \} = \linspan \{\vec{x}_1,\vec{x}_2 \}$. Нарешті, $\dim \linspan \{\vec{x}_1,\vec{x}_2,\vec{x}_3\} = 2$.
 	\end{example}
 	
 	\begin{proposition}
@@ -1208,7 +1208,7 @@ M_1 \dot{+} \dots \dot{+} M_n = \{z \in L \mid \exists !x_1 \in M_1, \dots, \exi
 	$y_1+M=y_2+M \iff y_1 \sim y_2 \iff y_1 - y_2 \in M$.\\
 	Отже, $(x_1+x_2)-(y_1+y_2) \in M$, оскільки $M$ -- лінійний простір також, а тому $x_1+x_2 \sim y_1+y_2 \iff (x_1+x_2)+M=(y_1+y_2)+M$.
 	\bigskip \\
-	I. \textit{Операція $\cdot \lambda$ коректна}.\\
+	II. \textit{Операція $\cdot \lambda$ коректна}.\\
 	Доведемо, що із $x_1+M=x_2+M$ випливає $\lambda(x_1+M) = \lambda(x_2+M)$.\\
 	$x_1+M=x_2+M \iff x_1 \sim x_2 \iff x_1 - x_2 \in M$.\\
 	Отже, $\lambda(x_1-x_2) = \lambda x_1 - \lambda x_2 \in M$, оскільки $M$ -- лінійний простір також, а тому $\lambda x_1 \sim \lambda x_2 \iff \lambda(x_1+M) = \lambda(x_2+M)$.
@@ -1866,7 +1866,10 @@ $(BAf)(x) = f(x)$ та $AB \mathbb{A} = \mathbb{A}$. Отже, $B$ -- оберн
 	$(A_1 \dot{+} A_2)(\alpha x + \beta y) = (A_1\dot{+}A_2)((\alpha x_1 + \beta y_1) + (\alpha x_2 + \beta y_2)) = \\ = A_1(\alpha x_1 + \beta y_1) + A_2(\alpha x_2 + \beta y_2) = \alpha A_1 x_1 + \beta A_1 y_1 + \alpha A_2 x_2 \beta A_2 y_2 = \\ = \alpha(A_1 x_1 + A_2 x_2) + \beta(A_1 y_1 + A_2 y_2) = \alpha(A_1 \dot{+}A_2)(x_1+x_2) + \beta(A_1 \dot{+} A_2)(y_1+y_2) = \\ = \alpha(A_1 \dot{+}A_2)x + \beta(A_1 \dot{+}A_2)y$
 	\end{proof}	
 	\noindent
-	\textit{Навіщо це все, дізнаємось скоро. А зараз буде відступ, до операторів ми ще повернемось.} \newpage
+	\textit{Навіщо це все, дізнаємось скоро. А зараз буде відступ, до операторів ми ще повернемось.} 
+	
+	\newpage	
+	
 	\section{Теорія матриць}
 	%\subsection{Основні властивості}
 	\subsection{Вступ}
@@ -3889,6 +3892,28 @@ $\forall x \in L: \exists! x_1 \in L_1, \exists! x_2 \in L_2: x = x_1 + x_2$\\
 $Ax = Ax_1 + Ax_2 = A|_{L_1}x_1 + A|_{L_2}x_2 = (A|_{L_1}+A|_{L_2})(x_1 + x_2) = (A|_{L_1}+A|_{L_2})x$
 \end{proof}
 
+\subsection{Фактороператори}
+\begin{definition}
+Заданий $A \colon L \to L$ -- лінійний оператор та $M$ -- $A$-інваріантний.\\
+\textbf{Фактороператором} називають оператор $A_{L/_M} \colon L/_M \to L/_M$, що задається таким чином:
+\begin{align*}
+A_{L/_M}(x + M) =  Ax + M
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+Оператор $A_{L/_M}$ визначений коректно, а також справді є лінійним оператором.
+\end{proposition}
+
+\begin{proof}
+I. \textit{Коректність.}\\
+Припустимо, що $x+M = y+M$, тобто два однакові суміжні класи, звідси $x-y \in M$. Оскільки $M$ інваріантний відносно $A$, то $A(x-y) = Ax - Ay \in M$. Таким чином, $Ax + M = Ay + M$.
+\bigskip \\
+II. \textit{Лінійність оператора.}\\
+$A_{L/_M}((x+M) + (y+M) = A_{L/_M}((x+y) + M) = A(x+y) + M = (Ax + Ay) + M = (Ax + M) + (Ay + M) = A_{L/_M}(x+M) + A_{L/_M}(y+M)$.\\
+$A_{L/_M}(\lambda(x+M)) = A_{L/_M}( \lambda x + M) = A(\lambda x) + M = (\lambda Ax) + M = \lambda (Ax + M) = \lambda A_{L/_M}(x+M)$.
+\end{proof}
+
 \subsection{Матриця оператора в базисі, розширенному з базису в інваріантному підпросторі}
 Задано $A \colon L \to L$ -- лінійний оператор та $L_1$ -- інваріантний підпростір, в якому є базис $\{f_1,\dots, f_k\}$.\\
 Продовжимо його до базису $L$, маємо $\{f_1,\dots,f_k,f_{k+1},\dots,f_n\}$. \\
@@ -3912,21 +3937,35 @@ a_{k,1} & \dots & a_{k,k} & \vline & a_{k,k+1} & \dots & a_{k, n} \\
 0 & \dots & 0 & \vline & a_{n,k+1} & \dots & a_{n, n} \\
 \end{pmatrix}$
 \bigskip \\
-Тепер розглянемо звужений оператор $A|_{L_1}$ в базисі $\{f_1,\dots,f_k\}$.\\ Тоді $A|_{L_1} f_1 = Af_1 , \dots, A|_{L_1}f_k = Af_k$.\\
+Тепер розглянемо звужений оператор $A|_{L_1}$ в базисі $\{f_1,\dots,f_k\}$. Тоді $A|_{L_1} f_1 = Af_1 , \dots, A|_{L_1}f_k = Af_k$.\\
 Матриця матиме вигляд:\\
 $\mathbb{A}_{|_{L_1}f} = \begin{pmatrix}
 a_{11} & \dots & a_{1,k}\\
 a_{21} & \dots & a_{2,k}\\
 \vdots & \ddots & \vdots\\
 a_{k,1} & \dots & a_{k,k}\\
-\end{pmatrix}$\\
-\\
+\end{pmatrix}$.\\
+На цьому ще не все. Ще раз детально розглянемо вирази\\
+$Af_{k+1} = \underbrace{a_{1,k+1}f_1 + a_{2,k+1}f_2 + \dots + a_{k,k+1}f_k}_{\in L_1} + a_{k+1,k+1}f_{k+1} + \dots + a_{n,k+1}f_n$\\
+$\vdots$\\
+$Af_n = \underbrace{a_{1,n}f_1 + a_{2,n}f_2 + \dots + a_{k,n}f_k}_{\in L_1} + a_{k+1,n}f_{k+1} + \dots + a_{n,n}f_n$.\\
+Тепер розглянемо фактороператор $A/_{L/_{L_1}}$, який визначали вище. Звідси випливатиме, що\\ 
+$A_{L/_{L_1}}(f_{k+1} + L_1) = a_{k+1,k+1}(f_{k+1}+L_1) + \dots + a_{n,k+1}(f_n+L_1)$.\\
+$A_{L/_{L_1}}(f_{n} + L_1) = a_{k+1,n}(f_{k+1}+L_1) + \dots + a_{n,n}(f_n + L_1)$.\\
+Матриця оператора $A_{L/_{L_1}}$ в базисі $\{f_{k+1}+L_1,\dots,f_n+L_1\}$ матиме вигляд:\\
+$\mathbb{A}_{L/_{L_1} f} = \begin{pmatrix}
+a_{k+1,k+1} & \dots & a_{k+1, n} \\
+a_{k+2,k+1} &  \dots & a_{k+2, n} \\
+\vdots & \ddots & \vdots \\
+a_{n,k+1} & \dots & a_{n, n} \\
+\end{pmatrix}$.\\
 Можна тоді сказати, що 
 $\mathbb{A}_f = \begin{pmatrix}
  \mathbb{A}_{|_{L_1}f}  & \vline & * \\
  \hline
- \mathbb{O} & \vline & *
+ \mathbb{O} & \vline & \mathbb{A}_{L/_{L_1} f}
 \end{pmatrix}$ -- остаточна матриця.
+\iffalse
 \bigskip \\
 Можна зробити більш уточнений вигляд матриці. Для цього розглянемо оператор $B \colon M \to M$, де $M = \linspan\{f_{k+1},\dots,f_n\}$ (зрозуміло, що $M$ -- підпростір $L$) таким чином:\\
 $Bf_{k+1} = a_{k+1,k+1}f_{k+1} + \dots + a_{n,k+1}f_n$\\
@@ -3942,6 +3981,7 @@ a_{n,k+1} & \dots & a_{n,n}
  \hline
  \mathbb{O} & \vline & \mathbb{B}
 \end{pmatrix}$.
+\fi
 
 \begin{example}
 Розглянемо лінійний оператор $A \colon \mathbb{R}_3[x] \to \mathbb{R}_3[x]$ як $Af = f$. Уже знаємо, що $\mathbb{R}_1[x]$ буде інваріантним. Маємо якийсь кастомний базис $\{1+x,-2x\}$ в $\mathbb{R}_1[x]$, який згодом розширимо до базису $\{1+x,-2x,x^2,x^3\}$ в $\mathbb{R}_3[x]$.
@@ -4176,16 +4216,20 @@ $(A^* g_i)(x_j) = (g_i \circ A)(x_j) = g_i(A(x_j)) = g_i(a_{1j}y_1 + \dots + a_{
 Таким чином, $b_{ji} = a_{ij}$, а тому звідси $\mathbb{B} = \mathbb{A}^T$.
 \end{proof}
 
-\iffalse
-\subsection{Фактор-оператори}
-\begin{definition}
-Задано: $A: L \to L$ - лінійний оператор.\\
-\textbf{Фактор-оператором} називають оператор $A_{L/_M}: L/_M \to L/_M$, що задається таким чином:
-\begin{align*}
-A_{L/_M}(x + M) =  Ax + M
-\end{align*}
-\end{definition}
-\fi
+\subsection{Перехід від одного дуального базису до іншого дуального}
+Заданий $L$ -- лінійний простір, в якому два різні базиси: $\{g_1,\dots,g_n\},\ \{f_1,\dots,f_n\}$. До кожного ми можемо побудувати дуальний базис $\{g^1,\dots,g^n\}$ та $\{f^1,\dots,f^n\}$.\\
+Мета: перейти з першого дуального базису до другого.\\
+Маємо $\mathbb{U}_{g \to f}$ -- матриця переходу, тобто маємо такі розклади:\\
+$g_1 = u_{11} f_1 + \dots + u_{n1} f_n$\\
+$\vdots$\\
+$g_n = u_{1n} f_1 + \dots + u_{nn} f_n$.\\
+Ми можемо розкласти вектори дуального базису в лінійну комбінацію іншого дуального:\\
+$f^1 = a_{11}g^1 + \dots + a_{n1}g^n$\\
+$\vdots$\\
+$f^n = a_{1n}g^1 + \dots + a_{nn}g^n$.\\
+Насправді кажучи, кожний $a_{ij} = u_{ij}$. Із одного боку, $f^i(g_j) = (a_{1i}g^1 + \dots + a_{ni}g^n)(g_j) = a_{1j}g^1(g_j) + \dots + a_{ji} g^j(g_j) = a_{ji}$. Із іншого боку, $f^i(g_j) = f^i(u_{1j}f_1 + \dots + u_{ij}f_i + \dots + u_{nj}f_n) = u_{ij}$.
+\bigskip \\
+Отже, $(\mathbb{U}_{g \to f}^{-1})^T$ -- матриця переходу з базиса $\{g^1,\dots,g^n\}$ в базис $\{f^1,\dots,f^n\}$.
 
 %stopped here
 
@@ -4271,30 +4315,30 @@ $\mathbb{P} = \begin{pmatrix}
 \section{Нова ера з матрицями}
 \subsection{Власні числа та власні вектори}
 \begin{definition}
-Задано $A \in \mathcal{L}(L,L)$.\\
+Заданий $A \in \mathcal{L}(L,L)$.\\
 \textbf{Власним вектором} оператора $A$ називається такий ненульовий елемент $f \in L$, для якого
 \begin{align*}
-\exists \lambda \in \mathbb{R}: Af = \lambda f
+\exists \lambda \in \mathbb{R}: Af = \lambda f.
 \end{align*}
-Водночас число $\lambda$ називається \textbf{власним числом} оператора $A$.\\
+Водночас $\lambda$ називається \textbf{власним числом} оператора $A$.\\
 Англійською маємо відповідний переклад: \textbf{eigenvector}, \textbf{eigenvalue}.
 \end{definition}
 
 \begin{remark}
-Із означення випливає, що власному вектору відповідає \emph{єдине} власне число в силу лінійності оператора. А власному числу може відповідати безліч власних векторів (див. нижче \prpref{eigenspace_is_subspace})
+Із означення випливає, що власному вектору відповідає \emph{єдине} власне число в силу лінійності оператора. А власному числу може відповідати безліч власних векторів (див.\ нижче \prpref{eigenspace_is_subspace})
 \end{remark}
 
 \begin{example}
-Знайдемо власні значення та власні вектори для оператора $A \colon \mathbb{R}^3 \to \mathbb{R}^3$, що заданий $A\vec{x} = [\vec{x}, \vec{a}]$. Тут $\vec{a}$ -- якийсь фіксований вектор.\\
+Знайдемо власні значення та власні вектори для оператора $A \colon \mathbb{R}^3 \to \mathbb{R}^3$, що заданий таким чином: $A\vec{x} = [\vec{x}, \vec{a}]$. Тут $\vec{a}$ -- якийсь фіксований вектор.\\
 За означенням маємо $A\vec{f} = \lambda \vec{f} \implies [\vec{f},\vec{a}] = \lambda \vec{f}$.\\
 Ліворуч маємо вектор, що перпендикулярний до $\vec{f}$, але водночас він дорівнює цьому ж вектору $\vec{f}$, який є домноженим на скаляр. Тоді звідси маємо єдиний випадок рівності, якщо $\lambda = 0$.\\
 Знайдемо власні вектори:\\
 $A\vec{f} = [\vec{f}, \vec{a}] = \vec{0} \implies \vec{f} \parallel \vec{a}$.\\
-Таким чином, власні вектори -- це вектори $\vec{f}$, що колінеарні $\vec{a}$, з власним числом $\lambda = 0$.
+Таким чином, власні вектори -- це вектори $\vec{f}$, що колінеарні з $\vec{a}$, з власним числом $\lambda = 0$.
 \end{example}
 
 \begin{proposition}[Властивості власних чисел та векторів]
-Задано $A \in \mathcal{L}(L,L)$. Тоді виконуються такі пункти:
+Заданий $A \in \mathcal{L}(L,L)$. Тоді виконуються такі пункти:
 \begin{enumerate}[nosep, wide=0pt, label={\arabic*)}]
 \item Нехай $f_1,\dots,f_k$ -- власні вектори з попарно різними власними числами. Тоді $\{f_1,\dots,f_k\}$ -- л.н.з.;
 \item $f$ -- власний вектор оператора $A$ з власним числом $\lambda \iff$ $f$ -- власний вектор оператора $(A - \mu I)$ з власним числом $(\lambda - \mu)$;
@@ -4310,7 +4354,7 @@ $f$ -- власний вектор $A$ з власним числом $\lambda$ 
 \begin{proof}
 Покажемо виконання кожної властивості.
 \begin{enumerate}[wide=0pt, label={\arabic*)},topsep=-\parskip]
-\item Доведення за МІ.\\
+\item Доведення проведемо за МІ.\\
 I. \textit{База індукції.} При $k=1$ маємо $\{f_1\}$ -- л.н.з. автоматично.\\
 II. \textit{Припущення індукції.} припустимо, що $\{f_1,\dots,f_k\}$ -- л.н.з. \\
 III. \textit{Крок індукції.} Доведемо, що система $\{f_1,\dots,f_k, f_{k+1}\}$ -- л.н.з.\\
@@ -4336,14 +4380,14 @@ L \arrow{r}{A} \arrow{d}[swap]{J_g} & L \arrow{d}{J_g} \\
 \end{tikzcd}\\
 Тоді $Af = J_g^{-1} \mathbb{A}_g J_g f = \lambda f$. Обидві частини множимо на $J_g \implies \mathbb{A}_g (J_g f) = \lambda (J_g f)$.
 
-\item $\lambda$ - власне число для $\mathbb{A}$ $\iff$ $\exists \vec{f} \neq 0: A \vec{f} = \lambda \vec{f} \iff \vec{f} \in \ker (A-\lambda I) \iff \ker (A-\lambda I) \neq \{0\} \iff \\ \iff \not\exists (\mathbb{A} - \lambda \mathbb{I})^{-1} \iff \det (\mathbb{A} - \lambda \mathbb{I}) = 0$.
+\item $\lambda$ -- власне число для $\mathbb{A}$ $\iff$ $\exists \vec{f} \neq 0: A \vec{f} = \lambda \vec{f} \iff \vec{f} \in \ker (A-\lambda I) \iff \ker (A-\lambda I) \neq \{0\} \iff \\ \iff \not\exists (\mathbb{A} - \lambda \mathbb{I})^{-1} \iff \det (\mathbb{A} - \lambda \mathbb{I}) = 0$.
 \end{enumerate}
 Всі властивості доведені.
 \end{proof}
 
 \begin{definition}
-Задано $A \in \mathcal{L}(L,L)$, в якому $\lambda$ -- власне число.\\
-\textbf{Власним підпростором} оператора $A$ називають множину всіх власних векторів з відповідним власним числом $\lambda$ та нульовим елементом.\\
+Заданий $A \in \mathcal{L}(L,L)$, в якому $\lambda$ -- власне число.\\
+\textbf{Власним підпростором} оператора $A$ називають множину всіх власних векторів з відповідним власним числом $\lambda$ та нульовим вектором.\\
 Позначення: $L_{\lambda}$. \\
 Англійською такий підпростір називають \textbf{eigenspace}.
 \end{definition}
@@ -4354,8 +4398,8 @@ $L_\lambda = \ker(A-\lambda I)$.\\
 \end{corollary}
 
 \begin{remark}
-Таким чином, $L_{\lambda}$ -- інваріантний підпростір відносно $A$. \\
-Якщо розглянути $A|_{L_{\lambda}}$, то він матиме лише єдине власне число $\lambda$. Бо кожному власному вектору з $L_{\lambda}$ ставиться єдине лише власне число $\lambda$.
+Таким чином, $L_{\lambda}$ -- інваріантний підпростір відносно $A$ (бо ядро -- інваріантний). \\
+Далі якщо розглянути $A|_{L_{\lambda}}$, то він матиме лише єдине власне число $\lambda$. Бо кожному власному вектору з $L_{\lambda}$ ставиться єдине лише власне число $\lambda$.
 \end{remark}
 
 \begin{remark}
@@ -4363,23 +4407,23 @@ $L_\lambda = \ker(A-\lambda I)$.\\
 Також $L_\lambda$ -- автоматично підпростір лінійного простору $L$.
 \end{remark}
 
-\subsection{Про характеристичний многочлен}
+\subsection{Характеристичний многочлен}
 \begin{definition}
-Задано матрицю $\mathbb{A} \in \Mat_{n \times n}(\mathbb{R})$.\\
+Задана матриця $\mathbb{A} \in \Mat_{n \times n}(\mathbb{R})$.\\
 \textbf{Характеристичним многочленом} називається вираз
 \begin{align*}
 \chi(\lambda) = \det(\mathbb{A} - \lambda \mathbb{I})
 \end{align*}
-А саме рівняння називається \textbf{характеристичним рівнянням}.
+Саме рівняння називається \textbf{характеристичним рівнянням}.
 \end{definition}
 
 \begin{remark}
-За властивістю 5), ми із рівняння $\det (\mathbb{A} - \lambda \mathbb{I}) = 0$ знаходимо власні числа. А власні вектори -- як розв'язок рівняння $(\mathbb{A} - \lambda \mathbb{I})\vec{f} = \vec{0}$.
+За властивістю 5) вище, ми із рівняння $\det (\mathbb{A} - \lambda \mathbb{I}) = 0$ знаходимо власні числа. А власні вектори -- як розв'язок рівняння $(\mathbb{A} - \lambda \mathbb{I})\vec{f} = \vec{0}$.
 \end{remark}
 
 \begin{example}
 \label{find_eigenvectors}
-Задано матрицю $\mathbb{A} = \begin{pmatrix}
+Задана матриця $\mathbb{A} = \begin{pmatrix}
 4 & -1 & -2 \\
 2 & 1 & -2 \\
 1 & -1 & 1
@@ -4395,7 +4439,7 @@ $(\mathbb{A} - \lambda_1 \mathbb{I})\vec{f} =\begin{pmatrix}
 3 & -1 & -2 \\
 2 & 0 & -2 \\
 1 & -1 & 0
-\end{pmatrix} \vec{f} = \vec{0} \Rightarrow \begin{cases} 2f_1 - 2f_3 = 0 \\ f_1 - f_2 = 0 \end{cases} \Rightarrow f_1 = f_2 = f_3$\\
+\end{pmatrix} \vec{f} = \vec{0} \implies \begin{cases} 2f_1 - 2f_3 = 0 \\ f_1 - f_2 = 0 \end{cases} \implies f_1 = f_2 = f_3$\\
 $\vec{f} = f_1 \begin{pmatrix}
 1 \\ 1 \\ 1
 \end{pmatrix}$. Таким чином, $L_{\lambda_1} = \linspan\left\{ \begin{pmatrix}
@@ -4407,7 +4451,7 @@ $(\mathbb{A} - \lambda_2 \mathbb{I})\vec{f} =\begin{pmatrix}
 2 & -1 & -2 \\
 2 & -1 & -2 \\
 1 & -1 & -1
-\end{pmatrix} \vec{f} = \vec{0} \Rightarrow \begin{cases} 2f_1 - f_2 - 2f_3 = 0 \\ f_1 - f_2 - f_3 = 0 \end{cases} \Rightarrow \begin{cases} f_1 = f_3 \\ f_2 = 0 \end{cases}$\\
+\end{pmatrix} \vec{f} = \vec{0} \implies \begin{cases} 2f_1 - f_2 - 2f_3 = 0 \\ f_1 - f_2 - f_3 = 0 \end{cases} \implies \begin{cases} f_1 = f_3 \\ f_2 = 0 \end{cases}$\\
 $\vec{f} = f_1 \begin{pmatrix}
 1 \\ 0 \\ 1
 \end{pmatrix}$ Таким чином, $L_{\lambda_2} = \linspan\left\{ \begin{pmatrix}
@@ -4419,7 +4463,7 @@ $(\mathbb{A} - \lambda_3 \mathbb{I})\vec{f} =\begin{pmatrix}
 1 & -1 & -2 \\
 2 & -2 & -2 \\
 1 & -1 & -2
-\end{pmatrix} \vec{f} = \vec{0} \Rightarrow \begin{cases} 2f_1 - 2f_2 - 2f_3 = 0 \\ f_1 - f_2 - 2f_3 = 0 \end{cases} \Rightarrow \begin{cases} f_1 = f_2 \\ f_3 = 0 \end{cases}$\\
+\end{pmatrix} \vec{f} = \vec{0} \implies \begin{cases} 2f_1 - 2f_2 - 2f_3 = 0 \\ f_1 - f_2 - 2f_3 = 0 \end{cases} \implies \begin{cases} f_1 = f_2 \\ f_3 = 0 \end{cases}$\\
 $\vec{f} = f_1 \begin{pmatrix}
 1 \\ 1 \\ 0
 \end{pmatrix}$. Таким чином, $L_{\lambda_3} = \linspan\left\{ \begin{pmatrix}
@@ -4429,7 +4473,7 @@ $\vec{f} = f_1 \begin{pmatrix}
 
 \begin{proposition}
 \label{change_of_basis_characteristic_polynomial}
-Задано $A \in \mathcal{L}(L,L)$ та матриці $\mathbb{A}_f, \mathbb{A}_g$ в різних базисах. Тоді $\det(\mathbb{A}_f - \lambda \mathbb{I}) = \det(\mathbb{A}_g - \lambda \mathbb{I})$.\\
+Задана $A \in \mathcal{L}(L,L)$ та матриці $\mathbb{A}_f, \mathbb{A}_g$ в різних базисах. Тоді $\det(\mathbb{A}_f - \lambda \mathbb{I}) = \det(\mathbb{A}_g - \lambda \mathbb{I})$.\\
 Тобто неважливо, який там базис в просторі $L$, характеристичний многочлен той самий.
 \end{proposition}
 
@@ -4448,7 +4492,7 @@ $\implies \det(\mathbb{A}_f - \lambda \mathbb{I}) = \det(\mathbb{U}^{-1}_{f \to 
 \begin{example}
 Знайти власні числа оператора $A \colon \mathbb{R}_2[x] \to \mathbb{R}_2[x]$, що задається як\\
 $A(ax^2+bx+c) = bx^2 + cx$.\\
-Нам потрібна матриця оператор, для цього потрібен базис. Ми довели, що майбутній характеристичний многочлен від базиса не залежить, тож оберемо $\{1,x,x^2\}$.\\
+Нам потрібна матриця оператора, для цього потрібний базис. Ми довели, що майбутній характеристичний многочлен від базиса не залежить, тож оберемо зручний $\{1,x,x^2\}$.\\
 $\begin{gathered} A1 = 0 \cdot 1 + 1 \cdot x + 0 \cdot x^2 \\ Ax = 0 \cdot 1 + 0 \cdot x + 1 \cdot x^2 \\ Ax^2 = 0 \cdot 1 + 0 \cdot x + 0 \cdot x^2 \end{gathered} \implies \mathbb{A} = \begin{pmatrix}
 0 & 0 & 0 \\
 1 & 0 & 0 \\
@@ -4493,32 +4537,33 @@ a_{21} & a_{22} - \lambda & \dots & a_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & \dots & a_{nn}-\lambda
 \end{pmatrix} = $\\
-Аналізуємо цю матрицю:\\
-- доданок при $\lambda^n$ отримується при множенні тільки елементів головної діагоналі, тобто маємо коефіцієнт $(-1)^n$:\\
+Аналізуємо цю матрицю:
+\begin{itemize}[nosep,wide=0pt]
+\item доданок при $\lambda^n$ отримується при множенні тільки елементів головної діагоналі, тобто маємо коефіцієнт $(-1)^n$:\\
 $\begin{pmatrix}
 a_{11}-\textcolor{red}{\lambda} & a_{12} & \dots & a_{1n} \\
 a_{21} & a_{22}-\textcolor{red}{\lambda} & \dots & a_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & \dots & a_{nn}-\textcolor{red}{\lambda}
-\end{pmatrix}$\\
-- доданок при $\lambda^{n-1}$ отримується при множенні всіх елементів головної діагоналі, крім, можливо, одного, по черзі, тобто маємо коефіцієнти: \\ $(-1)^{n-1}a_{11} + (-1)^{n-1}a_{22} + \dots + (-1)^{n-1}a_{nn} = (-1)^{n-1}(a_{11}+a_{22}+\dots+a_{nn})$:\\
+\end{pmatrix}$;
+\item доданок при $\lambda^{n-1}$ отримується при множенні всіх елементів головної діагоналі, крім, можливо, одного, по черзі, тобто маємо коефіцієнти: \\ $(-1)^{n-1}a_{11} + (-1)^{n-1}a_{22} + \dots + (-1)^{n-1}a_{nn} = (-1)^{n-1}(a_{11}+a_{22}+\dots+a_{nn})$:\\
 $\begin{pmatrix}
 \textcolor{red}{a_{11}}-\lambda & a_{12} & \dots & a_{1n} \\
 a_{21} & a_{22}-\textcolor{red}{\lambda} & \dots & a_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & \dots & a_{nn}-\textcolor{red}{\lambda}
-\end{pmatrix} + \begin{pmatrix}
+\end{pmatrix},\ \begin{pmatrix}
 a_{11}-\textcolor{red}{\lambda} & a_{12} & \dots & a_{1n} \\
 a_{21} & \textcolor{red}{a_{22}}-\lambda & \dots & a_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & \dots & a_{nn}-\textcolor{red}{\lambda}
-\end{pmatrix} + \dots + \begin{pmatrix}
+\end{pmatrix},\ \dots,\ \begin{pmatrix}
 a_{11}-\textcolor{red}{\lambda} & a_{12} & \dots & a_{1n} \\
 a_{21} & a_{22}-\textcolor{red}{\lambda} & \dots & a_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & \dots & \textcolor{red}{a_{nn}}-\lambda
-\end{pmatrix}$\\
-- доданок при $\lambda^{n-2}$ отримується при множенні всіх елементів головної діагоналі, крім, можливо, двох, по черзі.\\
+\end{pmatrix}$;
+\item доданок при $\lambda^{n-2}$ отримується при множенні всіх елементів головної діагоналі, крім, можливо, двох, по черзі.\\
 Наприклад, розглянемо один із доданків, в якому множимо елементи головної діагоналі з номерами $3,4,\dots,n$, при множенні цих елементів обираємо $\lambda^{n-2}$, залишається цей вираз помножити на \\ 
 $\det \begin{pmatrix}
 a_{11}-\lambda & a_{12} \\
@@ -4537,52 +4582,53 @@ $\begin{pmatrix}
 a_{31} & a_{32} & a_{33}-\textcolor{red}{\lambda} & \dots & a_{3n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & a_{n3} & \dots & a_{nn}-\textcolor{red}{\lambda}
-\end{pmatrix} + 
+\end{pmatrix} ,\
 \begin{pmatrix}
 \textcolor{red}{a_{11}}-\lambda & a_{12} & \textcolor{red}{a_{13}} & \dots & a_{1n} \\
 a_{21} & a_{22} - \textcolor{red}{\lambda} & a_{23} & \dots & a_{2n} \\
 \textcolor{red}{a_{31}} & a_{32} & \textcolor{red}{a_{33}}-\lambda & \dots & a_{3n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & a_{n3} & \dots & a_{nn}-\textcolor{red}{\lambda}
-\end{pmatrix} + 
-\dots \\
-+ \begin{pmatrix}
+\end{pmatrix} ,\
+\dots, \\
+\begin{pmatrix}
 \textcolor{red}{a_{11}}-\lambda & a_{12} & a_{13} & \dots & \textcolor{red}{a_{1n}} \\
 a_{21} & a_{22} - \textcolor{red}{\lambda} & a_{23} & \dots & a_{2n} \\
 a_{31} & a_{32} & a_{33}-\textcolor{red}{\lambda} & \dots & a_{3n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 \textcolor{red}{a_{n1}} & a_{n2} & a_{n3} & \dots & \textcolor{red}{a_{nn}}-\lambda
-\end{pmatrix} + \begin{pmatrix}
+\end{pmatrix},\ \begin{pmatrix}
 a_{11} - \textcolor{red}{\lambda} & a_{12} & a_{13} & \dots & a_{1n} \\
 a_{21} & \textcolor{red}{a_{22}} - \lambda & \textcolor{red}{a_{23}} & \dots & a_{2n} \\
 a_{31} & \textcolor{red}{a_{32}} & \textcolor{red}{a_{33}}-\lambda & \dots & a_{3n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & a_{n2} & a_{n3} & \dots & a_{nn}-\textcolor{red}{\lambda}
-\end{pmatrix} +
-\dots \\
-+ \begin{pmatrix}
+\end{pmatrix},\
+\dots, \\
+\begin{pmatrix}
 a_{11} - \textcolor{red}{\lambda} & a_{12} & a_{13} & \dots & a_{1n} \\
 a_{21} & \textcolor{red}{a_{22}} - \lambda & a_{23} & \dots & \textcolor{red}{a_{2n}} \\
 a_{31} & a_{32} & a_{33} - \textcolor{red}{\lambda} & \dots & a_{3n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 a_{n1} & \textcolor{red}{a_{n2}} & a_{n3} & \dots & \textcolor{red}{a_{nn}}-\lambda
-\end{pmatrix} + \dots + \dots + \begin{pmatrix}
+\end{pmatrix},\ \dots ,\ \dots, \begin{pmatrix}
 a_{11}-\textcolor{red}{\lambda} & a_{12} & \dots & a_{1n} \\
 a_{21} & a_{22} - \textcolor{red}{\lambda} & \dots & a_{2n} \\
 \vdots & \vdots & \textcolor{red}{\ddots} & \textcolor{red}{\vdots} \\
 a_{n1} & a_{n2} & \textcolor{red}{\dots} & \textcolor{red}{a_{nn}}-\lambda
 \end{pmatrix}
-$\\
-- все аналогічно для $\lambda^{n-3}$, коефіцієнт:\\
+$
+\item все аналогічно для $\lambda^{n-3}$, коефіцієнт:\\
 $(-1)^{n-3} \displaystyle \sum_{1 \leq j < m < p \leq n} M_{jmp}^{jmp}$ - сума всіх головних мінорів 3-го порядку.\\
-\vdots \\
-- коефіцієнт вільного доданку: $\det \mathbb{A}$:\\
+\vdots
+\item коефіцієнт вільного доданку: $\det \mathbb{A}$:\\
 $\begin{pmatrix}
 \textcolor{red}{a_{11}}-\lambda & \textcolor{red}{a_{12}} & \textcolor{red}{\dots} & \textcolor{red}{a_{1n}} \\
 \textcolor{red}{a_{21}} & \textcolor{red}{a_{22}} - \lambda & \textcolor{red}{\dots} & \textcolor{red}{a_{2n}} \\
 \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \textcolor{red}{\ddots} & \textcolor{red}{\vdots} \\
 \textcolor{red}{a_{n1}} & \textcolor{red}{a_{n2}} & \textcolor{red}{\dots} & \textcolor{red}{a_{nn}}-\lambda
-\end{pmatrix}$\\
+\end{pmatrix}$.
+\end{itemize}
 В результаті маємо:\\
 $\det (\mathbb{A} - \lambda \mathbb{I}) = \displaystyle (-1)^n \lambda^n + (-1)^{n-1} (a_{11} + a_{22} + \dots + a_{nn}) \lambda^{n-1} + (-1)^{n-2} \sum_{1 \leq j < m \leq n} M_{jm}^{jm} \lambda^{n-2} \\ + (-1)^{n-3} \sum_{1 \leq j < m < p \leq n} M_{jmp}^{jmp} \lambda^{n-3} + \dots + \det \mathbb{A} = \\
 = (-1)^n \lambda^n + \sum_{k=1}^{n-1} (-1)^{n-k} \left( \sum_{1 \leq j_1 < j_2 < \dots < j_k} M_{j_1j_2\dots j_k}^{j_1j_2\dots j_k} \lambda^{n-k} \right) + \det \mathbb{A}$.
@@ -4613,19 +4659,19 @@ $\det (\mathbb{A} - \lambda \mathbb{I}) = -\lambda^3 + (4+1+1)\lambda^2 - \left(
 
 \subsection{Діагоналізація матриці}
 \begin{definition}
-Задано $A \in \mathcal{L}(L,L)$ та базис $\{f_1,\dots,f_n\}$.\\
+Заданий $A \in \mathcal{L}(L,L)$ та базис $\{f_1,\dots,f_n\}$.\\
 Оператор $A$ називають \textbf{діагоналізовним}, якщо матриця оператора в заданому базисі є діагоналізовною, тобто
 \begin{align*}
 \mathbb{A}_f = \begin{pmatrix}
 a_{11} & \dots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \dots & a_{nn}
-\end{pmatrix}
+\end{pmatrix}.
 \end{align*}
 \end{definition}
 
 \begin{theorem}
-Задано $A \in \mathcal{L}(L,L)$ та базис $\{f_1,\dots,f_n\}$.\\
+Заданий $A \in \mathcal{L}(L,L)$ та базис $\{f_1,\dots,f_n\}$.\\
 Оператор $A$ -- діагоналізовний $\iff$ $\{f_1,\dots,f_n\}$ -- базис власних векторів оператора $A$.
 \end{theorem}
 
@@ -4635,9 +4681,9 @@ a_{11} & \dots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \dots & a_{nn}
 \end{pmatrix}$. Звідси випливає, що:\\
-$Af_1 = a_{11}f_1 + 0f_2 + \dots + 0f_n = a_{11}f_1$\\
+$Af_1 = a_{11}f_1 + 0f_2 + \dots + 0f_n = a_{11}f_1$;\\
 $\vdots$\\
-$Af_n = 0f_1 + 0f_2 + \dots + a_{nn}f_n = a_{nn}f_n$\\
+$Af_n = 0f_1 + 0f_2 + \dots + a_{nn}f_n = a_{nn}f_n$.\\
 Тоді з цих рівностей можна твердити, що $f_1,\dots,f_n$ -- власні вектори. Тому ми маємо базис $\{f_1,\dots,f_n\}$ саме з власних векторів.
 \bigskip \\
 \leftproof Дано: $\{f_1,\dots,f_n\}$ -- базис власних векторів. Кожний з власних векторів має своє власне число. Побудуємо тоді матрицю за п. 2.7.:\\
@@ -4654,7 +4700,7 @@ $\mathbb{A}_f = \begin{pmatrix}
 \end{pmatrix}$
 \end{proof}
 \noindent
-У \exref{find_eigenvectors} мали 3 власних числа: $\lambda_1 = 1, \lambda_2 = 2,\lambda_3 = 3$.\\
+У \exref{find_eigenvectors} мали 3 власні числа: $\lambda_1 = 1, \lambda_2 = 2,\lambda_3 = 3$.\\
 І також ми мали власні вектори: $\vec{f}_1 = \begin{pmatrix}
 1 \\ 1 \\ 1
 \end{pmatrix}, \vec{f}_2 = \begin{pmatrix}
@@ -4685,7 +4731,7 @@ $A^3 = A^2 \cdot A = U \mathbb{A}^2_f U^{-1} U \mathbb{A}_f U^{-1} = U \mathbb{A
 Ну і т.д.
 \fi
 \begin{remark}
-Головне зауважу, що в діагоналізованій матриці не обов'язково, щоб власні числа відрізнялись.
+На всяк випадок зазначу, що в діагоналізовній матриці не обов'язково, щоб власні числа відрізнялись.
 \end{remark}
 
 \begin{example}
@@ -4693,7 +4739,7 @@ $A^3 = A^2 \cdot A = U \mathbb{A}^2_f U^{-1} U \mathbb{A}_f U^{-1} = U \mathbb{A
 2 & 0 & 0 \\
 4 & 2 & 2 \\
 -2 & 0 & 1
-\end{pmatrix}$ характеристичний многочлен $\det (\mathbb{A}-\lambda \mathbb{I}) = (\lambda-1)(\lambda-2)^2$. Бачимо, що для матриці $3 \times 3$ ми маємо лише два власних числа.\\
+\end{pmatrix}$ характеристичний многочлен $\det (\mathbb{A}-\lambda \mathbb{I}) = (\lambda-1)(\lambda-2)^2$. Бачимо, що для матриці $3 \times 3$ ми маємо лише два власні числа.\\
 При $\lambda = 1$ маємо $\vec{f} \in \linspan \left\{ \begin{pmatrix}
 0 \\ -2 \\ 1
 \end{pmatrix} \right\}$, а ось при $\lambda = 2$ маємо $\vec{f} \in \linspan \left\{ \begin{pmatrix}
@@ -4715,18 +4761,17 @@ $A^3 = A^2 \cdot A = U \mathbb{A}^2_f U^{-1} U \mathbb{A}_f U^{-1} = U \mathbb{A
 Зокрема для матриці обертання $R = \begin{pmatrix}
 \cos \varphi & -\sin \varphi \\
 \sin \varphi & \cos \varphi
-\end{pmatrix}$ для кутів $\varphi \in (0,\pi)$ ми маємо, що\\
-$\det (R - \lambda I) = (\cos \varphi-\lambda)^2 + \sin^2 \varphi = \lambda^2 - 2\lambda \cos \varphi + 1 = 0$.\\
+\end{pmatrix}$ для кутів $\varphi \in (0,\pi)$ ми маємо, що $\det (R - \lambda I) = (\cos \varphi-\lambda)^2 + \sin^2 \varphi = \lambda^2 - 2\lambda \cos \varphi + 1 = 0$.\\
 Тут дискримінант -- від'ємний при заданих кутах, а тому не має розв'язків, а тому не має власних чисел. Хоча тут можна ситуацію виправити, розглянувши комплексні числа.
 \end{example}
 
 \begin{example}
 \label{non_diagonalizable_because_not_enough_dim}
-Задано матрицю $\mathbb{A} = \begin{pmatrix}
+Задана матриця $\mathbb{A} = \begin{pmatrix}
 0 & -6 & -4 \\
 5 & -11 & -6 \\
 -6 & 9 & 4
-\end{pmatrix}$, одразу скажу, що\\
+\end{pmatrix}$; одразу скажу, що\\
 $\det (\mathbb{A} - \lambda \mathbb{I}) = -(\lambda+2)^2(\lambda+3)=0$, також\\
 $L_{\lambda = -2} = \linspan \left\{ \begin{pmatrix}
 0 \\ 2 \\ -3
@@ -4738,14 +4783,14 @@ $L_{\lambda = -3} = \linspan \left\{ \begin{pmatrix}
 \end{example}
 
 \begin{definition}
-Задано $A \in \mathcal{L}(L,L)$ та $\lambda_0$ -- власне число.\\
+Заданий $A \in \mathcal{L}(L,L)$ та $\lambda_0$ -- власне число.\\
 \textbf{Алгебраїчним кратним} назвемо кратність кореня $\lambda_0$ характеристичного многочлена.\\
 \textbf{Геометричним кратним} назвемо розмірність власного підпростору, тобто $\dim L_{\lambda_0}$.\\
 Відповідні позначення: $a_{\lambda_0},\ g_{\lambda_0}$.
 \end{definition}
 
 \begin{proposition}
-Задано $A \in \mathcal{L}(L,L)$ та $M$ -- $A$-інваріантний підпростір. Покладемо $B = A|_{M} \in \mathcal{L}(M,M)$. Тоді $\chi_B(\lambda) \mid \chi_A(\lambda)$ (один характеристичний многочлен ділить інший).
+Заданий $A \in \mathcal{L}(L,L)$ та $M$ -- $A$-інваріантний підпростір. Покладемо $B = A|_{M} \in \mathcal{L}(M,M)$. Тоді $\chi_B(\lambda) \mid \chi_A(\lambda)$ (один характеристичний многочлен ділить інший).
 \end{proposition}
 
 \begin{proof}
@@ -4763,7 +4808,7 @@ $\det (\mathbb{A} - \lambda \mathbb{I}) = \det \begin{pmatrix}
 \end{proof}
 
 \begin{corollary}
-Задано $A \in \mathcal{L}(L,L)$ та $\lambda_0$ -- власне число. Тоді $a_{\lambda_0} \geq g_{\lambda_0}$.
+Заданий $A \in \mathcal{L}(L,L)$ та $\lambda_0$ -- власне число. Тоді $a_{\lambda_0} \geq g_{\lambda_0}$.
 \end{corollary}
 
 \begin{proof}
@@ -4773,36 +4818,36 @@ $\det (\mathbb{A} - \lambda \mathbb{I}) = \det \begin{pmatrix}
 Якщо побачити \exref{non_diagonalizable_because_not_enough_dim}, то там $a_{\lambda=-2} = 2$, але $g_{\lambda = -2} = 1$.
 
 \begin{proposition}
-Задано $A \in \mathcal{L}(L,L)$ та $\lambda_1,\dots,\lambda_k$ -- різні власні числа. Тоді $L_{\lambda_1} + \dots + L_{\lambda_k}$ утворює пряму суму.
+Заданий $A \in \mathcal{L}(L,L)$ та $\lambda_1,\dots,\lambda_k$ -- різні власні числа. Тоді $L_{\lambda_1} + \dots + L_{\lambda_k}$ утворює пряму суму.
 \end{proposition}
 
 \begin{proof}
 Для прямої суми треба показати, що $L_{\lambda_i} \cap \left( L_{\lambda_1} + \underset{\text{без }i}{\dots} + L_{\lambda_k} \right) = \{0\}, i = \overline{1,k}$. Зрозуміло, що там нульовий елемент дійсно лежить.\\
-!Не встрачаючи загальності, розглянемо випадок $i = 1$. Припустимо, що $x \in L_{\lambda_1} \cap (L_{\lambda_2} + \dots + L_{\lambda_k})$ -- ненульовий. $x \in L_{\lambda_1}$, тож $x$ - власний вектор числа $\lambda_1$. Також $x = f_2 + \dots + f_k$ із суми. Із цієї рівності випливає, що система $\{x,f_2,\dots,f_k\}$ -- л.з. система. Проте, оскільки $\lambda_1,\dots,\lambda_k$ - різні, дана система має бути л.н.з. -- суперечність!\\
+!Не встрачаючи загальності, розглянемо випадок $i = 1$. Припустимо, що $x \in L_{\lambda_1} \cap (L_{\lambda_2} + \dots + L_{\lambda_k})$ -- ненульовий. $x \in L_{\lambda_1}$, тож $x$ -- власний вектор числа $\lambda_1$. Також $x = f_2 + \dots + f_k$ із суми. Із цієї рівності випливає, що система $\{x,f_2,\dots,f_k\}$ -- л.з. система. Проте, оскільки $\lambda_1,\dots,\lambda_k$ -- різні, дана система має бути л.н.з. -- суперечність!\\
 Отже, $L_{\lambda_1} \cap (L_{\lambda_2} + \dots + L_{\lambda_k}) = \{0\}$, для інших аналогічно.
 \end{proof}
 
 \begin{theorem}[Критерій діагонізовності матриці]
-Задано $A \in \mathcal{L}(L,L)$ та базис $\{f_1,\dots,f_n\}$. Задані умови еквівалентні:
+Заданий $A \in \mathcal{L}(L,L)$ та базис $\{f_1,\dots,f_n\}$. Задані умови еквівалентні:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 \item $A$ -- діагоналізовний;
 \item $\det (\mathbb{A}-\lambda \mathbb{I}) = \displaystyle\prod_{i=1}^k (\lambda_i - \lambda)^{\alpha_i}$, причому $a_{\lambda_i} = g_{\lambda_i}$;
-\item $L = L_{\lambda_1} \dot{+} \dots \dot{+} L_{\lambda_k}$;
+\item $L = L_{\lambda_1} \oplus \dots \oplus L_{\lambda_k}$;
 \item $\{f_1,\dots,f_n\}$ -- базис із суто власних векторів.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-$\boxed{1) \Rightarrow 2)}$ Дано: $A$ - діагоналізовний, тобто $\mathbb{A} = \begin{pmatrix}
+$\boxed{1) \Rightarrow 2)}$ Дано: $A$ -- діагоналізовний, тобто $\mathbb{A} = \begin{pmatrix}
 \mu_1 & \dots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \dots & \mu_n
-\end{pmatrix}$. Звідси $\det (\mathbb{A}-\lambda \mathbb{I}) = (\mu_1 - \lambda) \dots (\mu_n - \lambda)$. Але оскільки $\mu_1,\dots,\mu_n$ можуть співпадати, то ми запишемо в такому вигляді:\\
+\end{pmatrix}$. Звідси $\det (\mathbb{A}-\lambda \mathbb{I}) = (\mu_1 - \lambda) \dots (\mu_n - \lambda)$. Але оскільки $\mu_1,\dots,\mu_n$ можуть збігатися, то ми запишемо в такому вигляді:\\
 $\det (\mathbb{A}-\lambda \mathbb{I}) = \displaystyle\prod_{i=1}^k (\lambda_i - \lambda)^{\alpha_i}$, де $\lambda_i \neq \lambda_j$ при $i \neq j$. Оскільки $\lambda_i$ -- власне число, то тоді $a_{\lambda_i} \geq g_{\lambda_i}$. Але водночас оскільки маємо діагоналізовну матрицю, то $Ah^{i}_l = \lambda_i h^{i}_l, l = \overline{1,\alpha_i}$, причому $\{h^{i}_1,\dots,h^{i}_{\alpha_i}\} \subset \{f_1,\dots,f_n\}$. Тоді система $\{h^{i}_1,\dots,h^{i}_{\alpha_i}\}$ має бути л.н.з., тож $\dim L_{\lambda_i} = g_{\lambda_i} \geq \alpha_i = a_{\lambda_i}$.
 \bigskip \\
-$\boxed{2) \Rightarrow 3)}$ Дано: $\det (\mathbb{A}-\lambda \mathbb{I}) = \displaystyle\prod_{i=1}^k (\lambda_i - \lambda)^{\alpha_i}$, причому $a_{\lambda_i} = g_{\lambda_i}$. Тобто $\dim L_{\lambda_i} = a_{\lambda_i}$. По-перше, $a_{\lambda_1} + \dots + a_{\lambda_k} = \alpha_1 + \dots + \alpha_k = n$, оскільки степінь многочлена $n$; по-друге, оскільки $L_{\lambda_1},\dots, L_{\lambda_k}$ утворює пряму суми, то об'єднавши їхні базиси, отримаємо базис $L$, просто тому що кількість базисних елементів $n$ штук. Тоді за \thref{direct_sum_iff_union_of_bases_is_basis}, $L = L_{\lambda_1} \dot{+} \dots \dot{+} L_{\lambda_k}$.
+$\boxed{2) \Rightarrow 3)}$ Дано: $\det (\mathbb{A}-\lambda \mathbb{I}) = \displaystyle\prod_{i=1}^k (\lambda_i - \lambda)^{\alpha_i}$, причому $a_{\lambda_i} = g_{\lambda_i}$. Тобто $\dim L_{\lambda_i} = a_{\lambda_i}$. По-перше, $a_{\lambda_1} + \dots + a_{\lambda_k} = \alpha_1 + \dots + \alpha_k = n$, оскільки степінь многочлена $n$; по-друге, оскільки $L_{\lambda_1},\dots, L_{\lambda_k}$ утворює пряму суми, то об'єднавши їхні базиси, отримаємо базис $L$, просто тому що кількість базисних елементів $n$ штук. Тоді за \thref{direct_sum_iff_union_of_bases_is_basis}, $L = L_{\lambda_1} \oplus \dots \oplus L_{\lambda_k}$.
 \bigskip \\
-$\boxed{3) \Rightarrow 4)}$ Дано: $L = L_{\lambda_1} \dot{+} \dots \dot{+} L_{\lambda_k}$. Нехай $\{h_1^i,\dots,h^i_{m_i}\}$ -- базис $L_{\lambda_i}$, тоді за \thref{direct_sum_iff_union_of_bases_is_basis}, буде базис $L$, який складається з $n$ елементів, кожний з яких -- власний вектор.
+$\boxed{3) \Rightarrow 4)}$ Дано: $L = L_{\lambda_1} \oplus \dots \oplus L_{\lambda_k}$. Нехай $\{h_1^i,\dots,h^i_{m_i}\}$ -- базис $L_{\lambda_i}$, тоді за \thref{direct_sum_iff_union_of_bases_is_basis}, буде базис $L$, який складається з $n$ елементів, кожний з яких -- власний вектор.
 \bigskip \\
 $\boxed{4) \Rightarrow 1)}$ уже доводили.
 \end{proof}
@@ -4813,7 +4858,7 @@ $\det (\mathbb{A}-\lambda \mathbb{I}) = (\lambda_1 - \lambda)^{k_1} \dots (\lamb
 Зауважу, що якщо розглядати $L$ над $\mathbb{C}$, то такий розклад завжди можливий за основною теоремою алгебри.
 
 \begin{theorem}[Теорема Жордана]
-Задано матрицю $A \in \mathcal{L}(L,L)$, де $L$ -- лінійний простір над $\mathbb{C}$. Тоді існує базис $L$, який позначу за $J$, для якого матриця оператора виглядає таким чином:\\
+Задана матриця $A \in \mathcal{L}(L,L)$, де $L$ -- лінійний простір над $\mathbb{C}$. Тоді існує базис $L$, який позначу за $J$, для якого матриця оператора виглядає таким чином:\\
 $ \mathbb{A}_{J} =
   \tikz[baseline=(M.west)]{%
     \node[matrix of math nodes,matrix anchor=west,left delimiter=(,right delimiter=),ampersand replacement=\&] (M) {%
@@ -4826,7 +4871,7 @@ $ \mathbb{A}_{J} =
     \node[draw,fit=(M-2-2)(M-2-2),inner sep=-1pt] {};
     \node[draw,fit=(M-4-4)(M-4-4),inner sep=-1pt] {};
   }
-$ -- така матриця називається \textbf{жордановою формою матриці}.\\
+$ -- так звана \textbf{жорданова форма матриці}.\\
 Не обов'язково, щоб $\lambda_i \neq \lambda_j$ всюди. На діагоналі в нас матриці виглядають так:\\
 $J(\lambda) = \begin{pmatrix}
 \lambda & 1 & 0 & \dots & 0 & 0 \\
@@ -4840,14 +4885,6 @@ $J(\lambda) = \begin{pmatrix}
 \end{theorem}
 \noindent
 Доведення даної теореми потребує додаткових теоретичних відомостей, які ми розглянемо нижче.
-
-\begin{lemma}
-Задано $A \in \mathcal{L}(L,L)$ та $M$ -- інваріантний підпростір. Тоді $M$ -- інваріантний підпростір відносно $A-\lambda I$.
-\end{lemma}
-
-\begin{proof}
-$\forall x \in M: Ax \in M \implies (A-\lambda I)x = Ax - \lambda x \in M$.
-\end{proof}
 
 %From Bohdanov and Stefin lecutres
 \iffalse
@@ -4967,7 +5004,7 @@ $x = Ix = (u(A)f_1(A)+v(A)f_2(A))x = u(A)f_1(A)x + v(A)f_2(A)x = 0 + 0 = 0$.
 
 \subsection{Кореневі вектори}
 \begin{definition}
-Задано $A \in \mathcal{L}(L,L)$, в якому $\lambda \in \mathbb{R}$ -- деяке число.\\
+Заданий $A \in \mathcal{L}(L,L)$, в якому $\lambda \in \mathbb{R}$ -- деяке число.\\
 Вектор $f$ називається \textbf{кореневим} (англійською \textbf{generalized eigenvector}), якщо
 \begin{align*}
 (A-\lambda I)^k f = 0, k \in \mathbb{N} \cup \{0\}
@@ -4989,7 +5026,7 @@ $x = Ix = (u(A)f_1(A)+v(A)f_2(A))x = u(A)f_1(A)x + v(A)f_2(A)x = 0 + 0 = 0$.
 \end{remark}
 
 \begin{remark}
-Множина кореневих векторів висоти $\leq k$ співпадає з множиною $\ker(A-\lambda I)^k$, яке є підпростором в $L$.
+Множина кореневих векторів висоти $\leq k$ збігається з множиною $\ker(A-\lambda I)^k$, яке є підпростором в $L$.
 \end{remark}
 \noindent
 Таким чином, ми маємо такий ланюцг ядер:\\
@@ -4999,7 +5036,7 @@ $\{0\} \subsetneq \underset{= L_\lambda}{\ker(A-\lambda I)} \subsetneq \ker(A-\l
 Строге включення, тому що $k$ -- мінімальне число, де $(A-\lambda I)^k$ онулює вектор $f$. Тобто в жодному разі вже $f \notin \ker(A-\lambda I)^{k-1}$.
 
 \begin{definition}
-Задано $A \in \mathcal{L}(L,L)$ -- лінійний оператор, в якому $\lambda \in \mathbb{R}$ -- власне число.\\
+Заданий $A \in \mathcal{L}(L,L)$ -- лінійний оператор, в якому $\lambda \in \mathbb{R}$ -- власне число.\\
 \textbf{Кореневим підпростором} оператора $A$ з власним числом $\lambda$ називають множину всіх кореневих векторів.\\
 Позначення: $L^\lambda$.\\
 Англійською це називають \textbf{generalized eigenspace}.
@@ -5034,29 +5071,39 @@ $\{0\} \subset \underset{=L_\lambda}{\ker (A-\lambda I)} \subset \ker (A-\lambda
 \end{proof}
 \fi
 
+\begin{lemma}
+Заданий $A \in \mathcal{L}(L,L)$ та $M$ -- інваріантний підпростір. Тоді $M$ -- інваріантний підпростір відносно $A-\lambda I$.
+\end{lemma}
+
+\begin{proof}
+$\forall x \in M: Ax \in M \implies (A-\lambda I)x = Ax - \lambda x \in M$.
+\end{proof}
+
 \begin{proposition}[Властивості кореневих підпросторів]
-Задано $A \in \mathcal{L}(L,L)$, в якому $\lambda \in \mathbb{R}$ -- власне число. Тоді:
+Заданий $A \in \mathcal{L}(L,L)$, в якому $\lambda \in \mathbb{R}$ -- власне число. Тоді:
 \begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
 \item $L^\lambda$ -- інваріантний відносно $A$;
 \item $(A-\mu I)|_{L^\lambda}$ -- невироджений при $\mu \neq \lambda$;
 \item $\dim L^{\lambda_0} = a_{\lambda_0}$, де $a_{\lambda_0}$ -- алгебраїчна кратність характеристичного многочлена оператора $A$.
 \end{enumerate}
-(TODO: переглянути доведення)
 \end{proposition}
 
+%TODO check proof correctness
 \begin{proof}
-1) Якщо взяти базис в $L^\lambda$, то тоді кожний з базисних елементів має свою висоту. Ми зафіксуємо максимальну висоту $m$, і тоді звідси $\forall x \in L^\lambda: (A-\lambda I)^m x = 0$. Звідси випливає, що \\ $L^\lambda = \ker (A-\lambda I)^m$. Ми позначимо $B = (A-\lambda I)^m$. Оскільки $A$ з $A$ та $A$ з $I$ комутують між собою, то звідси $AB = BA$. Отже, $\forall x \in L^\lambda = \ker B: B x =0 \implies A(Bx) = B(Ax) = 0 \implies Ax \in L^\lambda$.\\
-Тобто $L^\lambda$ - $A$-інваріантний, як наслідок $(A-\lambda I)$-інваріантний.
-\bigskip \\
-2) Треба довести фактично, що $\ker (A-\mu I)|_{L^\lambda} = \{0\}$. Я надалі розглядаю всі оператори, що звужені лише до $L^\lambda$, явно не показуючи.\\
+Доведемо кожний пункт окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Якщо взяти базис в $L^\lambda$, то тоді кожний з базисних елементів має свою висоту. Ми зафіксуємо максимальну висоту $m$, і тоді звідси $\forall x \in L^\lambda: (A-\lambda I)^m x = 0$. Звідси випливає, що \\ $L^\lambda = \ker (A-\lambda I)^m$. Ми позначимо $B = (A-\lambda I)^m$. Оскільки $A$ з $A$ та $A$ з $I$ комутують між собою, то звідси $AB = BA$. Отже, $\forall x \in L^\lambda = \ker B: B x =0 \implies A(Bx) = B(Ax) = 0 \implies Ax \in L^\lambda$.\\
+Тобто $L^\lambda$ -- $A$-інваріантний, як наслідок $(A-\lambda I)$-інваріантний.
+
+\item Треба довести фактично, що $\ker (A-\mu I)|_{L^\lambda} = \{0\}$. Я надалі розглядаю всі оператори, що звужені лише до $L^\lambda$, явно не показуючи.\\
 Нехай $x \in \ker (A-\mu I))$. Тоді $(A-\mu I)x = 0$. Звідси\\
 $(A-\lambda I)x = (A-\mu I + \mu I - \lambda I)x = (A-\mu I) + (\mu -\lambda)x = (\mu-\lambda)x$.\\
-Оскільки $x$ - кореневий вектор, то $(A-\lambda I)^m x = (\mu - \lambda)^m x = 0$ для деякого $m \in \mathbb{N}$. У силу того, що $\mu \neq \lambda$, то єдиний варіант - вимагати $x =0$.
+Оскільки $x$ -- кореневий вектор, то $(A-\lambda I)^m x = (\mu - \lambda)^m x = 0$ для деякого $m \in \mathbb{N}$. У силу того, що $\mu \neq \lambda$, то єдиний варіант -- вимагати $x =0$.
 \bigskip \\
-Фактично кажучи, цією властивістю ми кажемо, що оператор $A|_{L^\lambda}$ має лише власне число $\lambda$ - і більше ніяке. Тому характеристичний многочлен матиме вигляд:\\
-$\det(\mathbb{A}|_{L^{\lambda}} - t \mathbb{I}) = (\lambda - t)^n$. Тут $\dim L^{\lambda} = n$. Але тут $n$ - алгебраїчне кратне числа $\lambda$ характеристичного многочлена $A|_{L^\lambda}$, тобто це не схоже на третю властивість.
-\bigskip \\
-3) Візьмемо якийсь базис $\{e_1,\dots,e_r\}$ в $L^{\lambda_0}$ та розширимо до $\{e_1,\dots,e_r,f_1,\dots,f_k\}$ базису $L$. Матриця оператора $A$ виглядатиме так:\\
+Фактично кажучи, цією властивістю ми кажемо, що оператор $A|_{L^\lambda}$ має лише власне число $\lambda$ -- і більше ніяке. Тому характеристичний многочлен матиме вигляд:\\
+$\det(\mathbb{A}|_{L^{\lambda}} - t \mathbb{I}) = (\lambda - t)^n$. Тут $\dim L^{\lambda} = n$. Але тут $n$ -- алгебраїчне кратне числа $\lambda$ характеристичного многочлена $A|_{L^\lambda}$, тобто це не схоже на третю властивість.
+
+\item Візьмемо якийсь базис $\{e_1,\dots,e_r\}$ в $L^{\lambda_0}$ та розширимо до $\{e_1,\dots,e_r,f_1,\dots,f_k\}$ базису $L$. Матриця оператора $A$ виглядатиме так:\\
 $\mathbb{A} = \begin{pmatrix}
  \mathbb{A}|_{L^{\lambda_0}}  & \vline & \mathbb{C} \\
  \hline
@@ -5070,6 +5117,8 @@ $Af_1$ відповідає $r+1$-му стовпчику матриці $\mathb
 $\boxed{=} d_1 e_1 + \dots + d_r e_r$.\\
 Але якщо $(A-\lambda_0 I)g \in L^{\lambda_0}$, то тоді $(A-\lambda_0 I)^{m+1} g = 0$ для деякого $m \in \mathbb{N}$. І виходить, що $g \in L^{\lambda_0}$. Суперечність!\\
 Таким чином, ми показали, що $a_{\lambda_0} = r$ в характеристичному многочлені. А це співпадає з $\dim L^{\lambda_0}$, бо був базис $\{e_1,\dots,e_r\}$.
+\end{enumerate}
+Всі властивості доведені.
 \end{proof}
 
 \begin{remark}
@@ -5077,7 +5126,7 @@ $\boxed{=} d_1 e_1 + \dots + d_r e_r$.\\
 \end{remark}
 
 \begin{proposition}
-Задано $A \in \mathcal{L}(L,L)$ та $\lambda_1,\dots,\lambda_s$ -- різні власні числа. Тоді $L^{\lambda_1}+\dots +L^{\lambda_s}$ утворює пряму суму.
+Заданий $A \in \mathcal{L}(L,L)$ та $\lambda_1,\dots,\lambda_s$ -- різні власні числа. Тоді $L^{\lambda_1}+\dots +L^{\lambda_s}$ утворює пряму суму.
 \end{proposition}
 
 \begin{proof}
@@ -5088,21 +5137,20 @@ III. \textit{Крок індукції.} Покажемо, що $L^{\lambda_1}+\
 Оскільки $v_s \in L^{\lambda_s}$, то $(A-\lambda_s I)^m v_s = 0$ для деякого $m \in \mathbb{N}$. Подіємо цим оператором на рівняння вище -- отримаємо:\\
 $w_1 + \dots + w_{s-1} = 0$, де $w_i = (A-\lambda_s I)^m v_i \in L^{\lambda_i}$. Належність випливає з інваріантності кореневого підпростора. Оскільки $L^{\lambda_1}+\dots +L^{\lambda_{s-1}}$ утворює пряму суму, то звідси випливає, що $w_1,\dots,w_{s-1} = 0$.\\
 Тобто $w_i = (A-\lambda_s I)^m v_i = 0$, але оскільки $(A-\lambda_s I)$ -- невироджений на $L^{\lambda_i}$, як наслідок  $(A-\lambda_s I)^m$ -- невироджений, то звідси $v_i = 0$.\\
-Підставимо в найперше рівняння - отримаємо $v_s = 0$.\\
+Підставимо в найперше рівняння -- отримаємо $v_s = 0$.\\
 МІ доведено.
 \end{proof}
 
 \begin{theorem}
 \label{space_decomposition_into_generalized_eigenspace}
-Задано $A \in \mathcal{L}(L,L)$, де $L$ -- лінійний простір над $\mathbb{C}$. Припустимо $\dim L = n$.\\
-Тоді $L = L^{\lambda_1} \dot{+} L^{\lambda_2} \dot{+} \dots \dot{+} L^{\lambda_m}$.
+Заданий $A \in \mathcal{L}(L,L)$, де $L$ -- лінійний простір над $\mathbb{C}$. Припустимо $\dim L = n$. Тоді $L = L^{\lambda_1} \oplus L^{\lambda_2} \oplus \dots \oplus L^{\lambda_m}$.
 \end{theorem}
 
 \begin{proof}
 Нехай характеристичний поліном має власні числа $\lambda_1,\dots,\lambda_m$. За попереднім твердженням, \\ $L^{\lambda_1}+\dots +L^{\lambda_{m}}$ утворює пряму суму.\\
-Зауважимо, що $L^{\lambda_1} \dot{+} L^{\lambda_2} \dot{+} \dots \dot{+} L^{\lambda_m} \subset L$.\\
-Також $\dim (L^{\lambda_1} \dot{+} L^{\lambda_2} \dot{+} \dots \dot{+} \dim L^{\lambda_m}) = \dim L^{\lambda_1} + \dots + L^{\lambda_m} = a_{\lambda_1} + \dots + a_{\lambda_m} = n = \dim L$, тому що сумуючи алегбраїчні кратності, отримаємо степінь многочлена.\\
-Такми чином, $L = L^{\lambda_1} \dot{+} L^{\lambda_2} \dot{+} \dots \dot{+} L^{\lambda_m}$.
+Зауважимо, що $L^{\lambda_1} \oplus L^{\lambda_2} \oplus \dots \oplus L^{\lambda_m} \subset L$.\\
+Також $\dim (L^{\lambda_1} \oplus L^{\lambda_2} \oplus \dots \oplus \dim L^{\lambda_m}) = \dim L^{\lambda_1} + \dots + L^{\lambda_m} = a_{\lambda_1} + \dots + a_{\lambda_m} = n = \dim L$, тому що сумуючи алегбраїчні кратності, отримаємо степінь многочлена.\\
+Такми чином, $L = L^{\lambda_1} \oplus L^{\lambda_2} \oplus \dots \oplus L^{\lambda_m}$.
 \end{proof}
 \noindent
 Ця теорема відіграє важливу роль в подальшому розвитку доведення теореми Жордана. Якщо ми продовжимо розглядати оператор $A \in \mathcal{L}(L,L)$, де $L$ -- лінійний простір над $\mathbb{C}$, то за пунктом 2.14. (завдяки щойно доведеної теореми), матрицю лінійного оператора можна записати ось так:\\
@@ -5184,7 +5232,7 @@ $L = L^{\lambda_1} + \dots + L^{\lambda_k}$.\\
 
 \subsection{Нільпотентні оператори}
 \begin{definition}
-Задано $B \in \mathcal{L}(L,L)$.\\
+Заданий $B \in \mathcal{L}(L,L)$.\\
 Оператор $B$ називається \textbf{нільпотентним}, якщо
 \begin{align*}
 \exists k \in \mathbb{N}: B^k = O
@@ -5212,7 +5260,7 @@ $L = L^{\lambda_1} + \dots + L^{\lambda_k}$.\\
 \end{corollary}
 
 \begin{definition}
-Задано $A \in \mathcal{L}(L,L)$ та $f$ -- деякий елемент.\\
+Заданий $A \in \mathcal{L}(L,L)$ та $f$ -- деякий елемент.\\
 \textbf{Циклічним підпростором, що породжений елементом} $f$, називається множина
 \begin{align*}
 U = \linspan\{f,Af,A^2f,\dots\}
@@ -5220,7 +5268,7 @@ U = \linspan\{f,Af,A^2f,\dots\}
 \end{definition}
 
 \begin{remark}
-У деталі про циклічні підпростори не буду копатися, але деякі факти для випадку кореневих векторів як раз знадобиться.
+У деталі про циклічні підпростори не буду копатися, але деякі факти для випадку кореневих векторів як раз знадобляться.
 \end{remark}
 
 \begin{proposition}
@@ -5237,7 +5285,7 @@ $\forall x \in U: x = \alpha_0 f + \alpha_1 Af + \dots \in W$. Тоді $W = U$.
 \end{proof}
 
 \begin{lemma}
-Задано $B \in \mathcal{L}(L,L)$ -- нільпотентний. Нехай $f \in L$ -- кореневий вектор висоти $k>0$. Тоді система $\{f,Bf,\dots,B^{k-1}f\}$ -- л.н.з.
+Заданий $B \in \mathcal{L}(L,L)$ -- нільпотентний. Нехай $f \in L$ -- кореневий вектор висоти $k>0$. Тоді система $\{f,Bf,\dots,B^{k-1}f\}$ -- л.н.з.
 \end{lemma}
 
 \begin{proof}
@@ -5255,15 +5303,15 @@ $\beta_0 g + \beta_1 Bg + \dots + \beta_{k-2} B^{k-2}g = 0$.\\
 \end{proof}
 
 \begin{corollary}
-Задано $B \in \mathcal{L}(L,L)$ -- нільпотентний оператор та $\dim L = k$, а також $f$ --кореневий вектор висоти $k$. Тоді $\{f,Bf,\dots,B^{k-1}f\}$ -- базис для циклічного підпростору, породженого $f$.
+Заданий $B \in \mathcal{L}(L,L)$ -- нільпотентний оператор та $\dim L = k$, а також $f$ -- кореневий вектор висоти $k$. Тоді $\{f,Bf,\dots,B^{k-1}f\}$ -- базис для циклічного підпростору, породженого $f$.
 \bigskip \\
-Якщо позначити $e^{(j)} = Bf^{(k-j)}$, то ми отримаємо такий ланцюг:\\
+Якщо позначити $e_j = B^{k-j}f$, то ми отримаємо такий ланцюг:\\
 \begin{tikzcd}
 0 & e_1 \arrow{l}{B} & e_2 \arrow{l}{B} & e_3 \arrow{l}{B} & \dots \arrow{l}{B} & e_{k} \arrow{l}{B}
 \end{tikzcd}
 \end{corollary}
 \noindent
-Тоді для оператора $B|_{U} \colon U \to U$ можна записати матрицю оператора в базисі $\{e_1,\dots,e_k\}$ таким чином:\\
+Тоді для оператора $B|_{U} \colon U \to U$ можна записати матрицю оператора в базисі $\{e_1,\dots,e_k\}$ так:\\
 $\mathbb{B}|_{U} \overset{\text{позн.}}{=} J_k = \begin{pmatrix}
 0 & 1 & 0 & \dots & 0 & 0 \\
 0 & 0 & 1 & \dots & 0 & 0 \\
@@ -5276,7 +5324,7 @@ $\mathbb{B}|_{U} \overset{\text{позн.}}{=} J_k = \begin{pmatrix}
 
 \begin{theorem}
 \label{space_decomposition_into_cyclic_subspaces}
-Задано $B \in \mathcal{L}(L,L)$ -- нільпотентний оператор та $\dim L = n$. Тоді існує розклад $L = U_1 \dot{+} \dots \dot{+} U_p$, де кожна $U_i$ -- циклічні підпростори та $\dim U_i = k_i$.
+Заданий $B \in \mathcal{L}(L,L)$ -- нільпотентний оператор та $\dim L = n$. Тоді існує розклад $L = U_1 \oplus \dots \oplus U_p$, де кожна $U_i$ -- циклічні підпростори та $\dim U_i = k_i$.
 \end{theorem}
 
 \begin{corollary}
@@ -5301,9 +5349,9 @@ $,
 \begin{proof}
 Доведення МІ за $\dim L$.\\
 I. \textit{База індукції.} Маємо $\dim L = 1$. Тоді оскільки $\lambda = 0$ -- власне число, то мається власний вектор $f \neq 0$. Тоді $Bf = 0$, а тому циклічним підпростором буде $\{f\}$.\\
-II. \textit{Припущення індукції.} Нехай теорема виконується для $\dim L < n$.
+II. \textit{Припущення індукції.} Нехай теорема виконується для $\dim L < n$.\\
 III. \textit{Крок індукції.} Доведемо теорему для $\dim L = n$. Оскільки $\Im B$ -- інваріантний підпростір відносно $B$ (доводили), то ми будемо розглядати $B|_{\Im B}$, який також нільпотентний. І дійсно, $\Im B \subset L$, а тому $B^k|_{\Im B} = O$. Також оскільки $\lambda = 0$ -- власне число, то звідси $\dim \Im B = \dim L - \dim \ker B < n$.\\
-За припущенням МІ, для нільпотентного оператора $B|_{\Im B}$ існує розклад $\Im B = W_1 \dot{+} \dots \dot{+} W_q$, де $W_i$ -- циклічні підпростори та $\dim W_i = k_i$. Маємо таку картину:\\
+За припущенням МІ, для нільпотентного оператора $B|_{\Im B}$ існує розклад $\Im B = W_1 \oplus \dots \oplus W_q$, де $W_i$ -- циклічні підпростори та $\dim W_i = k_i$. Маємо таку картину:\\
 \begin{tikzcd}
 0 & e^1_1 \arrow{l}{B} & e^1_2 \arrow{l}{B} & \dots \arrow{l}{B} & e_{k_1}^1 \arrow{l}{B}
 \end{tikzcd}
@@ -5363,10 +5411,10 @@ $\alpha_2^1=\dots=\alpha_{k_1}^1 = \beta_1 = 0, \dots, \alpha_2^q=\dots=\alpha_{
 $\alpha_1^1e_1^1 + \dots + \alpha_1^qe_1^q + \gamma_1 g_1 + \dots + \gamma_t g_t = 0$.\\
 Уже відомо, що $\{e_1^1,\dots,e_1^q, g_1,\dots,g_t\}$ -- базис, а тому $\alpha_1^1 = \dots = \alpha_1^q = 0$.\\
 Значить звідси $u_1 = \dots = u_q = 0, \gamma_1 = \dots = \gamma_t = 0$, що й доводить утворення прямої суми.\\
-Далі покажемо, що $L = U_1 \dot{+} \dots \dot{+} U_q \dot{+} P_1 \dot{+} \dots \dot{+} P_t$. Ясно, що $U_1 \dot{+} \dots \dot{+} U_q \dot{+} P_1 \dot{+} \dots \dot{+} P_t \subset L$, а також \\
-$\dim (U_1 \dot{+} \dots \dot{+} U_q \dot{+} P_1 \dot{+} \dots \dot{+} P_t) = \dim U_1 + \dots + \dim U_q + \dim P_1 + \dots + \dim P_t = \\
+Далі покажемо, що $L = U_1 \oplus \dots \oplus U_q \oplus P_1 \oplus \dots \oplus P_t$. Ясно, що $U_1 \oplus \dots \oplus U_q \oplus P_1 \oplus \dots \oplus P_t \subset L$, а також \\
+$\dim (U_1 \oplus \dots \oplus U_q \oplus P_1 \oplus \dots \oplus P_t) = \dim U_1 + \dots + \dim U_q + \dim P_1 + \dots + \dim P_t = \\
 = (k_1+1) + \dots + (k_q+1) + 1 + \dots + 1 = (k_1+\dots+k_q) + q + t = \dim \Im B + (q+t) = \dim \Im B + \dim \ker B = \dim L$.\\
-Отже, $L = U_1 \dot{+} \dots \dot{+} U_q \dot{+} P_1 \dot{+} \dots \dot{+} P_t$.\\
+Отже, $L = U_1 \oplus \dots \oplus U_q \oplus P_1 \oplus \dots \oplus P_t$.\\
 МІ доведено.
 \end{proof}
 
@@ -6014,7 +6062,7 @@ $\det (\mathbb{A} - \lambda \mathbb{I}) = (\lambda - 2)^5 (\lambda-1)^5 = 0$. О
 \end{example}
 \fi
 \begin{example}
-Задано матрицю оператора $\mathbb{A} = \begin{pmatrix}
+Задана матриця оператора $\mathbb{A} = \begin{pmatrix}
 0 & 1 & 0 & 0 \\
 -1 & 2 & 0 & 0 \\
 -2 & 2 & 1 & 0 \\
@@ -6058,7 +6106,7 @@ $\vec{f} = \begin{pmatrix}
 \end{pmatrix} \right\}$\\
 Можемо взяти власний вектор $\vec{f}_1 = \begin{pmatrix}
 0 \\ 0 \\ 0 \\ 1
-\end{pmatrix}$
+\end{pmatrix}$.
 \bigskip \\
 $\lambda = 1$:\\
 $(\mathbb{A} - \lambda \mathbb{I}) \vec{f} = \begin{pmatrix}
@@ -8780,7 +8828,508 @@ $\lambda_3 z_3^2 + \widetilde{b_2} z_2 = 0$ - а це є параболічни�
 При $\widetilde{b_2} = 0$ отримаємо пару площин.\\
 $\scaleobj{5}{\blacksquare}$
 \newpage
+\section{Тензорна алгебра}
+На даному етапі ми розглядаємо лінійний простір $L$, де $\dim L = n < \infty$. Такий простір будемо називати \textbf{основним}, а його елементи будемо називати \textbf{векторами}.\\
+Також ми вже знаємо про спряжений простір $L^*$, елементами якого будемо називати \textbf{ковекторами}.
 
+\begin{remark}
+Оскільки $(L^*)^* \cong L$ канонічним чином, то можна було $L^*$ назвати основним.
+\end{remark}
+
+\subsection{Тензори}
+\begin{definition}
+\textbf{Тензором типу $(p,q)$} на лінійному просторі $L$ називають полілінійний функціонал
+\begin{align*}
+T \colon \underbrace{L \times \dots \times L}_{p \text{  разів}} \times \underbrace{L^* \times \dots \times L^*}_{q \text{  разів}} \to \mathbb{R}
+\end{align*}
+Полілінійний означає лінійний за кожним аргументом.\\
+Число $p$ називають \textbf{коваріантною валентністю}. Число $q$ називають \textbf{контраваріантною валентністю}.\\
+Позначення: $\mathbb{T}_p^q(L)$ -- набір тензорів типу $(p,q)$, що визначені на просторі $L$.
+\end{definition}
+
+\begin{example}
+Зараз розглянемо приклади тензорів з малими валентностями:
+\begin{itemize}[nosep,wide=0pt,label={-}]
+\item $(0,0)$: скаляр на $\mathbb{R}$;
+\item $(1,0)$: ковектор на $L^*$;
+\item $(0,1)$: елемети простору $(L^*)^* \cong L$, ну коротше вектори на $L$;
+\item $(2,0)$: білінійні форми на $L$;
+\item $(1,1)$: лінійний оператор на $L$.
+\end{itemize}
+\end{example}
+
+\begin{example}
+Про тензор типу $(1,1)$ хочеться поговорити детальніше. Маємо $T \colon L \times L^* \to \mathbb{R}$.\\
+Зафіксуємо лінійний оператор $A \colon L \to L$. Тоді побудуємо $T \colon L \times L^* \to \mathbb{R}$ таким чином: $T(v,f) = f(A(v))$. Цілком зрозуміло, що $T$ задаватиме тензор $(1,1)$.\\
+Отже, кожному оператору $A \in \mathcal{L}(L)$ ставиться в відповідність тензор $T \in \mathbb{T}_1^1(L)$.
+\bigskip \\
+Навпаки зафіксуємо тензор $T \colon L \times L^* \to \mathbb{R}$. Зафіксуємо вектор $v \in L$, отримаємо функціонал $T(v, \cdot) \colon L^* \to \mathbb{R}$. Тобто $T(v,\cdot) \in L^{**}$. Оскільки $L \cong L^{**}$ канонічним чином, то ми можемо побудувати оператор $A \colon L \to L$ таким чином: $Av = T(v,\cdot)$. У силу лінійності тензора отримаємо, що $A$ -- лінійний оператор.\\
+Отже, кожному тензору $T \in \mathbb{T}^1_1(L)$ ставиться в відповідність оператор $A \in \mathcal{L}(L)$.
+\end{example}
+
+\begin{remark}
+Коротше, $\mathcal{L}(V) \cong \mathbb{T}_1^1(V)$ канонічним чином.
+\end{remark}
+
+\subsubsection*{Операції над тензорами}
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item додавання\\
+Нехай $T,S$ -- обидва тензори $(p,q)$. Тоді $T+S$ буде тензором типа $(p,q)$, що визначається природним чином:
+\begin{align*}
+(T+S)(v_1,\dots,v_p,w_1,\dots,w_q) \overset{\text{def.}}{=} T(v_1,\dots,v_p,w_1,\dots,w_q) + S(v_1,\dots,v_p,w_1,\dots,w_q)
+\end{align*}
+\item множення на скаляр\\
+Нехай $T$ -- тензор $(p,q)$ та $\lambda \in \mathbb{R}$. Тоді $\lambda \cdot T$ буде тензором типа $(p,q)$, що визначається природним чином:
+\begin{align*}
+(\lambda \cdot T)(v_1,\dots,v_p,w_1,\dots,w_q) \overset{\text{def.}}{=} \lambda \cdot T(v_1,\dots,v_p,w_1,\dots,w_q)
+\end{align*}
+\item тензорне множення\\
+Нехай $T$ -- тензор $(p,q)$ та $S$ -- тензор $(k,l)$. Тоді $T \otimes S$ буде тензором типа $(p+k,q+l)$, що визначається таким чином:
+\begin{align*}
+(T \otimes S)(v_1,\dots,v_{p+k},w_1,\dots,w_{q+l}) = T(v_1,\dots,v_p,w_1,\dots,w_q) \cdot S(v_{p+1},\dots,v_{p+k},w_{q+1},\dots,w_{q+l})
+\end{align*}
+\end{enumerate}
+\noindent
+Цілком зрозуміло, що нові тензори будуть справді тензорами.\\
+
+\begin{remark}
+$\mathbb{T}_p^q(L)$ утворює лінійний простір (це тіпа простір функцій).
+\end{remark}
+
+\begin{example}
+Нехай $B \in \mathcal{B}(L)$.\\
+$B = f \otimes g$, де $f,g$ -- ковектори на $L \iff \rank B = 1$.\\
+(TODO: пояснити).
+\end{example}
+
+\begin{proposition}[Властивості множення]
+Справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $(T \otimes S) \otimes R = T \otimes (S \otimes R)$;
+\item $(T + T') \otimes S = T \otimes S + T' \otimes S$;
+\item $(\lambda \cdot T) \otimes S = T \otimes (\lambda \cdot S) = \lambda \cdot (T \otimes S)$ при $\lambda \in \mathbb{R}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+$T \otimes S \neq S \otimes T$.
+\end{remark}
+
+\begin{example}
+Розглянемо два функціонали $f,g \in (\mathbb{R}^2)^*$, що задані таким чином: $f(\vec{x}) = 2x_1 + 3x_2$ та $g(\vec{x}) = -x_1 + x_2$. Ми вже знаємо, що їх можна сприйняти як тензори, тобто $f,g \in \mathbb{T}_1^0(\mathbb{R}^2)$.\\
+$(f \otimes g)( (0,1)^T, (1,0)^T) = f((0,1)^T) \cdot g( (1,0)^T) = 3 \cdot (-1) = -3$;\\
+$(g \otimes f)( (0,1)^T, (1,0)^T) = g((0,1)^T) \cdot f((1,0)^T) = 1 \cdot 2 = 2$.\\
+Отже, отримали загалом, що $f \otimes g \neq g \otimes f$.
+\end{example}
+
+\subsection{Задання тензорів у координатах}
+Маємо $L$ -- лінійний простір. Оберемо $\{e_1,\dots,e_n\}$ -- базис $L$. Автоматично мається дуальний базис $L^*$, конвенція тут позначати як $\{e^1,\dots,e^n\}$. Нагадаємо, що $e^i(e_j) = \delta_{j}^i$ -- дельта-символ Кронекера.
+
+\begin{theorem}
+Система тезорів $\{ e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q} \mid 1 \leq i_1,\dots,i_p \leq n, \quad 1 \leq j_1,\dots,j_q \leq n \}$ утворює базис лінійного простору $\mathbb{T}_p^q(L)$.
+\end{theorem}
+
+\begin{remark}
+Отже, $\dim \mathbb{T}_p^q(L) = n^{p+q}$.
+\end{remark}
+
+\begin{remark}
+Ще одне отже, кожний тензор $T \in \mathbb{T}_p^q(L)$ матиме однозначний розклад таким чином:\\
+$T = \displaystyle\sum_{\substack{1 \leq i_1,\dots,i_p \leq n \\ 1 \leq j_1,\dots,j_q \leq n}} T_{i_1,\dots,i_p}^{j_1,\dots,j_q} e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q}$,\\
+де $T_{i_1,\dots,i_p}^{j_1,\dots,j_q} = T(e_{i_1},\dots,e_{i_p},e^{j_1},\dots,e^{j_q})$.
+\end{remark}
+
+\begin{remark}
+Існує домовленість: \textit{не писати знак суми}, якщо в деякому виразі двічі зустрічаються набори однакових індексів так, що один раз десь згори, а інший десь знизу.\\
+Наприклад, якщо бачимо $a_i b^i$, то під цим мається на увазі $\displaystyle\sum_i a_i b^i$. Суму в першому не писали, однак передбачається сумування за індексом $i$.\\
+У випадку з сумою вище це перепишеться ось так: $T = T_{i_1,\dots,i_p}^{j_1,\dots,j_q} e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q}$.
+\end{remark}
+
+\begin{proof}
+Маємо $v_1,\dots,v_p \in L$ та $w_1,\dots,w_q \in L^*$. Розкладемо за базисом:\\
+$v_k = \displaystyle\sum_{i=1}^n x_k^i e_i \qquad w_l = \sum_{j=1}^n y_j^l e^j$.\\
+Оскільки тензор $T$ в нас полілінійний, то ми отримаємо наступне:\\
+$T(v_1,\dots,v_p,w_1,\dots,w_q) = \displaystyle T\left( \sum_{i_1=1}^n x_1^{i_1} e_{i_1}, \dots, \sum_{i_p=1}^n x_p^{i_p} e_{i_p}, \sum_{j_1=1}^n y_{j_1}^1 e^{j_1},\dots, \sum_{j_q=1}^n y_{j_q}^q e^{j_q} \right) = \\
+= \sum_{\substack{1 \leq i_1,\dots,i_p \leq n \\ 1 \leq j_1, \dots, j_q \leq n}} x_1^{i_1} \dots x_p^{i_p} y_{j_1}^1 \dots y_{j_q}^q T(e_{i_1},\dots,e_{i_p},e^{j_1},\dots,e^{j_q})$.\\
+Таким чином, тензор можна задати однозначно цими компонентами $T_{i_1,\dots,i_p}^{j_1,\dots,j_q}$ (схожу процедуру ми робили з білінійними формами).
+\bigskip \\
+На основі цього доведемо теорему. Розглянемо $S = \displaystyle\sum_{\substack{1 \leq i_1,\dots,i_p \leq n \\ 1 \leq j_1,\dots,j_q \leq n}} T_{i_1,\dots,i_p}^{j_1,\dots,j_q} e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q}$ -- тензор. Хочемо довести, що $S = T$. Це означатиме, що треба довести, що $S_{k_1,\dots,k_p}^{l_1,\dots,l_q} = T_{k_1,\dots,k_p}^{l_1,\dots,l_q}$.\\
+$S_{k_1,\dots,k_p}^{l_1,\dots,l_q} = S(e_{k_1},\dots,e_{k_p},e^{l_1},\dots,e^{l_q}) = \displaystyle\sum_{\substack{1 \leq i_1,\dots,i_p \leq n \\ 1 \leq j_1,\dots,j_q \leq n}} T_{i_1,\dots,i_p}^{j_1,\dots,j_q} e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q} (e_{k_1},\dots,e_{k_p},e^{l_1},\dots,e^{l_q}) \boxed{=}$\\
+Детально розпишемо $e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q} (e_{k_1},\dots,e_{k_p},e^{l_1},\dots,e^{l_q})$. За означенням множення тензорів, а також з теорії дуальних просторів маємо\\
+$e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q} (e_{k_1},\dots,e_{k_p},e^{l_1},\dots,e^{l_q}) = e^{i_1}(e_{k_1}) \cdots e^{i_p}(e_{k_p}) \cdot e_{j_1}(e^{l_1}) \cdots e_{j_q}(e^{l_q}) = \delta_{k_1}^{i_1} \dots \delta_{k_p}^{i_p} \delta_{j_1}^{l_1} \dots \delta_{j_q}^{l_q}$.\\
+Добуток дельта-символів Кронекера буде одиницею за умовою, якщо $k_1 = i_1, \dots, k_p = i_p, j_1 = l_1, \dots, j_q = l_q$. У всіх інших випадках добуток буде нулевим. Тому під сумою залишаться саме індекси, що задовольняють щойно зазначеним рівностям.\\
+$\boxed{=} T_{k_1,\dots,k_p}^{l_1,\dots,l_q} \implies S = T$.
+\bigskip \\
+Внаслідок чого розклад довільного тензора $S$ в лінійну комбінацію $\{ e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q} \mid 1 \leq i_1,\dots,i_p \leq n, \quad 1 \leq j_1,\dots,j_q \leq n \}$ -- єдиний. Тому ці тензори утворюють базис $\mathbb{T}_p^q(L)$.
+\end{proof}
+
+\subsubsection*{Операції над тензорами в координатах}
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item додавання: $(T+S)_{i_1, \dots, i_p}^{j_1,\dots,j_q} = T_{i_1, \dots, i_p}^{j_1,\dots,j_q} + S_{i_1, \dots, i_p}^{j_1,\dots,j_q}$
+\item множення на скаляр: $(\lambda T)_{i_1, \dots, i_p}^{j_1,\dots,j_q} = \lambda \cdot T_{i_1, \dots, i_p}^{j_1,\dots,j_q}$
+\item тензорне множення: $(T \otimes S)_{i_1,\dots,i_{p+k}}^{j_1,\dots,j_{q+l}} = T_{i_1,\dots,i_p}^{j_1,\dots,j_q} \cdot S_{i_{p+1},\dots,i_{p+k}}^{j_{q+1},\dots,j_{q+l}}$
+\end{enumerate}
+Всі вони випливають з визначення операції над тензорами та визначення компоненти.
+
+\subsubsection*{Перетворення компонент тензорів під час заміни базиса}
+Маємо $L$ -- лінійний простір, $\{e_1,\dots,e_n\}$ -- базис $L$ та $\{e^1,\dots,e^n\}$ -- дуальний базис.\\
+Припустимо, що $\{f_1,\dots,f_n\}$ -- інший базис $L$ та $\{f^1,\dots,f^n\}$ -- його дуальний.\\
+Позначимо $\mathbb{B}_{e \to f}$ -- матриця перехода, а також $\mathbb{B}^{-1}_{e \to f} = \tilde{\mathbb{B}}_{e \to f}$. Тоді маємо такі розклади:\\
+$f_i = \displaystyle\sum_k b_i^k e_k$, де $b_i^k = b_{ik}$;\\
+$f^j = \displaystyle\sum_l (\tilde{b}^j_l)^T e^j$, де $(\tilde{b}^j_l)^T = \tilde{b}_{lj}$.\\
+Розглянемо тензор $T \in \mathbb{T}_p^q(L)$, який створений компонентами $T_{i_1,\dots,i_p}^{j_1,\dots,j_q} = T(e_{i_1},\dots,e_{i_p}, e^{j_1},\dots,e^{j_q})$. Тепер хочемо переписати тензор на новому базисі, тобто знайти компоненти $\tilde{T}_{i_1,\dots,i_p}^{j_1,\dots,j_q} = T(f_{i_1},\dots,f_{i_p},f^{j_1},\dots,f^{j_q})$.\\
+Але, маючи лінійну комбінацію вище та маючи полілінійність тензора, отримаємо наступне:\\
+$\tilde{T}_{i_1,\dots,i_p}^{j_1,\dots,j_q} = \displaystyle\sum_{1 \leq \substack{k_1,\dots,k_p \\ l_1,\dots,l_q} \leq n} b_{i_1}^{k_1} \dots b_{i_p}^{k_p} (\tilde{b}_{l_1}^{j_1})^T \dots (\tilde{b}_{l_q}^{j_q})^T \cdot T_{k_1,\dots,k_p}^{l_1,\dots,l_q}$.
+
+\subsection{Тензорний добуток просторів}
+\begin{definition}
+Задані $L,M$ -- лінійні простори.\\
+\textbf{Тензорним добутком} просторів $L,M$ називають простір $L \otimes M$, якому асоціюється білінійне відображення
+\begin{align*}
+b \colon L \times M \to L \otimes M,
+\end{align*}
+причому якщо $\{e_1,\dots,e_n\}$ та $\{f_1,\dots,f_m\}$ -- базис відповідно $L,M$, то
+\begin{align*}
+\{ b(e_i,f_j) \} \text{ -- базис } L \otimes M
+\end{align*}
+Вектор $b(u,v)$ часто позначають ось так: $u \otimes v$.
+\end{definition}
+
+\noindent
+Проблема даного означення полягає в виборі базису $L,M$. Насправді, нема значення, який базис фіксувати, у нас завжди буде базис $L \otimes M$ у вигляді, який зазначений вище. Для демонстрації цього потрібна лема.
+
+\begin{lemma}
+Нехай існує білінійне відображення $b \colon L \times M \to L \otimes M$, маємо $\{e_1,\dots,e_n\}$ та $\{f_1,\dots,f_m\}$ -- базис відповідно $L,M$. Нижче умови рівносильні:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\{b(e_i,f_j)\}$ -- базис $L \otimes M$;
+\item $\forall w \in L \otimes M: \exists ! v_1,\dots,v_n \in M: w = \displaystyle\sum_{i=1}^n b(e_i,v_i)$;
+\item $\forall w \in L \otimes M: \exists ! u_1,\dots,u_k \in L: w = \displaystyle\sum_{k=1}^n b(u_j,f_j)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\boxed{\text{1)} \Rightarrow \text{2)}}$ Дано: $\{b(e_i,f_j)\}$ -- базис $L \otimes M$. Нехай $w \in L \otimes M$. Маємо $w = \displaystyle\sum_{i,j} \alpha_{ij} b(e_i,f_j)$, тоді можна переписати ось так: $w = \displaystyle\sum_i b\left(e_i, \sum_j \alpha_{ij} f_j \right) = \sum_i b(e_i,v_i)$.
+\bigskip \\
+$\boxed{\text{2)} \Rightarrow \text{1)}}$ Дано: $\forall w \in L \otimes M: \exists ! v_1,\dots,v_n \in M: w = \displaystyle\sum_{i=1}^n b(e_i,v_i)$. Кожний $v_i$ розпадається в лінійну комбінацію, тобто $v_i = \displaystyle\sum_j \alpha_{ij} f_j$. Таким чином, отримаємо $w = \displaystyle\sum_{i,j} \alpha_{ij} b(e_i,f_j)$.
+\bigskip \\
+$\boxed{\text{1)} \iff \text{3)}}$ доводиться аналогічно.
+\end{proof}
+
+\begin{corollary}
+Якщо $\{b(e_i,f_j)\}$ -- базис $L \otimes M$ для деякої пари базисів $L,M$, то й для будь-якої пари базисів теж.
+\end{corollary}
+
+\begin{proof}
+Умова 1) виконана для базисів $\{e_1,\dots,e_n\},\ \{f_1,\dots,f_k\}$ просторів $L,M \iff$ умова 2) леми виконується для базиса $\{e_1,\dots,e_n\} \iff$ умова 1) виконана для базисів $\{e_1,\dots,e_n\},\ \{f'_1,\dots,f'_k\}$ просторів $L,M \iff$ умова 3) виконана для базиа $\{f'_1,\dots,f'_k\} \iff$ умова 1) виконана для базисів $\{e'_1,\dots,e'_n\},\ \{f'_1,\dots,f'_k\}$ просторів $L,M$.
+\end{proof}
+
+\begin{example}
+$\mathcal{B}(L,M) = L^* \otimes M^*$.\\
+Визначимо білінійне відображення $b \colon U^* \times V^* \to \mathcal{B}(U,V)$ таким чином: $b(f,g)\textcolor{red}{(x,y)} = f(\textcolor{red}{x}) \cdot g(\textcolor{red}{y})$. Цілком зрозуміло, що це справді білінійне відображення.\\
+Нехай $\{e^1,\dots,e^n\}$ та $\{f^1,\dots,f^n\}$ -- базиси $L^*$ та $M^*$. Тоді\\
+$b(e^i,f^j)\textcolor{red}{(e_k,f_l)} = e^i(e_k) \cdot f^j(f_l) = \delta^i_k \delta^j_l$. Значить, $\{b(e^i,f^j)\}$ -- базис $\mathcal{B}(L,M)$.\\
+Отже, $\mathcal{B}(L,M)$ задовольняє означенню тензорно добутку $L^*,M^*$, тобто $\mathcal{B}(L,M) = L^* \otimes M^*$.
+\end{example}
+
+\begin{example}
+$\mathcal{L}(L,M) = L^* \times M$.\\
+Для цього треба дати білінійне відображення $b \colon L^* \times M \to \mathcal{L}(L,M)$ таким чином: $b(f,v)(u) = f(u)v$. Далі процедура аналогічна.
+\end{example}
+\noindent
+Надалі позначимо $\mathcal{B}(L,M; W)$ -- множина всіх білінійних відображень вигляду $L \times M \to W$.
+
+\begin{proposition}
+Нехай $f \in \mathcal{B}(L,M; W)$. Тоді існує єдиний $\varphi \in \mathcal{L}(L \otimes M, W)$ такий, що $\varphi(x \otimes y) = f(x,y)$.
+\end{proposition}
+
+\begin{proof}
+Нехай $f \in \mathcal{B}(L,M; W)$. Оберемо $\{e_i\}, \{f_j\}$ -- базиси $L,M$. Покладемо відображення $\varphi \colon L \otimes M \to W$, що задається ось так: $\varphi(e_i \otimes f_j) = f(e_i,f_j)$. Тоді $\varphi \in \mathcal{L}(L \otimes M, W)$. Дійсно, раз оператор $\varphi$ визначений на базисних елементах, то можна розширити $\varphi$ до будь-якого елемента ось таким чином: $\varphi(x \otimes y) = \displaystyle\sum_{i,j} \alpha_{ij} \varphi(e_i \otimes f_j)$, за умовою, що $x \otimes y = \displaystyle\sum_{i,j} \alpha_{ij} \cdot e_i \otimes f_j$.\\
+Крім того, $\varphi(x \otimes y) = f(x,y)$ для всіх $x \in L, y \in M$. Справді,\\
+$\varphi(x \otimes y) = \displaystyle\varphi\left( \sum_i \alpha_i e_i \otimes \sum_j \beta_j f_j\right) = \varphi\left( \sum_{i,j} \alpha_i \beta_j \cdot e_I \otimes f_j\right) = \sum_{i,j} \alpha_i \beta_j \varphi(e_i \otimes f_j) = \sum_{i,j} \alpha_i \beta_j f(e_i,f_j) = f\left( \sum_i \alpha_i e_i, \sum_j \beta_j f_j\right) = f(x,y)$.
+\end{proof}
+
+\begin{proposition}
+$\mathcal{B}(L,M; W) \cong \mathcal{L}(L \otimes M, W)$, причому канонічним чином.
+\end{proposition}
+
+\begin{proof}
+Розглянемо оператор $A \colon \mathcal{L}(L \otimes M, W) \to \mathcal{B}(L,M;W)$ таким чином: $(A\varphi)(x,y) = \varphi(x \otimes y)$. Уже відомо, що для кожного $f \in \mathcal{B}(L,M;W)$ існує єдиний $\varphi \in \mathcal{L}(L \otimes M,W)$, для якого $(A \varphi)(x,y) = f(x,y)$. Отже, відображення $A$ -- бієктивне.\\
+Нарешті, $A$ -- лінійний оператор, оскільки $A(\alpha \varphi + \beta \psi)(x,y) = (\alpha \varphi + \beta \psi)(x \otimes y) = \alpha \varphi(x \otimes y) + \beta \psi(x \otimes y) = (\alpha A\varphi + \beta A \psi)(x,y)$.
+\end{proof}
+
+\begin{corollary}
+Якщо в нас є два білінійні відображення $\otimes_1 \colon L \times M \to W_1$ та $\otimes_2 \colon L \times M \to W_2$, то тоді існує ізоморфізм $\theta \colon W_1 \to W_2$ таким чином, що $\theta(u \otimes_1 v) = u \otimes_2 v$.
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+& W_1 \arrow{dd}{\theta} \\
+L \times M \arrow{ur}{\otimes_1}  \arrow{dr}{\otimes_2} & \\
+& W_2
+\end{tikzcd}
+\end{figure}
+\noindent
+Іншими словами, тензорні добутки $L,M$ ізоморфні.
+\end{corollary}
+
+\begin{proof}
+Маємо $\otimes_2 \in \mathcal{B}(L,M;W_2)$. За твердженням вище, існує єдиний оператор $\theta \in \mathcal{L}(W_1,W_2)$ такий, що $\theta(x \otimes_1 y) = x \otimes_2 y$.\\
+Маємо $\otimes_1 \in \mathcal{B}(L,M;W_1)$. За твердженням вище, існує єдиний оператор $\psi \in \mathcal{L}(W_2,W_1)$ такий, що $\psi(x \otimes_2 y) = x \otimes_1 y$.\\
+Зазначимо, що $\theta, \psi$ -- взаємно оборотні оператори. Отримали необхідний ізоморфізм.
+\end{proof}
+
+\begin{proposition}[Властивість тензорного добутку]
+Справедливі такі пункти:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $L \otimes M \cong M \otimes L$;
+\item $L \otimes (M \otimes N) \cong (L \otimes M) \otimes N$;
+\item $(L \otimes M)^* = L^* \otimes M^*$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(TODO: не можу строго довести).
+\end{proof}
+
+\begin{remark}
+Тепер можна розглянути набір трилінійних форм $L \times M \times N \to \mathbb{R}$, тобто $\mathcal{B}(L,M,N)$. Доведемо, що $\mathcal{B}(L,M,N) = \mathcal{L}(L, \mathcal{B}(M,N))$. (TODO: ???).\\
+Внаслідок чого $\mathcal{B}(L,M,N) = L^* \otimes M^* \otimes N^*$.
+\end{remark}
+
+\begin{remark}
+Користуючись подібними міркуваннями, отримаємо наступне:\\
+$\mathbb{T}_p^q(L) = \underbrace{L^* \otimes \dots \otimes L^*}_{p \text{ разів}} \otimes \underbrace{L \otimes \dots \otimes L}_{q \text{ разів}}$.
+\bigskip \\
+Тепер цілком ясно, чому $\{ e^{j_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q}\}$ задавав базис $\mathbb{T}_p^q(L)$.
+\end{remark}
+
+\subsection{Тензорний добуток просторів (інший підхід)}
+Нехай $L,M$ -- лінійні простори. Розглянемо формально векторний простір $L*M$, що містить базис $\{ x*y \mid x \in L, y \in M \}$. Тобто якщо взяти $x \in L, y \in M$, то елемент $x*y$ уже базисний. Такий векторний простір надзвичайно великий.
+
+\begin{example}
+Зокрема маємо простори $\mathbb{R}^2, \mathbb{R}^3$, тоді можемо сконструювати добуток $\mathbb{R}^2 * \mathbb{R}^3$. Природно хотілось би очікувати розмірність даного простору $2 \cdot 3$, проте (насправді), $\dim (\mathbb{R}^2 * \mathbb{R}^3) = \infty$.\\
+Чому? Бо беремо будь-який елемент $(a,b)^T \in \mathbb{R}^2$ та будь-який елемент $(x,y,z)^T \in \mathbb{R}^3$, тоді за визначенням вище $(a,b)^T * (x,y,z)^T$ має бути базисним елементом. Таких базисних елементів дуже дофіга.
+\end{example}
+
+\begin{example}
+Чергова проблема такої побудови полягає в наступному. Повернемось до $\mathbb{R}^2 * \mathbb{R}^3$.\\
+$\begin{pmatrix}
+2 \\ 4
+\end{pmatrix} * \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix} \neq 2 \cdot \begin{pmatrix}
+1 \\ 2
+\end{pmatrix} * \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix}$, \qquad тобто $(\lambda x)*y \neq \lambda \cdot (x*y)$.\\
+$\begin{pmatrix}
+1 \\ 0
+\end{pmatrix} * \begin{pmatrix}
+3 \\ 6 \\ 9
+\end{pmatrix} \neq 3 \cdot \begin{pmatrix}
+1 \\ 0
+\end{pmatrix} * \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix}$, \qquad тобто $x*(\lambda y) \neq \lambda \cdot (x*y)$.\\
+$\begin{pmatrix}
+3 \\ 5
+\end{pmatrix}* \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix} \neq \begin{pmatrix}
+1 \\ 3
+\end{pmatrix} * \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix} + \begin{pmatrix}
+2 \\ 2
+\end{pmatrix} * \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix}$, \qquad тобто $(x_1+x_2)*y \neq x_1*y + x_2*y$.\\
+$\begin{pmatrix}
+3 \\ 5
+\end{pmatrix} * \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix} \neq \begin{pmatrix}
+3 \\ 5
+\end{pmatrix} * \begin{pmatrix}
+1 \\ 1 \\ 1
+\end{pmatrix} + \begin{pmatrix}
+3 \\ 5
+\end{pmatrix} * \begin{pmatrix}
+0 \\ 1 \\ 2
+\end{pmatrix}$, \qquad тобто $x*(y_1+y_2) \neq x*y_1 + x*y_2$.
+\end{example}
+\noindent
+Взагалі в будь-якому добутку $L*M$ не виконуються такі зазначені рівності, оскільки кожний зазначений елемент $(x*(\lambda y), x*(y_1+y_2) \text{ тощо })$ -- базисний. Проте ми хочемо векторний простір, де все це працює.\\
+Для цього розглянемо ось такий підпростір $L*M$:
+\begin{align*}
+I = \linspan\left\{ \substack{ \textstyle (\lambda x)*y - \lambda \cdot (x*y), \\ \textstyle x*(\lambda y) - \lambda \cdot (x*y), \\ \textstyle (x_1+x_2)*y - (x_1*y + x_2*y), \\ \textstyle x*(y_1+y_2) - (x*y_1 + x*y_2) } \quad \Big| \quad \lambda \in \mathbb{R}, x,x_1,x_2 \in L, y,y_1,y_2 \in M  \right\}
+\end{align*}
+
+\begin{definition}
+\textbf{Тензорним добутком} просторів $L,M$ називатимемо факторпростір
+\begin{align*}
+L \otimes M = (L*M)/_I
+\end{align*}
+Суміжні класи позначають ось так: $x \otimes y = x*y + I$.
+\end{definition}
+
+\begin{proposition}
+У просторі $L \otimes M$ справедливе наступне:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $(\lambda x) \otimes y = \lambda \cdot (x \otimes y)$;
+\item $x \otimes (\lambda y) = \lambda \cdot (x \otimes y)$;
+\item $(x_1 + x_2) \otimes y = x_1 \otimes y + x_2 \otimes y$;
+\item $x \otimes (y_1 + y_2) = x \otimes y_1 + x \otimes y_2$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Лише покажу, як доводити першу. Решта мають аналогічні міркування.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item $(\lambda x) \otimes y = (\lambda x)*y + I = (\lambda x)*y + (\lambda \cdot (x*y) - (\lambda x)*y) + I = \lambda \cdot (x*y) + I = \lambda \cdot (x \otimes y)$.
+\end{enumerate}
+Всі рівності (якщо зрозуміли аналогічність) доведені.
+\end{proof}
+
+\begin{lemma}
+Відображення $\tau \colon L \times M \to L \otimes M$, що задається як $\tau(x,y) = x \otimes y$, -- білінійне.\\
+\textit{Випливає безпосередньо з властивостей вище}.
+\end{lemma}
+
+\begin{theorem}[Універсальна властивість тензорного добутку]
+Маємо білінійне відображення $f \colon L \times M \to U$, де $U$ -- деякий інший лінійний простір. Тоді існує єдиний лінійний оператор $\tilde{f} \colon L \otimes M \to U$, для якого $\tilde{f} \circ \tau = f$.
+\end{theorem}
+
+\begin{proof}
+Визначимо відображення $g \colon L*M \to U$ ось таким чином: $g(x*y) = f(x,y)$. Ми розширимо цю функцію таким чином, щоб $g$ був лінійним оператором, тобто треба покласти $\displaystyle g\left( \sum_j \lambda_j (x_j*y_j) \right) = \sum_j \lambda_j f(x_j,y_j)$. Стверджую, що $g|_I = 0$, де $I$ -- вищезазначена лінійна оболонка. У силу лінійності нам досить буде довести, що (наприклад) $g((x_1+x_2)*y - (x_1*y + x_2*y)) = 0$ (ну й решта три елементи, що фігурують в лінійній оболонці, але там аналогічно).\\
+$g((x_1+x_2)*y - x_1*y - x_2*y) = g((x_1+x_2)*y) - g(x_1*y) - g(x_2*y) = f(x_1+x_2,y) - f(x_1,y) - f(x_2,y) = 0$.\\
+Визначимо тепер функцію $\tilde{f} \colon L \otimes M \to U$ ось таким чином: $\tilde{f}(x \otimes y) = g(x*y)$. Така функція не залежить від вибору суміжного класу (тобто коректна функція). Дійсно, нехай $x*y+I = a*b+I$, тобто $x*y-a*b \in I$, тобто $g(x*y-a*b) = 0 \implies \tilde{f}(x*y+I) = g(x*y) = g(a*b) = \tilde{f}(a*b+I)$.\\
+Визначений оператор $\tilde{f}$ -- лінійний (цілком зрозуміло).\\
+Нарешті, $(\tilde{f} \circ \tau)(x,y) = \tilde{f}(x \otimes y) = g(x*y) = f(x,y)$.\\
+Єдиність такого відображення доводиться неважко.
+\end{proof}
+
+\begin{theorem}
+Маємо $L,M$ -- лінійні простори та $\{e_1,\dots,e_n\}$ та $\{f_1,\dots,f_m\}$ -- базиси відповідно $L,M$. Тоді $\{ e_i \otimes f_j \mid i = \overline{1,n}, j = \overline{1,m} \}$ -- базис простору $L \otimes M$.
+\end{theorem}
+
+\begin{proof}
+I. \textit{$\{e_i \otimes f_j\}$ -- л.н.з.}\\
+Отже, нехай маємо $\displaystyle\sum_{i,j} \lambda_{ij} \cdot e_i \otimes f_j = 0$. Оскільки маємо базиси $\{e_i\}$ та $\{f_j\}$ просторів $L,M$ відповідно, то ми маємо також дуальні базиси $\{\varphi_i\}$ та $\{\psi_j\}$ просторів $L^*,M^*$ відповідно.\\
+Визначимо відображення $\theta_{ij} \colon L \otimes M \to \mathbb{R}$ ось таким чином: $\theta_{ij}(x,y) = \varphi_i(x) \psi_j(y)$. Цілком зрозуміло, що $\theta_{ij}$ -- білінійне. Тоді за універсальною властивістю існує єдиний лінійний оператор $\tilde{\theta}_{ij} \colon L \otimes M \to \mathbb{R}$, для якого $\tilde{\theta}_{ij}(x \otimes y) = \varphi_i(x) \psi_j(y)$. Ми отримали, що $\tilde{\theta}_{ij}(e_k \otimes f_l) = \begin{cases} 1, & (k,l) = (i,j) \\ 0, & (k,l) \neq (i,j) \end{cases}$.\\
+Якщо на $\displaystyle\sum_{i,j} \lambda_{ij} \cdot e_i \otimes f_j = 0$ подіяти по черзі оператором $\tilde{\theta}_{ij}$, то ми отримаємо $\lambda_{ij} = 0$. Довели л.н.з.
+\bigskip \\
+II. \textit{$\{e_i \otimes f_j\}$ -- повна.}\\
+Маємо $x \otimes y \in L \otimes M$. Розкладемо $x = \displaystyle\sum_i \alpha_i e_i$ та $x = \displaystyle\sum_i \beta_j f_j$ єдиним чином. Тоді\\
+$x \otimes y = \displaystyle\left(\sum_i \alpha_i e_i \right) \otimes \left(\sum_j \beta_j f_j \right) = \sum_{i,j} \alpha_i \beta_j \cdot e_i \otimes f_j = \sum_{i,j} \lambda_{ij} e_i \otimes f_j$.\\
+Коефіцієнти $\lambda_{ij}$ однозначним чином визначені, тому повнота доведена.
+\end{proof}
+
+\begin{corollary}
+$\dim (L \otimes M) = \dim L \cdot \dim M$.
+\end{corollary}
+
+\begin{example}
+Зокрема розглянемо тепер $\mathbb{R}^2 \otimes \mathbb{R}^3$, який містить такий базис: $\begin{pmatrix}
+1 \\ 0
+\end{pmatrix} \otimes \begin{pmatrix}
+1 \\ 0 \\ 0
+\end{pmatrix},\ \begin{pmatrix}
+1 \\ 0
+\end{pmatrix} \otimes \begin{pmatrix}
+0 \\ 1 \\ 0
+\end{pmatrix},\ \begin{pmatrix}
+1 \\ 0
+\end{pmatrix} \otimes \begin{pmatrix}
+0 \\ 0 \\ 1
+\end{pmatrix},\ \begin{pmatrix}
+0 \\ 1
+\end{pmatrix} \otimes \begin{pmatrix}
+1 \\ 0 \\ 0
+\end{pmatrix},\ \begin{pmatrix}
+0 \\ 1
+\end{pmatrix} \otimes \begin{pmatrix}
+0 \\ 1 \\ 0
+\end{pmatrix},\ \begin{pmatrix}
+0 \\ 1
+\end{pmatrix} \otimes \begin{pmatrix}
+0 \\ 0 \\ 1
+\end{pmatrix}$. До речі, оскільки $\dim (\mathbb{R}^2 \otimes \mathbb{R}^3) = 6$, то можна зауважити, що $\mathbb{R}^2 \otimes \mathbb{R}^3 \cong \Mat_{2 \times 3}(\mathbb{R}) \cong \mathbb{R}^6$. Наприклад, базисному вектору $\begin{pmatrix}
+1 \\ 0
+\end{pmatrix} \otimes \begin{pmatrix}
+0 \\ 1 \\ 0
+\end{pmatrix}$ ставиться в відповідність матриця $\begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{pmatrix}$.
+\end{example}
+
+\begin{proposition}
+Нехай $L,L',M,N$ -- лінійні простори. Тоді справедливі канонічні ізоморфізми:
+\begin{enumerate}[nosep,wide=0pt,label={\arabic*)}]
+\item $\mathbb{R} \otimes L \cong L \cong L \otimes \mathbb{R}$;
+\item $L \otimes M \cong M \otimes L$;
+\item $L \otimes (M \otimes N) \cong (L \otimes M) \otimes N$;
+\item $(L \oplus L') \otimes M \cong (L \otimes M) \oplus (L' \otimes M)$.
+\end{enumerate}
+На місці $\mathbb{R}$ може стояти $\mathbb{C}$ або будь-яке інше поле.
+\end{proposition}
+
+\begin{proof}
+Доведемо кожний пункт окремо.
+\begin{enumerate}[wide=0pt,label={\arabic*)}]
+\item Визначимо відображення $f \colon \mathbb{R} \times L \to L$ таким чином: $f(\alpha,x) = \alpha x$. Цілком зрозуміло, що це білінійне відображення. За універсальною властивістю, існує єдиний лінійний оператор $\tilde{f} \colon \mathbb{R} \otimes L \to L$ так, що $\tilde{f}(\alpha \otimes x) = \alpha x$. Він буде ізоморфізмом, оскільки можна підібрати $\tilde{f}^{-1} \colon L \to \mathbb{R} \otimes L$ таким чином: $\tilde{f}^{-1}(x) = 1 \otimes x$. Такий оператор теж лінійний. Значить, $\mathbb{R} \otimes L \cong L$.\\
+Аналогічним чином можна довести, що $L \cong L \otimes \mathbb{R}$.
+
+\item Визначимо відображення $f \colon L \times M \to M \otimes L$ таким чином: $f(x,y) = y \otimes x$. Знову за універсальною властивістю маємо єдиний лінійний оператор $\tilde{f} \colon L \otimes M \to M \otimes L$ такий, що $\tilde{f}(x \otimes y) = y \otimes x$. Аналогічно розглянемо відображення $g \colon M \times L \to L \otimes M$ таким чином: $g(y,x) = (x,y)$. Так само за універсальною властивістю існує єдиний лінійний оператор $\tilde{g} \colon M \otimes L \to L \otimes M$ таким чином: $\tilde{g}(y \otimes x) = x \otimes y$. Відображення $\tilde{f},\tilde{g}$ взаємно оборотні, тобто звідси $L \otimes M \cong M \otimes L$.
+
+\item Визначимо відображення $f \colon L \times (M \times N) \to (L \otimes M) \otimes N$ ось таким чином: $f(l, (m,n)) = (l \otimes m) \otimes n$. Зафіксуємо деяке $l \in L$, отримаємо $f(l, \cdot) \colon M \times N \to (L \otimes M) \otimes N$ -- білінійне відображення. За універсальною властивістю, існуватиме єдиинй $\tilde{f}_l \colon M \otimes N \to (L \otimes M) \otimes N$ -- лінійний оператор, де $\tilde{f}_l(m \otimes n) = (l \otimes m) \otimes n$.\\
+Коректним чином можна визначити відображення $g \colon L \times (M \otimes N) \to (L \otimes M) \otimes N$ ось так: $g(l,m \otimes n) = \tilde{f}_l(m \otimes n)$, яке буде білінійним. Знову за універсальною властивістю, $\exists ! \tilde{g} \colon L \otimes (M \otimes N) \to (L \otimes M) \otimes N$ так, що $\tilde{g}(l \otimes (m \otimes n)) = (l \otimes m) \otimes n$.\\
+Точно такі самі махінації можна провести, якщо визначити $\varphi \colon (L \times M) \times N \to L \otimes (M \otimes N)$ так: $\varphi((l,m),n) = l \otimes (m \otimes n)$. Отримаємо врешті-решт лінійний оператор $\tilde{\psi} \colon (L \otimes M) \otimes N \to L \otimes (M \otimes N)$ таким чином: $\tilde{\psi}((l \otimes m) \otimes n) = l \otimes (m \otimes n)$.\\
+Відобраежння $\tilde{g},\tilde{\psi}$ взаємно обернені лінійні оператори, тому $(L \otimes M) \otimes N \cong L \otimes (M \otimes N)$.
+
+\item Визначимо відображення $f \colon (L \oplus L') \times M \to (L \otimes M) \oplus (L' \otimes M)$ таким чином: $f(l \oplus l', m) = (l \otimes m) \oplus (l' \otimes m)$ -- це білінійне. Тому далі за універсальною властивістю існує $\tilde{f} \colon (L \oplus L') \otimes M \to (L \otimes M) \oplus (L' \otimes M)$ -- єдиний лінійний оператор так, що $\tilde{f}((l \oplus l') \otimes m) = (l \otimes m) \oplus (l' \otimes m)$.\\
+(TODO: строго описати).
+\end{enumerate}
+Всі властивості доведені.
+\end{proof}
+
+\subsection{Згортка тензорів}
+Нехай заданий тензор $T \in \mathbb{T}_p^q(L)$ при $p,q>0$. Визначимо відображення $\underbrace{L^* \times \dots \times L^*}_{p \text{ разів}} \times \underbrace{L \times \dots \times L}_{q \text{ разів}} \to \mathbb{T}_p^q(L)$ ось таким чином:\\
+$(f_1,\dots,f_p, v_1,\dots,v_q) \mapsto f_1(v_1) \cdot f_2 \otimes \dots \otimes f_p \otimes v_1 \otimes \dots \otimes v_q$.\\
+Цілком ясно, що такий оператор буде полілінійним. Саме цей оператор визначає відображення $\mathbb{T}_p^q(L) \to \mathbb{T}_{q-1}^{p-1}(L)$.\\
+Так відображення називають \textbf{згорткою} (\textbf{contraction}) за першим коваріантним та першим контраваріантним аргументами.
+
+\subsection{Згортка тензорів}
+\begin{proposition}
+Існує єдине відображення $C_k^l \colon \mathbb{T}_p^q(L) \to \mathbb{T}_{p-1}^{q-1}(L)$ таке, що \\
+$C_k^l(w_1 \otimes w_p \otimes v_1 \otimes \dots \otimes v_q) = w_k(v_l) \cdot \underbrace{w_1 \otimes \dots \otimes w_p}_{\text{без }k} \otimes \underbrace{v_1 \otimes \dots \otimes v_p}_{\text{без }l}$.\\
+Компонента $(C_k^l T)_{i_1,\dots,i_{k-1},i_{k+1},\dots,i_p}^{j_1,\dots,j_{l-1},j_{l+1},\dots,q_j} = \displaystyle\sum_{\textcolor{red}{i}=1}^n T_{i_1,\dots,i_{k-1},\textcolor{red}{i},i_{k+1},\dots,i_p}^{j_1,\dots,j_{l-1},\textcolor{red}{i},j_{l+1},\dots,j_q}$.
+\end{proposition}
+
+\begin{proposition}
+Відображення $C_k^l$ називається \textbf{згорткою} за $k$-м нижнім аргументом та $l$-м верхнім аргументом.
+\end{proposition}
+
+\begin{proof}
+I. \textit{Єдиність}.\\
+$C_k^l$ однозначно задана образами базисних тензорів.
+\bigskip \\
+II. \textit{Запис у координатах}.\\
+Маємо тензор $T = \displaystyle\sum T_{i_1,\dots,i_p}^{j_1,\dots,j_q} e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q}$. Подіємо оператором $C_k^l$.\\
+$C_k^l T = \displaystyle\sum T_{i_1,\dots,i_p}^{j_1,\dots,j_q} C_k^l(e^{i_1} \otimes \dots \otimes e^{i_p} \otimes e_{j_1} \otimes \dots \otimes e_{j_q}) = \sum T_{i_1,\dots,i_p}^{j_1,\dots,j_q} e^{i_k}(e_{j_l}) \cdot \underbrace{e^{i_1} \otimes \dots \otimes e^{i_p}}_{\text{без }k} \otimes \underbrace{e_{j_1} \otimes \dots \otimes e_{j_q}}_{\text{без }l}$.\\
+$\implies (C_k^l T)_{i_1,\dots,i_{k-1},i_{k+1},\dots,i_p}^{j_1,\dots,j_{l-1},j_{l+1},\dots,j_q} = \displaystyle\sum_{i_k,j_l} T_{i_1,\dots,i_k,\dots,i_p}^{j_1,\dots,j_l,\dots,j_q} \cdot \delta_{j_l}^{i_k} = \sum_{i} T_{i_1,\dots,i,\dots,i_p}^{j_1,\dots,i,\dots,j_q}$.
+\bigskip \\
+III. \textit{Існування}.\\
+Визначимо лінійне відображення $C_k^l$ в координатах (в деякому фіксованому базисі $L$) так, як зазначено в твердженні. Оберемо $w_1,\dots,w_p \in L^*$ та $v_1,\dots,v_p \in V$. Запишемо їх в координатах:\\
+$w_s = \displaystyle\sum_i y_i^s e^i$ \qquad $v = \displaystyle\sum_j x^j_t e_j$.\\
+$T = w_1 \otimes \dots \otimes w_p \otimes v_1 \otimes \dots \otimes v_q$\\
+$T_{i_1,\dots,i_p}^{j_1,\dots,j_q} = y_{i_1}^1 \dots y_{i_p}^p x_1^{j_1} \dots x_q^{q_j}$.\\
+$(C_k^l T)_{i_1,\dots,i_{k-1},i_{k+1},\dots,i_p}^{j_1,\dots,j_{l-1},j_{l+1},\dots,j_q} = \displaystyle\sum_i y_{i_1}^1 \dots y_{i_{k-1}}^{k-1} y_i^k y_{i_{k+1}}^{k+1} \dots y_{i_p}^p x_1^{j_1} \dots x_{l-1}^{j_{l-1}} x_l^i x_{l+1}^{j_{l+1}} \dots x_q^{j_q} = \\
+= y_{i_1}^1 \dots y_{i_{k-1}}^{k-1} y_{i_{k+1}}^{k+1} \dots y_{i_p}^p x_1^{j_1} \dots x_{l-1}^{j_{l-1}} x_{l+1}^{j_{l+1}} \dots x_q^{j_q} \sum_i y_i^k x_l^i$.\\
+$\implies C_k^l T = \underbrace{w_1 \otimes \dots \otimes w_p}_{\text{без }k} \otimes \underbrace{v_1 \otimes \dots \otimes v_p}_{\text{без }l} \cdot w_k(v_l)$
+\end{proof}
+
+\newpage
 \section{Додаткові факти}
 Дани розділ присвячений виключно для тих, хто володіє фактами з теорії метричних просторів та функціонального аналізу. Всі нові означення, які були наведені там, я нагадувати не буду. Із ними можна ознайомитися в іншому pdf файлі.
 \bigskip \\
@@ -8834,6 +9383,16 @@ $\dim E < \infty \iff$ кожна підмножина $E$ -- передкомп
 \bigskip \\
 \rightproof Дано: $\dim E < \infty$, тоді відомо, що $E \cong \mathbb{C}^n$. Будь-яка обмежена підмножина $\mathbb{R}^n$ -- передкомпактна за Больцано-Ваєрштраса.
 \end{proof}
+\newpage
+
+\section*{Використані джерела}
+\begin{enumerate}
+\item \href{https://www.youtube.com/watch?v=Lcy5VDYMM4Q&list=PLgAugiET8rrIGTphP-IfbxixpAZDO3UHC&index=3}{DanielChanMaths: Properties of tensors products of vector spaces}
+\item \href{https://www.youtube.com/watch?v=KnSZBjnd_74&ab_channel=MuPrimeMath}{Mu Prime Math: A Concrete Introduction to Tensor Products}
+\item \href{https://www.youtube.com/watch?v=vZzZhdLC_YQ&t=0s&ab_channel=MuPrimeMath}{Mu Prime Math: Complete Derivation: Universal Property of the Tensor Product}
+\item \href{https://www.youtube.com/watch?v=5i8tp0rD2EA&ab_channel=MuPrimeMath}{My Prime Math: Tensor Product Basis With the Universal Property}
+\item \href{https://www.youtube.com/watch?v=K7f2pCQ3p3U}{Michael Penn: What is a tensor anyway?? (from a mathematician)}
+\end{enumerate}
 
 \iffalse
 \section*{Постскриптум}
@@ -8899,6 +9458,7 @@ $Bx = Ax - \lambda x = (A - \lambda I)x$\\
 Оскільки існує ненульовий власний вектор для власного числа $\lambda$, то $\dim (\ker B) \neq 0$\\
 Тому $\dim (\Im B) \neq n$\\
 \newpage
+
 \section*{Чернетка}
 $A: \underset{= \mathbb{R}^8}{L} \to L$, $\dim L = 8$\\
 $A = \begin{pmatrix}
